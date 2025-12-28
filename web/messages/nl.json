@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "siteName": "Edge Solutions",
+    "siteTagline": "Webontwikkeling & realtime technologie"
+  },
+  "nav": {
+    "home": "Home",
+    "web": "Webontwikkeling",
+    "realtime": "Realtime 3D/VR",
+    "contact": "Contact"
+  },
+  "home": {
+    "headline": "Ik bouw performante webproducten en realtime 3D‑ervaringen.",
+    "subheadline": "Edge Solutions — door Gil Guminski.",
+    "primaryCta": "Contacteer mij",
+    "secondaryCta": "Bekijk services"
+  },
+  "services": {
+    "title": "Services",
+    "webTitle": "Webontwikkeling",
+    "webDesc": "Websites & webapps (Next.js, Laravel, WordPress). Performance, SEO en onderhoudbaarheid.",
+    "realtimeTitle": "Realtime 3D/VR",
+    "realtimeDesc": "Prototypes, visualisatie en immersive ervaringen (Unreal, Unity, WebGL).",
+    "cta": "Ontdek"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Beschrijf je behoefte (budget, timing, constraints) en ik kom snel bij je terug.",
+    "form": {
+      "name": "Naam",
+      "email": "Email",
+      "service": "Type project",
+      "service_web": "Webontwikkeling",
+      "service_realtime": "Realtime 3D/VR",
+      "service_unsure": "Niet zeker / ander",
+      "message": "Bericht",
+      "submit": "Versturen",
+      "success": "Bericht verzonden. Ik kom snel bij je terug.",
+      "genericError": "Kon je bericht niet versturen. Probeer het opnieuw."
+    }
+  },
+  "footer": {
+    "copyright": "© {year} Edge Solutions",
+    "links": "Links"
+  },
+  "notFound": {
+    "title": "Pagina niet gevonden",
+    "description": "De pagina bestaat niet (of niet meer).",
+    "cta": "Terug naar home"
+  }
+}
+
+

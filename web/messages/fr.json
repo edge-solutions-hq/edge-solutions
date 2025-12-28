@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "siteName": "Edge Solutions",
+    "siteTagline": "Développement web & technologies temps réel"
+  },
+  "nav": {
+    "home": "Accueil",
+    "web": "Développement web",
+    "realtime": "Temps réel 3D/VR",
+    "contact": "Contact"
+  },
+  "home": {
+    "headline": "Je conçois des produits web performants et des expériences 3D temps réel.",
+    "subheadline": "Edge Solutions — par Gil Guminski.",
+    "primaryCta": "Me contacter",
+    "secondaryCta": "Voir les services"
+  },
+  "services": {
+    "title": "Services",
+    "webTitle": "Développement web",
+    "webDesc": "Sites vitrine & applications web (Next.js, Laravel, WordPress). Performance, SEO et maintenabilité.",
+    "realtimeTitle": "Temps réel 3D/VR",
+    "realtimeDesc": "Prototypes, visualisation et expériences immersives (Unreal, Unity, WebGL).",
+    "cta": "Découvrir"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Décrivez votre besoin (budget, timing, contraintes) et je reviens vers vous rapidement.",
+    "form": {
+      "name": "Nom",
+      "email": "Email",
+      "service": "Type de projet",
+      "service_web": "Développement web",
+      "service_realtime": "Temps réel 3D/VR",
+      "service_unsure": "Je ne sais pas / autre",
+      "message": "Message",
+      "submit": "Envoyer",
+      "success": "Message envoyé. Je reviens vers vous rapidement.",
+      "genericError": "Impossible d'envoyer le message. Réessayez dans un instant."
+    }
+  },
+  "footer": {
+    "copyright": "© {year} Edge Solutions",
+    "links": "Liens"
+  },
+  "notFound": {
+    "title": "Page introuvable",
+    "description": "La page demandée n’existe pas (ou plus).",
+    "cta": "Retour à l’accueil"
+  }
+}
+
+

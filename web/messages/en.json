@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "siteName": "Edge Solutions",
+    "siteTagline": "Web development & real-time technologies"
+  },
+  "nav": {
+    "home": "Home",
+    "web": "Web development",
+    "realtime": "Real-time 3D/VR",
+    "contact": "Contact"
+  },
+  "home": {
+    "headline": "I build high-performance web products and real-time 3D experiences.",
+    "subheadline": "Edge Solutions — by Gil Guminski.",
+    "primaryCta": "Contact me",
+    "secondaryCta": "View services"
+  },
+  "services": {
+    "title": "Services",
+    "webTitle": "Web development",
+    "webDesc": "Websites & web apps (Next.js, Laravel, WordPress). Performance, SEO and maintainability.",
+    "realtimeTitle": "Real-time 3D/VR",
+    "realtimeDesc": "Prototypes, visualization and immersive experiences (Unreal, Unity, WebGL).",
+    "cta": "Explore"
+  },
+  "contact": {
+    "title": "Contact",
+    "intro": "Share your needs (budget, timeline, constraints) and I’ll get back to you quickly.",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "service": "Project type",
+      "service_web": "Web development",
+      "service_realtime": "Real-time 3D/VR",
+      "service_unsure": "Not sure / other",
+      "message": "Message",
+      "submit": "Send",
+      "success": "Message sent. I’ll get back to you shortly.",
+      "genericError": "Could not send your message. Please try again."
+    }
+  },
+  "footer": {
+    "copyright": "© {year} Edge Solutions",
+    "links": "Links"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The page you’re looking for doesn’t exist (or no longer exists).",
+    "cta": "Back to home"
+  }
+}
+
+
