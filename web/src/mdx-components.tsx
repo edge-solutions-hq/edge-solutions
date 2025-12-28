@@ -1,6 +1,12 @@
 import type {MDXComponents} from 'mdx/types';
 import {CTA} from '@/components/mdx/CTA';
 import {Callout} from '@/components/mdx/Callout';
+import {GridList, GridListItem} from '@/components/studio/GridList';
+import {List, ListItem} from '@/components/studio/List';
+import {PageIntro} from '@/components/studio/PageIntro';
+import {SectionIntro} from '@/components/studio/SectionIntro';
+import {StatList, StatListItem} from '@/components/studio/StatList';
+import {TagList, TagListItem} from '@/components/studio/TagList';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -9,6 +15,16 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Custom components available in MDX without imports
     CTA,
     Callout,
+    PageIntro,
+    SectionIntro,
+    GridList,
+    GridListItem,
+    List,
+    ListItem,
+    StatList,
+    StatListItem,
+    TagList,
+    TagListItem,
 
     // Optional: tighten default rendering
     h1: (props) => (

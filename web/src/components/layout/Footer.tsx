@@ -27,6 +27,9 @@ export async function Footer() {
               {site.contactEmail}
             </a>
           </div>
+          <div className="text-sm text-muted-foreground">
+            {site.vatNumber}
+          </div>
         </div>
 
         <div className="space-y-2">
