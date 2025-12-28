@@ -5,8 +5,8 @@ export const site = {
   contactEmail: 'gil@edge-solutions.be',
   social: {
     linkedin: 'https://www.linkedin.com/in/gil-guminski',
-    artstation: 'https://gilguminski.artstation.com/',
-    github: 'https://github.com/Gil-1'
+    github: 'https://github.com/Gil-1',
+    artstation: 'https://gilguminski.artstation.com/'
   }
 } as const;
 
