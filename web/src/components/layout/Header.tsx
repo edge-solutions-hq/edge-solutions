@@ -2,57 +2,45 @@ import {getTranslations} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
 import {LocaleSwitch} from './LocaleSwitch';
 import {site} from '@/lib/site';
+import {ButtonLink} from '@/components/ui/Button';
+import {HeaderNav} from './HeaderNav';
+import {MobileMenu} from './MobileMenu';
 
 export async function Header({locale}: {locale: string}) {
   const t = await getTranslations();
 
-  return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-white/70 backdrop-blur dark:border-white/10 dark:bg-black/50">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-6 py-4">
-        <Link href="/" className="group flex items-baseline gap-2">
-          <span className="text-base font-semibold tracking-tight">
-            {site.personalBrand}
-          </span>
-          <span className="text-sm text-black/50 dark:text-white/50">
-            {site.companyName}
-          </span>
-        </Link>
+  const items = [
+    {href: '/', label: t('nav.home')},
+    {href: '/services/web-dev', label: t('nav.web')},
+    {href: '/services/realtime-games', label: t('nav.realtime')},
+    {href: '/contact', label: t('nav.contact')}
+  ];
 
-        <nav className="hidden items-center gap-1 text-sm md:flex">
+  return (
+    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+        <div className="flex items-center gap-6">
           <Link
             href="/"
-            className="rounded-xl px-3 py-2 text-black/70 transition hover:bg-black/[0.04] dark:text-white/70 dark:hover:bg-white/[0.06]"
+            className="group flex items-baseline gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
-            {t('nav.home')}
+            <span className="text-base font-semibold tracking-tight text-foreground">
+              {site.personalBrand}
+            </span>
+            <span className="text-sm text-subtle-foreground">
+              {site.companyName}
+            </span>
           </Link>
-          <Link
-            href="/services/web-dev"
-            className="rounded-xl px-3 py-2 text-black/70 transition hover:bg-black/[0.04] dark:text-white/70 dark:hover:bg-white/[0.06]"
-          >
-            {t('nav.web')}
-          </Link>
-          <Link
-            href="/services/realtime-games"
-            className="rounded-xl px-3 py-2 text-black/70 transition hover:bg-black/[0.04] dark:text-white/70 dark:hover:bg-white/[0.06]"
-          >
-            {t('nav.realtime')}
-          </Link>
-          <Link
-            href="/contact"
-            className="rounded-xl px-3 py-2 text-black/70 transition hover:bg-black/[0.04] dark:text-white/70 dark:hover:bg-white/[0.06]"
-          >
-            {t('nav.contact')}
-          </Link>
-        </nav>
+
+          <HeaderNav items={items} />
+        </div>
 
         <div className="flex items-center gap-3">
           <LocaleSwitch locale={locale} />
-          <Link
-            href="/contact"
-            className="hidden rounded-xl bg-black px-4 py-2 text-sm font-medium text-white transition hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 md:inline-flex"
-          >
+          <ButtonLink href="/contact" className="hidden md:inline-flex">
             {t('home.primaryCta')}
-          </Link>
+          </ButtonLink>
+          <MobileMenu items={items} ctaLabel={t('home.primaryCta')} />
         </div>
       </div>
     </header>

@@ -23,7 +23,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         {...props}
       />
     ),
-    a: (props) => <a className="underline underline-offset-4" {...props} />
+    a: (props) => (
+      <a
+        className="text-link underline underline-offset-4 decoration-link/30 transition-colors hover:decoration-link focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
+        {...props}
+      />
+    )
   };
 }
 

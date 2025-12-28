@@ -2,28 +2,75 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Neutrals */
+  --background: #f9fafb; /* Neutral Light */
+  --foreground: #1f2937; /* Neutral Dark */
+  --surface: #ffffff;
+  --surface-muted: #f3f4f6;
+  --border: #e5e7eb;
+  --muted-foreground: #4b5563;
+  --subtle-foreground: #6b7280;
+
+  /* Brand */
+  --primary: #2563eb;
+  --primary-foreground: #ffffff;
+  --secondary: #f97316;
+  --secondary-foreground: #1f2937; /* Ensure contrast on orange */
+  --accent: #7c3aed;
+  --accent-foreground: #ffffff;
+
+  /* Interactive */
+  --link: var(--primary);
+  --ring: var(--primary);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-subtle-foreground: var(--subtle-foreground);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-link: var(--link);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-fira-code);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Dark mode compatibility (spec guidance) */
+    --background: #111827;
+    --foreground: #e5e7eb;
+    --surface: #0f172a;
+    --surface-muted: #111b2e;
+    --border: #273449;
+    --muted-foreground: #cbd5e1;
+    --subtle-foreground: #9ca3af;
+
+    /* Keep same hues, adjust interactive contrast */
+    --link: #60a5fa;
+    --ring: #60a5fa;
+    --accent: #a78bfa;
+    --accent-foreground: #111827;
   }
 }
 
 body {
+  min-height: 100dvh;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
 }
 
 

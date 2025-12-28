@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import {Geist, Geist_Mono} from 'next/font/google';
+import {Fira_Code, Inter} from 'next/font/google';
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import {Analytics} from '@vercel/analytics/react';
 import {SpeedInsights} from '@vercel/speed-insights/next';
@@ -11,15 +11,9 @@ import {Header} from '@/components/layout/Header';
 import {Footer} from '@/components/layout/Footer';
 import {site} from '@/lib/site';
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin']
-});
+const inter = Inter({variable: '--font-inter', subsets: ['latin']});
 
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin']
-});
+const firaCode = Fira_Code({variable: '--font-fira-code', subsets: ['latin']});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
@@ -62,11 +56,11 @@ export default async function LocaleLayout({children, params}: Props) {
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${firaCode.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <Header locale={locale} />
-          <main className="mx-auto max-w-6xl px-6 py-10">{children}</main>
+          <main className="mx-auto max-w-6xl px-6 py-12 md:py-14">{children}</main>
           <Footer />
         </NextIntlClientProvider>
         <Analytics />

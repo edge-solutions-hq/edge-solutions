@@ -4,8 +4,12 @@ import {useActionState} from 'react';
 import {useTranslations} from 'next-intl';
 import type {ContactActionState} from './actions';
 import {sendContactEmail} from './actions';
+import {Button} from '@/components/ui/Button';
 
 const initialState: ContactActionState = {status: 'idle'};
+
+const inputBase =
+  'mt-2 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-foreground shadow-sm transition-colors placeholder:text-subtle-foreground focus-visible:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none';
 
 function FieldError({children}: {children?: string}) {
   if (!children) return null;
@@ -34,7 +38,7 @@ export function ContactForm() {
             name="name"
             required
             minLength={2}
-            className="mt-2 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none ring-0 transition focus:border-black/30 dark:border-white/10 dark:bg-black dark:focus:border-white/30"
+            className={inputBase + ' h-10'}
             placeholder="Gil Guminski"
           />
           <FieldError>{state.fieldErrors?.name}</FieldError>
@@ -46,7 +50,7 @@ export function ContactForm() {
             name="email"
             type="email"
             required
-            className="mt-2 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none ring-0 transition focus:border-black/30 dark:border-white/10 dark:bg-black dark:focus:border-white/30"
+            className={inputBase + ' h-10'}
             placeholder="vous@exemple.com"
           />
           <FieldError>{state.fieldErrors?.email}</FieldError>
@@ -58,7 +62,7 @@ export function ContactForm() {
         <select
           name="service"
           defaultValue="unsure"
-          className="mt-2 w-full rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none ring-0 transition focus:border-black/30 dark:border-white/10 dark:bg-black dark:focus:border-white/30"
+          className={inputBase + ' h-10'}
         >
           <option value="web">{t('contact.form.service_web')}</option>
           <option value="realtime">{t('contact.form.service_realtime')}</option>
@@ -74,28 +78,27 @@ export function ContactForm() {
           required
           minLength={10}
           rows={7}
-          className="mt-2 w-full resize-y rounded-xl border border-black/10 bg-white px-3 py-2 text-sm outline-none ring-0 transition focus:border-black/30 dark:border-white/10 dark:bg-black dark:focus:border-white/30"
+          className={inputBase + ' min-h-[8rem] resize-y'}
           placeholder="Contexte, objectifs, contraintes, délais..."
         />
         <FieldError>{state.fieldErrors?.message}</FieldError>
       </label>
 
-      <button
+      <Button
         type="submit"
         disabled={pending}
-        className="inline-flex items-center justify-center rounded-xl bg-black px-5 py-3 text-sm font-medium text-white transition hover:bg-black/90 disabled:cursor-not-allowed disabled:opacity-60 dark:bg-white dark:text-black dark:hover:bg-white/90"
       >
         {pending ? '...' : t('contact.form.submit')}
-      </button>
+      </Button>
 
       {state.status === 'success' ? (
-        <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-900 dark:text-emerald-100">
+        <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-900 dark:text-emerald-100">
           {t('contact.form.success')}
         </div>
       ) : null}
 
       {state.status === 'error' && state.message ? (
-        <div className="rounded-xl border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-900 dark:text-red-100">
+        <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-900 dark:text-red-100">
           {state.message}
         </div>
       ) : null}

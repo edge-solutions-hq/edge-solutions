@@ -35,7 +35,7 @@ export default async function ServicePage({params}: Props) {
   const Content = mdx.default;
 
   return (
-    <article className="prose prose-zinc max-w-none dark:prose-invert">
+    <article className="prose prose-slate max-w-none dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground">
       <Content />
     </article>
   );
