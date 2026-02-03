@@ -55,9 +55,7 @@ export default async function LocaleLayout({children, params}: Props) {
 
   return (
     <html lang={locale}>
-      <body
-        className={`${inter.variable} ${firaCode.variable} antialiased`}
-      >
+      <body className={`${inter.variable} ${firaCode.variable} antialiased`}>
         <NextIntlClientProvider messages={messages}>
           <Header locale={locale} />
           <main className="mx-auto max-w-6xl px-6 py-12 md:py-14">{children}</main>
@@ -69,5 +67,3 @@ export default async function LocaleLayout({children, params}: Props) {
     </html>
   );
 }
-
-
