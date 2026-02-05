@@ -21,7 +21,7 @@ export function PageIntro({
       className={cn('not-prose', className)}
       innerClassName={cn('max-w-4xl', centered && 'text-center')}
     >
-      <FadeIn>
+      <FadeIn initiallyVisible>
         <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
           {eyebrow}
         </p>

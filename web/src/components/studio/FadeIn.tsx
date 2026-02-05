@@ -13,11 +13,16 @@ import {cn} from '@/lib/cn';
 type FadeInProps = React.HTMLAttributes<HTMLDivElement> & {
   /** Optional delay (ms) used by FadeInStagger. */
   delayMs?: number;
+  /**
+   * Render content visible on the first server render.
+   * Useful for above-the-fold content to avoid delaying LCP behind hydration.
+   */
+  initiallyVisible?: boolean;
 };
 
-export function FadeIn({className, style, delayMs, ...props}: FadeInProps) {
+export function FadeIn({className, style, delayMs, initiallyVisible = false, ...props}: FadeInProps) {
   const ref = React.useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = React.useState(initiallyVisible);
 
   React.useEffect(() => {
     const el = ref.current;
