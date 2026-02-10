@@ -1,0 +1,13 @@
+{
+  "action": "update",
+  "jobId": "47ba5e0a-4b3a-4fcf-90a2-7cbe0fd7eb42",
+  "patch": {
+    "payload": {
+      "kind": "agentTurn",
+      "message": "node automation/shared/run-domain.mjs --domain openclaw-trends --scheduled --jira --job-id '47ba5e0a-4b3a-4fcf-90a2-7cbe0fd7eb42'"
+    },
+    "delivery": {
+      "bestEffort": false
+    }
+  }
+}

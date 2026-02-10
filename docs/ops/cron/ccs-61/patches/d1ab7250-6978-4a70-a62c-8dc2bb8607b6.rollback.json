@@ -1,0 +1,10 @@
+{
+  "action": "update",
+  "jobId": "d1ab7250-6978-4a70-a62c-8dc2bb8607b6",
+  "patch": {
+    "payload": {
+      "kind": "agentTurn",
+      "message": "node workspace/automation/shared/run-domain.mjs --domain linkedin-drafts --scheduled --no-jira --job-id 'd1ab7250-6978-4a70-a62c-8dc2bb8607b6'"
+    }
+  }
+}

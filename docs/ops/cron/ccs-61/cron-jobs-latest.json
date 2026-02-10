@@ -1,0 +1,445 @@
+{
+  "generated_at": "2026-02-10T13:40:57.473Z",
+  "source": "cron/jobs.json",
+  "jobs": [
+    {
+      "id": "bedc28cb-0a48-42b8-89c0-04854670fbdb",
+      "agentId": "main",
+      "name": "Calendar heads-up (day-before)",
+      "enabled": true,
+      "createdAtMs": 1770141470881,
+      "updatedAtMs": 1770656422220,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 18 * * *",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "Calendar reminder (day-before, 18:00 Europe/Brussels): Check Gil's Google Calendar for tomorrow and post ONE concise summary in Discord #general with time + title, plus important description/location details when relevant. Add one short prep hint if useful. If no events tomorrow, post NO_REPLY.",
+        "timeoutSeconds": 300
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "discord",
+        "to": "channel:1470168049691787570",
+        "bestEffort": true
+      },
+      "state": {
+        "nextRunAtMs": 1770742800000,
+        "lastRunAtMs": 1770656400005,
+        "lastStatus": "ok",
+        "lastDurationMs": 22215,
+        "execution_status": "ok",
+        "delivery_status": "ok"
+      }
+    },
+    {
+      "id": "75f4ea2b-e798-4928-8c72-f4baaa08c8df",
+      "agentId": "main",
+      "name": "Job scout (micro, 20m)",
+      "enabled": true,
+      "createdAtMs": 1770142342131,
+      "updatedAtMs": 1770730580288,
+      "schedule": {
+        "kind": "cron",
+        "expr": "30 7 * * 1-5",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "node automation/shared/run-domain.mjs --domain job-scout --scheduled --jira --job-id '75f4ea2b-e798-4928-8c72-f4baaa08c8df'",
+        "timeoutSeconds": 1200
+      },
+      "state": {
+        "nextRunAtMs": 1770791400000,
+        "lastRunAtMs": 1770705000006,
+        "lastStatus": "ok",
+        "lastDurationMs": 543820,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "discord",
+        "to": "channel:1470175442928533565",
+        "bestEffort": false
+      }
+    },
+    {
+      "id": "15a25c3b-96cd-4e38-920f-738ffb6b93ef",
+      "agentId": "main",
+      "name": "Edge-solutions improvement (report + dev loop)",
+      "enabled": true,
+      "createdAtMs": 1770142616606,
+      "updatedAtMs": 1770730582357,
+      "schedule": {
+        "kind": "cron",
+        "expr": "45 7 * * 1-5",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "node automation/shared/run-domain.mjs --domain edge-solutions --scheduled --jira --job-id '15a25c3b-96cd-4e38-920f-738ffb6b93ef'",
+        "timeoutSeconds": 5400
+      },
+      "state": {
+        "nextRunAtMs": 1770792300000,
+        "lastRunAtMs": 1770705900005,
+        "lastStatus": "ok",
+        "lastDurationMs": 260958,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "discord",
+        "to": "channel:1470174455698423963",
+        "bestEffort": false
+      }
+    },
+    {
+      "id": "47ba5e0a-4b3a-4fcf-90a2-7cbe0fd7eb42",
+      "agentId": "main",
+      "name": "OpenClaw trends (20m)",
+      "enabled": true,
+      "createdAtMs": 1770194145436,
+      "updatedAtMs": 1770730594608,
+      "schedule": {
+        "kind": "cron",
+        "expr": "5 8 * * *",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "node automation/shared/run-domain.mjs --domain openclaw-trends --scheduled --jira --job-id '47ba5e0a-4b3a-4fcf-90a2-7cbe0fd7eb42'",
+        "timeoutSeconds": 1200
+      },
+      "state": {
+        "nextRunAtMs": 1770793500000,
+        "lastRunAtMs": 1770707100004,
+        "lastStatus": "ok",
+        "lastDurationMs": 230264,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "discord",
+        "to": "channel:1470174455698423963",
+        "bestEffort": false
+      }
+    },
+    {
+      "id": "d1ab7250-6978-4a70-a62c-8dc2bb8607b6",
+      "agentId": "main",
+      "name": "LinkedIn AI adventures draft (20m)",
+      "enabled": true,
+      "createdAtMs": 1770194429617,
+      "updatedAtMs": 1770730768312,
+      "schedule": {
+        "kind": "cron",
+        "expr": "25 8 * * 1-5",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "message": "node automation/shared/run-domain.mjs --domain linkedin-drafts --scheduled --no-jira --job-id 'd1ab7250-6978-4a70-a62c-8dc2bb8607b6'",
+        "timeoutSeconds": 1200
+      },
+      "state": {
+        "nextRunAtMs": 1770794700000,
+        "lastRunAtMs": 1770730755614,
+        "lastStatus": "ok",
+        "lastDurationMs": 12698,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      },
+      "delivery": {
+        "mode": "none"
+      }
+    },
+    {
+      "id": "9f2cdec2-eee1-4c7f-ae71-5f86447f4a0d",
+      "agentId": "main",
+      "name": "Notion + workspace hygiene (auto-archive duplicates)",
+      "enabled": true,
+      "createdAtMs": 1770202567699,
+      "updatedAtMs": 1770688874260,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 3 */3 * *",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "next-heartbeat",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 900,
+        "message": "node skills/jira/scripts/hygiene-jira-run.mjs --scheduled --job-id '9f2cdec2-eee1-4c7f-ae71-5f86447f4a0d'"
+      },
+      "state": {
+        "nextRunAtMs": 1770948000000,
+        "lastRunAtMs": 1770688800004,
+        "lastStatus": "ok",
+        "lastDurationMs": 74256,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      },
+      "delivery": {
+        "mode": "none"
+      }
+    },
+    {
+      "id": "408c208a-980d-48dd-a4d5-af9f83df75c8",
+      "agentId": "main",
+      "name": "Self-improvement digest (YouTube + Reddit)",
+      "enabled": true,
+      "createdAtMs": 1770214639313,
+      "updatedAtMs": 1770730596695,
+      "schedule": {
+        "kind": "cron",
+        "expr": "40 8 * * 1-5",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 1800,
+        "message": "node automation/shared/run-domain.mjs --domain self-improvement --scheduled --jira --job-id '408c208a-980d-48dd-a4d5-af9f83df75c8'"
+      },
+      "state": {
+        "nextRunAtMs": 1770795600000,
+        "lastRunAtMs": 1770709200004,
+        "lastStatus": "ok",
+        "lastDurationMs": 217032,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "discord",
+        "to": "channel:1470174455698423963",
+        "bestEffort": false
+      }
+    },
+    {
+      "id": "b5f9c0c3-3c4f-4b2f-9fd5-9b6c5d8a7e12",
+      "agentId": "main",
+      "name": "Podcast discovery digest (YouTube)",
+      "enabled": true,
+      "createdAtMs": 1770500000000,
+      "updatedAtMs": 1770699743226,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 6 * * 1-5",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 1800,
+        "message": "node /home/winedgeuser/.openclaw/workspace/automation/domains/podcast-discovery/cron-deliver.mjs --job-id \"b5f9c0c3-3c4f-4b2f-9fd5-9b6c5d8a7e12\""
+      },
+      "state": {
+        "lastRunAtMs": 1770699600003,
+        "lastStatus": "ok",
+        "lastDurationMs": 143223,
+        "nextRunAtMs": 1770786000000,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "discord",
+        "to": "channel:1470174455698423963",
+        "bestEffort": true
+      }
+    },
+    {
+      "id": "5986ab86-ffa1-414f-a363-9b5427d8415c",
+      "agentId": "main",
+      "name": "Ops watchdog (15m): cron failures + catch-up",
+      "enabled": true,
+      "createdAtMs": 1770466587006,
+      "updatedAtMs": 1770729405807,
+      "schedule": {
+        "kind": "every",
+        "everyMs": 900000,
+        "anchorMs": 1770466587006
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 240,
+        "message": "skills/cron/playbooks/ops-watchdog.md"
+      },
+      "delivery": {
+        "mode": "none",
+        "channel": "discord",
+        "to": "channel:1470174455698423963",
+        "bestEffort": true
+      },
+      "state": {
+        "lastRunAtMs": 1770729387010,
+        "lastStatus": "ok",
+        "lastDurationMs": 18797,
+        "nextRunAtMs": 1770731187006,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "9c654496-8875-49ea-819f-919a63c1b093",
+      "agentId": "main",
+      "name": "Jira daily digest (19:00)",
+      "enabled": true,
+      "createdAtMs": 1770466591154,
+      "updatedAtMs": 1770672710837,
+      "schedule": {
+        "kind": "cron",
+        "expr": "0 19 * * *",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 240,
+        "message": "node skills/jira/scripts/jira-digest.mjs"
+      },
+      "delivery": {
+        "mode": "announce",
+        "channel": "discord",
+        "to": "channel:1470174455698423963",
+        "bestEffort": true
+      },
+      "state": {
+        "nextRunAtMs": 1770746400000,
+        "lastRunAtMs": 1770672666498,
+        "lastStatus": "ok",
+        "lastDurationMs": 44339,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "f374449e-201e-4b4e-8559-5c971d4ef08b",
+      "agentId": "main",
+      "name": "Jira comment responder (comment-only, non-executor comments)",
+      "enabled": true,
+      "createdAtMs": 1770487366417,
+      "updatedAtMs": 1770730219000,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/15 * * * *",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 1800,
+        "message": "skills/cron/playbooks/jira-comment-responder.md"
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "nextRunAtMs": 1770731100000,
+        "lastRunAtMs": 1770730200004,
+        "lastStatus": "ok",
+        "lastDurationMs": 18996,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "a1dc6f72-6cbf-4bf7-9f3c-9c503d17b477",
+      "agentId": "main",
+      "name": "Jira planned dispatcher (execution workers)",
+      "enabled": true,
+      "createdAtMs": 1770585000000,
+      "updatedAtMs": 1770730326687,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/15 * * * *",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 5400,
+        "message": "skills/cron/playbooks/jira-dispatcher.md"
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "nextRunAtMs": 1770731100000,
+        "lastRunAtMs": 1770730219000,
+        "lastStatus": "ok",
+        "lastDurationMs": 107687,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      }
+    },
+    {
+      "id": "cefeff9c-cfd6-4397-9e34-0f059a89d1f3",
+      "agentId": "main",
+      "name": "Edge solutions stuck in-progress recovery",
+      "enabled": true,
+      "createdAtMs": 1770487478032,
+      "updatedAtMs": 1770730354110,
+      "schedule": {
+        "kind": "cron",
+        "expr": "*/30 * * * *",
+        "tz": "Europe/Brussels"
+      },
+      "sessionTarget": "isolated",
+      "wakeMode": "now",
+      "payload": {
+        "kind": "agentTurn",
+        "timeoutSeconds": 900,
+        "message": "skills/cron/playbooks/jira-recovery.md"
+      },
+      "delivery": {
+        "mode": "none"
+      },
+      "state": {
+        "nextRunAtMs": 1770732000000,
+        "lastRunAtMs": 1770730326687,
+        "lastStatus": "ok",
+        "lastDurationMs": 27423,
+        "execution_status": "ok",
+        "delivery_status": "ok",
+        "consecutiveErrors": 0
+      }
+    }
+  ]
+}

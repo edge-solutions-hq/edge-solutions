@@ -1,0 +1,13 @@
+{
+  "action": "update",
+  "jobId": "15a25c3b-96cd-4e38-920f-738ffb6b93ef",
+  "patch": {
+    "payload": {
+      "kind": "agentTurn",
+      "message": "node workspace/automation/shared/run-domain.mjs --domain edge-solutions --scheduled --jira --job-id '15a25c3b-96cd-4e38-920f-738ffb6b93ef'"
+    },
+    "delivery": {
+      "bestEffort": true
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "action": "update",
+  "jobId": "408c208a-980d-48dd-a4d5-af9f83df75c8",
+  "patch": {
+    "payload": {
+      "kind": "agentTurn",
+      "message": "node workspace/automation/shared/run-domain.mjs --domain self-improvement --scheduled --jira --job-id '408c208a-980d-48dd-a4d5-af9f83df75c8'"
+    },
+    "delivery": {
+      "bestEffort": true
+    }
+  }
+}

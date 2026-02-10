@@ -1,0 +1,37 @@
+[
+  {
+    "id": "75f4ea2b-e798-4928-8c72-f4baaa08c8df",
+    "name": "Job scout (micro, 20m)",
+    "isAnnounce": true,
+    "oldMsg": "node workspace/automation/shared/run-domain.mjs --domain job-scout --scheduled --jira --job-id '75f4ea2b-e798-4928-8c72-f4baaa08c8df'",
+    "newMsg": "node automation/shared/run-domain.mjs --domain job-scout --scheduled --jira --job-id '75f4ea2b-e798-4928-8c72-f4baaa08c8df'"
+  },
+  {
+    "id": "15a25c3b-96cd-4e38-920f-738ffb6b93ef",
+    "name": "Edge-solutions improvement (report + dev loop)",
+    "isAnnounce": true,
+    "oldMsg": "node workspace/automation/shared/run-domain.mjs --domain edge-solutions --scheduled --jira --job-id '15a25c3b-96cd-4e38-920f-738ffb6b93ef'",
+    "newMsg": "node automation/shared/run-domain.mjs --domain edge-solutions --scheduled --jira --job-id '15a25c3b-96cd-4e38-920f-738ffb6b93ef'"
+  },
+  {
+    "id": "47ba5e0a-4b3a-4fcf-90a2-7cbe0fd7eb42",
+    "name": "OpenClaw trends (20m)",
+    "isAnnounce": true,
+    "oldMsg": "node workspace/automation/shared/run-domain.mjs --domain openclaw-trends --scheduled --jira --job-id '47ba5e0a-4b3a-4fcf-90a2-7cbe0fd7eb42'",
+    "newMsg": "node automation/shared/run-domain.mjs --domain openclaw-trends --scheduled --jira --job-id '47ba5e0a-4b3a-4fcf-90a2-7cbe0fd7eb42'"
+  },
+  {
+    "id": "408c208a-980d-48dd-a4d5-af9f83df75c8",
+    "name": "Self-improvement digest (YouTube + Reddit)",
+    "isAnnounce": true,
+    "oldMsg": "node workspace/automation/shared/run-domain.mjs --domain self-improvement --scheduled --jira --job-id '408c208a-980d-48dd-a4d5-af9f83df75c8'",
+    "newMsg": "node automation/shared/run-domain.mjs --domain self-improvement --scheduled --jira --job-id '408c208a-980d-48dd-a4d5-af9f83df75c8'"
+  },
+  {
+    "id": "d1ab7250-6978-4a70-a62c-8dc2bb8607b6",
+    "name": "LinkedIn AI adventures draft (20m)",
+    "isAnnounce": false,
+    "oldMsg": "node workspace/automation/shared/run-domain.mjs --domain linkedin-drafts --scheduled --no-jira --job-id 'd1ab7250-6978-4a70-a62c-8dc2bb8607b6'",
+    "newMsg": "node automation/shared/run-domain.mjs --domain linkedin-drafts --scheduled --no-jira --job-id 'd1ab7250-6978-4a70-a62c-8dc2bb8607b6'"
+  }
+]
