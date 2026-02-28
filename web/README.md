@@ -2,7 +2,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-First, run the development server:
+First, set environment variables (copy `env.example` into your local env setup, e.g. `.env.local`) and run the development server:
 
 ```bash
 npm run dev
@@ -15,6 +15,16 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+### Optional analytics setup (GA4)
+
+If you want GA4 tracking enabled, set:
+
+```bash
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
+When this variable is present, the app injects GA4 `gtag` and tracks client-side page views.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

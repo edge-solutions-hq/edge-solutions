@@ -9,11 +9,14 @@ import {routing} from '@/i18n/routing';
 import '@/styles/globals.css';
 import {Header} from '@/components/layout/Header';
 import {Footer} from '@/components/layout/Footer';
+import {GoogleAnalytics} from '@/components/analytics/GoogleAnalytics';
 import {site} from '@/lib/site';
 
 const inter = Inter({variable: '--font-inter', subsets: ['latin']});
 
 const firaCode = Fira_Code({variable: '--font-fira-code', subsets: ['latin']});
+
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || '';
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
@@ -61,6 +64,7 @@ export default async function LocaleLayout({children, params}: Props) {
           <main className="mx-auto max-w-6xl px-6 py-12 md:py-14">{children}</main>
           <Footer />
         </NextIntlClientProvider>
+        {GA_MEASUREMENT_ID ? <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} /> : null}
         <Analytics />
         <SpeedInsights />
       </body>
