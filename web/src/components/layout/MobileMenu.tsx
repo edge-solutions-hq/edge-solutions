@@ -61,7 +61,7 @@ export function MobileMenu({
                     if (item.href === '/contact') {
                       trackConversionEvent('contact_cta_click', {
                         cta_target: '/contact',
-                        page_path: window.location.pathname,
+                        page_path: `${window.location.pathname}${window.location.search}`,
                         placement: 'mobile_menu_nav',
                       });
                     }
