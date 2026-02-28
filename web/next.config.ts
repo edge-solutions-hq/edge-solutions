@@ -25,6 +25,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   reactStrictMode: true,
+  turbopack: {
+    root: process.cwd()
+  },
 
   async headers() {
     const cacheOneDay = 'public, max-age=86400, stale-while-revalidate=604800';

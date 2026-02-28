@@ -4,6 +4,7 @@ import {setRequestLocale} from 'next-intl/server';
 import {hasLocale} from 'next-intl';
 import {routing} from '@/i18n/routing';
 import {getServiceMdx, SERVICE_SLUGS} from '@/lib/content/services';
+import {buildLocaleAlternates} from '@/lib/seo';
 
 type Props = {
   params: Promise<{locale: string; slug: string}>;
@@ -19,7 +20,11 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale, slug} = await params;
   const mdx = await getServiceMdx(locale, slug);
   if (!mdx?.metadata) return {};
-  return mdx.metadata;
+
+  return {
+    ...mdx.metadata,
+    alternates: buildLocaleAlternates(locale, `/services/${slug}`),
+  };
 }
 
 export default async function ServicePage({params}: Props) {
