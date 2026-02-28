@@ -81,9 +81,11 @@ export function ButtonLink({
           return;
         }
 
+        const currentPath = `${window.location.pathname}${window.location.search}`;
+
         trackConversionEvent('contact_cta_click', {
           cta_target: hrefPathname,
-          page_path: window.location.pathname,
+          page_path: currentPath,
           placement: trackingPlacement,
         });
       }}
