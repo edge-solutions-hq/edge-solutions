@@ -39,8 +39,10 @@ export function TrackedLink({
           return;
         }
 
+        const currentPath = `${window.location.pathname}${window.location.search}`;
+
         trackConversionEvent(eventName, {
-          page_path: window.location.pathname,
+          page_path: currentPath,
           link_target: hrefPathname || undefined,
           ...eventParams,
         });
