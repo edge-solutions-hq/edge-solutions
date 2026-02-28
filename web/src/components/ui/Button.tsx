@@ -82,11 +82,13 @@ export function ButtonLink({
         }
 
         const currentPath = `${window.location.pathname}${window.location.search}`;
+        const ctaLabel = event.currentTarget.textContent?.trim();
 
         trackConversionEvent('contact_cta_click', {
           cta_target: hrefPathname,
           page_path: currentPath,
           placement: trackingPlacement,
+          cta_label: ctaLabel || undefined,
         });
       }}
       {...props}

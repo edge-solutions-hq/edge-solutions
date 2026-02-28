@@ -63,6 +63,7 @@ export function MobileMenu({
                         cta_target: '/contact',
                         page_path: `${window.location.pathname}${window.location.search}`,
                         placement: 'mobile_menu_nav',
+                        cta_label: item.label,
                       });
                     }
 

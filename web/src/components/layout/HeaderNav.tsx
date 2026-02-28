@@ -38,6 +38,7 @@ export function HeaderNav({items}: {items: HeaderNavItem[]}) {
                   cta_target: '/contact',
                   page_path: `${window.location.pathname}${window.location.search}`,
                   placement: 'header_nav',
+                  cta_label: item.label,
                 });
               }
             }}
