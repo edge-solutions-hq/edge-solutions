@@ -19,9 +19,11 @@ export function trackConversionEvent(eventName: string, params: EventParams = {}
   if (typeof window === 'undefined') return;
 
   const defaultPath = `${window.location.pathname}${window.location.search}`;
+  const pageTitle = document.title.trim();
   const payload = compactParams({
     page_path: defaultPath,
     page_location: window.location.href,
+    page_title: pageTitle || undefined,
     ...params,
   });
 
