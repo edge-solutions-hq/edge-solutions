@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
+import {useEffect} from 'react';
 import Script from 'next/script';
-import { usePathname } from 'next/navigation';
+import {usePathname, useSearchParams} from 'next/navigation';
 
 declare global {
   interface Window {
@@ -15,17 +15,20 @@ type GoogleAnalyticsProps = {
   measurementId: string;
 };
 
-export function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {
+export function GoogleAnalytics({measurementId}: GoogleAnalyticsProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
 
   useEffect(() => {
     if (!window.gtag) return;
-    const pagePath = `${window.location.pathname}${window.location.search || ''}`;
+
+    const pagePath = queryString ? `${pathname}?${queryString}` : pathname;
 
     window.gtag('config', measurementId, {
       page_path: pagePath,
     });
-  }, [measurementId, pathname]);
+  }, [measurementId, pathname, queryString]);
 
   return (
     <>
