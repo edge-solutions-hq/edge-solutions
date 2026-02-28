@@ -65,6 +65,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 
 - `service` (string): `web` | `realtime` | `unsure`
 - `page_path` (string): current path
+- `submit_attempt` (number): incremental submit attempt index for the current page session (starts at `1`)
 
 ---
 
@@ -80,6 +81,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 
 - `page_path` (string): current path
 - `service` (string, optional): submitted service value (`web` | `realtime` | `unsure`)
+- `submit_attempt` (number): submit attempt index linked to the matching `contact_form_submit`
 
 ---
 
@@ -95,12 +97,14 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 
 - `page_path` (string): current path
 - `service` (string, optional): submitted service value (`web` | `realtime` | `unsure`)
+- `submit_attempt` (number): submit attempt index linked to the matching `contact_form_submit`
 - `error_type` (string): `validation` | `delivery`
 - `error_field_count` (number, optional): count of invalid fields when `error_type=validation`
 
 **Emission rule:**
 
 - `contact_form_success` / `contact_form_error` fire once per captured submit attempt, including consecutive attempts with the same final status.
+- `submit_attempt` can be used to join `contact_form_submit` with the final outcome event for that attempt.
 
 ## GTM/GA4 mapping recommendation
 

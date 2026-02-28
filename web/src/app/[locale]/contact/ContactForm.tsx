@@ -41,6 +41,7 @@ export function ContactForm() {
       trackConversionEvent('contact_form_success', {
         page_path: currentPath,
         service: submittedService,
+        submit_attempt: currentAttempt,
       });
       trackedAttemptRef.current = currentAttempt;
       return;
@@ -55,6 +56,7 @@ export function ContactForm() {
       trackConversionEvent('contact_form_error', {
         page_path: currentPath,
         service: submittedService,
+        submit_attempt: currentAttempt,
         error_type: hasFieldErrors ? 'validation' : 'delivery',
         error_field_count: hasFieldErrors ? fieldErrorCount : undefined,
       });
@@ -75,6 +77,7 @@ export function ContactForm() {
     trackConversionEvent('contact_form_submit', {
       service: normalizedService,
       page_path: currentPath,
+      submit_attempt: submissionAttemptRef.current,
     });
   }
 
