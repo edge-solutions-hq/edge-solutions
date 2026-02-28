@@ -48,7 +48,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 - `service_slug` (string): `web-dev` | `realtime-games`
 - `placement` (string): `home_services_grid` | `services_index_grid`
 - `page_path` (string): current path where click happened
-- `link_target` (string): target route
+- `link_target` (string): target route (preserves query string/hash when present)
 - `link_label` (string, optional): readable card/link label (from `aria-label` or visible text)
 
 ---
