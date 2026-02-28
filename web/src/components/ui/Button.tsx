@@ -128,7 +128,9 @@ export function ButtonLink({
         }
 
         const currentPath = `${window.location.pathname}${window.location.search}`;
-        const ctaLabel = event.currentTarget.textContent?.trim();
+        const ctaLabel =
+          event.currentTarget.getAttribute('aria-label')?.trim() ||
+          event.currentTarget.textContent?.trim();
 
         trackConversionEvent('contact_cta_click', {
           cta_target: hrefPathname,
