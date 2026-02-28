@@ -31,8 +31,19 @@ export function ContactForm() {
       });
     }
 
+    if (state.status === 'error' && previousStatus !== 'error') {
+      const hasFieldErrors = Boolean(
+        state.fieldErrors && Object.values(state.fieldErrors).some(Boolean),
+      );
+
+      trackConversionEvent('contact_form_error', {
+        page_path: window.location.pathname,
+        error_type: hasFieldErrors ? 'validation' : 'delivery',
+      });
+    }
+
     previousStatusRef.current = state.status;
-  }, [state.status]);
+  }, [state.fieldErrors, state.status]);
 
   function handleSubmitCapture(event: FormEvent<HTMLFormElement>) {
     const formData = new FormData(event.currentTarget);

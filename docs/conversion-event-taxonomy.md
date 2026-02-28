@@ -22,11 +22,14 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 **Where wired:**
 
 - `web/src/components/ui/Button.tsx` (`ButtonLink`)
+- `web/src/components/layout/HeaderNav.tsx` (desktop nav contact item)
+- `web/src/components/layout/MobileMenu.tsx` (mobile nav contact item)
 
 **Parameters:**
 
 - `cta_target` (string): target path (typically `/contact`)
 - `page_path` (string): current path where click happened
+- `placement` (string, optional): source location (`header_cta`, `header_nav`, `mobile_menu_cta`, `mobile_menu_nav`, `home_hero_primary`, `home_bottom_primary`, `service_detail_cta`)
 
 ---
 
@@ -76,6 +79,21 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 
 - `page_path` (string): current path
 
+---
+
+### 5) `contact_form_error`
+
+**Intent:** Contact form submission failed.
+
+**Where wired:**
+
+- `web/src/app/[locale]/contact/ContactForm.tsx` (`state.status === 'error'` effect)
+
+**Parameters:**
+
+- `page_path` (string): current path
+- `error_type` (string): `validation` | `delivery`
+
 ## GTM/GA4 mapping recommendation
 
 In GTM, create custom event triggers for:
@@ -84,11 +102,13 @@ In GTM, create custom event triggers for:
 - `service_card_click`
 - `contact_form_submit`
 - `contact_form_success`
+- `contact_form_error`
 
 In GA4:
 
 - Mark `contact_form_success` as a conversion event.
-- Keep `contact_form_submit` as a diagnostic intent signal.
+- Keep `contact_form_submit` as an intent signal and `contact_form_error` as a friction signal.
+- Use `contact_cta_click` + `placement` to compare where intent starts.
 - Use `service_card_click` + `placement` to compare interest from homepage vs services index.
 
 ## Naming rules for new events

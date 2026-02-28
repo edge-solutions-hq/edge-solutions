@@ -37,7 +37,11 @@ export async function Header({locale}: {locale: string}) {
 
         <div className="flex items-center gap-3">
           <LocaleSwitch locale={locale} />
-          <ButtonLink href="/contact" className="hidden md:inline-flex">
+          <ButtonLink
+            href="/contact"
+            className="hidden md:inline-flex"
+            trackingPlacement="header_cta"
+          >
             {t('home.primaryCta')}
           </ButtonLink>
           <MobileMenu items={items} ctaLabel={t('home.primaryCta')} />

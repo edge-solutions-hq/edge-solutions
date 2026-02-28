@@ -56,7 +56,7 @@ export default async function HomePage({params}: Props) {
           <p>{t('meta.siteTagline')}</p>
 
           <div className="not-prose mt-8 flex flex-col gap-3 sm:flex-row">
-            <ButtonLink href="/contact" size="lg">
+            <ButtonLink href="/contact" size="lg" trackingPlacement="home_hero_primary">
               {t('home.primaryCta')}
             </ButtonLink>
             <ButtonLink href="/services" variant="outline" size="lg">
@@ -196,7 +196,11 @@ export default async function HomePage({params}: Props) {
             </p>
 
             <div className="not-prose mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact" size="lg">
+              <ButtonLink
+                href="/contact"
+                size="lg"
+                trackingPlacement="home_bottom_primary"
+              >
                 {t('home.primaryCta')}
               </ButtonLink>
               <ButtonLink href="/services" variant="outline" size="lg">

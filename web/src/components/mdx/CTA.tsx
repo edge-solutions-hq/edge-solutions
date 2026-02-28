@@ -15,7 +15,7 @@ export function CTA({
       <div className="text-lg font-semibold text-foreground">{title}</div>
       <div className="mt-2 text-sm text-muted-foreground">{children}</div>
       <div className="mt-4">
-        <ButtonLink href={href}>
+        <ButtonLink href={href} trackingPlacement="service_detail_cta">
           Me contacter
         </ButtonLink>
       </div>

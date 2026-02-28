@@ -4,6 +4,7 @@ import * as React from 'react';
 import {Link} from '@/i18n/navigation';
 import {cn} from '@/lib/cn';
 import {ButtonLink} from '@/components/ui/Button';
+import {trackConversionEvent} from '@/lib/analytics/events';
 import type {HeaderNavItem} from './HeaderNav';
 
 export function MobileMenu({
@@ -56,7 +57,17 @@ export function MobileMenu({
                   href={item.href}
                   role="menuitem"
                   className="rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    if (item.href === '/contact') {
+                      trackConversionEvent('contact_cta_click', {
+                        cta_target: '/contact',
+                        page_path: window.location.pathname,
+                        placement: 'mobile_menu_nav',
+                      });
+                    }
+
+                    setOpen(false);
+                  }}
                 >
                   {item.label}
                 </Link>
@@ -68,6 +79,7 @@ export function MobileMenu({
                 href="/contact"
                 size="lg"
                 className="w-full"
+                trackingPlacement="mobile_menu_cta"
                 onClick={() => setOpen(false)}
               >
                 {ctaLabel}

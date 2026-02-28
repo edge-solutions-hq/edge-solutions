@@ -14,16 +14,25 @@ If env vars are missing, analytics code is a no-op (safe for local/dev).
 
 Set these in Vercel project settings (Production + Preview as needed):
 
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID` (format: `G-XXXXXXXXXX`)
-- `NEXT_PUBLIC_GTM_ID` (format: `GTM-XXXXXXX`)
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID` (format: `G-XXXXXXXXXX`, non-placeholder value required)
+- `NEXT_PUBLIC_GTM_ID` (format: `GTM-XXXXXXX`, non-placeholder value required)
 
-Recommended local/CI validation:
+### Preflight validation commands (local/CI)
 
 ```bash
 cd web
 npm run check:analytics-env
-npm run check:analytics-env -- --require-ga --require-gtm
+npm run check:analytics-env:prod
 ```
+
+`check:analytics-env:prod` runs strict validation (`--strict`) and fails if GA4/GTM IDs are missing, invalid, or still placeholder values.
+
+### Validation gate checklist
+
+- [ ] Local env includes real GA4 and GTM IDs (not `G-XXXXXXXXXX` / `GTM-XXXXXXX`)
+- [ ] `npm run check:analytics-env:prod` exits successfully
+- [ ] Same values are configured in Vercel Production environment
+- [ ] Production deployment was re-triggered after any env change
 
 ## 3) Deploy checklist (copy/paste)
 
@@ -32,6 +41,7 @@ npm run check:analytics-env -- --require-ga --require-gtm
 - [ ] `NEXT_PUBLIC_GA_MEASUREMENT_ID` set in Production
 - [ ] `NEXT_PUBLIC_GTM_ID` set in Production
 - [ ] Production redeploy triggered after env update
+- [ ] `npm run check:analytics-env:prod` passes
 - [ ] `npm run lint` passes
 - [ ] `npm run build` passes
 
@@ -50,6 +60,7 @@ npm run check:analytics-env -- --require-ga --require-gtm
 - [ ] Click service cards on homepage/services index → `service_card_click`
 - [ ] Submit contact form (attempt) → `contact_form_submit`
 - [ ] Successful contact form response → `contact_form_success`
+- [ ] Trigger a validation error (e.g., empty required field) → `contact_form_error`
 
 ### GA4/GTM dashboards
 

@@ -55,6 +55,7 @@ export function Button({
 export type ButtonLinkProps = React.ComponentProps<typeof Link> & {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  trackingPlacement?: string;
 };
 
 export function ButtonLink({
@@ -63,6 +64,7 @@ export function ButtonLink({
   className,
   onClick,
   href,
+  trackingPlacement,
   ...props
 }: ButtonLinkProps) {
   const hrefPathname = hrefToPathname(href);
@@ -82,6 +84,7 @@ export function ButtonLink({
         trackConversionEvent('contact_cta_click', {
           cta_target: hrefPathname,
           page_path: window.location.pathname,
+          placement: trackingPlacement,
         });
       }}
       {...props}
