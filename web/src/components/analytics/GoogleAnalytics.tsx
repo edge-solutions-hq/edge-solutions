@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect} from 'react';
+import {useEffect, useRef} from 'react';
 import Script from 'next/script';
 import {usePathname, useSearchParams} from 'next/navigation';
 
@@ -37,18 +37,23 @@ export function GoogleAnalytics({measurementId}: GoogleAnalyticsProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const queryString = searchParams.toString();
+  const previousPagePathRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!window.gtag) return;
 
     const pagePath = queryString ? `${pathname}?${queryString}` : pathname;
+    const previousPagePath = previousPagePathRef.current;
 
     window.gtag('config', measurementId, {
       page_path: pagePath,
       page_location: window.location.href,
       page_title: document.title.trim() || undefined,
       site_locale: resolveSiteLocale(pathname),
+      previous_page_path: previousPagePath || undefined,
     });
+
+    previousPagePathRef.current = pagePath;
   }, [measurementId, pathname, queryString]);
 
   return (
