@@ -18,7 +18,12 @@ function compactParams(params: EventParams): Record<string, string | number | bo
 export function trackConversionEvent(eventName: string, params: EventParams = {}) {
   if (typeof window === 'undefined') return;
 
-  const payload = compactParams(params);
+  const defaultPath = `${window.location.pathname}${window.location.search}`;
+  const payload = compactParams({
+    page_path: defaultPath,
+    page_location: window.location.href,
+    ...params,
+  });
 
   if (Array.isArray(window.dataLayer)) {
     window.dataLayer.push({
