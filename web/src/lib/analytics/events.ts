@@ -37,11 +37,13 @@ export function trackConversionEvent(eventName: string, params: EventParams = {}
 
   const defaultPath = `${window.location.pathname}${window.location.search}`;
   const pageTitle = document.title.trim();
+  const pageReferrer = document.referrer.trim();
   const payload = compactParams({
     site_locale: resolveSiteLocale(),
     page_path: defaultPath,
     page_location: window.location.href,
     page_title: pageTitle || undefined,
+    page_referrer: pageReferrer || undefined,
     ...params,
   });
 
