@@ -93,7 +93,9 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 **Parameters:**
 
 - `page_path` (string): current path
+- `service` (string, optional): submitted service value (`web` | `realtime` | `unsure`)
 - `error_type` (string): `validation` | `delivery`
+- `error_field_count` (number, optional): count of invalid fields when `error_type=validation`
 
 ## GTM/GA4 mapping recommendation
 

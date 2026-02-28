@@ -36,14 +36,16 @@ export function ContactForm() {
     }
 
     if (state.status === 'error' && previousStatus !== 'error') {
-      const hasFieldErrors = Boolean(
-        state.fieldErrors && Object.values(state.fieldErrors).some(Boolean),
-      );
+      const fieldErrorCount = state.fieldErrors
+        ? Object.values(state.fieldErrors).filter(Boolean).length
+        : 0;
+      const hasFieldErrors = fieldErrorCount > 0;
 
       trackConversionEvent('contact_form_error', {
         page_path: currentPath,
         service: submittedService,
         error_type: hasFieldErrors ? 'validation' : 'delivery',
+        error_field_count: hasFieldErrors ? fieldErrorCount : undefined,
       });
     }
 
