@@ -21,14 +21,17 @@ export function ContactForm() {
   const t = useTranslations();
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
   const previousStatusRef = useRef<ContactActionState['status']>('idle');
+  const lastSubmittedServiceRef = useRef<string | undefined>(undefined);
 
   useEffect(() => {
     const previousStatus = previousStatusRef.current;
     const currentPath = `${window.location.pathname}${window.location.search}`;
+    const submittedService = lastSubmittedServiceRef.current;
 
     if (state.status === 'success' && previousStatus !== 'success') {
       trackConversionEvent('contact_form_success', {
         page_path: currentPath,
+        service: submittedService,
       });
     }
 
@@ -39,6 +42,7 @@ export function ContactForm() {
 
       trackConversionEvent('contact_form_error', {
         page_path: currentPath,
+        service: submittedService,
         error_type: hasFieldErrors ? 'validation' : 'delivery',
       });
     }
@@ -49,10 +53,13 @@ export function ContactForm() {
   function handleSubmitCapture(event: FormEvent<HTMLFormElement>) {
     const formData = new FormData(event.currentTarget);
     const service = formData.get('service');
+    const normalizedService = typeof service === 'string' ? service : undefined;
     const currentPath = `${window.location.pathname}${window.location.search}`;
 
+    lastSubmittedServiceRef.current = normalizedService;
+
     trackConversionEvent('contact_form_submit', {
-      service: typeof service === 'string' ? service : undefined,
+      service: normalizedService,
       page_path: currentPath,
     });
   }
