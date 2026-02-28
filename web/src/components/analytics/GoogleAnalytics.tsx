@@ -15,6 +15,24 @@ type GoogleAnalyticsProps = {
   measurementId: string;
 };
 
+const SUPPORTED_LOCALES = new Set(['fr', 'en', 'nl']);
+
+function resolveSiteLocale(pathname: string): string | undefined {
+  const htmlLang = document.documentElement.lang.trim().toLowerCase();
+  const normalizedHtmlLang = htmlLang.split('-')[0];
+
+  if (SUPPORTED_LOCALES.has(normalizedHtmlLang)) {
+    return normalizedHtmlLang;
+  }
+
+  const pathLocale = pathname.split('/').filter(Boolean)[0]?.toLowerCase();
+  if (pathLocale && SUPPORTED_LOCALES.has(pathLocale)) {
+    return pathLocale;
+  }
+
+  return undefined;
+}
+
 export function GoogleAnalytics({measurementId}: GoogleAnalyticsProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -27,6 +45,9 @@ export function GoogleAnalytics({measurementId}: GoogleAnalyticsProps) {
 
     window.gtag('config', measurementId, {
       page_path: pagePath,
+      page_location: window.location.href,
+      page_title: document.title.trim() || undefined,
+      site_locale: resolveSiteLocale(pathname),
     });
   }, [measurementId, pathname, queryString]);
 
