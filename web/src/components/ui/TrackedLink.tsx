@@ -40,10 +40,14 @@ export function TrackedLink({
         }
 
         const currentPath = `${window.location.pathname}${window.location.search}`;
+        const linkLabel =
+          event.currentTarget.getAttribute('aria-label')?.trim() ||
+          event.currentTarget.textContent?.trim();
 
         trackConversionEvent(eventName, {
           page_path: currentPath,
           link_target: hrefPathname || undefined,
+          link_label: linkLabel || undefined,
           ...eventParams,
         });
       }}
