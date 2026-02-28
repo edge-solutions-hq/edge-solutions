@@ -79,6 +79,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 **Parameters:**
 
 - `page_path` (string): current path
+- `service` (string, optional): submitted service value (`web` | `realtime` | `unsure`)
 
 ---
 
@@ -96,6 +97,10 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 - `service` (string, optional): submitted service value (`web` | `realtime` | `unsure`)
 - `error_type` (string): `validation` | `delivery`
 - `error_field_count` (number, optional): count of invalid fields when `error_type=validation`
+
+**Emission rule:**
+
+- `contact_form_success` / `contact_form_error` fire once per captured submit attempt, including consecutive attempts with the same final status.
 
 ## GTM/GA4 mapping recommendation
 

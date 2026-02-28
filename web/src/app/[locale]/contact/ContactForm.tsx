@@ -20,22 +20,33 @@ function FieldError({children}: {children?: string}) {
 export function ContactForm() {
   const t = useTranslations();
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
-  const previousStatusRef = useRef<ContactActionState['status']>('idle');
   const lastSubmittedServiceRef = useRef<string | undefined>(undefined);
+  const submissionAttemptRef = useRef(0);
+  const trackedAttemptRef = useRef(0);
 
   useEffect(() => {
-    const previousStatus = previousStatusRef.current;
+    if (pending) {
+      return;
+    }
+
+    const currentAttempt = submissionAttemptRef.current;
+    if (currentAttempt === 0 || currentAttempt <= trackedAttemptRef.current) {
+      return;
+    }
+
     const currentPath = `${window.location.pathname}${window.location.search}`;
     const submittedService = lastSubmittedServiceRef.current;
 
-    if (state.status === 'success' && previousStatus !== 'success') {
+    if (state.status === 'success') {
       trackConversionEvent('contact_form_success', {
         page_path: currentPath,
         service: submittedService,
       });
+      trackedAttemptRef.current = currentAttempt;
+      return;
     }
 
-    if (state.status === 'error' && previousStatus !== 'error') {
+    if (state.status === 'error') {
       const fieldErrorCount = state.fieldErrors
         ? Object.values(state.fieldErrors).filter(Boolean).length
         : 0;
@@ -47,12 +58,13 @@ export function ContactForm() {
         error_type: hasFieldErrors ? 'validation' : 'delivery',
         error_field_count: hasFieldErrors ? fieldErrorCount : undefined,
       });
+      trackedAttemptRef.current = currentAttempt;
     }
-
-    previousStatusRef.current = state.status;
-  }, [state.fieldErrors, state.status]);
+  }, [pending, state.fieldErrors, state.status]);
 
   function handleSubmitCapture(event: FormEvent<HTMLFormElement>) {
+    submissionAttemptRef.current += 1;
+
     const formData = new FormData(event.currentTarget);
     const service = formData.get('service');
     const normalizedService = typeof service === 'string' ? service : undefined;
