@@ -24,10 +24,11 @@ export function ContactForm() {
 
   useEffect(() => {
     const previousStatus = previousStatusRef.current;
+    const currentPath = `${window.location.pathname}${window.location.search}`;
 
     if (state.status === 'success' && previousStatus !== 'success') {
       trackConversionEvent('contact_form_success', {
-        page_path: window.location.pathname,
+        page_path: currentPath,
       });
     }
 
@@ -37,7 +38,7 @@ export function ContactForm() {
       );
 
       trackConversionEvent('contact_form_error', {
-        page_path: window.location.pathname,
+        page_path: currentPath,
         error_type: hasFieldErrors ? 'validation' : 'delivery',
       });
     }
@@ -48,10 +49,11 @@ export function ContactForm() {
   function handleSubmitCapture(event: FormEvent<HTMLFormElement>) {
     const formData = new FormData(event.currentTarget);
     const service = formData.get('service');
+    const currentPath = `${window.location.pathname}${window.location.search}`;
 
     trackConversionEvent('contact_form_submit', {
       service: typeof service === 'string' ? service : undefined,
-      page_path: window.location.pathname,
+      page_path: currentPath,
     });
   }
 
