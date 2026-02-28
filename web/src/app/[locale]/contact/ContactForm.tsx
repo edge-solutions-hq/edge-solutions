@@ -1,7 +1,8 @@
 'use client';
 
-import {useActionState} from 'react';
+import {useActionState, type FormEvent} from 'react';
 import {useTranslations} from 'next-intl';
+import {trackConversionEvent} from '@/lib/analytics/events';
 import type {ContactActionState} from './actions';
 import {sendContactEmail} from './actions';
 import {Button} from '@/components/ui/Button';
@@ -20,8 +21,18 @@ export function ContactForm() {
   const t = useTranslations();
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
 
+  function handleSubmitCapture(event: FormEvent<HTMLFormElement>) {
+    const formData = new FormData(event.currentTarget);
+    const service = formData.get('service');
+
+    trackConversionEvent('contact_form_submit', {
+      service: typeof service === 'string' ? service : undefined,
+      page_path: window.location.pathname,
+    });
+  }
+
   return (
-    <form action={formAction} className="space-y-5">
+    <form action={formAction} onSubmitCapture={handleSubmitCapture} className="space-y-5">
       {/* Honeypot */}
       <input
         type="text"

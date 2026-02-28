@@ -1,10 +1,34 @@
+import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
+import {buildLocaleAlternates} from '@/lib/seo';
 
 type Props = {
   params: Promise<{locale: string}>;
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale} = await params;
+
+  const titleByLocale: Record<string, string> = {
+    fr: 'Services web et 3D/VR pour entreprises en Wallonie',
+    en: 'Web development and 3D/VR services in Belgium',
+    nl: 'Webontwikkeling en 3D/VR-diensten in België',
+  };
+
+  const descriptionByLocale: Record<string, string> = {
+    fr: 'Services Edge Solutions : développement web, SEO technique et expériences temps réel 3D/VR pour PME et recruteurs en Wallonie.',
+    en: 'Edge Solutions services: web development, technical SEO and real-time 3D/VR experiences for Belgian businesses and recruiters.',
+    nl: 'Diensten van Edge Solutions: webontwikkeling, technische SEO en realtime 3D/VR-ervaringen voor Belgische bedrijven en recruiters.',
+  };
+
+  return {
+    title: titleByLocale[locale] || titleByLocale.en,
+    description: descriptionByLocale[locale] || descriptionByLocale.en,
+    alternates: buildLocaleAlternates(locale, '/services'),
+  };
+}
 
 export default async function ServicesIndexPage({params}: Props) {
   const {locale} = await params;

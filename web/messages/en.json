@@ -13,7 +13,30 @@
     "headline": "I build high-performance web products and real-time 3D experiences.",
     "subheadline": "Edge Solutions — by Gil Guminski.",
     "primaryCta": "Contact me",
-    "secondaryCta": "View services"
+    "secondaryCta": "View services",
+    "trust": {
+      "eyebrow": "Why teams choose Edge Solutions",
+      "title": "Trust signals for business-critical projects",
+      "intro": "From scope to launch, delivery stays direct, transparent and focused on measurable outcomes.",
+      "items": {
+        "direct": {
+          "value": "1 technical partner",
+          "label": "Direct communication from brief to production"
+        },
+        "locales": {
+          "value": "FR / EN / NL",
+          "label": "Multilingual collaboration for Belgian teams"
+        },
+        "delivery": {
+          "value": "PR-sized iterations",
+          "label": "Frequent deliveries with clear review checkpoints"
+        },
+        "quality": {
+          "value": "SEO + Core Web Vitals",
+          "label": "Performance and search quality built in from day one"
+        }
+      }
+    }
   },
   "services": {
     "title": "Services",

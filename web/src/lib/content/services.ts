@@ -18,9 +18,14 @@ const loaders: Record<Locale, Partial<Record<ServiceSlug, Loader>>> = {
     'web-dev': () => import('@/content/fr/services/web-dev.mdx'),
     'realtime-games': () => import('@/content/fr/services/realtime-games.mdx')
   },
-  // FR first: translations can be added later without breaking routes/build
-  en: {},
-  nl: {}
+  en: {
+    'web-dev': () => import('@/content/en/services/web-dev.mdx'),
+    'realtime-games': () => import('@/content/en/services/realtime-games.mdx')
+  },
+  nl: {
+    'web-dev': () => import('@/content/nl/services/web-dev.mdx'),
+    'realtime-games': () => import('@/content/nl/services/realtime-games.mdx')
+  }
 };
 
 const LOCALES: Locale[] = ['fr', 'en', 'nl'];

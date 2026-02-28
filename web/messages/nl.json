@@ -13,10 +13,33 @@
     "headline": "Ik bouw performante webproducten en realtime 3D‑ervaringen.",
     "subheadline": "Edge Solutions — door Gil Guminski.",
     "primaryCta": "Contacteer mij",
-    "secondaryCta": "Bekijk services"
+    "secondaryCta": "Bekijk services",
+    "trust": {
+      "eyebrow": "Waarom teams voor Edge Solutions kiezen",
+      "title": "Vertrouwenssignalen voor businesskritische projecten",
+      "intro": "Van scope tot lancering blijft de samenwerking direct, transparant en gericht op meetbare impact.",
+      "items": {
+        "direct": {
+          "value": "1 technische partner",
+          "label": "Rechtstreekse communicatie van briefing tot productie"
+        },
+        "locales": {
+          "value": "FR / EN / NL",
+          "label": "Meertalige samenwerking voor Belgische teams"
+        },
+        "delivery": {
+          "value": "PR-sized iteraties",
+          "label": "Regelmatige opleveringen met duidelijke reviewmomenten"
+        },
+        "quality": {
+          "value": "SEO + Core Web Vitals",
+          "label": "Performance en SEO-kwaliteit ingebouwd vanaf dag één"
+        }
+      }
+    }
   },
   "services": {
-    "title": "Services",
+    "title": "Diensten",
     "webTitle": "Webontwikkeling",
     "webDesc": "Websites & webapps (Next.js, Laravel, WordPress). Performance, SEO en onderhoudbaarheid.",
     "realtimeTitle": "Realtime 3D/VR",
@@ -25,7 +48,7 @@
   },
   "contact": {
     "title": "Contact",
-    "intro": "Beschrijf je behoefte (budget, timing, constraints) en ik kom snel bij je terug.",
+    "intro": "Beschrijf je behoefte (budget, timing, randvoorwaarden) en ik neem snel contact met je op.",
     "form": {
       "name": "Naam",
       "email": "Email",

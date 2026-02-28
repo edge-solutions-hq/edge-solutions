@@ -1,3 +1,4 @@
+import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {ButtonLink} from '@/components/ui/Button';
@@ -6,10 +7,34 @@ import {Link} from '@/i18n/navigation';
 import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
+import {StatList, StatListItem} from '@/components/studio/StatList';
+import {buildLocaleAlternates} from '@/lib/seo';
 
 type Props = {
   params: Promise<{locale: string}>;
 };
+
+export async function generateMetadata({params}: Props): Promise<Metadata> {
+  const {locale} = await params;
+
+  const titleByLocale: Record<string, string> = {
+    fr: 'Développement web et 3D/VR pour entreprises wallonnes',
+    en: 'Web development and 3D/VR for Belgian teams',
+    nl: 'Webontwikkeling en 3D/VR voor Belgische teams',
+  };
+
+  const descriptionByLocale: Record<string, string> = {
+    fr: 'Edge Solutions conçoit des sites performants et des expériences 3D/VR, avec une approche SEO et conversion orientée Wallonie.',
+    en: 'Edge Solutions builds high-performance websites and real-time 3D/VR experiences with a Wallonia-first SEO and conversion approach.',
+    nl: 'Edge Solutions bouwt snelle websites en realtime 3D/VR-ervaringen met een lokale SEO- en conversiefocus voor België.',
+  };
+
+  return {
+    title: titleByLocale[locale] || titleByLocale.en,
+    description: descriptionByLocale[locale] || descriptionByLocale.en,
+    alternates: buildLocaleAlternates(locale),
+  };
+}
 
 export default async function HomePage({params}: Props) {
   const {locale} = await params;
@@ -111,6 +136,34 @@ export default async function HomePage({params}: Props) {
             </Link>
           </FadeIn>
         </FadeInStagger>
+      </section>
+
+      <section>
+        <SectionIntro
+          eyebrow={t('home.trust.eyebrow')}
+          title={t('home.trust.title')}
+        >
+          <p>{t('home.trust.intro')}</p>
+        </SectionIntro>
+
+        <StatList className="mt-10">
+          <StatListItem
+            value={t('home.trust.items.direct.value')}
+            label={t('home.trust.items.direct.label')}
+          />
+          <StatListItem
+            value={t('home.trust.items.locales.value')}
+            label={t('home.trust.items.locales.label')}
+          />
+          <StatListItem
+            value={t('home.trust.items.delivery.value')}
+            label={t('home.trust.items.delivery.label')}
+          />
+          <StatListItem
+            value={t('home.trust.items.quality.value')}
+            label={t('home.trust.items.quality.label')}
+          />
+        </StatList>
       </section>
 
       <section>

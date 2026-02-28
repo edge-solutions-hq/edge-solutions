@@ -10,13 +10,43 @@ import '@/styles/globals.css';
 import {Header} from '@/components/layout/Header';
 import {Footer} from '@/components/layout/Footer';
 import {GoogleAnalytics} from '@/components/analytics/GoogleAnalytics';
+import {GoogleTagManager} from '@/components/analytics/GoogleTagManager';
 import {site} from '@/lib/site';
+import {buildLocaleAlternates} from '@/lib/seo';
 
 const inter = Inter({variable: '--font-inter', subsets: ['latin']});
 
 const firaCode = Fira_Code({variable: '--font-fira-code', subsets: ['latin']});
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || '';
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim() || '';
+
+const ORGANIZATION_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.companyName,
+  legalName: site.companyName,
+  url: site.url,
+  email: site.contactEmail,
+  vatID: site.vatNumber,
+  founder: {
+    '@type': 'Person',
+    name: site.personalBrand,
+  },
+  sameAs: Object.values(site.social),
+  areaServed: [
+    {
+      '@type': 'Country',
+      name: 'Belgium',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Wallonia',
+    },
+  ],
+  availableLanguage: ['fr', 'en', 'nl'],
+  serviceType: ['Web development', 'Real-time 3D/VR'],
+};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
@@ -30,19 +60,20 @@ type Props = {
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
 
+  const descriptionByLocale: Record<string, string> = {
+    fr: 'Développement web et technologies temps réel en Belgique. Sites performants, SEO et expériences 3D/VR.',
+    en: 'Web development and real-time technologies in Belgium. High-performance websites, SEO and 3D/VR experiences.',
+    nl: 'Webontwikkeling en realtime technologie in België. Snelle websites, SEO en 3D/VR-ervaringen.',
+  };
+
   return {
     metadataBase: new URL(site.url),
     title: {
       default: `${site.personalBrand} · ${site.companyName}`,
-      template: `%s · ${site.companyName}`
+      template: `%s · ${site.companyName}`,
     },
-    description:
-      locale === 'fr'
-        ? 'Développement web & technologies temps réel. Sites/applications performants, expériences 3D/VR.'
-        : 'Web development & real-time technologies. High-performance sites/apps, 3D/VR experiences.',
-    alternates: {
-      canonical: `/${locale}`
-    }
+    description: descriptionByLocale[locale] || descriptionByLocale.en,
+    alternates: buildLocaleAlternates(locale),
   };
 }
 
@@ -64,6 +95,11 @@ export default async function LocaleLayout({children, params}: Props) {
           <main className="mx-auto max-w-6xl px-6 py-12 md:py-14">{children}</main>
           <Footer />
         </NextIntlClientProvider>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{__html: JSON.stringify(ORGANIZATION_SCHEMA)}}
+        />
+        {GTM_ID ? <GoogleTagManager containerId={GTM_ID} /> : null}
         {GA_MEASUREMENT_ID ? <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} /> : null}
         <Analytics />
         <SpeedInsights />
