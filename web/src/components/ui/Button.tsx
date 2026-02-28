@@ -1,5 +1,8 @@
+'use client';
+
 import * as React from 'react';
 import {Link} from '@/i18n/navigation';
+import {trackConversionEvent} from '@/lib/analytics/events';
 import {cn} from '@/lib/cn';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -20,6 +23,15 @@ const sizes: Record<ButtonSize, string> = {
   md: 'h-10 px-4',
   lg: 'h-11 px-5'
 };
+
+function hrefToPathname(href: React.ComponentProps<typeof Link>['href']) {
+  if (typeof href === 'string') return href;
+  if (typeof href === 'object' && href && 'pathname' in href) {
+    return typeof href.pathname === 'string' ? href.pathname : '';
+  }
+
+  return '';
+}
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: ButtonVariant;
@@ -49,14 +61,30 @@ export function ButtonLink({
   variant = 'primary',
   size = 'md',
   className,
+  onClick,
+  href,
   ...props
 }: ButtonLinkProps) {
+  const hrefPathname = hrefToPathname(href);
+  const isContactCta = hrefPathname.endsWith('/contact') || hrefPathname === '/contact';
+
   return (
     <Link
+      href={href}
       className={cn(base, variants[variant], sizes[size], className)}
+      onClick={(event) => {
+        onClick?.(event);
+
+        if (event.defaultPrevented || !isContactCta) {
+          return;
+        }
+
+        trackConversionEvent('contact_cta_click', {
+          cta_target: hrefPathname,
+          page_path: window.location.pathname,
+        });
+      }}
       {...props}
     />
   );
 }
-
-

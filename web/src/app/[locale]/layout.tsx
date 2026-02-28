@@ -10,6 +10,7 @@ import '@/styles/globals.css';
 import {Header} from '@/components/layout/Header';
 import {Footer} from '@/components/layout/Footer';
 import {GoogleAnalytics} from '@/components/analytics/GoogleAnalytics';
+import {GoogleTagManager} from '@/components/analytics/GoogleTagManager';
 import {site} from '@/lib/site';
 import {buildLocaleAlternates} from '@/lib/seo';
 
@@ -18,6 +19,7 @@ const inter = Inter({variable: '--font-inter', subsets: ['latin']});
 const firaCode = Fira_Code({variable: '--font-fira-code', subsets: ['latin']});
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || '';
+const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim() || '';
 
 const ORGANIZATION_SCHEMA = {
   '@context': 'https://schema.org',
@@ -97,6 +99,7 @@ export default async function LocaleLayout({children, params}: Props) {
           type="application/ld+json"
           dangerouslySetInnerHTML={{__html: JSON.stringify(ORGANIZATION_SCHEMA)}}
         />
+        {GTM_ID ? <GoogleTagManager containerId={GTM_ID} /> : null}
         {GA_MEASUREMENT_ID ? <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} /> : null}
         <Analytics />
         <SpeedInsights />

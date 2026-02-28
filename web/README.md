@@ -16,7 +16,7 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Optional analytics setup (GA4)
+### Optional analytics setup (GA4 + GTM)
 
 If you want GA4 tracking enabled, set:
 
@@ -24,7 +24,13 @@ If you want GA4 tracking enabled, set:
 NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
 ```
 
-When this variable is present, the app injects GA4 `gtag` and tracks client-side page views.
+If you want Google Tag Manager enabled, set:
+
+```bash
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+```
+
+When these variables are present, the app loads GA4/GTM and emits minimal conversion events (`contact_cta_click`, `contact_form_submit`) via `dataLayer` and `gtag` when available.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

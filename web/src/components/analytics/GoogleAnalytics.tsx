@@ -7,7 +7,7 @@ import { usePathname } from 'next/navigation';
 declare global {
   interface Window {
     gtag?: (...args: unknown[]) => void;
-    dataLayer?: unknown[];
+    dataLayer?: Array<Record<string, unknown>>;
   }
 }
 

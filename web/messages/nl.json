@@ -39,7 +39,7 @@
     }
   },
   "services": {
-    "title": "Services",
+    "title": "Diensten",
     "webTitle": "Webontwikkeling",
     "webDesc": "Websites & webapps (Next.js, Laravel, WordPress). Performance, SEO en onderhoudbaarheid.",
     "realtimeTitle": "Realtime 3D/VR",
@@ -48,7 +48,7 @@
   },
   "contact": {
     "title": "Contact",
-    "intro": "Beschrijf je behoefte (budget, timing, constraints) en ik kom snel bij je terug.",
+    "intro": "Beschrijf je behoefte (budget, timing, randvoorwaarden) en ik neem snel contact met je op.",
     "form": {
       "name": "Naam",
       "email": "Email",

@@ -26,7 +26,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const descriptionByLocale: Record<string, string> = {
     fr: 'Edge Solutions conçoit des sites performants et des expériences 3D/VR, avec une approche SEO et conversion orientée Wallonie.',
     en: 'Edge Solutions builds high-performance websites and real-time 3D/VR experiences with a Wallonia-first SEO and conversion approach.',
-    nl: 'Edge Solutions bouwt snelle websites en realtime 3D/VR-ervaringen met een Franstalige SEO- en conversiefocus voor Wallonië.',
+    nl: 'Edge Solutions bouwt snelle websites en realtime 3D/VR-ervaringen met een lokale SEO- en conversiefocus voor België.',
   };
 
   return {
