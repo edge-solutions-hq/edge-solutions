@@ -30,7 +30,16 @@ If you want Google Tag Manager enabled, set:
 NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 ```
 
-When these variables are present, the app loads GA4/GTM and emits minimal conversion events (`contact_cta_click`, `contact_form_submit`) via `dataLayer` and `gtag` when available.
+When these variables are present, the app loads GA4/GTM and emits conversion events (`contact_cta_click`, `contact_form_submit`, `contact_form_success`, `service_card_click`) via `dataLayer` and `gtag` when available.
+
+You can validate variable formats locally with:
+
+```bash
+npm run check:analytics-env
+npm run check:analytics-env -- --require-ga --require-gtm
+```
+
+For production rollout, follow `../docs/gtm-ga4-production-readiness.md` and `../docs/conversion-event-taxonomy.md`.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

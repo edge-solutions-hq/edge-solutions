@@ -3,7 +3,7 @@ import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {ButtonLink} from '@/components/ui/Button';
 import {Card} from '@/components/ui/Card';
-import {Link} from '@/i18n/navigation';
+import {TrackedLink} from '@/components/ui/TrackedLink';
 import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
@@ -71,9 +71,14 @@ export default async function HomePage({params}: Props) {
 
         <FadeInStagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
           <FadeIn className="flex">
-            <Link
+            <TrackedLink
               href="/services/web-dev"
               aria-label={t('services.webTitle')}
+              eventName="service_card_click"
+              eventParams={{
+                service_slug: 'web-dev',
+                placement: 'home_services_grid',
+              }}
               className="group flex w-full flex-col rounded-lg border border-border bg-surface p-6 no-underline shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
             >
               <div className="flex items-start justify-between gap-4">
@@ -99,13 +104,18 @@ export default async function HomePage({params}: Props) {
                   →
                 </span>
               </div>
-            </Link>
+            </TrackedLink>
           </FadeIn>
 
           <FadeIn className="flex">
-            <Link
+            <TrackedLink
               href="/services/realtime-games"
               aria-label={t('services.realtimeTitle')}
+              eventName="service_card_click"
+              eventParams={{
+                service_slug: 'realtime-games',
+                placement: 'home_services_grid',
+              }}
               className="group flex w-full flex-col rounded-lg border border-border bg-surface p-6 no-underline shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
             >
               <div className="flex items-start justify-between gap-4">
@@ -133,7 +143,7 @@ export default async function HomePage({params}: Props) {
                   →
                 </span>
               </div>
-            </Link>
+            </TrackedLink>
           </FadeIn>
         </FadeInStagger>
       </section>

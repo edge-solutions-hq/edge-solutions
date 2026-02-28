@@ -10,30 +10,30 @@
     "contact": "Contact"
   },
   "home": {
-    "headline": "Je conçois des produits web performants et des expériences 3D temps réel.",
-    "subheadline": "Edge Solutions — par Gil Guminski.",
+    "headline": "Je conçois des sites qui inspirent confiance et des expériences 3D temps réel orientées résultats.",
+    "subheadline": "Edge Solutions — par Gil Guminski, interlocuteur technique unique.",
     "primaryCta": "Me contacter",
     "secondaryCta": "Voir les services",
     "trust": {
       "eyebrow": "Pourquoi les équipes choisissent Edge Solutions",
-      "title": "Des signaux de confiance pour des projets business critiques",
-      "intro": "Du cadrage à la mise en ligne, le suivi reste direct, transparent et orienté résultats mesurables.",
+      "title": "Des signaux concrets pour sécuriser vos décisions business",
+      "intro": "Du cadrage à la mise en ligne, vous gardez de la visibilité sur le planning, les choix techniques et les résultats attendus.",
       "items": {
         "direct": {
           "value": "1 partenaire technique",
-          "label": "Communication directe du brief à la production"
+          "label": "Décisions rapides, communication directe du brief à la production"
         },
         "locales": {
           "value": "FR / EN / NL",
-          "label": "Collaboration multilingue pour les équipes belges"
+          "label": "Collaboration fluide avec vos équipes et parties prenantes locales"
         },
         "delivery": {
           "value": "Itérations PR-sized",
-          "label": "Livraisons fréquentes avec points de validation clairs"
+          "label": "Livraisons courtes avec validation claire avant chaque étape"
         },
         "quality": {
           "value": "SEO + Core Web Vitals",
-          "label": "Performance et qualité SEO intégrées dès le départ"
+          "label": "Performance mesurable et base SEO robuste dès le départ"
         }
       }
     }
@@ -41,14 +41,14 @@
   "services": {
     "title": "Services",
     "webTitle": "Développement web",
-    "webDesc": "Sites vitrine & applications web (Next.js, Laravel, WordPress). Performance, SEO et maintenabilité.",
+    "webDesc": "Sites vitrine & applications web (Next.js, Laravel, WordPress) conçus pour générer des contacts qualifiés.",
     "realtimeTitle": "Temps réel 3D/VR",
-    "realtimeDesc": "Prototypes, visualisation et expériences immersives (Unreal, Unity, WebGL).",
+    "realtimeDesc": "Prototypes et expériences immersives (Unreal, Unity, WebGL) pensés pour convaincre investisseurs, équipes et clients.",
     "cta": "Découvrir"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Décrivez votre besoin (budget, timing, contraintes) et je reviens vers vous rapidement.",
+    "intro": "Décrivez votre besoin (budget, timing, contraintes) et je reviens vers vous sous 1 jour ouvré avec une première orientation.",
     "form": {
       "name": "Nom",
       "email": "Email",

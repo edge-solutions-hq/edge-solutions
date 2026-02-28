@@ -1,7 +1,7 @@
 import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
-import {Link} from '@/i18n/navigation';
+import {TrackedLink} from '@/components/ui/TrackedLink';
 import {buildLocaleAlternates} from '@/lib/seo';
 
 type Props = {
@@ -45,9 +45,14 @@ export default async function ServicesIndexPage({params}: Props) {
       </header>
 
       <div className="grid gap-6 md:grid-cols-2">
-        <Link
+        <TrackedLink
           href="/services/web-dev"
           aria-label={t('services.webTitle')}
+          eventName="service_card_click"
+          eventParams={{
+            service_slug: 'web-dev',
+            placement: 'services_index_grid',
+          }}
           className="group rounded-lg border border-border bg-surface p-6 shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
         >
           <div className="flex items-start justify-between gap-4">
@@ -73,11 +78,16 @@ export default async function ServicesIndexPage({params}: Props) {
               →
             </span>
           </div>
-        </Link>
+        </TrackedLink>
 
-        <Link
+        <TrackedLink
           href="/services/realtime-games"
           aria-label={t('services.realtimeTitle')}
+          eventName="service_card_click"
+          eventParams={{
+            service_slug: 'realtime-games',
+            placement: 'services_index_grid',
+          }}
           className="group rounded-lg border border-border bg-surface p-6 shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
         >
           <div className="flex items-start justify-between gap-4">
@@ -105,7 +115,7 @@ export default async function ServicesIndexPage({params}: Props) {
               →
             </span>
           </div>
-        </Link>
+        </TrackedLink>
       </div>
     </div>
   );

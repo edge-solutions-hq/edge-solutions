@@ -1,6 +1,6 @@
 'use client';
 
-import {useActionState, type FormEvent} from 'react';
+import {useActionState, useEffect, useRef, type FormEvent} from 'react';
 import {useTranslations} from 'next-intl';
 import {trackConversionEvent} from '@/lib/analytics/events';
 import type {ContactActionState} from './actions';
@@ -20,6 +20,19 @@ function FieldError({children}: {children?: string}) {
 export function ContactForm() {
   const t = useTranslations();
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
+  const previousStatusRef = useRef<ContactActionState['status']>('idle');
+
+  useEffect(() => {
+    const previousStatus = previousStatusRef.current;
+
+    if (state.status === 'success' && previousStatus !== 'success') {
+      trackConversionEvent('contact_form_success', {
+        page_path: window.location.pathname,
+      });
+    }
+
+    previousStatusRef.current = state.status;
+  }, [state.status]);
 
   function handleSubmitCapture(event: FormEvent<HTMLFormElement>) {
     const formData = new FormData(event.currentTarget);
