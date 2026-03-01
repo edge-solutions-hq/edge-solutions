@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:analytics-env": "node scripts/validate-analytics-env.mjs",
+    "check:analytics-env:prod": "node scripts/validate-analytics-env.mjs --strict"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

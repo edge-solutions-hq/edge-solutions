@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect } from 'react';
+import {useEffect, useRef} from 'react';
 import Script from 'next/script';
-import { usePathname } from 'next/navigation';
+import {usePathname, useSearchParams} from 'next/navigation';
 
 declare global {
   interface Window {
@@ -15,17 +15,46 @@ type GoogleAnalyticsProps = {
   measurementId: string;
 };
 
-export function GoogleAnalytics({ measurementId }: GoogleAnalyticsProps) {
+const SUPPORTED_LOCALES = new Set(['fr', 'en', 'nl']);
+
+function resolveSiteLocale(pathname: string): string | undefined {
+  const htmlLang = document.documentElement.lang.trim().toLowerCase();
+  const normalizedHtmlLang = htmlLang.split('-')[0];
+
+  if (SUPPORTED_LOCALES.has(normalizedHtmlLang)) {
+    return normalizedHtmlLang;
+  }
+
+  const pathLocale = pathname.split('/').filter(Boolean)[0]?.toLowerCase();
+  if (pathLocale && SUPPORTED_LOCALES.has(pathLocale)) {
+    return pathLocale;
+  }
+
+  return undefined;
+}
+
+export function GoogleAnalytics({measurementId}: GoogleAnalyticsProps) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
+  const previousPagePathRef = useRef<string | null>(null);
 
   useEffect(() => {
     if (!window.gtag) return;
-    const pagePath = `${window.location.pathname}${window.location.search || ''}`;
+
+    const pagePath = queryString ? `${pathname}?${queryString}` : pathname;
+    const previousPagePath = previousPagePathRef.current;
 
     window.gtag('config', measurementId, {
       page_path: pagePath,
+      page_location: window.location.href,
+      page_title: document.title.trim() || undefined,
+      site_locale: resolveSiteLocale(pathname),
+      previous_page_path: previousPagePath || undefined,
     });
-  }, [measurementId, pathname]);
+
+    previousPagePathRef.current = pagePath;
+  }, [measurementId, pathname, queryString]);
 
   return (
     <>

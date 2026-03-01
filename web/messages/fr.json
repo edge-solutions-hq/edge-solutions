@@ -10,30 +10,30 @@
     "contact": "Contact"
   },
   "home": {
-    "headline": "Je conçois des produits web performants et des expériences 3D temps réel.",
-    "subheadline": "Edge Solutions — par Gil Guminski.",
+    "headline": "J’aide les PME wallonnes à convertir leur trafic en demandes qualifiées avec des sites crédibles et des expériences 3D qui marquent.",
+    "subheadline": "Edge Solutions — par Gil Guminski, interlocuteur technique unique du cadrage à la mise en ligne.",
     "primaryCta": "Me contacter",
     "secondaryCta": "Voir les services",
     "trust": {
       "eyebrow": "Pourquoi les équipes choisissent Edge Solutions",
-      "title": "Des signaux de confiance pour des projets business critiques",
-      "intro": "Du cadrage à la mise en ligne, le suivi reste direct, transparent et orienté résultats mesurables.",
+      "title": "Des preuves concrètes pour décider vite et limiter le risque",
+      "intro": "Vous savez ce qui est livré, quand, et pourquoi. Chaque étape est reliée à un objectif business clair (visibilité, crédibilité, demandes entrantes).",
       "items": {
         "direct": {
-          "value": "1 partenaire technique",
-          "label": "Communication directe du brief à la production"
+          "value": "1 interlocuteur senior",
+          "label": "Arbitrages rapides, communication directe du brief à la production"
         },
         "locales": {
           "value": "FR / EN / NL",
-          "label": "Collaboration multilingue pour les équipes belges"
+          "label": "Collaboration fluide avec vos équipes et parties prenantes locales"
         },
         "delivery": {
-          "value": "Itérations PR-sized",
-          "label": "Livraisons fréquentes avec points de validation clairs"
+          "value": "Roadmap hebdo claire",
+          "label": "Livraisons courtes avec validation visible avant chaque étape"
         },
         "quality": {
-          "value": "SEO + Core Web Vitals",
-          "label": "Performance et qualité SEO intégrées dès le départ"
+          "value": "Performance + SEO vérifiables",
+          "label": "Base technique robuste pour capter et convertir du trafic qualifié"
         }
       }
     }
@@ -41,14 +41,14 @@
   "services": {
     "title": "Services",
     "webTitle": "Développement web",
-    "webDesc": "Sites vitrine & applications web (Next.js, Laravel, WordPress). Performance, SEO et maintenabilité.",
+    "webDesc": "Sites vitrine et applications (Next.js, Laravel, WordPress) pensés pour convertir : CTA clairs, SEO technique et Core Web Vitals solides.",
     "realtimeTitle": "Temps réel 3D/VR",
-    "realtimeDesc": "Prototypes, visualisation et expériences immersives (Unreal, Unity, WebGL).",
-    "cta": "Découvrir"
+    "realtimeDesc": "Prototypes et expériences immersives (Unreal, Unity, WebGL) conçus pour rassurer les décideurs et accélérer vos démonstrations commerciales.",
+    "cta": "Voir le service"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Décrivez votre besoin (budget, timing, contraintes) et je reviens vers vous rapidement.",
+    "intro": "Décrivez votre besoin (objectif, budget, timing, contraintes) et je vous réponds sous 1 jour ouvré avec une recommandation concrète et les prochains pas.",
     "form": {
       "name": "Nom",
       "email": "Email",

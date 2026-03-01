@@ -1,6 +1,7 @@
 'use client';
 
 import {Link, usePathname} from '@/i18n/navigation';
+import {trackConversionEvent} from '@/lib/analytics/events';
 import {cn} from '@/lib/cn';
 
 export type HeaderNavItem = {
@@ -31,6 +32,16 @@ export function HeaderNav({items}: {items: HeaderNavItem[]}) {
                 ? 'bg-surface-muted text-foreground'
                 : 'text-muted-foreground hover:bg-surface-muted hover:text-foreground'
             )}
+            onClick={() => {
+              if (item.href === '/contact') {
+                trackConversionEvent('contact_cta_click', {
+                  cta_target: '/contact',
+                  page_path: `${window.location.pathname}${window.location.search}`,
+                  placement: 'header_nav',
+                  cta_label: item.label,
+                });
+              }
+            }}
           >
             {item.label}
           </Link>

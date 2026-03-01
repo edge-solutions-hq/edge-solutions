@@ -4,10 +4,12 @@ import {Card} from '@/components/ui/Card';
 export function CTA({
   title,
   href,
+  buttonLabel,
   children
 }: {
   title: string;
   href: string;
+  buttonLabel: string;
   children: React.ReactNode;
 }) {
   return (
@@ -15,8 +17,8 @@ export function CTA({
       <div className="text-lg font-semibold text-foreground">{title}</div>
       <div className="mt-2 text-sm text-muted-foreground">{children}</div>
       <div className="mt-4">
-        <ButtonLink href={href}>
-          Me contacter
+        <ButtonLink href={href} trackingPlacement="service_detail_cta">
+          {buttonLabel}
         </ButtonLink>
       </div>
     </Card>

@@ -2,10 +2,23 @@
 
 import {Link, usePathname} from '@/i18n/navigation';
 import {routing} from '@/i18n/routing';
+import {trackConversionEvent} from '@/lib/analytics/events';
 import {cn} from '@/lib/cn';
 
 export function LocaleSwitch({locale}: {locale: string}) {
   const pathname = usePathname();
+
+  const handleLocaleClick = (nextLocale: string, active: boolean) => {
+    if (active || typeof window === 'undefined') return;
+
+    const currentPath = `${window.location.pathname}${window.location.search}`;
+
+    trackConversionEvent('locale_switch', {
+      from_locale: locale,
+      to_locale: nextLocale,
+      page_path: currentPath,
+    });
+  };
 
   return (
     <div className="flex items-center gap-1 text-sm">
@@ -16,6 +29,7 @@ export function LocaleSwitch({locale}: {locale: string}) {
             key={l}
             href={pathname}
             locale={l}
+            onClick={() => handleLocaleClick(l, active)}
             aria-current={active ? 'page' : undefined}
             className={cn(
               'rounded-md px-2 py-1 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',

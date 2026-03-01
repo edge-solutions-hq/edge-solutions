@@ -24,13 +24,59 @@ const sizes: Record<ButtonSize, string> = {
   lg: 'h-11 px-5'
 };
 
+function queryValueToStrings(value: unknown): string[] {
+  if (Array.isArray(value)) {
+    return value.flatMap(queryValueToStrings);
+  }
+
+  if (value === undefined || value === null) {
+    return [];
+  }
+
+  return [String(value)];
+}
+
+function queryToSearch(query: Record<string, unknown> | undefined): string {
+  if (!query) {
+    return '';
+  }
+
+  const searchParams = new URLSearchParams();
+
+  Object.entries(query).forEach(([key, value]) => {
+    queryValueToStrings(value).forEach((item) => {
+      searchParams.append(key, item);
+    });
+  });
+
+  const queryString = searchParams.toString();
+  return queryString ? `?${queryString}` : '';
+}
+
+function normalizeHash(hash: unknown): string {
+  if (typeof hash !== 'string' || hash.length === 0) {
+    return '';
+  }
+
+  return hash.startsWith('#') ? hash : `#${hash}`;
+}
+
 function hrefToPathname(href: React.ComponentProps<typeof Link>['href']) {
   if (typeof href === 'string') return href;
   if (typeof href === 'object' && href && 'pathname' in href) {
-    return typeof href.pathname === 'string' ? href.pathname : '';
+    const pathname = typeof href.pathname === 'string' ? href.pathname : '';
+    const query = 'query' in href ? queryToSearch(href.query as Record<string, unknown>) : '';
+    const hash = 'hash' in href ? normalizeHash(href.hash) : '';
+
+    return `${pathname}${query}${hash}`;
   }
 
   return '';
+}
+
+function isContactPath(path: string): boolean {
+  const cleanPath = path.split(/[?#]/, 1)[0] ?? '';
+  return cleanPath.endsWith('/contact') || cleanPath === '/contact';
 }
 
 export type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -55,6 +101,7 @@ export function Button({
 export type ButtonLinkProps = React.ComponentProps<typeof Link> & {
   variant?: ButtonVariant;
   size?: ButtonSize;
+  trackingPlacement?: string;
 };
 
 export function ButtonLink({
@@ -63,10 +110,11 @@ export function ButtonLink({
   className,
   onClick,
   href,
+  trackingPlacement,
   ...props
 }: ButtonLinkProps) {
   const hrefPathname = hrefToPathname(href);
-  const isContactCta = hrefPathname.endsWith('/contact') || hrefPathname === '/contact';
+  const isContactCta = isContactPath(hrefPathname);
 
   return (
     <Link
@@ -79,9 +127,16 @@ export function ButtonLink({
           return;
         }
 
+        const currentPath = `${window.location.pathname}${window.location.search}`;
+        const ctaLabel =
+          event.currentTarget.getAttribute('aria-label')?.trim() ||
+          event.currentTarget.textContent?.trim();
+
         trackConversionEvent('contact_cta_click', {
           cta_target: hrefPathname,
-          page_path: window.location.pathname,
+          page_path: currentPath,
+          placement: trackingPlacement,
+          cta_label: ctaLabel || undefined,
         });
       }}
       {...props}
