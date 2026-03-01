@@ -162,10 +162,6 @@ export default async function HomePage({params}: Props) {
             label={t('home.trust.items.direct.label')}
           />
           <StatListItem
-            value={t('home.trust.items.locales.value')}
-            label={t('home.trust.items.locales.label')}
-          />
-          <StatListItem
             value={t('home.trust.items.delivery.value')}
             label={t('home.trust.items.delivery.label')}
           />

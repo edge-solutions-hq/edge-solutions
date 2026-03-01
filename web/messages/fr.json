@@ -23,10 +23,6 @@
           "value": "1 interlocuteur senior",
           "label": "Arbitrages rapides, communication directe du brief à la production"
         },
-        "locales": {
-          "value": "FR / EN / NL",
-          "label": "Collaboration fluide avec vos équipes et parties prenantes locales"
-        },
         "delivery": {
           "value": "Roadmap hebdo claire",
           "label": "Livraisons courtes avec validation visible avant chaque étape"

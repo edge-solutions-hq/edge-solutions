@@ -23,10 +23,6 @@
           "value": "1 technical partner",
           "label": "Direct communication from brief to production"
         },
-        "locales": {
-          "value": "FR / EN / NL",
-          "label": "Multilingual collaboration for Belgian teams"
-        },
         "delivery": {
           "value": "PR-sized iterations",
           "label": "Frequent deliveries with clear review checkpoints"
