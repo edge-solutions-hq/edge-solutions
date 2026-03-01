@@ -1,4 +1,5 @@
 import type {Metadata} from 'next';
+import {Suspense} from 'react';
 import {Fira_Code, Inter} from 'next/font/google';
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import {Analytics} from '@vercel/analytics/react';
@@ -100,7 +101,11 @@ export default async function LocaleLayout({children, params}: Props) {
           dangerouslySetInnerHTML={{__html: JSON.stringify(ORGANIZATION_SCHEMA)}}
         />
         {GTM_ID ? <GoogleTagManager containerId={GTM_ID} /> : null}
-        {GA_MEASUREMENT_ID ? <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} /> : null}
+        {GA_MEASUREMENT_ID ? (
+          <Suspense fallback={null}>
+            <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
+          </Suspense>
+        ) : null}
         <Analytics />
         <SpeedInsights />
       </body>
