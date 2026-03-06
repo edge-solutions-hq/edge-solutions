@@ -5,6 +5,7 @@ import {hasLocale} from 'next-intl';
 import {routing} from '@/i18n/routing';
 import {getServiceMdx, SERVICE_SLUGS} from '@/lib/content/services';
 import {buildLocaleAlternates} from '@/lib/seo';
+import {ServiceScrollDepthTracker} from '@/components/analytics/ServiceScrollDepthTracker';
 
 type Props = {
   params: Promise<{locale: string; slug: string}>;
@@ -40,9 +41,12 @@ export default async function ServicePage({params}: Props) {
   const Content = mdx.default;
 
   return (
-    <article className="prose prose-slate max-w-none dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground">
-      <Content />
-    </article>
+    <>
+      <ServiceScrollDepthTracker serviceSlug={slug} />
+      <article className="prose prose-slate max-w-none dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground">
+        <Content />
+      </article>
+    </>
   );
 }
 
