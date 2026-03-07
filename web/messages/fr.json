@@ -53,7 +53,7 @@
       "service_realtime": "Temps réel 3D/VR",
       "service_unsure": "Je ne sais pas / autre",
       "message": "Message",
-      "namePlaceholder": "Gil Guminski",
+      "namePlaceholder": "Votre nom",
       "emailPlaceholder": "vous@exemple.com",
       "messagePlaceholder": "Contexte, objectifs, contraintes, délais...",
       "submit": "Envoyer",
