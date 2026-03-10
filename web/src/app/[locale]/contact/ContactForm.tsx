@@ -100,7 +100,7 @@ export function ContactForm() {
             required
             minLength={2}
             className={inputBase + ' h-10'}
-            placeholder="Gil Guminski"
+            placeholder={t('contact.form.namePlaceholder')}
           />
           <FieldError>{state.fieldErrors?.name}</FieldError>
         </label>
@@ -112,7 +112,7 @@ export function ContactForm() {
             type="email"
             required
             className={inputBase + ' h-10'}
-            placeholder="vous@exemple.com"
+            placeholder={t('contact.form.emailPlaceholder')}
           />
           <FieldError>{state.fieldErrors?.email}</FieldError>
         </label>
@@ -140,7 +140,7 @@ export function ContactForm() {
           minLength={10}
           rows={7}
           className={inputBase + ' min-h-[8rem] resize-y'}
-          placeholder="Contexte, objectifs, contraintes, délais..."
+          placeholder={t('contact.form.messagePlaceholder')}
         />
         <FieldError>{state.fieldErrors?.message}</FieldError>
       </label>
@@ -166,5 +166,4 @@ export function ContactForm() {
     </form>
   );
 }
-
 

@@ -53,6 +53,9 @@
       "service_realtime": "Realtime 3D/VR",
       "service_unsure": "Niet zeker / ander",
       "message": "Bericht",
+      "namePlaceholder": "Je naam",
+      "emailPlaceholder": "jij@voorbeeld.com",
+      "messagePlaceholder": "Context, doelen, randvoorwaarden, timing...",
       "submit": "Versturen",
       "success": "Bericht verzonden. Ik kom snel bij je terug.",
       "genericError": "Kon je bericht niet versturen. Probeer het opnieuw."
@@ -68,5 +71,4 @@
     "cta": "Terug naar home"
   }
 }
-
 

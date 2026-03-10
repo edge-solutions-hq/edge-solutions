@@ -53,6 +53,9 @@
       "service_realtime": "Real-time 3D/VR",
       "service_unsure": "Not sure / other",
       "message": "Message",
+      "namePlaceholder": "Your name",
+      "emailPlaceholder": "you@example.com",
+      "messagePlaceholder": "Context, goals, constraints, timeline...",
       "submit": "Send",
       "success": "Message sent. I’ll get back to you shortly.",
       "genericError": "Could not send your message. Please try again."
@@ -68,5 +71,4 @@
     "cta": "Back to home"
   }
 }
-
 
