@@ -32,6 +32,39 @@
           "label": "Performance en SEO-kwaliteit ingebouwd vanaf dag één"
         }
       }
+    },
+    "process": {
+      "eyebrow": "Zichtbare tools & proces",
+      "title": "Een duidelijke stack, korte iteraties en bewijs dat je echt kan controleren",
+      "intro": "Het werk steunt niet op vage beloften. Ik gebruik een concrete stack, korte oplevercycli en zichtbare reviewmomenten zodat het project leesbaar blijft van briefing tot lancering.",
+      "stackTitle": "Stack ingezet waar die zinvol is",
+      "stackIntro": "Deze tools staan al op de servicepagina's, in de repo en in publieke profielen. Ze op de homepage tonen maakt ze tot vertrouwenssignalen in plaats van verborgen voetnoten.",
+      "stackItems": {
+        "web": "Next.js · React · TypeScript",
+        "backend": "Laravel · WordPress · technische SEO",
+        "realtime": "Unreal · Unity · WebGL",
+        "delivery": "GitHub · korte PR's · zichtbare reviewmomenten"
+      },
+      "workflowTitle": "Hoe het werk vooruitgaat",
+      "workflowItems": {
+        "scope": {
+          "step": "1. Duidelijke afbakening",
+          "body": "We stemmen eerst af op het businessdoel, de randvoorwaarden en de prioriteiten voor er gebouwd wordt."
+        },
+        "iterate": {
+          "step": "2. Korte iteraties",
+          "body": "Het werk gaat vooruit in leesbare blokken met snelle feedback, niet in een lange black box."
+        },
+        "prove": {
+          "step": "3. Controleerbaar bewijs",
+          "body": "Resultaten zijn na te kijken in de code, opgeleverde pagina's, performance-signalen of publieke voorbeelden."
+        }
+      },
+      "links": {
+        "github": "Bekijk GitHub",
+        "artstation": "Bekijk ArtStation-werk",
+        "linkedin": "Bekijk LinkedIn-profiel"
+      }
     }
   },
   "services": {

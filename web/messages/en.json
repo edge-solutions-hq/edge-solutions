@@ -32,6 +32,39 @@
           "label": "Performance and search quality built in from day one"
         }
       }
+    },
+    "process": {
+      "eyebrow": "Visible tools & process",
+      "title": "A clear stack, short iterations and proof you can actually verify",
+      "intro": "The work does not rely on vague promises. I use a concrete stack, short delivery cycles and visible review points so the project stays readable from brief to launch.",
+      "stackTitle": "Stack used where it makes sense",
+      "stackIntro": "These tools already appear across the service pages, repo and public profiles. Bringing them onto the homepage turns them into trust builders instead of hidden footnotes.",
+      "stackItems": {
+        "web": "Next.js · React · TypeScript",
+        "backend": "Laravel · WordPress · technical SEO",
+        "realtime": "Unreal · Unity · WebGL",
+        "delivery": "GitHub · short PRs · visible review checkpoints"
+      },
+      "workflowTitle": "How work moves forward",
+      "workflowItems": {
+        "scope": {
+          "step": "1. Clear scoping",
+          "body": "We align on the business goal, constraints and priorities before building."
+        },
+        "iterate": {
+          "step": "2. Short iterations",
+          "body": "Work moves in readable chunks with fast feedback instead of disappearing into a long black box."
+        },
+        "prove": {
+          "step": "3. Verifiable proof",
+          "body": "Results can be checked in the code, delivered pages, performance signals or public work samples."
+        }
+      },
+      "links": {
+        "github": "View GitHub",
+        "artstation": "View ArtStation work",
+        "linkedin": "View LinkedIn profile"
+      }
     }
   },
   "services": {

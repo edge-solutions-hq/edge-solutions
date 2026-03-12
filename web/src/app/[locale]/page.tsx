@@ -9,6 +9,7 @@ import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {StatList, StatListItem} from '@/components/studio/StatList';
 import {buildLocaleAlternates} from '@/lib/seo';
+import {site} from '@/lib/site';
 
 type Props = {
   params: Promise<{locale: string}>;
@@ -170,6 +171,100 @@ export default async function HomePage({params}: Props) {
             label={t('home.trust.items.quality.label')}
           />
         </StatList>
+      </section>
+
+      <section>
+        <SectionIntro
+          eyebrow={t('home.process.eyebrow')}
+          title={t('home.process.title')}
+        >
+          <p>{t('home.process.intro')}</p>
+        </SectionIntro>
+
+        <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
+          <Card className="p-6 md:p-8">
+            <h3 className="text-lg font-semibold tracking-tight">
+              {t('home.process.stackTitle')}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {t('home.process.stackIntro')}
+            </p>
+
+            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              <li className="rounded-lg border border-border bg-background/60 px-4 py-3 text-sm font-medium text-foreground">
+                {t('home.process.stackItems.web')}
+              </li>
+              <li className="rounded-lg border border-border bg-background/60 px-4 py-3 text-sm font-medium text-foreground">
+                {t('home.process.stackItems.backend')}
+              </li>
+              <li className="rounded-lg border border-border bg-background/60 px-4 py-3 text-sm font-medium text-foreground">
+                {t('home.process.stackItems.realtime')}
+              </li>
+              <li className="rounded-lg border border-border bg-background/60 px-4 py-3 text-sm font-medium text-foreground">
+                {t('home.process.stackItems.delivery')}
+              </li>
+            </ul>
+
+            <div className="mt-6 flex flex-wrap gap-3 text-sm text-link">
+              <a
+                href={site.social.github}
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 decoration-link/30 transition-colors hover:decoration-link"
+              >
+                {t('home.process.links.github')}
+              </a>
+              <a
+                href={site.social.artstation}
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 decoration-link/30 transition-colors hover:decoration-link"
+              >
+                {t('home.process.links.artstation')}
+              </a>
+              <a
+                href={site.social.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="underline underline-offset-4 decoration-link/30 transition-colors hover:decoration-link"
+              >
+                {t('home.process.links.linkedin')}
+              </a>
+            </div>
+          </Card>
+
+          <Card className="p-6 md:p-8">
+            <h3 className="text-lg font-semibold tracking-tight">
+              {t('home.process.workflowTitle')}
+            </h3>
+            <ol className="mt-6 space-y-4">
+              <li>
+                <div className="text-sm font-semibold text-foreground">
+                  {t('home.process.workflowItems.scope.step')}
+                </div>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  {t('home.process.workflowItems.scope.body')}
+                </p>
+              </li>
+              <li>
+                <div className="text-sm font-semibold text-foreground">
+                  {t('home.process.workflowItems.iterate.step')}
+                </div>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  {t('home.process.workflowItems.iterate.body')}
+                </p>
+              </li>
+              <li>
+                <div className="text-sm font-semibold text-foreground">
+                  {t('home.process.workflowItems.prove.step')}
+                </div>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  {t('home.process.workflowItems.prove.body')}
+                </p>
+              </li>
+            </ol>
+          </Card>
+        </div>
       </section>
 
       <section>

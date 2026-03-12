@@ -32,6 +32,39 @@
           "label": "Base technique robuste pour capter et convertir du trafic qualifié"
         }
       }
+    },
+    "process": {
+      "eyebrow": "Outils & process visibles",
+      "title": "Une stack claire, des étapes courtes, des preuves faciles à vérifier",
+      "intro": "Le travail ne repose pas sur des promesses vagues. J’utilise une stack précise, des itérations courtes et des points de validation visibles pour garder le projet lisible du brief à la mise en ligne.",
+      "stackTitle": "Stack utilisée selon le besoin",
+      "stackIntro": "Les mêmes outils reviennent déjà dans les services, le repo et les profils publics : ils servent ici de preuve concrète plutôt que de jargon caché en bas de page.",
+      "stackItems": {
+        "web": "Next.js · React · TypeScript",
+        "backend": "Laravel · WordPress · SEO technique",
+        "realtime": "Unreal · Unity · WebGL",
+        "delivery": "GitHub · PR courtes · validations visibles"
+      },
+      "workflowTitle": "Comment le projet avance",
+      "workflowItems": {
+        "scope": {
+          "step": "1. Cadrage clair",
+          "body": "On fixe l’objectif business, les contraintes et la priorité avant d’ouvrir le chantier."
+        },
+        "iterate": {
+          "step": "2. Itérations courtes",
+          "body": "Le travail avance par blocs lisibles avec retours rapides plutôt qu’en tunnel."
+        },
+        "prove": {
+          "step": "3. Preuves vérifiables",
+          "body": "Le résultat se vérifie dans le code, les pages livrées, les performances ou les démonstrations publiques."
+        }
+      },
+      "links": {
+        "github": "Voir le GitHub",
+        "artstation": "Voir les travaux ArtStation",
+        "linkedin": "Voir le profil LinkedIn"
+      }
     }
   },
   "services": {
