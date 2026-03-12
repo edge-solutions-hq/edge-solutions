@@ -65,6 +65,28 @@
         "artstation": "Bekijk ArtStation-werk",
         "linkedin": "Bekijk LinkedIn-profiel"
       }
+    },
+    "proof": {
+      "eyebrow": "Bewijs in de praktijk",
+      "title": "Tekstueel bewijs werkt beter dan vage claims",
+      "intro": "De homepage kan nu al tonen hoe werk concreet wordt: opgeleverde projecttypes, een benoemde stack en publieke sporen die makkelijk te controleren zijn, zonder nieuwe media-assets.",
+      "items": {
+        "web": {
+          "kicker": "Webprojecten",
+          "title": "Sites en trajecten gebouwd om te converteren",
+          "body": "Webwerk steunt op Next.js, React, TypeScript, technische SEO en korte iteraties om van een briefing pagina's te maken die geloofwaardiger, helderder en beter meetbaar zijn."
+        },
+        "realtime": {
+          "kicker": "3D / VR-projecten",
+          "title": "Prototypes en demo's die ideeën tastbaar maken",
+          "body": "Unreal, Unity en WebGL worden ingezet om een workflow te tonen, een interactie te valideren of stakeholders snel te laten begrijpen wat er echt geleverd wordt."
+        },
+        "trust": {
+          "kicker": "Controleerbare sporen",
+          "title": "GitHub, ArtStation en LinkedIn als vertrouwenssignalen",
+          "body": "In plaats van tools en referenties in de footer te verstoppen, koppelt de homepage nu publieke profielen, stackkeuzes en werkwijze aan elkaar zodat het making-of geloofwaardiger wordt."
+        }
+      }
     }
   },
   "services": {

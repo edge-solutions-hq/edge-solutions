@@ -65,6 +65,28 @@
         "artstation": "Voir les travaux ArtStation",
         "linkedin": "Voir le profil LinkedIn"
       }
+    },
+    "proof": {
+      "eyebrow": "Preuves en pratique",
+      "title": "Des preuves textuelles plutôt que des promesses floues",
+      "intro": "La page d’accueil peut déjà montrer comment le travail se matérialise : projets livrés, stack assumée et traces publiques faciles à vérifier, sans attendre de nouveaux visuels.",
+      "items": {
+        "web": {
+          "kicker": "Projets web",
+          "title": "Sites et parcours pensés pour convertir",
+          "body": "Le travail web s’appuie sur Next.js, React, TypeScript, SEO technique et des itérations courtes pour transformer un brief en pages plus crédibles, plus lisibles et plus faciles à mesurer."
+        },
+        "realtime": {
+          "kicker": "Projets 3D / VR",
+          "title": "Prototypes et démonstrations qui rendent l’idée concrète",
+          "body": "Les expériences Unreal, Unity et WebGL servent à montrer un workflow, valider une interaction ou aider un décideur à comprendre vite ce qui sera réellement livré."
+        },
+        "trust": {
+          "kicker": "Traces vérifiables",
+          "title": "GitHub, ArtStation et LinkedIn comme signaux de confiance",
+          "body": "Au lieu de cacher les outils et les références en pied de page, la homepage relie maintenant profils publics, stack et méthode pour donner une preuve simple du making-of."
+        }
+      }
     }
   },
   "services": {

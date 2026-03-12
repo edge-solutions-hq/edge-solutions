@@ -65,6 +65,28 @@
         "artstation": "View ArtStation work",
         "linkedin": "View LinkedIn profile"
       }
+    },
+    "proof": {
+      "eyebrow": "Proof in practice",
+      "title": "Text-based proof beats vague claims",
+      "intro": "The homepage can already show how work becomes tangible: delivered project types, a named stack and public traces that are easy to verify, without waiting for new media assets.",
+      "items": {
+        "web": {
+          "kicker": "Web projects",
+          "title": "Sites and user journeys built to convert",
+          "body": "Web work relies on Next.js, React, TypeScript, technical SEO and short iterations to turn a brief into pages that feel sharper, more credible and easier to measure."
+        },
+        "realtime": {
+          "kicker": "3D / VR projects",
+          "title": "Prototypes and demos that make ideas concrete",
+          "body": "Unreal, Unity and WebGL are used to show a workflow, validate an interaction or help stakeholders understand quickly what will actually be delivered."
+        },
+        "trust": {
+          "kicker": "Verifiable traces",
+          "title": "GitHub, ArtStation and LinkedIn as trust signals",
+          "body": "Instead of hiding tools and references in the footer, the homepage now connects public profiles, stack choices and delivery method to make the making-of easier to trust."
+        }
+      }
     }
   },
   "services": {

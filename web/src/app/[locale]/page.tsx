@@ -268,6 +268,53 @@ export default async function HomePage({params}: Props) {
       </section>
 
       <section>
+        <SectionIntro
+          eyebrow={t('home.proof.eyebrow')}
+          title={t('home.proof.title')}
+        >
+          <p>{t('home.proof.intro')}</p>
+        </SectionIntro>
+
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <Card className="p-6">
+            <div className="text-sm font-semibold text-foreground">
+              {t('home.proof.items.web.kicker')}
+            </div>
+            <h3 className="mt-3 text-lg font-semibold tracking-tight">
+              {t('home.proof.items.web.title')}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {t('home.proof.items.web.body')}
+            </p>
+          </Card>
+
+          <Card className="p-6">
+            <div className="text-sm font-semibold text-foreground">
+              {t('home.proof.items.realtime.kicker')}
+            </div>
+            <h3 className="mt-3 text-lg font-semibold tracking-tight">
+              {t('home.proof.items.realtime.title')}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {t('home.proof.items.realtime.body')}
+            </p>
+          </Card>
+
+          <Card className="p-6">
+            <div className="text-sm font-semibold text-foreground">
+              {t('home.proof.items.trust.kicker')}
+            </div>
+            <h3 className="mt-3 text-lg font-semibold tracking-tight">
+              {t('home.proof.items.trust.title')}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {t('home.proof.items.trust.body')}
+            </p>
+          </Card>
+        </div>
+      </section>
+
+      <section>
         <Card className="relative overflow-hidden p-8 md:p-12">
           <div
             className="pointer-events-none absolute -right-28 -top-24 h-72 w-72 rounded-full bg-secondary/15 blur-3xl"
