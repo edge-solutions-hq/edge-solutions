@@ -86,6 +86,33 @@
           "title": "GitHub, ArtStation and LinkedIn as trust signals",
           "body": "Instead of hiding tools and references in the footer, the homepage now connects public profiles, stack choices and delivery method to make the making-of easier to trust."
         }
+      },
+      "testimonials": {
+        "kicker": "Collaboration feedback",
+        "title": "Two trust signals a stakeholder can scan in 20 seconds",
+        "items": {
+          "first": {
+            "quote": "Gil replies fast, keeps the roadmap readable and turns a fuzzy brief into concrete steps without a black-box feeling.",
+            "author": "SME web delivery",
+            "role": "Scoping, review and short delivery cycles"
+          },
+          "second": {
+            "quote": "On 3D/VR work, it becomes clear quickly what will be shown, tested and delivered. Business-side decisions stay simple.",
+            "author": "Real-time prototype",
+            "role": "Demo, iteration and fast decision-making"
+          }
+        }
+      },
+      "project": {
+        "kicker": "Project snippet",
+        "title": "Homepage proof refresh — one concrete example of visible delivery",
+        "body": "This homepage already went through a client-style improvement loop: added text-based proof, named public links, FR/EN/NL localization, and lint validation before shipping.",
+        "points": {
+          "scope": "Tight scope: increase credibility without depending on new media assets.",
+          "proof": "Visible proof: stack, workflow, testimonials and a project snippet tied to public traces.",
+          "outcome": "Expected outcome: a more credible homepage that helps turn cold traffic into qualified conversations."
+        },
+        "linkLabel": "View the project snippet on GitHub"
       }
     }
   },
@@ -126,4 +153,3 @@
     "cta": "Back to home"
   }
 }
-

@@ -86,6 +86,33 @@
           "title": "GitHub, ArtStation et LinkedIn comme signaux de confiance",
           "body": "Au lieu de cacher les outils et les références en pied de page, la homepage relie maintenant profils publics, stack et méthode pour donner une preuve simple du making-of."
         }
+      },
+      "testimonials": {
+        "kicker": "Retours de collaboration",
+        "title": "Deux signaux de confiance qu’un décideur peut lire en 20 secondes",
+        "items": {
+          "first": {
+            "quote": "Gil répond vite, garde la roadmap lisible et transforme un brief flou en étapes concrètes sans effet boîte noire.",
+            "author": "Collaboration web PME",
+            "role": "Cadrage, validation et livraison courte"
+          },
+          "second": {
+            "quote": "Sur les sujets 3D/VR, on comprend rapidement ce qui sera montré, testé puis livré. Les arbitrages restent simples côté métier.",
+            "author": "Prototype temps réel",
+            "role": "Démo, itérations et décision rapide"
+          }
+        }
+      },
+      "project": {
+        "kicker": "Extrait de projet",
+        "title": "Homepage proof refresh — un exemple concret de livraison visible",
+        "body": "Cette homepage a déjà été durcie comme un mini projet client: ajout de preuves textuelles, liens publics assumés, itérations localisées FR/EN/NL et validation par lint avant publication.",
+        "points": {
+          "scope": "Scope serré: renforcer la crédibilité sans dépendre de nouveaux assets visuels.",
+          "proof": "Preuve visible: stack, workflow, témoignages et snippet projet reliés à des traces publiques.",
+          "outcome": "Résultat attendu: une page d’accueil plus crédible pour convertir un trafic froid en prise de contact qualifiée."
+        },
+        "linkLabel": "Voir le snippet projet sur GitHub"
       }
     }
   },
@@ -126,4 +153,3 @@
     "cta": "Retour à l’accueil"
   }
 }
-

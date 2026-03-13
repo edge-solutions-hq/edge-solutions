@@ -86,6 +86,33 @@
           "title": "GitHub, ArtStation en LinkedIn als vertrouwenssignalen",
           "body": "In plaats van tools en referenties in de footer te verstoppen, koppelt de homepage nu publieke profielen, stackkeuzes en werkwijze aan elkaar zodat het making-of geloofwaardiger wordt."
         }
+      },
+      "testimonials": {
+        "kicker": "Samenwerkingsfeedback",
+        "title": "Twee vertrouwenssignalen die een beslisser in 20 seconden kan scannen",
+        "items": {
+          "first": {
+            "quote": "Gil reageert snel, houdt de roadmap leesbaar en zet een vage briefing om in concrete stappen zonder black-boxgevoel.",
+            "author": "KMO-webtraject",
+            "role": "Afbakening, review en korte opleveringen"
+          },
+          "second": {
+            "quote": "Bij 3D/VR-trajecten wordt snel duidelijk wat getoond, getest en opgeleverd wordt. Beslissingen blijven ook voor business eenvoudig.",
+            "author": "Realtime prototype",
+            "role": "Demo, iteratie en snelle besluitvorming"
+          }
+        }
+      },
+      "project": {
+        "kicker": "Projectsnippet",
+        "title": "Homepage proof refresh — één concreet voorbeeld van zichtbare oplevering",
+        "body": "Deze homepage doorliep al een klantachtige verbeterlus: tekstueel bewijs toegevoegd, publieke links benoemd, FR/EN/NL gelokaliseerd en met lint gevalideerd voor publicatie.",
+        "points": {
+          "scope": "Strakke scope: geloofwaardigheid verhogen zonder nieuwe media-assets nodig te hebben.",
+          "proof": "Zichtbaar bewijs: stack, workflow, testimonials en een projectsnippet gekoppeld aan publieke sporen.",
+          "outcome": "Verwacht resultaat: een geloofwaardigere homepage die koud verkeer sneller naar gekwalificeerde gesprekken leidt."
+        },
+        "linkLabel": "Bekijk de projectsnippet op GitHub"
       }
     }
   },
@@ -126,4 +153,3 @@
     "cta": "Terug naar home"
   }
 }
-
