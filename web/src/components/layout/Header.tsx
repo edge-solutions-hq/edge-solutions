@@ -11,6 +11,7 @@ export async function Header({locale}: {locale: string}) {
 
   const items = [
     {href: '/', label: t('nav.home')},
+    {href: '/#how-we-work', label: t('nav.process')},
     {href: '/services/web-dev', label: t('nav.web')},
     {href: '/services/realtime-games', label: t('nav.realtime')},
     {href: '/contact', label: t('nav.contact')}

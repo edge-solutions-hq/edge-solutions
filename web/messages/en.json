@@ -5,6 +5,7 @@
   },
   "nav": {
     "home": "Home",
+    "process": "How we work",
     "web": "Web development",
     "realtime": "Real-time 3D/VR",
     "contact": "Contact"
@@ -34,9 +35,9 @@
       }
     },
     "process": {
-      "eyebrow": "Visible tools & process",
-      "title": "A clear stack, short iterations and proof you can actually verify",
-      "intro": "The work does not rely on vague promises. I use a concrete stack, short delivery cycles and visible review points so the project stays readable from brief to launch.",
+      "eyebrow": "How we work",
+      "title": "A clear method that keeps your project readable from brief to launch",
+      "intro": "You can see how the project moves forward, what is in progress and what gets validated next. The method combines a named stack, short iterations and visible proof so the work never feels like a black box.",
       "stackTitle": "Stack used where it makes sense",
       "stackIntro": "These tools already appear across the service pages, repo and public profiles. Bringing them onto the homepage turns them into trust builders instead of hidden footnotes.",
       "stackItems": {

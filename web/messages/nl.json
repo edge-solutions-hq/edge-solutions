@@ -5,6 +5,7 @@
   },
   "nav": {
     "home": "Home",
+    "process": "Hoe we werken",
     "web": "Webontwikkeling",
     "realtime": "Realtime 3D/VR",
     "contact": "Contact"
@@ -34,9 +35,9 @@
       }
     },
     "process": {
-      "eyebrow": "Zichtbare tools & proces",
-      "title": "Een duidelijke stack, korte iteraties en bewijs dat je echt kan controleren",
-      "intro": "Het werk steunt niet op vage beloften. Ik gebruik een concrete stack, korte oplevercycli en zichtbare reviewmomenten zodat het project leesbaar blijft van briefing tot lancering.",
+      "eyebrow": "Hoe we werken",
+      "title": "Een duidelijke methode die je project leesbaar houdt van briefing tot lancering",
+      "intro": "Je ziet hoe het project vooruitgaat, wat in uitvoering is en wat daarna gevalideerd wordt. De methode combineert een benoemde stack, korte iteraties en zichtbaar bewijs zodat het werk geen black box wordt.",
       "stackTitle": "Stack ingezet waar die zinvol is",
       "stackIntro": "Deze tools staan al op de servicepagina's, in de repo en in publieke profielen. Ze op de homepage tonen maakt ze tot vertrouwenssignalen in plaats van verborgen voetnoten.",
       "stackItems": {

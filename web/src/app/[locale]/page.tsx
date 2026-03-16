@@ -173,10 +173,11 @@ export default async function HomePage({params}: Props) {
         </StatList>
       </section>
 
-      <section>
+      <section id="how-we-work" aria-labelledby="how-we-work-title">
         <SectionIntro
           eyebrow={t('home.process.eyebrow')}
           title={t('home.process.title')}
+          titleId="how-we-work-title"
         >
           <p>{t('home.process.intro')}</p>
         </SectionIntro>
