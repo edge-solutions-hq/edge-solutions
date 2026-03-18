@@ -88,6 +88,13 @@
       "eyebrow": "Preuves en pratique",
       "title": "Des preuves textuelles plutôt que des promesses floues",
       "intro": "La page d’accueil peut déjà montrer comment le travail se matérialise : projets livrés, stack assumée et traces publiques faciles à vérifier, sans attendre de nouveaux visuels.",
+      "tokens": {
+        "projects": "Projets livrés",
+        "tools": "Outils nommés",
+        "testimonials": "Témoignages",
+        "process": "Process visible",
+        "publicLinks": "Liens publics vérifiables"
+      },
       "items": {
         "web": {
           "kicker": "Projets web",

@@ -88,6 +88,13 @@
       "eyebrow": "Proof in practice",
       "title": "Text-based proof beats vague claims",
       "intro": "The homepage can already show how work becomes tangible: delivered project types, a named stack and public traces that are easy to verify, without waiting for new media assets.",
+      "tokens": {
+        "projects": "Delivered projects",
+        "tools": "Named tools",
+        "testimonials": "Testimonials",
+        "process": "Visible process",
+        "publicLinks": "Verifiable public links"
+      },
       "items": {
         "web": {
           "kicker": "Web projects",

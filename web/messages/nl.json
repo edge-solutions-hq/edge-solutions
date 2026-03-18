@@ -88,6 +88,13 @@
       "eyebrow": "Bewijs in de praktijk",
       "title": "Tekstueel bewijs werkt beter dan vage claims",
       "intro": "De homepage kan nu al tonen hoe werk concreet wordt: opgeleverde projecttypes, een benoemde stack en publieke sporen die makkelijk te controleren zijn, zonder nieuwe media-assets.",
+      "tokens": {
+        "projects": "Opgeleverde projecten",
+        "tools": "Benoemde tools",
+        "testimonials": "Testimonials",
+        "process": "Zichtbaar proces",
+        "publicLinks": "Controleerbare publieke links"
+      },
       "items": {
         "web": {
           "kicker": "Webprojecten",

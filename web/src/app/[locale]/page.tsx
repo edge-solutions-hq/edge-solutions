@@ -308,6 +308,24 @@ export default async function HomePage({params}: Props) {
           <p>{t('home.proof.intro')}</p>
         </SectionIntro>
 
+        <div className="mt-8 flex flex-wrap gap-3">
+          <span className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm font-medium text-foreground">
+            {t('home.proof.tokens.projects')}
+          </span>
+          <span className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm font-medium text-foreground">
+            {t('home.proof.tokens.tools')}
+          </span>
+          <span className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm font-medium text-foreground">
+            {t('home.proof.tokens.testimonials')}
+          </span>
+          <span className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm font-medium text-foreground">
+            {t('home.proof.tokens.process')}
+          </span>
+          <span className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm font-medium text-foreground">
+            {t('home.proof.tokens.publicLinks')}
+          </span>
+        </div>
+
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
           <Card className="p-6">
             <div className="text-sm font-semibold text-foreground">
