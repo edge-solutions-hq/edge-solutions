@@ -36,29 +36,46 @@
     },
     "process": {
       "eyebrow": "Comment on travaille",
-      "title": "Une méthode claire pour garder votre projet lisible du brief à la mise en ligne",
-      "intro": "Vous voyez comment le projet avance, ce qui est en cours et ce qui sera validé ensuite. La méthode combine stack assumée, itérations courtes et preuves visibles pour éviter l’effet boîte noire.",
-      "stackTitle": "Stack utilisée selon le besoin",
-      "stackIntro": "Les mêmes outils reviennent déjà dans les services, le repo et les profils publics : ils servent ici de preuve concrète plutôt que de jargon caché en bas de page.",
-      "stackItems": {
-        "web": "Next.js · React · TypeScript",
-        "backend": "Laravel · WordPress · SEO technique",
-        "realtime": "Unreal · Unity · WebGL",
-        "delivery": "GitHub · PR courtes · validations visibles"
+      "title": "Un process web clair pour cadrer, produire et mettre en ligne sans zone floue",
+      "intro": "La section suit maintenant la logique qu’un décideur utilise pour évaluer un partenaire web : comprendre l’objectif, produire avec la bonne stack, puis vérifier ce qui a réellement changé après mise en ligne.",
+      "discovery": {
+        "kicker": "Étape 1 — cadrage et intention de recherche",
+        "title": "Aligner l’objectif business avant de toucher au design ou au code",
+        "body": "On clarifie d’abord l’offre, les pages prioritaires et les requêtes que vos prospects utilisent avant d’arriver sur la page services ou le formulaire de contact.",
+        "points": {
+          "goals": "Définir l’objectif de conversion, les questions du décideur et ce que la page doit rendre plus simple.",
+          "queries": "Cartographier l’intention de recherche autour du développement web, du SEO technique et des services 3D/VR temps réel.",
+          "plan": "Transformer cela en plan de page lisible avec bons intertitres, preuves concrètes et appels à l’action clairs."
+        }
       },
-      "workflowTitle": "Comment le projet avance",
-      "workflowItems": {
-        "scope": {
-          "step": "1. Cadrage clair",
-          "body": "On fixe l’objectif business, les contraintes et la priorité avant d’ouvrir le chantier."
-        },
-        "iterate": {
-          "step": "2. Itérations courtes",
-          "body": "Le travail avance par blocs lisibles avec retours rapides plutôt qu’en tunnel."
-        },
-        "prove": {
-          "step": "3. Preuves vérifiables",
-          "body": "Le résultat se vérifie dans le code, les pages livrées, les performances ou les démonstrations publiques."
+      "build": {
+        "kicker": "Étape 2 — production et optimisation",
+        "title": "Rédiger, designer et livrer des pages lisibles pour les humains comme pour les moteurs",
+        "body": "L’exécution reste pragmatique : un message concis, une structure facile à scanner et une stack choisie pour la performance, la maintenabilité et une mise en ligne propre côté SEO.",
+        "stackItems": {
+          "web": "Next.js · React · TypeScript",
+          "backend": "Laravel · WordPress · SEO technique",
+          "realtime": "Unreal · Unity · WebGL",
+          "delivery": "GitHub · PR courtes · validations visibles"
+        }
+      },
+      "launch": {
+        "kicker": "Étape 3 — mise en ligne et preuve",
+        "title": "Vérifier ce qui part en production et mesurer si la section génère plus d’intérêt qualifié",
+        "body": "Rien n’est considéré comme terminé parce que c’est plus joli. La mise en ligne relie le copy, le code et les preuves publiques à des contrôles visibles et à une mesure après publication.",
+        "items": {
+          "verify": {
+            "step": "Vérifier la page",
+            "body": "Contrôler les titres, les liens, la localisation, le lint et la lisibilité globale du récit de service."
+          },
+          "publish": {
+            "step": "Publier des preuves visibles",
+            "body": "Garder GitHub, ArtStation et LinkedIn reliés à la page pour que le making-of soit vérifiable au lieu de reposer sur des promesses génériques."
+          },
+          "measure": {
+            "step": "Mesurer l’intérêt qualifié",
+            "body": "Observer si plus de visiteurs rejoignent la page services, utilisent des requêtes internes pertinentes ou lancent une prise de contact après la mise à jour."
+          }
         }
       },
       "links": {

@@ -36,29 +36,46 @@
     },
     "process": {
       "eyebrow": "Hoe we werken",
-      "title": "Een duidelijke methode die je project leesbaar houdt van briefing tot lancering",
-      "intro": "Je ziet hoe het project vooruitgaat, wat in uitvoering is en wat daarna gevalideerd wordt. De methode combineert een benoemde stack, korte iteraties en zichtbaar bewijs zodat het werk geen black box wordt.",
-      "stackTitle": "Stack ingezet waar die zinvol is",
-      "stackIntro": "Deze tools staan al op de servicepagina's, in de repo en in publieke profielen. Ze op de homepage tonen maakt ze tot vertrouwenssignalen in plaats van verborgen voetnoten.",
-      "stackItems": {
-        "web": "Next.js · React · TypeScript",
-        "backend": "Laravel · WordPress · technische SEO",
-        "realtime": "Unreal · Unity · WebGL",
-        "delivery": "GitHub · korte PR's · zichtbare reviewmomenten"
+      "title": "Een helder webproces om af te bakenen, te bouwen en te lanceren zonder black-boxgevoel",
+      "intro": "De sectie volgt nu de logica waarmee een beslisser een webpartner beoordeelt: eerst het doel begrijpen, dan bouwen met de juiste stack en daarna controleren wat er na de lancering echt veranderd is.",
+      "discovery": {
+        "kicker": "Stap 1 — afbakening en zoekintentie",
+        "title": "Het businessdoel scherpstellen vóór design of code start",
+        "body": "We maken eerst de propositie, prioritaire pagina's en zoektermen helder die prospects gebruiken voor ze op de dienstenpagina of het contactformulier terechtkomen.",
+        "points": {
+          "goals": "Bepalen wat het conversiedoel is, welke vragen een beslisser heeft en wat de pagina makkelijker moet maken.",
+          "queries": "De interne zoekintentie rond webontwikkeling, technische SEO en realtime 3D/VR-diensten in kaart brengen.",
+          "plan": "Dat vertalen naar een compacte paginaplan met duidelijke tussenkoppen, bewijs en calls to action."
+        }
       },
-      "workflowTitle": "Hoe het werk vooruitgaat",
-      "workflowItems": {
-        "scope": {
-          "step": "1. Duidelijke afbakening",
-          "body": "We stemmen eerst af op het businessdoel, de randvoorwaarden en de prioriteiten voor er gebouwd wordt."
-        },
-        "iterate": {
-          "step": "2. Korte iteraties",
-          "body": "Het werk gaat vooruit in leesbare blokken met snelle feedback, niet in een lange black box."
-        },
-        "prove": {
-          "step": "3. Controleerbaar bewijs",
-          "body": "Resultaten zijn na te kijken in de code, opgeleverde pagina's, performance-signalen of publieke voorbeelden."
+      "build": {
+        "kicker": "Stap 2 — bouwen en optimaliseren",
+        "title": "Pagina's schrijven, ontwerpen en opleveren die helder blijven voor mensen en zoekmachines",
+        "body": "De uitvoering blijft praktisch: beknopte copy, een scanbare structuur en een stack gekozen voor performance, onderhoudbaarheid en SEO-vriendelijke oplevering.",
+        "stackItems": {
+          "web": "Next.js · React · TypeScript",
+          "backend": "Laravel · WordPress · technische SEO",
+          "realtime": "Unreal · Unity · WebGL",
+          "delivery": "GitHub · korte PR's · zichtbare reviewmomenten"
+        }
+      },
+      "launch": {
+        "kicker": "Stap 3 — lancering en bewijs",
+        "title": "Controleren wat live gaat en meten of de sectie meer gekwalificeerde interesse oplevert",
+        "body": "Niets is klaar alleen omdat het er beter uitziet. De lancering koppelt copy, code en publieke bewijzen aan zichtbare controles en opvolgmeting.",
+        "items": {
+          "verify": {
+            "step": "De pagina controleren",
+            "body": "Koppen, links, lokalisatie, linting en de scanbaarheid van het serviceverhaal nakijken."
+          },
+          "publish": {
+            "step": "Zichtbaar bewijs publiceren",
+            "body": "GitHub, ArtStation en LinkedIn gekoppeld houden zodat bezoekers het making-of kunnen verifiëren in plaats van generieke claims te moeten geloven."
+          },
+          "measure": {
+            "step": "Gekwalificeerde interesse meten",
+            "body": "Nagaan of meer bezoekers de dienstenpagina bereiken, relevante interne zoektermen gebruiken of een contactgesprek starten na de update."
+          }
         }
       },
       "links": {

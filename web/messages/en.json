@@ -36,29 +36,46 @@
     },
     "process": {
       "eyebrow": "How we work",
-      "title": "A clear method that keeps your project readable from brief to launch",
-      "intro": "You can see how the project moves forward, what is in progress and what gets validated next. The method combines a named stack, short iterations and visible proof so the work never feels like a black box.",
-      "stackTitle": "Stack used where it makes sense",
-      "stackIntro": "These tools already appear across the service pages, repo and public profiles. Bringing them onto the homepage turns them into trust builders instead of hidden footnotes.",
-      "stackItems": {
-        "web": "Next.js · React · TypeScript",
-        "backend": "Laravel · WordPress · technical SEO",
-        "realtime": "Unreal · Unity · WebGL",
-        "delivery": "GitHub · short PRs · visible review checkpoints"
+      "title": "A clear website process for scoping, building and launching work that can be verified",
+      "intro": "The section now follows the same logic buyers use when they compare a web development partner: understand the goal, build with the right stack, then launch and measure what changed.",
+      "discovery": {
+        "kicker": "Step 1 — discovery and search intent",
+        "title": "Align the business goal before touching design or code",
+        "body": "We start by clarifying the offer, priority pages and the search terms people are likely to use before they land on your services page or contact form.",
+        "points": {
+          "goals": "Define the conversion goal, decision-maker questions and what the page must make easier.",
+          "queries": "Map internal search intent around web development, technical SEO and real-time 3D/VR services.",
+          "plan": "Turn that into a lean page plan with headings, proof points and clear calls to action."
+        }
       },
-      "workflowTitle": "How work moves forward",
-      "workflowItems": {
-        "scope": {
-          "step": "1. Clear scoping",
-          "body": "We align on the business goal, constraints and priorities before building."
-        },
-        "iterate": {
-          "step": "2. Short iterations",
-          "body": "Work moves in readable chunks with fast feedback instead of disappearing into a long black box."
-        },
-        "prove": {
-          "step": "3. Verifiable proof",
-          "body": "Results can be checked in the code, delivered pages, performance signals or public work samples."
+      "build": {
+        "kicker": "Step 2 — build and optimize",
+        "title": "Write, design and ship pages that stay clear for humans and search engines",
+        "body": "The implementation stays practical: concise copy, structure that is easy to scan, and a stack chosen for performance, maintainability and SEO-friendly delivery.",
+        "stackItems": {
+          "web": "Next.js · React · TypeScript",
+          "backend": "Laravel · WordPress · technical SEO",
+          "realtime": "Unreal · Unity · WebGL",
+          "delivery": "GitHub · short PRs · visible review checkpoints"
+        }
+      },
+      "launch": {
+        "kicker": "Step 3 — launch and proof",
+        "title": "Verify what shipped and measure whether the section earns more qualified interest",
+        "body": "Nothing is treated as finished just because it looks better. The launch step ties copy, code and public proof back to visible checks and follow-up measurement.",
+        "items": {
+          "verify": {
+            "step": "Verify the page",
+            "body": "Check headings, links, localization, linting and whether the service narrative is still easy to scan."
+          },
+          "publish": {
+            "step": "Publish visible proof",
+            "body": "Keep GitHub, ArtStation and LinkedIn connected so buyers can validate the making-of instead of relying on generic claims."
+          },
+          "measure": {
+            "step": "Measure qualified interest",
+            "body": "Review whether more visitors reach the services page, use relevant internal queries or start a contact conversation after the update."
+          }
         }
       },
       "links": {
