@@ -9,7 +9,6 @@ import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {StatList, StatListItem} from '@/components/studio/StatList';
 import {buildLocaleAlternates} from '@/lib/seo';
-import {site} from '@/lib/site';
 
 type Props = {
   params: Promise<{locale: string}>;
