@@ -1,7 +1,7 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Senior development, practical AI and real-time technologies"
+    "siteTagline": "Practical AI, senior delivery and usable products"
   },
   "nav": {
     "home": "Home",
@@ -11,70 +11,70 @@
     "contact": "Contact"
   },
   "home": {
-    "headline": "Senior developer for websites, internal tools and real-time 3D/VR experiences.",
-    "subheadline": "I use AI when it genuinely improves delivery: faster on repetitive work, without turning technical decisions into a black box.",
+    "headline": "I help teams turn AI usage and prototypes into something genuinely usable.",
+    "subheadline": "As a senior developer, I step in to structure, harden or build AI workflows and products without black boxes, unnecessary debt or hype.",
     "primaryCta": "Contact me",
     "secondaryCta": "View services",
     "trust": {
-      "eyebrow": "What you are really buying",
-      "title": "Senior delivery, AI under control and production-ready execution",
-      "intro": "AI is there to accelerate execution when it actually helps. Scoping, code quality and shipping still get handled like a real project, not like a demo.",
+      "eyebrow": "When AI moves faster than structure",
+      "title": "The situations where a senior approach becomes useful again",
+      "intro": "Many teams experiment, patch things together and move faster with AI. The real challenge comes after that: making it understandable, reliable and usable inside a product or business context.",
       "items": {
         "direct": {
-          "value": "1 senior developer",
-          "label": "Faster technical decisions, direct communication and clear responsibility from scoping to production"
+          "value": "Lots of experiments",
+          "label": "Ideas, prototypes or automations move quickly, but without a base that is really clear enough to last"
         },
         "delivery": {
-          "value": "AI when useful",
-          "label": "Automate repetitive work where it helps, keep human judgment on trade-offs, review and sensitive code"
+          "value": "Time gained, clarity lost",
+          "label": "AI speeds parts of the work up, but code, decisions and ownership become harder to follow"
         },
         "quality": {
-          "value": "Serious production",
-          "label": "Performance, SEO, versioning and clean deployment instead of a fragile prototype"
+          "value": "A need to make it real",
+          "label": "A first version exists, but it now needs to become cleaner, more maintainable and more credible in production"
         }
       }
     },
     "process": {
-      "eyebrow": "How it works",
-      "title": "A simple framework to scope, build and ship properly",
-      "intro": "The work moves in three steps: clarify the need, build quickly with the right tools, then publish something reliable.",
+      "eyebrow": "What I take on",
+      "title": "Three ways I usually step into an AI topic",
+      "intro": "I usually step in either to bring order to an existing AI usage, to harden a base that already exists, or to build an AI feature that serves a real use case.",
       "discovery": {
-        "kicker": "Step 1 — scoping",
-        "title": "Clarify the need before building anything",
-        "body": "We define the business problem, the intended user and the ambition level before choosing the stack, format or amount of automation.",
+        "kicker": "AI workflow",
+        "title": "Structure AI usage that is getting hard to manage",
+        "body": "Clarify where AI genuinely helps in delivery, production or operations, and stop it from becoming an extra layer of confusion.",
         "points": {
-          "goals": "Define what needs to be delivered, who it serves and what will make the project genuinely useful.",
-          "queries": "Surface the product, SEO, content or demo constraints that materially change the solution.",
-          "plan": "Choose a realistic scope: page, app, prototype or existing product that needs hardening."
+          "goals": "Identify the steps where AI creates real leverage instead of extra noise.",
+          "queries": "Make usages, roles and limits easier for the team to understand.",
+          "plan": "Put a frame around it that remains usable as the project grows or changes hands."
         }
       },
       "build": {
-        "kicker": "Step 2 — build",
-        "title": "Move fast without losing technical readability",
-        "body": "AI can accelerate part of the delivery, but technical direction stays owned. The goal is speed without ending up with an opaque or brittle base.",
+        "kicker": "Base to harden",
+        "title": "Take over a prototype or implementation that already exists",
+        "body": "When a first version is already there, the work is often about restoring readability, structure and a level of quality that can support a real product path.",
         "stackItems": {
-          "web": "Next.js · React · TypeScript",
-          "backend": "Laravel · WordPress · technical SEO",
-          "realtime": "Unreal · Unity · WebGL",
-          "delivery": "AI workflow · GitHub · short PRs · visible review checkpoints"
+          "web": "Clean up a fragile base",
+          "backend": "Rework blurry technical choices",
+          "realtime": "Make the project easier to maintain",
+          "delivery": "Prepare something credible for production"
         }
       },
       "launch": {
-        "kicker": "Step 3 — production",
-        "title": "Make the result reliable, maintainable and ready to ship",
-        "body": "The last step is not cosmetic. We check what is actually going live, what should be measured next and what needs to remain easy to take over later.",
+        "kicker": "Targeted build",
+        "title": "Build an AI feature or tool that serves a real use case",
+        "body": "When something needs to be built, the goal is not to add AI for the sake of it. It is to design something useful, understandable and usable over time.",
         "items": {
           "verify": {
-            "step": "Check before publishing",
-            "body": "Review content, links, readability, technical quality and the points most likely to break in production."
+            "step": "Clarify the use case",
+            "body": "Define what AI should actually improve for the user or the team."
           },
           "publish": {
-            "step": "Ship cleanly",
-            "body": "Version, review, deploy cleanly and keep a clear record of what changed."
+            "step": "Build without making things opaque",
+            "body": "Keep the architecture, decisions and ownership readable even when delivery speeds up."
           },
           "measure": {
-            "step": "Prepare what comes next",
-            "body": "Leave behind a base that can be iterated on, handed over or extended without starting over from scratch."
+            "step": "Leave a usable base behind",
+            "body": "Make sure the project can be resumed, iterated on or hardened later without starting over a few weeks later."
           }
         }
       },
@@ -85,29 +85,29 @@
       }
     },
     "proof": {
-      "eyebrow": "What you can already verify",
-      "title": "Named stack, visible workflow and public references",
-      "intro": "Before we even speak, you can already see the technologies in use, the way work gets delivered and the public profiles connected to it. AI is part of the workflow, not a smokescreen.",
+      "eyebrow": "A pragmatic AI approach",
+      "title": "Move faster without losing control",
+      "intro": "AI does not need to be everywhere to be useful. The goal is to use it where it genuinely improves execution, without degrading quality, product understanding or the ability to pick the work back up later.",
       "tokens": {
-        "tools": "Named tools",
-        "process": "Visible process",
-        "publicLinks": "Verifiable public links"
+        "tools": "AI when useful",
+        "process": "Senior judgment",
+        "publicLinks": "Usable base"
       },
       "items": {
         "web": {
-          "kicker": "Web development",
-          "title": "Websites, pages and internal tools that need to hold up in production",
-          "body": "Next.js, React, TypeScript, Laravel, WordPress and technical SEO to build web surfaces that are fast, readable and serious to operate."
+          "kicker": "Scope before automating",
+          "title": "Start from a real use case instead of a trend",
+          "body": "The right starting point is not the AI tool of the month, but the problem worth solving and the value expected for the team or the user."
         },
         "realtime": {
-          "kicker": "Real-time 3D / VR",
-          "title": "Demonstrators that make an idea concrete faster",
-          "body": "Unreal, Unity and WebGL to test an interaction, present a concept or make a complex subject easier to sell and understand."
+          "kicker": "Speed up without obscuring things",
+          "title": "Keep technical decisions readable even when delivery accelerates",
+          "body": "AI can help move faster. It should not make code, trade-offs or maintenance harder to own afterwards."
         },
         "trust": {
-          "kicker": "AI workflow",
-          "title": "AI speeds up execution, not accountability",
-          "body": "AI tools save time on repetitive work. Scoping, review and production decisions still stay owned end to end."
+          "kicker": "Leave behind a usable base",
+          "title": "Build something that can be resumed and improved later",
+          "body": "The result should stay understandable, maintainable and clean enough to evolve without pain later on."
         }
       }
     }
@@ -115,14 +115,14 @@
   "services": {
     "title": "Services",
     "webTitle": "Web development",
-    "webDesc": "Websites, pages and internal tools that need to be fast, credible and easy to evolve.",
+    "webDesc": "Features, interfaces and useful tools to integrate AI into a product or workflow without losing clarity.",
     "realtimeTitle": "Real-time 3D/VR",
-    "realtimeDesc": "3D/VR prototypes and real-time demonstrators that make an idea easier to validate, explain and sell.",
+    "realtimeDesc": "Prototypes and demonstrators to test an AI use case, clarify an idea or make a complex topic more concrete.",
     "cta": "Explore"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Share your needs, constraints and timing. I’ll reply within 1 business day with a concrete recommendation and the next steps.",
+    "intro": "Share the context, what already exists and what is blocked. I’ll reply quickly with a clear read on what should be structured, rebuilt or developed.",
     "form": {
       "name": "Name",
       "email": "Email",

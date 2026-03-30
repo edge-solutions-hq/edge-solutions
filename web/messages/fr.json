@@ -1,7 +1,7 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Développement senior, IA pragmatique et technologies temps réel"
+    "siteTagline": "IA pragmatique, delivery senior et produits exploitables"
   },
   "nav": {
     "home": "Accueil",
@@ -11,70 +11,70 @@
     "contact": "Contact"
   },
   "home": {
-    "headline": "Développeur senior pour sites web, outils métier et expériences 3D/VR.",
-    "subheadline": "J’utilise l’IA quand elle accélère réellement le delivery: plus vite sur le répétitif, sans boîte noire sur les choix techniques.",
+    "headline": "J’aide les équipes à rendre leurs usages et prototypes IA réellement exploitables.",
+    "subheadline": "Développeur senior, j’interviens pour structurer, fiabiliser ou construire des workflows et produits IA sans boîte noire, sans dette inutile et sans hype.",
     "primaryCta": "Me contacter",
     "secondaryCta": "Voir les services",
     "trust": {
-      "eyebrow": "Ce que vous achetez vraiment",
-      "title": "Développement senior, IA sous contrôle et mise en production sérieuse",
-      "intro": "L’IA sert à accélérer l’exécution quand elle aide vraiment. Le cadrage, la qualité du code et la mise en ligne restent pilotés comme un vrai projet, pas comme une démo.",
+      "eyebrow": "Quand l’IA va plus vite que la structure",
+      "title": "Les situations où une approche senior redevient utile",
+      "intro": "Beaucoup d’équipes testent, bricolent et accélèrent avec l’IA. Le vrai sujet arrive après : rendre tout cela compréhensible, fiable et utilisable dans un cadre produit ou métier.",
       "items": {
         "direct": {
-          "value": "1 développeur senior",
-          "label": "Décisions techniques rapides, échanges directs et responsabilité claire du cadrage à la prod"
+          "value": "Beaucoup d’essais",
+          "label": "Des idées, prototypes ou automatisations qui avancent vite, mais sans base vraiment claire pour durer"
         },
         "delivery": {
-          "value": "IA quand utile",
-          "label": "Automatiser le répétitif quand cela aide, garder l’humain sur les arbitrages, la revue et le code sensible"
+          "value": "Du gain de temps, moins de lisibilité",
+          "label": "L’IA accélère certaines tâches, mais le code, les décisions et les responsabilités deviennent plus flous"
         },
         "quality": {
-          "value": "Prod sérieuse",
-          "label": "Performance, SEO, versioning et déploiement propre plutôt qu’un prototype fragile"
+          "value": "Un besoin de passage au réel",
+          "label": "Une première base existe, mais elle doit devenir plus propre, plus maintenable et plus crédible côté production"
         }
       }
     },
     "process": {
-      "eyebrow": "Comment ça se passe",
-      "title": "Un cadre simple pour cadrer, construire et mettre en production",
-      "intro": "Le travail avance en trois temps : clarifier le besoin, construire vite avec les bons outils, puis publier un résultat fiable.",
+      "eyebrow": "Ce que je prends en charge",
+      "title": "Trois façons d’intervenir sur un sujet IA",
+      "intro": "J’interviens soit pour mettre de l’ordre dans un usage existant, soit pour fiabiliser une base déjà démarrée, soit pour construire une fonctionnalité IA qui sert un vrai usage.",
       "discovery": {
-        "kicker": "Étape 1 — cadrage",
-        "title": "Clarifier le besoin avant de produire quoi que ce soit",
-        "body": "On pose le problème métier, l’utilisateur visé et le niveau d’ambition du projet avant de choisir l’outil, le format ou le degré d’automatisation.",
+        "kicker": "Workflow IA",
+        "title": "Structurer des usages IA qui deviennent difficiles à piloter",
+        "body": "Clarifier où l’IA aide vraiment dans le delivery, la production ou les opérations, et éviter qu’elle ne devienne une couche de confusion supplémentaire.",
         "points": {
-          "goals": "Définir ce qui doit être livré, à qui cela sert et ce qui fera dire que le projet est utile.",
-          "queries": "Repérer les contraintes produit, SEO, contenu ou démo qui changent vraiment la solution.",
-          "plan": "Choisir une portée réaliste : page, application, prototype ou reprise d’existant à durcir."
+          "goals": "Identifier les étapes où l’IA apporte un vrai gain au lieu d’ajouter du bruit.",
+          "queries": "Rendre les usages, rôles et limites plus compréhensibles pour l’équipe.",
+          "plan": "Poser un cadre qui reste exploitable quand le projet grossit ou change de main."
         }
       },
       "build": {
-        "kicker": "Étape 2 — construction",
-        "title": "Développer vite, sans perdre la lisibilité technique",
-        "body": "L’IA peut accélérer une partie du delivery, mais la direction technique reste assumée. L’objectif est d’aller plus vite sans fabriquer une base opaque ou fragile.",
+        "kicker": "Base à fiabiliser",
+        "title": "Reprendre un prototype ou une implémentation déjà lancée",
+        "body": "Quand une première version existe déjà, le travail consiste souvent à remettre de la lisibilité, de la structure et un niveau de qualité compatible avec une vraie suite produit.",
         "stackItems": {
-          "web": "Next.js · React · TypeScript",
-          "backend": "Laravel · WordPress · SEO technique",
-          "realtime": "Unreal · Unity · WebGL",
-          "delivery": "Workflow IA · GitHub · PR courtes · validations visibles"
+          "web": "Nettoyer une base devenue fragile",
+          "backend": "Reprendre des choix techniques flous",
+          "realtime": "Rendre le projet plus maintenable",
+          "delivery": "Préparer une suite crédible côté prod"
         }
       },
       "launch": {
-        "kicker": "Étape 3 — mise en production",
-        "title": "Rendre le résultat fiable, maintenable et publiable",
-        "body": "La dernière étape n’est pas cosmétique. On vérifie ce qui part réellement en ligne, ce qui doit être mesuré et ce qu’il faudra pouvoir reprendre sans douleur ensuite.",
+        "kicker": "Construction ciblée",
+        "title": "Développer une fonctionnalité ou un outil IA qui sert un vrai usage",
+        "body": "Quand il faut construire, l’objectif n’est pas de rajouter de l’IA pour le principe. Il s’agit de concevoir quelque chose d’utile, compréhensible et exploitable dans le temps.",
         "items": {
           "verify": {
-            "step": "Vérifier avant publication",
-            "body": "Contrôler les contenus, les liens, la lisibilité, la qualité technique et les points qui peuvent casser en prod."
+            "step": "Clarifier l’usage",
+            "body": "Définir ce que l’IA doit réellement améliorer pour l’utilisateur ou l’équipe."
           },
           "publish": {
-            "step": "Publier proprement",
-            "body": "Versionner, relire, déployer proprement et garder un historique clair de ce qui a changé."
+            "step": "Construire sans opacifier",
+            "body": "Garder une architecture, des choix et une responsabilité lisibles malgré l’accélération du delivery."
           },
           "measure": {
-            "step": "Préparer la suite",
-            "body": "Laisser une base compréhensible pour itérer, reprendre le projet ou ajouter de nouvelles briques sans repartir de zéro."
+            "step": "Laisser une base exploitable",
+            "body": "Permettre au projet d’être repris, itéré ou durci sans repartir de zéro quelques semaines plus tard."
           }
         }
       },
@@ -85,29 +85,29 @@
       }
     },
     "proof": {
-      "eyebrow": "Ce que vous pouvez déjà vérifier",
-      "title": "Stack assumée, workflow visible et références publiques",
-      "intro": "Avant même un premier échange, vous pouvez déjà voir les technologies utilisées, la manière de travailler et les profils publics associés. L’IA fait partie du workflow, pas d’un écran de fumée.",
+      "eyebrow": "Une approche pragmatique de l’IA",
+      "title": "Aller plus vite sans perdre le contrôle",
+      "intro": "L’IA n’a pas besoin d’être partout pour être utile. Le but est de l’utiliser là où elle améliore réellement l’exécution, sans dégrader la qualité, la compréhension du produit ou la capacité à reprendre le travail ensuite.",
       "tokens": {
-        "tools": "Outils nommés",
-        "process": "Process visible",
-        "publicLinks": "Liens publics vérifiables"
+        "tools": "IA quand utile",
+        "process": "Jugement senior",
+        "publicLinks": "Base exploitable"
       },
       "items": {
         "web": {
-          "kicker": "Développement web",
-          "title": "Sites, pages et outils métier qui doivent tenir en production",
-          "body": "Next.js, React, TypeScript, Laravel, WordPress et SEO technique pour construire des surfaces web rapides, lisibles et sérieuses côté exploitation."
+          "kicker": "Cadrer avant d’automatiser",
+          "title": "Partir d’un usage réel plutôt que d’un effet de mode",
+          "body": "Le bon point de départ n’est pas l’outil IA du moment, mais le problème à résoudre et la valeur attendue pour l’équipe ou l’utilisateur."
         },
         "realtime": {
-          "kicker": "3D / VR temps réel",
-          "title": "Des démonstrateurs qui rendent une idée concrète plus vite",
-          "body": "Unreal, Unity et WebGL pour tester une interaction, présenter un concept ou rendre un sujet complexe plus facile à vendre et à comprendre."
+          "kicker": "Accélérer sans opacifier",
+          "title": "Garder des choix techniques lisibles malgré la vitesse",
+          "body": "L’IA peut aider à produire plus vite. Elle ne doit pas rendre le code, les arbitrages ou la maintenance plus difficiles à assumer ensuite."
         },
         "trust": {
-          "kicker": "Workflow IA",
-          "title": "L’IA accélère l’exécution, pas la responsabilité",
-          "body": "Les outils IA servent à gagner du temps sur le répétitif. Le cadrage, la revue et les décisions de production restent assumés de bout en bout."
+          "kicker": "Laisser une base exploitable",
+          "title": "Construire quelque chose qu’on peut reprendre et faire évoluer",
+          "body": "Le résultat doit rester compréhensible, maintenable et assez propre pour être poursuivi sans douleur par la suite."
         }
       }
     }
@@ -115,14 +115,14 @@
   "services": {
     "title": "Services",
     "webTitle": "Développement web",
-    "webDesc": "Sites, pages et applications métiers qui doivent être rapides, crédibles et faciles à faire évoluer.",
+    "webDesc": "Fonctionnalités, interfaces et outils utiles pour intégrer l’IA dans un produit ou un workflow sans perdre en lisibilité.",
     "realtimeTitle": "Temps réel 3D/VR",
-    "realtimeDesc": "Prototypes 3D/VR et démonstrateurs temps réel pour rendre une idée plus concrète et accélérer la vente ou la validation.",
+    "realtimeDesc": "Prototypes et démonstrateurs pour tester un usage IA, clarifier une idée ou rendre un sujet complexe plus concret.",
     "cta": "Voir le service"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Décrivez votre besoin, vos contraintes et votre timing. Je vous réponds sous 1 jour ouvré avec un retour concret et les prochaines étapes.",
+    "intro": "Décrivez le contexte, ce qui existe déjà et ce qui bloque. Je vous réponds rapidement avec une lecture claire de ce qu’il faut structurer, reprendre ou construire.",
     "form": {
       "name": "Nom",
       "email": "Email",
