@@ -100,18 +100,29 @@ export const metadata = {
   </p>
 </SectionIntro>
 
+<StatList className="mt-8">
+  <StatListItem label="1. Brief" value="Goal, scope, constraints" />
+  <StatListItem label="2. AI draft" value="First pass, faster exploration" />
+  <StatListItem label="3. Human review" value="Choices challenged and refined" />
+  <StatListItem label="4. Delivery" value="Verified output, clear handover" />
+</StatList>
+
 <GridList className="mt-8">
   <GridListItem title="Where AI helps">
     First drafts (copy/code), refactors, test ideas, QA checklists, translation
     variants.
   </GridListItem>
+  <GridListItem title="What stays human-led">
+    Scope, architecture, trade-offs, acceptance criteria, and the final go/no-go
+    decision.
+  </GridListItem>
+  <GridListItem title="What you see in practice">
+    A first version quickly, short feedback loops, and visible revisions instead
+    of hidden long production phases.
+  </GridListItem>
   <GridListItem title="Guardrails">
     No secret sharing, no blind copy-paste, and every change goes through review
     and verification.
-  </GridListItem>
-  <GridListItem title="What you get">
-    Faster iteration cycles, clearer documentation, and more time spent on the
-    parts that actually matter (quality + outcomes).
   </GridListItem>
 </GridList>
 
