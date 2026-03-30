@@ -310,13 +310,7 @@ export default async function HomePage({params}: Props) {
 
         <div className="mt-8 flex flex-wrap gap-3">
           <span className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm font-medium text-foreground">
-            {t('home.proof.tokens.projects')}
-          </span>
-          <span className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm font-medium text-foreground">
             {t('home.proof.tokens.tools')}
-          </span>
-          <span className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm font-medium text-foreground">
-            {t('home.proof.tokens.testimonials')}
           </span>
           <span className="rounded-full border border-border bg-background/70 px-3 py-1.5 text-sm font-medium text-foreground">
             {t('home.proof.tokens.process')}
@@ -361,77 +355,6 @@ export default async function HomePage({params}: Props) {
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
               {t('home.proof.items.trust.body')}
             </p>
-          </Card>
-        </div>
-
-        <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.95fr)]">
-          <Card className="p-6 md:p-8">
-            <div className="text-sm font-semibold text-foreground">
-              {t('home.proof.testimonials.kicker')}
-            </div>
-            <h3 className="mt-3 text-lg font-semibold tracking-tight">
-              {t('home.proof.testimonials.title')}
-            </h3>
-            <div className="mt-6 grid gap-4 md:grid-cols-2">
-              <blockquote className="rounded-lg border border-border bg-background/60 p-5">
-                <p className="text-sm leading-relaxed text-foreground">
-                  “{t('home.proof.testimonials.items.first.quote')}”
-                </p>
-                <footer className="mt-4 text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">
-                    {t('home.proof.testimonials.items.first.author')}
-                  </span>
-                  <span className="block mt-1">
-                    {t('home.proof.testimonials.items.first.role')}
-                  </span>
-                </footer>
-              </blockquote>
-
-              <blockquote className="rounded-lg border border-border bg-background/60 p-5">
-                <p className="text-sm leading-relaxed text-foreground">
-                  “{t('home.proof.testimonials.items.second.quote')}”
-                </p>
-                <footer className="mt-4 text-sm text-muted-foreground">
-                  <span className="font-medium text-foreground">
-                    {t('home.proof.testimonials.items.second.author')}
-                  </span>
-                  <span className="block mt-1">
-                    {t('home.proof.testimonials.items.second.role')}
-                  </span>
-                </footer>
-              </blockquote>
-            </div>
-          </Card>
-
-          <Card className="p-6 md:p-8">
-            <div className="text-sm font-semibold text-foreground">
-              {t('home.proof.project.kicker')}
-            </div>
-            <h3 className="mt-3 text-lg font-semibold tracking-tight">
-              {t('home.proof.project.title')}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {t('home.proof.project.body')}
-            </p>
-            <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
-              <li className="rounded-lg border border-border bg-background/60 px-4 py-3">
-                {t('home.proof.project.points.scope')}
-              </li>
-              <li className="rounded-lg border border-border bg-background/60 px-4 py-3">
-                {t('home.proof.project.points.proof')}
-              </li>
-              <li className="rounded-lg border border-border bg-background/60 px-4 py-3">
-                {t('home.proof.project.points.outcome')}
-              </li>
-            </ul>
-            <a
-              href="https://github.com/Gil-1/edge-solutions/pull/13"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-6 inline-flex text-sm font-medium text-link underline underline-offset-4 decoration-link/30 transition-colors hover:decoration-link"
-            >
-              {t('home.proof.project.linkLabel')}
-            </a>
           </Card>
         </div>
       </section>
