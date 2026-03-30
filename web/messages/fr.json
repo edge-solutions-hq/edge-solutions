@@ -1,7 +1,7 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "IA pragmatique, delivery senior et produits exploitables"
+    "siteTagline": "IA pragmatique, delivery maitrise et produits exploitables"
   },
   "nav": {
     "home": "Accueil",
@@ -17,7 +17,7 @@
     "secondaryCta": "Voir les services",
     "trust": {
       "eyebrow": "Quand l’IA va plus vite que la structure",
-      "title": "Les situations où une approche senior redevient utile",
+      "title": "Les situations où il faut remettre de la structure",
       "intro": "Beaucoup d’équipes testent, bricolent et accélèrent avec l’IA. Le vrai sujet arrive après : rendre tout cela compréhensible, fiable et utilisable dans un cadre produit ou métier.",
       "items": {
         "direct": {
@@ -90,7 +90,7 @@
       "intro": "L’IA n’a pas besoin d’être partout pour être utile. Le but est de l’utiliser là où elle améliore réellement l’exécution, sans dégrader la qualité, la compréhension du produit ou la capacité à reprendre le travail ensuite.",
       "tokens": {
         "tools": "IA quand utile",
-        "process": "Jugement senior",
+        "process": "Choix techniques clairs",
         "publicLinks": "Base exploitable"
       },
       "items": {

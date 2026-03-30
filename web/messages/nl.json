@@ -1,7 +1,7 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Pragmatische AI, senior delivery en bruikbare producten"
+    "siteTagline": "Pragmatische AI, gecontroleerde delivery en bruikbare producten"
   },
   "nav": {
     "home": "Home",
@@ -17,7 +17,7 @@
     "secondaryCta": "Bekijk services",
     "trust": {
       "eyebrow": "Wanneer AI sneller gaat dan de structuur",
-      "title": "De situaties waarin een senior aanpak opnieuw waardevol wordt",
+      "title": "De situaties waarin opnieuw structuur nodig is",
       "intro": "Veel teams experimenteren, knutselen en versnellen met AI. De echte uitdaging komt daarna: alles begrijpelijk, betrouwbaar en bruikbaar maken binnen een product- of businesscontext.",
       "items": {
         "direct": {
@@ -90,7 +90,7 @@
       "intro": "AI hoeft niet overal te zitten om nuttig te zijn. Het doel is AI te gebruiken waar het uitvoering echt verbetert, zonder kwaliteit, productbegrip of overneembaarheid te schaden.",
       "tokens": {
         "tools": "AI wanneer nuttig",
-        "process": "Senior oordeel",
+        "process": "Duidelijke technische keuzes",
         "publicLinks": "Bruikbare basis"
       },
       "items": {

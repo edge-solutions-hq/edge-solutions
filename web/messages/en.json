@@ -1,7 +1,7 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Practical AI, senior delivery and usable products"
+    "siteTagline": "Practical AI, controlled delivery and usable products"
   },
   "nav": {
     "home": "Home",
@@ -17,7 +17,7 @@
     "secondaryCta": "View services",
     "trust": {
       "eyebrow": "When AI moves faster than structure",
-      "title": "The situations where a senior approach becomes useful again",
+      "title": "The situations where structure needs to be restored",
       "intro": "Many teams experiment, patch things together and move faster with AI. The real challenge comes after that: making it understandable, reliable and usable inside a product or business context.",
       "items": {
         "direct": {
@@ -90,7 +90,7 @@
       "intro": "AI does not need to be everywhere to be useful. The goal is to use it where it genuinely improves execution, without degrading quality, product understanding or the ability to pick the work back up later.",
       "tokens": {
         "tools": "AI when useful",
-        "process": "Senior judgment",
+        "process": "Clear technical choices",
         "publicLinks": "Usable base"
       },
       "items": {
