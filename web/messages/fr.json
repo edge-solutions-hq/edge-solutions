@@ -1,35 +1,113 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Développement web & technologies temps réel"
+    "siteTagline": "IA pragmatique, delivery maitrise et produits exploitables"
   },
   "nav": {
     "home": "Accueil",
+    "process": "Méthode",
     "web": "Développement web",
     "realtime": "Temps réel 3D/VR",
     "contact": "Contact"
   },
   "home": {
-    "headline": "J’aide les PME wallonnes à convertir leur trafic en demandes qualifiées avec des sites crédibles et des expériences 3D qui marquent.",
-    "subheadline": "Edge Solutions — par Gil Guminski, interlocuteur technique unique du cadrage à la mise en ligne.",
+    "headline": "J’aide les équipes à rendre leurs usages et prototypes IA réellement exploitables.",
+    "subheadline": "Développeur senior, j’interviens pour structurer, fiabiliser ou construire des workflows et produits IA sans boîte noire, sans dette inutile et sans hype.",
     "primaryCta": "Me contacter",
     "secondaryCta": "Voir les services",
     "trust": {
-      "eyebrow": "Pourquoi les équipes choisissent Edge Solutions",
-      "title": "Des preuves concrètes pour décider vite et limiter le risque",
-      "intro": "Vous savez ce qui est livré, quand, et pourquoi. Chaque étape est reliée à un objectif business clair (visibilité, crédibilité, demandes entrantes).",
+      "eyebrow": "Quand l’IA va plus vite que la structure",
+      "title": "Les situations où il faut remettre de la structure",
+      "intro": "Beaucoup d’équipes testent, bricolent et accélèrent avec l’IA. Le vrai sujet arrive après : rendre tout cela compréhensible, fiable et utilisable dans un cadre produit ou métier.",
       "items": {
         "direct": {
-          "value": "1 interlocuteur senior",
-          "label": "Arbitrages rapides, communication directe du brief à la production"
+          "value": "Beaucoup d’essais",
+          "label": "Des idées, prototypes ou automatisations qui avancent vite, mais sans base vraiment claire pour durer"
         },
         "delivery": {
-          "value": "Roadmap hebdo claire",
-          "label": "Livraisons courtes avec validation visible avant chaque étape"
+          "value": "Du gain de temps, moins de lisibilité",
+          "label": "L’IA accélère certaines tâches, mais le code, les décisions et les responsabilités deviennent plus flous"
         },
         "quality": {
-          "value": "Performance + SEO vérifiables",
-          "label": "Base technique robuste pour capter et convertir du trafic qualifié"
+          "value": "Un besoin de passage au réel",
+          "label": "Une première base existe, mais elle doit devenir plus propre, plus maintenable et plus crédible côté production"
+        }
+      }
+    },
+    "process": {
+      "eyebrow": "Ce que je prends en charge",
+      "title": "Trois façons d’intervenir sur un sujet IA",
+      "intro": "J’interviens soit pour mettre de l’ordre dans un usage existant, soit pour fiabiliser une base déjà démarrée, soit pour construire une fonctionnalité IA qui sert un vrai usage.",
+      "discovery": {
+        "kicker": "Workflow IA",
+        "title": "Structurer des usages IA qui deviennent difficiles à piloter",
+        "body": "Clarifier où l’IA aide vraiment dans le delivery, la production ou les opérations, et éviter qu’elle ne devienne une couche de confusion supplémentaire.",
+        "points": {
+          "goals": "Identifier les étapes où l’IA apporte un vrai gain au lieu d’ajouter du bruit.",
+          "queries": "Rendre les usages, rôles et limites plus compréhensibles pour l’équipe.",
+          "plan": "Poser un cadre qui reste exploitable quand le projet grossit ou change de main."
+        }
+      },
+      "build": {
+        "kicker": "Base à fiabiliser",
+        "title": "Reprendre un prototype ou une implémentation déjà lancée",
+        "body": "Quand une première version existe déjà, le travail consiste souvent à remettre de la lisibilité, de la structure et un niveau de qualité compatible avec une vraie suite produit.",
+        "stackItems": {
+          "web": "Nettoyer une base devenue fragile",
+          "backend": "Reprendre des choix techniques flous",
+          "realtime": "Rendre le projet plus maintenable",
+          "delivery": "Préparer une suite crédible côté prod"
+        }
+      },
+      "launch": {
+        "kicker": "Construction ciblée",
+        "title": "Développer une fonctionnalité ou un outil IA qui sert un vrai usage",
+        "body": "Quand il faut construire, l’objectif n’est pas de rajouter de l’IA pour le principe. Il s’agit de concevoir quelque chose d’utile, compréhensible et exploitable dans le temps.",
+        "items": {
+          "verify": {
+            "step": "Clarifier l’usage",
+            "body": "Définir ce que l’IA doit réellement améliorer pour l’utilisateur ou l’équipe."
+          },
+          "publish": {
+            "step": "Construire sans opacifier",
+            "body": "Garder une architecture, des choix et une responsabilité lisibles malgré l’accélération du delivery."
+          },
+          "measure": {
+            "step": "Laisser une base exploitable",
+            "body": "Permettre au projet d’être repris, itéré ou durci sans repartir de zéro quelques semaines plus tard."
+          }
+        }
+      },
+      "links": {
+        "github": "Voir le GitHub",
+        "artstation": "Voir les travaux ArtStation",
+        "linkedin": "Voir le profil LinkedIn"
+      }
+    },
+    "proof": {
+      "eyebrow": "Une approche pragmatique de l’IA",
+      "title": "Aller plus vite sans perdre le contrôle",
+      "intro": "L’IA n’a pas besoin d’être partout pour être utile. Le but est de l’utiliser là où elle améliore réellement l’exécution, sans dégrader la qualité, la compréhension du produit ou la capacité à reprendre le travail ensuite.",
+      "tokens": {
+        "tools": "IA quand utile",
+        "process": "Choix techniques clairs",
+        "publicLinks": "Base exploitable"
+      },
+      "items": {
+        "web": {
+          "kicker": "Cadrer avant d’automatiser",
+          "title": "Partir d’un usage réel plutôt que d’un effet de mode",
+          "body": "Le bon point de départ n’est pas l’outil IA du moment, mais le problème à résoudre et la valeur attendue pour l’équipe ou l’utilisateur."
+        },
+        "realtime": {
+          "kicker": "Accélérer sans opacifier",
+          "title": "Garder des choix techniques lisibles malgré la vitesse",
+          "body": "L’IA peut aider à produire plus vite. Elle ne doit pas rendre le code, les arbitrages ou la maintenance plus difficiles à assumer ensuite."
+        },
+        "trust": {
+          "kicker": "Laisser une base exploitable",
+          "title": "Construire quelque chose qu’on peut reprendre et faire évoluer",
+          "body": "Le résultat doit rester compréhensible, maintenable et assez propre pour être poursuivi sans douleur par la suite."
         }
       }
     }
@@ -37,14 +115,14 @@
   "services": {
     "title": "Services",
     "webTitle": "Développement web",
-    "webDesc": "Sites vitrine et applications (Next.js, Laravel, WordPress) pensés pour convertir : CTA clairs, SEO technique et Core Web Vitals solides.",
+    "webDesc": "Fonctionnalités, interfaces et outils utiles pour intégrer l’IA dans un produit ou un workflow sans perdre en lisibilité.",
     "realtimeTitle": "Temps réel 3D/VR",
-    "realtimeDesc": "Prototypes et expériences immersives (Unreal, Unity, WebGL) conçus pour rassurer les décideurs et accélérer vos démonstrations commerciales.",
+    "realtimeDesc": "Prototypes et démonstrateurs pour tester un usage IA, clarifier une idée ou rendre un sujet complexe plus concret.",
     "cta": "Voir le service"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Décrivez votre besoin (objectif, budget, timing, contraintes) et je vous réponds sous 1 jour ouvré avec une recommandation concrète et les prochains pas.",
+    "intro": "Décrivez le contexte, ce qui existe déjà et ce qui bloque. Je vous réponds rapidement avec une lecture claire de ce qu’il faut structurer, reprendre ou construire.",
     "form": {
       "name": "Nom",
       "email": "Email",
@@ -71,4 +149,3 @@
     "cta": "Retour à l’accueil"
   }
 }
-

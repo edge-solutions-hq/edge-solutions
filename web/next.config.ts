@@ -1,6 +1,7 @@
 import createMDX from '@next/mdx';
 import type {NextConfig} from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
+import path from 'node:path';
 
 const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
@@ -11,6 +12,8 @@ const withMDX = createMDX({
     remarkPlugins: ['remark-gfm']
   }
 });
+
+const repoRoot = path.join(process.cwd(), '..');
 
 const securityHeaders = [
   {key: 'X-Content-Type-Options', value: 'nosniff'},
@@ -25,8 +28,9 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
   reactStrictMode: true,
+  outputFileTracingRoot: repoRoot,
   turbopack: {
-    root: process.cwd()
+    root: repoRoot
   },
 
   async headers() {

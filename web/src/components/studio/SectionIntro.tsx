@@ -9,7 +9,8 @@ export function SectionIntro({
   children,
   smaller = false,
   invert = false,
-  className
+  className,
+  titleId
 }: {
   title: string;
   eyebrow?: string;
@@ -17,6 +18,7 @@ export function SectionIntro({
   smaller?: boolean;
   invert?: boolean;
   className?: string;
+  titleId?: string;
 }) {
   return (
     <Container className={cn('not-prose', className)}>
@@ -33,6 +35,7 @@ export function SectionIntro({
         ) : null}
 
         <h2
+          id={titleId}
           className={cn(
             'mt-3 text-balance font-semibold tracking-tight',
             smaller ? 'text-xl sm:text-2xl' : 'text-3xl sm:text-4xl',

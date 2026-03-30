@@ -1,35 +1,113 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Web development & real-time technologies"
+    "siteTagline": "Practical AI, controlled delivery and usable products"
   },
   "nav": {
     "home": "Home",
+    "process": "How we work",
     "web": "Web development",
     "realtime": "Real-time 3D/VR",
     "contact": "Contact"
   },
   "home": {
-    "headline": "I build high-performance web products and real-time 3D experiences.",
-    "subheadline": "Edge Solutions — by Gil Guminski.",
+    "headline": "I help teams turn AI usage and prototypes into something genuinely usable.",
+    "subheadline": "As a senior developer, I step in to structure, harden or build AI workflows and products without black boxes, unnecessary debt or hype.",
     "primaryCta": "Contact me",
     "secondaryCta": "View services",
     "trust": {
-      "eyebrow": "Why teams choose Edge Solutions",
-      "title": "Trust signals for business-critical projects",
-      "intro": "From scope to launch, delivery stays direct, transparent and focused on measurable outcomes.",
+      "eyebrow": "When AI moves faster than structure",
+      "title": "The situations where structure needs to be restored",
+      "intro": "Many teams experiment, patch things together and move faster with AI. The real challenge comes after that: making it understandable, reliable and usable inside a product or business context.",
       "items": {
         "direct": {
-          "value": "1 technical partner",
-          "label": "Direct communication from brief to production"
+          "value": "Lots of experiments",
+          "label": "Ideas, prototypes or automations move quickly, but without a base that is really clear enough to last"
         },
         "delivery": {
-          "value": "PR-sized iterations",
-          "label": "Frequent deliveries with clear review checkpoints"
+          "value": "Time gained, clarity lost",
+          "label": "AI speeds parts of the work up, but code, decisions and ownership become harder to follow"
         },
         "quality": {
-          "value": "SEO + Core Web Vitals",
-          "label": "Performance and search quality built in from day one"
+          "value": "A need to make it real",
+          "label": "A first version exists, but it now needs to become cleaner, more maintainable and more credible in production"
+        }
+      }
+    },
+    "process": {
+      "eyebrow": "What I take on",
+      "title": "Three ways I usually step into an AI topic",
+      "intro": "I usually step in either to bring order to an existing AI usage, to harden a base that already exists, or to build an AI feature that serves a real use case.",
+      "discovery": {
+        "kicker": "AI workflow",
+        "title": "Structure AI usage that is getting hard to manage",
+        "body": "Clarify where AI genuinely helps in delivery, production or operations, and stop it from becoming an extra layer of confusion.",
+        "points": {
+          "goals": "Identify the steps where AI creates real leverage instead of extra noise.",
+          "queries": "Make usages, roles and limits easier for the team to understand.",
+          "plan": "Put a frame around it that remains usable as the project grows or changes hands."
+        }
+      },
+      "build": {
+        "kicker": "Base to harden",
+        "title": "Take over a prototype or implementation that already exists",
+        "body": "When a first version is already there, the work is often about restoring readability, structure and a level of quality that can support a real product path.",
+        "stackItems": {
+          "web": "Clean up a fragile base",
+          "backend": "Rework blurry technical choices",
+          "realtime": "Make the project easier to maintain",
+          "delivery": "Prepare something credible for production"
+        }
+      },
+      "launch": {
+        "kicker": "Targeted build",
+        "title": "Build an AI feature or tool that serves a real use case",
+        "body": "When something needs to be built, the goal is not to add AI for the sake of it. It is to design something useful, understandable and usable over time.",
+        "items": {
+          "verify": {
+            "step": "Clarify the use case",
+            "body": "Define what AI should actually improve for the user or the team."
+          },
+          "publish": {
+            "step": "Build without making things opaque",
+            "body": "Keep the architecture, decisions and ownership readable even when delivery speeds up."
+          },
+          "measure": {
+            "step": "Leave a usable base behind",
+            "body": "Make sure the project can be resumed, iterated on or hardened later without starting over a few weeks later."
+          }
+        }
+      },
+      "links": {
+        "github": "View GitHub",
+        "artstation": "View ArtStation work",
+        "linkedin": "View LinkedIn profile"
+      }
+    },
+    "proof": {
+      "eyebrow": "A pragmatic AI approach",
+      "title": "Move faster without losing control",
+      "intro": "AI does not need to be everywhere to be useful. The goal is to use it where it genuinely improves execution, without degrading quality, product understanding or the ability to pick the work back up later.",
+      "tokens": {
+        "tools": "AI when useful",
+        "process": "Clear technical choices",
+        "publicLinks": "Usable base"
+      },
+      "items": {
+        "web": {
+          "kicker": "Scope before automating",
+          "title": "Start from a real use case instead of a trend",
+          "body": "The right starting point is not the AI tool of the month, but the problem worth solving and the value expected for the team or the user."
+        },
+        "realtime": {
+          "kicker": "Speed up without obscuring things",
+          "title": "Keep technical decisions readable even when delivery accelerates",
+          "body": "AI can help move faster. It should not make code, trade-offs or maintenance harder to own afterwards."
+        },
+        "trust": {
+          "kicker": "Leave behind a usable base",
+          "title": "Build something that can be resumed and improved later",
+          "body": "The result should stay understandable, maintainable and clean enough to evolve without pain later on."
         }
       }
     }
@@ -37,14 +115,14 @@
   "services": {
     "title": "Services",
     "webTitle": "Web development",
-    "webDesc": "Websites & web apps (Next.js, Laravel, WordPress). Performance, SEO and maintainability.",
+    "webDesc": "Features, interfaces and useful tools to integrate AI into a product or workflow without losing clarity.",
     "realtimeTitle": "Real-time 3D/VR",
-    "realtimeDesc": "Prototypes, visualization and immersive experiences (Unreal, Unity, WebGL).",
+    "realtimeDesc": "Prototypes and demonstrators to test an AI use case, clarify an idea or make a complex topic more concrete.",
     "cta": "Explore"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Share your needs (budget, timeline, constraints) and I’ll get back to you quickly.",
+    "intro": "Share the context, what already exists and what is blocked. I’ll reply quickly with a clear read on what should be structured, rebuilt or developed.",
     "form": {
       "name": "Name",
       "email": "Email",
@@ -71,4 +149,3 @@
     "cta": "Back to home"
   }
 }
-

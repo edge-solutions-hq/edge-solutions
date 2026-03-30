@@ -1,35 +1,113 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Webontwikkeling & realtime technologie"
+    "siteTagline": "Pragmatische AI, gecontroleerde delivery en bruikbare producten"
   },
   "nav": {
     "home": "Home",
+    "process": "Hoe we werken",
     "web": "Webontwikkeling",
     "realtime": "Realtime 3D/VR",
     "contact": "Contact"
   },
   "home": {
-    "headline": "Ik bouw performante webproducten en realtime 3D‑ervaringen.",
-    "subheadline": "Edge Solutions — door Gil Guminski.",
+    "headline": "Ik help teams om hun AI-gebruik en prototypes echt bruikbaar te maken.",
+    "subheadline": "Als senior developer help ik om AI-workflows en producten te structureren, te verstevigen of te bouwen zonder black box, zonder onnodige schuld en zonder hype.",
     "primaryCta": "Contacteer mij",
     "secondaryCta": "Bekijk services",
     "trust": {
-      "eyebrow": "Waarom teams voor Edge Solutions kiezen",
-      "title": "Vertrouwenssignalen voor businesskritische projecten",
-      "intro": "Van scope tot lancering blijft de samenwerking direct, transparant en gericht op meetbare impact.",
+      "eyebrow": "Wanneer AI sneller gaat dan de structuur",
+      "title": "De situaties waarin opnieuw structuur nodig is",
+      "intro": "Veel teams experimenteren, knutselen en versnellen met AI. De echte uitdaging komt daarna: alles begrijpelijk, betrouwbaar en bruikbaar maken binnen een product- of businesscontext.",
       "items": {
         "direct": {
-          "value": "1 technische partner",
-          "label": "Rechtstreekse communicatie van briefing tot productie"
+          "value": "Veel experimenten",
+          "label": "Ideeën, prototypes of automatiseringen gaan snel vooruit, maar zonder een basis die echt duidelijk genoeg is om te blijven bestaan"
         },
         "delivery": {
-          "value": "PR-sized iteraties",
-          "label": "Regelmatige opleveringen met duidelijke reviewmomenten"
+          "value": "Tijdswinst, minder leesbaarheid",
+          "label": "AI versnelt delen van het werk, maar code, beslissingen en eigenaarschap worden moeilijker te volgen"
         },
         "quality": {
-          "value": "SEO + Core Web Vitals",
-          "label": "Performance en SEO-kwaliteit ingebouwd vanaf dag één"
+          "value": "Nood aan iets echts",
+          "label": "Er bestaat al een eerste versie, maar die moet nu properder, onderhoudbaarder en geloofwaardiger worden voor productie"
+        }
+      }
+    },
+    "process": {
+      "eyebrow": "Wat ik opneem",
+      "title": "Drie manieren waarop ik meestal op een AI-onderwerp instap",
+      "intro": "Ik stap meestal in om orde te brengen in bestaand AI-gebruik, om een al bestaande basis te verstevigen, of om een AI-functionaliteit te bouwen die een echt gebruik dient.",
+      "discovery": {
+        "kicker": "AI-workflow",
+        "title": "AI-gebruik structureren dat moeilijk te sturen wordt",
+        "body": "Helder maken waar AI echt helpt in delivery, productie of operations, en vermijden dat het een extra laag verwarring wordt.",
+        "points": {
+          "goals": "De stappen identificeren waar AI echte hefboom geeft in plaats van extra ruis.",
+          "queries": "Gebruik, rollen en grenzen begrijpelijker maken voor het team.",
+          "plan": "Een kader zetten dat bruikbaar blijft wanneer het project groeit of van eigenaar verandert."
+        }
+      },
+      "build": {
+        "kicker": "Basis verstevigen",
+        "title": "Een prototype of implementatie overnemen die al bestaat",
+        "body": "Wanneer er al een eerste versie is, gaat het werk vaak over leesbaarheid, structuur en een kwaliteitsniveau terugbrengen dat een echte productverderzetting aankan.",
+        "stackItems": {
+          "web": "Een fragiele basis opschonen",
+          "backend": "Vage technische keuzes herwerken",
+          "realtime": "Het project onderhoudbaarder maken",
+          "delivery": "Iets geloofwaardigs voorbereiden voor productie"
+        }
+      },
+      "launch": {
+        "kicker": "Gericht bouwen",
+        "title": "Een AI-functionaliteit of tool bouwen die een echt gebruik dient",
+        "body": "Wanneer er iets gebouwd moet worden, is het doel niet om AI toe te voegen om de hype te volgen. Het gaat om iets nuttigs, begrijpelijks en duurzaam op te zetten.",
+        "items": {
+          "verify": {
+            "step": "Het gebruik verduidelijken",
+            "body": "Bepalen wat AI echt moet verbeteren voor de gebruiker of het team."
+          },
+          "publish": {
+            "step": "Bouwen zonder te vertroebelen",
+            "body": "Architectuur, beslissingen en eigenaarschap leesbaar houden, ook wanneer delivery sneller gaat."
+          },
+          "measure": {
+            "step": "Een bruikbare basis achterlaten",
+            "body": "Zorgen dat het project later kan worden hervat, uitgebreid of verstevigd zonder enkele weken later opnieuw te beginnen."
+          }
+        }
+      },
+      "links": {
+        "github": "Bekijk GitHub",
+        "artstation": "Bekijk ArtStation-werk",
+        "linkedin": "Bekijk LinkedIn-profiel"
+      }
+    },
+    "proof": {
+      "eyebrow": "Een pragmatische AI-aanpak",
+      "title": "Sneller gaan zonder de controle te verliezen",
+      "intro": "AI hoeft niet overal te zitten om nuttig te zijn. Het doel is AI te gebruiken waar het uitvoering echt verbetert, zonder kwaliteit, productbegrip of overneembaarheid te schaden.",
+      "tokens": {
+        "tools": "AI wanneer nuttig",
+        "process": "Duidelijke technische keuzes",
+        "publicLinks": "Bruikbare basis"
+      },
+      "items": {
+        "web": {
+          "kicker": "Afbakenen voor je automatiseert",
+          "title": "Vertrekken van een echt gebruik in plaats van een trend",
+          "body": "Het juiste vertrekpunt is niet de AI-tool van de maand, maar het probleem dat de moeite waard is om op te lossen en de verwachte waarde voor team of gebruiker."
+        },
+        "realtime": {
+          "kicker": "Versnellen zonder vertroebelen",
+          "title": "Technische keuzes leesbaar houden, ook als delivery versnelt",
+          "body": "AI kan helpen om sneller te gaan. Het mag code, afwegingen of onderhoud achteraf niet moeilijker maken om te dragen."
+        },
+        "trust": {
+          "kicker": "Een bruikbare basis achterlaten",
+          "title": "Iets bouwen dat later opnieuw kan worden opgepakt en verbeterd",
+          "body": "Het resultaat moet begrijpelijk, onderhoudbaar en proper genoeg blijven om later zonder pijn op verder te bouwen."
         }
       }
     }
@@ -37,14 +115,14 @@
   "services": {
     "title": "Diensten",
     "webTitle": "Webontwikkeling",
-    "webDesc": "Websites & webapps (Next.js, Laravel, WordPress). Performance, SEO en onderhoudbaarheid.",
+    "webDesc": "Functionaliteiten, interfaces en nuttige tools om AI in een product of workflow te integreren zonder leesbaarheid te verliezen.",
     "realtimeTitle": "Realtime 3D/VR",
-    "realtimeDesc": "Prototypes, visualisatie en immersive ervaringen (Unreal, Unity, WebGL).",
+    "realtimeDesc": "Prototypes en demo's om een AI-use-case te testen, een idee te verduidelijken of een complex onderwerp concreter te maken.",
     "cta": "Ontdek"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Beschrijf je behoefte (budget, timing, randvoorwaarden) en ik neem snel contact met je op.",
+    "intro": "Beschrijf de context, wat er al bestaat en wat geblokkeerd zit. Ik antwoord snel met een heldere kijk op wat gestructureerd, herwerkt of gebouwd moet worden.",
     "form": {
       "name": "Naam",
       "email": "Email",
@@ -71,4 +149,3 @@
     "cta": "Terug naar home"
   }
 }
-
