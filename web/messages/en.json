@@ -11,47 +11,47 @@
     "contact": "Contact"
   },
   "home": {
-    "headline": "I build high-performance web products and real-time 3D experiences.",
-    "subheadline": "Edge Solutions — by Gil Guminski.",
+    "headline": "I help Belgian SMEs build credibility and turn traffic into qualified conversations.",
+    "subheadline": "High-performance websites, technical SEO and real-time 3D/VR work, with one senior technical partner from scoping to launch.",
     "primaryCta": "Contact me",
     "secondaryCta": "View services",
     "trust": {
-      "eyebrow": "Why teams choose Edge Solutions",
-      "title": "Trust signals for business-critical projects",
-      "intro": "From scope to launch, delivery stays direct, transparent and focused on measurable outcomes.",
+      "eyebrow": "Why work with Edge Solutions",
+      "title": "A clear working model that keeps delivery fast and communication direct",
+      "intro": "You know what is being built, in what order, and why. The work stays readable from the first conversation to launch.",
       "items": {
         "direct": {
           "value": "1 technical partner",
-          "label": "Direct communication from brief to production"
+          "label": "Faster decisions, direct exchanges, and less loss between the brief and execution"
         },
         "delivery": {
-          "value": "PR-sized iterations",
-          "label": "Frequent deliveries with clear review checkpoints"
+          "value": "Short delivery cycles",
+          "label": "Visible validation at each step instead of one large final handoff"
         },
         "quality": {
-          "value": "SEO + Core Web Vitals",
-          "label": "Performance and search quality built in from day one"
+          "value": "Solid technical base",
+          "label": "Performance, SEO and clarity designed to support conversion"
         }
       }
     },
     "process": {
       "eyebrow": "How we work",
-      "title": "A clear website process for scoping, building and launching work that can be verified",
-      "intro": "The section now follows the same logic buyers use when they compare a web development partner: understand the goal, build with the right stack, then launch and measure what changed.",
+      "title": "A simple process to scope, build and publish without guesswork",
+      "intro": "The goal is straightforward: understand what needs to be sold, build a credible page or prototype, then verify that the launch supports the original business need.",
       "discovery": {
-        "kicker": "Step 1 — discovery and search intent",
-        "title": "Align the business goal before touching design or code",
-        "body": "We start by clarifying the offer, priority pages and the search terms people are likely to use before they land on your services page or contact form.",
+        "kicker": "Step 1 — scoping",
+        "title": "Clarify the goal before talking about design or technology",
+        "body": "We first identify what you sell, who it is for, and what the page or experience needs to make clearer in order to trigger interest.",
         "points": {
-          "goals": "Define the conversion goal, decision-maker questions and what the page must make easier.",
-          "queries": "Map internal search intent around web development, technical SEO and real-time 3D/VR services.",
-          "plan": "Turn that into a lean page plan with headings, proof points and clear calls to action."
+          "goals": "Define the conversion goal and the questions the page needs to answer.",
+          "queries": "Identify the topics and searches that actually matter to your prospects.",
+          "plan": "Shape that into a clear page or prototype with the right proof and calls to action."
         }
       },
       "build": {
         "kicker": "Step 2 — build and optimize",
-        "title": "Write, design and ship pages that stay clear for humans and search engines",
-        "body": "The implementation stays practical: concise copy, structure that is easy to scan, and a stack chosen for performance, maintainability and SEO-friendly delivery.",
+        "title": "Design and ship something clear, fast and credible",
+        "body": "The work stays pragmatic: clear messaging, easy-to-scan structure, a stack that fits the need, and visible delivery steps.",
         "stackItems": {
           "web": "Next.js · React · TypeScript",
           "backend": "Laravel · WordPress · technical SEO",
@@ -61,20 +61,20 @@
       },
       "launch": {
         "kicker": "Step 3 — launch and proof",
-        "title": "Verify what shipped and measure whether the section earns more qualified interest",
-        "body": "Nothing is treated as finished just because it looks better. The launch step ties copy, code and public proof back to visible checks and follow-up measurement.",
+        "title": "Publish cleanly and check that the result holds up",
+        "body": "A launch is not just a finishing step. We verify the quality of what goes live and check whether the page actually helps generate more relevant interest.",
         "items": {
           "verify": {
-            "step": "Verify the page",
-            "body": "Check headings, links, localization, linting and whether the service narrative is still easy to scan."
+            "step": "Check before publishing",
+            "body": "Review content, links, localization, readability and technical quality."
           },
           "publish": {
-            "step": "Publish visible proof",
-            "body": "Keep GitHub, ArtStation and LinkedIn connected so buyers can validate the making-of instead of relying on generic claims."
+            "step": "Show visible proof",
+            "body": "Make the stack, public references and working method visible instead of relying on vague promises."
           },
           "measure": {
-            "step": "Measure qualified interest",
-            "body": "Review whether more visitors reach the services page, use relevant internal queries or start a contact conversation after the update."
+            "step": "Observe the impact",
+            "body": "Check whether the page attracts more relevant traffic and leads to more useful conversations."
           }
         }
       },
@@ -85,73 +85,44 @@
       }
     },
     "proof": {
-      "eyebrow": "Proof in practice",
-      "title": "Text-based proof beats vague claims",
-      "intro": "The homepage can already show how work becomes tangible: delivered project types, a named stack and public traces that are easy to verify, without waiting for new media assets.",
+      "eyebrow": "What you can already verify",
+      "title": "A clear method, a named stack and public references",
+      "intro": "Before we even speak, you can already see the tools being used, the kind of work being delivered and the public profiles connected to it.",
       "tokens": {
-        "projects": "Delivered projects",
         "tools": "Named tools",
-        "testimonials": "Testimonials",
         "process": "Visible process",
         "publicLinks": "Verifiable public links"
       },
       "items": {
         "web": {
-          "kicker": "Web projects",
-          "title": "Sites and user journeys built to convert",
-          "body": "Web work relies on Next.js, React, TypeScript, technical SEO and short iterations to turn a brief into pages that feel sharper, more credible and easier to measure."
+          "kicker": "Web development",
+          "title": "Pages built to be clear, fast and conversion-oriented",
+          "body": "Next.js, React, TypeScript, technical SEO and short iterations help produce sites and pages that build trust and make contact easier." 
         },
         "realtime": {
-          "kicker": "3D / VR projects",
-          "title": "Prototypes and demos that make ideas concrete",
-          "body": "Unreal, Unity and WebGL are used to show a workflow, validate an interaction or help stakeholders understand quickly what will actually be delivered."
+          "kicker": "Real-time 3D / VR",
+          "title": "Demonstrations that make an idea concrete faster",
+          "body": "Unreal, Unity and WebGL help show an interaction, test a scenario or let a stakeholder picture the result more quickly."
         },
         "trust": {
-          "kicker": "Verifiable traces",
-          "title": "GitHub, ArtStation and LinkedIn as trust signals",
-          "body": "Instead of hiding tools and references in the footer, the homepage now connects public profiles, stack choices and delivery method to make the making-of easier to trust."
+          "kicker": "Visible references",
+          "title": "Public profiles that extend the page’s credibility",
+          "body": "GitHub, ArtStation and LinkedIn are not decorative links. They connect the page to real, visible practice."
         }
-      },
-      "testimonials": {
-        "kicker": "Collaboration feedback",
-        "title": "Two trust signals a stakeholder can scan in 20 seconds",
-        "items": {
-          "first": {
-            "quote": "Gil replies fast, keeps the roadmap readable and turns a fuzzy brief into concrete steps without a black-box feeling.",
-            "author": "SME web delivery",
-            "role": "Scoping, review and short delivery cycles"
-          },
-          "second": {
-            "quote": "On 3D/VR work, it becomes clear quickly what will be shown, tested and delivered. Business-side decisions stay simple.",
-            "author": "Real-time prototype",
-            "role": "Demo, iteration and fast decision-making"
-          }
-        }
-      },
-      "project": {
-        "kicker": "Project snippet",
-        "title": "Homepage proof refresh — one concrete example of visible delivery",
-        "body": "This homepage already went through a client-style improvement loop: added text-based proof, named public links, FR/EN/NL localization, and lint validation before shipping.",
-        "points": {
-          "scope": "Tight scope: increase credibility without depending on new media assets.",
-          "proof": "Visible proof: stack, workflow, testimonials and a project snippet tied to public traces.",
-          "outcome": "Expected outcome: a more credible homepage that helps turn cold traffic into qualified conversations."
-        },
-        "linkLabel": "View the project snippet on GitHub"
       }
     }
   },
   "services": {
     "title": "Services",
     "webTitle": "Web development",
-    "webDesc": "Websites & web apps (Next.js, Laravel, WordPress). Performance, SEO and maintainability.",
+    "webDesc": "Websites and web apps built to convert: clear structure, technical SEO and strong performance.",
     "realtimeTitle": "Real-time 3D/VR",
-    "realtimeDesc": "Prototypes, visualization and immersive experiences (Unreal, Unity, WebGL).",
+    "realtimeDesc": "Prototypes and immersive experiences built to make an idea concrete and speed up demonstrations.",
     "cta": "Explore"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Share your needs (budget, timeline, constraints) and I’ll get back to you quickly.",
+    "intro": "Share your needs, constraints and timing. I’ll reply within 1 business day with a concrete recommendation and the next steps.",
     "form": {
       "name": "Name",
       "email": "Email",

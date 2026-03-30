@@ -11,47 +11,47 @@
     "contact": "Contact"
   },
   "home": {
-    "headline": "J’aide les PME wallonnes à convertir leur trafic en demandes qualifiées avec des sites crédibles et des expériences 3D qui marquent.",
-    "subheadline": "Edge Solutions — par Gil Guminski, interlocuteur technique unique du cadrage à la mise en ligne.",
+    "headline": "J’aide les PME wallonnes à gagner en crédibilité et à transformer leur trafic en demandes qualifiées.",
+    "subheadline": "Sites web performants, SEO technique et expériences 3D/VR, avec un interlocuteur senior unique du cadrage à la mise en ligne.",
     "primaryCta": "Me contacter",
     "secondaryCta": "Voir les services",
     "trust": {
-      "eyebrow": "Pourquoi les équipes choisissent Edge Solutions",
-      "title": "Des preuves concrètes pour décider vite et limiter le risque",
-      "intro": "Vous savez ce qui est livré, quand, et pourquoi. Chaque étape est reliée à un objectif business clair (visibilité, crédibilité, demandes entrantes).",
+      "eyebrow": "Pourquoi travailler avec Edge Solutions",
+      "title": "Un cadre clair pour avancer vite sans multiplier les intermédiaires",
+      "intro": "Vous savez ce qu’on construit, dans quel ordre, et pourquoi. Le travail reste lisible du premier échange à la mise en ligne.",
       "items": {
         "direct": {
           "value": "1 interlocuteur senior",
-          "label": "Arbitrages rapides, communication directe du brief à la production"
+          "label": "Décisions plus rapides, échanges directs, moins de perte entre le brief et l’exécution"
         },
         "delivery": {
-          "value": "Roadmap hebdo claire",
-          "label": "Livraisons courtes avec validation visible avant chaque étape"
+          "value": "Livraisons courtes",
+          "label": "Validation visible à chaque étape plutôt que grosse livraison finale"
         },
         "quality": {
-          "value": "Performance + SEO vérifiables",
-          "label": "Base technique robuste pour capter et convertir du trafic qualifié"
+          "value": "Base technique solide",
+          "label": "Performance, SEO et lisibilité pensés pour soutenir la conversion"
         }
       }
     },
     "process": {
-      "eyebrow": "Comment on travaille",
-      "title": "Un process web clair pour cadrer, produire et mettre en ligne sans zone floue",
-      "intro": "La section suit maintenant la logique qu’un décideur utilise pour évaluer un partenaire web : comprendre l’objectif, produire avec la bonne stack, puis vérifier ce qui a réellement changé après mise en ligne.",
+      "eyebrow": "Comment je travaille",
+      "title": "Un process simple pour cadrer, produire et publier sans zone floue",
+      "intro": "L’objectif est simple : comprendre ce qu’il faut vraiment vendre, produire une page ou un prototype crédible, puis vérifier que la mise en ligne sert bien le besoin de départ.",
       "discovery": {
-        "kicker": "Étape 1 — cadrage et intention de recherche",
-        "title": "Aligner l’objectif business avant de toucher au design ou au code",
-        "body": "On clarifie d’abord l’offre, les pages prioritaires et les requêtes que vos prospects utilisent avant d’arriver sur la page services ou le formulaire de contact.",
+        "kicker": "Étape 1 — cadrage",
+        "title": "Clarifier l’objectif avant de parler design ou technique",
+        "body": "On identifie ce que vous vendez, à qui, et ce que la page ou l’expérience doit rendre plus clair pour déclencher l’intérêt.",
         "points": {
-          "goals": "Définir l’objectif de conversion, les questions du décideur et ce que la page doit rendre plus simple.",
-          "queries": "Cartographier l’intention de recherche autour du développement web, du SEO technique et des services 3D/VR temps réel.",
-          "plan": "Transformer cela en plan de page lisible avec bons intertitres, preuves concrètes et appels à l’action clairs."
+          "goals": "Définir l’objectif de conversion et les questions auxquelles il faut répondre.",
+          "queries": "Repérer les sujets et recherches qui comptent vraiment pour vos prospects.",
+          "plan": "Structurer une page ou un prototype lisible, avec les bonnes preuves et les bons appels à l’action."
         }
       },
       "build": {
         "kicker": "Étape 2 — production et optimisation",
-        "title": "Rédiger, designer et livrer des pages lisibles pour les humains comme pour les moteurs",
-        "body": "L’exécution reste pragmatique : un message concis, une structure facile à scanner et une stack choisie pour la performance, la maintenabilité et une mise en ligne propre côté SEO.",
+        "title": "Concevoir et livrer quelque chose de clair, rapide et crédible",
+        "body": "Le travail reste pragmatique : message compréhensible, structure facile à parcourir, stack adaptée au besoin, et livraisons visibles.",
         "stackItems": {
           "web": "Next.js · React · TypeScript",
           "backend": "Laravel · WordPress · SEO technique",
@@ -61,20 +61,20 @@
       },
       "launch": {
         "kicker": "Étape 3 — mise en ligne et preuve",
-        "title": "Vérifier ce qui part en production et mesurer si la section génère plus d’intérêt qualifié",
-        "body": "Rien n’est considéré comme terminé parce que c’est plus joli. La mise en ligne relie le copy, le code et les preuves publiques à des contrôles visibles et à une mesure après publication.",
+        "title": "Publier proprement et vérifier que le résultat tient la route",
+        "body": "Une mise en ligne n’est pas juste une finition. On vérifie la qualité de ce qui part en production et on regarde si la page aide réellement à générer plus d’intérêt.",
         "items": {
           "verify": {
-            "step": "Vérifier la page",
-            "body": "Contrôler les titres, les liens, la localisation, le lint et la lisibilité globale du récit de service."
+            "step": "Vérifier avant publication",
+            "body": "Contrôler les contenus, les liens, la localisation, la lisibilité et la qualité technique."
           },
           "publish": {
-            "step": "Publier des preuves visibles",
-            "body": "Garder GitHub, ArtStation et LinkedIn reliés à la page pour que le making-of soit vérifiable au lieu de reposer sur des promesses génériques."
+            "step": "Assumer des preuves visibles",
+            "body": "Montrer la stack, les références publiques et la méthode au lieu de rester dans des promesses vagues."
           },
           "measure": {
-            "step": "Mesurer l’intérêt qualifié",
-            "body": "Observer si plus de visiteurs rejoignent la page services, utilisent des requêtes internes pertinentes ou lancent une prise de contact après la mise à jour."
+            "step": "Observer l’impact",
+            "body": "Voir si la page attire un trafic plus pertinent et amène davantage de prises de contact utiles."
           }
         }
       },
@@ -85,73 +85,44 @@
       }
     },
     "proof": {
-      "eyebrow": "Preuves en pratique",
-      "title": "Des preuves textuelles plutôt que des promesses floues",
-      "intro": "La page d’accueil peut déjà montrer comment le travail se matérialise : projets livrés, stack assumée et traces publiques faciles à vérifier, sans attendre de nouveaux visuels.",
+      "eyebrow": "Ce que vous pouvez déjà vérifier",
+      "title": "Une méthode, une stack et des références publiques assumées",
+      "intro": "Avant même un premier échange, vous pouvez déjà voir les outils utilisés, le type de travail livré et les profils publics associés.",
       "tokens": {
-        "projects": "Projets livrés",
         "tools": "Outils nommés",
-        "testimonials": "Témoignages",
         "process": "Process visible",
         "publicLinks": "Liens publics vérifiables"
       },
       "items": {
         "web": {
-          "kicker": "Projets web",
-          "title": "Sites et parcours pensés pour convertir",
-          "body": "Le travail web s’appuie sur Next.js, React, TypeScript, SEO technique et des itérations courtes pour transformer un brief en pages plus crédibles, plus lisibles et plus faciles à mesurer."
+          "kicker": "Développement web",
+          "title": "Des pages conçues pour être lisibles, rapides et orientées conversion",
+          "body": "Next.js, React, TypeScript, SEO technique et itérations courtes pour produire des sites et pages qui rassurent et facilitent la prise de contact."
         },
         "realtime": {
-          "kicker": "Projets 3D / VR",
-          "title": "Prototypes et démonstrations qui rendent l’idée concrète",
-          "body": "Les expériences Unreal, Unity et WebGL servent à montrer un workflow, valider une interaction ou aider un décideur à comprendre vite ce qui sera réellement livré."
+          "kicker": "3D / VR temps réel",
+          "title": "Des démonstrations qui rendent une idée concrète plus vite",
+          "body": "Unreal, Unity et WebGL pour montrer une interaction, tester un scénario ou aider un décideur à se projeter rapidement."
         },
         "trust": {
-          "kicker": "Traces vérifiables",
-          "title": "GitHub, ArtStation et LinkedIn comme signaux de confiance",
-          "body": "Au lieu de cacher les outils et les références en pied de page, la homepage relie maintenant profils publics, stack et méthode pour donner une preuve simple du making-of."
+          "kicker": "Références visibles",
+          "title": "Des profils publics qui prolongent la crédibilité de la page",
+          "body": "GitHub, ArtStation et LinkedIn ne sont pas des liens décoratifs : ils permettent de relier la page à une pratique réelle et visible."
         }
-      },
-      "testimonials": {
-        "kicker": "Retours de collaboration",
-        "title": "Deux signaux de confiance qu’un décideur peut lire en 20 secondes",
-        "items": {
-          "first": {
-            "quote": "Gil répond vite, garde la roadmap lisible et transforme un brief flou en étapes concrètes sans effet boîte noire.",
-            "author": "Collaboration web PME",
-            "role": "Cadrage, validation et livraison courte"
-          },
-          "second": {
-            "quote": "Sur les sujets 3D/VR, on comprend rapidement ce qui sera montré, testé puis livré. Les arbitrages restent simples côté métier.",
-            "author": "Prototype temps réel",
-            "role": "Démo, itérations et décision rapide"
-          }
-        }
-      },
-      "project": {
-        "kicker": "Extrait de projet",
-        "title": "Homepage proof refresh — un exemple concret de livraison visible",
-        "body": "Cette homepage a déjà été durcie comme un mini projet client: ajout de preuves textuelles, liens publics assumés, itérations localisées FR/EN/NL et validation par lint avant publication.",
-        "points": {
-          "scope": "Scope serré: renforcer la crédibilité sans dépendre de nouveaux assets visuels.",
-          "proof": "Preuve visible: stack, workflow, témoignages et snippet projet reliés à des traces publiques.",
-          "outcome": "Résultat attendu: une page d’accueil plus crédible pour convertir un trafic froid en prise de contact qualifiée."
-        },
-        "linkLabel": "Voir le snippet projet sur GitHub"
       }
     }
   },
   "services": {
     "title": "Services",
     "webTitle": "Développement web",
-    "webDesc": "Sites vitrine et applications (Next.js, Laravel, WordPress) pensés pour convertir : CTA clairs, SEO technique et Core Web Vitals solides.",
+    "webDesc": "Sites vitrines et applications pensés pour convertir : structure claire, SEO technique et bonnes performances.",
     "realtimeTitle": "Temps réel 3D/VR",
-    "realtimeDesc": "Prototypes et expériences immersives (Unreal, Unity, WebGL) conçus pour rassurer les décideurs et accélérer vos démonstrations commerciales.",
+    "realtimeDesc": "Prototypes et expériences immersives conçus pour rendre une idée plus concrète et accélérer les démonstrations.",
     "cta": "Voir le service"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Décrivez votre besoin (objectif, budget, timing, contraintes) et je vous réponds sous 1 jour ouvré avec une recommandation concrète et les prochains pas.",
+    "intro": "Décrivez votre besoin, vos contraintes et votre timing. Je vous réponds sous 1 jour ouvré avec un retour concret et les prochaines étapes.",
     "form": {
       "name": "Nom",
       "email": "Email",

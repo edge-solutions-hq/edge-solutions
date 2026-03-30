@@ -11,47 +11,47 @@
     "contact": "Contact"
   },
   "home": {
-    "headline": "Ik bouw performante webproducten en realtime 3D‑ervaringen.",
-    "subheadline": "Edge Solutions — door Gil Guminski.",
+    "headline": "Ik help Belgische kmo's meer geloofwaardigheid opbouwen en verkeer omzetten in waardevolle contacten.",
+    "subheadline": "Performante websites, technische SEO en realtime 3D/VR, met één senior technisch aanspreekpunt van afbakening tot lancering.",
     "primaryCta": "Contacteer mij",
     "secondaryCta": "Bekijk services",
     "trust": {
-      "eyebrow": "Waarom teams voor Edge Solutions kiezen",
-      "title": "Vertrouwenssignalen voor businesskritische projecten",
-      "intro": "Van scope tot lancering blijft de samenwerking direct, transparant en gericht op meetbare impact.",
+      "eyebrow": "Waarom werken met Edge Solutions",
+      "title": "Een duidelijke aanpak om snel vooruit te gaan zonder extra schakels",
+      "intro": "Je weet wat er gebouwd wordt, in welke volgorde en waarom. Het werk blijft leesbaar vanaf het eerste gesprek tot aan de lancering.",
       "items": {
         "direct": {
           "value": "1 technische partner",
-          "label": "Rechtstreekse communicatie van briefing tot productie"
+          "label": "Snellere beslissingen, directe uitwisseling en minder verlies tussen briefing en uitvoering"
         },
         "delivery": {
-          "value": "PR-sized iteraties",
-          "label": "Regelmatige opleveringen met duidelijke reviewmomenten"
+          "value": "Korte oplevercycli",
+          "label": "Zichtbare validatie per stap in plaats van één grote eindlevering"
         },
         "quality": {
-          "value": "SEO + Core Web Vitals",
-          "label": "Performance en SEO-kwaliteit ingebouwd vanaf dag één"
+          "value": "Sterke technische basis",
+          "label": "Performance, SEO en duidelijkheid die conversie ondersteunen"
         }
       }
     },
     "process": {
-      "eyebrow": "Hoe we werken",
-      "title": "Een helder webproces om af te bakenen, te bouwen en te lanceren zonder black-boxgevoel",
-      "intro": "De sectie volgt nu de logica waarmee een beslisser een webpartner beoordeelt: eerst het doel begrijpen, dan bouwen met de juiste stack en daarna controleren wat er na de lancering echt veranderd is.",
+      "eyebrow": "Hoe ik werk",
+      "title": "Een eenvoudig proces om af te bakenen, te bouwen en te publiceren zonder giswerk",
+      "intro": "Het doel is eenvoudig: begrijpen wat echt verkocht moet worden, een geloofwaardige pagina of prototype bouwen, en daarna controleren of de livegang het oorspronkelijke doel ondersteunt.",
       "discovery": {
-        "kicker": "Stap 1 — afbakening en zoekintentie",
-        "title": "Het businessdoel scherpstellen vóór design of code start",
-        "body": "We maken eerst de propositie, prioritaire pagina's en zoektermen helder die prospects gebruiken voor ze op de dienstenpagina of het contactformulier terechtkomen.",
+        "kicker": "Stap 1 — afbakening",
+        "title": "Het doel scherpstellen vóór design of techniek",
+        "body": "We brengen eerst in kaart wat je verkoopt, voor wie, en wat de pagina of ervaring duidelijker moet maken om interesse op te wekken.",
         "points": {
-          "goals": "Bepalen wat het conversiedoel is, welke vragen een beslisser heeft en wat de pagina makkelijker moet maken.",
-          "queries": "De interne zoekintentie rond webontwikkeling, technische SEO en realtime 3D/VR-diensten in kaart brengen.",
-          "plan": "Dat vertalen naar een compacte paginaplan met duidelijke tussenkoppen, bewijs en calls to action."
+          "goals": "Bepalen wat het conversiedoel is en welke vragen de pagina moet beantwoorden.",
+          "queries": "Inzicht krijgen in de onderwerpen en zoekopdrachten die echt relevant zijn voor prospects.",
+          "plan": "Dat omzetten in een duidelijke pagina of prototype met het juiste bewijs en de juiste calls to action."
         }
       },
       "build": {
         "kicker": "Stap 2 — bouwen en optimaliseren",
-        "title": "Pagina's schrijven, ontwerpen en opleveren die helder blijven voor mensen en zoekmachines",
-        "body": "De uitvoering blijft praktisch: beknopte copy, een scanbare structuur en een stack gekozen voor performance, onderhoudbaarheid en SEO-vriendelijke oplevering.",
+        "title": "Iets ontwerpen en opleveren dat helder, snel en geloofwaardig is",
+        "body": "De uitvoering blijft pragmatisch: duidelijke boodschap, goed scanbare structuur, stack die bij de behoefte past en zichtbare opleverstappen.",
         "stackItems": {
           "web": "Next.js · React · TypeScript",
           "backend": "Laravel · WordPress · technische SEO",
@@ -61,20 +61,20 @@
       },
       "launch": {
         "kicker": "Stap 3 — lancering en bewijs",
-        "title": "Controleren wat live gaat en meten of de sectie meer gekwalificeerde interesse oplevert",
-        "body": "Niets is klaar alleen omdat het er beter uitziet. De lancering koppelt copy, code en publieke bewijzen aan zichtbare controles en opvolgmeting.",
+        "title": "Netjes publiceren en controleren of het resultaat standhoudt",
+        "body": "Een livegang is geen laatste formaliteit. We controleren de kwaliteit van wat online gaat en bekijken of de pagina echt meer relevante interesse oplevert.",
         "items": {
           "verify": {
-            "step": "De pagina controleren",
-            "body": "Koppen, links, lokalisatie, linting en de scanbaarheid van het serviceverhaal nakijken."
+            "step": "Controleren voor publicatie",
+            "body": "Content, links, lokalisatie, leesbaarheid en technische kwaliteit nakijken."
           },
           "publish": {
-            "step": "Zichtbaar bewijs publiceren",
-            "body": "GitHub, ArtStation en LinkedIn gekoppeld houden zodat bezoekers het making-of kunnen verifiëren in plaats van generieke claims te moeten geloven."
+            "step": "Zichtbaar bewijs tonen",
+            "body": "De stack, publieke referenties en werkwijze zichtbaar maken in plaats van te leunen op vage beloftes."
           },
           "measure": {
-            "step": "Gekwalificeerde interesse meten",
-            "body": "Nagaan of meer bezoekers de dienstenpagina bereiken, relevante interne zoektermen gebruiken of een contactgesprek starten na de update."
+            "step": "Impact opvolgen",
+            "body": "Bekijken of de pagina relevanter verkeer aantrekt en tot meer bruikbare contacten leidt."
           }
         }
       },
@@ -85,73 +85,44 @@
       }
     },
     "proof": {
-      "eyebrow": "Bewijs in de praktijk",
-      "title": "Tekstueel bewijs werkt beter dan vage claims",
-      "intro": "De homepage kan nu al tonen hoe werk concreet wordt: opgeleverde projecttypes, een benoemde stack en publieke sporen die makkelijk te controleren zijn, zonder nieuwe media-assets.",
+      "eyebrow": "Wat je nu al kunt controleren",
+      "title": "Een duidelijke methode, benoemde stack en publieke referenties",
+      "intro": "Nog voor een eerste gesprek kun je al zien welke tools gebruikt worden, welk type werk geleverd wordt en welke publieke profielen eraan gekoppeld zijn.",
       "tokens": {
-        "projects": "Opgeleverde projecten",
         "tools": "Benoemde tools",
-        "testimonials": "Testimonials",
         "process": "Zichtbaar proces",
         "publicLinks": "Controleerbare publieke links"
       },
       "items": {
         "web": {
-          "kicker": "Webprojecten",
-          "title": "Sites en trajecten gebouwd om te converteren",
-          "body": "Webwerk steunt op Next.js, React, TypeScript, technische SEO en korte iteraties om van een briefing pagina's te maken die geloofwaardiger, helderder en beter meetbaar zijn."
+          "kicker": "Webontwikkeling",
+          "title": "Pagina's ontworpen om helder, snel en conversiegericht te zijn",
+          "body": "Next.js, React, TypeScript, technische SEO en korte iteraties helpen om sites en pagina's te bouwen die vertrouwen wekken en contact eenvoudiger maken."
         },
         "realtime": {
-          "kicker": "3D / VR-projecten",
-          "title": "Prototypes en demo's die ideeën tastbaar maken",
-          "body": "Unreal, Unity en WebGL worden ingezet om een workflow te tonen, een interactie te valideren of stakeholders snel te laten begrijpen wat er echt geleverd wordt."
+          "kicker": "Realtime 3D / VR",
+          "title": "Demo's die een idee sneller concreet maken",
+          "body": "Unreal, Unity en WebGL helpen om een interactie te tonen, een scenario te testen of een beslisser zich sneller het resultaat te laten voorstellen."
         },
         "trust": {
-          "kicker": "Controleerbare sporen",
-          "title": "GitHub, ArtStation en LinkedIn als vertrouwenssignalen",
-          "body": "In plaats van tools en referenties in de footer te verstoppen, koppelt de homepage nu publieke profielen, stackkeuzes en werkwijze aan elkaar zodat het making-of geloofwaardiger wordt."
+          "kicker": "Zichtbare referenties",
+          "title": "Publieke profielen die de geloofwaardigheid van de pagina versterken",
+          "body": "GitHub, ArtStation en LinkedIn zijn geen decoratieve links. Ze verbinden de pagina met echte, zichtbare praktijk."
         }
-      },
-      "testimonials": {
-        "kicker": "Samenwerkingsfeedback",
-        "title": "Twee vertrouwenssignalen die een beslisser in 20 seconden kan scannen",
-        "items": {
-          "first": {
-            "quote": "Gil reageert snel, houdt de roadmap leesbaar en zet een vage briefing om in concrete stappen zonder black-boxgevoel.",
-            "author": "KMO-webtraject",
-            "role": "Afbakening, review en korte opleveringen"
-          },
-          "second": {
-            "quote": "Bij 3D/VR-trajecten wordt snel duidelijk wat getoond, getest en opgeleverd wordt. Beslissingen blijven ook voor business eenvoudig.",
-            "author": "Realtime prototype",
-            "role": "Demo, iteratie en snelle besluitvorming"
-          }
-        }
-      },
-      "project": {
-        "kicker": "Projectsnippet",
-        "title": "Homepage proof refresh — één concreet voorbeeld van zichtbare oplevering",
-        "body": "Deze homepage doorliep al een klantachtige verbeterlus: tekstueel bewijs toegevoegd, publieke links benoemd, FR/EN/NL gelokaliseerd en met lint gevalideerd voor publicatie.",
-        "points": {
-          "scope": "Strakke scope: geloofwaardigheid verhogen zonder nieuwe media-assets nodig te hebben.",
-          "proof": "Zichtbaar bewijs: stack, workflow, testimonials en een projectsnippet gekoppeld aan publieke sporen.",
-          "outcome": "Verwacht resultaat: een geloofwaardigere homepage die koud verkeer sneller naar gekwalificeerde gesprekken leidt."
-        },
-        "linkLabel": "Bekijk de projectsnippet op GitHub"
       }
     }
   },
   "services": {
     "title": "Diensten",
     "webTitle": "Webontwikkeling",
-    "webDesc": "Websites & webapps (Next.js, Laravel, WordPress). Performance, SEO en onderhoudbaarheid.",
+    "webDesc": "Websites en webapps ontworpen om te converteren: duidelijke structuur, technische SEO en sterke performance.",
     "realtimeTitle": "Realtime 3D/VR",
-    "realtimeDesc": "Prototypes, visualisatie en immersive ervaringen (Unreal, Unity, WebGL).",
+    "realtimeDesc": "Prototypes en immersive ervaringen die een idee concreter maken en demo's versnellen.",
     "cta": "Ontdek"
   },
   "contact": {
     "title": "Contact",
-    "intro": "Beschrijf je behoefte (budget, timing, randvoorwaarden) en ik neem snel contact met je op.",
+    "intro": "Beschrijf je behoefte, randvoorwaarden en timing. Ik antwoord binnen 1 werkdag met een concreet voorstel en de volgende stappen.",
     "form": {
       "name": "Naam",
       "email": "Email",
