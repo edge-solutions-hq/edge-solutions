@@ -14,6 +14,64 @@ type Props = {
   params: Promise<{locale: string}>;
 };
 
+type ProofIconProps = {
+  kind: 'process' | 'stack' | 'outcomes';
+};
+
+function ProofIcon({kind}: ProofIconProps) {
+  const shared = {
+    className: 'h-5 w-5',
+    viewBox: '0 0 24 24',
+    fill: 'none',
+    xmlns: 'http://www.w3.org/2000/svg',
+    'aria-hidden': 'true' as const,
+    focusable: 'false',
+  };
+
+  if (kind === 'process') {
+    return (
+      <svg {...shared}>
+        <path
+          d="M6 7H18M6 12H12M6 17H15"
+          stroke="currentColor"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+        <circle cx="17.5" cy="12" r="2.5" stroke="currentColor" strokeWidth="1.8" />
+      </svg>
+    );
+  }
+
+  if (kind === 'stack') {
+    return (
+      <svg {...shared}>
+        <rect x="4" y="5" width="16" height="4" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+        <rect x="4" y="10" width="16" height="4" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+        <rect x="4" y="15" width="16" height="4" rx="1.5" stroke="currentColor" strokeWidth="1.8" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...shared}>
+      <path
+        d="M5 16L10 11L13 14L19 8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M15 8H19V12"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
 
@@ -182,10 +240,13 @@ export default async function HomePage({params}: Props) {
 
         <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
           <Card className="p-6 md:p-8">
-            <div className="text-sm font-semibold text-foreground">
-              {t('home.proof.items.process.kicker')}
+            <div className="flex items-center gap-3 text-sm font-semibold text-foreground">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/70 text-link">
+                <ProofIcon kind="process" />
+              </span>
+              <span>{t('home.proof.items.process.kicker')}</span>
             </div>
-            <h3 className="mt-3 text-lg font-semibold tracking-tight">
+            <h3 className="mt-4 text-lg font-semibold tracking-tight">
               {t('home.proof.items.process.title')}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -194,10 +255,13 @@ export default async function HomePage({params}: Props) {
           </Card>
 
           <Card className="p-6 md:p-8">
-            <div className="text-sm font-semibold text-foreground">
-              {t('home.proof.items.stack.kicker')}
+            <div className="flex items-center gap-3 text-sm font-semibold text-foreground">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/70 text-link">
+                <ProofIcon kind="stack" />
+              </span>
+              <span>{t('home.proof.items.stack.kicker')}</span>
             </div>
-            <h3 className="mt-3 text-lg font-semibold tracking-tight">
+            <h3 className="mt-4 text-lg font-semibold tracking-tight">
               {t('home.proof.items.stack.title')}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -206,10 +270,13 @@ export default async function HomePage({params}: Props) {
           </Card>
 
           <Card className="p-6 md:p-8">
-            <div className="text-sm font-semibold text-foreground">
-              {t('home.proof.items.outcomes.kicker')}
+            <div className="flex items-center gap-3 text-sm font-semibold text-foreground">
+              <span className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background/70 text-link">
+                <ProofIcon kind="outcomes" />
+              </span>
+              <span>{t('home.proof.items.outcomes.kicker')}</span>
             </div>
-            <h3 className="mt-3 text-lg font-semibold tracking-tight">
+            <h3 className="mt-4 text-lg font-semibold tracking-tight">
               {t('home.proof.items.outcomes.title')}
             </h3>
             <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
