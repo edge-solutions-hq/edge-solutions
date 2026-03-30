@@ -1,7 +1,7 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Web development & real-time technologies"
+    "siteTagline": "Senior development, practical AI and real-time technologies"
   },
   "nav": {
     "home": "Home",
@@ -11,70 +11,70 @@
     "contact": "Contact"
   },
   "home": {
-    "headline": "I help Belgian SMEs build credibility and turn traffic into qualified conversations.",
-    "subheadline": "High-performance websites, technical SEO and real-time 3D/VR work, with one senior technical partner from scoping to launch.",
+    "headline": "Senior developer for websites, internal tools and real-time 3D/VR experiences.",
+    "subheadline": "I use AI when it genuinely improves delivery: faster on repetitive work, without turning technical decisions into a black box.",
     "primaryCta": "Contact me",
     "secondaryCta": "View services",
     "trust": {
-      "eyebrow": "Why work with Edge Solutions",
-      "title": "A clear working model that keeps delivery fast and communication direct",
-      "intro": "You know what is being built, in what order, and why. The work stays readable from the first conversation to launch.",
+      "eyebrow": "What you are really buying",
+      "title": "Senior delivery, AI under control and production-ready execution",
+      "intro": "AI is there to accelerate execution when it actually helps. Scoping, code quality and shipping still get handled like a real project, not like a demo.",
       "items": {
         "direct": {
-          "value": "1 technical partner",
-          "label": "Faster decisions, direct exchanges, and less loss between the brief and execution"
+          "value": "1 senior developer",
+          "label": "Faster technical decisions, direct communication and clear responsibility from scoping to production"
         },
         "delivery": {
-          "value": "Short delivery cycles",
-          "label": "Visible validation at each step instead of one large final handoff"
+          "value": "AI when useful",
+          "label": "Automate repetitive work where it helps, keep human judgment on trade-offs, review and sensitive code"
         },
         "quality": {
-          "value": "Solid technical base",
-          "label": "Performance, SEO and clarity designed to support conversion"
+          "value": "Serious production",
+          "label": "Performance, SEO, versioning and clean deployment instead of a fragile prototype"
         }
       }
     },
     "process": {
-      "eyebrow": "How we work",
-      "title": "A simple process to scope, build and publish without guesswork",
-      "intro": "The goal is straightforward: understand what needs to be sold, build a credible page or prototype, then verify that the launch supports the original business need.",
+      "eyebrow": "How it works",
+      "title": "A simple framework to scope, build and ship properly",
+      "intro": "The work moves in three steps: clarify the need, build quickly with the right tools, then publish something reliable.",
       "discovery": {
         "kicker": "Step 1 — scoping",
-        "title": "Clarify the goal before talking about design or technology",
-        "body": "We first identify what you sell, who it is for, and what the page or experience needs to make clearer in order to trigger interest.",
+        "title": "Clarify the need before building anything",
+        "body": "We define the business problem, the intended user and the ambition level before choosing the stack, format or amount of automation.",
         "points": {
-          "goals": "Define the conversion goal and the questions the page needs to answer.",
-          "queries": "Identify the topics and searches that actually matter to your prospects.",
-          "plan": "Shape that into a clear page or prototype with the right proof and calls to action."
+          "goals": "Define what needs to be delivered, who it serves and what will make the project genuinely useful.",
+          "queries": "Surface the product, SEO, content or demo constraints that materially change the solution.",
+          "plan": "Choose a realistic scope: page, app, prototype or existing product that needs hardening."
         }
       },
       "build": {
-        "kicker": "Step 2 — build and optimize",
-        "title": "Design and ship something clear, fast and credible",
-        "body": "The work stays pragmatic: clear messaging, easy-to-scan structure, a stack that fits the need, and visible delivery steps.",
+        "kicker": "Step 2 — build",
+        "title": "Move fast without losing technical readability",
+        "body": "AI can accelerate part of the delivery, but technical direction stays owned. The goal is speed without ending up with an opaque or brittle base.",
         "stackItems": {
           "web": "Next.js · React · TypeScript",
           "backend": "Laravel · WordPress · technical SEO",
           "realtime": "Unreal · Unity · WebGL",
-          "delivery": "GitHub · short PRs · visible review checkpoints"
+          "delivery": "AI workflow · GitHub · short PRs · visible review checkpoints"
         }
       },
       "launch": {
-        "kicker": "Step 3 — launch and proof",
-        "title": "Publish cleanly and check that the result holds up",
-        "body": "A launch is not just a finishing step. We verify the quality of what goes live and check whether the page actually helps generate more relevant interest.",
+        "kicker": "Step 3 — production",
+        "title": "Make the result reliable, maintainable and ready to ship",
+        "body": "The last step is not cosmetic. We check what is actually going live, what should be measured next and what needs to remain easy to take over later.",
         "items": {
           "verify": {
             "step": "Check before publishing",
-            "body": "Review content, links, localization, readability and technical quality."
+            "body": "Review content, links, readability, technical quality and the points most likely to break in production."
           },
           "publish": {
-            "step": "Show visible proof",
-            "body": "Make the stack, public references and working method visible instead of relying on vague promises."
+            "step": "Ship cleanly",
+            "body": "Version, review, deploy cleanly and keep a clear record of what changed."
           },
           "measure": {
-            "step": "Observe the impact",
-            "body": "Check whether the page attracts more relevant traffic and leads to more useful conversations."
+            "step": "Prepare what comes next",
+            "body": "Leave behind a base that can be iterated on, handed over or extended without starting over from scratch."
           }
         }
       },
@@ -86,8 +86,8 @@
     },
     "proof": {
       "eyebrow": "What you can already verify",
-      "title": "A clear method, a named stack and public references",
-      "intro": "Before we even speak, you can already see the tools being used, the kind of work being delivered and the public profiles connected to it.",
+      "title": "Named stack, visible workflow and public references",
+      "intro": "Before we even speak, you can already see the technologies in use, the way work gets delivered and the public profiles connected to it. AI is part of the workflow, not a smokescreen.",
       "tokens": {
         "tools": "Named tools",
         "process": "Visible process",
@@ -96,18 +96,18 @@
       "items": {
         "web": {
           "kicker": "Web development",
-          "title": "Pages built to be clear, fast and conversion-oriented",
-          "body": "Next.js, React, TypeScript, technical SEO and short iterations help produce sites and pages that build trust and make contact easier." 
+          "title": "Websites, pages and internal tools that need to hold up in production",
+          "body": "Next.js, React, TypeScript, Laravel, WordPress and technical SEO to build web surfaces that are fast, readable and serious to operate."
         },
         "realtime": {
           "kicker": "Real-time 3D / VR",
-          "title": "Demonstrations that make an idea concrete faster",
-          "body": "Unreal, Unity and WebGL help show an interaction, test a scenario or let a stakeholder picture the result more quickly."
+          "title": "Demonstrators that make an idea concrete faster",
+          "body": "Unreal, Unity and WebGL to test an interaction, present a concept or make a complex subject easier to sell and understand."
         },
         "trust": {
-          "kicker": "Visible references",
-          "title": "Public profiles that extend the page’s credibility",
-          "body": "GitHub, ArtStation and LinkedIn are not decorative links. They connect the page to real, visible practice."
+          "kicker": "AI workflow",
+          "title": "AI speeds up execution, not accountability",
+          "body": "AI tools save time on repetitive work. Scoping, review and production decisions still stay owned end to end."
         }
       }
     }
@@ -115,9 +115,9 @@
   "services": {
     "title": "Services",
     "webTitle": "Web development",
-    "webDesc": "Websites and web apps built to convert: clear structure, technical SEO and strong performance.",
+    "webDesc": "Websites, pages and internal tools that need to be fast, credible and easy to evolve.",
     "realtimeTitle": "Real-time 3D/VR",
-    "realtimeDesc": "Prototypes and immersive experiences built to make an idea concrete and speed up demonstrations.",
+    "realtimeDesc": "3D/VR prototypes and real-time demonstrators that make an idea easier to validate, explain and sell.",
     "cta": "Explore"
   },
   "contact": {

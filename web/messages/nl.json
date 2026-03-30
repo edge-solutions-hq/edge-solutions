@@ -1,7 +1,7 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Webontwikkeling & realtime technologie"
+    "siteTagline": "Senior development, pragmatische AI en realtime technologie"
   },
   "nav": {
     "home": "Home",
@@ -11,70 +11,70 @@
     "contact": "Contact"
   },
   "home": {
-    "headline": "Ik help Belgische kmo's meer geloofwaardigheid opbouwen en verkeer omzetten in waardevolle contacten.",
-    "subheadline": "Performante websites, technische SEO en realtime 3D/VR, met één senior technisch aanspreekpunt van afbakening tot lancering.",
+    "headline": "Senior developer voor websites, interne tools en realtime 3D/VR-ervaringen.",
+    "subheadline": "Ik gebruik AI wanneer het delivery echt versnelt: sneller op repetitief werk, zonder technische keuzes in een black box te veranderen.",
     "primaryCta": "Contacteer mij",
     "secondaryCta": "Bekijk services",
     "trust": {
-      "eyebrow": "Waarom werken met Edge Solutions",
-      "title": "Een duidelijke aanpak om snel vooruit te gaan zonder extra schakels",
-      "intro": "Je weet wat er gebouwd wordt, in welke volgorde en waarom. Het werk blijft leesbaar vanaf het eerste gesprek tot aan de lancering.",
+      "eyebrow": "Wat je echt koopt",
+      "title": "Senior delivery, AI onder controle en productieklare uitvoering",
+      "intro": "AI is er om uitvoering te versnellen wanneer het echt helpt. Scoping, codekwaliteit en livegang worden nog altijd behandeld als een echt project, niet als een demo.",
       "items": {
         "direct": {
-          "value": "1 technische partner",
-          "label": "Snellere beslissingen, directe uitwisseling en minder verlies tussen briefing en uitvoering"
+          "value": "1 senior developer",
+          "label": "Snellere technische beslissingen, directe communicatie en duidelijke verantwoordelijkheid van scope tot productie"
         },
         "delivery": {
-          "value": "Korte oplevercycli",
-          "label": "Zichtbare validatie per stap in plaats van één grote eindlevering"
+          "value": "AI wanneer nuttig",
+          "label": "Repetitief werk automatiseren waar het helpt, menselijk oordeel behouden voor afwegingen, review en gevoelige code"
         },
         "quality": {
-          "value": "Sterke technische basis",
-          "label": "Performance, SEO en duidelijkheid die conversie ondersteunen"
+          "value": "Serieuze productie",
+          "label": "Performance, SEO, versioning en nette deployment in plaats van een fragiel prototype"
         }
       }
     },
     "process": {
-      "eyebrow": "Hoe ik werk",
-      "title": "Een eenvoudig proces om af te bakenen, te bouwen en te publiceren zonder giswerk",
-      "intro": "Het doel is eenvoudig: begrijpen wat echt verkocht moet worden, een geloofwaardige pagina of prototype bouwen, en daarna controleren of de livegang het oorspronkelijke doel ondersteunt.",
+      "eyebrow": "Hoe het werkt",
+      "title": "Een eenvoudig kader om af te bakenen, te bouwen en degelijk live te zetten",
+      "intro": "Het werk verloopt in drie stappen: de behoefte scherpstellen, snel bouwen met de juiste tools en daarna iets betrouwbaars publiceren.",
       "discovery": {
         "kicker": "Stap 1 — afbakening",
-        "title": "Het doel scherpstellen vóór design of techniek",
-        "body": "We brengen eerst in kaart wat je verkoopt, voor wie, en wat de pagina of ervaring duidelijker moet maken om interesse op te wekken.",
+        "title": "De behoefte scherpstellen vóór er iets gebouwd wordt",
+        "body": "We bepalen eerst het businessprobleem, de beoogde gebruiker en het ambitieniveau vóór we stack, formaat of automatisering kiezen.",
         "points": {
-          "goals": "Bepalen wat het conversiedoel is en welke vragen de pagina moet beantwoorden.",
-          "queries": "Inzicht krijgen in de onderwerpen en zoekopdrachten die echt relevant zijn voor prospects.",
-          "plan": "Dat omzetten in een duidelijke pagina of prototype met het juiste bewijs en de juiste calls to action."
+          "goals": "Bepalen wat geleverd moet worden, voor wie het dient en wanneer het project echt nuttig is.",
+          "queries": "Product-, SEO-, content- of demo-beperkingen blootleggen die de oplossing echt veranderen.",
+          "plan": "Een realistische scope kiezen: pagina, app, prototype of bestaand product dat verstevigd moet worden."
         }
       },
       "build": {
-        "kicker": "Stap 2 — bouwen en optimaliseren",
-        "title": "Iets ontwerpen en opleveren dat helder, snel en geloofwaardig is",
-        "body": "De uitvoering blijft pragmatisch: duidelijke boodschap, goed scanbare structuur, stack die bij de behoefte past en zichtbare opleverstappen.",
+        "kicker": "Stap 2 — bouwen",
+        "title": "Snel ontwikkelen zonder technische leesbaarheid te verliezen",
+        "body": "AI kan een deel van de delivery versnellen, maar de technische richting blijft bewust gekozen. Het doel is snelheid zonder een ondoorzichtige of fragiele basis te bouwen.",
         "stackItems": {
           "web": "Next.js · React · TypeScript",
           "backend": "Laravel · WordPress · technische SEO",
           "realtime": "Unreal · Unity · WebGL",
-          "delivery": "GitHub · korte PR's · zichtbare reviewmomenten"
+          "delivery": "AI-workflow · GitHub · korte PR's · zichtbare reviewmomenten"
         }
       },
       "launch": {
-        "kicker": "Stap 3 — lancering en bewijs",
-        "title": "Netjes publiceren en controleren of het resultaat standhoudt",
-        "body": "Een livegang is geen laatste formaliteit. We controleren de kwaliteit van wat online gaat en bekijken of de pagina echt meer relevante interesse oplevert.",
+        "kicker": "Stap 3 — productie",
+        "title": "Het resultaat betrouwbaar, onderhoudbaar en publiceerbaar maken",
+        "body": "De laatste stap is niet cosmetisch. We controleren wat echt live gaat, wat nadien gemeten moet worden en wat later zonder pijn moet kunnen worden overgenomen.",
         "items": {
           "verify": {
             "step": "Controleren voor publicatie",
-            "body": "Content, links, lokalisatie, leesbaarheid en technische kwaliteit nakijken."
+            "body": "Content, links, leesbaarheid, technische kwaliteit en de punten die in productie kunnen breken nakijken."
           },
           "publish": {
-            "step": "Zichtbaar bewijs tonen",
-            "body": "De stack, publieke referenties en werkwijze zichtbaar maken in plaats van te leunen op vage beloftes."
+            "step": "Netjes live zetten",
+            "body": "Versioneren, reviewen, proper deployen en een duidelijke historiek bijhouden van wat gewijzigd is."
           },
           "measure": {
-            "step": "Impact opvolgen",
-            "body": "Bekijken of de pagina relevanter verkeer aantrekt en tot meer bruikbare contacten leidt."
+            "step": "De volgende stap voorbereiden",
+            "body": "Een basis achterlaten waarop verder gebouwd, overgenomen of uitgebreid kan worden zonder opnieuw te beginnen."
           }
         }
       },
@@ -86,8 +86,8 @@
     },
     "proof": {
       "eyebrow": "Wat je nu al kunt controleren",
-      "title": "Een duidelijke methode, benoemde stack en publieke referenties",
-      "intro": "Nog voor een eerste gesprek kun je al zien welke tools gebruikt worden, welk type werk geleverd wordt en welke publieke profielen eraan gekoppeld zijn.",
+      "title": "Benoemde stack, zichtbare workflow en publieke referenties",
+      "intro": "Nog voor een eerste gesprek kun je al zien welke technologieën gebruikt worden, hoe het werk wordt opgeleverd en welke publieke profielen eraan verbonden zijn. AI is deel van de workflow, geen rookgordijn.",
       "tokens": {
         "tools": "Benoemde tools",
         "process": "Zichtbaar proces",
@@ -96,18 +96,18 @@
       "items": {
         "web": {
           "kicker": "Webontwikkeling",
-          "title": "Pagina's ontworpen om helder, snel en conversiegericht te zijn",
-          "body": "Next.js, React, TypeScript, technische SEO en korte iteraties helpen om sites en pagina's te bouwen die vertrouwen wekken en contact eenvoudiger maken."
+          "title": "Websites, pagina's en interne tools die in productie moeten standhouden",
+          "body": "Next.js, React, TypeScript, Laravel, WordPress en technische SEO om weboppervlakken te bouwen die snel, leesbaar en serieus in gebruik zijn."
         },
         "realtime": {
           "kicker": "Realtime 3D / VR",
           "title": "Demo's die een idee sneller concreet maken",
-          "body": "Unreal, Unity en WebGL helpen om een interactie te tonen, een scenario te testen of een beslisser zich sneller het resultaat te laten voorstellen."
+          "body": "Unreal, Unity en WebGL om een interactie te testen, een concept te tonen of een complex onderwerp makkelijker te verkopen en te begrijpen."
         },
         "trust": {
-          "kicker": "Zichtbare referenties",
-          "title": "Publieke profielen die de geloofwaardigheid van de pagina versterken",
-          "body": "GitHub, ArtStation en LinkedIn zijn geen decoratieve links. Ze verbinden de pagina met echte, zichtbare praktijk."
+          "kicker": "AI-workflow",
+          "title": "AI versnelt de uitvoering, niet de verantwoordelijkheid",
+          "body": "AI-tools besparen tijd op repetitief werk. Scoping, review en productie-beslissingen blijven van begin tot eind bewust genomen."
         }
       }
     }
@@ -115,9 +115,9 @@
   "services": {
     "title": "Diensten",
     "webTitle": "Webontwikkeling",
-    "webDesc": "Websites en webapps ontworpen om te converteren: duidelijke structuur, technische SEO en sterke performance.",
+    "webDesc": "Websites, pagina's en interne tools die snel, geloofwaardig en makkelijk uitbreidbaar moeten zijn.",
     "realtimeTitle": "Realtime 3D/VR",
-    "realtimeDesc": "Prototypes en immersive ervaringen die een idee concreter maken en demo's versnellen.",
+    "realtimeDesc": "3D/VR-prototypes en realtime demo's die een idee makkelijker valideren, uitleggen en verkopen.",
     "cta": "Ontdek"
   },
   "contact": {
