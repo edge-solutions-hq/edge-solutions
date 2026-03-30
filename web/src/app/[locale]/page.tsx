@@ -172,6 +172,53 @@ export default async function HomePage({params}: Props) {
         </StatList>
       </section>
 
+      <section id="proof-signals" className="scroll-mt-24">
+        <SectionIntro
+          eyebrow={t('home.proof.eyebrow')}
+          title={t('home.proof.title')}
+        >
+          <p>{t('home.proof.intro')}</p>
+        </SectionIntro>
+
+        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+          <Card className="p-6 md:p-8">
+            <div className="text-sm font-semibold text-foreground">
+              {t('home.proof.items.process.kicker')}
+            </div>
+            <h3 className="mt-3 text-lg font-semibold tracking-tight">
+              {t('home.proof.items.process.title')}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {t('home.proof.items.process.body')}
+            </p>
+          </Card>
+
+          <Card className="p-6 md:p-8">
+            <div className="text-sm font-semibold text-foreground">
+              {t('home.proof.items.stack.kicker')}
+            </div>
+            <h3 className="mt-3 text-lg font-semibold tracking-tight">
+              {t('home.proof.items.stack.title')}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {t('home.proof.items.stack.body')}
+            </p>
+          </Card>
+
+          <Card className="p-6 md:p-8">
+            <div className="text-sm font-semibold text-foreground">
+              {t('home.proof.items.outcomes.kicker')}
+            </div>
+            <h3 className="mt-3 text-lg font-semibold tracking-tight">
+              {t('home.proof.items.outcomes.title')}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {t('home.proof.items.outcomes.body')}
+            </p>
+          </Card>
+        </div>
+      </section>
+
       <section>
         <Card className="relative overflow-hidden p-8 md:p-12">
           <div

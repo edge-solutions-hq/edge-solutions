@@ -32,6 +32,28 @@
           "label": "Base technique robuste pour capter et convertir du trafic qualifié"
         }
       }
+    },
+    "proof": {
+      "eyebrow": "Preuves de confiance",
+      "title": "Des signaux concrets sous la ligne de flottaison pour rassurer avant le contact",
+      "intro": "Cette section ajoute des indices de confiance lisibles dans le HTML sans dépendre d’images ou d’actifs externes : méthode visible, stack assumée et résultats attendus.",
+      "items": {
+        "process": {
+          "kicker": "Méthode visible",
+          "title": "Le projet avance par étapes compréhensibles",
+          "body": "Le cadrage, les validations intermédiaires et la mise en ligne restent lisibles pour éviter l’effet boîte noire souvent associé aux prestations web et SEO."
+        },
+        "stack": {
+          "kicker": "Stack nommée",
+          "title": "Les choix techniques sont explicites et reliés au besoin",
+          "body": "Next.js, Laravel, WordPress, Unreal, Unity ou WebGL ne sont pas là pour faire joli : ils sont mentionnés parce qu’ils orientent la performance, la maintenance et la démonstration produit."
+        },
+        "outcomes": {
+          "kicker": "Résultats attendus",
+          "title": "Les signaux de succès sont définis avant d’appeler cela terminé",
+          "body": "L’objectif reste mesurable : meilleure crédibilité, trafic qualifié, demandes entrantes plus claires, ou démonstration commerciale plus convaincante selon la mission."
+        }
+      }
     }
   },
   "services": {

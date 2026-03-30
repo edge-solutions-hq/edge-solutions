@@ -32,6 +32,28 @@
           "label": "Performance and search quality built in from day one"
         }
       }
+    },
+    "proof": {
+      "eyebrow": "Trust proof",
+      "title": "Below-the-fold proof signals that reassure visitors before they reach out",
+      "intro": "This section adds readable trust markers in the HTML without relying on new images or outside assets: visible process, named stack and expected outcomes.",
+      "items": {
+        "process": {
+          "kicker": "Visible process",
+          "title": "The work moves forward in steps people can actually follow",
+          "body": "Scoping, review checkpoints and launch stay visible so the project does not feel like the usual black box often associated with web and SEO work."
+        },
+        "stack": {
+          "kicker": "Named stack",
+          "title": "Technical choices are explicit and tied to the business need",
+          "body": "Next.js, Laravel, WordPress, Unreal, Unity and WebGL are not listed for decoration; they are surfaced because they shape performance, maintainability and product demos."
+        },
+        "outcomes": {
+          "kicker": "Expected outcomes",
+          "title": "Success signals are defined before the work is called finished",
+          "body": "The goal stays measurable: stronger credibility, more qualified traffic, clearer inbound leads, or a more convincing sales demo depending on the mission."
+        }
+      }
     }
   },
   "services": {

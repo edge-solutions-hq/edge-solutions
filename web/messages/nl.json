@@ -32,6 +32,28 @@
           "label": "Performance en SEO-kwaliteit ingebouwd vanaf dag één"
         }
       }
+    },
+    "proof": {
+      "eyebrow": "Bewijs van vertrouwen",
+      "title": "Onder de vouw extra vertrouwenssignalen die bezoekers geruststellen vóór contact",
+      "intro": "Deze sectie voegt leesbare trust markers toe in de HTML zonder nieuwe beelden of externe assets: zichtbaar proces, benoemde stack en verwachte resultaten.",
+      "items": {
+        "process": {
+          "kicker": "Zichtbaar proces",
+          "title": "Het werk gaat vooruit in stappen die mensen echt kunnen volgen",
+          "body": "Afbakening, reviewmomenten en lancering blijven zichtbaar zodat het project niet aanvoelt als de klassieke black box van web- en SEO-werk."
+        },
+        "stack": {
+          "kicker": "Benoemde stack",
+          "title": "Technische keuzes zijn expliciet en gekoppeld aan de echte behoefte",
+          "body": "Next.js, Laravel, WordPress, Unreal, Unity en WebGL staan er niet als decoratie; ze worden getoond omdat ze performance, onderhoudbaarheid en productdemo’s mee bepalen."
+        },
+        "outcomes": {
+          "kicker": "Verwachte resultaten",
+          "title": "Succescriteria worden bepaald vóór het werk als afgerond telt",
+          "body": "Het doel blijft meetbaar: meer geloofwaardigheid, kwalitatiever verkeer, duidelijkere inbound leads of een overtuigendere salesdemo afhankelijk van de opdracht."
+        }
+      }
     }
   },
   "services": {
