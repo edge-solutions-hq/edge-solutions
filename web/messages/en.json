@@ -74,7 +74,15 @@
     "webDesc": "Websites & web apps (Next.js, Laravel, WordPress). Performance, SEO and maintainability.",
     "realtimeTitle": "Real-time 3D/VR",
     "realtimeDesc": "Prototypes, visualization and immersive experiences (Unreal, Unity, WebGL).",
-    "cta": "Explore"
+    "cta": "Explore",
+    "serviceNav": {
+      "eyebrow": "Service navigation",
+      "intro": "Switch between offers without going back to the index, with a quick visual preview to reduce orientation time.",
+      "webBadge": "Web project",
+      "webThumb": "UI- and page-structure-oriented thumbnail that helps visitors identify the web offer at a glance.",
+      "realtimeBadge": "3D/VR project",
+      "realtimeThumb": "Scene- and immersion-oriented thumbnail that makes the real-time offer visually distinct immediately."
+    }
   },
   "contact": {
     "title": "Contact",

@@ -74,7 +74,15 @@
     "webDesc": "Sites vitrine et applications (Next.js, Laravel, WordPress) pensés pour convertir : CTA clairs, SEO technique et Core Web Vitals solides.",
     "realtimeTitle": "Temps réel 3D/VR",
     "realtimeDesc": "Prototypes et expériences immersives (Unreal, Unity, WebGL) conçus pour rassurer les décideurs et accélérer vos démonstrations commerciales.",
-    "cta": "Voir le service"
+    "cta": "Voir le service",
+    "serviceNav": {
+      "eyebrow": "Navigation service",
+      "intro": "Passez d’une offre à l’autre sans revenir à l’index, avec un aperçu visuel rapide pour mieux vous repérer.",
+      "webBadge": "Projet web",
+      "webThumb": "Aperçu orienté interface, structure de page et conversion pour explorer rapidement la prestation web.",
+      "realtimeBadge": "Projet 3D/VR",
+      "realtimeThumb": "Aperçu orienté scène temps réel et prototype immersif pour distinguer immédiatement l’offre 3D/VR."
+    }
   },
   "contact": {
     "title": "Contact",
