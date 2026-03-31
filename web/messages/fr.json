@@ -53,6 +53,18 @@
           "title": "Les signaux de succès sont définis avant d’appeler cela terminé",
           "body": "L’objectif reste mesurable : meilleure crédibilité, trafic qualifié, demandes entrantes plus claires, ou démonstration commerciale plus convaincante selon la mission."
         }
+      },
+      "testimonials": {
+        "first": {
+          "quote": "Le site présente enfin notre savoir-faire sans jargon flou : en rendez-vous, on comprend en trente secondes ce que nous faisons.",
+          "author": "Responsable communication",
+          "role": "PME B2B en Wallonie"
+        },
+        "second": {
+          "quote": "Les pages localisées nous aident à parler juste selon le public, sans donner l’impression d’une traduction automatique ou d’un template générique.",
+          "author": "Fondatrice",
+          "role": "Studio produit et expérience digitale"
+        }
       }
     }
   },

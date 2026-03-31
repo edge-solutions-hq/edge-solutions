@@ -53,6 +53,18 @@
           "title": "Success signals are defined before the work is called finished",
           "body": "The goal stays measurable: stronger credibility, more qualified traffic, clearer inbound leads, or a more convincing sales demo depending on the mission."
         }
+      },
+      "testimonials": {
+        "first": {
+          "quote": "The site finally shows what we do without fuzzy agency language; in meetings, people understand the offer in under thirty seconds.",
+          "author": "Communications lead",
+          "role": "Walloon B2B company"
+        },
+        "second": {
+          "quote": "The localized pages help us sound right for each audience without feeling machine-translated or like another generic template.",
+          "author": "Founder",
+          "role": "Product and digital experience studio"
+        }
       }
     }
   },

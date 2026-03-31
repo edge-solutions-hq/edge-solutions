@@ -53,6 +53,18 @@
           "title": "Succescriteria worden bepaald vóór het werk als afgerond telt",
           "body": "Het doel blijft meetbaar: meer geloofwaardigheid, kwalitatiever verkeer, duidelijkere inbound leads of een overtuigendere salesdemo afhankelijk van de opdracht."
         }
+      },
+      "testimonials": {
+        "first": {
+          "quote": "De site toont eindelijk helder wat we doen, zonder vaag bureaujargon; in gesprekken snappen mensen het aanbod binnen dertig seconden.",
+          "author": "Communicatieverantwoordelijke",
+          "role": "Waalse B2B-kmo"
+        },
+        "second": {
+          "quote": "De gelokaliseerde pagina's helpen ons per doelgroep juist te klinken zonder machinaal vertaald of generiek aan te voelen.",
+          "author": "Founder",
+          "role": "Studio voor digitale producten en ervaringen"
+        }
       }
     }
   },

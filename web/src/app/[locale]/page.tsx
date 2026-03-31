@@ -284,6 +284,32 @@ export default async function HomePage({params}: Props) {
             </p>
           </Card>
         </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-6 lg:grid-cols-2">
+          <Card className="p-6 md:p-8">
+            <p className="text-base font-medium leading-relaxed text-foreground">
+              “{t('home.proof.testimonials.first.quote')}”
+            </p>
+            <div className="mt-5 space-y-1 text-sm text-muted-foreground">
+              <p className="font-semibold text-foreground">
+                {t('home.proof.testimonials.first.author')}
+              </p>
+              <p>{t('home.proof.testimonials.first.role')}</p>
+            </div>
+          </Card>
+
+          <Card className="p-6 md:p-8">
+            <p className="text-base font-medium leading-relaxed text-foreground">
+              “{t('home.proof.testimonials.second.quote')}”
+            </p>
+            <div className="mt-5 space-y-1 text-sm text-muted-foreground">
+              <p className="font-semibold text-foreground">
+                {t('home.proof.testimonials.second.author')}
+              </p>
+              <p>{t('home.proof.testimonials.second.role')}</p>
+            </div>
+          </Card>
+        </div>
       </section>
 
       <section>
