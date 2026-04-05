@@ -125,6 +125,7 @@ export function ContactForm() {
           defaultValue="unsure"
           className={inputBase + ' h-10'}
         >
+          <option value="ai">{t('contact.form.service_ai')}</option>
           <option value="web">{t('contact.form.service_web')}</option>
           <option value="realtime">{t('contact.form.service_realtime')}</option>
           <option value="unsure">{t('contact.form.service_unsure')}</option>
@@ -166,4 +167,3 @@ export function ContactForm() {
     </form>
   );
 }
-

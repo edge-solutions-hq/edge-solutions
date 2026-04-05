@@ -13,15 +13,15 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
 
   const titleByLocale: Record<string, string> = {
-    fr: 'Contact — projet web ou 3D/VR en Wallonie',
-    en: 'Contact — web or 3D/VR project in Belgium',
-    nl: 'Contact — web- of 3D/VR-project in België',
+    fr: 'Contact — projet IA, web ou 3D/VR en Wallonie',
+    en: 'Contact — AI, web or 3D/VR project in Belgium',
+    nl: 'Contact — AI-, web- of 3D/VR-project in België',
   };
 
   const descriptionByLocale: Record<string, string> = {
-    fr: 'Décrivez votre projet (web, SEO, 3D/VR) et recevez un retour rapide avec périmètre, délai et prochaines étapes.',
-    en: 'Share your project scope (web, SEO, 3D/VR) and get a fast reply with timeline, scope and next steps.',
-    nl: 'Beschrijf je project (web, SEO, 3D/VR) en ontvang snel feedback met scope, timing en volgende stappen.',
+    fr: 'Décrivez votre projet (IA, automatisation, web, SEO, 3D/VR) et recevez un retour rapide avec périmètre, délai et prochaines étapes.',
+    en: 'Share your project scope (AI, automation, web, SEO, 3D/VR) and get a fast reply with timeline, scope and next steps.',
+    nl: 'Beschrijf je project (AI, automatisatie, web, SEO, 3D/VR) en ontvang snel feedback met scope, timing en volgende stappen.',
   };
 
   return {
@@ -52,5 +52,4 @@ export default async function ContactPage({params}: Props) {
     </div>
   );
 }
-
 

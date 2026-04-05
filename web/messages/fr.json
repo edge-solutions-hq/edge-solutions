@@ -5,6 +5,7 @@
   },
   "nav": {
     "home": "Accueil",
+    "ai": "IA & automatisation",
     "process": "Méthode",
     "web": "Développement web",
     "realtime": "Temps réel 3D/VR",
@@ -15,6 +16,51 @@
     "subheadline": "Développeur senior, j’interviens pour structurer, fiabiliser ou construire des workflows et produits IA sans boîte noire, sans dette inutile et sans hype.",
     "primaryCta": "Me contacter",
     "secondaryCta": "Voir les services",
+    "proof": {
+      "eyebrow": "Preuves concrètes",
+      "title": "Des preuves opérationnelles avant les grandes études de cas publiques",
+      "intro": "Je privilégie les preuves de méthode, de système et de garde-fous : comment l’IA est cadrée, vérifiée et reliée à un vrai usage métier.",
+      "cta": "Voir l’offre IA",
+      "publicProject": {
+        "title": "Projet public en cours : Rusty Art",
+        "description": "Rusty Art est un projet en cours accessible publiquement. Il me sert de terrain vivant pour tester des workflows, de l’orchestration et des itérations produit autour de l’IA.",
+        "cta": "Voir Rusty Art"
+      },
+      "tokens": {
+        "tools": "IA quand utile",
+        "process": "Choix techniques clairs",
+        "publicLinks": "Base exploitable"
+      },
+      "items": {
+        "openclaw": {
+          "title": "Setup OpenClaw utilisé au quotidien",
+          "description": "Un environnement d’assistants spécialisés, de rapports planifiés, de mémoire durable et de validations avant action : une vraie preuve de capacité opérationnelle."
+        },
+        "method": {
+          "title": "IA pilotée par un humain",
+          "description": "Sources de vérité explicites, prompts versionnés, revue qualité, garde-fous et escalade humaine sur les cas sensibles."
+        },
+        "execution": {
+          "title": "Capacité d’exécution complète",
+          "description": "Quand un cas d’usage est validé, je peux aller jusqu’au code, à l’automatisation, à l’intégration web et au déploiement."
+        },
+        "web": {
+          "kicker": "Cadrer avant d’automatiser",
+          "title": "Partir d’un usage réel plutôt que d’un effet de mode",
+          "body": "Le bon point de départ n’est pas l’outil IA du moment, mais le problème à résoudre et la valeur attendue pour l’équipe ou l’utilisateur."
+        },
+        "realtime": {
+          "kicker": "Accélérer sans opacifier",
+          "title": "Garder des choix techniques lisibles malgré la vitesse",
+          "body": "L’IA peut aider à produire plus vite. Elle ne doit pas rendre le code, les arbitrages ou la maintenance plus difficiles à assumer ensuite."
+        },
+        "trust": {
+          "kicker": "Laisser une base exploitable",
+          "title": "Construire quelque chose qu’on peut reprendre et faire évoluer",
+          "body": "Le résultat doit rester compréhensible, maintenable et assez propre pour être poursuivi sans douleur par la suite."
+        }
+      }
+    },
     "trust": {
       "eyebrow": "Quand l’IA va plus vite que la structure",
       "title": "Les situations où il faut remettre de la structure",
@@ -77,43 +123,13 @@
             "body": "Permettre au projet d’être repris, itéré ou durci sans repartir de zéro quelques semaines plus tard."
           }
         }
-      },
-      "links": {
-        "github": "Voir le GitHub",
-        "artstation": "Voir les travaux ArtStation",
-        "linkedin": "Voir le profil LinkedIn"
-      }
-    },
-    "proof": {
-      "eyebrow": "Une approche pragmatique de l’IA",
-      "title": "Aller plus vite sans perdre le contrôle",
-      "intro": "L’IA n’a pas besoin d’être partout pour être utile. Le but est de l’utiliser là où elle améliore réellement l’exécution, sans dégrader la qualité, la compréhension du produit ou la capacité à reprendre le travail ensuite.",
-      "tokens": {
-        "tools": "IA quand utile",
-        "process": "Choix techniques clairs",
-        "publicLinks": "Base exploitable"
-      },
-      "items": {
-        "web": {
-          "kicker": "Cadrer avant d’automatiser",
-          "title": "Partir d’un usage réel plutôt que d’un effet de mode",
-          "body": "Le bon point de départ n’est pas l’outil IA du moment, mais le problème à résoudre et la valeur attendue pour l’équipe ou l’utilisateur."
-        },
-        "realtime": {
-          "kicker": "Accélérer sans opacifier",
-          "title": "Garder des choix techniques lisibles malgré la vitesse",
-          "body": "L’IA peut aider à produire plus vite. Elle ne doit pas rendre le code, les arbitrages ou la maintenance plus difficiles à assumer ensuite."
-        },
-        "trust": {
-          "kicker": "Laisser une base exploitable",
-          "title": "Construire quelque chose qu’on peut reprendre et faire évoluer",
-          "body": "Le résultat doit rester compréhensible, maintenable et assez propre pour être poursuivi sans douleur par la suite."
-        }
       }
     }
   },
   "services": {
     "title": "Services",
+    "aiTitle": "IA & automatisation",
+    "aiDesc": "Assistants internes, workflows IA, extraction documentaire, qualification et garde-fous de mise en production.",
     "webTitle": "Développement web",
     "webDesc": "Fonctionnalités, interfaces et outils utiles pour intégrer l’IA dans un produit ou un workflow sans perdre en lisibilité.",
     "realtimeTitle": "Temps réel 3D/VR",
@@ -127,6 +143,7 @@
       "name": "Nom",
       "email": "Email",
       "service": "Type de projet",
+      "service_ai": "IA & automatisation",
       "service_web": "Développement web",
       "service_realtime": "Temps réel 3D/VR",
       "service_unsure": "Je ne sais pas / autre",
@@ -136,7 +153,7 @@
       "messagePlaceholder": "Contexte, objectifs, contraintes, délais...",
       "submit": "Envoyer",
       "success": "Message envoyé. Je reviens vers vous rapidement.",
-      "genericError": "Impossible d'envoyer le message. Réessayez dans un instant."
+      "genericError": "Impossible d'envoyer votre message. Réessayez dans un instant."
     }
   },
   "footer": {

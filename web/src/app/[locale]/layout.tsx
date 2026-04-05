@@ -46,7 +46,7 @@ const ORGANIZATION_SCHEMA = {
     },
   ],
   availableLanguage: ['fr', 'en', 'nl'],
-  serviceType: ['Web development', 'Real-time 3D/VR'],
+  serviceType: ['AI systems & automation', 'Web development', 'Real-time 3D/VR'],
 };
 
 export function generateStaticParams() {
@@ -62,9 +62,9 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
 
   const descriptionByLocale: Record<string, string> = {
-    fr: 'Développement web et technologies temps réel en Belgique. Sites performants, SEO et expériences 3D/VR.',
-    en: 'Web development and real-time technologies in Belgium. High-performance websites, SEO and 3D/VR experiences.',
-    nl: 'Webontwikkeling en realtime technologie in België. Snelle websites, SEO en 3D/VR-ervaringen.',
+    fr: 'Systèmes IA, automatisation, développement web et technologies temps réel en Belgique. Workflows utiles, sites performants et expériences 3D/VR.',
+    en: 'AI systems, automation, web development and real-time technology in Belgium. Useful workflows, high-performance websites and 3D/VR experiences.',
+    nl: 'AI-systemen, automatisatie, webontwikkeling en realtime technologie in België. Nuttige workflows, performante websites en 3D/VR-ervaringen.',
   };
 
   return {

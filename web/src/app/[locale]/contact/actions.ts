@@ -7,7 +7,7 @@ import {site} from '@/lib/site';
 const schema = z.object({
   name: z.string().trim().min(2).max(80),
   email: z.string().trim().email().max(200),
-  service: z.enum(['web', 'realtime', 'unsure']).default('unsure'),
+  service: z.enum(['ai', 'web', 'realtime', 'unsure']).default('unsure'),
   message: z.string().trim().min(10).max(5000),
   company: z.string().optional() // honeypot (doit rester vide)
 });
@@ -22,8 +22,10 @@ function asString(v: FormDataEntryValue | null) {
   return typeof v === 'string' ? v : '';
 }
 
-function serviceLabel(service: 'web' | 'realtime' | 'unsure') {
+function serviceLabel(service: 'ai' | 'web' | 'realtime' | 'unsure') {
   switch (service) {
+    case 'ai':
+      return 'IA & automatisation';
     case 'web':
       return 'Web';
     case 'realtime':
@@ -111,5 +113,4 @@ export async function sendContactEmail(
     message: 'Message envoyé. Je reviens vers vous rapidement.'
   };
 }
-
 
