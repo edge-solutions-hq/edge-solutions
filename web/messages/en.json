@@ -21,6 +21,11 @@
       "title": "Operational proof before polished public case studies",
       "intro": "I prefer to show method, systems and guardrails: how AI is scoped, verified and connected to a real business workflow.",
       "cta": "View AI service",
+      "publicProject": {
+        "title": "Public project in progress: Rusty Art",
+        "description": "Rusty Art is an ongoing public project. I use it as a live ground for testing workflows, orchestration and product iteration patterns around AI.",
+        "cta": "View Rusty Art"
+      },
       "tokens": {
         "tools": "AI when useful",
         "process": "Clear technical choices",

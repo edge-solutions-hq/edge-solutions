@@ -167,6 +167,26 @@ export default async function HomePage({params}: Props) {
               {t('home.proof.cta')}
             </ButtonLink>
           </div>
+
+          <Card className="mt-6 p-6">
+            <h3 className="text-lg font-semibold tracking-tight">
+              {t('home.proof.publicProject.title')}
+            </h3>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+              {t('home.proof.publicProject.description')}
+            </p>
+            <div className="not-prose mt-5">
+              <a
+                href="https://rusty-art.edge-solutions.be/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-1 text-sm font-medium text-link"
+              >
+                {t('home.proof.publicProject.cta')}
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </Card>
         </section>
 
         <section>

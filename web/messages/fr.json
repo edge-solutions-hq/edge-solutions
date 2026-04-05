@@ -21,6 +21,11 @@
       "title": "Des preuves opérationnelles avant les grandes études de cas publiques",
       "intro": "Je privilégie les preuves de méthode, de système et de garde-fous : comment l’IA est cadrée, vérifiée et reliée à un vrai usage métier.",
       "cta": "Voir l’offre IA",
+      "publicProject": {
+        "title": "Projet public en cours : Rusty Art",
+        "description": "Rusty Art est un projet en cours accessible publiquement. Il me sert de terrain vivant pour tester des workflows, de l’orchestration et des itérations produit autour de l’IA.",
+        "cta": "Voir Rusty Art"
+      },
       "tokens": {
         "tools": "IA quand utile",
         "process": "Choix techniques clairs",

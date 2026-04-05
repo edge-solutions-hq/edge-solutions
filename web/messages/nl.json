@@ -21,6 +21,11 @@
       "title": "Operationele proof nog voor afgewerkte publieke case studies",
       "intro": "Ik toon liever methode, systemen en guardrails: hoe AI wordt afgebakend, geverifieerd en gekoppeld aan een echte businessworkflow.",
       "cta": "Bekijk AI-dienst",
+      "publicProject": {
+        "title": "Publiek project in opbouw: Rusty Art",
+        "description": "Rusty Art is een lopend publiek project. Ik gebruik het als levende testgrond voor workflows, orchestratie en productiteratie rond AI.",
+        "cta": "Bekijk Rusty Art"
+      },
       "tokens": {
         "tools": "AI wanneer nuttig",
         "process": "Duidelijke technische keuzes",
