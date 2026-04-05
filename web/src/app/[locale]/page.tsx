@@ -4,6 +4,7 @@ import {getTranslations} from 'next-intl/server';
 import {ButtonLink} from '@/components/ui/Button';
 import {Card} from '@/components/ui/Card';
 import {TrackedLink} from '@/components/ui/TrackedLink';
+import HomepageTooling from '@/components/HomepageTooling';
 import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
@@ -65,6 +66,22 @@ export default async function HomePage({params}: Props) {
           </div>
         </PageIntro>
       </section>
+
+      <HomepageTooling
+        eyebrow={t('home.process.eyebrow')}
+        title={t('home.process.title')}
+        intro={t('home.process.intro')}
+        cardTitle={t('home.process.build.title')}
+        cardBody={t('home.process.build.body')}
+        stackLabel={t('nav.web')}
+        workflowLabel={t('nav.process')}
+        deliveryLabel={t('home.trust.items.quality.value')}
+        stackBody={t('home.process.build.stackItems.web')}
+        workflowBody={t('home.process.discovery.points.plan')}
+        deliveryBody={t('home.process.launch.items.measure.body')}
+        githubLabel={t('home.process.links.github')}
+        artstationLabel={t('home.process.links.artstation')}
+      />
 
       <section>
         <SectionIntro title={t('services.title')} />
