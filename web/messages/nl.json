@@ -5,6 +5,7 @@
   },
   "nav": {
     "home": "Home",
+    "ai": "AI-systemen",
     "process": "Hoe we werken",
     "web": "Webontwikkeling",
     "realtime": "Realtime 3D/VR",
@@ -15,6 +16,46 @@
     "subheadline": "Als senior developer help ik om AI-workflows en producten te structureren, te verstevigen of te bouwen zonder black box, zonder onnodige schuld en zonder hype.",
     "primaryCta": "Contacteer mij",
     "secondaryCta": "Bekijk services",
+    "proof": {
+      "eyebrow": "Concrete proof",
+      "title": "Operationele proof nog voor afgewerkte publieke case studies",
+      "intro": "Ik toon liever methode, systemen en guardrails: hoe AI wordt afgebakend, geverifieerd en gekoppeld aan een echte businessworkflow.",
+      "cta": "Bekijk AI-dienst",
+      "tokens": {
+        "tools": "AI wanneer nuttig",
+        "process": "Duidelijke technische keuzes",
+        "publicLinks": "Bruikbare basis"
+      },
+      "items": {
+        "openclaw": {
+          "title": "OpenClaw-setup in dagelijks gebruik",
+          "description": "Een werkende omgeving met specialistische assistenten, geplande rapporten, duurzaam geheugen en gated acties: concrete proof van operationele AI-capaciteit."
+        },
+        "method": {
+          "title": "Menselijk geleide AI-delivery",
+          "description": "Expliciete sources of truth, versiebeheer voor prompts, quality review, guardrails en menselijke escalatie wanneer de workflow gevoelig wordt."
+        },
+        "execution": {
+          "title": "Volledige uitvoeringscapaciteit",
+          "description": "Als een use case gevalideerd is, kan ik die doortrekken tot code, automatisatie, webintegratie en deployment."
+        },
+        "web": {
+          "kicker": "Afbakenen voor je automatiseert",
+          "title": "Vertrekken van een echt gebruik in plaats van een trend",
+          "body": "Het juiste vertrekpunt is niet de AI-tool van de maand, maar het probleem dat de moeite waard is om op te lossen en de verwachte waarde voor team of gebruiker."
+        },
+        "realtime": {
+          "kicker": "Versnellen zonder vertroebelen",
+          "title": "Technische keuzes leesbaar houden, ook als delivery versnelt",
+          "body": "AI kan helpen om sneller te gaan. Het mag code, afwegingen of onderhoud achteraf niet moeilijker maken om te dragen."
+        },
+        "trust": {
+          "kicker": "Een bruikbare basis achterlaten",
+          "title": "Iets bouwen dat later opnieuw kan worden opgepakt en verbeterd",
+          "body": "Het resultaat moet begrijpelijk, onderhoudbaar en proper genoeg blijven om later zonder pijn op verder te bouwen."
+        }
+      }
+    },
     "trust": {
       "eyebrow": "Wanneer AI sneller gaat dan de structuur",
       "title": "De situaties waarin opnieuw structuur nodig is",
@@ -77,43 +118,13 @@
             "body": "Zorgen dat het project later kan worden hervat, uitgebreid of verstevigd zonder enkele weken later opnieuw te beginnen."
           }
         }
-      },
-      "links": {
-        "github": "Bekijk GitHub",
-        "artstation": "Bekijk ArtStation-werk",
-        "linkedin": "Bekijk LinkedIn-profiel"
-      }
-    },
-    "proof": {
-      "eyebrow": "Een pragmatische AI-aanpak",
-      "title": "Sneller gaan zonder de controle te verliezen",
-      "intro": "AI hoeft niet overal te zitten om nuttig te zijn. Het doel is AI te gebruiken waar het uitvoering echt verbetert, zonder kwaliteit, productbegrip of overneembaarheid te schaden.",
-      "tokens": {
-        "tools": "AI wanneer nuttig",
-        "process": "Duidelijke technische keuzes",
-        "publicLinks": "Bruikbare basis"
-      },
-      "items": {
-        "web": {
-          "kicker": "Afbakenen voor je automatiseert",
-          "title": "Vertrekken van een echt gebruik in plaats van een trend",
-          "body": "Het juiste vertrekpunt is niet de AI-tool van de maand, maar het probleem dat de moeite waard is om op te lossen en de verwachte waarde voor team of gebruiker."
-        },
-        "realtime": {
-          "kicker": "Versnellen zonder vertroebelen",
-          "title": "Technische keuzes leesbaar houden, ook als delivery versnelt",
-          "body": "AI kan helpen om sneller te gaan. Het mag code, afwegingen of onderhoud achteraf niet moeilijker maken om te dragen."
-        },
-        "trust": {
-          "kicker": "Een bruikbare basis achterlaten",
-          "title": "Iets bouwen dat later opnieuw kan worden opgepakt en verbeterd",
-          "body": "Het resultaat moet begrijpelijk, onderhoudbaar en proper genoeg blijven om later zonder pijn op verder te bouwen."
-        }
       }
     }
   },
   "services": {
     "title": "Diensten",
+    "aiTitle": "AI-systemen & automatisatie",
+    "aiDesc": "Interne assistenten, documentworkflows, kwalificatie, automatisatie en guardrails voor productie.",
     "webTitle": "Webontwikkeling",
     "webDesc": "Functionaliteiten, interfaces en nuttige tools om AI in een product of workflow te integreren zonder leesbaarheid te verliezen.",
     "realtimeTitle": "Realtime 3D/VR",
@@ -127,6 +138,7 @@
       "name": "Naam",
       "email": "Email",
       "service": "Type project",
+      "service_ai": "AI-systemen & automatisatie",
       "service_web": "Webontwikkeling",
       "service_realtime": "Realtime 3D/VR",
       "service_unsure": "Niet zeker / ander",

@@ -5,6 +5,7 @@
   },
   "nav": {
     "home": "Home",
+    "ai": "AI systems",
     "process": "How we work",
     "web": "Web development",
     "realtime": "Real-time 3D/VR",
@@ -15,6 +16,46 @@
     "subheadline": "As a senior developer, I step in to structure, harden or build AI workflows and products without black boxes, unnecessary debt or hype.",
     "primaryCta": "Contact me",
     "secondaryCta": "View services",
+    "proof": {
+      "eyebrow": "Concrete proof",
+      "title": "Operational proof before polished public case studies",
+      "intro": "I prefer to show method, systems and guardrails: how AI is scoped, verified and connected to a real business workflow.",
+      "cta": "View AI service",
+      "tokens": {
+        "tools": "AI when useful",
+        "process": "Clear technical choices",
+        "publicLinks": "Usable base"
+      },
+      "items": {
+        "openclaw": {
+          "title": "OpenClaw setup used daily",
+          "description": "A working environment with specialist assistants, scheduled reports, durable memory and gated actions: a concrete proof of operational AI capability."
+        },
+        "method": {
+          "title": "Human-led AI delivery",
+          "description": "Explicit sources of truth, versioned prompts, quality review, guardrails and human escalation when the workflow gets sensitive."
+        },
+        "execution": {
+          "title": "Full execution capacity",
+          "description": "When a use case is validated, I can carry it through code, automation, web integration and deployment."
+        },
+        "web": {
+          "kicker": "Scope before automating",
+          "title": "Start from a real use case instead of a trend",
+          "body": "The right starting point is not the AI tool of the month, but the problem worth solving and the value expected for the team or the user."
+        },
+        "realtime": {
+          "kicker": "Speed up without obscuring things",
+          "title": "Keep technical decisions readable even when delivery accelerates",
+          "body": "AI can help move faster. It should not make code, trade-offs or maintenance harder to own afterwards."
+        },
+        "trust": {
+          "kicker": "Leave behind a usable base",
+          "title": "Build something that can be resumed and improved later",
+          "body": "The result should stay understandable, maintainable and clean enough to evolve without pain later on."
+        }
+      }
+    },
     "trust": {
       "eyebrow": "When AI moves faster than structure",
       "title": "The situations where structure needs to be restored",
@@ -77,43 +118,13 @@
             "body": "Make sure the project can be resumed, iterated on or hardened later without starting over a few weeks later."
           }
         }
-      },
-      "links": {
-        "github": "View GitHub",
-        "artstation": "View ArtStation work",
-        "linkedin": "View LinkedIn profile"
-      }
-    },
-    "proof": {
-      "eyebrow": "A pragmatic AI approach",
-      "title": "Move faster without losing control",
-      "intro": "AI does not need to be everywhere to be useful. The goal is to use it where it genuinely improves execution, without degrading quality, product understanding or the ability to pick the work back up later.",
-      "tokens": {
-        "tools": "AI when useful",
-        "process": "Clear technical choices",
-        "publicLinks": "Usable base"
-      },
-      "items": {
-        "web": {
-          "kicker": "Scope before automating",
-          "title": "Start from a real use case instead of a trend",
-          "body": "The right starting point is not the AI tool of the month, but the problem worth solving and the value expected for the team or the user."
-        },
-        "realtime": {
-          "kicker": "Speed up without obscuring things",
-          "title": "Keep technical decisions readable even when delivery accelerates",
-          "body": "AI can help move faster. It should not make code, trade-offs or maintenance harder to own afterwards."
-        },
-        "trust": {
-          "kicker": "Leave behind a usable base",
-          "title": "Build something that can be resumed and improved later",
-          "body": "The result should stay understandable, maintainable and clean enough to evolve without pain later on."
-        }
       }
     }
   },
   "services": {
     "title": "Services",
+    "aiTitle": "AI systems & automation",
+    "aiDesc": "Internal assistants, document workflows, qualification, automation and production guardrails.",
     "webTitle": "Web development",
     "webDesc": "Features, interfaces and useful tools to integrate AI into a product or workflow without losing clarity.",
     "realtimeTitle": "Real-time 3D/VR",
@@ -127,6 +138,7 @@
       "name": "Name",
       "email": "Email",
       "service": "Project type",
+      "service_ai": "AI systems & automation",
       "service_web": "Web development",
       "service_realtime": "Real-time 3D/VR",
       "service_unsure": "Not sure / other",
