@@ -1,0 +1,8 @@
+[
+  {
+    "id": "example-proof-asset",
+    "type": "image",
+    "url": "https://example.com/proof/example-proof-asset.jpg",
+    "alt": "Example approved proof asset placeholder"
+  }
+]
