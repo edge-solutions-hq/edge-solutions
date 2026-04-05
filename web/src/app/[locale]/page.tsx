@@ -79,6 +79,9 @@ export default async function HomePage({params}: Props) {
         stackBody={t('home.process.build.stackItems.web')}
         workflowBody={t('home.process.discovery.points.plan')}
         deliveryBody={t('home.process.launch.items.measure.body')}
+        proofLabel={t('home.tooling.proofLabel')}
+        proofTitle={t('home.tooling.proofTitle')}
+        proofBody={t('home.tooling.proofBody')}
         githubLabel={t('home.process.links.github')}
         artstationLabel={t('home.process.links.artstation')}
       />

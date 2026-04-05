@@ -84,6 +84,11 @@
         "linkedin": "Voir le profil LinkedIn"
       }
     },
+    "tooling": {
+      "proofLabel": "Preuves publiques",
+      "proofTitle": "Des traces concrètes du travail réalisé",
+      "proofBody": "Ces liens publics permettent de vérifier comment le travail est conçu et partagé sans dépendre de nouveaux médias sur la homepage."
+    },
     "proof": {
       "eyebrow": "Une approche pragmatique de l’IA",
       "title": "Aller plus vite sans perdre le contrôle",

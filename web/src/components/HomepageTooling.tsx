@@ -15,6 +15,9 @@ type HomepageToolingProps = {
   stackBody: string;
   workflowBody: string;
   deliveryBody: string;
+  proofLabel: string;
+  proofTitle: string;
+  proofBody: string;
   githubLabel: string;
   artstationLabel: string;
 };
@@ -37,6 +40,9 @@ export default function HomepageTooling({
   stackBody,
   workflowBody,
   deliveryBody,
+  proofLabel,
+  proofTitle,
+  proofBody,
   githubLabel,
   artstationLabel,
 }: HomepageToolingProps) {
@@ -104,12 +110,12 @@ export default function HomepageTooling({
         </Card>
 
         <Card className="p-6 md:p-8">
-          <div className="text-sm font-semibold text-foreground">Proof links</div>
+          <div className="text-sm font-semibold text-foreground">{proofLabel}</div>
           <h3 className="mt-3 text-xl font-semibold tracking-tight text-foreground">
-            Concrete public traces of work
+            {proofTitle}
           </h3>
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-            Public links help prospects verify how the work is built and shared without needing new media assets on the homepage.
+            {proofBody}
           </p>
 
           <div className="mt-6 space-y-3 text-sm text-muted-foreground">

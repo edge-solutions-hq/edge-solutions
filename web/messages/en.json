@@ -84,6 +84,11 @@
         "linkedin": "View LinkedIn profile"
       }
     },
+    "tooling": {
+      "proofLabel": "Public proof",
+      "proofTitle": "Concrete public traces of work",
+      "proofBody": "These public links help visitors verify how the work is built and shared without relying on new homepage media assets."
+    },
     "proof": {
       "eyebrow": "A pragmatic AI approach",
       "title": "Move faster without losing control",

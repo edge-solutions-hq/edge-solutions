@@ -84,6 +84,11 @@
         "linkedin": "Bekijk LinkedIn-profiel"
       }
     },
+    "tooling": {
+      "proofLabel": "Publieke bewijzen",
+      "proofTitle": "Concrete publieke sporen van het werk",
+      "proofBody": "Deze publieke links helpen bezoekers te verifiëren hoe het werk wordt opgebouwd en gedeeld zonder nieuwe media-assets op de homepage nodig te hebben."
+    },
     "proof": {
       "eyebrow": "Een pragmatische AI-aanpak",
       "title": "Sneller gaan zonder de controle te verliezen",
