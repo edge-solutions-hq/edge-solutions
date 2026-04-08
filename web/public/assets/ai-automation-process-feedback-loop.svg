@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">AI automation architecture and feedback loop</title>
+  <desc id="desc">Diagram showing inputs, AI workflow engine, human review, and continuous improvement loop.</desc>
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#020617"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#22d3ee"/>
+    </marker>
+    <style>
+      .box { fill:#0b1220; stroke:#22d3ee; stroke-width:3; rx:16; }
+      .head { fill:#f8fafc; font:700 36px Inter,Arial,sans-serif; }
+      .text { fill:#cbd5e1; font:500 24px Inter,Arial,sans-serif; }
+      .small { fill:#94a3b8; font:500 20px Inter,Arial,sans-serif; }
+      .title { fill:#e2e8f0; font:700 52px Inter,Arial,sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg2)"/>
+  <text x="90" y="105" class="title">AI Workflow Architecture — Feedback Loop</text>
+
+  <rect class="box" x="90" y="220" width="360" height="210"/>
+  <text class="head" x="130" y="290">Inputs</text>
+  <text class="text" x="130" y="345">CRM • Documents • Forms</text>
+  <text class="small" x="130" y="385">Validated source-of-truth data</text>
+
+  <rect class="box" x="530" y="220" width="420" height="210"/>
+  <text class="head" x="570" y="290">AI Workflow Engine</text>
+  <text class="text" x="570" y="345">Prompt orchestration + rules</text>
+  <text class="small" x="570" y="385">Deterministic steps where possible</text>
+
+  <rect class="box" x="1030" y="220" width="480" height="210"/>
+  <text class="head" x="1070" y="290">Human Review & Action</text>
+  <text class="text" x="1070" y="345">Approve • Edit • Escalate</text>
+  <text class="small" x="1070" y="385">Operational ownership remains explicit</text>
+
+  <line x1="450" y1="325" x2="520" y2="325" stroke="#22d3ee" stroke-width="6" marker-end="url(#arr)"/>
+  <line x1="950" y1="325" x2="1020" y2="325" stroke="#22d3ee" stroke-width="6" marker-end="url(#arr)"/>
+
+  <rect class="box" x="420" y="540" width="760" height="230"/>
+  <text class="head" x="460" y="610">Observability & Improvement</text>
+  <text class="text" x="460" y="665">KPI tracking • error review • prompt/version updates</text>
+  <text class="small" x="460" y="710">Continuous loop: production signals feed back into workflow design.</text>
+
+  <path d="M 1270 430 C 1400 520, 1400 700, 1180 740" fill="none" stroke="#22d3ee" stroke-width="6" marker-end="url(#arr)"/>
+  <path d="M 420 740 C 180 700, 180 520, 320 430" fill="none" stroke="#22d3ee" stroke-width="6" marker-end="url(#arr)"/>
+</svg>

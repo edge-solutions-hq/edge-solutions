@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">AI automation process — discovery to launch</title>
+  <desc id="desc">Four-step process diagram: discovery, prototype, integration, launch and iteration.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0f172a"/>
+      <stop offset="100%" stop-color="#1e293b"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="10" markerHeight="10" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#38bdf8"/>
+    </marker>
+    <style>
+      .step { fill:#111827; stroke:#38bdf8; stroke-width:3; rx:20; }
+      .heading { fill:#e2e8f0; font: 700 34px Inter,Arial,sans-serif; }
+      .sub { fill:#94a3b8; font: 500 22px Inter,Arial,sans-serif; }
+      .title { fill:#f8fafc; font: 700 54px Inter,Arial,sans-serif; }
+      .note { fill:#cbd5e1; font: 500 24px Inter,Arial,sans-serif; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="100" y="115" class="title">Edge Solutions — AI Automation Process</text>
+  <text x="100" y="160" class="note">From first workshop to production launch with human review checkpoints</text>
+
+  <rect class="step" x="90" y="260" width="320" height="300"/>
+  <text class="heading" x="130" y="335">1. Discovery</text>
+  <text class="sub" x="130" y="390">• Goals & constraints</text>
+  <text class="sub" x="130" y="430">• Source-of-truth mapping</text>
+  <text class="sub" x="130" y="470">• Risk and guardrails</text>
+
+  <rect class="step" x="460" y="260" width="320" height="300"/>
+  <text class="heading" x="500" y="335">2. Prototype</text>
+  <text class="sub" x="500" y="390">• Real examples first</text>
+  <text class="sub" x="500" y="430">• Prompt + workflow design</text>
+  <text class="sub" x="500" y="470">• Fast validation loop</text>
+
+  <rect class="step" x="830" y="260" width="320" height="300"/>
+  <text class="heading" x="870" y="335">3. Integration</text>
+  <text class="sub" x="870" y="390">• APIs and internal tools</text>
+  <text class="sub" x="870" y="430">• Logging and observability</text>
+  <text class="sub" x="870" y="470">• Human checkpoints</text>
+
+  <rect class="step" x="1200" y="260" width="320" height="300"/>
+  <text class="heading" x="1240" y="335">4. Launch</text>
+  <text class="sub" x="1240" y="390">• Production rollout</text>
+  <text class="sub" x="1240" y="430">• KPI monitoring</text>
+  <text class="sub" x="1240" y="470">• Iteration backlog</text>
+
+  <line x1="410" y1="410" x2="450" y2="410" stroke="#38bdf8" stroke-width="6" marker-end="url(#arrow)"/>
+  <line x1="780" y1="410" x2="820" y2="410" stroke="#38bdf8" stroke-width="6" marker-end="url(#arrow)"/>
+  <line x1="1150" y1="410" x2="1190" y2="410" stroke="#38bdf8" stroke-width="6" marker-end="url(#arrow)"/>
+
+  <rect x="100" y="650" width="1400" height="150" fill="#0b1220" stroke="#334155" stroke-width="2" rx="16"/>
+  <text class="heading" x="140" y="720">Quality gate: every phase includes explicit acceptance criteria and owner validation.</text>
+  <text class="sub" x="140" y="770">This visual is approved for service pages to improve scanability and process credibility.</text>
+</svg>
