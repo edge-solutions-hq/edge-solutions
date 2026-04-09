@@ -80,39 +80,67 @@ export const metadata = {
   </GridListItem>
 </GridList>
 
-<SectionIntro className="mt-16" eyebrow="Méthode" title="Comment je travaille">
-  <p>Une méthode simple, transparente, orientée résultats.</p>
+<SectionIntro className="mt-16" eyebrow="Méthode" title="Sprint type pour un site ou une web app">
+  <p>
+    Pour éviter les projets flous, j’avance avec un cycle court, visible et
+    décidable, plutôt qu’une longue phase de production opaque.
+  </p>
 </SectionIntro>
 
-<List className="mt-10">
-  <ListItem title="Cadrage">
-    Objectifs, audience, contenu, contraintes (budget/délais) et périmètre clair.
-  </ListItem>
-  <ListItem title="Itérations rapides">
-    Prévisualisations et retours fréquents : vous voyez le résultat tôt, et on
-    ajuste vite.
-  </ListItem>
-  <ListItem title="Qualité intégrée">
-    Performance (Core Web Vitals), accessibilité, SEO technique, sécurité, dette
-    maîtrisée.
-  </ListItem>
-  <ListItem title="Livraison & transfert">
-    Documentation, mini‑formation si besoin, et plan de maintenance.
-  </ListItem>
-</List>
+<GridList className="mt-8">
+  <GridListItem title="1. Cadrer ce qui compte vraiment">
+    On clarifie l’objectif business, le contenu utile, les contraintes et le
+    niveau de qualité attendu avant d’ouvrir trop de pistes techniques.
+  </GridListItem>
+  <GridListItem title="2. Montrer vite une base concrète">
+    Une première version permet de valider structure, direction visuelle,
+    messages clés et points de friction pendant qu’il est encore simple
+    d’ajuster.
+  </GridListItem>
+  <GridListItem title="3. Finaliser, vérifier, livrer proprement">
+    On consolide les détails, la performance, le SEO et la reprise future pour
+    livrer une base exploitable sans dépendance inutile.
+  </GridListItem>
+</GridList>
+
+<StatList className="mt-10">
+  <StatListItem label="Cadre" value="Objectif + périmètre" />
+  <StatListItem label="Visibilité" value="Version montrable tôt" />
+  <StatListItem label="Vérification" value="SEO + performance" />
+  <StatListItem label="Livraison" value="Base reprenable" />
+</StatList>
+
+<SectionIntro className="mt-16" eyebrow="Preuves de méthode" title="Ce que vous voyez concrètement pendant la mission" smaller>
+  <p>
+    L’idée n’est pas de vous promettre de la vitesse, mais de rendre le travail
+    lisible avec des jalons concrets et des arbitrages visibles.
+  </p>
+</SectionIntro>
+
+<GridList className="mt-8 sm:grid-cols-2">
+  <GridListItem title="Périmètre clair dès le départ">
+    Objectifs, contraintes et priorités sont explicités pour éviter les demandes
+    qui changent de nature en cours de route.
+  </GridListItem>
+  <GridListItem title="Prévisualisations et retours fréquents">
+    Vous voyez rapidement une base concrète, ce qui permet de corriger la
+    direction avant d’accumuler du travail inutile.
+  </GridListItem>
+  <GridListItem title="Qualité intégrée au fil de l’eau">
+    Performance, SEO technique, accessibilité et maintenabilité sont traités
+    pendant la construction, pas reportés à la toute fin.
+  </GridListItem>
+  <GridListItem title="Transfert propre à la livraison">
+    Documentation, handover et prochaines priorités sont prévus pour que le site
+    ou l’app reste exploitable après la mise en ligne.
+  </GridListItem>
+</GridList>
 
 <Callout>
-  L’objectif est de rendre l’avancement visible rapidement : une base concrète,
-  des arbitrages expliqués et des priorités décidées sans transformer le projet
-  en tunnel opaque.
+  Mon objectif est simple : rendre l’avancement visible tôt, expliquer les
+  arbitrages et livrer une base saine que vous pouvez reprendre sans dépendance
+  opaque.
 </Callout>
-
-<Stats className="mt-8">
-  <StatsItem label="Démarrage" value="Périmètre cadré" />
-  <StatsItem label="Avancement" value="Retours fréquents" />
-  <StatsItem label="Qualité" value="SEO + performance" />
-  <StatsItem label="Livraison" value="Base reprenable" />
-</Stats>
 
 <SectionIntro className="mt-16" eyebrow="IA (responsable)" title="Méthode de travail IA (pilotée par un humain)" smaller>
   <p>
@@ -228,28 +256,6 @@ export const metadata = {
   d’empiler des briques, mais de garder un site ou une application reprenable et
   rentable à faire évoluer.
 </Callout>
-
-<SectionIntro className="mt-16" eyebrow="Processus" title="Comment la collaboration avance" smaller>
-  <p>
-    Pour éviter les projets flous ou interminables, j’avance avec un déroulé
-    simple, visible et révisable à chaque étape.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-10">
-  <GridListItem title="1. Cadrer ce qui compte vraiment">
-    On clarifie l’objectif, les contraintes, les contenus utiles et le niveau de
-    qualité attendu avant d’ouvrir trop de pistes techniques.
-  </GridListItem>
-  <GridListItem title="2. Montrer vite une base concrète">
-    Une première version permet de valider structure, direction visuelle,
-    messages clés et points de friction avant de complexifier.
-  </GridListItem>
-  <GridListItem title="3. Finaliser, vérifier, livrer proprement">
-    On consolide les détails, la performance, le SEO et la reprise future pour
-    livrer une base exploitable sans dépendance inutile.
-  </GridListItem>
-</GridList>
 
 <SectionIntro className="mt-16" eyebrow="Résultat" title="Ce que vous obtenez" />
 

@@ -72,38 +72,65 @@ export const metadata = {
   </GridListItem>
 </GridList>
 
-<SectionIntro className="mt-16" eyebrow="Method" title="How I work">
-  <p>A simple, transparent approach focused on outcomes.</p>
+<SectionIntro className="mt-16" eyebrow="Method" title="What a typical sprint looks like for a website or web app">
+  <p>
+    To avoid vague projects, I prefer a short cycle that stays visible and easy
+    to decide on instead of a long opaque production phase.
+  </p>
 </SectionIntro>
 
-<List className="mt-10">
-  <ListItem title="Scoping">
-    Goals, audience, content, constraints (budget/timeline) and a clear scope.
-  </ListItem>
-  <ListItem title="Fast iterations">
-    Frequent previews and feedback loops: you see the result early and we adjust
-    quickly.
-  </ListItem>
-  <ListItem title="Quality built-in">
-    Performance (Core Web Vitals), accessibility, technical SEO, security,
-    controlled debt.
-  </ListItem>
-  <ListItem title="Delivery & handover">
-    Documentation, a short walkthrough if needed, and a maintenance plan.
-  </ListItem>
-</List>
+<GridList className="mt-8">
+  <GridListItem title="1. Frame what really matters">
+    We clarify the business goal, useful content, constraints and expected
+    quality level before opening too many technical directions.
+  </GridListItem>
+  <GridListItem title="2. Show a concrete base early">
+    A first version helps validate structure, visual direction, key messaging
+    and friction points while it is still easy to adjust.
+  </GridListItem>
+  <GridListItem title="3. Finish, verify and ship cleanly">
+    We consolidate details, performance, SEO and future maintainability so the
+    delivered base stays usable without unnecessary dependency.
+  </GridListItem>
+</GridList>
+
+<StatList className="mt-10">
+  <StatListItem label="Frame" value="Goal + scope" />
+  <StatListItem label="Visibility" value="Early showable version" />
+  <StatListItem label="Verification" value="SEO + performance" />
+  <StatListItem label="Delivery" value="Maintainable base" />
+</StatList>
+
+<SectionIntro className="mt-16" eyebrow="Process proof" title="What you can expect to see during the project" smaller>
+  <p>
+    The point is not to promise speed in the abstract, but to make the work easy
+    to follow through visible checkpoints and concrete trade-offs.
+  </p>
+</SectionIntro>
+
+<GridList className="mt-8 sm:grid-cols-2">
+  <GridListItem title="Clear scope from the start">
+    Goals, constraints and priorities are made explicit so the project does not
+    quietly change shape halfway through.
+  </GridListItem>
+  <GridListItem title="Frequent previews and feedback">
+    You see a concrete base quickly, which makes it easier to correct direction
+    before unnecessary work piles up.
+  </GridListItem>
+  <GridListItem title="Quality handled as we build">
+    Performance, technical SEO, accessibility and maintainability are treated
+    during the build, not postponed to the very end.
+  </GridListItem>
+  <GridListItem title="Clean handover at delivery">
+    Documentation, handover and next priorities are planned so the site or app
+    stays usable after launch.
+  </GridListItem>
+</GridList>
 
 <Callout>
-  The goal is to make progress visible early: a concrete base, explained
-  trade-offs and priorities decided without turning the project into a black box.
+  My goal is simple: make progress visible early, explain trade-offs clearly,
+  and deliver a healthy base you can keep using without opaque dependency.
 </Callout>
-
-<Stats className="mt-8">
-  <StatsItem label="Kickoff" value="Clear scope" />
-  <StatsItem label="Progress" value="Frequent feedback" />
-  <StatsItem label="Quality" value="SEO + performance" />
-  <StatsItem label="Delivery" value="Maintainable base" />
-</Stats>
 
 <SectionIntro className="mt-16" eyebrow="AI (responsible)" title="AI working method (human-led)" smaller>
   <p>
@@ -165,28 +192,6 @@ export const metadata = {
   pile on tools, but to keep the site or application easy to resume, maintain
   and improve.
 </Callout>
-
-<SectionIntro className="mt-16" eyebrow="Process" title="How the collaboration moves" smaller>
-  <p>
-    To avoid vague or overlong projects, I work through a simple process that
-    stays visible and adjustable at each step.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-10">
-  <GridListItem title="1. Frame what really matters">
-    We clarify the goal, constraints, useful content and expected quality level
-    before opening too many technical directions.
-  </GridListItem>
-  <GridListItem title="2. Show a concrete base early">
-    A first version helps validate structure, visual direction, key messaging and
-    friction points before adding more complexity.
-  </GridListItem>
-  <GridListItem title="3. Finish, verify and ship cleanly">
-    We consolidate details, performance, SEO and future maintainability so the
-    delivered base stays usable without unnecessary dependency.
-  </GridListItem>
-</GridList>
 
 <SectionIntro className="mt-16" eyebrow="Outcome" title="What you get" />
 

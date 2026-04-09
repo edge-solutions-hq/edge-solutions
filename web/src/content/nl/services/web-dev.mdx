@@ -71,40 +71,67 @@ export const metadata = {
   </GridListItem>
 </GridList>
 
-<SectionIntro className="mt-16" eyebrow="Werkwijze" title="Hoe ik werk">
-  <p>Een eenvoudige, transparante aanpak gericht op resultaat.</p>
+<SectionIntro className="mt-16" eyebrow="Werkwijze" title="Hoe een typische sprint voor een website of webapp eruitziet">
+  <p>
+    Om vage projecten te vermijden, werk ik liever met een korte cyclus die
+    zichtbaar en beslisbaar blijft dan met een lange ondoorzichtige
+    productiefase.
+  </p>
 </SectionIntro>
 
-<List className="mt-10">
-  <ListItem title="Scoping">
-    Doelen, doelgroep, content, constraints (budget/timing) en een duidelijke
-    scope.
-  </ListItem>
-  <ListItem title="Snelle iteraties">
-    Regelmatige previews en feedback: je ziet vroeg resultaat en we sturen snel
-    bij.
-  </ListItem>
-  <ListItem title="Kwaliteit ingebouwd">
-    Performance (Core Web Vitals), toegankelijkheid, technische SEO, security,
-    beheersbare technische schuld.
-  </ListItem>
-  <ListItem title="Delivery & handover">
-    Documentatie, korte walkthrough indien nodig, en een maintenanceplan.
-  </ListItem>
-</List>
+<GridList className="mt-8">
+  <GridListItem title="1. Kaderen wat echt telt">
+    We verduidelijken het businessdoel, nuttige content, constraints en het
+    verwachte kwaliteitsniveau voor we te veel technische richtingen openen.
+  </GridListItem>
+  <GridListItem title="2. Snel een concrete basis tonen">
+    Een eerste versie helpt om structuur, visuele richting, kernboodschap en
+    frictiepunten te valideren terwijl bijsturen nog eenvoudig is.
+  </GridListItem>
+  <GridListItem title="3. Afwerken, verifiëren en proper opleveren">
+    We consolideren details, performance, SEO en latere onderhoudbaarheid zodat
+    de opgeleverde basis bruikbaar blijft zonder onnodige afhankelijkheden.
+  </GridListItem>
+</GridList>
+
+<StatList className="mt-10">
+  <StatListItem label="Kader" value="Doel + scope" />
+  <StatListItem label="Zichtbaarheid" value="Vroeg toonbare versie" />
+  <StatListItem label="Verificatie" value="SEO + performance" />
+  <StatListItem label="Oplevering" value="Onderhoudbare basis" />
+</StatList>
+
+<SectionIntro className="mt-16" eyebrow="Process proof" title="Wat je concreet ziet tijdens het project" smaller>
+  <p>
+    Het idee is niet om abstract snelheid te beloven, maar om het werk
+    begrijpelijk te maken via zichtbare checkpoints en concrete afwegingen.
+  </p>
+</SectionIntro>
+
+<GridList className="mt-8 sm:grid-cols-2">
+  <GridListItem title="Duidelijke scope vanaf de start">
+    Doelen, constraints en prioriteiten worden expliciet gemaakt zodat het
+    project niet stilaan van vorm verandert.
+  </GridListItem>
+  <GridListItem title="Regelmatige previews en feedback">
+    Je ziet snel een concrete basis, waardoor de richting kan worden aangepast
+    voor er onnodig werk opstapelt.
+  </GridListItem>
+  <GridListItem title="Kwaliteit tijdens de bouw">
+    Performance, technische SEO, toegankelijkheid en onderhoudbaarheid worden
+    meegenomen tijdens het bouwen, niet pas helemaal op het einde.
+  </GridListItem>
+  <GridListItem title="Propere handover bij oplevering">
+    Documentatie, handover en volgende prioriteiten zijn voorzien zodat de site
+    of app bruikbaar blijft na de launch.
+  </GridListItem>
+</GridList>
 
 <Callout>
-  Het doel is om vooruitgang snel zichtbaar te maken: een concrete basis,
-  duidelijke afwegingen en prioriteiten die beslist worden zonder dat het
-  project een black box wordt.
+  Mijn doel is eenvoudig: vroeg zichtbare vooruitgang tonen, afwegingen helder
+  uitleggen en een gezonde basis opleveren die je zonder black-box-afhankelijkheid
+  kan blijven gebruiken.
 </Callout>
-
-<Stats className="mt-8">
-  <StatsItem label="Start" value="Duidelijke scope" />
-  <StatsItem label="Voortgang" value="Regelmatige feedback" />
-  <StatsItem label="Kwaliteit" value="SEO + performance" />
-  <StatsItem label="Oplevering" value="Onderhoudbare basis" />
-</Stats>
 
 <SectionIntro className="mt-16" eyebrow="AI (verantwoord)" title="AI-werkmethode (menselijk geleid)" smaller>
   <p>
@@ -156,28 +183,6 @@ export const metadata = {
   niet om tools op te stapelen, maar om een site of applicatie hervatbaar en
   onderhoudbaar te houden.
 </Callout>
-
-<SectionIntro className="mt-16" eyebrow="Proces" title="Hoe de samenwerking vooruitgaat" smaller>
-  <p>
-    Om vage of eindeloze projecten te vermijden, werk ik met een eenvoudig
-    proces dat op elk moment zichtbaar en bijstuurbaar blijft.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-10">
-  <GridListItem title="1. Kaderen wat echt telt">
-    We verduidelijken doel, beperkingen, nuttige content en het verwachte
-    kwaliteitsniveau voor er te veel technische pistes worden geopend.
-  </GridListItem>
-  <GridListItem title="2. Snel een concrete basis tonen">
-    Een eerste versie helpt om structuur, visuele richting, kernboodschap en
-    frictiepunten te valideren voor er extra complexiteit bijkomt.
-  </GridListItem>
-  <GridListItem title="3. Afwerken, verifiëren en proper opleveren">
-    We consolideren details, performance, SEO en latere onderhoudbaarheid zodat
-    de opgeleverde basis bruikbaar blijft zonder onnodige afhankelijkheden.
-  </GridListItem>
-</GridList>
 
 <SectionIntro className="mt-16" eyebrow="Resultaat" title="Wat je krijgt" />
 
