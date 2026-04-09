@@ -23,6 +23,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ListItem,
     StatList,
     StatListItem,
+    Stats: StatList,
+    StatsItem: StatListItem,
     TagList,
     TagListItem,
 
