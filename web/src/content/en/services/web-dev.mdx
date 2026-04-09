@@ -79,7 +79,13 @@ export const metadata = {
   </p>
 </SectionIntro>
 
-<GridList className="mt-8">
+<StatList className="mt-10">
+  <StatListItem label="1. Scope" value="Goal + scope" />
+  <StatListItem label="2. First version" value="Early showable base" />
+  <StatListItem label="3. Verification" value="SEO + performance" />
+</StatList>
+
+<GridList className="mt-10 sm:grid-cols-3">
   <GridListItem title="1. Frame what really matters">
     We clarify the business goal, useful content, constraints and expected
     quality level before opening too many technical directions.
@@ -94,36 +100,25 @@ export const metadata = {
   </GridListItem>
 </GridList>
 
-<StatList className="mt-10">
-  <StatListItem label="Frame" value="Goal + scope" />
-  <StatListItem label="Visibility" value="Early showable version" />
-  <StatListItem label="Verification" value="SEO + performance" />
-  <StatListItem label="Delivery" value="Maintainable base" />
-</StatList>
-
-<SectionIntro className="mt-16" eyebrow="Process proof" title="What you can expect to see during the project" smaller>
+<SectionIntro className="mt-16" eyebrow="Process proof" title="What you can validate at each stage" smaller>
   <p>
     The point is not to promise speed in the abstract, but to make the work easy
     to follow through visible checkpoints and concrete trade-offs.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-2">
-  <GridListItem title="Clear scope from the start">
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Before too much gets built">
     Goals, constraints and priorities are made explicit so the project does not
     quietly change shape halfway through.
   </GridListItem>
-  <GridListItem title="Frequent previews and feedback">
-    You see a concrete base quickly, which makes it easier to correct direction
-    before unnecessary work piles up.
+  <GridListItem title="During the build">
+    You see a concrete base quickly, with frequent feedback loops to correct
+    direction before unnecessary work piles up.
   </GridListItem>
-  <GridListItem title="Quality handled as we build">
-    Performance, technical SEO, accessibility and maintainability are treated
-    during the build, not postponed to the very end.
-  </GridListItem>
-  <GridListItem title="Clean handover at delivery">
-    Documentation, handover and next priorities are planned so the site or app
-    stays usable after launch.
+  <GridListItem title="Before launch">
+    Performance, technical SEO, accessibility, handover and next priorities are
+    checked so the site or app stays usable after launch.
   </GridListItem>
 </GridList>
 
