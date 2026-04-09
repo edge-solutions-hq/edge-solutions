@@ -87,7 +87,13 @@ export const metadata = {
   </p>
 </SectionIntro>
 
-<GridList className="mt-8">
+<StatList className="mt-10">
+  <StatListItem label="1. Cadrage" value="Objectif + périmètre" />
+  <StatListItem label="2. Première version" value="Base montrable tôt" />
+  <StatListItem label="3. Vérification" value="SEO + performance" />
+</StatList>
+
+<GridList className="mt-10 sm:grid-cols-3">
   <GridListItem title="1. Cadrer ce qui compte vraiment">
     On clarifie l’objectif business, le contenu utile, les contraintes et le
     niveau de qualité attendu avant d’ouvrir trop de pistes techniques.
@@ -103,36 +109,25 @@ export const metadata = {
   </GridListItem>
 </GridList>
 
-<StatList className="mt-10">
-  <StatListItem label="Cadre" value="Objectif + périmètre" />
-  <StatListItem label="Visibilité" value="Version montrable tôt" />
-  <StatListItem label="Vérification" value="SEO + performance" />
-  <StatListItem label="Livraison" value="Base reprenable" />
-</StatList>
-
-<SectionIntro className="mt-16" eyebrow="Preuves de méthode" title="Ce que vous voyez concrètement pendant la mission" smaller>
+<SectionIntro className="mt-16" eyebrow="Preuves de méthode" title="Ce que vous pouvez valider à chaque étape" smaller>
   <p>
     L’idée n’est pas de vous promettre de la vitesse, mais de rendre le travail
     lisible avec des jalons concrets et des arbitrages visibles.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-2">
-  <GridListItem title="Périmètre clair dès le départ">
-    Objectifs, contraintes et priorités sont explicités pour éviter les demandes
-    qui changent de nature en cours de route.
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Avant de produire trop">
+    Le périmètre, les contraintes et les priorités sont explicités pour éviter
+    les demandes qui changent de nature en cours de route.
   </GridListItem>
-  <GridListItem title="Prévisualisations et retours fréquents">
-    Vous voyez rapidement une base concrète, ce qui permet de corriger la
-    direction avant d’accumuler du travail inutile.
+  <GridListItem title="Pendant la construction">
+    Vous voyez rapidement une base concrète, avec des retours fréquents pour
+    corriger la direction avant d’accumuler du travail inutile.
   </GridListItem>
-  <GridListItem title="Qualité intégrée au fil de l’eau">
-    Performance, SEO technique, accessibilité et maintenabilité sont traités
-    pendant la construction, pas reportés à la toute fin.
-  </GridListItem>
-  <GridListItem title="Transfert propre à la livraison">
-    Documentation, handover et prochaines priorités sont prévus pour que le site
-    ou l’app reste exploitable après la mise en ligne.
+  <GridListItem title="Avant la mise en ligne">
+    Performance, SEO technique, accessibilité, handover et prochaines priorités
+    sont vérifiés pour livrer une base exploitable après le lancement.
   </GridListItem>
 </GridList>
 
