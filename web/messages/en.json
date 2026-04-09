@@ -129,11 +129,11 @@
   "services": {
     "title": "Services",
     "aiTitle": "AI systems & automation",
-    "aiDesc": "Internal assistants, document workflows, qualification, automation and production guardrails.",
+    "aiDesc": "Internal assistants, document workflows, business automation and guardrails before production rollout.",
     "webTitle": "Web development",
-    "webDesc": "Features, interfaces and useful tools to integrate AI into a product or workflow without losing clarity.",
+    "webDesc": "Custom sites, landing pages, business apps and web integrations that stay fast and easy to evolve.",
     "realtimeTitle": "Real-time 3D/VR",
-    "realtimeDesc": "Prototypes and demonstrators to test an AI use case, clarify an idea or make a complex topic more concrete.",
+    "realtimeDesc": "VR prototypes, interactive 3D experiences and WebGL builds designed to be shown, tested and improved.",
     "cta": "Explore"
   },
   "contact": {

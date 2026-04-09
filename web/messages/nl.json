@@ -129,11 +129,11 @@
   "services": {
     "title": "Diensten",
     "aiTitle": "AI-systemen & automatisatie",
-    "aiDesc": "Interne assistenten, documentworkflows, kwalificatie, automatisatie en guardrails voor productie.",
+    "aiDesc": "Interne assistenten, documentworkflows, bedrijfsautomatisatie en guardrails voor productie.",
     "webTitle": "Webontwikkeling",
-    "webDesc": "Functionaliteiten, interfaces en nuttige tools om AI in een product of workflow te integreren zonder leesbaarheid te verliezen.",
+    "webDesc": "Websites, landingspagina’s, bedrijfsapps en webintegraties op maat die snel blijven en makkelijk kunnen meegroeien.",
     "realtimeTitle": "Realtime 3D/VR",
-    "realtimeDesc": "Prototypes en demo's om een AI-use-case te testen, een idee te verduidelijken of een complex onderwerp concreter te maken.",
+    "realtimeDesc": "VR-prototypes, interactieve 3D-ervaringen en WebGL-projecten om te tonen, te testen en verder te verfijnen.",
     "cta": "Ontdek"
   },
   "contact": {
