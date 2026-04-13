@@ -24,6 +24,44 @@ export const metadata = {
   de lancer un developpement plus lourd.
 </Callout>
 
+<SectionIntro className="mt-16" eyebrow="Processus visible" title="Ce que vous devez pouvoir verifier tres tot">
+  <p>
+    Je cherche a rendre le premier cycle IA lisible pour un decideur, pas
+    seulement impressionnant en demo.
+  </p>
+</SectionIntro>
+
+<Stats className="mt-10">
+  <StatsItem label="Semaine 1" value="1 cas prioritaire cadre" />
+  <StatsItem label="Sources" value="Documents et regles identifies" />
+  <StatsItem label="Prototype" value="Testable sur cas reels" />
+  <StatsItem label="Decision" value="Go / recadrage / stop" />
+</Stats>
+
+<GridList className="mt-10 sm:grid-cols-2">
+  <GridListItem title="Sans cadrage clair">
+    Des prompts disperses, des attentes floues et une demo difficile a juger
+    autrement que "ca a l'air bien".
+  </GridListItem>
+  <GridListItem title="Avec un workflow cadre">
+    Un cas d'usage borne, une source de verite explicite, un point de revue
+    humaine et un verdict exploitable en fin de sprint.
+  </GridListItem>
+  <GridListItem title="Ce que vous voyez rapidement">
+    Les entrees utilisees, les sorties attendues, les cas qui passent, les cas
+    qui echouent et l'endroit exact ou le risque reste trop eleve.
+  </GridListItem>
+  <GridListItem title="Ce que vous pouvez decider">
+    Continuer tel quel, simplifier, changer le perimetre, ou arreter avant
+    d'industrialiser quelque chose de fragile.
+  </GridListItem>
+</GridList>
+
+<Callout>
+  Si le premier sprint ne rend pas la decision plus simple, le prototype n'est
+  pas encore assez bon.
+</Callout>
+
 <SectionIntro className="mt-16" eyebrow="Pour qui ?" title="Quand cette offre est un bon fit">
   <p>Cette offre est adaptee si vous avez besoin de :</p>
 </SectionIntro>
