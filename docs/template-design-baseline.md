@@ -32,21 +32,27 @@ Prefer a mix of:
 - alternating text/media showcases
 - clear CTA blocks
 
-5. Language-neutral visuals when possible.
+5. Track-specific module identity.
+Do not solve every service page with the same proof component.
+AI, web, and realtime pages should each keep at least one module type or section treatment that is not shared by all tracks.
+
+6. Language-neutral visuals when possible.
 Prefer diagrams and assets that do not depend on embedded text, so they survive FR/EN/NL reuse cleanly.
 
 ## Signals the cron should treat as positive
 
 - Homepage contains a real visual proof board or showcase panel, not just text cards.
 - Service pages contain custom media assets under `web/public/images/proof/` or equivalent repo-owned proof media.
-- Service pages use at least one showcase-style text/media block.
+- Service pages use visual proof modules, but not all with the same module grammar.
 - Public proof remains grounded in actual Edge Solutions artifacts like OpenClaw, Rusty Art, delivery guardrails, workflow framing, or real prototype checkpoints.
 - Web and realtime depth is visible as supporting proof without overpowering the AI-first message.
+- Each service track keeps at least one track-specific presentation module or proof treatment.
 
 ## Signals the cron should still flag
 
 - Service pages becoming text-heavy again with no visual proof.
 - Repeated layout grammar across all service pages with no section variety.
+- The same proof component being reused across all service tracks with only copy changes.
 - Homepage drifting into equal-weight three-service marketing.
 - Generic stock-looking panels that do not communicate concrete proof.
 - Placeholder screenshots or invented portfolio evidence.
