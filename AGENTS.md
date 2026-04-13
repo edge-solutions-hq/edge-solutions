@@ -28,8 +28,9 @@
 - SEO: `src/app/robots.ts`, `src/app/sitemap.ts`; keep metadata up to date when adding pages.
 
 ## Docs to read first
+- `docs/website_positioning.md`: primary positioning source for website/design/content decisions. Treat Edge Solutions as AI-first, with web/integration/realtime as supporting execution depth rather than equal top-level offers.
 - `docs/tech-stack.md`: stack choices, Node version, implementation checklist.
-- `docs/website_design.md`: UX/layout guidance for dual-service portfolio.
+- `docs/website_design.md`: UX/layout guidance, but apply it through the AI-first positioning above rather than generic portfolio symmetry.
 - `docs/website_content_plan.md`: section-by-section content plan and multilingual guidance.
 - `docs/arborescence-repo.md`: recommended repo/tree and i18n/MDX conventions.
 - Other context: `docs/marketing_strategy.md`, service pages drafts under `docs/page-service-*.md`.
@@ -38,6 +39,7 @@
 - CVs and LinkedIn profile in `ressources/` (e.g., `CV_Guminski_Gil-Tech Lead-2025-04-17.md`, `Linkedin Profile.md`) for bios, experience highlights, and wording.
 
 ## Contribution tips
+- Before changing layout, typography, section order, or service emphasis, read `docs/website_positioning.md` and preserve the AI-first hierarchy in the presentation.
 - When adding copy/features: update MDX for all locales, align `messages/*.json`, and keep slugs stable.
 - Run `npm run lint` before delivery.
 - Preserve content in Markdown/MDX; default authoring language is French, then translate to EN/NL.
