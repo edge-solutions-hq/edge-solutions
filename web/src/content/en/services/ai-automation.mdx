@@ -93,7 +93,7 @@ export const metadata = {
   </p>
 </SectionIntro>
 
-<GridList className="mt-8">
+<GridList className="mt-8 sm:grid-cols-2">
   <GridListItem title="Specialist assistants">
     Domain-specific lanes with their own context, memory and rules instead of a
     single generic agent.
@@ -111,6 +111,19 @@ export const metadata = {
     over time.
   </GridListItem>
 </GridList>
+
+<Callout>
+  Useful proof beats polished claims: I make the framing, review steps and
+  supervision model visible because that is what makes AI automation feel safe
+  enough to buy.
+</Callout>
+
+<Stats className="mt-10">
+  <StatsItem label="Assistants" value="Specialist lanes" />
+  <StatsItem label="Cadence" value="Scheduled loops" />
+  <StatsItem label="Control" value="Review before action" />
+  <StatsItem label="Traceability" value="Memory + artifacts" />
+</Stats>
 
 <SectionIntro className="mt-16" eyebrow="Typical sprint" title="What a useful first sprint looks like">
   <p>
@@ -135,12 +148,18 @@ export const metadata = {
   </GridListItem>
 </GridList>
 
-<StatList className="mt-10">
-  <StatListItem label="Scope" value="1 priority use case" />
-  <StatListItem label="Validation" value="Real examples" />
-  <StatListItem label="Steering" value="Explicit human review" />
-  <StatListItem label="Decision" value="Go / reframe / stop" />
-</StatList>
+<Stats className="mt-10">
+  <StatsItem label="Scope" value="1 priority use case" />
+  <StatsItem label="Validation" value="Real examples" />
+  <StatsItem label="Steering" value="Explicit human review" />
+  <StatsItem label="Decision" value="Go / reframe / stop" />
+</Stats>
+
+<Callout>
+  The first sprint should end with a readable decision, not a pile of demos.
+  Either the use case proves itself, or we reframe quickly with enough evidence
+  to decide what happens next.
+</Callout>
 
 <SectionIntro className="mt-16" eyebrow="Method" title="How I make AI projects safer">
   <p>A pragmatic approach that ships quickly without hiding the risks.</p>
@@ -212,12 +231,12 @@ export const metadata = {
 
 <SectionIntro className="mt-16" eyebrow="Outcome" title="What you get" />
 
-<StatList className="mt-10">
-  <StatListItem label="Steering" value="Human-led" />
-  <StatListItem label="Prompts & rules" value="Versioned" />
-  <StatListItem label="Integrations" value="Useful" />
-  <StatListItem label="Production" value="Scoped" />
-</StatList>
+<Stats className="mt-10">
+  <StatsItem label="Steering" value="Human-led" />
+  <StatsItem label="Prompts & rules" value="Versioned" />
+  <StatsItem label="Integrations" value="Useful" />
+  <StatsItem label="Production" value="Scoped" />
+</Stats>
 
 <SectionIntro className="mt-16" eyebrow="FAQ" title="Frequently asked" smaller />
 
