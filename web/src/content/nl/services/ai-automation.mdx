@@ -1,70 +1,57 @@
 export const metadata = {
-  title: "AI-systemen & automatisatie in Belgie — assistenten, workflows, guardrails",
+  title: "AI-systemen & automatisatie in België — assistenten, workflows, guardrails",
   description:
-    "Ik help Belgische teams om nuttige AI-systemen te scopen, prototypen en uit te rollen: interne assistenten, documentworkflows, automatisatie en menselijke review-guardrails."
+    "Ik help Belgische teams om bruikbare AI-systemen af te bakenen, te prototypen en op te leveren: interne assistenten, documentworkflows, automatisatie en menselijke guardrails."
 };
 
 <PageIntro eyebrow="Dienst" title="AI-systemen & automatisatie">
   <p>
-    Ik help teams om vage AI-ideeen om te zetten in bruikbare systemen:
-    interne assistenten, documentworkflows, lead- of supportautomatisatie en
-    menselijk gereviewde flows die ook in productie te vertrouwen zijn.
+    Ik help teams om vage AI-ideeën om te zetten in bruikbare systemen: interne
+    assistenten, documentworkflows, kwalificatie, businessautomatisatie en
+    guardrails voor gevoelige stappen.
   </p>
   <p>
-    Vanuit Belgie werk ik van scoping tot prototype tot integratie, met een
-    eenvoudige regel: duidelijke source of truth, expliciete guardrails en
-    concrete proof in plaats van vage AI-beloftes.
+    Vanuit België werk ik van scoping tot prototype tot integratie, met één
+    eenvoudige regel: duidelijke bronnen van waarheid, expliciete menselijke
+    review en concrete proof in plaats van vage AI-beloftes.
   </p>
 </PageIntro>
 
 <Callout>
-  Wil je AI gebruiken maar zijn de use case, risico's of volgende stappen nog
-  onduidelijk? Dan kan ik eerst de roadmap structureren voor er zwaarder wordt
-  gebouwd.
+  Als je AI wil inzetten maar de use case, de risico’s of de volgende stap nog
+  onduidelijk zijn, kan ik eerst structuur aanbrengen voor het project zwaarder wordt.
 </Callout>
 
-<SectionIntro className="mt-16" eyebrow="Zichtbaar proces" title="Wat je heel vroeg moet kunnen verifieren">
+<SectionIntro
+  className="mt-16"
+  eyebrow="Wanneer ik instap"
+  title="De situaties waarin AI eerst structuur nodig heeft"
+>
   <p>
-    Ik wil dat de eerste AI-cyclus scanbaar is voor een beslisser, niet alleen
-    indrukwekkend als demo.
+    Deze dienst is vooral nuttig wanneer AI sneller vooruitgaat dan de kadering,
+    het vertrouwen of het beslissingsvermogen errond.
   </p>
 </SectionIntro>
 
-<Stats className="mt-10">
-  <StatsItem label="Week 1" value="1 prioritaire use case afgebakend" />
-  <StatsItem label="Bronnen" value="Documenten en regels benoemd" />
-  <StatsItem label="Prototype" value="Testbaar op echte cases" />
-  <StatsItem label="Beslissing" value="Go / herkaderen / stop" />
-</Stats>
-
-<GridList className="mt-10 sm:grid-cols-2">
-  <GridListItem title="Zonder duidelijke kadering">
-    Verspreide prompts, vage verwachtingen en een demo die moeilijk te beoordelen
-    is buiten "dit ziet er veelbelovend uit".
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Veelbelovend maar nog vaag">
+    Je ziet potentieel, maar niemand heeft scherp beslist welke use case eerst
+    telt of hoe succes beoordeeld moet worden.
   </GridListItem>
-  <GridListItem title="Met een afgebakende workflow">
-    Een begrensde use case, een expliciete source of truth, een menselijke
-    reviewstap en een bruikbaar verdict op het einde van de sprint.
+  <GridListItem title="Prototype dat moeilijk te vertrouwen is">
+    Een eerste versie bestaat al, maar bronnen, limieten en reviewstappen zijn
+    nog te impliciet om veilig te voelen.
   </GridListItem>
-  <GridListItem title="Wat je snel ziet">
-    Welke inputs gebruikt worden, welke outputs verwacht zijn, welke cases slagen,
-    welke falen en op welk punt het risico nog te hoog blijft.
-  </GridListItem>
-  <GridListItem title="Wat je kan beslissen">
-    Doorgaan zoals voorzien, vereenvoudigen, de scope aanpassen of stoppen voor
-    je een fragiele workflow industrialiseert.
+  <GridListItem title="Nood aan een echt verdict">
+    Je moet snel kunnen beslissen go, herkaderen of stop in plaats van een demo
+    levend te houden zonder operationele toekomst.
   </GridListItem>
 </GridList>
-
-<Callout>
-  Als de eerste sprint de beslissing niet eenvoudiger maakt, is het prototype
-  nog niet goed genoeg.
-</Callout>
 
 <WorkflowSnapshot
   className="mt-16"
   eyebrow="Operationele proof"
-  title="Wat een betrouwbare AI-lane moet tonen voor je ze laat opschalen"
+  title="Wat een betrouwbare AI-lane moet tonen voor ze mag opschalen"
   imageSrc="/images/proof/ai-workflow-board.svg"
   imageAlt="Abstract schema van een AI-workflow met verbonden stappen en een menselijke review-lane."
   reviewTitle="Menselijke review-lane"
@@ -76,7 +63,7 @@ export const metadata = {
   steps={[
     {
       label: 'Stap 01',
-      title: 'Een afgebakende use case kiezen',
+      title: 'Eén afgebakende use case kiezen',
       detail:
         'Kies de gebruiker, bron van waarheid en exacte beslissing die de workflow moet ondersteunen voor je meer tooling toevoegt.',
     },
@@ -101,245 +88,97 @@ export const metadata = {
   </p>
 </WorkflowSnapshot>
 
-<SectionIntro className="mt-16" eyebrow="Voor wie?" title="Wanneer deze dienst een goede match is">
-  <p>Deze dienst past goed als je nood hebt aan:</p>
-</SectionIntro>
-
-<GridList className="mt-8">
-  <GridListItem title="Een betrouwbare interne assistent">
-    Antwoorden op basis van procedures, FAQ's, interne documentatie of business
-    rules, met menselijke validatie wanneer nodig.
-  </GridListItem>
-  <GridListItem title="Documentworkflows">
-    Extractie, normalisatie en samenvattingen uit PDF's, emails, formulieren of
-    verspreide interne content.
-  </GridListItem>
-  <GridListItem title="Automatisatie van repetitief werk">
-    Kwalificatie, triage, samenvattingen, voorbereiding van acties of data
-    enrichment in je bestaande tools.
-  </GridListItem>
-  <GridListItem title="Een veiligere weg naar productie">
-    Prompts, guardrails, observability en reviewflows zodat het systeem geen
-    fragiele black box wordt.
-  </GridListItem>
-</GridList>
-
-<SectionIntro className="mt-16" eyebrow="Opleveringen" title="Wat ik kan opleveren">
-  <p>Concrete deliverables afgestemd op je maturiteit en context.</p>
-</SectionIntro>
-
-<GridList className="mt-8">
-  <GridListItem title="AI-scoping & roadmap">
-    Prioritaire use cases, risico's, sources of truth, menselijke checkpoints,
-    acceptatiecriteria en een prototypeplan.
-  </GridListItem>
-  <GridListItem title="Snel bruikbaar prototype">
-    Een eerste versie getest op echte voorbeelden, zodat je de richting kan
-    valideren voor je een groter systeem financiert.
-  </GridListItem>
-  <GridListItem title="Integraties & automatisatie">
-    Koppelingen met je tools, API's, formulieren of kennisbronnen zodra het
-    prototype zijn waarde bewijst.
-  </GridListItem>
-  <GridListItem title="Guardrails & supervisie">
-    Rollen, rechten, logging, reviewstappen en duidelijke grenzen rond wat het
-    systeem wel en niet mag doen.
-  </GridListItem>
-  <GridListItem title="Documentatie & iteratie">
-    Versiebeheer voor prompts, usage notes, QA-checklists en een plan om te
-    verbeteren wat echt telt.
-  </GridListItem>
-</GridList>
-
-<SectionIntro className="mt-16" eyebrow="Huidige proof" title="OpenClaw als operationeel proof-artifact">
+<SectionIntro
+  className="mt-16"
+  eyebrow="Eerste engagement"
+  title="Wat je snel krijgt"
+>
   <p>
-    Ik verzin geen publieke klantencases. De duidelijkste proof die ik vandaag
-    kan tonen is mijn OpenClaw-setup, waarmee ik specialistische assistenten,
-    geplande analyses, rapporten, quality review en gated acties orkestreer.
-  </p>
-  <p>
-    Ik heb ook geëxperimenteerd met CrewAI rond multi-agent orchestratie en
-    role-based workflowpatronen. Dat helpt me beoordelen wat eenvoudig,
-    superviseerbaar en echt bruikbaar moet blijven in productie.
-  </p>
-  <p>
-    Rusty Art is ook een lopend publiek project, beschikbaar op{' '}
-    <a href="https://rusty-art.edge-solutions.be/" target="_blank" rel="noreferrer">
-      rusty-art.edge-solutions.be
-    </a>
-    , dat ik gebruik als levende omgeving om productideeën en AI-ondersteunde
-    workflows verder uit te werken.
+    Het doel is niet om een stapel deliverables te produceren. Het doel is een
+    eerste cyclus op te leveren die bruikbaar, leesbaar en beslisbaar is.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-2">
-  <GridListItem title="Specialistische assistenten">
-    Domeinspecifieke lanes met eigen context, geheugen en regels in plaats van
-    een generieke alles-agent.
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Korte scopingfase">
+    We kiezen één prioritaire use case, de juiste bronnen, de risico’s en het
+    exacte punt waar een mens moet overnemen.
   </GridListItem>
-  <GridListItem title="Geplande loops">
-    Cron jobs, rapporten en opvolging zodat AI een werkproces wordt en geen
-    eenmalige demo blijft.
+  <GridListItem title="Prototype op echte cases">
+    Ik bouw een flow die op je echte voorbeelden testbaar is: assistent,
+    documenttriage, kwalificatie of interne workflow met zichtbare sporen.
   </GridListItem>
-  <GridListItem title="Review & guardrails">
-    Critic mode, escalatie, actielimieten en expliciete review voor er iets
-    gevoeligs gebeurt.
-  </GridListItem>
-  <GridListItem title="Nuttige continuiteit">
-    Duurzaam geheugen, run-artifacts en beslissingshistoriek om het systeem op
-    lange termijn bruikbaar te houden.
-  </GridListItem>
-</GridList>
-
-<Callout>
-  Nuttige proof werkt beter dan gladde claims: ik maak de kadering,
-  reviewstappen en supervisie zichtbaar omdat net dat vertrouwen geeft bij AI
-  automatisatie.
-</Callout>
-
-<Stats className="mt-10">
-  <StatsItem label="Assistenten" value="Specialistische lanes" />
-  <StatsItem label="Cadans" value="Geplande loops" />
-  <StatsItem label="Controle" value="Review voor actie" />
-  <StatsItem label="Traceerbaarheid" value="Geheugen + artifacts" />
-</Stats>
-
-<SectionIntro className="mt-16" eyebrow="Typische sprint" title="Hoe een nuttige eerste sprint eruitziet">
-  <p>
-    Om de samenwerking sneller scanbaar te maken, is dit het korte format dat ik
-    eerst wil opleveren: een eerste cyclus die concreet, reviewbaar en beslisbaar is.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8">
-  <GridListItem title="1. Scoping in enkele dagen">
-    We kiezen een prioritaire use case, de bronnen waarop we steunen, de
-    risicozones en het exacte punt waar een mens moet valideren voor gevoelige
-    actie.
-  </GridListItem>
-  <GridListItem title="2. Prototype op echte cases">
-    Ik bouw een testbare flow op jullie echte voorbeelden: assistent,
-    documenttriage, kwalificatieflow of interne workflow met zichtbare sporen.
-  </GridListItem>
-  <GridListItem title="3. Duidelijke beslissingspoort">
-    Je blijft niet achter met een vaag AI-idee, maar met een verdict: stoppen,
-    herkaderen of stapsgewijs integreren wat al nuttig blijkt.
+  <GridListItem title="Bruikbare beslissing">
+    Je eindigt met een verdict: doorgaan, vereenvoudigen, herkaderen of stoppen
+    voor het onderwerp meer budget opslorpt dan het waard is.
   </GridListItem>
 </GridList>
 
 <Stats className="mt-10">
   <StatsItem label="Scope" value="1 prioritaire use case" />
   <StatsItem label="Validatie" value="Echte voorbeelden" />
-  <StatsItem label="Aansturing" value="Expliciete menselijke review" />
+  <StatsItem label="Controle" value="Expliciete review" />
   <StatsItem label="Beslissing" value="Go / herkaderen / stop" />
 </Stats>
 
-<Callout>
-  De eerste sprint moet eindigen met een leesbare beslissing, niet met een hoop
-  losse demo's. Ofwel bewijst de use case zich, ofwel herkaderen we snel met
-  genoeg evidence om de volgende stap te kiezen.
-</Callout>
-
-<SectionIntro className="mt-16" eyebrow="Werkwijze" title="Hoe ik AI-projecten veiliger maak">
-  <p>Een pragmatische aanpak die snel shipt zonder de risico's te verstoppen.</p>
+<SectionIntro
+  className="mt-16"
+  eyebrow="Publieke proof"
+  title="Er bestaat al een zichtbare proof van werkwijze"
+>
+  <p>
+    Ik verzin geen glanzende publieke case studies. De duidelijkste proof die ik
+    vandaag kan tonen is mijn OpenClaw-setup, met Rusty Art als levende
+    productomgeving voor iteratie en proof building.
+  </p>
 </SectionIntro>
 
-<List className="mt-10">
-  <ListItem title="1) Business framing">
-    We starten van een concreet probleem, verwachte winst en een duidelijke
-    definitie van nuttig gedrag in echte omstandigheden.
-  </ListItem>
-  <ListItem title="2) Sources & constraints">
-    We verduidelijken data, tools, confidentialiteit, rechten en business rules
-    voor we een model overal aan koppelen.
-  </ListItem>
-  <ListItem title="3) Prototype op echte cases">
-    We testen snel op jullie echte voorbeelden om te zien waar het systeem helpt,
-    waar het faalt en welke menselijke oversight nodig is.
-  </ListItem>
-  <ListItem title="4) Geleidelijke integratie">
-    Als de waarde echt is, koppelen we de workflow aan je tools met logging,
-    guardrails en duidelijke ownership.
-  </ListItem>
-  <ListItem title="5) Review & iteratie">
-    We reviewen outputs, sturen prompts bij en houden het systeem meetbaar,
-    onderhoudbaar en echt bruikbaar.
-  </ListItem>
-</List>
-
-<SectionIntro className="mt-16" eyebrow="Guardrails" title="Wat ik niet vaag laat" smaller>
-  <p>AI kan versnellen. Het vervangt geen duidelijk kader.</p>
-</SectionIntro>
-
-<GridList className="mt-8">
-  <GridListItem title="Geen magische claims">
-    Ik ship liever een eenvoudige flow die werkt dan een flashy demo die later
-    niet betrouwbaar blijkt.
+<GridList className="mt-8 sm:grid-cols-2">
+  <GridListItem title="Specialistische assistenten">
+    Domeinspecifieke lanes met hun eigen context, geheugen en regels in plaats
+    van één generieke assistent die moeilijk te vertrouwen is.
   </GridListItem>
-  <GridListItem title="Menselijke validatie waar nodig">
-    Als de impact commercieel, operationeel of gevoelig is, blijft er een helder
-    menselijk checkpoint in de workflow.
+  <GridListItem title="Geplande loops">
+    Cron jobs, rapporten en opvolging zodat AI een werkproces wordt en geen
+    eenmalige demo blijft.
   </GridListItem>
-  <GridListItem title="Expliciete source of truth">
-    Documenten, regels, data en uitzonderingen moeten benoemd worden, niet
-    verondersteld.
+  <GridListItem title="Review & guardrails">
+    Verificatie, critic mode, escalatie en actielimieten voor er iets gevoeligs
+    automatisch gebeurt.
+  </GridListItem>
+  <GridListItem title="Levend publiek project">
+    Rusty Art geeft me een zichtbare plek om orchestration, productiteratie en
+    AI-ondersteunde workflows te testen zonder fake portfoliovernis.
   </GridListItem>
 </GridList>
 
-<SectionIntro className="mt-16" eyebrow="Tech" title="Technologieen & skills" smaller>
-  <p>Ik blijf pragmatisch: de stack moet de workflow en het team dienen.</p>
-</SectionIntro>
-
-<TagList className="mt-6">
-  <TagListItem>OpenClaw</TagListItem>
-  <TagListItem>CrewAI</TagListItem>
-  <TagListItem>Prompt workflows</TagListItem>
-  <TagListItem>RAG / source-of-truth design</TagListItem>
-  <TagListItem>Evaluation & review loops</TagListItem>
-  <TagListItem>Human-in-the-loop</TagListItem>
-  <TagListItem>Node.js</TagListItem>
-  <TagListItem>TypeScript</TagListItem>
-  <TagListItem>APIs & integraties</TagListItem>
-  <TagListItem>Cron & automatisatie</TagListItem>
-  <TagListItem>Observability</TagListItem>
-</TagList>
-
 <Callout>
-  De echte winst komt niet van een “magische” agent, maar van een afgebakend
-  proces, betrouwbare bronnen en menselijke supervisie waar het risico dat vraagt.
+  Wat ik hier eigenlijk verkoop, is niet “meer AI”. Het is een duidelijkere,
+  betrouwbaardere en meer verantwoordbare manier om AI in een echte werking te gebruiken.
 </Callout>
-
-<SectionIntro className="mt-16" eyebrow="Resultaat" title="Wat je krijgt" />
-
-<Stats className="mt-10">
-  <StatsItem label="Aansturing" value="Menselijk geleid" />
-  <StatsItem label="Prompts & regels" value="Versiebeheer" />
-  <StatsItem label="Integraties" value="Nuttig" />
-  <StatsItem label="Productie" value="Afgebakend" />
-</Stats>
 
 <SectionIntro className="mt-16" eyebrow="FAQ" title="Veelgestelde vragen" smaller />
 
 <List className="mt-10">
-  <ListItem title="Moet ik al een heel precies AI-idee hebben?">
-    Nee. Ik kan helpen om een ruwe intuïtie om te zetten in een geprioriteerde
-    use case met een eenvoudig prototypepad.
+  <ListItem title="Moeten we al een heel precieze use case hebben?">
+    Nee. Ik kan helpen om een intuïtie of diffuus probleem om te zetten in een
+    geprioriteerde en testbare use case.
   </ListItem>
-  <ListItem title="Moeten onze data al perfect voorbereid zijn?">
-    Niet noodzakelijk. We kunnen klein starten, bekijken wat er bestaat en dan
-    de bronnen opschonen die echt belangrijk zijn.
+  <ListItem title="Moeten onze bronnen al proper zijn?">
+    Niet noodzakelijk. We kunnen klein starten, bekijken wat er is en alleen de
+    bronnen opschonen die voor de eerste nuttige cyclus echt tellen.
   </ListItem>
   <ListItem title="Lever je alleen prompts?">
-    Nee. Ik kan scopen, prototypen, integreren, documenteren en de workflow
-    betrouwbaarder maken met echte supervisielogica.
+    Nee. Ik kan de workflow afbakenen, prototypen, integreren, documenteren en
+    hardenen met echte supervisie en duidelijke verantwoordelijkheid.
   </ListItem>
-  <ListItem title="Wat als we nog geen publieke case studies hebben?">
-    Dat is geen blocker. Process proof, interne workflows, geanonimiseerde
-    voorbeelden en verifieerbare technische artifacts kunnen al vertrouwen opbouwen.
+  <ListItem title="Wat als het verdict “stop” is?">
+    Dat is nog altijd een goed resultaat. Het doel is net te vermijden dat een
+    fragiel onderwerp meer budget en aandacht opslorpt dan het waard is.
   </ListItem>
 </List>
 
-<CTA title="Laten we je AI-use case bespreken" href="/contact" buttonLabel="Contact opnemen">
-  Deel 3 korte details: het probleem, je constraints en hoeveel risico de
-  workflow mag nemen. Ik kom terug met een concrete eerste richting.
+<CTA title="Laten we je AI-workflow bespreken" href="/contact" buttonLabel="Contacteer me">
+  Stuur de context, wat er al bestaat en wat nog onduidelijk is. Ik kom terug
+  met een concrete eerste kadering en de beste volgende stap.
 </CTA>
