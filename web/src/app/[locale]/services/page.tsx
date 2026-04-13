@@ -12,15 +12,15 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
 
   const titleByLocale: Record<string, string> = {
-    fr: 'Services IA, web et 3D/VR pour entreprises en Wallonie',
-    en: 'AI, web development and 3D/VR services in Belgium',
-    nl: 'AI-, webontwikkelings- en 3D/VR-diensten in België',
+    fr: 'Services IA-first, web et 3D/VR pour équipes en Wallonie',
+    en: 'AI-first services with web and 3D/VR execution in Belgium',
+    nl: 'AI-first diensten met web- en 3D/VR-uitvoering in België',
   };
 
   const descriptionByLocale: Record<string, string> = {
-    fr: 'Services Edge Solutions : systèmes IA, automatisation, développement web, SEO technique et expériences temps réel 3D/VR pour PME et recruteurs en Wallonie.',
-    en: 'Edge Solutions services: AI systems, automation, web development, technical SEO and real-time 3D/VR experiences for Belgian businesses and recruiters.',
-    nl: 'Diensten van Edge Solutions: AI-systemen, automatisatie, webontwikkeling, technische SEO en realtime 3D/VR-ervaringen voor Belgische bedrijven en recruiters.',
+    fr: 'Services Edge Solutions : systèmes IA, automatisation, intégration web, SEO technique et exécution temps réel 3D/VR pour équipes belges qui doivent rendre l’IA réellement exploitable.',
+    en: 'Edge Solutions services: AI systems, automation, web integration, technical SEO and real-time 3D/VR execution for Belgian teams that need AI to become truly usable.',
+    nl: 'Diensten van Edge Solutions: AI-systemen, automatisatie, webintegratie, technische SEO en realtime 3D/VR-uitvoering voor Belgische teams die AI echt bruikbaar moeten maken.',
   };
 
   return {
