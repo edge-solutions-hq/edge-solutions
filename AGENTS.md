@@ -31,6 +31,7 @@
 - `docs/website_positioning.md`: primary positioning source for website/design/content decisions. Treat Edge Solutions as AI-first, with web/integration/realtime as supporting execution depth rather than equal top-level offers.
 - `docs/tech-stack.md`: stack choices, Node version, implementation checklist.
 - `docs/website_design.md`: UX/layout guidance, but apply it through the AI-first positioning above rather than generic portfolio symmetry.
+- `docs/template-design-baseline.md`: current Tailwind Plus-derived design baseline and the signals future cron/design work should preserve.
 - `docs/website_content_plan.md`: section-by-section content plan and multilingual guidance.
 - `docs/arborescence-repo.md`: recommended repo/tree and i18n/MDX conventions.
 - Other context: `docs/marketing_strategy.md`, service pages drafts under `docs/page-service-*.md`.
@@ -44,4 +45,3 @@
 - Run `npm run lint` before delivery.
 - Preserve content in Markdown/MDX; default authoring language is French, then translate to EN/NL.
 - If expanding services or pages, add corresponding MDX files, metadata, and translations; adjust navigation labels if needed.
-

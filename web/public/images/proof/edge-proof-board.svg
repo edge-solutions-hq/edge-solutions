@@ -1,0 +1,39 @@
+<svg width="1400" height="1000" viewBox="0 0 1400 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Edge Solutions proof board</title>
+  <desc id="desc">Abstract proof board with an AI lane, a delivery lane, and a realtime lane connected by a shared verification track.</desc>
+  <rect width="1400" height="1000" rx="40" fill="#F8FAFC"/>
+  <rect x="48" y="48" width="1304" height="904" rx="32" fill="url(#bg)"/>
+  <rect x="96" y="120" width="360" height="540" rx="28" fill="#0F172A" fill-opacity="0.92"/>
+  <rect x="520" y="120" width="360" height="540" rx="28" fill="#FFFFFF" fill-opacity="0.9"/>
+  <rect x="944" y="120" width="360" height="540" rx="28" fill="#111827" fill-opacity="0.95"/>
+  <rect x="120" y="160" width="312" height="92" rx="20" fill="#2563EB" fill-opacity="0.25"/>
+  <rect x="120" y="280" width="312" height="92" rx="20" fill="#7C3AED" fill-opacity="0.32"/>
+  <rect x="120" y="400" width="312" height="92" rx="20" fill="#F97316" fill-opacity="0.28"/>
+  <rect x="120" y="520" width="312" height="92" rx="20" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.18"/>
+  <rect x="552" y="160" width="296" height="68" rx="18" fill="#E2E8F0"/>
+  <rect x="552" y="252" width="296" height="68" rx="18" fill="#DBEAFE"/>
+  <rect x="552" y="344" width="296" height="68" rx="18" fill="#EDE9FE"/>
+  <rect x="552" y="436" width="296" height="68" rx="18" fill="#FFEDD5"/>
+  <rect x="552" y="528" width="296" height="84" rx="22" fill="#0F172A" fill-opacity="0.04" stroke="#CBD5E1"/>
+  <path d="M1008 196C1008 179.431 1021.43 166 1038 166H1214C1230.57 166 1244 179.431 1244 196V574C1244 590.569 1230.57 604 1214 604H1038C1021.43 604 1008 590.569 1008 574V196Z" fill="#F8FAFC" fill-opacity="0.06" stroke="#CBD5E1" stroke-opacity="0.22"/>
+  <rect x="1038" y="214" width="176" height="124" rx="20" fill="#2563EB" fill-opacity="0.28"/>
+  <rect x="1038" y="362" width="176" height="100" rx="20" fill="#7C3AED" fill-opacity="0.32"/>
+  <rect x="1038" y="486" width="176" height="86" rx="20" fill="#F97316" fill-opacity="0.28"/>
+  <path d="M276 696H1124" stroke="#CBD5E1" stroke-width="16" stroke-linecap="round"/>
+  <circle cx="356" cy="696" r="26" fill="#2563EB"/>
+  <circle cx="620" cy="696" r="26" fill="#7C3AED"/>
+  <circle cx="884" cy="696" r="26" fill="#F97316"/>
+  <circle cx="1124" cy="696" r="26" fill="#0F172A"/>
+  <rect x="148" y="772" width="1104" height="116" rx="28" fill="#FFFFFF" fill-opacity="0.82" stroke="#CBD5E1"/>
+  <rect x="188" y="812" width="188" height="36" rx="18" fill="#DBEAFE"/>
+  <rect x="400" y="812" width="252" height="36" rx="18" fill="#EDE9FE"/>
+  <rect x="676" y="812" width="204" height="36" rx="18" fill="#FFEDD5"/>
+  <rect x="904" y="812" width="308" height="36" rx="18" fill="#E2E8F0"/>
+  <defs>
+    <linearGradient id="bg" x1="120" y1="96" x2="1240" y2="912" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EFF6FF"/>
+      <stop offset="0.48" stop-color="#F8FAFC"/>
+      <stop offset="1" stop-color="#FAF5FF"/>
+    </linearGradient>
+  </defs>
+</svg>

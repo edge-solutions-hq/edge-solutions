@@ -8,6 +8,7 @@ import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {StatList, StatListItem} from '@/components/studio/StatList';
+import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
 import {buildLocaleAlternates} from '@/lib/seo';
 
 type Props = {
@@ -63,16 +64,16 @@ export default async function HomePage({params}: Props) {
   ];
   const proofCards = [
     {
-      title: t('home.proof.items.openclaw.title'),
-      description: t('home.proof.items.openclaw.description'),
-    },
-    {
       title: t('home.proof.items.method.title'),
       description: t('home.proof.items.method.description'),
     },
     {
       title: t('home.proof.items.execution.title'),
       description: t('home.proof.items.execution.description'),
+    },
+    {
+      title: t('home.proof.items.trust.title'),
+      description: t('home.proof.items.trust.body'),
     },
   ];
 
@@ -149,6 +150,30 @@ export default async function HomePage({params}: Props) {
             <p>{t('home.proof.intro')}</p>
           </SectionIntro>
 
+          <ShowcasePanel
+            className="mt-10"
+            eyebrow={t('home.proof.publicProject.title')}
+            title={t('home.proof.items.openclaw.title')}
+            imageSrc="/images/proof/edge-proof-board.svg"
+            imageAlt={t('home.proof.items.openclaw.title')}
+          >
+            <p>{t('home.proof.items.openclaw.description')}</p>
+            <p>{t('home.proof.publicProject.description')}</p>
+            <div className="flex flex-wrap gap-2">
+              {serviceCards.map((service) => (
+                <span
+                  key={service.slug}
+                  className="rounded-full border border-border bg-background/70 px-3 py-1 text-xs font-medium text-foreground"
+                >
+                  {service.label}
+                </span>
+              ))}
+            </div>
+            <a href="https://rusty-art.edge-solutions.be/" target="_blank" rel="noreferrer">
+              {t('home.proof.publicProject.cta')} <span aria-hidden="true">↗</span>
+            </a>
+          </ShowcasePanel>
+
           <FadeInStagger className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
             {proofCards.map((item) => (
               <FadeIn key={item.title}>
@@ -167,26 +192,6 @@ export default async function HomePage({params}: Props) {
               {t('home.proof.cta')}
             </ButtonLink>
           </div>
-
-          <Card className="mt-6 p-6">
-            <h3 className="text-lg font-semibold tracking-tight">
-              {t('home.proof.publicProject.title')}
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {t('home.proof.publicProject.description')}
-            </p>
-            <div className="not-prose mt-5">
-              <a
-                href="https://rusty-art.edge-solutions.be/"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-sm font-medium text-link"
-              >
-                {t('home.proof.publicProject.cta')}
-                <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </Card>
         </section>
 
         <section>

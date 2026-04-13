@@ -7,6 +7,7 @@ import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {StatList, StatListItem} from '@/components/studio/StatList';
 import {TagList, TagListItem} from '@/components/studio/TagList';
+import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -27,6 +28,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     StatsItem: StatListItem,
     TagList,
     TagListItem,
+    ShowcasePanel,
 
     // Optional: tighten default rendering
     h1: (props) => (
@@ -49,5 +51,4 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     )
   };
 }
-
 
