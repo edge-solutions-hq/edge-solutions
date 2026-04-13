@@ -39,6 +39,44 @@ AI, web, and realtime pages should each keep at least one module type or section
 6. Language-neutral visuals when possible.
 Prefer diagrams and assets that do not depend on embedded text, so they survive FR/EN/NL reuse cleanly.
 
+## Sales-page rules
+
+1. One page, one sales job.
+Each service page should help a buyer quickly answer three things:
+- is this my problem?
+- can this person handle it credibly?
+- what happens if I contact him?
+
+2. Fewer major sections.
+Service pages should stay compact.
+Aim for roughly 4 meaningful content sections before FAQ and final CTA, not long inventories of everything that could possibly be delivered.
+
+3. Do not repeat generic section titles across tracks.
+Avoid using the same headings like "When this is a good fit" or "What I can deliver" on every page.
+If a section exists on multiple pages, rename it around the actual buyer decision for that track.
+
+4. Trim inventory copy.
+Do not stack multiple long sections that all say roughly the same thing in different words.
+If a list exists, it should either qualify, prove, or de-risk the engagement.
+
+5. Homepage should simplify toward the bottom.
+The lower the user scrolls, the clearer the next step should become.
+Do not increase structural complexity near the bottom of the homepage.
+
+6. Palette logic must be intentional.
+Default to a mostly light page.
+Use dark surfaces only when they have a clear semantic job:
+- operational control / workflow review
+- immersive prototype / realtime mood
+- high-emphasis proof moment
+
+7. Limit dark emphasis.
+One dominant dark proof block per page is usually enough.
+Do not mix multiple unrelated dark modules just for variety.
+
+8. Remove non-selling sections.
+Large stack lists, exhaustive tech tags, and secondary methodology sections should be cut unless they clearly help a buyer choose or trust the offer.
+
 ## Signals the cron should treat as positive
 
 - Homepage contains a real visual proof board or showcase panel, not just text cards.

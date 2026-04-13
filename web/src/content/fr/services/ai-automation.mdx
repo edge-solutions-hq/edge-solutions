@@ -6,61 +6,48 @@ export const metadata = {
 
 <PageIntro eyebrow="Service" title="IA appliquee & automatisation">
   <p>
-    J'aide les entreprises a transformer des idees IA floues en systemes utiles:
+    J’aide les equipes a transformer des idees IA floues en systemes utiles:
     assistants internes, workflows documentaires, qualification, automatisations
     metier et garde-fous avant mise en production.
   </p>
   <p>
-    Base en Belgique, j'interviens du cadrage au prototype puis a
-    l'integration, avec une approche simple: source de verite claire, validation
-    humaine sur les points sensibles, et preuves concretes plutot que promesses
-    vagues.
+    Base en Belgique, j’interviens du cadrage au prototype puis a l’integration,
+    avec une regle simple: source de verite claire, validation humaine sur les
+    points sensibles et preuves concretes plutot que promesses vagues.
   </p>
 </PageIntro>
 
 <Callout>
-  Si vous voulez utiliser l'IA mais que le cas d'usage, les risques ou la
-  marche a suivre restent flous, je peux structurer la feuille de route avant
-  de lancer un developpement plus lourd.
+  Si vous voulez utiliser l’IA mais que le cas d’usage, les risques ou la marche
+  a suivre restent flous, je peux remettre de la structure avant que le projet
+  ne parte dans tous les sens.
 </Callout>
 
-<SectionIntro className="mt-16" eyebrow="Processus visible" title="Ce que vous devez pouvoir verifier tres tot">
+<SectionIntro
+  className="mt-16"
+  eyebrow="Quand j’interviens"
+  title="Les situations ou il faut cadrer avant d’automatiser"
+>
   <p>
-    Je cherche a rendre le premier cycle IA lisible pour un decideur, pas
-    seulement impressionnant en demo.
+    Cette offre est utile quand l’IA avance plus vite que le cadre, la confiance
+    ou la capacite de decision.
   </p>
 </SectionIntro>
 
-<Stats className="mt-10">
-  <StatsItem label="Semaine 1" value="1 cas prioritaire cadre" />
-  <StatsItem label="Sources" value="Documents et regles identifies" />
-  <StatsItem label="Prototype" value="Testable sur cas reels" />
-  <StatsItem label="Decision" value="Go / recadrage / stop" />
-</Stats>
-
-<GridList className="mt-10 sm:grid-cols-2">
-  <GridListItem title="Sans cadrage clair">
-    Des prompts disperses, des attentes floues et une demo difficile a juger
-    autrement que "ca a l'air bien".
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Usage prometteur mais flou">
+    Vous voyez des gains possibles, mais personne ne sait encore exactement quel
+    cas d’usage prioriser ni comment le juger proprement.
   </GridListItem>
-  <GridListItem title="Avec un workflow cadre">
-    Un cas d'usage borne, une source de verite explicite, un point de revue
-    humaine et un verdict exploitable en fin de sprint.
+  <GridListItem title="Prototype difficile a fiabiliser">
+    Une premiere version existe deja, mais les sources, les limites et les
+    points de validation restent trop implicites.
   </GridListItem>
-  <GridListItem title="Ce que vous voyez rapidement">
-    Les entrees utilisees, les sorties attendues, les cas qui passent, les cas
-    qui echouent et l'endroit exact ou le risque reste trop eleve.
-  </GridListItem>
-  <GridListItem title="Ce que vous pouvez decider">
-    Continuer tel quel, simplifier, changer le perimetre, ou arreter avant
-    d'industrialiser quelque chose de fragile.
+  <GridListItem title="Besoin d’un vrai verdict">
+    Il faut pouvoir dire rapidement go, recadrage ou stop au lieu d’entretenir
+    une demo impressionnante mais difficile a exploiter.
   </GridListItem>
 </GridList>
-
-<Callout>
-  Si le premier sprint ne rend pas la decision plus simple, le prototype n'est
-  pas encore assez bon.
-</Callout>
 
 <WorkflowSnapshot
   className="mt-16"
@@ -102,246 +89,97 @@ export const metadata = {
   </p>
 </WorkflowSnapshot>
 
-<SectionIntro className="mt-16" eyebrow="Pour qui ?" title="Quand cette offre est un bon fit">
-  <p>Cette offre est adaptee si vous avez besoin de :</p>
+<SectionIntro
+  className="mt-16"
+  eyebrow="Premier engagement"
+  title="Ce que vous obtenez rapidement"
+>
+  <p>
+    Le but n’est pas d’empiler des livrables. Le but est de produire un premier
+    cycle utile, lisible et decidable.
+  </p>
 </SectionIntro>
 
-<GridList className="mt-8">
-  <GridListItem title="Assistant interne fiable">
-    Pour repondre a partir de procedures, FAQ, base documentaire ou regles
-    metier, avec validation humaine si necessaire.
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Cadrage court">
+    On choisit un cas prioritaire, les sources a utiliser, les risques et le
+    point exact ou un humain doit reprendre la main.
   </GridListItem>
-  <GridListItem title="Workflow documentaire">
-    Extraction, normalisation et synthese depuis PDFs, emails, formulaires ou
-    contenus disperses.
+  <GridListItem title="Prototype sur cas reels">
+    Je monte un flux testable sur vos vrais exemples: assistant, tri
+    documentaire, qualification ou workflow interne avec traces visibles.
   </GridListItem>
-  <GridListItem title="Automatisation de taches repetitives">
-    Qualification, tri, resumes, preparation d'actions ou enrichissement de
-    donnees dans vos outils existants.
-  </GridListItem>
-  <GridListItem title="Mise au propre avant production">
-    Prompts, garde-fous, observabilite, escalade humaine et regles de
-    verification pour eviter la boite noire fragile.
+  <GridListItem title="Decision exploitable">
+    Vous repartez avec un verdict clair: continuer, simplifier, recadrer ou
+    arreter avant d’investir plus lourdement.
   </GridListItem>
 </GridList>
 
-<SectionIntro className="mt-16" eyebrow="Livrables" title="Ce que je peux livrer">
-  <p>Des livrables concrets, adaptes a votre maturite et a votre contexte.</p>
-</SectionIntro>
+<Stats className="mt-10">
+  <StatsItem label="Perimetre" value="1 cas prioritaire" />
+  <StatsItem label="Validation" value="Exemples reels" />
+  <StatsItem label="Controle" value="Humain explicite" />
+  <StatsItem label="Decision" value="Go / recadrage / stop" />
+</Stats>
 
-<GridList className="mt-8">
-  <GridListItem title="Cadrage & roadmap IA">
-    Cas d'usage prioritaires, risques, sources de verite, points de validation
-    humaine, criteres d'acceptation et plan de prototype.
-  </GridListItem>
-  <GridListItem title="Prototype utilisable rapidement">
-    Une premiere version testable sur de vrais exemples, pour valider la
-    direction sans lancer tout le chantier d'un coup.
-  </GridListItem>
-  <GridListItem title="Integrations & automatisations">
-    Raccordement a vos outils, APIs, formulaires, bases documentaires ou flux
-    existants quand le prototype prouve sa valeur.
-  </GridListItem>
-  <GridListItem title="Garde-fous & supervision">
-    Roles, droits, journalisation, traces de decision, validation humaine et
-    limites claires sur ce que le systeme peut faire.
-  </GridListItem>
-  <GridListItem title="Documentation & iteration">
-    Prompts versionnes, documentation d'usage, checklist QA et plan
-    d'amelioration continue.
-  </GridListItem>
-</GridList>
-
-<SectionIntro className="mt-16" eyebrow="Preuve actuelle" title="OpenClaw comme preuve de capacite operationnelle">
+<SectionIntro
+  className="mt-16"
+  eyebrow="Preuve publique"
+  title="Une preuve de methode deja visible"
+>
   <p>
-    Je n'invente pas des etudes de cas publiques. La preuve la plus concrete que
-    je peux montrer aujourd'hui est mon setup OpenClaw, que j'utilise pour
-    orchestrer des assistants specialises, des analyses planifiees, des rapports,
-    des revues qualite et des validations avant action.
-  </p>
-  <p>
-    J'ai aussi fait des experimentations avec CrewAI sur des patterns
-    d'orchestration multi-agents et de repartition de roles, ce qui nourrit ma
-    facon d'evaluer ce qui doit rester simple, supervise et vraiment utile en
-    production.
-  </p>
-  <p>
-    Rusty Art est aussi un projet public en cours, visible sur{' '}
-    <a href="https://rusty-art.edge-solutions.be/" target="_blank" rel="noreferrer">
-      rusty-art.edge-solutions.be
-    </a>
-    , que j'utilise comme terrain vivant pour iterer sur des approches produit
-    et des usages assistes par IA.
+    Je ne vends pas des etudes de cas publiques inventees. La preuve la plus
+    concrete que je peux montrer aujourd’hui est mon setup OpenClaw, complete par
+    Rusty Art comme terrain vivant d’iteration produit.
   </p>
 </SectionIntro>
 
 <GridList className="mt-8 sm:grid-cols-2">
   <GridListItem title="Assistants specialises">
     Des lanes dediees par domaine, avec contexte, memoire et consignes propres,
-    plutot qu'un agent fourre-tout difficile a fiabiliser.
+    plutot qu’un agent fourre-tout difficile a fiabiliser.
   </GridListItem>
   <GridListItem title="Boucles planifiees">
-    Cron jobs, rapports et suivis reguliers pour transformer l'IA en processus
+    Cron jobs, rapports et suivis reguliers pour transformer l’IA en processus
     operationnel, pas juste en demo ponctuelle.
   </GridListItem>
   <GridListItem title="Revue & garde-fous">
-    Verification, mode critique, escalade, limites d'action et relecture avant
-    qu'une automation fasse quelque chose de sensible.
+    Verification, mode critique, escalade, limites d’action et relecture avant
+    qu’une automation fasse quelque chose de sensible.
   </GridListItem>
-  <GridListItem title="Continuite utile">
-    Memoire durable, artefacts, rapports de run et historique de decisions pour
-    garder un systeme exploitable dans le temps.
+  <GridListItem title="Projet public vivant">
+    Rusty Art me sert de terrain montrable pour tester orchestration, iteration
+    produit et usages assistes par IA sans inventer de faux vernis marketing.
   </GridListItem>
 </GridList>
 
 <Callout>
-  Preuve utile, pas vernis marketing: je montre surtout comment le systeme est
-  cadre, verifie et supervise, parce que c'est ce qui rassure vraiment quand on
-  parle d'automatisation metier.
+  Ce que j’essaie de vendre ici n’est pas “plus d’IA”. C’est une facon plus
+  claire, plus fiable et plus assumable d’utiliser l’IA dans un vrai contexte.
 </Callout>
-
-<Stats className="mt-10">
-  <StatsItem label="Assistants" value="Specialises" />
-  <StatsItem label="Rythme" value="Boucles planifiees" />
-  <StatsItem label="Controle" value="Revue avant action" />
-  <StatsItem label="Trace" value="Memoire + artefacts" />
-</Stats>
-
-<SectionIntro className="mt-16" eyebrow="Sprint type" title="A quoi ressemble un premier sprint utile">
-  <p>
-    Pour rendre la mission plus concrete, voici le format que je cherche a
-    produire rapidement: un premier cycle court, lisible et decidable.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8">
-  <GridListItem title="1. Cadrage en quelques jours">
-    On choisit un cas d'usage prioritaire, les sources a utiliser, les zones a
-    risque et le point exact ou un humain doit valider avant action.
-  </GridListItem>
-  <GridListItem title="2. Prototype sur cas reels">
-    Je monte un flux testable sur vos vrais exemples: assistant, tri
-    documentaire, qualification ou workflow interne avec traces visibles.
-  </GridListItem>
-  <GridListItem title="3. Point de decision clair">
-    A la fin, vous ne repartez pas avec une idee floue mais avec un verdict:
-    abandonner, recadrer ou integrer progressivement ce qui fonctionne.
-  </GridListItem>
-</GridList>
-
-<Stats className="mt-10">
-  <StatsItem label="Perimetre" value="1 cas prioritaire" />
-  <StatsItem label="Validation" value="Sur exemples reels" />
-  <StatsItem label="Pilotage" value="Humain explicite" />
-  <StatsItem label="Decision" value="Go / recadrage / stop" />
-</Stats>
-
-<Callout>
-  Le premier sprint doit produire une decision lisible, pas une accumulation de
-  demos. Soit on valide un cas d'usage, soit on recadre vite, avec des traces
-  suffisamment concretes pour arbitrer.
-</Callout>
-
-<SectionIntro className="mt-16" eyebrow="Methode" title="Comment je securise un projet IA">
-  <p>Une approche pragmatique pour livrer vite sans masquer les risques.</p>
-</SectionIntro>
-
-<List className="mt-10">
-  <ListItem title="1) Cadrage metier">
-    On cible un probleme concret, un gain attendu et une definition claire de ce
-    qui sera considere comme utile en conditions reelles.
-  </ListItem>
-  <ListItem title="2) Sources & contraintes">
-    On clarifie les donnees, les outils, la confidentialite, les droits et les
-    regles metier avant de brancher un modele partout.
-  </ListItem>
-  <ListItem title="3) Prototype sur cas reels">
-    On teste rapidement avec vos vrais exemples pour voir ou ca aide, ou ca se
-    trompe, et quel niveau de supervision est necessaire.
-  </ListItem>
-  <ListItem title="4) Integration progressive">
-    Si la valeur est la, on connecte le workflow a vos outils, avec logging,
-    garde-fous et responsabilites explicites.
-  </ListItem>
-  <ListItem title="5) Suivi & amelioration">
-    On relit les sorties, on ajuste les prompts et on garde la solution utile,
-    mesurable et maintenable.
-  </ListItem>
-</List>
-
-<SectionIntro className="mt-16" eyebrow="Garde-fous" title="Ce que je refuse de laisser flou" smaller>
-  <p>L'IA peut accelerer. Elle ne dispense pas de penser le cadre.</p>
-</SectionIntro>
-
-<GridList className="mt-8">
-  <GridListItem title="Pas de promesses magiques">
-    Je prefere un flux simple qui marche a une demo spectaculaire impossible a
-    fiabiliser ensuite.
-  </GridListItem>
-  <GridListItem title="Validation humaine quand il faut">
-    Quand l'impact est commercial, operationnel ou sensible, on garde un point
-    de controle humain clair.
-  </GridListItem>
-  <GridListItem title="Source de verite explicite">
-    Documents, regles, donnees et exceptions doivent etre identifies, pas
-    supposes.
-  </GridListItem>
-</GridList>
-
-<SectionIntro className="mt-16" eyebrow="Tech" title="Technologies & competences" smaller>
-  <p>Je reste pragmatique: la technique doit servir le workflow et l'equipe.</p>
-</SectionIntro>
-
-<TagList className="mt-6">
-  <TagListItem>OpenClaw</TagListItem>
-  <TagListItem>CrewAI</TagListItem>
-  <TagListItem>Prompt workflows</TagListItem>
-  <TagListItem>RAG / sources de verite</TagListItem>
-  <TagListItem>Evaluation & review loops</TagListItem>
-  <TagListItem>Human-in-the-loop</TagListItem>
-  <TagListItem>Node.js</TagListItem>
-  <TagListItem>TypeScript</TagListItem>
-  <TagListItem>APIs & integrations</TagListItem>
-  <TagListItem>Cron & automation</TagListItem>
-  <TagListItem>Observabilite</TagListItem>
-</TagList>
-
-<Callout>
-  Le vrai gain ne vient pas d’un agent “magique”, mais d’un processus cadré,
-  de sources fiables et d’une supervision humaine là où le risque l’exige.
-</Callout>
-
-<SectionIntro className="mt-16" eyebrow="Resultat" title="Ce que vous obtenez" />
-
-<Stats className="mt-10">
-  <StatsItem label="Pilotage" value="Humain" />
-  <StatsItem label="Prompts & regles" value="Versionnes" />
-  <StatsItem label="Integrations" value="Utiles" />
-  <StatsItem label="Mise en prod" value="Cadree" />
-</Stats>
 
 <SectionIntro className="mt-16" eyebrow="FAQ" title="Questions frequentes" smaller />
 
 <List className="mt-10">
-  <ListItem title="Faut-il deja avoir une idee tres precise ?">
-    Non. Je peux vous aider a transformer une intuition en cas d'usage priorise,
-    avec un prototype simple pour valider la valeur.
+  <ListItem title="Faut-il deja avoir un cas d’usage tres precise ?">
+    Non. Je peux justement aider a transformer une intuition ou un besoin diffus
+    en cas d’usage priorise et testable.
   </ListItem>
-  <ListItem title="Faut-il deja avoir des donnees bien preparees ?">
-    Pas forcement. On peut commencer petit, auditer ce qui existe, puis mettre au
-    propre les sources qui comptent vraiment.
+  <ListItem title="Faut-il deja avoir des donnees propres ?">
+    Pas forcement. On peut commencer petit, auditer ce qui existe, puis remettre
+    au propre seulement les sources qui comptent vraiment pour le premier cycle.
   </ListItem>
-  <ListItem title="Est-ce que vous fournissez juste des prompts ?">
+  <ListItem title="Vous fournissez seulement des prompts ?">
     Non. Je peux cadrer, prototyper, integrer, documenter et fiabiliser le flux,
-    avec une vraie logique de supervision et d'usage.
+    avec une vraie logique de supervision et de responsabilite.
   </ListItem>
-  <ListItem title="Et si on n'a pas encore de cas client public a montrer ?">
-    Ce n'est pas bloquant. On peut utiliser des preuves de methode, des workflows
-    internes, des exemples anonymises et des artefacts techniques verifiables.
+  <ListItem title="Et si le verdict est “stop” ?">
+    C’est aussi un bon resultat. Le but est d’eviter qu’un sujet fragile absorbe
+    du budget ou de l’energie sans produire de valeur exploitable.
   </ListItem>
 </List>
 
-<CTA title="Discutons de votre cas d'usage IA" href="/contact" buttonLabel="Me contacter">
-  Donnez 3 infos: le probleme a resoudre, vos contraintes, et le niveau de
-  risque acceptable. Je vous propose une premiere direction concrete.
+<CTA title="Parlons de votre usage IA" href="/contact" buttonLabel="Me contacter">
+  Envoyez le contexte, ce qui existe deja et ce qui reste flou. Je reviens vers
+  vous avec un premier cadrage concret et la meilleure prochaine etape.
 </CTA>

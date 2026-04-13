@@ -7,7 +7,6 @@ import {TrackedLink} from '@/components/ui/TrackedLink';
 import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
-import {StatList, StatListItem} from '@/components/studio/StatList';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
 import {buildLocaleAlternates} from '@/lib/seo';
 
@@ -194,27 +193,6 @@ export default async function HomePage({params}: Props) {
           </div>
         </section>
 
-        <section>
-          <SectionIntro eyebrow={t('home.trust.eyebrow')} title={t('home.trust.title')}>
-            <p>{t('home.trust.intro')}</p>
-          </SectionIntro>
-
-          <StatList className="mt-10">
-            <StatListItem
-              value={t('home.trust.items.direct.value')}
-              label={t('home.trust.items.direct.label')}
-            />
-            <StatListItem
-              value={t('home.trust.items.delivery.value')}
-              label={t('home.trust.items.delivery.label')}
-            />
-            <StatListItem
-              value={t('home.trust.items.quality.value')}
-              label={t('home.trust.items.quality.label')}
-            />
-          </StatList>
-        </section>
-
         <section id="how-we-work" aria-labelledby="how-we-work-title">
           <SectionIntro
             eyebrow={t('home.process.eyebrow')}
@@ -235,17 +213,9 @@ export default async function HomePage({params}: Props) {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {t('home.process.discovery.body')}
               </p>
-              <ul className="mt-6 space-y-3 text-sm text-muted-foreground">
-                <li className="rounded-lg border border-border bg-background/60 px-4 py-3">
-                  {t('home.process.discovery.points.goals')}
-                </li>
-                <li className="rounded-lg border border-border bg-background/60 px-4 py-3">
-                  {t('home.process.discovery.points.queries')}
-                </li>
-                <li className="rounded-lg border border-border bg-background/60 px-4 py-3">
-                  {t('home.process.discovery.points.plan')}
-                </li>
-              </ul>
+              <p className="mt-5 text-sm leading-relaxed text-foreground/80">
+                {t('home.process.discovery.points.plan')}
+              </p>
             </Card>
 
             <Card className="p-6 md:p-8">
@@ -258,21 +228,9 @@ export default async function HomePage({params}: Props) {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {t('home.process.build.body')}
               </p>
-
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-                <li className="rounded-lg border border-border bg-background/60 px-4 py-3 text-sm font-medium text-foreground">
-                  {t('home.process.build.stackItems.web')}
-                </li>
-                <li className="rounded-lg border border-border bg-background/60 px-4 py-3 text-sm font-medium text-foreground">
-                  {t('home.process.build.stackItems.backend')}
-                </li>
-                <li className="rounded-lg border border-border bg-background/60 px-4 py-3 text-sm font-medium text-foreground">
-                  {t('home.process.build.stackItems.realtime')}
-                </li>
-                <li className="rounded-lg border border-border bg-background/60 px-4 py-3 text-sm font-medium text-foreground">
-                  {t('home.process.build.stackItems.delivery')}
-                </li>
-              </ul>
+              <p className="mt-5 text-sm leading-relaxed text-foreground/80">
+                {t('home.process.build.stackItems.delivery')}
+              </p>
             </Card>
 
             <Card className="p-6 md:p-8">
@@ -285,32 +243,9 @@ export default async function HomePage({params}: Props) {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {t('home.process.launch.body')}
               </p>
-              <ol className="mt-6 space-y-4">
-                <li>
-                  <div className="text-sm font-semibold text-foreground">
-                    {t('home.process.launch.items.verify.step')}
-                  </div>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    {t('home.process.launch.items.verify.body')}
-                  </p>
-                </li>
-                <li>
-                  <div className="text-sm font-semibold text-foreground">
-                    {t('home.process.launch.items.publish.step')}
-                  </div>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    {t('home.process.launch.items.publish.body')}
-                  </p>
-                </li>
-                <li>
-                  <div className="text-sm font-semibold text-foreground">
-                    {t('home.process.launch.items.measure.step')}
-                  </div>
-                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                    {t('home.process.launch.items.measure.body')}
-                  </p>
-                </li>
-              </ol>
+              <p className="mt-5 text-sm leading-relaxed text-foreground/80">
+                {t('home.process.launch.items.measure.body')}
+              </p>
             </Card>
           </div>
         </section>

@@ -7,35 +7,31 @@ export const metadata = {
 <PageIntro eyebrow="Service" title="Real-time — VR, interactive 3D & WebGL">
   <p>
     I build real-time experiences: VR, interactive 3D, playable prototypes and
-    WebGL content. The goal: a smooth, comfortable and reliable experience —
+    WebGL content. The goal is a fluid, comfortable and reliable experience —
     ready to be shown, tested and improved.
   </p>
   <p>
     Based in Belgium, I work with studios, producers and teams from idea to
-    prototype (and to production if needed).
+    prototype, and up to production when the concept proves itself.
   </p>
 </PageIntro>
 
 <Callout>
-  The goal: a prototype that validates a direction, a demo that holds up, and a
-  clean technical foundation if you go to production.
+  The goal is not to create a “wow” demo that is hard to continue. It is to get
+  to a playable base quickly, so the direction is validated without hiding the
+  technical risk.
 </Callout>
-
-<p>
-  I help you scope feasibility, secure performance early, and set up a pipeline
-  that makes delivery painless.
-</p>
 
 <PrototypeSignals
   className="mt-16"
   eyebrow="Prototype signals"
-  title="What needs to feel real before a realtime build deserves a bigger budget"
+  title="What needs to feel real before a realtime build deserves more budget"
   imageSrc="/images/proof/realtime-prototype-board.svg"
   imageAlt="Abstract realtime prototype board with a 3D viewport, performance graph and validation checkpoints."
   signals={[
     {label: 'Target', value: 'Playable build on the right device'},
     {label: 'Risk', value: 'Performance and comfort checked early'},
-    {label: 'Outcome', value: 'Clear keep / cut / polish decisions'},
+    {label: 'Verdict', value: 'Clear keep / cut / polish decisions'},
   ]}
   phases={[
     {
@@ -48,13 +44,13 @@ export const metadata = {
       label: 'Phase 02',
       title: 'Showable build',
       detail:
-        'Get a presentable or playable version early enough to judge comfort, fluidity and onboarding with real feedback.',
+        'Get to a presentable or playable version early enough to judge comfort, fluidity and onboarding with real feedback.',
     },
     {
       label: 'Phase 03',
       title: 'Production gate',
       detail:
-        'Use the prototype to decide what is worth polishing, what should be simplified and what must stay out of scope.',
+        'Use the prototype to decide what deserves polish, what should be simplified and what should stay out of scope.',
     },
   ]}
 >
@@ -65,115 +61,66 @@ export const metadata = {
 </PrototypeSignals>
 
 <SectionIntro
-  className="mt-14"
-  eyebrow="Who is it for?"
-  title="When this service is a good fit"
+  className="mt-16"
+  eyebrow="What we validate early"
+  title="Before production, three things matter most"
 >
-  <p>This service is a good fit if you want to:</p>
+  <p>
+    Most expensive surprises happen when these three topics stay blurry for too
+    long.
+  </p>
 </SectionIntro>
 
-<GridList className="mt-8">
-  <GridListItem title="Build an interactive 3D app / game">
-    On screen (PC/mobile/kiosk): interactions, UI, performance and content
-    integration.
-  </GridListItem>
-  <GridListItem title="Create a VR experience">
-    Game, training, event or demo — with user comfort and onboarding.
-  </GridListItem>
-  <GridListItem title="Ship a web 3D experience (WebGL)">
-    Embeddable in a website or campaign with a focus on compatibility and load
-    time.
-  </GridListItem>
-  <GridListItem title="Validate a concept with a playable prototype">
-    Gameplay, flows, key mechanics — quick iterations and risks addressed early.
-  </GridListItem>
-</GridList>
-
-<SectionIntro className="mt-16" eyebrow="Deliverables" title="What I can ship">
-  <p>Concrete deliverables grouped by project type.</p>
-</SectionIntro>
-
-<GridList className="mt-8">
-  <GridListItem title="VR games & experiences">
-    <ul className="mt-4 space-y-2">
-      <li>
-        <span className="font-semibold text-foreground">Immersive VR games</span>
-        : gameplay, natural interactions, headset-appropriate UI.
-      </li>
-      <li>
-        <span className="font-semibold text-foreground">
-          VR simulations & training
-        </span>
-        : guided flows, scoring, step validation, analytics if needed.
-      </li>
-      <li>
-        <span className="font-semibold text-foreground">Event experiences</span>
-        : robust demos, onboarding, controlled “wow factor”.
-      </li>
-    </ul>
-  </GridListItem>
-
-  <GridListItem title="Interactive 3D applications">
-    <ul className="mt-4 space-y-2">
-      <li>
-        <span className="font-semibold text-foreground">
-          Simulations & visualisation
-        </span>
-        : configurators, digital twins, interactive tours.
-      </li>
-      <li>
-        <span className="font-semibold text-foreground">
-          Prototypes (game / serious game)
-        </span>
-        : playable POCs, gameplay loops, fast iteration.
-      </li>
-      <li>
-        <span className="font-semibold text-foreground">AR/MR (if relevant)</span>
-        : technical scoping and use-case-driven prototyping (hardware, tracking,
-        constraints).
-      </li>
-    </ul>
-  </GridListItem>
-
-  <GridListItem title="WebGL demos & web 3D">
-    <ul className="mt-4 space-y-2">
-      <li>
-        <span className="font-semibold text-foreground">
-          Interactive product demos
-        </span>
-        : 3D visualisation, variants, configurators, interactive storytelling.
-      </li>
-      <li>
-        <span className="font-semibold text-foreground">Animations / mini‑games</span>
-        : short, engaging formats for campaigns or activations.
-      </li>
-      <li>
-        <span className="font-semibold text-foreground">WebGL integration</span>
-        : Three.js / Babylon.js when relevant with focus on performance and
-        compatibility.
-      </li>
-    </ul>
-  </GridListItem>
-</GridList>
-
-<SectionIntro className="mt-16" eyebrow="Quality" title="Key constraints">
-  <p>In real-time projects, quality mostly comes down to three things:</p>
-</SectionIntro>
-
-<GridList className="mt-8">
+<GridList className="mt-8 sm:grid-cols-3">
   <GridListItem title="Performance">
-    Profiling, budgets, optimisation, load time, stability.
+    Profiling, budgets, load time and stability must be handled during the
+    prototype, not “fixed at the end”.
   </GridListItem>
-  <GridListItem title="UX">
-    VR comfort (locomotion, nausea), readability, onboarding, interactions.
+  <GridListItem title="Comfort & UX">
+    Especially in VR, locomotion, readability, onboarding and interactions need
+    real-world testing on the target hardware.
   </GridListItem>
   <GridListItem title="Pipeline">
-    Asset management, versioning, automation, reproducible builds.
+    Assets, versioning, builds and deliverables need to stay clean enough that
+    the project can continue without unnecessary friction.
   </GridListItem>
 </GridList>
 
-<SectionIntro className="mt-16" eyebrow="Method" title="How I work">
-  <p>A pragmatic approach: iterate fast, measure, and reduce risk early.</p>
+<SectionIntro
+  className="mt-16"
+  eyebrow="Mission formats"
+  title="What I can prototype or ship"
+>
+  <p>
+    I mostly step in on projects where the experience needs to become showable,
+    testable and technically defensible quickly.
+  </p>
+</SectionIntro>
+
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="VR experience">
+    Game, training flow, event setup or immersive demo with user comfort and
+    onboarding treated as first-class concerns.
+  </GridListItem>
+  <GridListItem title="Interactive 3D prototype">
+    Simulation, configurator, serious game or playable proof of concept to
+    validate an idea before a heavier production phase.
+  </GridListItem>
+  <GridListItem title="WebGL / web 3D demo">
+    An experience embedded in a website or campaign, with focus on compatibility,
+    load time and acceptable rendering on the right devices.
+  </GridListItem>
+</GridList>
+
+<SectionIntro
+  className="mt-16"
+  eyebrow="Working style"
+  title="How I reduce risk"
+>
+  <p>
+    A pragmatic approach: scope, show something real quickly, then decide with
+    concrete signals instead of assumptions.
+  </p>
 </SectionIntro>
 
 <Stats className="mt-10">
@@ -183,94 +130,47 @@ export const metadata = {
 </Stats>
 
 <List className="mt-10">
-  <ListItem title="Scoping">
-    Goal, audience, target platform, constraints, success criteria.
+  <ListItem title="Set the right scope">
+    Goal, audience, target platform, constraints and ambition level need to be
+    clear before features start piling up.
   </ListItem>
-  <ListItem title="Prototype">
-    A first showable version quickly (POC), then short iteration cycles.
+  <ListItem title="Show something real">
+    I aim for a playable or presentable version early enough to judge fluidity,
+    clarity and production priorities with real feedback.
   </ListItem>
-  <ListItem title="Production">
-    Stabilisation, optimisation, deliverables (Quest APK, PC build, web demo),
-    documentation and handover if needed.
+  <ListItem title="Decide whether it should continue">
+    The prototype should help decide what to polish, what to simplify and what is
+    not worth taking into a full production phase yet.
   </ListItem>
 </List>
 
-<SectionIntro className="mt-16" eyebrow="AI (responsible)" title="AI working method" smaller>
-  <p>
-    On real-time projects, AI is useful for faster iteration (documentation,
-    debugging ideas, tooling scripts), but performance/UX decisions are always
-    validated in-engine.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8">
-  <GridListItem title="Where AI helps">
-    Pipeline scripts, tooling, documentation drafts, profiling checklists.
-  </GridListItem>
-  <GridListItem title="Guardrails">
-    Profiling and testing stay the source of truth. Comfort/performance targets
-    are measured, not assumed.
-  </GridListItem>
-  <GridListItem title="What you get">
-    Faster proof cycles without compromising stability or user comfort.
-  </GridListItem>
-</GridList>
-
 <Callout>
-  In real-time work, a strong demo depends first on a clear pipeline, explicit
+  In real-time work, a strong demo mostly depends on a clear pipeline, explicit
   technical choices and frequent validation on the target machine or headset.
 </Callout>
-
-<SectionIntro
-  className="mt-16"
-  eyebrow="Tech"
-  title="Technologies & skills"
-  smaller
->
-  <p>Chosen per project, with a strong focus on performance and ergonomics.</p>
-</SectionIntro>
-
-<TagList className="mt-6">
-  <TagListItem>Unreal Engine 5</TagListItem>
-  <TagListItem>Unity</TagListItem>
-  <TagListItem>WebGL</TagListItem>
-  <TagListItem>Three.js / Babylon.js</TagListItem>
-  <TagListItem>VR/AR (Quest, PCVR…)</TagListItem>
-  <TagListItem>Profiling & optimisation</TagListItem>
-  <TagListItem>Pipeline & versioning</TagListItem>
-</TagList>
 
 <SectionIntro className="mt-16" eyebrow="FAQ" title="Frequently asked" smaller />
 
 <List className="mt-10">
-  <ListItem title="Can you start from a fuzzy idea?">
-    Yes. I can help clarify the need (goal, constraints, platform) and propose a
-    prototype plan.
-  </ListItem>
-  <ListItem title="What do you need to start?">
-    A goal, a target platform (Quest / PCVR / web), a deadline, and ideally 2–3
-    references (what you like / don’t like). If you already have assets I adapt;
-    otherwise we start light and iterate.
+  <ListItem title="Can you start from a fuzzy concept?">
+    Yes. I can help clarify the need, the platform and the main risks so the
+    prototype plan stays realistic.
   </ListItem>
   <ListItem title="Quest, PCVR, or both?">
-    We pick based on the use case (mobility, visual quality, budget) and avoid
-    “cinema” promises on hardware that can’t deliver.
+    We choose based on the use case, visual ambition, budget and distribution
+    constraints. The key is to avoid promises that the target hardware cannot support.
   </ListItem>
-  <ListItem title="Unreal or Unity?">
-    It mostly depends on your context (team, pipeline, visual ambition, build
-    constraints). I help you decide quickly.
+  <ListItem title="What about performance?">
+    It is built into the work from the start: budgets, profiling, optimization
+    and validation on the real target device.
   </ListItem>
-  <ListItem title="How do you estimate budget and timeline?">
-    After a short scoping call, I propose option-based estimates (prototype vs.
-    production) with clear milestones and risks.
-  </ListItem>
-  <ListItem title="And performance?">
-    It’s built in from day one: budgets, profiling and continuous optimisation.
-    We avoid “fixing it at the end”.
+  <ListItem title="How do you estimate budget and timing?">
+    After a short framing step, I propose options, prototype vs production, with
+    clear milestones and identified risks.
   </ListItem>
 </List>
 
-<CTA title="Let’s discuss your idea" href="/contact" buttonLabel="Contact us">
-  Share 3 details: target platform (Quest/PCVR/web), goal, deadline. I’ll then
-  propose a prototype plan (and estimate) tailored to your context.
+<CTA title="Let’s talk about your realtime concept" href="/contact" buttonLabel="Contact me">
+  Send the target platform, the business goal and the timeline. I’ll come back
+  with a pragmatic prototype plan and the clearest next step.
 </CTA>
