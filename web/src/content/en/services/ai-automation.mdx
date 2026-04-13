@@ -60,6 +60,45 @@ export const metadata = {
   good enough yet.
 </Callout>
 
+<WorkflowSnapshot
+  className="mt-16"
+  eyebrow="Operational proof"
+  title="What a trustworthy AI lane should expose before you scale it"
+  imageSrc="/images/proof/ai-workflow-board.svg"
+  imageAlt="Abstract AI workflow diagram with connected stages and a human review lane."
+  reviewTitle="Human review lane"
+  reviewPoints={[
+    'the risky output is identified before anyone asks the model to do too much',
+    'someone owns the go / reframe / stop verdict instead of leaving it implicit',
+    'the next integration step is earned by evidence, not by demo enthusiasm',
+  ]}
+  steps={[
+    {
+      label: 'Stage 01',
+      title: 'Scope one bounded use case',
+      detail:
+        'Choose the user, source of truth and exact decision the workflow should help with before adding more tooling.',
+    },
+    {
+      label: 'Stage 02',
+      title: 'Test on real examples',
+      detail:
+        'Run the lane on representative documents, requests or edge cases with traces visible enough for review.',
+    },
+    {
+      label: 'Stage 03',
+      title: 'Decide with evidence',
+      detail:
+        'Keep what already works, reframe what is fragile and stop early if the workflow still creates more uncertainty than value.',
+    },
+  ]}
+>
+  <p>
+    The point is not to show “AI capability” in the abstract. It is to make the
+    operating lane readable enough that a team can trust the next decision.
+  </p>
+</WorkflowSnapshot>
+
 <SectionIntro className="mt-16" eyebrow="Who is it for?" title="When this service is a good fit">
   <p>This service is a good fit if you need:</p>
 </SectionIntro>
@@ -149,24 +188,6 @@ export const metadata = {
     over time.
   </GridListItem>
 </GridList>
-
-<ShowcasePanel
-  className="mt-12"
-  eyebrow="Visual proof"
-  title="What a usable AI workflow should make visible"
-  imageSrc="/images/proof/ai-workflow-board.svg"
-  imageAlt="Abstract AI workflow diagram with connected stages and a human review lane."
->
-  <p>
-    Before anything gets industrialised, the system should make the scope,
-    sources, verification points and expected verdict visible.
-  </p>
-  <ul>
-    <li>one bounded use case instead of a vague assistant that is meant to do everything;</li>
-    <li>an explicit human review lane for sensitive outputs;</li>
-    <li>enough traceability to decide go, reframe or stop.</li>
-  </ul>
-</ShowcasePanel>
 
 <Callout>
   Useful proof beats polished claims: I make the framing, review steps and

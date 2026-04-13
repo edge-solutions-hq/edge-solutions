@@ -26,6 +26,45 @@ export const metadata = {
   pipeline op te zetten die delivery vlot maakt.
 </p>
 
+<PrototypeSignals
+  className="mt-16"
+  eyebrow="Prototype-signalen"
+  title="Wat echt moet aanvoelen voor een realtime build meer budget verdient"
+  imageSrc="/images/proof/realtime-prototype-board.svg"
+  imageAlt="Abstract realtime prototypebord met een 3D-view, performancegrafiek en validatiecheckpoints."
+  signals={[
+    {label: 'Doel', value: 'Speelbare build op het juiste toestel'},
+    {label: 'Risico', value: 'Performance en comfort vroeg gecheckt'},
+    {label: 'Verdict', value: 'Duidelijke keep / cut / polish-beslissingen'},
+  ]}
+  phases={[
+    {
+      label: 'Fase 01',
+      title: 'Eerst haalbaarheid',
+      detail:
+        'Leg toestel, interactiestijl, assetkost en frame-ratebeperkingen vast voor de ambitie begint te schuiven.',
+    },
+    {
+      label: 'Fase 02',
+      title: 'Toonbare build',
+      detail:
+        'Zorg vroeg voor een presenteerbare of speelbare versie om comfort, vloeiendheid en onboarding te beoordelen met echte feedback.',
+    },
+    {
+      label: 'Fase 03',
+      title: 'Productiepoort',
+      detail:
+        'Gebruik het prototype om te beslissen wat polijsting verdient, wat eenvoudiger moet en wat buiten scope moet blijven.',
+    },
+  ]}
+>
+  <p>
+    Een sterk realtime project wint vertrouwen wanneer de ervaring, de risico’s
+    en de volgende productiebeslissingen zichtbaar zijn voor het budget zwaarder
+    wordt.
+  </p>
+</PrototypeSignals>
+
 <SectionIntro
   className="mt-14"
   eyebrow="Voor wie?"
@@ -154,52 +193,6 @@ export const metadata = {
     documentatie en handover indien nodig.
   </ListItem>
 </List>
-
-<SectionIntro className="mt-16" eyebrow="Procesbewijs" title="Wat je snel kan valideren" smaller>
-  <p>
-    Het doel is niet om een “magische” demo te beloven, maar om de geruststellende
-    signalen zichtbaar te maken voor je verder investeert.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Voor je te ver gaat">
-    Haalbaarheid, doelplatform, performance-constraints en ambitieniveau worden
-    expliciet gemaakt zodat een dure richting niet te laat zichtbaar wordt.
-  </GridListItem>
-  <GridListItem title="Tijdens het prototype">
-    Je krijgt snel een speelbare build of toonbare demo, met concrete feedback
-    over vloeiendheid, UX en productieprioriteiten.
-  </GridListItem>
-  <GridListItem title="Voor productie">
-    Pipeline, deliverables, resterende risico’s en validatie op het doeltoestel
-    worden helder gemaakt zodat het einde van het project geen verrassing wordt.
-  </GridListItem>
-</GridList>
-
-<Callout>
-  Bij dit soort projecten komt vertrouwen vooral van een vroeg toonbare basis,
-  bewuste technische keuzes en frequente validatie op het doelplatform.
-</Callout>
-
-<ShowcasePanel
-  className="mt-16"
-  eyebrow="Visuele proof"
-  title="Wat een realtime prototype vroeg moet tonen"
-  imageSrc="/images/proof/realtime-prototype-board.svg"
-  imageAlt="Abstract realtime prototypebord met een 3D-view, performancegrafiek en validatiecheckpoints."
->
-  <p>
-    Voor je productie belooft, moet het werk de vloeiendheid, comfort-checkpoints
-    en releasestappen zichtbaar maken zodat het prototype op meer dan alleen wow
-    beoordeeld kan worden.
-  </p>
-  <ul>
-    <li>vroeg een speelbare of toonbare build op het doelplatform;</li>
-    <li>performance- en UX-signalen die gemeten worden in plaats van verondersteld;</li>
-    <li>heldere releasestappen die tonen wat klaar is en wat nog niet.</li>
-  </ul>
-</ShowcasePanel>
 
 <SectionIntro className="mt-16" eyebrow="AI (verantwoord)" title="AI-werkmethode" smaller>
   <p>

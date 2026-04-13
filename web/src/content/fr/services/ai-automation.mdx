@@ -62,6 +62,46 @@ export const metadata = {
   pas encore assez bon.
 </Callout>
 
+<WorkflowSnapshot
+  className="mt-16"
+  eyebrow="Preuve operationnelle"
+  title="Ce qu’une lane IA digne de confiance doit exposer avant de monter en charge"
+  imageSrc="/images/proof/ai-workflow-board.svg"
+  imageAlt="Schema abstrait d’un workflow IA avec etapes reliees et piste de revue humaine."
+  reviewTitle="Piste de revue humaine"
+  reviewPoints={[
+    'la sortie risquee est identifiee avant de demander trop au modele',
+    'quelqu’un porte le verdict go / recadrage / stop au lieu de le laisser implicite',
+    'l’etape d’integration suivante est meritee par des preuves, pas par l’enthousiasme d’une demo',
+  ]}
+  steps={[
+    {
+      label: 'Etape 01',
+      title: 'Cadrer un cas d’usage borne',
+      detail:
+        'Choisir l’utilisateur, la source de verite et la decision exacte que le workflow doit aider a prendre avant d’ajouter plus d’outillage.',
+    },
+    {
+      label: 'Etape 02',
+      title: 'Tester sur des exemples reels',
+      detail:
+        'Faire tourner la lane sur des documents, demandes ou cas limites representatifs avec des traces assez visibles pour etre revues.',
+    },
+    {
+      label: 'Etape 03',
+      title: 'Decider avec des preuves',
+      detail:
+        'Garder ce qui marche deja, recadrer ce qui reste fragile et stopper tot si le workflow cree encore plus d’incertitude que de valeur.',
+    },
+  ]}
+>
+  <p>
+    L’enjeu n’est pas de montrer une “capacite IA” dans l’abstrait. Il est de
+    rendre la lane d’exploitation assez lisible pour qu’une equipe puisse faire
+    confiance a la decision suivante.
+  </p>
+</WorkflowSnapshot>
+
 <SectionIntro className="mt-16" eyebrow="Pour qui ?" title="Quand cette offre est un bon fit">
   <p>Cette offre est adaptee si vous avez besoin de :</p>
 </SectionIntro>
@@ -153,24 +193,6 @@ export const metadata = {
     garder un systeme exploitable dans le temps.
   </GridListItem>
 </GridList>
-
-<ShowcasePanel
-  className="mt-12"
-  eyebrow="Preuve visuelle"
-  title="Ce qu’un workflow IA exploitable doit rendre visible"
-  imageSrc="/images/proof/ai-workflow-board.svg"
-  imageAlt="Schema abstrait d’un workflow IA avec etapes reliees et piste de revue humaine."
->
-  <p>
-    Avant d’industrialiser quoi que ce soit, le systeme doit rendre visibles le
-    perimetre, les sources, les points de verification et le verdict attendu.
-  </p>
-  <ul>
-    <li>un cas d’usage borne, plutot qu’un assistant cense tout faire ;</li>
-    <li>une piste de revue humaine explicite sur les sorties sensibles ;</li>
-    <li>des traces suffisantes pour decider go, recadrage ou stop.</li>
-  </ul>
-</ShowcasePanel>
 
 <Callout>
   Preuve utile, pas vernis marketing: je montre surtout comment le systeme est

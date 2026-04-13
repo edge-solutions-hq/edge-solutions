@@ -92,25 +92,54 @@ export const metadata = {
   de livrer une base que vous pouvez faire évoluer sans dépendance opaque.
 </Callout>
 
-<ShowcasePanel
+<DeliveryBlueprint
   className="mt-16"
-  eyebrow="Preuve visuelle"
-  title="Ce qu’une base web saine doit rendre visible"
+  eyebrow="Blueprint de livraison"
+  title="Ce qu’une base web prete au lancement doit rendre evident"
   imageSrc="/images/proof/web-delivery-board.svg"
   imageAlt="Schema abstrait d’une base web avec structure de page, integrations et checklist QA."
-  imageSide="left"
+  checklistTitle="Avant la mise en ligne"
+  checklist={[
+    'la hierarchie de page se scanne et mene au contact en moins d’une minute',
+    'les points d’integration sont explicites au lieu d’etre caches dans un collage fragile',
+    'performance, QA et handover font partie de la livraison, pas du nettoyage apres coup',
+  ]}
+  columns={[
+    {
+      label: 'Couche 01',
+      title: 'Offre et structure de page',
+      points: [
+        'headline claire, preuve de soutien et CTA lisible',
+        'sections reutilisables plutot que fragments one-shot',
+        'ordre de contenu qui aide humains et SEO a scanner vite',
+      ],
+    },
+    {
+      label: 'Couche 02',
+      title: 'Integrations et logique metier',
+      points: [
+        'forms, CRM, analytics, paiements ou CMS identifies tot',
+        'stack choisie pour la maintenabilite et l’autonomie d’edition',
+        'interfaces qui ne cachent pas les etats importants aux operateurs',
+      ],
+    },
+    {
+      label: 'Couche 03',
+      title: 'Verification et handover',
+      points: [
+        'performance et SEO technique verifiees avant lancement',
+        'contenu, redirects et cas limites revus visiblement',
+        'documentation et chemin d’iteration clairs apres release',
+      ],
+    },
+  ]}
 >
   <p>
-    Un site credible ne repose pas seulement sur la copy. Il doit montrer une
-    structure de page claire, des modules reutilisables, des integrations
-    assumees et un passage QA / publication lisible.
+    Un site credible n’est pas juste une belle front-end. La structure, la carte
+    des integrations et le chemin de release doivent etre assez visibles pour que
+    le projet paraisse robuste avant de grossir.
   </p>
-  <ul>
-    <li>une hierarchie de page qui aide a scanner l’offre et a contacter ;</li>
-    <li>des points d’integration identifies au lieu d’un bricolage cache ;</li>
-    <li>un chemin clair entre base montrable, verification et mise en ligne.</li>
-  </ul>
-</ShowcasePanel>
+</DeliveryBlueprint>
 
 <SectionIntro className="mt-16" eyebrow="IA" title="IA utile, pas gadget" smaller>
   <p>

@@ -61,6 +61,46 @@ export const metadata = {
   nog niet goed genoeg.
 </Callout>
 
+<WorkflowSnapshot
+  className="mt-16"
+  eyebrow="Operationele proof"
+  title="Wat een betrouwbare AI-lane moet tonen voor je ze laat opschalen"
+  imageSrc="/images/proof/ai-workflow-board.svg"
+  imageAlt="Abstract schema van een AI-workflow met verbonden stappen en een menselijke review-lane."
+  reviewTitle="Menselijke review-lane"
+  reviewPoints={[
+    'de risicovolle output is zichtbaar voor iemand te veel van het model vraagt',
+    'iemand draagt expliciet het go / herkaderen / stop-verdict',
+    'de volgende integratiestap wordt verdiend door bewijs, niet door demo-enthousiasme',
+  ]}
+  steps={[
+    {
+      label: 'Stap 01',
+      title: 'Een afgebakende use case kiezen',
+      detail:
+        'Kies de gebruiker, bron van waarheid en exacte beslissing die de workflow moet ondersteunen voor je meer tooling toevoegt.',
+    },
+    {
+      label: 'Stap 02',
+      title: 'Testen op echte voorbeelden',
+      detail:
+        'Laat de lane draaien op representatieve documenten, aanvragen of edge cases met sporen die zichtbaar genoeg zijn om te reviewen.',
+    },
+    {
+      label: 'Stap 03',
+      title: 'Beslissen met bewijs',
+      detail:
+        'Behoud wat al werkt, herkadreer wat fragiel blijft en stop vroeg als de workflow nog meer onzekerheid dan waarde oplevert.',
+    },
+  ]}
+>
+  <p>
+    Het punt is niet om abstracte “AI-capaciteit” te tonen. Het punt is om de
+    operationele lane leesbaar genoeg te maken zodat een team de volgende
+    beslissing kan vertrouwen.
+  </p>
+</WorkflowSnapshot>
+
 <SectionIntro className="mt-16" eyebrow="Voor wie?" title="Wanneer deze dienst een goede match is">
   <p>Deze dienst past goed als je nood hebt aan:</p>
 </SectionIntro>
@@ -150,24 +190,6 @@ export const metadata = {
     lange termijn bruikbaar te houden.
   </GridListItem>
 </GridList>
-
-<ShowcasePanel
-  className="mt-12"
-  eyebrow="Visuele proof"
-  title="Wat een bruikbare AI-workflow zichtbaar moet maken"
-  imageSrc="/images/proof/ai-workflow-board.svg"
-  imageAlt="Abstract schema van een AI-workflow met verbonden stappen en een menselijke review-lane."
->
-  <p>
-    Voor je iets industrialiseert, moet het systeem de scope, bronnen,
-    verificatiemomenten en het verwachte verdict zichtbaar maken.
-  </p>
-  <ul>
-    <li>een afgebakende use case in plaats van een assistent die zogezegd alles doet;</li>
-    <li>een expliciete menselijke review-lane voor gevoelige output;</li>
-    <li>genoeg traceerbaarheid om te beslissen: go, herkaderen of stop.</li>
-  </ul>
-</ShowcasePanel>
 
 <Callout>
   Nuttige proof werkt beter dan gladde claims: ik maak de kadering,

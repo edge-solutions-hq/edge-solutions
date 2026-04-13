@@ -28,6 +28,45 @@ export const metadata = {
   place un pipeline propre pour livrer sans douleur.
 </p>
 
+<PrototypeSignals
+  className="mt-16"
+  eyebrow="Signaux prototype"
+  title="Ce qui doit sembler reel avant qu’un build temps reel merite plus de budget"
+  imageSrc="/images/proof/realtime-prototype-board.svg"
+  imageAlt="Schema abstrait d’un prototype temps reel avec vue 3D, courbe de performance et jalons de validation."
+  signals={[
+    {label: 'Cible', value: 'Build jouable sur le bon appareil'},
+    {label: 'Risque', value: 'Performance et confort verifies tot'},
+    {label: 'Verdict', value: 'Decisions claires garder / couper / polir'},
+  ]}
+  phases={[
+    {
+      label: 'Phase 01',
+      title: 'Faisabilite d’abord',
+      detail:
+        'Verrouiller l’appareil, le style d’interaction, le cout asset et les contraintes de frame-rate avant que l’ambition ne derape.',
+    },
+    {
+      label: 'Phase 02',
+      title: 'Build montrable',
+      detail:
+        'Obtenir vite une version presentable ou jouable pour juger le confort, la fluidite et l’onboarding avec du vrai feedback.',
+    },
+    {
+      label: 'Phase 03',
+      title: 'Porte de production',
+      detail:
+        'Utiliser le prototype pour decider ce qui merite d’etre poli, ce qui doit etre simplifie et ce qui doit rester hors scope.',
+    },
+  ]}
+>
+  <p>
+    Un bon projet temps reel gagne en confiance quand l’experience, les risques
+    et les prochaines decisions de production sont visibles avant que le budget
+    ne devienne plus lourd.
+  </p>
+</PrototypeSignals>
+
 <SectionIntro
   className="mt-14"
   eyebrow="Pour qui ?"
@@ -163,52 +202,6 @@ export const metadata = {
     documentation et transfert si besoin.
   </ListItem>
 </List>
-
-<SectionIntro className="mt-16" eyebrow="Preuves de méthode" title="Ce que vous pouvez valider rapidement" smaller>
-  <p>
-    L’idée n’est pas de promettre une démo “magique”, mais de rendre visibles les
-    points qui rassurent avant d’investir davantage.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Avant d’aller trop loin">
-    Faisabilité, plateforme cible, contraintes de performance et niveau d’ambition
-    sont explicités pour éviter une direction trop coûteuse trop tard.
-  </GridListItem>
-  <GridListItem title="Pendant le prototype">
-    Vous voyez rapidement un build jouable ou une démo montrable, avec des retours
-    concrets sur la fluidité, l’UX et les priorités de production.
-  </GridListItem>
-  <GridListItem title="Avant la mise en production">
-    Pipeline, livrables, risques restants et validations sur machine ou casque cible
-    sont clarifiés pour limiter les surprises de fin de projet.
-  </GridListItem>
-</GridList>
-
-<Callout>
-  Sur ce type de projet, la confiance vient surtout d’une base montrable tôt, de
-  choix techniques assumés et d’une validation fréquente sur la plateforme cible.
-</Callout>
-
-<ShowcasePanel
-  className="mt-16"
-  eyebrow="Preuve visuelle"
-  title="Ce qu’un prototype temps reel doit montrer tot"
-  imageSrc="/images/proof/realtime-prototype-board.svg"
-  imageAlt="Schema abstrait d’un prototype temps reel avec vue 3D, courbe de performance et jalons de validation."
->
-  <p>
-    Avant de promettre la production, il faut rendre visibles la fluidite, les
-    checkpoints de confort et les jalons qui font passer un prototype de la demo
-    au build exploitable.
-  </p>
-  <ul>
-    <li>une base jouable ou montrable tot sur la plateforme cible ;</li>
-    <li>des signaux de performance et d’UX verifies au lieu de suppositions ;</li>
-    <li>des etapes de release claires pour savoir ce qui est pret ou non.</li>
-  </ul>
-</ShowcasePanel>
 
 <SectionIntro className="mt-16" eyebrow="IA (responsable)" title="Méthode de travail IA" smaller>
   <p>

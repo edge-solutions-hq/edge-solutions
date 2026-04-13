@@ -95,25 +95,54 @@ export const metadata = {
   base you can evolve without opaque dependency.
 </Callout>
 
-<ShowcasePanel
+<DeliveryBlueprint
   className="mt-16"
-  eyebrow="Visual proof"
-  title="What a healthy web foundation should make visible"
+  eyebrow="Delivery blueprint"
+  title="What a launch-ready web foundation should make obvious"
   imageSrc="/images/proof/web-delivery-board.svg"
   imageAlt="Abstract web delivery board with page structure, integrations and a QA checklist."
-  imageSide="left"
+  checklistTitle="Before launch"
+  checklist={[
+    'page hierarchy is readable enough to scan and contact in under a minute',
+    'integration points are explicit instead of hidden in brittle glue code',
+    'performance, QA and handover are treated as part of delivery, not cleanup later',
+  ]}
+  columns={[
+    {
+      label: 'Layer 01',
+      title: 'Offer and page structure',
+      points: [
+        'clear headline, supporting proof and next-step CTA',
+        'reusable sections instead of one-off page fragments',
+        'content order that helps both humans and SEO scan the page quickly',
+      ],
+    },
+    {
+      label: 'Layer 02',
+      title: 'Integrations and business logic',
+      points: [
+        'forms, CRM, analytics, payments or CMS paths identified early',
+        'a stack chosen for maintainability and editing autonomy',
+        'interfaces that do not hide the important states from operators',
+      ],
+    },
+    {
+      label: 'Layer 03',
+      title: 'Verification and handover',
+      points: [
+        'performance and technical SEO checked before launch',
+        'content, redirects and edge cases reviewed visibly',
+        'documentation and next-iteration path clear after release',
+      ],
+    },
+  ]}
 >
   <p>
-    A credible website does not rely on copy alone. It should expose a clear
-    page structure, reusable modules, deliberate integrations and a readable QA
-    and publish path.
+    A credible website is not just a polished front-end. The structure, the
+    integration map and the release path should all be visible enough that the
+    project feels robust before it grows.
   </p>
-  <ul>
-    <li>a page hierarchy that makes the offer easy to scan and contact;</li>
-    <li>identified integration points instead of hidden glue code;</li>
-    <li>a clear path between a showable base, verification and release.</li>
-  </ul>
-</ShowcasePanel>
+</DeliveryBlueprint>
 
 <SectionIntro className="mt-16" eyebrow="AI" title="Useful AI, not a gimmick" smaller>
   <p>

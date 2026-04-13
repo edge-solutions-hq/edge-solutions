@@ -1,13 +1,16 @@
 import type {MDXComponents} from 'mdx/types';
 import {CTA} from '@/components/mdx/CTA';
 import {Callout} from '@/components/mdx/Callout';
+import {DeliveryBlueprint} from '@/components/mdx/DeliveryBlueprint';
 import {GridList, GridListItem} from '@/components/studio/GridList';
 import {List, ListItem} from '@/components/studio/List';
 import {PageIntro} from '@/components/studio/PageIntro';
+import {PrototypeSignals} from '@/components/mdx/PrototypeSignals';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {StatList, StatListItem} from '@/components/studio/StatList';
 import {TagList, TagListItem} from '@/components/studio/TagList';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
+import {WorkflowSnapshot} from '@/components/mdx/WorkflowSnapshot';
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -16,7 +19,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     // Custom components available in MDX without imports
     CTA,
     Callout,
+    DeliveryBlueprint,
     PageIntro,
+    PrototypeSignals,
     SectionIntro,
     GridList,
     GridListItem,
@@ -29,6 +34,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     TagList,
     TagListItem,
     ShowcasePanel,
+    WorkflowSnapshot,
 
     // Optional: tighten default rendering
     h1: (props) => (
@@ -51,4 +57,3 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     )
   };
 }
-
