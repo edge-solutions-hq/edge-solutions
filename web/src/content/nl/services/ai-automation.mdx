@@ -94,7 +94,7 @@ export const metadata = {
   </p>
 </SectionIntro>
 
-<GridList className="mt-8">
+<GridList className="mt-8 sm:grid-cols-2">
   <GridListItem title="Specialistische assistenten">
     Domeinspecifieke lanes met eigen context, geheugen en regels in plaats van
     een generieke alles-agent.
@@ -112,6 +112,19 @@ export const metadata = {
     lange termijn bruikbaar te houden.
   </GridListItem>
 </GridList>
+
+<Callout>
+  Nuttige proof werkt beter dan gladde claims: ik maak de kadering,
+  reviewstappen en supervisie zichtbaar omdat net dat vertrouwen geeft bij AI
+  automatisatie.
+</Callout>
+
+<Stats className="mt-10">
+  <StatsItem label="Assistenten" value="Specialistische lanes" />
+  <StatsItem label="Cadans" value="Geplande loops" />
+  <StatsItem label="Controle" value="Review voor actie" />
+  <StatsItem label="Traceerbaarheid" value="Geheugen + artifacts" />
+</Stats>
 
 <SectionIntro className="mt-16" eyebrow="Typische sprint" title="Hoe een nuttige eerste sprint eruitziet">
   <p>
@@ -136,12 +149,18 @@ export const metadata = {
   </GridListItem>
 </GridList>
 
-<StatList className="mt-10">
-  <StatListItem label="Scope" value="1 prioritaire use case" />
-  <StatListItem label="Validatie" value="Echte voorbeelden" />
-  <StatListItem label="Aansturing" value="Expliciete menselijke review" />
-  <StatListItem label="Beslissing" value="Go / herkaderen / stop" />
-</StatList>
+<Stats className="mt-10">
+  <StatsItem label="Scope" value="1 prioritaire use case" />
+  <StatsItem label="Validatie" value="Echte voorbeelden" />
+  <StatsItem label="Aansturing" value="Expliciete menselijke review" />
+  <StatsItem label="Beslissing" value="Go / herkaderen / stop" />
+</Stats>
+
+<Callout>
+  De eerste sprint moet eindigen met een leesbare beslissing, niet met een hoop
+  losse demo's. Ofwel bewijst de use case zich, ofwel herkaderen we snel met
+  genoeg evidence om de volgende stap te kiezen.
+</Callout>
 
 <SectionIntro className="mt-16" eyebrow="Werkwijze" title="Hoe ik AI-projecten veiliger maak">
   <p>Een pragmatische aanpak die snel shipt zonder de risico's te verstoppen.</p>
@@ -214,12 +233,12 @@ export const metadata = {
 
 <SectionIntro className="mt-16" eyebrow="Resultaat" title="Wat je krijgt" />
 
-<StatList className="mt-10">
-  <StatListItem label="Aansturing" value="Menselijk geleid" />
-  <StatListItem label="Prompts & regels" value="Versiebeheer" />
-  <StatListItem label="Integraties" value="Nuttig" />
-  <StatListItem label="Productie" value="Afgebakend" />
-</StatList>
+<Stats className="mt-10">
+  <StatsItem label="Aansturing" value="Menselijk geleid" />
+  <StatsItem label="Prompts & regels" value="Versiebeheer" />
+  <StatsItem label="Integraties" value="Nuttig" />
+  <StatsItem label="Productie" value="Afgebakend" />
+</Stats>
 
 <SectionIntro className="mt-16" eyebrow="FAQ" title="Veelgestelde vragen" smaller />
 

@@ -97,7 +97,7 @@ export const metadata = {
   </p>
 </SectionIntro>
 
-<GridList className="mt-8">
+<GridList className="mt-8 sm:grid-cols-2">
   <GridListItem title="Assistants specialises">
     Des lanes dediees par domaine, avec contexte, memoire et consignes propres,
     plutot qu'un agent fourre-tout difficile a fiabiliser.
@@ -115,6 +115,19 @@ export const metadata = {
     garder un systeme exploitable dans le temps.
   </GridListItem>
 </GridList>
+
+<Callout>
+  Preuve utile, pas vernis marketing: je montre surtout comment le systeme est
+  cadre, verifie et supervise, parce que c'est ce qui rassure vraiment quand on
+  parle d'automatisation metier.
+</Callout>
+
+<Stats className="mt-10">
+  <StatsItem label="Assistants" value="Specialises" />
+  <StatsItem label="Rythme" value="Boucles planifiees" />
+  <StatsItem label="Controle" value="Revue avant action" />
+  <StatsItem label="Trace" value="Memoire + artefacts" />
+</Stats>
 
 <SectionIntro className="mt-16" eyebrow="Sprint type" title="A quoi ressemble un premier sprint utile">
   <p>
@@ -138,12 +151,18 @@ export const metadata = {
   </GridListItem>
 </GridList>
 
-<StatList className="mt-10">
-  <StatListItem label="Perimetre" value="1 cas prioritaire" />
-  <StatListItem label="Validation" value="Sur exemples reels" />
-  <StatListItem label="Pilotage" value="Humain explicite" />
-  <StatListItem label="Decision" value="Go / recadrage / stop" />
-</StatList>
+<Stats className="mt-10">
+  <StatsItem label="Perimetre" value="1 cas prioritaire" />
+  <StatsItem label="Validation" value="Sur exemples reels" />
+  <StatsItem label="Pilotage" value="Humain explicite" />
+  <StatsItem label="Decision" value="Go / recadrage / stop" />
+</Stats>
+
+<Callout>
+  Le premier sprint doit produire une decision lisible, pas une accumulation de
+  demos. Soit on valide un cas d'usage, soit on recadre vite, avec des traces
+  suffisamment concretes pour arbitrer.
+</Callout>
 
 <SectionIntro className="mt-16" eyebrow="Methode" title="Comment je securise un projet IA">
   <p>Une approche pragmatique pour livrer vite sans masquer les risques.</p>
@@ -216,12 +235,12 @@ export const metadata = {
 
 <SectionIntro className="mt-16" eyebrow="Resultat" title="Ce que vous obtenez" />
 
-<StatList className="mt-10">
-  <StatListItem label="Pilotage" value="Humain" />
-  <StatListItem label="Prompts & regles" value="Versionnes" />
-  <StatListItem label="Integrations" value="Utiles" />
-  <StatListItem label="Mise en prod" value="Cadree" />
-</StatList>
+<Stats className="mt-10">
+  <StatsItem label="Pilotage" value="Humain" />
+  <StatsItem label="Prompts & regles" value="Versionnes" />
+  <StatsItem label="Integrations" value="Utiles" />
+  <StatsItem label="Mise en prod" value="Cadree" />
+</Stats>
 
 <SectionIntro className="mt-16" eyebrow="FAQ" title="Questions frequentes" smaller />
 
