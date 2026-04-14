@@ -1,3 +1,5 @@
+import workflowBoard from '../../../../public/images/proof/services-ai-workflow-board.svg';
+
 export const metadata = {
   title: "AI systems & automation in Belgium — assistants, workflows, guardrails",
   description:
@@ -17,42 +19,11 @@ export const metadata = {
   </p>
 </PageIntro>
 
-<Callout>
-  If you want to use AI but the use case, the risk or the next step is still
-  unclear, I can put structure around it before the project grows heavier.
-</Callout>
-
-<SectionIntro
-  className="mt-16"
-  eyebrow="When I step in"
-  title="The situations where AI needs structure before scale"
->
-  <p>
-    This service is useful when AI is moving faster than the framing, trust or
-    decision-making around it.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Promising but still vague">
-    You can see potential value, but nobody has clearly decided which use case to
-    prioritize or how success should be judged.
-  </GridListItem>
-  <GridListItem title="Prototype that is hard to trust">
-    A first version exists already, but the sources, limits and review steps are
-    still too implicit to feel safe.
-  </GridListItem>
-  <GridListItem title="Need a real verdict">
-    You need to decide go, reframe or stop quickly instead of keeping an
-    impressive demo alive without an operational future.
-  </GridListItem>
-</GridList>
-
 <WorkflowSnapshot
   className="mt-16"
   eyebrow="Operational proof"
-  title="What a trustworthy AI lane should expose before it scales"
-  imageSrc="/images/proof/ai-workflow-board.svg"
+  title="The workflow board that makes an AI lane readable before it grows"
+  imageSrc={workflowBoard}
   imageAlt="Abstract AI workflow diagram with connected stages and a human review lane."
   reviewTitle="Human review lane"
   reviewPoints={[
@@ -82,23 +53,50 @@ export const metadata = {
   ]}
 >
   <p>
-    The point is not to show abstract “AI capability”. It is to make the
+    If the use case, risk or next step is still unclear, I start by adding
+    structure. The goal is not to show abstract “AI capability”, but to make the
     operating lane readable enough that a team can trust the next decision.
   </p>
 </WorkflowSnapshot>
 
 <SectionIntro
   className="mt-16"
-  eyebrow="First engagement"
-  title="What you get quickly"
+  eyebrow="When I step in"
+  title="The situations where AI needs structure before scale"
 >
   <p>
-    The goal is not to stack deliverables. The goal is to produce a first cycle
-    that is useful, readable and easy to decide on.
+    This service is useful when AI is moving faster than the framing, trust or
+    decision-making around it.
   </p>
 </SectionIntro>
 
 <GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Promising but still vague">
+    You can see potential value, but nobody has clearly decided which use case to
+    prioritize or how success should be judged.
+  </GridListItem>
+  <GridListItem title="Prototype that is hard to trust">
+    A first version exists already, but the sources, limits and review steps are
+    still too implicit to feel safe.
+  </GridListItem>
+  <GridListItem title="Need a real verdict">
+    You need to decide go, reframe or stop quickly instead of keeping an
+    impressive demo alive without an operational future.
+  </GridListItem>
+</GridList>
+
+<SectionIntro
+  className="mt-16"
+  eyebrow="First cycle"
+  title="What you get quickly, and why it feels credible"
+>
+  <p>
+    The goal is not to stack deliverables. It is to produce a first cycle that is
+    useful, readable and easy to decide on, with visible proof of method.
+  </p>
+</SectionIntro>
+
+<GridList className="mt-8 sm:grid-cols-2">
   <GridListItem title="Short scoping phase">
     We choose one priority use case, the right sources, the risks and the exact
     step where a human should take control.
@@ -107,9 +105,13 @@ export const metadata = {
     I build a flow that can be tested on your actual examples: assistant,
     document triage, qualification or internal workflow with visible traces.
   </GridListItem>
-  <GridListItem title="Usable decision">
-    You leave with a verdict: continue, simplify, reframe or stop before the
-    subject absorbs more budget than it deserves.
+  <GridListItem title="Review & guardrails">
+    Verification, critic mode, escalation and action limits before anything
+    sensitive happens automatically.
+  </GridListItem>
+  <GridListItem title="Visible public proof already exists">
+    My OpenClaw setup, backed by Rusty Art, already shows a concrete working
+    method without inventing glossy public case studies.
   </GridListItem>
 </GridList>
 
@@ -119,37 +121,6 @@ export const metadata = {
   <StatsItem label="Control" value="Explicit human review" />
   <StatsItem label="Decision" value="Go / reframe / stop" />
 </Stats>
-
-<SectionIntro
-  className="mt-16"
-  eyebrow="Public proof"
-  title="A visible proof of method already exists"
->
-  <p>
-    I am not inventing glossy public case studies. The clearest proof I can show
-    today is my OpenClaw setup, with Rusty Art as a live product playground for
-    iteration and proof building.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-2">
-  <GridListItem title="Specialist assistants">
-    Domain-specific lanes with their own context, memory and rules instead of one
-    generic assistant that is hard to trust.
-  </GridListItem>
-  <GridListItem title="Scheduled loops">
-    Cron jobs, reports and follow-up so AI becomes an operating process instead
-    of a one-off demo.
-  </GridListItem>
-  <GridListItem title="Review & guardrails">
-    Verification, critic mode, escalation and action limits before anything
-    sensitive happens automatically.
-  </GridListItem>
-  <GridListItem title="Live public project">
-    Rusty Art gives me a visible place to test orchestration, product iteration
-    and AI-assisted workflows without inventing fake portfolio polish.
-  </GridListItem>
-</GridList>
 
 <Callout>
   What I am really selling here is not “more AI”. It is a clearer, more reliable
