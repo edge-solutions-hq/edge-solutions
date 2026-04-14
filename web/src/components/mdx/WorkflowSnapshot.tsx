@@ -1,4 +1,4 @@
-import Image from 'next/image';
+import Image, {type StaticImageData} from 'next/image';
 import type {ReactNode} from 'react';
 
 import {cn} from '@/lib/cn';
@@ -12,7 +12,7 @@ type WorkflowStep = {
 type WorkflowSnapshotProps = {
   eyebrow?: string;
   title: string;
-  imageSrc: string;
+  imageSrc: string | StaticImageData;
   imageAlt: string;
   steps: WorkflowStep[];
   reviewTitle: string;

@@ -1,3 +1,5 @@
+import workflowBoard from '../../../../public/images/proof/services-ai-workflow-board.svg';
+
 export const metadata = {
   title: "Expert IA & automatisation en Wallonie — assistants, workflows, garde-fous",
   description:
@@ -17,43 +19,11 @@ export const metadata = {
   </p>
 </PageIntro>
 
-<Callout>
-  Si vous voulez utiliser l’IA mais que le cas d’usage, les risques ou la marche
-  a suivre restent flous, je peux remettre de la structure avant que le projet
-  ne parte dans tous les sens.
-</Callout>
-
-<SectionIntro
-  className="mt-16"
-  eyebrow="Quand j’interviens"
-  title="Les situations ou il faut cadrer avant d’automatiser"
->
-  <p>
-    Cette offre est utile quand l’IA avance plus vite que le cadre, la confiance
-    ou la capacite de decision.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Usage prometteur mais flou">
-    Vous voyez des gains possibles, mais personne ne sait encore exactement quel
-    cas d’usage prioriser ni comment le juger proprement.
-  </GridListItem>
-  <GridListItem title="Prototype difficile a fiabiliser">
-    Une premiere version existe deja, mais les sources, les limites et les
-    points de validation restent trop implicites.
-  </GridListItem>
-  <GridListItem title="Besoin d’un vrai verdict">
-    Il faut pouvoir dire rapidement go, recadrage ou stop au lieu d’entretenir
-    une demo impressionnante mais difficile a exploiter.
-  </GridListItem>
-</GridList>
-
 <WorkflowSnapshot
   className="mt-16"
   eyebrow="Preuve operationnelle"
-  title="Ce qu’une lane IA digne de confiance doit exposer avant de monter en charge"
-  imageSrc="/images/proof/ai-workflow-board.svg"
+  title="Le workflow board qui rend l’IA lisible avant qu’elle prenne trop de place"
+  imageSrc={workflowBoard}
   imageAlt="Schema abstrait d’un workflow IA avec etapes reliees et piste de revue humaine."
   reviewTitle="Piste de revue humaine"
   reviewPoints={[
@@ -83,24 +53,51 @@ export const metadata = {
   ]}
 >
   <p>
-    L’enjeu n’est pas de montrer une “capacite IA” dans l’abstrait. Il est de
-    rendre la lane d’exploitation assez lisible pour qu’une equipe puisse faire
-    confiance a la decision suivante.
+    Si le cas d’usage, les risques ou la marche a suivre restent flous, je
+    remets d’abord de la structure. Le but n’est pas de montrer une “capacite
+    IA” dans l’abstrait, mais de rendre la lane assez lisible pour qu’une
+    equipe puisse faire confiance a la decision suivante.
   </p>
 </WorkflowSnapshot>
 
 <SectionIntro
   className="mt-16"
-  eyebrow="Premier engagement"
-  title="Ce que vous obtenez rapidement"
+  eyebrow="Quand j’interviens"
+  title="Les situations ou il faut cadrer avant d’automatiser"
 >
   <p>
-    Le but n’est pas d’empiler des livrables. Le but est de produire un premier
-    cycle utile, lisible et decidable.
+    Cette offre est utile quand l’IA avance plus vite que le cadre, la confiance
+    ou la capacite de decision.
   </p>
 </SectionIntro>
 
 <GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Usage prometteur mais flou">
+    Vous voyez des gains possibles, mais personne ne sait encore exactement quel
+    cas d’usage prioriser ni comment le juger proprement.
+  </GridListItem>
+  <GridListItem title="Prototype difficile a fiabiliser">
+    Une premiere version existe deja, mais les sources, les limites et les
+    points de validation restent trop implicites.
+  </GridListItem>
+  <GridListItem title="Besoin d’un vrai verdict">
+    Il faut pouvoir dire rapidement go, recadrage ou stop au lieu d’entretenir
+    une demo impressionnante mais difficile a exploiter.
+  </GridListItem>
+</GridList>
+
+<SectionIntro
+  className="mt-16"
+  eyebrow="Premier cycle"
+  title="Ce que vous obtenez rapidement, et pourquoi c’est credible"
+>
+  <p>
+    Le but n’est pas d’empiler des livrables. Le but est de produire un premier
+    cycle utile, lisible et decidable avec une preuve de methode deja visible.
+  </p>
+</SectionIntro>
+
+<GridList className="mt-8 sm:grid-cols-2">
   <GridListItem title="Cadrage court">
     On choisit un cas prioritaire, les sources a utiliser, les risques et le
     point exact ou un humain doit reprendre la main.
@@ -109,9 +106,13 @@ export const metadata = {
     Je monte un flux testable sur vos vrais exemples: assistant, tri
     documentaire, qualification ou workflow interne avec traces visibles.
   </GridListItem>
-  <GridListItem title="Decision exploitable">
-    Vous repartez avec un verdict clair: continuer, simplifier, recadrer ou
-    arreter avant d’investir plus lourdement.
+  <GridListItem title="Revue & garde-fous">
+    Verification, mode critique, escalade, limites d’action et relecture avant
+    qu’une automation fasse quelque chose de sensible.
+  </GridListItem>
+  <GridListItem title="Preuve publique deja visible">
+    Mon setup OpenClaw, complete par Rusty Art, montre deja une methode de
+    travail concrete sans inventer de faux cas clients.
   </GridListItem>
 </GridList>
 
@@ -121,37 +122,6 @@ export const metadata = {
   <StatsItem label="Controle" value="Humain explicite" />
   <StatsItem label="Decision" value="Go / recadrage / stop" />
 </Stats>
-
-<SectionIntro
-  className="mt-16"
-  eyebrow="Preuve publique"
-  title="Une preuve de methode deja visible"
->
-  <p>
-    Je ne vends pas des etudes de cas publiques inventees. La preuve la plus
-    concrete que je peux montrer aujourd’hui est mon setup OpenClaw, complete par
-    Rusty Art comme terrain vivant d’iteration produit.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-2">
-  <GridListItem title="Assistants specialises">
-    Des lanes dediees par domaine, avec contexte, memoire et consignes propres,
-    plutot qu’un agent fourre-tout difficile a fiabiliser.
-  </GridListItem>
-  <GridListItem title="Boucles planifiees">
-    Cron jobs, rapports et suivis reguliers pour transformer l’IA en processus
-    operationnel, pas juste en demo ponctuelle.
-  </GridListItem>
-  <GridListItem title="Revue & garde-fous">
-    Verification, mode critique, escalade, limites d’action et relecture avant
-    qu’une automation fasse quelque chose de sensible.
-  </GridListItem>
-  <GridListItem title="Projet public vivant">
-    Rusty Art me sert de terrain montrable pour tester orchestration, iteration
-    produit et usages assistes par IA sans inventer de faux vernis marketing.
-  </GridListItem>
-</GridList>
 
 <Callout>
   Ce que j’essaie de vendre ici n’est pas “plus d’IA”. C’est une facon plus

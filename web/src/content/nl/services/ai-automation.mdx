@@ -1,3 +1,5 @@
+import workflowBoard from '../../../../public/images/proof/services-ai-workflow-board.svg';
+
 export const metadata = {
   title: "AI-systemen & automatisatie in België — assistenten, workflows, guardrails",
   description:
@@ -17,42 +19,11 @@ export const metadata = {
   </p>
 </PageIntro>
 
-<Callout>
-  Als je AI wil inzetten maar de use case, de risico’s of de volgende stap nog
-  onduidelijk zijn, kan ik eerst structuur aanbrengen voor het project zwaarder wordt.
-</Callout>
-
-<SectionIntro
-  className="mt-16"
-  eyebrow="Wanneer ik instap"
-  title="De situaties waarin AI eerst structuur nodig heeft"
->
-  <p>
-    Deze dienst is vooral nuttig wanneer AI sneller vooruitgaat dan de kadering,
-    het vertrouwen of het beslissingsvermogen errond.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Veelbelovend maar nog vaag">
-    Je ziet potentieel, maar niemand heeft scherp beslist welke use case eerst
-    telt of hoe succes beoordeeld moet worden.
-  </GridListItem>
-  <GridListItem title="Prototype dat moeilijk te vertrouwen is">
-    Een eerste versie bestaat al, maar bronnen, limieten en reviewstappen zijn
-    nog te impliciet om veilig te voelen.
-  </GridListItem>
-  <GridListItem title="Nood aan een echt verdict">
-    Je moet snel kunnen beslissen go, herkaderen of stop in plaats van een demo
-    levend te houden zonder operationele toekomst.
-  </GridListItem>
-</GridList>
-
 <WorkflowSnapshot
   className="mt-16"
   eyebrow="Operationele proof"
-  title="Wat een betrouwbare AI-lane moet tonen voor ze mag opschalen"
-  imageSrc="/images/proof/ai-workflow-board.svg"
+  title="Het workflow board dat een AI-lane leesbaar maakt voor ze groter wordt"
+  imageSrc={workflowBoard}
   imageAlt="Abstract schema van een AI-workflow met verbonden stappen en een menselijke review-lane."
   reviewTitle="Menselijke review-lane"
   reviewPoints={[
@@ -82,24 +53,52 @@ export const metadata = {
   ]}
 >
   <p>
-    Het punt is niet om abstracte “AI-capaciteit” te tonen. Het punt is om de
-    operationele lane leesbaar genoeg te maken zodat een team de volgende
-    beslissing kan vertrouwen.
+    Als de use case, de risico’s of de volgende stap nog onduidelijk zijn, breng
+    ik eerst structuur aan. Het punt is niet om abstracte “AI-capaciteit” te
+    tonen, maar om de operationele lane leesbaar genoeg te maken zodat een team
+    de volgende beslissing kan vertrouwen.
   </p>
 </WorkflowSnapshot>
 
 <SectionIntro
   className="mt-16"
-  eyebrow="Eerste engagement"
-  title="Wat je snel krijgt"
+  eyebrow="Wanneer ik instap"
+  title="De situaties waarin AI eerst structuur nodig heeft"
 >
   <p>
-    Het doel is niet om een stapel deliverables te produceren. Het doel is een
-    eerste cyclus op te leveren die bruikbaar, leesbaar en beslisbaar is.
+    Deze dienst is vooral nuttig wanneer AI sneller vooruitgaat dan de kadering,
+    het vertrouwen of het beslissingsvermogen errond.
   </p>
 </SectionIntro>
 
 <GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Veelbelovend maar nog vaag">
+    Je ziet potentieel, maar niemand heeft scherp beslist welke use case eerst
+    telt of hoe succes beoordeeld moet worden.
+  </GridListItem>
+  <GridListItem title="Prototype dat moeilijk te vertrouwen is">
+    Een eerste versie bestaat al, maar bronnen, limieten en reviewstappen zijn
+    nog te impliciet om veilig te voelen.
+  </GridListItem>
+  <GridListItem title="Nood aan een echt verdict">
+    Je moet snel kunnen beslissen go, herkaderen of stop in plaats van een demo
+    levend te houden zonder operationele toekomst.
+  </GridListItem>
+</GridList>
+
+<SectionIntro
+  className="mt-16"
+  eyebrow="Eerste cyclus"
+  title="Wat je snel krijgt, en waarom het geloofwaardig voelt"
+>
+  <p>
+    Het doel is niet om een stapel deliverables te produceren. Het doel is een
+    eerste cyclus op te leveren die bruikbaar, leesbaar en beslisbaar is, met
+    zichtbare proof van methode.
+  </p>
+</SectionIntro>
+
+<GridList className="mt-8 sm:grid-cols-2">
   <GridListItem title="Korte scopingfase">
     We kiezen één prioritaire use case, de juiste bronnen, de risico’s en het
     exacte punt waar een mens moet overnemen.
@@ -108,9 +107,13 @@ export const metadata = {
     Ik bouw een flow die op je echte voorbeelden testbaar is: assistent,
     documenttriage, kwalificatie of interne workflow met zichtbare sporen.
   </GridListItem>
-  <GridListItem title="Bruikbare beslissing">
-    Je eindigt met een verdict: doorgaan, vereenvoudigen, herkaderen of stoppen
-    voor het onderwerp meer budget opslorpt dan het waard is.
+  <GridListItem title="Review & guardrails">
+    Verificatie, critic mode, escalatie en actielimieten voor er iets gevoeligs
+    automatisch gebeurt.
+  </GridListItem>
+  <GridListItem title="Zichtbare publieke proof bestaat al">
+    Mijn OpenClaw-setup, aangevuld met Rusty Art, toont vandaag al een concrete
+    werkwijze zonder glanzende publieke case studies te verzinnen.
   </GridListItem>
 </GridList>
 
@@ -120,37 +123,6 @@ export const metadata = {
   <StatsItem label="Controle" value="Expliciete review" />
   <StatsItem label="Beslissing" value="Go / herkaderen / stop" />
 </Stats>
-
-<SectionIntro
-  className="mt-16"
-  eyebrow="Publieke proof"
-  title="Er bestaat al een zichtbare proof van werkwijze"
->
-  <p>
-    Ik verzin geen glanzende publieke case studies. De duidelijkste proof die ik
-    vandaag kan tonen is mijn OpenClaw-setup, met Rusty Art als levende
-    productomgeving voor iteratie en proof building.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-2">
-  <GridListItem title="Specialistische assistenten">
-    Domeinspecifieke lanes met hun eigen context, geheugen en regels in plaats
-    van één generieke assistent die moeilijk te vertrouwen is.
-  </GridListItem>
-  <GridListItem title="Geplande loops">
-    Cron jobs, rapporten en opvolging zodat AI een werkproces wordt en geen
-    eenmalige demo blijft.
-  </GridListItem>
-  <GridListItem title="Review & guardrails">
-    Verificatie, critic mode, escalatie en actielimieten voor er iets gevoeligs
-    automatisch gebeurt.
-  </GridListItem>
-  <GridListItem title="Levend publiek project">
-    Rusty Art geeft me een zichtbare plek om orchestration, productiteratie en
-    AI-ondersteunde workflows te testen zonder fake portfoliovernis.
-  </GridListItem>
-</GridList>
 
 <Callout>
   Wat ik hier eigenlijk verkoop, is niet “meer AI”. Het is een duidelijkere,
