@@ -26,7 +26,7 @@ export const metadata = {
   className="mt-16"
   eyebrow="Signaux prototype"
   title="Ce qui doit sembler reel avant qu’un build temps reel merite plus de budget"
-  imageSrc="/images/proof/realtime-prototype-board.svg"
+  imageSrc="/images/proof/services-realtime-prototype-board.svg"
   imageAlt="Schema abstrait d’un prototype temps reel avec vue 3D, courbe de performance et jalons de validation."
   signals={[
     {label: 'Cible', value: 'Build jouable sur le bon appareil'},
@@ -63,53 +63,40 @@ export const metadata = {
 
 <SectionIntro
   className="mt-16"
-  eyebrow="Ce qu’on valide tôt"
-  title="Avant la production, trois choses comptent"
+  eyebrow="Perimetre prototype"
+  title="Le build doit prouver a la fois le risque de livraison et la qualite de l’experience"
 >
   <p>
-    La plupart des mauvaises surprises arrivent quand ces trois sujets restent
-    flous trop longtemps.
+    Le meme prototype doit repondre vite a deux questions : est-ce que
+    l’experience tient sur la bonne machine, et est-ce que la suite reste assez
+    saine pour continuer sans deraper.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Performance">
-    Profiling, budgets, temps de chargement et stabilite doivent etre traites des
-    le prototype, pas “repares a la fin”.
+<GridList className="mt-8 sm:grid-cols-2 xl:grid-cols-3">
+  <GridListItem title="Budgets performance">
+    Profiling, temps de chargement et stabilite doivent etre traites des le
+    prototype, pas “repares a la fin”.
   </GridListItem>
-  <GridListItem title="Confort & UX">
+  <GridListItem title="Confort sur le vrai materiel">
     En VR surtout, locomotion, lisibilite, onboarding et interactions doivent
-    etre testes en conditions reelles.
+    etre testes sur l’appareil cible.
   </GridListItem>
-  <GridListItem title="Pipeline">
-    Assets, versioning, builds et livrables doivent rester assez propres pour que
-    le projet puisse continuer sans friction inutile.
+  <GridListItem title="Pipeline capable de continuer">
+    Assets, versioning, builds et handoff doivent rester assez propres pour que
+    le projet avance sans friction evitable.
   </GridListItem>
-</GridList>
-
-<SectionIntro
-  className="mt-16"
-  eyebrow="Formats de mission"
-  title="Ce que je peux prototyper ou livrer"
->
-  <p>
-    J’interviens surtout sur des projets ou il faut rendre une experience
-    montrable, testable et techniquement assumable rapidement.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-3">
   <GridListItem title="Experience VR">
     Jeu, formation, demo ou parcours immersif avec confort utilisateur et
-    onboarding traites des le depart.
+    onboarding traites comme des contraintes de premier plan.
   </GridListItem>
   <GridListItem title="Prototype 3D interactif">
     Simulation, configurateur, serious game ou proof of concept jouable pour
-    valider un usage avant de lancer la production lourde.
+    valider un usage avant une phase de production plus lourde.
   </GridListItem>
   <GridListItem title="Demo WebGL / web 3D">
-    Experience embarquable dans un site ou une campagne, avec focus sur
-    compatibilite, laadtijd et rendu acceptable sur les bons supports.
+    Experience embarquee dans un site ou une campagne, avec focus sur
+    compatibilite, temps de chargement et rendu acceptable sur les bons supports.
   </GridListItem>
 </GridList>
 
