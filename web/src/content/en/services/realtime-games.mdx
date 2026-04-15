@@ -26,7 +26,7 @@ export const metadata = {
   className="mt-16"
   eyebrow="Prototype signals"
   title="What needs to feel real before a realtime build deserves more budget"
-  imageSrc="/images/proof/realtime-prototype-board.svg"
+  imageSrc="/images/proof/services-realtime-prototype-board.svg"
   imageAlt="Abstract realtime prototype board with a 3D viewport, performance graph and validation checkpoints."
   signals={[
     {label: 'Target', value: 'Playable build on the right device'},
@@ -62,45 +62,32 @@ export const metadata = {
 
 <SectionIntro
   className="mt-16"
-  eyebrow="What we validate early"
-  title="Before production, three things matter most"
+  eyebrow="Prototype scope"
+  title="The build has to prove both delivery risk and experience quality"
 >
   <p>
-    Most expensive surprises happen when these three topics stay blurry for too
-    long.
+    The same prototype should answer two questions quickly: does the experience
+    hold up on the target device, and is the production path still sane enough
+    to continue?
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Performance">
-    Profiling, budgets, load time and stability must be handled during the
-    prototype, not “fixed at the end”.
+<GridList className="mt-8 sm:grid-cols-2 xl:grid-cols-3">
+  <GridListItem title="Performance budgets">
+    Profiling, load time and stability need to be handled during the prototype,
+    not “fixed at the end”.
   </GridListItem>
-  <GridListItem title="Comfort & UX">
+  <GridListItem title="Comfort on real hardware">
     Especially in VR, locomotion, readability, onboarding and interactions need
-    real-world testing on the target hardware.
+    testing on the target device.
   </GridListItem>
-  <GridListItem title="Pipeline">
-    Assets, versioning, builds and deliverables need to stay clean enough that
-    the project can continue without unnecessary friction.
+  <GridListItem title="A pipeline that can continue">
+    Assets, versioning, builds and handoff need to stay clean enough that the
+    project can move forward without avoidable friction.
   </GridListItem>
-</GridList>
-
-<SectionIntro
-  className="mt-16"
-  eyebrow="Mission formats"
-  title="What I can prototype or ship"
->
-  <p>
-    I mostly step in on projects where the experience needs to become showable,
-    testable and technically defensible quickly.
-  </p>
-</SectionIntro>
-
-<GridList className="mt-8 sm:grid-cols-3">
   <GridListItem title="VR experience">
-    Game, training flow, event setup or immersive demo with user comfort and
-    onboarding treated as first-class concerns.
+    Game, training flow, event setup or immersive demo with comfort and
+    onboarding treated as first-class constraints.
   </GridListItem>
   <GridListItem title="Interactive 3D prototype">
     Simulation, configurator, serious game or playable proof of concept to
