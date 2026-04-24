@@ -248,6 +248,16 @@ export default async function HomePage({params}: Props) {
               </p>
             </Card>
           </div>
+
+          <div className="not-prose mt-8">
+            <ButtonLink
+              href="/contact"
+              size="lg"
+              trackingPlacement="home_process_primary"
+            >
+              {t('home.process.primaryCta')}
+            </ButtonLink>
+          </div>
         </section>
 
         <section>
