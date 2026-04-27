@@ -43,19 +43,25 @@ export default async function ServicesIndexPage({params}: Props) {
     {
       href: '/services/ai-automation',
       label: t('services.aiTitle'),
+      triggerLabel: t('services.hubAiTrigger'),
       description: t('services.hubAiDesc'),
+      proofCue: t('services.hubAiProof'),
       slug: 'ai-automation',
     },
     {
       href: '/services/web-dev',
       label: t('services.webTitle'),
+      triggerLabel: t('services.hubWebTrigger'),
       description: t('services.hubWebDesc'),
+      proofCue: t('services.hubWebProof'),
       slug: 'web-dev',
     },
     {
       href: '/services/realtime-games',
       label: t('services.realtimeTitle'),
+      triggerLabel: t('services.hubRealtimeTrigger'),
       description: t('services.hubRealtimeDesc'),
+      proofCue: t('services.hubRealtimeProof'),
       slug: 'realtime-games',
     },
   ];
@@ -96,7 +102,12 @@ export default async function ServicesIndexPage({params}: Props) {
             className="group rounded-lg border border-border bg-surface p-6 shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
           >
             <div className="flex items-start justify-between gap-4">
-              <div className="text-lg font-semibold">{service.label}</div>
+              <div className="space-y-2">
+                <div className="text-xs font-medium uppercase tracking-wide text-subtle-foreground">
+                  {service.triggerLabel}
+                </div>
+                <div className="text-lg font-semibold">{service.label}</div>
+              </div>
               <span
                 className="mt-0.5 text-sm text-subtle-foreground transition group-hover:translate-x-0.5 motion-reduce:transition-none"
                 aria-hidden="true"
@@ -107,6 +118,10 @@ export default async function ServicesIndexPage({params}: Props) {
 
             <p className="mt-2 line-clamp-3 text-sm text-muted-foreground">
               {service.description}
+            </p>
+
+            <p className="mt-4 border-t border-border pt-4 text-sm leading-6 text-foreground">
+              {service.proofCue}
             </p>
 
             <div className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-link">
