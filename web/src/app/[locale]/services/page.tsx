@@ -39,6 +39,11 @@ export default async function ServicesIndexPage({params}: Props) {
   const t = await getTranslations();
   const title = t('services.hubTitle');
   const description = t('services.hubIntro');
+  const decisionItems = [
+    t('services.decisionAi'),
+    t('services.decisionWeb'),
+    t('services.decisionRealtime'),
+  ];
   const services = [
     {
       href: '/services/ai-automation',
@@ -87,6 +92,26 @@ export default async function ServicesIndexPage({params}: Props) {
           {t('services.hubIntro')}
         </p>
       </header>
+
+      <section
+        aria-labelledby="services-decision-strip"
+        className="rounded-lg border border-border bg-surface p-5"
+      >
+        <h2
+          id="services-decision-strip"
+          className="text-sm font-semibold uppercase tracking-wide text-subtle-foreground"
+        >
+          {t('services.decisionTitle')}
+        </h2>
+
+        <div className="mt-4 grid gap-3 text-sm leading-6 text-foreground md:grid-cols-3">
+          {decisionItems.map((item) => (
+            <p key={item} className="rounded-md bg-surface-muted px-4 py-3">
+              {item}
+            </p>
+          ))}
+        </div>
+      </section>
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {services.map((service) => (
