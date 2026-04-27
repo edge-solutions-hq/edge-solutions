@@ -129,12 +129,17 @@
   },
   "services": {
     "title": "Services",
+    "hubTitle": "AI-first services for teams that need AI to work in real operations",
+    "hubIntro": "I start by structuring AI systems, automation and guardrails that can survive real operations. When the project needs more than orchestration, I also handle the web layer, integrations and real-time prototypes so a promising pilot does not turn into a vague delivery mess.",
     "aiTitle": "AI systems & automation",
     "aiDesc": "Internal assistants, document workflows, business automation and guardrails before production rollout.",
+    "hubAiDesc": "Choose this when you need an internal assistant, document workflow or rollout guardrails before exposing AI to more teams.",
     "webTitle": "Web development",
     "webDesc": "Custom sites, landing pages, business apps and web integrations that stay fast and easy to evolve.",
+    "hubWebDesc": "For teams that need a site, portal or internal tool connected to AI workflows without creating another fragile delivery layer.",
     "realtimeTitle": "Real-time 3D/VR",
     "realtimeDesc": "VR prototypes, interactive 3D experiences and WebGL builds designed to be shown, tested and improved.",
+    "hubRealtimeDesc": "For teams that need a real-time prototype to explain, test or sell a spatial, industrial or immersive product before heavier production.",
     "cta": "Explore"
   },
   "contact": {

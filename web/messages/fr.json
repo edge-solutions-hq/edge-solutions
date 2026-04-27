@@ -129,12 +129,17 @@
   },
   "services": {
     "title": "Services",
+    "hubTitle": "Services IA-first pour équipes qui doivent rendre l’IA exploitable en conditions réelles",
+    "hubIntro": "J’interviens d’abord pour cadrer des systèmes IA, des automatisations et des garde-fous qui tiennent dans le réel. Quand le besoin va plus loin, je prends aussi la couche web, les intégrations et les prototypes temps réel pour éviter qu’un pilote prometteur devienne un chantier flou.",
     "aiTitle": "IA & automatisation",
     "aiDesc": "Assistants internes, workflows documentaires, automatisations métier et garde-fous avant mise en production.",
+    "hubAiDesc": "À choisir quand vous avez besoin d’un assistant interne, d’un workflow documentaire ou de garde-fous avant d’ouvrir l’IA à plus d’équipes.",
     "webTitle": "Développement web",
     "webDesc": "Sites, landing pages, applications métier et intégrations web sur-mesure, rapides et faciles à faire évoluer.",
+    "hubWebDesc": "Pour les équipes qui doivent relier un site, un portail ou un outil métier à leurs flux IA sans recréer une base fragile.",
     "realtimeTitle": "Temps réel 3D/VR",
     "realtimeDesc": "Prototypes VR, expériences 3D interactives et contenus WebGL conçus pour être montrés, testés puis améliorés.",
+    "hubRealtimeDesc": "Pour montrer, tester ou vendre un produit spatial, industriel ou immersif avec un prototype temps réel avant un build plus lourd.",
     "cta": "Voir le service"
   },
   "contact": {
