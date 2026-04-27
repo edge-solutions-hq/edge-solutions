@@ -39,29 +39,33 @@ export default async function ServicesIndexPage({params}: Props) {
     {
       href: '/services/ai-automation',
       label: t('services.aiTitle'),
-      description: t('services.aiDesc'),
+      description: t('services.hubAiDesc'),
       slug: 'ai-automation',
     },
     {
       href: '/services/web-dev',
       label: t('services.webTitle'),
-      description: t('services.webDesc'),
+      description: t('services.hubWebDesc'),
       slug: 'web-dev',
     },
     {
       href: '/services/realtime-games',
       label: t('services.realtimeTitle'),
-      description: t('services.realtimeDesc'),
+      description: t('services.hubRealtimeDesc'),
       slug: 'realtime-games',
     },
   ];
 
   return (
     <div className="space-y-8">
-      <header className="space-y-2">
+      <header className="max-w-3xl space-y-3">
         <h1 className="text-3xl font-semibold tracking-tight">
-          {t('services.title')}
+          {t('services.hubTitle')}
         </h1>
+
+        <p className="text-base leading-7 text-muted-foreground">
+          {t('services.hubIntro')}
+        </p>
       </header>
 
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">

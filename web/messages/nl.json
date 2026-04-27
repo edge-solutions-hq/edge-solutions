@@ -129,12 +129,17 @@
   },
   "services": {
     "title": "Diensten",
+    "hubTitle": "AI-first diensten voor teams die AI bruikbaar moeten maken in de praktijk",
+    "hubIntro": "Ik help eerst om AI-systemen, automatisatie en guardrails op te zetten die ook in de praktijk standhouden. Wanneer het project meer vraagt dan alleen orkestratie, neem ik ook de weblaag, integraties en realtime prototypes mee zodat een veelbelovende pilot geen vaag oplevertraject wordt.",
     "aiTitle": "AI-systemen & automatisatie",
     "aiDesc": "Interne assistenten, documentworkflows, bedrijfsautomatisatie en guardrails voor productie.",
+    "hubAiDesc": "Kies dit wanneer je een interne assistent, documentworkflow of guardrails nodig hebt voordat AI naar meer teams gaat.",
     "webTitle": "Webontwikkeling",
     "webDesc": "Websites, landingspagina’s, bedrijfsapps en webintegraties op maat die snel blijven en makkelijk kunnen meegroeien.",
+    "hubWebDesc": "Voor teams die een website, portaal of interne tool aan AI-workflows moeten koppelen zonder opnieuw een fragiele basis te bouwen.",
     "realtimeTitle": "Realtime 3D/VR",
     "realtimeDesc": "VR-prototypes, interactieve 3D-ervaringen en WebGL-projecten om te tonen, te testen en verder te verfijnen.",
+    "hubRealtimeDesc": "Voor teams die een realtime prototype nodig hebben om een ruimtelijk, industrieel of immersief product te tonen, te testen of te verkopen vóór zwaardere productie.",
     "cta": "Ontdek"
   },
   "contact": {
