@@ -2,7 +2,8 @@ import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {TrackedLink} from '@/components/ui/TrackedLink';
-import {buildLocaleAlternates} from '@/lib/seo';
+import {buildLocalizedPageMetadata, breadcrumbSchema, webPageSchema} from '@/lib/seo';
+import {JsonLd} from '@/components/seo/JsonLd';
 
 type Props = {
   params: Promise<{locale: string}>;
@@ -23,11 +24,12 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     nl: 'Diensten van Edge Solutions: AI-systemen, automatisatie, webintegratie, technische SEO en realtime 3D/VR-uitvoering voor Belgische teams die AI echt bruikbaar moeten maken.',
   };
 
-  return {
+  return buildLocalizedPageMetadata({
+    locale,
+    pathSuffix: '/services',
     title: titleByLocale[locale] || titleByLocale.en,
     description: descriptionByLocale[locale] || descriptionByLocale.en,
-    alternates: buildLocaleAlternates(locale, '/services'),
-  };
+  });
 }
 
 export default async function ServicesIndexPage({params}: Props) {
@@ -35,6 +37,8 @@ export default async function ServicesIndexPage({params}: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations();
+  const title = t('services.hubTitle');
+  const description = t('services.hubIntro');
   const services = [
     {
       href: '/services/ai-automation',
@@ -58,6 +62,16 @@ export default async function ServicesIndexPage({params}: Props) {
 
   return (
     <div className="space-y-8">
+      <JsonLd
+        data={[
+          webPageSchema(locale, '/services', title, description),
+          breadcrumbSchema(locale, [
+            {name: t('nav.home'), path: ''},
+            {name: t('services.title'), path: '/services'},
+          ]),
+        ]}
+      />
+
       <header className="max-w-3xl space-y-3">
         <h1 className="text-3xl font-semibold tracking-tight">
           {t('services.hubTitle')}

@@ -13,7 +13,8 @@ import {Footer} from '@/components/layout/Footer';
 import {GoogleAnalytics} from '@/components/analytics/GoogleAnalytics';
 import {GoogleTagManager} from '@/components/analytics/GoogleTagManager';
 import {site} from '@/lib/site';
-import {buildLocaleAlternates} from '@/lib/seo';
+import {buildLocalizedPageMetadata, organizationSchema} from '@/lib/seo';
+import {JsonLd} from '@/components/seo/JsonLd';
 
 const inter = Inter({variable: '--font-inter', subsets: ['latin']});
 
@@ -21,33 +22,6 @@ const firaCode = Fira_Code({variable: '--font-fira-code', subsets: ['latin']});
 
 const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || '';
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim() || '';
-
-const ORGANIZATION_SCHEMA = {
-  '@context': 'https://schema.org',
-  '@type': 'ProfessionalService',
-  name: site.companyName,
-  legalName: site.companyName,
-  url: site.url,
-  email: site.contactEmail,
-  vatID: site.vatNumber,
-  founder: {
-    '@type': 'Person',
-    name: site.personalBrand,
-  },
-  sameAs: Object.values(site.social),
-  areaServed: [
-    {
-      '@type': 'Country',
-      name: 'Belgium',
-    },
-    {
-      '@type': 'AdministrativeArea',
-      name: 'Wallonia',
-    },
-  ],
-  availableLanguage: ['fr', 'en', 'nl'],
-  serviceType: ['AI systems & automation', 'Web development', 'Real-time 3D/VR'],
-};
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
@@ -69,12 +43,15 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
 
   return {
     metadataBase: new URL(site.url),
+    ...buildLocalizedPageMetadata({
+      locale,
+      title: `${site.personalBrand} · ${site.companyName}`,
+      description: descriptionByLocale[locale] || descriptionByLocale.en,
+    }),
     title: {
       default: `${site.personalBrand} · ${site.companyName}`,
       template: `%s · ${site.companyName}`,
     },
-    description: descriptionByLocale[locale] || descriptionByLocale.en,
-    alternates: buildLocaleAlternates(locale),
   };
 }
 
@@ -96,10 +73,7 @@ export default async function LocaleLayout({children, params}: Props) {
           <main className="mx-auto max-w-6xl px-6 py-12 md:py-14">{children}</main>
           <Footer />
         </NextIntlClientProvider>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{__html: JSON.stringify(ORGANIZATION_SCHEMA)}}
-        />
+        <JsonLd data={organizationSchema} />
         {GTM_ID ? <GoogleTagManager containerId={GTM_ID} /> : null}
         {GA_MEASUREMENT_ID ? (
           <Suspense fallback={null}>
