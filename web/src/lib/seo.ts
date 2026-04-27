@@ -1,5 +1,6 @@
 import type {Metadata} from 'next';
 import {routing} from '@/i18n/routing';
+import {site} from '@/lib/site';
 
 const HREFLANG_BY_LOCALE: Record<string, string> = {
   fr: 'fr-BE',
@@ -18,6 +19,11 @@ export function localizedPath(locale: string, pathSuffix = '') {
   return `/${locale}${suffix}`;
 }
 
+export function absoluteUrl(path: string) {
+  const base = site.url.replace(/\/$/, '');
+  return `${base}${path.startsWith('/') ? path : `/${path}`}`;
+}
+
 export function buildLocaleAlternates(locale: string, pathSuffix = ''): NonNullable<Metadata['alternates']> {
   const suffix = normalizeSuffix(pathSuffix);
   const languages: Record<string, string> = {};
@@ -32,5 +38,145 @@ export function buildLocaleAlternates(locale: string, pathSuffix = ''): NonNulla
   return {
     canonical: localizedPath(locale, suffix),
     languages,
+  };
+}
+
+type LocalizedPageMetadataInput = {
+  locale: string;
+  pathSuffix?: string;
+  title: string;
+  description: string;
+  type?: 'website' | 'article';
+};
+
+export function buildLocalizedPageMetadata({
+  locale,
+  pathSuffix = '',
+  title,
+  description,
+  type = 'website',
+}: LocalizedPageMetadataInput): Metadata {
+  const path = localizedPath(locale, pathSuffix);
+  const url = absoluteUrl(path);
+
+  return {
+    title,
+    description,
+    alternates: buildLocaleAlternates(locale, pathSuffix),
+    openGraph: {
+      title,
+      description,
+      url,
+      siteName: site.companyName,
+      locale,
+      type,
+    },
+    twitter: {
+      card: 'summary',
+      title,
+      description,
+    },
+  };
+}
+
+export const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  '@id': `${site.url}#organization`,
+  name: site.companyName,
+  legalName: site.companyName,
+  url: site.url,
+  email: site.contactEmail,
+  vatID: site.vatNumber,
+  founder: {
+    '@type': 'Person',
+    name: site.personalBrand,
+  },
+  sameAs: Object.values(site.social),
+  areaServed: [
+    {
+      '@type': 'Country',
+      name: 'Belgium',
+    },
+    {
+      '@type': 'AdministrativeArea',
+      name: 'Wallonia',
+    },
+  ],
+  availableLanguage: ['fr', 'en', 'nl'],
+  serviceType: ['AI systems & automation', 'Web development', 'Real-time 3D/VR'],
+};
+
+export function websiteSchema(locale: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': `${site.url}/${locale}#website`,
+    name: site.companyName,
+    url: absoluteUrl(localizedPath(locale)),
+    inLanguage: locale,
+    publisher: {
+      '@id': `${site.url}#organization`,
+    },
+  };
+}
+
+export function webPageSchema(locale: string, pathSuffix: string, title: string, description: string) {
+  const url = absoluteUrl(localizedPath(locale, pathSuffix));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    '@id': `${url}#webpage`,
+    url,
+    name: title,
+    description,
+    inLanguage: locale,
+    isPartOf: {
+      '@id': `${site.url}/${locale}#website`,
+    },
+    about: {
+      '@id': `${site.url}#organization`,
+    },
+  };
+}
+
+export function serviceSchema(locale: string, slug: string, title: string, description: string) {
+  const url = absoluteUrl(localizedPath(locale, `/services/${slug}`));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    '@id': `${url}#service`,
+    name: title,
+    description,
+    url,
+    inLanguage: locale,
+    provider: {
+      '@id': `${site.url}#organization`,
+    },
+    areaServed: [
+      {
+        '@type': 'Country',
+        name: 'Belgium',
+      },
+      {
+        '@type': 'AdministrativeArea',
+        name: 'Wallonia',
+      },
+    ],
+  };
+}
+
+export function breadcrumbSchema(locale: string, items: Array<{name: string; path: string}>) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: items.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      item: absoluteUrl(localizedPath(locale, item.path)),
+    })),
   };
 }

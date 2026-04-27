@@ -8,7 +8,8 @@ import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
-import {buildLocaleAlternates} from '@/lib/seo';
+import {buildLocalizedPageMetadata, webPageSchema, websiteSchema} from '@/lib/seo';
+import {JsonLd} from '@/components/seo/JsonLd';
 
 type Props = {
   params: Promise<{locale: string}>;
@@ -29,11 +30,11 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
     nl: 'Edge Solutions helpt teams om AI-gebruik echt bruikbaar te maken, met menselijke review, guardrails, webintegratie en realtime uitvoering wanneer het product dat vraagt.',
   };
 
-  return {
+  return buildLocalizedPageMetadata({
+    locale,
     title: titleByLocale[locale] || titleByLocale.en,
     description: descriptionByLocale[locale] || descriptionByLocale.en,
-    alternates: buildLocaleAlternates(locale),
-  };
+  });
 }
 
 export default async function HomePage({params}: Props) {
@@ -41,6 +42,16 @@ export default async function HomePage({params}: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations();
+  const metadataTitle = {
+    fr: 'Systèmes IA pragmatiques et delivery fiable pour équipes wallonnes',
+    en: 'Pragmatic AI systems and delivery hardening for Belgian teams',
+    nl: 'Pragmatische AI-systemen en betrouwbare delivery voor Belgische teams',
+  }[locale] || 'Pragmatic AI systems and delivery hardening for Belgian teams';
+  const metadataDescription = {
+    fr: 'Edge Solutions aide les équipes à rendre leurs usages IA réellement exploitables, avec revue humaine, garde-fous, intégration web et exécution temps réel quand le produit le demande.',
+    en: 'Edge Solutions helps teams turn AI usage into something truly usable, with human review, guardrails, web integration and real-time execution when the product needs it.',
+    nl: 'Edge Solutions helpt teams om AI-gebruik echt bruikbaar te maken, met menselijke review, guardrails, webintegratie en realtime uitvoering wanneer het product dat vraagt.',
+  }[locale] || 'Edge Solutions helps teams turn AI usage into something truly usable, with human review, guardrails, web integration and real-time execution when the product needs it.';
   const serviceCards = [
     {
       href: '/services/ai-automation',
@@ -78,6 +89,8 @@ export default async function HomePage({params}: Props) {
 
   return (
     <div className="relative">
+      <JsonLd data={[websiteSchema(locale), webPageSchema(locale, '', metadataTitle, metadataDescription)]} />
+
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(900px_circle_at_75%_18%,rgba(37,99,235,0.20),transparent_60%),radial-gradient(800px_circle_at_20%_78%,rgba(124,58,237,0.16),transparent_60%)]"
