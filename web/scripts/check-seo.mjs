@@ -137,6 +137,35 @@ function assertPageHasJsonLd(pathname) {
   );
 }
 
+function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
+  const pathname = `/${locale}/services`;
+  const generated = readGeneratedPage(pathname);
+  const expectedServiceUrls = serviceSlugs.map((slug) => `${siteUrl}/${locale}/services/${slug}`);
+
+  if (generated) {
+    assert(
+      generated.includes('ItemList') && generated.includes('#services-list'),
+      `Generated ${pathname} is missing services ItemList JSON-LD`
+    );
+
+    for (const expectedUrl of expectedServiceUrls) {
+      assert(
+        generated.includes(expectedUrl),
+        `Generated ${pathname} services ItemList is missing ${expectedUrl}`
+      );
+    }
+
+    return;
+  }
+
+  assertSourceContainsAll(
+    servicesIndexSource,
+    ['servicesItemListSchema(', 'services.map((service) => ({', 'slug: service.slug'],
+    'services hub ItemList JSON-LD'
+  );
+  assertSourceContainsAll(servicesIndexSource, serviceSlugs, 'services hub ItemList source slugs');
+}
+
 const routingSource = readSource('src/i18n/routing.ts');
 const servicesSource = readSource('src/lib/content/services.ts');
 const sitemapSource = readSource('src/app/sitemap.ts');
@@ -174,8 +203,17 @@ assertSourceContainsAll(
 );
 assertSourceContainsAll(
   servicesIndexSource,
-  ["webPageSchema(locale, '/services', title, description)", 'breadcrumbSchema(locale, ['],
+  [
+    "webPageSchema(locale, '/services', title, description)",
+    'servicesItemListSchema(',
+    'breadcrumbSchema(locale, [',
+  ],
   'services hub JSON-LD'
+);
+assertSourceContainsAll(
+  seoSource,
+  ["'@type': 'ItemList'", "'@id': `${url}#services-list`", "'@type': 'Service'"],
+  'services hub ItemList schema helper'
 );
 assertSourceContainsAll(
   serviceDetailSource,
@@ -219,6 +257,7 @@ for (const slug of serviceSlugs) {
 for (const locale of locales) {
   assertPageHasJsonLd(`/${locale}`);
   assertPageHasJsonLd(`/${locale}/services`);
+  assertServicesHubHasServiceItemList(locale, serviceSlugs);
   for (const slug of serviceSlugs) {
     assertPageHasJsonLd(`/${locale}/services/${slug}`);
   }

@@ -168,6 +168,43 @@ export function serviceSchema(locale: string, slug: string, title: string, descr
   };
 }
 
+type ServiceListItem = {
+  slug: string;
+  name: string;
+  description: string;
+};
+
+export function servicesItemListSchema(locale: string, services: ServiceListItem[]) {
+  const url = absoluteUrl(localizedPath(locale, '/services'));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    '@id': `${url}#services-list`,
+    name: 'Edge Solutions services',
+    inLanguage: locale,
+    itemListElement: services.map((service, index) => {
+      const serviceUrl = absoluteUrl(localizedPath(locale, `/services/${service.slug}`));
+
+      return {
+        '@type': 'ListItem',
+        position: index + 1,
+        url: serviceUrl,
+        item: {
+          '@type': 'Service',
+          '@id': `${serviceUrl}#service`,
+          name: service.name,
+          description: service.description,
+          url: serviceUrl,
+          provider: {
+            '@id': `${site.url}#organization`,
+          },
+        },
+      };
+    }),
+  };
+}
+
 export function breadcrumbSchema(locale: string, items: Array<{name: string; path: string}>) {
   return {
     '@context': 'https://schema.org',
