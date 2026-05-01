@@ -156,6 +156,10 @@ const expectedPaths = locales.flatMap((locale) => [
 const expectedUrls = expectedPaths.map((item) => `${siteUrl}${item}`);
 
 assert(expectedUrls.length === 18, `Expected 18 localized URLs, got ${expectedUrls.length}`);
+assert(
+  /alternateLinks\s*:\s*false/.test(routingSource),
+  'next-intl HTTP alternate Link headers must stay disabled; HTML metadata owns hreflang output'
+);
 assert(sitemapSource.includes("from '@/i18n/routing'"), 'sitemap.ts must derive locales from routing.locales');
 assert(
   sitemapSource.includes("from '@/lib/content/services'") && sitemapSource.includes('SERVICE_SLUGS'),
