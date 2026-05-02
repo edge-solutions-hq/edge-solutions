@@ -2,7 +2,12 @@ import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {TrackedLink} from '@/components/ui/TrackedLink';
-import {buildLocalizedPageMetadata, breadcrumbSchema, webPageSchema} from '@/lib/seo';
+import {
+  buildLocalizedPageMetadata,
+  breadcrumbSchema,
+  servicesItemListSchema,
+  webPageSchema,
+} from '@/lib/seo';
 import {JsonLd} from '@/components/seo/JsonLd';
 
 type Props = {
@@ -76,6 +81,14 @@ export default async function ServicesIndexPage({params}: Props) {
       <JsonLd
         data={[
           webPageSchema(locale, '/services', title, description),
+          servicesItemListSchema(
+            locale,
+            services.map((service) => ({
+              slug: service.slug,
+              name: service.label,
+              description: service.description,
+            }))
+          ),
           breadcrumbSchema(locale, [
             {name: t('nav.home'), path: ''},
             {name: t('services.title'), path: '/services'},
