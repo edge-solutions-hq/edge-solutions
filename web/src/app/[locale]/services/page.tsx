@@ -29,17 +29,7 @@ export default async function ServicesIndexPage({params}: Props) {
     proofCue: t(track.hubProofKey),
     slug: track.slug,
   }));
-  const profile = getServicesPageProfile(locale, {
-    offerTracks: services.map((service) => ({
-      slug: service.slug,
-      name: service.label,
-      description: service.description,
-    })),
-    breadcrumbs: [
-      {name: t('nav.home'), path: ''},
-      {name: t('services.title'), path: '/services'},
-    ],
-  });
+  const profile = getServicesPageProfile(locale, {translate: t});
 
   return (
     <div className="space-y-8">

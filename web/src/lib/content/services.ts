@@ -4,6 +4,7 @@ import {
   OFFER_TRACK_SLUGS,
   type OfferTrackSlug,
 } from '@/lib/offer-tracks';
+import {getOfferTrackProofProfile, type OfferTrackProofProfile} from '@/lib/content/proof-registry';
 
 export type ServiceSlug = OfferTrackSlug;
 export const SERVICE_SLUGS = OFFER_TRACK_SLUGS;
@@ -23,6 +24,7 @@ export type ServiceContentResult = {
   requestedLocale: Locale;
   contentLocale: Locale;
   didFallback: boolean;
+  proof: OfferTrackProofProfile;
   module: MdxModule;
   metadata: {
     title?: string;
@@ -58,6 +60,8 @@ export async function getServiceContent(locale: string, slug: string): Promise<S
   const preferred = loaders[safeLocale][typedSlug];
   const fallback = loaders.fr[typedSlug];
   if (!fallback) return null;
+  const proof = getOfferTrackProofProfile(typedSlug);
+  if (!proof) return null;
 
   const preferredModule = preferred ? await preferred().catch(() => null) : null;
   const shouldTryFallback = !preferredModule && safeLocale !== 'fr';
@@ -73,6 +77,7 @@ export async function getServiceContent(locale: string, slug: string): Promise<S
     requestedLocale: safeLocale,
     contentLocale: didFallback ? 'fr' : safeLocale,
     didFallback,
+    proof,
     module: mod,
     metadata: mod.metadata ?? {},
   };

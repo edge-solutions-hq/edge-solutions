@@ -3,6 +3,12 @@
 import {LOCALES} from '@/i18n/routing';
 import type {OfferTrackSlug} from '@/lib/offer-tracks';
 import type {ContactAttemptOutcome, ContactOfferValue} from '@/lib/contact/intake';
+import {
+  analyticsEvents,
+  type ContactCtaPlacement,
+  type OfferTrackClickPlacement,
+  type ScrollDepthThreshold,
+} from '@/lib/analytics/taxonomy';
 
 declare global {
   interface Window {
@@ -74,10 +80,10 @@ export function trackContactCtaClick({
   ctaLabel,
 }: {
   ctaTarget: string;
-  placement?: string;
+  placement?: ContactCtaPlacement;
   ctaLabel?: string;
 }) {
-  trackConversionEvent('contact_cta_click', {
+  trackConversionEvent(analyticsEvents.contactCtaClick, {
     cta_target: ctaTarget,
     page_path: currentPagePath(),
     placement,
@@ -92,11 +98,11 @@ export function trackOfferTrackClick({
   linkLabel,
 }: {
   offerTrackSlug: OfferTrackSlug;
-  placement: string;
+  placement: OfferTrackClickPlacement;
   linkTarget?: string;
   linkLabel?: string;
 }) {
-  trackConversionEvent('service_card_click', {
+  trackConversionEvent(analyticsEvents.offerTrackClick, {
     service_slug: offerTrackSlug,
     placement,
     page_path: currentPagePath(),
@@ -112,7 +118,7 @@ export function trackLocaleSwitch({
   fromLocale: string;
   toLocale: string;
 }) {
-  trackConversionEvent('locale_switch', {
+  trackConversionEvent(analyticsEvents.localeSwitch, {
     from_locale: fromLocale,
     to_locale: toLocale,
     page_path: currentPagePath(),
@@ -124,9 +130,9 @@ export function trackServiceScrollDepth({
   scrollDepthPercent,
 }: {
   offerTrackSlug: OfferTrackSlug;
-  scrollDepthPercent: number;
+  scrollDepthPercent: ScrollDepthThreshold;
 }) {
-  trackConversionEvent('service_scroll_depth', {
+  trackConversionEvent(analyticsEvents.offerTrackScrollDepth, {
     service_slug: offerTrackSlug,
     scroll_depth_percent: scrollDepthPercent,
   });
@@ -139,7 +145,7 @@ export function trackContactFormSubmit({
   service?: string;
   submitAttempt: number;
 }) {
-  trackConversionEvent('contact_form_submit', {
+  trackConversionEvent(analyticsEvents.contactFormSubmit, {
     service,
     page_path: currentPagePath(),
     submit_attempt: submitAttempt,
@@ -156,7 +162,7 @@ export function trackContactFormOutcome({
   if (outcome.kind === 'spam') return;
 
   if (outcome.kind === 'success') {
-    trackConversionEvent('contact_form_success', {
+    trackConversionEvent(analyticsEvents.contactFormSuccess, {
       page_path: currentPagePath(),
       service: outcome.service,
       submit_attempt: submitAttempt,
@@ -170,7 +176,7 @@ export function trackContactFormOutcome({
       ? Object.values(outcome.fieldErrors).filter(Boolean).length
       : undefined;
 
-  trackConversionEvent('contact_form_error', {
+  trackConversionEvent(analyticsEvents.contactFormError, {
     page_path: currentPagePath(),
     service: service as ContactOfferValue | string | undefined,
     submit_attempt: submitAttempt,
