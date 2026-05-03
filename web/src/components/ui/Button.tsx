@@ -3,6 +3,7 @@
 import * as React from 'react';
 import {Link} from '@/i18n/navigation';
 import {trackContactCtaClick} from '@/lib/analytics/events';
+import type {ContactCtaPlacement} from '@/lib/analytics/taxonomy';
 import {cn} from '@/lib/cn';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -101,7 +102,7 @@ export function Button({
 export type ButtonLinkProps = React.ComponentProps<typeof Link> & {
   variant?: ButtonVariant;
   size?: ButtonSize;
-  trackingPlacement?: string;
+  trackingPlacement?: ContactCtaPlacement;
 };
 
 export function ButtonLink({

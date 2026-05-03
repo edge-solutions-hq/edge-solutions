@@ -11,16 +11,8 @@ export type OfferTrack = {
   hubProofKey: string;
   decisionKey: string;
   lastModified: Date;
+  sitemapPriority: number;
   priorityRole: 'primary' | 'supporting';
-};
-
-export type StaticSiteRouteId = 'home' | 'services' | 'contact';
-
-export type StaticSiteRoute = {
-  id: StaticSiteRouteId;
-  pathSuffix: '' | '/services' | '/contact';
-  lastModified: Date;
-  priority: number;
 };
 
 export const OFFER_TRACKS: readonly OfferTrack[] = [
@@ -35,6 +27,7 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     hubProofKey: 'services.hubAiProof',
     decisionKey: 'services.decisionAi',
     lastModified: new Date('2026-04-14T05:55:40.000Z'),
+    sitemapPriority: 0.7,
     priorityRole: 'primary',
   },
   {
@@ -48,6 +41,7 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     hubProofKey: 'services.hubWebProof',
     decisionKey: 'services.decisionWeb',
     lastModified: new Date('2026-04-16T05:54:06.000Z'),
+    sitemapPriority: 0.7,
     priorityRole: 'supporting',
   },
   {
@@ -61,32 +55,12 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     hubProofKey: 'services.hubRealtimeProof',
     decisionKey: 'services.decisionRealtime',
     lastModified: new Date('2026-04-15T05:56:00.000Z'),
+    sitemapPriority: 0.7,
     priorityRole: 'supporting',
   },
 ];
 
 export const OFFER_TRACK_SLUGS = OFFER_TRACKS.map((track) => track.slug);
-
-export const STATIC_SITE_ROUTES: readonly StaticSiteRoute[] = [
-  {
-    id: 'home',
-    pathSuffix: '',
-    lastModified: new Date('2026-04-24T10:10:11.000Z'),
-    priority: 0.7,
-  },
-  {
-    id: 'services',
-    pathSuffix: '/services',
-    lastModified: new Date('2026-04-27T13:06:04.000Z'),
-    priority: 0.7,
-  },
-  {
-    id: 'contact',
-    pathSuffix: '/contact',
-    lastModified: new Date('2026-04-05T14:34:58.000Z'),
-    priority: 0.6,
-  },
-];
 
 export function isOfferTrackSlug(value: string): value is OfferTrackSlug {
   return OFFER_TRACK_SLUGS.includes(value as OfferTrackSlug);

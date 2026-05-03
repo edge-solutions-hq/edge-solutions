@@ -3,11 +3,12 @@
 import * as React from 'react';
 import {Link} from '@/i18n/navigation';
 import {trackOfferTrackClick} from '@/lib/analytics/events';
+import type {OfferTrackClickPlacement} from '@/lib/analytics/taxonomy';
 import type {OfferTrackSlug} from '@/lib/offer-tracks';
 
 type TrackedLinkProps = React.ComponentProps<typeof Link> & {
   offerTrackSlug: OfferTrackSlug;
-  trackingPlacement: string;
+  trackingPlacement: OfferTrackClickPlacement;
 };
 
 function queryValueToStrings(value: unknown): string[] {

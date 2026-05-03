@@ -34,7 +34,7 @@ function extractStringArray(source, exportName) {
 
 function extractStringProperties(source, propertyName) {
   const escapedName = propertyName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const regex = new RegExp(`${escapedName}\\s*:\\s*['\"]([^'\"]+)['\"]`, 'g');
+  const regex = new RegExp(`${escapedName}\\s*:\\s*['\"]([^'\"]*)['\"]`, 'g');
   const values = [...source.matchAll(regex)].map((item) => item[1]);
   return [...new Set(values)];
 }
@@ -119,29 +119,13 @@ function readGeneratedPage(pathname) {
 
 function assertPageHasJsonLd(pathname) {
   const generated = readGeneratedPage(pathname);
-  if (generated) {
-    assert(
-      generated.includes('application/ld+json'),
-      `Generated page ${pathname} is missing JSON-LD`
-    );
-    return;
-  }
-
-  const sourceByPath = new Map([
-    ['', 'src/app/[locale]/page.tsx'],
-    ['/services', 'src/app/[locale]/services/page.tsx'],
-    ['/contact', 'src/app/[locale]/contact/page.tsx'],
-  ]);
-  const serviceDetailMatch = pathname.match(/^\/[a-z]{2}\/services\/([^/]+)$/);
-  const sourcePath = serviceDetailMatch
-    ? 'src/app/[locale]/services/[slug]/page.tsx'
-    : sourceByPath.get(pathname.replace(/^\/[a-z]{2}/, ''));
-  assert(sourcePath, `No source assertion configured for ${pathname}`);
-
-  const source = readSource(sourcePath);
   assert(
-    source.includes('<JsonLd') && source.includes('data='),
-    `${sourcePath} must render JSON-LD for ${pathname}`
+    generated,
+    `Generated page ${pathname} was not found. Run npm run build before check:seo.`
+  );
+  assert(
+    generated.includes('application/ld+json'),
+    `Generated page ${pathname} is missing JSON-LD`
   );
 }
 
@@ -150,28 +134,21 @@ function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
   const generated = readGeneratedPage(pathname);
   const expectedServiceUrls = serviceSlugs.map((slug) => `${siteUrl}/${locale}/services/${slug}`);
 
-  if (generated && generated.includes('#services-list')) {
-    assert(
-      generated.includes('ItemList') && generated.includes('#services-list'),
-      `Generated ${pathname} is missing services ItemList JSON-LD`
-    );
-
-    for (const expectedUrl of expectedServiceUrls) {
-      assert(
-        generated.includes(expectedUrl),
-        `Generated ${pathname} services ItemList is missing ${expectedUrl}`
-      );
-    }
-
-    return;
-  }
-
-  assertSourceContainsAll(
-    pageProfilesSource,
-    ['servicesItemListSchema(', 'offerTracks'],
-    'services hub ItemList JSON-LD'
+  assert(
+    generated,
+    `Generated ${pathname} was not found. Run npm run build before check:seo.`
   );
-  assertSourceContainsAll(offerTracksSource, serviceSlugs, 'services hub ItemList source slugs');
+  assert(
+    generated.includes('ItemList') && generated.includes('#services-list'),
+    `Generated ${pathname} is missing services ItemList JSON-LD`
+  );
+
+  for (const expectedUrl of expectedServiceUrls) {
+    assert(
+      generated.includes(expectedUrl),
+      `Generated ${pathname} services ItemList is missing ${expectedUrl}`
+    );
+  }
 }
 
 const routingSource = readSource('src/i18n/routing.ts');
@@ -184,10 +161,14 @@ const seoSource = readSource('src/lib/seo.ts');
 const homeSource = readSource('src/app/[locale]/page.tsx');
 const servicesIndexSource = readSource('src/app/[locale]/services/page.tsx');
 const serviceDetailSource = readSource('src/app/[locale]/services/[slug]/page.tsx');
+const sitemapUsesCentralizedPageProfiles =
+  sitemapSource.includes('getLocalizedSitemapEntries') &&
+  pageProfilesSource.includes('STATIC_PAGE_DEFINITIONS') &&
+  pageProfilesSource.includes('OFFER_TRACKS');
 
 const locales = extractStringArray(routingSource, 'LOCALES');
 const serviceSlugs = extractStringProperties(offerTracksSource, 'slug');
-const staticSuffixes = ['', '/services', '/contact'];
+const staticSuffixes = extractStringProperties(pageProfilesSource, 'pathSuffix');
 const expectedPaths = locales.flatMap((locale) => [
   ...staticSuffixes.map((suffix) => `/${locale}${suffix}`),
   ...serviceSlugs.map((slug) => `/${locale}/services/${slug}`),
@@ -201,7 +182,8 @@ assert(
 );
 assert(sitemapSource.includes("from '@/i18n/routing'"), 'sitemap.ts must derive locales from routing.locales');
 assert(
-  sitemapSource.includes("from '@/lib/offer-tracks'") && sitemapSource.includes('OFFER_TRACKS'),
+  sitemapUsesCentralizedPageProfiles ||
+    (sitemapSource.includes("from '@/lib/offer-tracks'") && sitemapSource.includes('OFFER_TRACKS')),
   'sitemap.ts must derive service routes from OFFER_TRACKS'
 );
 assert(
@@ -257,13 +239,6 @@ for (const slug of serviceSlugs) {
         /<link[^>]+rel=["']alternate["'][^>]+hreflang=["']x-default["']/i.test(generated),
         `Generated ${pagePath} is missing x-default alternate`
       );
-    } else {
-      assert(
-        serviceDetailSource.includes('getOfferTrackPageProfile') &&
-          pageProfilesSource.includes('buildLocalizedPageMetadata') &&
-          seoSource.includes('buildLocaleAlternates'),
-        `Service route source must derive localized alternates for ${pagePath}`
-      );
     }
   }
 }
@@ -306,8 +281,7 @@ if (generatedSitemap) {
     );
   }
 } else {
-  assert(sitemapSource.includes('STATIC_SITE_ROUTES'), 'sitemap.ts must include localized static routes');
-  assert(sitemapSource.includes('OFFER_TRACKS'), 'sitemap.ts must include localized service detail routes');
+  throw new Error('Generated sitemap.xml was not found. Run npm run build before check:seo.');
 }
 
 if (generatedRobots) {
@@ -317,10 +291,7 @@ if (generatedRobots) {
     `Generated robots.txt must include Sitemap: ${siteUrl}/sitemap.xml`
   );
 } else {
-  assert(
-    robotsSource.includes('sitemap') && robotsSource.includes('/sitemap.xml'),
-    'robots.ts must expose the sitemap URL'
-  );
+  throw new Error('Generated robots.txt was not found. Run npm run build before check:seo.');
 }
 
 console.log(

@@ -1,50 +1,15 @@
 #!/usr/bin/env node
 
+import {getAnalyticsRuntimeConfig} from '../src/lib/runtime-config-core.mjs';
+
 const args = new Set(process.argv.slice(2));
 const strict = args.has('--strict');
 const requireGa = strict || args.has('--require-ga');
 const requireGtm = strict || args.has('--require-gtm');
 
-const gaMeasurementId = (process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || '').trim();
-const gtmId = (process.env.NEXT_PUBLIC_GTM_ID || '').trim();
-
-const GA4_PATTERN = /^G-[A-Z0-9]{4,}$/;
-const GTM_PATTERN = /^GTM-[A-Z0-9]+$/;
-
-const GA4_PLACEHOLDER_PATTERN = /^G-X+$/i;
-const GTM_PLACEHOLDER_PATTERN = /^GTM-X+$/i;
-
-function checkId(value, pattern, label, placeholderPattern) {
-  if (!value) {
-    return {ok: false, reason: `${label} is missing`};
-  }
-
-  if (placeholderPattern.test(value)) {
-    return {
-      ok: false,
-      reason: `${label} is still a placeholder value (${value})`,
-    };
-  }
-
-  if (!pattern.test(value)) {
-    return {ok: false, reason: `${label} has an invalid format (${value})`};
-  }
-
-  return {ok: true, reason: `${label} format looks valid (${value})`};
-}
-
-const gaStatus = checkId(
-  gaMeasurementId,
-  GA4_PATTERN,
-  'NEXT_PUBLIC_GA_MEASUREMENT_ID',
-  GA4_PLACEHOLDER_PATTERN,
-);
-const gtmStatus = checkId(
-  gtmId,
-  GTM_PATTERN,
-  'NEXT_PUBLIC_GTM_ID',
-  GTM_PLACEHOLDER_PATTERN,
-);
+const analyticsConfig = getAnalyticsRuntimeConfig();
+const {gaMeasurementId, gtmId} = analyticsConfig.raw;
+const {ga: gaStatus, gtm: gtmStatus} = analyticsConfig.status;
 
 console.log('Analytics env validation');
 console.log('------------------------');

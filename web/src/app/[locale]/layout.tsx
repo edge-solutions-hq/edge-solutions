@@ -15,13 +15,13 @@ import {GoogleTagManager} from '@/components/analytics/GoogleTagManager';
 import {site} from '@/lib/site';
 import {buildLocalizedPageMetadata, organizationSchema} from '@/lib/seo';
 import {JsonLd} from '@/components/seo/JsonLd';
+import {getAnalyticsRuntimeConfig} from '@/lib/runtime-config';
 
 const inter = Inter({variable: '--font-inter', subsets: ['latin']});
 
 const firaCode = Fira_Code({variable: '--font-fira-code', subsets: ['latin']});
 
-const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID?.trim() || '';
-const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID?.trim() || '';
+const analyticsConfig = getAnalyticsRuntimeConfig();
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
@@ -74,10 +74,10 @@ export default async function LocaleLayout({children, params}: Props) {
           <Footer />
         </NextIntlClientProvider>
         <JsonLd data={organizationSchema} />
-        {GTM_ID ? <GoogleTagManager containerId={GTM_ID} /> : null}
-        {GA_MEASUREMENT_ID ? (
+        {analyticsConfig.gtmId ? <GoogleTagManager containerId={analyticsConfig.gtmId} /> : null}
+        {analyticsConfig.gaMeasurementId ? (
           <Suspense fallback={null}>
-            <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
+            <GoogleAnalytics measurementId={analyticsConfig.gaMeasurementId} />
           </Suspense>
         ) : null}
         <Analytics />

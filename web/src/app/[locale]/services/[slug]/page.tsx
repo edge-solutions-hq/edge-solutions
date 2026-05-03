@@ -51,11 +51,7 @@ export default async function ServicePage({params}: Props) {
     slug: content.slug,
     title,
     description,
-    breadcrumbs: [
-      {name: t('nav.home'), path: ''},
-      {name: t('services.title'), path: '/services'},
-      {name: title, path: `/services/${content.slug}`},
-    ],
+    translate: t,
   });
 
   return (

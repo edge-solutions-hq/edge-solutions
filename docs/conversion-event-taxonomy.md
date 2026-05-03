@@ -1,6 +1,6 @@
 # Conversion event taxonomy (Edge Solutions)
 
-Last updated: 2026-02-28
+Last updated: 2026-05-03
 
 ## Scope
 
@@ -29,7 +29,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 
 - `cta_target` (string): target path (typically `/contact`)
 - `page_path` (string): current path where click happened
-- `placement` (string, optional): source location (`header_cta`, `header_nav`, `mobile_menu_cta`, `mobile_menu_nav`, `home_hero_primary`, `home_bottom_primary`, `service_detail_cta`)
+- `placement` (string, optional): source location (`header_cta`, `header_nav`, `mobile_menu_cta`, `mobile_menu_nav`, `home_hero_primary`, `home_process_primary`, `home_bottom_primary`, `service_detail_cta`)
 
 ---
 
