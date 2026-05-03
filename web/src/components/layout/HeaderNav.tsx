@@ -1,7 +1,7 @@
 'use client';
 
 import {Link, usePathname} from '@/i18n/navigation';
-import {trackConversionEvent} from '@/lib/analytics/events';
+import {trackContactCtaClick} from '@/lib/analytics/events';
 import {cn} from '@/lib/cn';
 
 export type HeaderNavItem = {
@@ -34,11 +34,10 @@ export function HeaderNav({items}: {items: HeaderNavItem[]}) {
             )}
             onClick={() => {
               if (item.href === '/contact') {
-                trackConversionEvent('contact_cta_click', {
-                  cta_target: '/contact',
-                  page_path: `${window.location.pathname}${window.location.search}`,
+                trackContactCtaClick({
+                  ctaTarget: '/contact',
                   placement: 'header_nav',
-                  cta_label: item.label,
+                  ctaLabel: item.label,
                 });
               }
             }}
@@ -50,5 +49,4 @@ export function HeaderNav({items}: {items: HeaderNavItem[]}) {
     </nav>
   );
 }
-
 

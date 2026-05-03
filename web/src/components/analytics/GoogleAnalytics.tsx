@@ -3,6 +3,7 @@
 import {useEffect, useRef} from 'react';
 import Script from 'next/script';
 import {usePathname, useSearchParams} from 'next/navigation';
+import {LOCALES} from '@/i18n/routing';
 
 declare global {
   interface Window {
@@ -15,7 +16,7 @@ type GoogleAnalyticsProps = {
   measurementId: string;
 };
 
-const SUPPORTED_LOCALES = new Set(['fr', 'en', 'nl']);
+const SUPPORTED_LOCALES = new Set<string>(LOCALES);
 
 function resolveSiteLocale(pathname: string): string | undefined {
   const htmlLang = document.documentElement.lang.trim().toLowerCase();

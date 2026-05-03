@@ -8,7 +8,8 @@ import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
-import {buildLocalizedPageMetadata, webPageSchema, websiteSchema} from '@/lib/seo';
+import {OFFER_TRACKS} from '@/lib/offer-tracks';
+import {getHomePageProfile} from '@/lib/page-profiles';
 import {JsonLd} from '@/components/seo/JsonLd';
 
 type Props = {
@@ -17,24 +18,7 @@ type Props = {
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
-
-  const titleByLocale: Record<string, string> = {
-    fr: 'Systèmes IA pragmatiques et delivery fiable pour équipes wallonnes',
-    en: 'Pragmatic AI systems and delivery hardening for Belgian teams',
-    nl: 'Pragmatische AI-systemen en betrouwbare delivery voor Belgische teams',
-  };
-
-  const descriptionByLocale: Record<string, string> = {
-    fr: 'Edge Solutions aide les équipes à rendre leurs usages IA réellement exploitables, avec revue humaine, garde-fous, intégration web et exécution temps réel quand le produit le demande.',
-    en: 'Edge Solutions helps teams turn AI usage into something truly usable, with human review, guardrails, web integration and real-time execution when the product needs it.',
-    nl: 'Edge Solutions helpt teams om AI-gebruik echt bruikbaar te maken, met menselijke review, guardrails, webintegratie en realtime uitvoering wanneer het product dat vraagt.',
-  };
-
-  return buildLocalizedPageMetadata({
-    locale,
-    title: titleByLocale[locale] || titleByLocale.en,
-    description: descriptionByLocale[locale] || descriptionByLocale.en,
-  });
+  return getHomePageProfile(locale).metadata;
 }
 
 export default async function HomePage({params}: Props) {
@@ -42,36 +26,13 @@ export default async function HomePage({params}: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations();
-  const metadataTitle = {
-    fr: 'Systèmes IA pragmatiques et delivery fiable pour équipes wallonnes',
-    en: 'Pragmatic AI systems and delivery hardening for Belgian teams',
-    nl: 'Pragmatische AI-systemen en betrouwbare delivery voor Belgische teams',
-  }[locale] || 'Pragmatic AI systems and delivery hardening for Belgian teams';
-  const metadataDescription = {
-    fr: 'Edge Solutions aide les équipes à rendre leurs usages IA réellement exploitables, avec revue humaine, garde-fous, intégration web et exécution temps réel quand le produit le demande.',
-    en: 'Edge Solutions helps teams turn AI usage into something truly usable, with human review, guardrails, web integration and real-time execution when the product needs it.',
-    nl: 'Edge Solutions helpt teams om AI-gebruik echt bruikbaar te maken, met menselijke review, guardrails, webintegratie en realtime uitvoering wanneer het product dat vraagt.',
-  }[locale] || 'Edge Solutions helps teams turn AI usage into something truly usable, with human review, guardrails, web integration and real-time execution when the product needs it.';
-  const serviceCards = [
-    {
-      href: '/services/ai-automation',
-      label: t('services.aiTitle'),
-      description: t('services.aiDesc'),
-      slug: 'ai-automation',
-    },
-    {
-      href: '/services/web-dev',
-      label: t('services.webTitle'),
-      description: t('services.webDesc'),
-      slug: 'web-dev',
-    },
-    {
-      href: '/services/realtime-games',
-      label: t('services.realtimeTitle'),
-      description: t('services.realtimeDesc'),
-      slug: 'realtime-games',
-    },
-  ];
+  const profile = getHomePageProfile(locale);
+  const serviceCards = OFFER_TRACKS.map((track) => ({
+    href: track.path,
+    label: t(track.titleKey),
+    description: t(track.descriptionKey),
+    slug: track.slug,
+  }));
   const proofCards = [
     {
       title: t('home.proof.items.method.title'),
@@ -89,7 +50,7 @@ export default async function HomePage({params}: Props) {
 
   return (
     <div className="relative">
-      <JsonLd data={[websiteSchema(locale), webPageSchema(locale, '', metadataTitle, metadataDescription)]} />
+      <JsonLd data={profile.jsonLd} />
 
       <div
         aria-hidden="true"
@@ -121,11 +82,8 @@ export default async function HomePage({params}: Props) {
                 <TrackedLink
                   href={service.href}
                   aria-label={service.label}
-                  eventName="service_card_click"
-                  eventParams={{
-                    service_slug: service.slug,
-                    placement: 'home_services_grid',
-                  }}
+                  offerTrackSlug={service.slug}
+                  trackingPlacement="home_services_grid"
                   className="group flex w-full flex-col rounded-lg border border-border bg-surface p-6 no-underline shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
                 >
                   <div className="flex items-start justify-between gap-4">

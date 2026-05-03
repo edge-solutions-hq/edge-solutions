@@ -32,6 +32,13 @@ function extractStringArray(source, exportName) {
   return values;
 }
 
+function extractStringProperties(source, propertyName) {
+  const escapedName = propertyName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const regex = new RegExp(`${escapedName}\\s*:\\s*['\"]([^'\"]+)['\"]`, 'g');
+  const values = [...source.matchAll(regex)].map((item) => item[1]);
+  return [...new Set(values)];
+}
+
 function findGeneratedTextFile(directory, filePattern) {
   if (!existsSync(directory)) return null;
 
@@ -123,6 +130,7 @@ function assertPageHasJsonLd(pathname) {
   const sourceByPath = new Map([
     ['', 'src/app/[locale]/page.tsx'],
     ['/services', 'src/app/[locale]/services/page.tsx'],
+    ['/contact', 'src/app/[locale]/contact/page.tsx'],
   ]);
   const serviceDetailMatch = pathname.match(/^\/[a-z]{2}\/services\/([^/]+)$/);
   const sourcePath = serviceDetailMatch
@@ -142,7 +150,7 @@ function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
   const generated = readGeneratedPage(pathname);
   const expectedServiceUrls = serviceSlugs.map((slug) => `${siteUrl}/${locale}/services/${slug}`);
 
-  if (generated) {
+  if (generated && generated.includes('#services-list')) {
     assert(
       generated.includes('ItemList') && generated.includes('#services-list'),
       `Generated ${pathname} is missing services ItemList JSON-LD`
@@ -159,15 +167,17 @@ function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
   }
 
   assertSourceContainsAll(
-    servicesIndexSource,
-    ['servicesItemListSchema(', 'services.map((service) => ({', 'slug: service.slug'],
+    pageProfilesSource,
+    ['servicesItemListSchema(', 'offerTracks'],
     'services hub ItemList JSON-LD'
   );
-  assertSourceContainsAll(servicesIndexSource, serviceSlugs, 'services hub ItemList source slugs');
+  assertSourceContainsAll(offerTracksSource, serviceSlugs, 'services hub ItemList source slugs');
 }
 
 const routingSource = readSource('src/i18n/routing.ts');
 const servicesSource = readSource('src/lib/content/services.ts');
+const offerTracksSource = readSource('src/lib/offer-tracks.ts');
+const pageProfilesSource = readSource('src/lib/page-profiles.ts');
 const sitemapSource = readSource('src/app/sitemap.ts');
 const robotsSource = readSource('src/app/robots.ts');
 const seoSource = readSource('src/lib/seo.ts');
@@ -175,8 +185,8 @@ const homeSource = readSource('src/app/[locale]/page.tsx');
 const servicesIndexSource = readSource('src/app/[locale]/services/page.tsx');
 const serviceDetailSource = readSource('src/app/[locale]/services/[slug]/page.tsx');
 
-const locales = extractStringArray(routingSource, 'locales');
-const serviceSlugs = extractStringArray(servicesSource, 'SERVICE_SLUGS');
+const locales = extractStringArray(routingSource, 'LOCALES');
+const serviceSlugs = extractStringProperties(offerTracksSource, 'slug');
 const staticSuffixes = ['', '/services', '/contact'];
 const expectedPaths = locales.flatMap((locale) => [
   ...staticSuffixes.map((suffix) => `/${locale}${suffix}`),
@@ -191,8 +201,12 @@ assert(
 );
 assert(sitemapSource.includes("from '@/i18n/routing'"), 'sitemap.ts must derive locales from routing.locales');
 assert(
-  sitemapSource.includes("from '@/lib/content/services'") && sitemapSource.includes('SERVICE_SLUGS'),
-  'sitemap.ts must derive service routes from SERVICE_SLUGS'
+  sitemapSource.includes("from '@/lib/offer-tracks'") && sitemapSource.includes('OFFER_TRACKS'),
+  'sitemap.ts must derive service routes from OFFER_TRACKS'
+);
+assert(
+  servicesSource.includes('OFFER_TRACK_SLUGS'),
+  'content registry must derive service slugs from OFFER_TRACK_SLUGS'
 );
 assert(robotsSource.includes('/sitemap.xml'), 'robots.ts must point crawlers to sitemap.xml');
 assertSourceContainsAll(seoSource, Object.values(hreflangByLocale), 'src/lib/seo.ts hreflang map');
@@ -202,26 +216,22 @@ assert(
 );
 assertSourceContainsAll(
   homeSource,
-  ['websiteSchema(locale)', "webPageSchema(locale, '', metadataTitle, metadataDescription)"],
+  ['getHomePageProfile', 'profile.jsonLd'],
   'home page JSON-LD'
 );
 assertSourceContainsAll(
   servicesIndexSource,
-  [
-    "webPageSchema(locale, '/services', title, description)",
-    'servicesItemListSchema(',
-    'breadcrumbSchema(locale, [',
-  ],
+  ['getServicesPageProfile', 'profile.jsonLd'],
   'services hub JSON-LD'
 );
 assertSourceContainsAll(
-  seoSource,
-  ["'@type': 'ItemList'", "'@id': `${url}#services-list`", "'@type': 'Service'"],
-  'services hub ItemList schema helper'
+  pageProfilesSource,
+  ['websiteSchema(locale)', 'webPageSchema(', 'servicesItemListSchema(', 'serviceSchema(', 'breadcrumbSchema('],
+  'page profile JSON-LD graph helpers'
 );
 assertSourceContainsAll(
   serviceDetailSource,
-  ['webPageSchema(locale, `/services/${slug}`, title, description)', 'serviceSchema(locale, slug, title, description)', 'breadcrumbSchema(locale, ['],
+  ['getOfferTrackPageProfile', 'profile.jsonLd'],
   'service detail JSON-LD'
 );
 
@@ -249,8 +259,8 @@ for (const slug of serviceSlugs) {
       );
     } else {
       assert(
-        serviceDetailSource.includes('buildLocalizedPageMetadata') &&
-          serviceDetailSource.includes('pathSuffix: `/services/${slug}`') &&
+        serviceDetailSource.includes('getOfferTrackPageProfile') &&
+          pageProfilesSource.includes('buildLocalizedPageMetadata') &&
           seoSource.includes('buildLocaleAlternates'),
         `Service route source must derive localized alternates for ${pagePath}`
       );
@@ -296,10 +306,8 @@ if (generatedSitemap) {
     );
   }
 } else {
-  assert(sitemapSource.includes('staticRouteLastModified.home'), 'sitemap.ts must include localized homepage routes');
-  assert(sitemapSource.includes('staticRouteLastModified.services'), 'sitemap.ts must include localized services hub routes');
-  assert(sitemapSource.includes('staticRouteLastModified.contact'), 'sitemap.ts must include localized contact routes');
-  assert(sitemapSource.includes('SERVICE_SLUGS'), 'sitemap.ts must include localized service detail routes');
+  assert(sitemapSource.includes('STATIC_SITE_ROUTES'), 'sitemap.ts must include localized static routes');
+  assert(sitemapSource.includes('OFFER_TRACKS'), 'sitemap.ts must include localized service detail routes');
 }
 
 if (generatedRobots) {

@@ -1,80 +1,62 @@
 'use server';
 
 import {Resend} from 'resend';
-import {z} from 'zod';
 import {site} from '@/lib/site';
-
-const schema = z.object({
-  name: z.string().trim().min(2).max(80),
-  email: z.string().trim().email().max(200),
-  service: z.enum(['ai', 'web', 'realtime', 'unsure']).default('unsure'),
-  message: z.string().trim().min(10).max(5000),
-  company: z.string().optional() // honeypot (doit rester vide)
-});
+import {
+  parseContactFields,
+  readContactFormData,
+  serviceLabel,
+  type ContactAttemptOutcome,
+} from '@/lib/contact/intake';
 
 export type ContactActionState = {
   status: 'idle' | 'success' | 'error';
   message?: string;
   fieldErrors?: Partial<Record<'name' | 'email' | 'service' | 'message', string>>;
+  outcome?: ContactAttemptOutcome;
 };
-
-function asString(v: FormDataEntryValue | null) {
-  return typeof v === 'string' ? v : '';
-}
-
-function serviceLabel(service: 'ai' | 'web' | 'realtime' | 'unsure') {
-  switch (service) {
-    case 'ai':
-      return 'IA & automatisation';
-    case 'web':
-      return 'Web';
-    case 'realtime':
-      return 'Temps réel 3D/VR';
-    default:
-      return 'Non précisé';
-  }
-}
 
 export async function sendContactEmail(
   _prevState: ContactActionState,
   formData: FormData
 ): Promise<ContactActionState> {
-  const raw = {
-    name: asString(formData.get('name')),
-    email: asString(formData.get('email')),
-    service: asString(formData.get('service')),
-    message: asString(formData.get('message')),
-    company: asString(formData.get('company'))
-  };
+  const parsed = parseContactFields(readContactFormData(formData));
+  if (!parsed.ok) {
+    if (parsed.outcome.kind === 'spam') {
+      return {status: 'idle', outcome: parsed.outcome};
+    }
 
-  // Honeypot: on "réussit" sans envoyer
-  if (raw.company) {
-    return {status: 'success', message: 'OK'};
-  }
+    if (parsed.outcome.kind !== 'validation_error') {
+      return {
+        status: 'error',
+        message: 'Erreur de traitement du formulaire.',
+        outcome: parsed.outcome,
+      };
+    }
 
-  const parsed = schema.safeParse(raw);
-  if (!parsed.success) {
-    const fieldErrors = parsed.error.flatten().fieldErrors;
     return {
       status: 'error',
       message: 'Champs invalides.',
-      fieldErrors: {
-        name: fieldErrors.name?.[0],
-        email: fieldErrors.email?.[0],
-        service: fieldErrors.service?.[0],
-        message: fieldErrors.message?.[0]
-      }
+      fieldErrors: parsed.outcome.fieldErrors,
+      outcome: parsed.outcome,
     };
   }
 
-  const {name, email, service, message} = parsed.data;
+  const {name, email, service, message} = parsed.fields;
 
   const apiKey = process.env.RESEND_API_KEY;
   if (!apiKey) {
+    const outcome: ContactAttemptOutcome = {
+      kind: 'delivery_error',
+      service,
+      message: 'missing_resend_api_key',
+    };
+
     return {
       status: 'error',
       message:
-        'Configuration email manquante (RESEND_API_KEY). Ajoutez-la dans vos variables d’environnement.'
+        'Configuration email manquante (RESEND_API_KEY). Ajoutez-la dans vos variables d’environnement.',
+      outcome,
     };
   }
 
@@ -102,15 +84,22 @@ export async function sendContactEmail(
   });
 
   if (error) {
+    const outcome: ContactAttemptOutcome = {
+      kind: 'delivery_error',
+      service,
+      message: error.message || 'resend_error',
+    };
+
     return {
       status: 'error',
-      message: error.message || 'Erreur Resend.'
+      message: error.message || 'Erreur Resend.',
+      outcome,
     };
   }
 
   return {
     status: 'success',
-    message: 'Message envoyé. Je reviens vers vous rapidement.'
+    message: 'Message envoyé. Je reviens vers vous rapidement.',
+    outcome: {kind: 'success', service},
   };
 }
-

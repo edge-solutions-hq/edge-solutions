@@ -5,15 +5,17 @@ import {site} from '@/lib/site';
 import {ButtonLink} from '@/components/ui/Button';
 import {HeaderNav} from './HeaderNav';
 import {MobileMenu} from './MobileMenu';
+import {OFFER_TRACKS} from '@/lib/offer-tracks';
 
 export async function Header({locale}: {locale: string}) {
   const t = await getTranslations();
 
   const items = [
     {href: '/', label: t('nav.home')},
-    {href: '/services/ai-automation', label: t('nav.ai')},
-    {href: '/services/web-dev', label: t('nav.web')},
-    {href: '/services/realtime-games', label: t('nav.realtime')},
+    ...OFFER_TRACKS.map((track) => ({
+      href: track.path,
+      label: t(track.navKey),
+    })),
     {href: '/contact', label: t('nav.contact')}
   ];
 
@@ -51,4 +53,3 @@ export async function Header({locale}: {locale: string}) {
     </header>
   );
 }
-

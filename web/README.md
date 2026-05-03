@@ -30,7 +30,7 @@ If you want Google Tag Manager enabled, set:
 NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 ```
 
-When these variables are present, the app loads GA4/GTM and emits conversion events (`contact_cta_click`, `contact_form_submit`, `contact_form_success`, `contact_form_error`, `service_card_click`) via `dataLayer` and `gtag` when available.
+When these variables are present, the app loads GA4/GTM and emits conversion events (`contact_cta_click`, `contact_form_submit`, `contact_form_success`, `contact_form_error`, `service_card_click`, `locale_switch`, `service_scroll_depth`) via `dataLayer` and `gtag` when available.
 
 You can validate variable formats locally with:
 
