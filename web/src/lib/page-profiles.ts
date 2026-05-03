@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import {OFFER_TRACKS, type OfferTrackSlug} from '@/lib/offer-tracks';
 import {
   breadcrumbSchema,
+  buildAbsoluteLocaleAlternates,
   buildLocalizedPageMetadata,
   serviceSchema,
   servicesItemListSchema,
@@ -246,5 +247,8 @@ export function getLocalizedSitemapEntries(locales: readonly string[]) {
     lastModified: entry.lastModified,
     changeFrequency: 'monthly' as const,
     priority: entry.priority,
+    alternates: {
+      languages: buildAbsoluteLocaleAlternates(entry.path.replace(/^\/(?:fr|en|nl)/, '')),
+    },
   }));
 }
