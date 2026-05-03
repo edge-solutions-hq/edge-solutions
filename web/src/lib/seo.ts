@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import {routing} from '@/i18n/routing';
 import {site} from '@/lib/site';
 
-const HREFLANG_BY_LOCALE: Record<string, string> = {
+export const HREFLANG_BY_LOCALE: Record<string, string> = {
   fr: 'fr-BE',
   en: 'en-BE',
   nl: 'nl-BE',
@@ -39,6 +39,20 @@ export function buildLocaleAlternates(locale: string, pathSuffix = ''): NonNulla
     canonical: localizedPath(locale, suffix),
     languages,
   };
+}
+
+export function buildAbsoluteLocaleAlternates(pathSuffix = '') {
+  const suffix = normalizeSuffix(pathSuffix);
+  const languages: Record<string, string> = {};
+
+  for (const item of routing.locales) {
+    const hreflang = HREFLANG_BY_LOCALE[item] || item;
+    languages[hreflang] = absoluteUrl(localizedPath(item, suffix));
+  }
+
+  languages['x-default'] = absoluteUrl(localizedPath(routing.defaultLocale, suffix));
+
+  return languages;
 }
 
 type LocalizedPageMetadataInput = {

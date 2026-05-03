@@ -272,6 +272,32 @@ if (generatedSitemap) {
   }
 
   for (const locale of locales) {
+    for (const slug of serviceSlugs) {
+      const pageUrl = `${siteUrl}/${locale}/services/${slug}`;
+      const urlBlock = sitemapXml.match(
+        new RegExp(`<url>[\\s\\S]*?<loc>${escapeRegExp(pageUrl)}<\\/loc>[\\s\\S]*?<\\/url>`)
+      )?.[0];
+
+      assert(urlBlock, `Generated sitemap is missing service URL block for ${pageUrl}`);
+
+      for (const alternateLocale of locales) {
+        const hreflang = hreflangByLocale[alternateLocale] || alternateLocale;
+        const alternateUrl = `${siteUrl}/${alternateLocale}/services/${slug}`;
+
+        assert(
+          urlBlock.includes(`hreflang="${hreflang}"`) && urlBlock.includes(`href="${alternateUrl}"`),
+          `Generated sitemap service URL ${pageUrl} is missing ${hreflang} alternate ${alternateUrl}`
+        );
+      }
+
+      assert(
+        urlBlock.includes('hreflang="x-default"') && urlBlock.includes(`href="${siteUrl}/fr/services/${slug}"`),
+        `Generated sitemap service URL ${pageUrl} is missing x-default alternate`
+      );
+    }
+  }
+
+  for (const locale of locales) {
     const localeUrls = urls.filter((url) => url.startsWith(`${siteUrl}/${locale}`));
     assert(
       localeUrls.length === staticSuffixes.length + serviceSlugs.length,
