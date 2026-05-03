@@ -2,6 +2,10 @@
 
 import {useEffect, useRef} from 'react';
 import {trackServiceScrollDepth} from '@/lib/analytics/events';
+import {
+  calculateScrollDepthPercent,
+  getUnfiredScrollDepthThresholds,
+} from '@/lib/analytics/service-scroll-depth';
 import {scrollDepthThresholds} from '@/lib/analytics/taxonomy';
 import type {OfferTrackSlug} from '@/lib/offer-tracks';
 
@@ -11,14 +15,11 @@ type ServiceScrollDepthTrackerProps = {
 
 function getScrollDepthPercent() {
   const doc = document.documentElement;
-  const scrollTop = window.scrollY || doc.scrollTop || 0;
-  const scrollableHeight = Math.max(doc.scrollHeight - window.innerHeight, 0);
-
-  if (scrollableHeight <= 0) {
-    return 100;
-  }
-
-  return Math.min(100, Math.round((scrollTop / scrollableHeight) * 100));
+  return calculateScrollDepthPercent({
+    scrollTop: window.scrollY || doc.scrollTop || 0,
+    scrollHeight: doc.scrollHeight,
+    viewportHeight: window.innerHeight,
+  });
 }
 
 export function ServiceScrollDepthTracker({offerTrackSlug}: ServiceScrollDepthTrackerProps) {
@@ -30,10 +31,11 @@ export function ServiceScrollDepthTracker({offerTrackSlug}: ServiceScrollDepthTr
     const emitDepthEvents = () => {
       const scrollDepthPercent = getScrollDepthPercent();
 
-      for (const threshold of scrollDepthThresholds) {
-        if (scrollDepthPercent < threshold) continue;
-        if (firedThresholdsRef.current.has(threshold)) continue;
-
+      for (const threshold of getUnfiredScrollDepthThresholds({
+        scrollDepthPercent,
+        thresholds: scrollDepthThresholds,
+        firedThresholds: firedThresholdsRef.current,
+      })) {
         firedThresholdsRef.current.add(threshold);
         trackServiceScrollDepth({offerTrackSlug, scrollDepthPercent: threshold});
       }

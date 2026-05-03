@@ -8,7 +8,7 @@ import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
-import {OFFER_TRACKS} from '@/lib/offer-tracks';
+import {getHomeOfferCards} from '@/lib/offer-presentation';
 import {getHomePageProfile} from '@/lib/page-profiles';
 import {JsonLd} from '@/components/seo/JsonLd';
 
@@ -27,12 +27,7 @@ export default async function HomePage({params}: Props) {
 
   const t = await getTranslations();
   const profile = getHomePageProfile(locale);
-  const serviceCards = OFFER_TRACKS.map((track) => ({
-    href: track.path,
-    label: t(track.titleKey),
-    description: t(track.descriptionKey),
-    slug: track.slug,
-  }));
+  const serviceCards = getHomeOfferCards(t);
   const proofCards = [
     {
       title: t('home.proof.items.method.title'),

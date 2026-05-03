@@ -6,6 +6,12 @@ import {
   trackContactFormOutcome,
   trackContactFormSubmit,
 } from '@/lib/analytics/events';
+import {
+  captureContactSubmitAttempt,
+  createContactAttemptTrackerState,
+  resolveContactAttemptCompletion,
+} from '@/lib/contact/contact-attempt-tracker';
+import {contactOfferOptions} from '@/lib/contact/intake';
 import type {ContactActionState} from './actions';
 import {sendContactEmail} from './actions';
 import {Button} from '@/components/ui/Button';
@@ -23,36 +29,25 @@ function FieldError({children}: {children?: string}) {
 export function ContactForm() {
   const t = useTranslations();
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
-  const submissionAttemptRef = useRef(0);
-  const trackedAttemptRef = useRef(0);
+  const attemptTrackerRef = useRef(createContactAttemptTrackerState());
 
   useEffect(() => {
-    if (pending) {
-      return;
-    }
+    const completion = resolveContactAttemptCompletion({
+      state: attemptTrackerRef.current,
+      pending,
+      outcome: state.outcome,
+    });
 
-    const currentAttempt = submissionAttemptRef.current;
-    if (currentAttempt === 0 || currentAttempt <= trackedAttemptRef.current) {
-      return;
-    }
-
-    if (state.outcome?.kind === 'spam') {
-      trackedAttemptRef.current = currentAttempt;
-      return;
-    }
-
-    if (state.outcome) {
+    if (completion?.shouldTrack) {
       trackContactFormOutcome({
-        outcome: state.outcome,
-        submitAttempt: currentAttempt,
+        outcome: completion.outcome,
+        submitAttempt: completion.submitAttempt,
       });
-      trackedAttemptRef.current = currentAttempt;
-      return;
     }
   }, [pending, state.outcome]);
 
   function handleSubmitCapture(event: FormEvent<HTMLFormElement>) {
-    submissionAttemptRef.current += 1;
+    const submitAttempt = captureContactSubmitAttempt(attemptTrackerRef.current);
 
     const formData = new FormData(event.currentTarget);
     const service = formData.get('service');
@@ -60,8 +55,12 @@ export function ContactForm() {
 
     trackContactFormSubmit({
       service: normalizedService,
-      submitAttempt: submissionAttemptRef.current,
+      submitAttempt,
     });
+  }
+
+  function fieldErrorMessage(messageKey?: string) {
+    return messageKey ? t(messageKey) : undefined;
   }
 
   return (
@@ -85,7 +84,7 @@ export function ContactForm() {
             className={inputBase + ' h-10'}
             placeholder={t('contact.form.namePlaceholder')}
           />
-          <FieldError>{state.fieldErrors?.name}</FieldError>
+          <FieldError>{fieldErrorMessage(state.fieldErrors?.name)}</FieldError>
         </label>
 
         <label className="block">
@@ -97,7 +96,7 @@ export function ContactForm() {
             className={inputBase + ' h-10'}
             placeholder={t('contact.form.emailPlaceholder')}
           />
-          <FieldError>{state.fieldErrors?.email}</FieldError>
+          <FieldError>{fieldErrorMessage(state.fieldErrors?.email)}</FieldError>
         </label>
       </div>
 
@@ -108,12 +107,13 @@ export function ContactForm() {
           defaultValue="unsure"
           className={inputBase + ' h-10'}
         >
-          <option value="ai">{t('contact.form.service_ai')}</option>
-          <option value="web">{t('contact.form.service_web')}</option>
-          <option value="realtime">{t('contact.form.service_realtime')}</option>
-          <option value="unsure">{t('contact.form.service_unsure')}</option>
+          {contactOfferOptions.map((option) => (
+            <option key={option.value} value={option.value}>
+              {t(option.messageKey)}
+            </option>
+          ))}
         </select>
-        <FieldError>{state.fieldErrors?.service}</FieldError>
+        <FieldError>{fieldErrorMessage(state.fieldErrors?.service)}</FieldError>
       </label>
 
       <label className="block">
@@ -126,7 +126,7 @@ export function ContactForm() {
           className={inputBase + ' min-h-[8rem] resize-y'}
           placeholder={t('contact.form.messagePlaceholder')}
         />
-        <FieldError>{state.fieldErrors?.message}</FieldError>
+        <FieldError>{fieldErrorMessage(state.fieldErrors?.message)}</FieldError>
       </label>
 
       <Button
@@ -138,13 +138,13 @@ export function ContactForm() {
 
       {state.status === 'success' ? (
         <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-900 dark:text-emerald-100">
-          {t('contact.form.success')}
+          {state.messageKey ? t(state.messageKey) : t('contact.form.success')}
         </div>
       ) : null}
 
       {state.status === 'error' && state.message ? (
         <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-900 dark:text-red-100">
-          {state.message}
+          {state.messageKey ? t(state.messageKey) : state.message}
         </div>
       ) : null}
     </form>

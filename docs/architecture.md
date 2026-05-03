@@ -6,6 +6,10 @@ This note names the main Modules that future iterations should preserve.
 
 `web/src/lib/offer-tracks.ts` owns the AI-first offer-track order, slugs, paths, message-key stems, and sitemap freshness. Public route Modules should consume this catalog instead of rebuilding parallel arrays.
 
+## Offer presentation models
+
+`web/src/lib/offer-presentation.ts` projects the offer-track catalog into header nav items, homepage offer cards, services-hub cards, and decision-strip items. Public route and layout Adapters should consume these models so AI-first ordering stays local without forcing every page to share the same visual grammar.
+
 ## Page profiles
 
 `web/src/lib/page-profiles.ts` owns localized public page metadata, JSON-LD graph selection, static page sitemap facts, and localized sitemap entry generation. Route files and `web/src/app/sitemap.ts` should stay as thin Adapters that request the profile or sitemap entries.
@@ -20,7 +24,11 @@ This note names the main Modules that future iterations should preserve.
 
 ## Contact intake
 
-`web/src/lib/contact/intake.ts` owns validation, spam classification, delivery outcome vocabulary, and offer values for the contact path. The contact form should render state and analytics based on the classified outcome.
+`web/src/lib/contact/intake.ts` owns validation, spam classification, delivery outcome vocabulary, offer values, offer option message keys, and localized field-error keys for the contact path. The contact form should render state and analytics based on the classified outcome.
+
+## Contact attempt tracking
+
+`web/src/lib/contact/contact-attempt-tracker.ts` owns contact form submit-attempt counting and one-outcome-per-attempt completion rules. The contact form should stay a thin Adapter that captures submit events, observes action outcomes, and delegates bookkeeping to this Module.
 
 ## Contact delivery
 
@@ -29,6 +37,14 @@ This note names the main Modules that future iterations should preserve.
 ## Analytics taxonomy
 
 `web/src/lib/analytics/taxonomy.ts` owns event names, placement values, and scroll-depth thresholds. `web/src/lib/analytics/events.ts` owns named conversion actions and keeps GTM/GA4 as Adapters behind one transport. Callers should use domain-specific tracking functions, not raw event names.
+
+## Tracked link targets
+
+`web/src/lib/navigation/tracked-link-target.ts` owns conversion from localized `Link` href values into analytics target strings. UI link Modules should use it instead of duplicating query/hash serialization.
+
+## Service scroll depth
+
+`web/src/lib/analytics/service-scroll-depth.ts` owns pure scroll-depth percent calculation and threshold progression. `ServiceScrollDepthTracker` should remain the browser Adapter that reads window/document state and emits named analytics events.
 
 ## Runtime config
 

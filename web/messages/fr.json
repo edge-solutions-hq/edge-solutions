@@ -169,7 +169,15 @@
       "messagePlaceholder": "Contexte, objectifs, contraintes, délais...",
       "submit": "Envoyer",
       "success": "Message envoyé. Je reviens vers vous rapidement.",
-      "genericError": "Impossible d'envoyer votre message. Réessayez dans un instant."
+      "validationError": "Certains champs sont invalides.",
+      "configError": "Le formulaire n'est pas encore configuré pour l'envoi email.",
+      "genericError": "Impossible d'envoyer votre message. Réessayez dans un instant.",
+      "fieldErrors": {
+        "name": "Indiquez un nom d'au moins 2 caractères.",
+        "email": "Indiquez une adresse email valide.",
+        "service": "Choisissez un type de projet valide.",
+        "message": "Décrivez le projet en au moins 10 caractères."
+      }
     }
   },
   "footer": {

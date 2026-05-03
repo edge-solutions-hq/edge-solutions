@@ -169,7 +169,15 @@
       "messagePlaceholder": "Context, doelen, randvoorwaarden, timing...",
       "submit": "Versturen",
       "success": "Bericht verzonden. Ik kom snel bij je terug.",
-      "genericError": "Kon je bericht niet versturen. Probeer het opnieuw."
+      "validationError": "Sommige velden zijn ongeldig.",
+      "configError": "Het formulier is nog niet geconfigureerd voor emailverzending.",
+      "genericError": "Kon je bericht niet versturen. Probeer het opnieuw.",
+      "fieldErrors": {
+        "name": "Vul een naam van minstens 2 tekens in.",
+        "email": "Vul een geldig emailadres in.",
+        "service": "Kies een geldig projecttype.",
+        "message": "Beschrijf het project in minstens 10 tekens."
+      }
     }
   },
   "footer": {

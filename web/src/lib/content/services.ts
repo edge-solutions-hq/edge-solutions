@@ -24,6 +24,11 @@ export type ServiceContentResult = {
   requestedLocale: Locale;
   contentLocale: Locale;
   didFallback: boolean;
+  renderPolicy: {
+    kind: 'localized' | 'fallback';
+    requestedLocale: Locale;
+    contentLocale: Locale;
+  };
   proof: OfferTrackProofProfile;
   module: MdxModule;
   metadata: {
@@ -71,19 +76,20 @@ export async function getServiceContent(locale: string, slug: string): Promise<S
   if (!mod) return null;
 
   const didFallback = !preferredModule && safeLocale !== 'fr';
+  const contentLocale = didFallback ? 'fr' : safeLocale;
 
   return {
     slug: typedSlug,
     requestedLocale: safeLocale,
-    contentLocale: didFallback ? 'fr' : safeLocale,
+    contentLocale,
     didFallback,
+    renderPolicy: {
+      kind: didFallback ? 'fallback' : 'localized',
+      requestedLocale: safeLocale,
+      contentLocale,
+    },
     proof,
     module: mod,
     metadata: mod.metadata ?? {},
   };
-}
-
-export async function getServiceMdx(locale: string, slug: string) {
-  const result = await getServiceContent(locale, slug);
-  return result?.module ?? null;
 }

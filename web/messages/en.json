@@ -169,7 +169,15 @@
       "messagePlaceholder": "Context, goals, constraints, timeline...",
       "submit": "Send",
       "success": "Message sent. I’ll get back to you shortly.",
-      "genericError": "Could not send your message. Please try again."
+      "validationError": "Some fields are invalid.",
+      "configError": "The form is not configured for email delivery yet.",
+      "genericError": "Could not send your message. Please try again.",
+      "fieldErrors": {
+        "name": "Enter a name with at least 2 characters.",
+        "email": "Enter a valid email address.",
+        "service": "Choose a valid project type.",
+        "message": "Describe the project in at least 10 characters."
+      }
     }
   },
   "footer": {
