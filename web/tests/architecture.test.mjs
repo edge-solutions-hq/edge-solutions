@@ -31,11 +31,6 @@ function extractStringProperty(block, key) {
   return match?.[1] ?? '';
 }
 
-function extractStringArrayProperty(block, key) {
-  const match = block.match(new RegExp(`${key}: \\[([\\s\\S]*?)\\]`));
-  return match ? [...match[1].matchAll(/'([^']+)'/g)].map((item) => item[1]) : [];
-}
-
 function extractConstStringValues(source, constName) {
   const match = source.match(new RegExp(`${constName}\\s*=\\s*(?:\\{|\\[)([\\s\\S]*?)(?:\\}|\\]) as const`));
   assert.ok(match, `${constName} not found`);
@@ -63,22 +58,8 @@ function extractOfferTracks() {
   }));
 }
 
-function extractProofProfiles() {
-  const source = read('src/lib/content/proof-registry.ts');
-  return extractObjectBlocks(source, 'OFFER_TRACK_PROOF_PROFILES').map((block) => ({
-    slug: extractStringProperty(block, 'slug'),
-    proofModule: extractStringProperty(block, 'proofModule'),
-    imagePath: extractStringProperty(block, 'imagePath'),
-    structuralCounts: Object.fromEntries(
-      [...block.matchAll(/(reviewPoints|steps|checklist|columns|columnPoints|signals|phases): (\d+)/g)]
-        .map((match) => [match[1], Number(match[2])])
-    ),
-    requiredSignals: extractStringArrayProperty(block, 'requiredSignals'),
-  }));
-}
-
 const offerTracks = extractOfferTracks();
-const proofProfiles = extractProofProfiles();
+const {OFFER_TRACK_PROOF_PROFILES: proofProfiles} = await import('../src/lib/content/proof-registry.ts');
 
 function countArrayItems(source, propName) {
   const match = source.match(new RegExp(`${propName}=\\{\\[([\\s\\S]*?)\\]\\}`, 'm'));
@@ -87,6 +68,21 @@ function countArrayItems(source, propName) {
     return [...match[1].matchAll(/\n\s*\{\s*(?:\n\s*)?label:/g)].length;
   }
   return [...match[1].matchAll(/\n\s*(?:\{|['"])/g)].length;
+}
+
+function countColumnPoints(source) {
+  return [...source.matchAll(/points:\s*\[([\s\S]*?)\]/g)].reduce(
+    (total, match) => total + [...match[1].matchAll(/\n\s*['"]/g)].length,
+    0
+  );
+}
+
+function normalizeContent(value) {
+  return value
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[’']/g, "'");
 }
 
 describe('offer track catalog seam', () => {
@@ -104,9 +100,14 @@ describe('offer track catalog seam', () => {
   });
 
   it('wires public route modules through the catalog', () => {
-    assert.match(read('src/app/[locale]/page.tsx'), /OFFER_TRACKS\.map/);
-    assert.match(read('src/app/[locale]/services/page.tsx'), /OFFER_TRACKS\.map/);
-    assert.match(read('src/components/layout/Header.tsx'), /OFFER_TRACKS\.map/);
+    assert.match(read('src/lib/offer-presentation.ts'), /OFFER_TRACKS\.map/);
+    assert.match(read('src/app/[locale]/page.tsx'), /getHomeOfferCards/);
+    assert.match(read('src/app/[locale]/services/page.tsx'), /getServicesHubOfferCards/);
+    assert.match(read('src/app/[locale]/services/page.tsx'), /getServicesDecisionItems/);
+    assert.match(read('src/components/layout/Header.tsx'), /getHeaderOfferNavItems/);
+    assert.doesNotMatch(read('src/app/[locale]/page.tsx'), /OFFER_TRACKS\.map/);
+    assert.doesNotMatch(read('src/app/[locale]/services/page.tsx'), /OFFER_TRACKS\.map/);
+    assert.doesNotMatch(read('src/components/layout/Header.tsx'), /OFFER_TRACKS\.map/);
     assert.match(read('src/app/sitemap.ts'), /getLocalizedSitemapEntries/);
     assert.match(read('src/lib/page-profiles.ts'), /OFFER_TRACKS/);
     assert.match(read('src/lib/content/services.ts'), /OFFER_TRACK_SLUGS/);
@@ -149,13 +150,28 @@ describe('localized content and proof seam', () => {
         assert.match(source, /<CTA\b/, `${filePath} missing CTA`);
 
         for (const [propName, expectedCount] of Object.entries(proof.structuralCounts)) {
-          if (propName === 'columnPoints') continue;
-          assert.equal(countArrayItems(source, propName), expectedCount, `${filePath} ${propName} count drifted`);
+          const actualCount = propName === 'columnPoints'
+            ? countColumnPoints(source)
+            : countArrayItems(source, propName);
+          assert.equal(actualCount, expectedCount, `${filePath} ${propName} count drifted`);
+        }
+
+        const normalizedSource = normalizeContent(source);
+        for (const signal of proof.requiredSignals) {
+          const terms = signal.terms[locale];
+          assert.ok(terms?.length, `${track.slug} missing ${locale} terms for ${signal.concept}`);
+          assert.ok(
+            terms.some((term) => normalizedSource.includes(normalizeContent(term))),
+            `${filePath} missing proof signal: ${signal.concept}`
+          );
         }
       }
     }
 
     assert.match(read('src/lib/content/services.ts'), /getOfferTrackProofProfile/);
+    assert.match(read('src/lib/content/services.ts'), /renderPolicy/);
+    assert.doesNotMatch(read('src/lib/content/services.ts'), /function getServiceMdx/);
+    assert.match(read('src/app/[locale]/services/[slug]/page.tsx'), /renderPolicy\.requestedLocale/);
   });
 
   it('uses page profiles for metadata and JSON-LD graph selection', () => {
@@ -172,6 +188,46 @@ describe('contact intake and analytics taxonomy seams', () => {
     assert.match(deliverySource, /kind === 'spam'/);
     assert.match(deliverySource, /status: 'idle'/);
     assert.doesNotMatch(deliverySource, /status: 'success', message: 'OK'/);
+  });
+
+  it('keeps contact offer options and visible outcomes behind contact seams', () => {
+    const intakeSource = read('src/lib/contact/intake.ts');
+    const formSource = read('src/app/[locale]/contact/ContactForm.tsx');
+    const deliverySource = read('src/lib/contact/delivery.ts');
+
+    assert.match(intakeSource, /contactOfferOptions/);
+    assert.match(formSource, /contactOfferOptions\.map/);
+    assert.doesNotMatch(formSource, /<option value="ai"/);
+    assert.match(deliverySource, /messageKey/);
+    assert.match(formSource, /state\.messageKey \? t\(state\.messageKey\)/);
+  });
+
+  it('keeps contact attempt tracking outside the form Adapter', () => {
+    const formSource = read('src/app/[locale]/contact/ContactForm.tsx');
+    assert.match(formSource, /createContactAttemptTrackerState/);
+    assert.match(formSource, /captureContactSubmitAttempt/);
+    assert.match(formSource, /resolveContactAttemptCompletion/);
+    assert.doesNotMatch(formSource, /submissionAttemptRef/);
+    assert.doesNotMatch(formSource, /trackedAttemptRef/);
+  });
+
+  it('keeps tracked link target normalization in one navigation seam', () => {
+    const buttonSource = read('src/components/ui/Button.tsx');
+    const trackedLinkSource = read('src/components/ui/TrackedLink.tsx');
+
+    assert.match(read('src/lib/navigation/tracked-link-target.ts'), /hrefToTrackedTarget/);
+    assert.match(buttonSource, /tracked-link-target/);
+    assert.match(trackedLinkSource, /tracked-link-target/);
+    assert.doesNotMatch(buttonSource, /function queryValueToStrings/);
+    assert.doesNotMatch(trackedLinkSource, /function queryValueToStrings/);
+  });
+
+  it('keeps scroll-depth decision logic outside the browser Adapter', () => {
+    const trackerSource = read('src/components/analytics/ServiceScrollDepthTracker.tsx');
+    assert.match(read('src/lib/analytics/service-scroll-depth.ts'), /calculateScrollDepthPercent/);
+    assert.match(trackerSource, /service-scroll-depth/);
+    assert.match(trackerSource, /trackServiceScrollDepth/);
+    assert.match(read('src/lib/analytics/taxonomy.ts'), /scrollDepthThresholds/);
   });
 
   it('routes event taxonomy through named domain actions', () => {
@@ -196,7 +252,7 @@ describe('contact intake and analytics taxonomy seams', () => {
   });
 
   it('keeps analytics docs aligned with runtime events and AI offer value', () => {
-    const taxonomy = read('../docs/conversion-event-taxonomy.md');
+    const taxonomy = read('../docs/analytics/conversion-event-taxonomy.md');
     const taxonomySource = read('src/lib/analytics/taxonomy.ts');
     const eventNames = extractConstStringValues(taxonomySource, 'analyticsEvents');
     const placements = [
@@ -236,10 +292,13 @@ describe('page profile seam', () => {
   it('owns sitemap route facts and keeps sitemap as an Adapter', () => {
     const profileSource = read('src/lib/page-profiles.ts');
     const sitemapSource = read('src/app/sitemap.ts');
+    const seoCheckSource = read('scripts/check-seo.mjs');
     assert.match(profileSource, /STATIC_PAGE_DEFINITIONS/);
     assert.match(profileSource, /getLocalizedSitemapEntries/);
     assert.match(sitemapSource, /getLocalizedSitemapEntries/);
     assert.doesNotMatch(sitemapSource, /path\.endsWith/);
-    assert.match(read('scripts/check-seo.mjs'), /\[\^'\\?"\]\*/);
+    assert.match(seoCheckSource, /expectedLocalizedUrlCount/);
+    assert.doesNotMatch(seoCheckSource, /Expected 18/);
+    assert.match(seoCheckSource, /\[\^'\\?"\]\*/);
   });
 });

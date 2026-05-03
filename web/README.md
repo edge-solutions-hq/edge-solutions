@@ -39,7 +39,7 @@ npm run check:analytics-env
 npm run check:analytics-env:prod
 ```
 
-For production rollout, follow `../docs/gtm-ga4-production-readiness.md` and `../docs/conversion-event-taxonomy.md`.
+For production rollout, follow `../docs/analytics/gtm-ga4-production-readiness.md` and `../docs/analytics/conversion-event-taxonomy.md`.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 

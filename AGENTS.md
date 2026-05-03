@@ -28,20 +28,33 @@
 - SEO: `src/app/robots.ts`, `src/app/sitemap.ts`; keep metadata up to date when adding pages.
 
 ## Docs to read first
-- `docs/website_positioning.md`: primary positioning source for website/design/content decisions. Treat Edge Solutions as AI-first, with web/integration/realtime as supporting execution depth rather than equal top-level offers.
+- `docs/README.md`: documentation map and source-of-truth order.
+- `docs/positioning.md`: primary positioning source for website/design/content decisions. Treat Edge Solutions as AI-first, with web/integration/realtime as supporting execution depth rather than equal top-level offers.
 - `docs/tech-stack.md`: stack choices, Node version, implementation checklist.
-- `docs/website_design.md`: UX/layout guidance, but apply it through the AI-first positioning above rather than generic portfolio symmetry.
-- `docs/template-design-baseline.md`: current Tailwind Plus-derived design baseline and the signals future cron/design work should preserve.
-- `docs/website_content_plan.md`: section-by-section content plan and multilingual guidance.
-- `docs/arborescence-repo.md`: recommended repo/tree and i18n/MDX conventions.
-- Other context: `docs/marketing_strategy.md`, service pages drafts under `docs/page-service-*.md`.
+- `docs/design-baseline.md`: current Tailwind Plus-derived design baseline and the signals future cron/design work should preserve.
+- `docs/architecture.md`: active Module ownership map.
+- Historical planning notes live under `docs/archive/initial-planning/`; use them as context only, not current direction.
 
 ## Personal profile sources
 - CVs and LinkedIn profile in `ressources/` (e.g., `CV_Guminski_Gil-Tech Lead-2025-04-17.md`, `Linkedin Profile.md`) for bios, experience highlights, and wording.
 
 ## Contribution tips
-- Before changing layout, typography, section order, or service emphasis, read `docs/website_positioning.md` and preserve the AI-first hierarchy in the presentation.
+- Before changing layout, typography, section order, or service emphasis, read `docs/positioning.md` and preserve the AI-first hierarchy in the presentation.
 - When adding copy/features: update MDX for all locales, align `messages/*.json`, and keep slugs stable.
 - Run `npm run lint` before delivery.
 - Preserve content in Markdown/MDX; default authoring language is French, then translate to EN/NL.
 - If expanding services or pages, add corresponding MDX files, metadata, and translations; adjust navigation labels if needed.
+
+## Agent skills
+
+### Issue tracker
+
+Issues and PRDs are tracked in GitHub Issues for `Gil-1/edge-solutions`. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the default triage label vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, and `wontfix`. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+Use the single-context layout; read repo docs as the domain source, and consume `CONTEXT.md`/`docs/adr/` if they are added later. See `docs/agents/domain.md`.

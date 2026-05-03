@@ -174,8 +174,12 @@ const expectedPaths = locales.flatMap((locale) => [
   ...serviceSlugs.map((slug) => `/${locale}/services/${slug}`),
 ]);
 const expectedUrls = expectedPaths.map((item) => `${siteUrl}${item}`);
+const expectedLocalizedUrlCount = locales.length * (staticSuffixes.length + serviceSlugs.length);
 
-assert(expectedUrls.length === 18, `Expected 18 localized URLs, got ${expectedUrls.length}`);
+assert(
+  expectedUrls.length === expectedLocalizedUrlCount,
+  `Expected ${expectedLocalizedUrlCount} localized URLs, got ${expectedUrls.length}`
+);
 assert(
   /alternateLinks\s*:\s*false/.test(routingSource),
   'next-intl HTTP alternate Link headers must stay disabled; HTML metadata owns hreflang output'

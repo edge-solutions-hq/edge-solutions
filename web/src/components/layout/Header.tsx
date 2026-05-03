@@ -5,17 +5,14 @@ import {site} from '@/lib/site';
 import {ButtonLink} from '@/components/ui/Button';
 import {HeaderNav} from './HeaderNav';
 import {MobileMenu} from './MobileMenu';
-import {OFFER_TRACKS} from '@/lib/offer-tracks';
+import {getHeaderOfferNavItems} from '@/lib/offer-presentation';
 
 export async function Header({locale}: {locale: string}) {
   const t = await getTranslations();
 
   const items = [
     {href: '/', label: t('nav.home')},
-    ...OFFER_TRACKS.map((track) => ({
-      href: track.path,
-      label: t(track.navKey),
-    })),
+    ...getHeaderOfferNavItems(t),
     {href: '/contact', label: t('nav.contact')}
   ];
 

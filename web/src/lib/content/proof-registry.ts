@@ -1,13 +1,19 @@
 import type {OfferTrackSlug} from '@/lib/offer-tracks';
+import type {Locale} from '@/i18n/routing';
 
 export type ProofModuleName = 'WorkflowSnapshot' | 'DeliveryBlueprint' | 'PrototypeSignals';
+
+export type RequiredProofSignal = {
+  concept: string;
+  terms: Record<Locale, readonly string[]>;
+};
 
 export type OfferTrackProofProfile = {
   slug: OfferTrackSlug;
   proofModule: ProofModuleName;
   imagePath: string;
   structuralCounts: Record<string, number>;
-  requiredSignals: readonly string[];
+  requiredSignals: readonly RequiredProofSignal[];
 };
 
 export const OFFER_TRACK_PROOF_PROFILES: readonly OfferTrackProofProfile[] = [
@@ -19,7 +25,32 @@ export const OFFER_TRACK_PROOF_PROFILES: readonly OfferTrackProofProfile[] = [
       reviewPoints: 3,
       steps: 3,
     },
-    requiredSignals: ['human review', 'source of truth', 'guardrails'],
+    requiredSignals: [
+      {
+        concept: 'human review',
+        terms: {
+          fr: ['validation humaine', 'humain'],
+          en: ['human review'],
+          nl: ['menselijke review'],
+        },
+      },
+      {
+        concept: 'source of truth',
+        terms: {
+          fr: ['source de verite'],
+          en: ['source of truth'],
+          nl: ['bron van waarheid'],
+        },
+      },
+      {
+        concept: 'guardrails',
+        terms: {
+          fr: ['garde-fous'],
+          en: ['guardrails', 'limits'],
+          nl: ['guardrails', 'limieten'],
+        },
+      },
+    ],
   },
   {
     slug: 'web-dev',
@@ -30,7 +61,32 @@ export const OFFER_TRACK_PROOF_PROFILES: readonly OfferTrackProofProfile[] = [
       columns: 3,
       columnPoints: 9,
     },
-    requiredSignals: ['SEO', 'performance', 'handover'],
+    requiredSignals: [
+      {
+        concept: 'SEO',
+        terms: {
+          fr: ['SEO'],
+          en: ['SEO'],
+          nl: ['SEO'],
+        },
+      },
+      {
+        concept: 'performance',
+        terms: {
+          fr: ['performance'],
+          en: ['performance'],
+          nl: ['performance'],
+        },
+      },
+      {
+        concept: 'handover',
+        terms: {
+          fr: ['handover', 'reprise future'],
+          en: ['handover'],
+          nl: ['handover'],
+        },
+      },
+    ],
   },
   {
     slug: 'realtime-games',
@@ -40,7 +96,32 @@ export const OFFER_TRACK_PROOF_PROFILES: readonly OfferTrackProofProfile[] = [
       signals: 3,
       phases: 3,
     },
-    requiredSignals: ['performance', 'prototype', 'decision'],
+    requiredSignals: [
+      {
+        concept: 'performance',
+        terms: {
+          fr: ['performance'],
+          en: ['performance'],
+          nl: ['performance'],
+        },
+      },
+      {
+        concept: 'prototype',
+        terms: {
+          fr: ['prototype'],
+          en: ['prototype'],
+          nl: ['prototype'],
+        },
+      },
+      {
+        concept: 'decision',
+        terms: {
+          fr: ['decision', 'decisions'],
+          en: ['decision', 'decisions'],
+          nl: ['beslissing', 'beslissingen'],
+        },
+      },
+    ],
   },
 ];
 

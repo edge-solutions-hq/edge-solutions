@@ -2,7 +2,7 @@ import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {TrackedLink} from '@/components/ui/TrackedLink';
-import {OFFER_TRACKS} from '@/lib/offer-tracks';
+import {getServicesDecisionItems, getServicesHubOfferCards} from '@/lib/offer-presentation';
 import {getServicesPageProfile} from '@/lib/page-profiles';
 import {JsonLd} from '@/components/seo/JsonLd';
 
@@ -20,15 +20,8 @@ export default async function ServicesIndexPage({params}: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations();
-  const decisionItems = OFFER_TRACKS.map((track) => t(track.decisionKey));
-  const services = OFFER_TRACKS.map((track) => ({
-    href: track.path,
-    label: t(track.titleKey),
-    triggerLabel: t(track.hubTriggerKey),
-    description: t(track.hubDescriptionKey),
-    proofCue: t(track.hubProofKey),
-    slug: track.slug,
-  }));
+  const decisionItems = getServicesDecisionItems(t);
+  const services = getServicesHubOfferCards(t);
   const profile = getServicesPageProfile(locale, {translate: t});
 
   return (
@@ -60,8 +53,8 @@ export default async function ServicesIndexPage({params}: Props) {
 
         <div className="mt-4 grid gap-3 text-sm leading-6 text-foreground md:grid-cols-3">
           {decisionItems.map((item) => (
-            <p key={item} className="rounded-md bg-surface-muted px-4 py-3">
-              {item}
+            <p key={item.slug} className="rounded-md bg-surface-muted px-4 py-3">
+              {item.label}
             </p>
           ))}
         </div>

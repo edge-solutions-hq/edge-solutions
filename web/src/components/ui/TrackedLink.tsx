@@ -5,61 +5,12 @@ import {Link} from '@/i18n/navigation';
 import {trackOfferTrackClick} from '@/lib/analytics/events';
 import type {OfferTrackClickPlacement} from '@/lib/analytics/taxonomy';
 import type {OfferTrackSlug} from '@/lib/offer-tracks';
+import {hrefToTrackedTarget} from '@/lib/navigation/tracked-link-target';
 
 type TrackedLinkProps = React.ComponentProps<typeof Link> & {
   offerTrackSlug: OfferTrackSlug;
   trackingPlacement: OfferTrackClickPlacement;
 };
-
-function queryValueToStrings(value: unknown): string[] {
-  if (Array.isArray(value)) {
-    return value.flatMap(queryValueToStrings);
-  }
-
-  if (value === undefined || value === null) {
-    return [];
-  }
-
-  return [String(value)];
-}
-
-function queryToSearch(query: Record<string, unknown> | undefined): string {
-  if (!query) {
-    return '';
-  }
-
-  const searchParams = new URLSearchParams();
-
-  Object.entries(query).forEach(([key, value]) => {
-    queryValueToStrings(value).forEach((item) => {
-      searchParams.append(key, item);
-    });
-  });
-
-  const queryString = searchParams.toString();
-  return queryString ? `?${queryString}` : '';
-}
-
-function normalizeHash(hash: unknown): string {
-  if (typeof hash !== 'string' || hash.length === 0) {
-    return '';
-  }
-
-  return hash.startsWith('#') ? hash : `#${hash}`;
-}
-
-function hrefToPathname(href: React.ComponentProps<typeof Link>['href']) {
-  if (typeof href === 'string') return href;
-  if (typeof href === 'object' && href && 'pathname' in href) {
-    const pathname = typeof href.pathname === 'string' ? href.pathname : '';
-    const query = 'query' in href ? queryToSearch(href.query as Record<string, unknown>) : '';
-    const hash = 'hash' in href ? normalizeHash(href.hash) : '';
-
-    return `${pathname}${query}${hash}`;
-  }
-
-  return '';
-}
 
 export function TrackedLink({
   offerTrackSlug,
@@ -68,7 +19,7 @@ export function TrackedLink({
   href,
   ...props
 }: TrackedLinkProps) {
-  const hrefPathname = hrefToPathname(href);
+  const hrefPathname = hrefToTrackedTarget(href);
 
   return (
     <Link

@@ -25,7 +25,7 @@ export async function generateMetadata({params}: Props): Promise<Metadata> {
   if (!content?.metadata) return {};
 
   return getOfferTrackPageProfile({
-    locale,
+    locale: content.renderPolicy.requestedLocale,
     slug: content.slug,
     title: content.metadata.title || slug,
     description: content.metadata.description || '',
@@ -47,7 +47,7 @@ export default async function ServicePage({params}: Props) {
   const title = content.metadata.title || slug;
   const description = content.metadata.description || '';
   const profile = getOfferTrackPageProfile({
-    locale,
+    locale: content.renderPolicy.requestedLocale,
     slug: content.slug,
     title,
     description,

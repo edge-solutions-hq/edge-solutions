@@ -3,6 +3,45 @@ import {z} from 'zod';
 export const contactOfferValues = ['ai', 'web', 'realtime', 'unsure'] as const;
 export type ContactOfferValue = (typeof contactOfferValues)[number];
 
+export const contactOfferOptions = [
+  {
+    value: 'ai',
+    messageKey: 'contact.form.service_ai',
+    deliveryLabel: 'IA & automatisation',
+  },
+  {
+    value: 'web',
+    messageKey: 'contact.form.service_web',
+    deliveryLabel: 'Web',
+  },
+  {
+    value: 'realtime',
+    messageKey: 'contact.form.service_realtime',
+    deliveryLabel: 'Temps réel 3D/VR',
+  },
+  {
+    value: 'unsure',
+    messageKey: 'contact.form.service_unsure',
+    deliveryLabel: 'Non précisé',
+  },
+] as const satisfies readonly {
+  value: ContactOfferValue;
+  messageKey: string;
+  deliveryLabel: string;
+}[];
+
+export type ContactActionMessageKey =
+  | 'contact.form.success'
+  | 'contact.form.validationError'
+  | 'contact.form.configError'
+  | 'contact.form.genericError';
+
+export type ContactFieldErrorKey =
+  | 'contact.form.fieldErrors.name'
+  | 'contact.form.fieldErrors.email'
+  | 'contact.form.fieldErrors.service'
+  | 'contact.form.fieldErrors.message';
+
 export type ContactFields = {
   name: string;
   email: string;
@@ -10,7 +49,7 @@ export type ContactFields = {
   message: string;
 };
 
-export type ContactFieldErrors = Partial<Record<keyof ContactFields, string>>;
+export type ContactFieldErrors = Partial<Record<keyof ContactFields, ContactFieldErrorKey>>;
 
 export type ContactAttemptOutcome =
   | {kind: 'success'; service: ContactOfferValue}
@@ -47,7 +86,10 @@ export function parseContactFields(raw: ReturnType<typeof readContactFormData>):
     return {ok: false, outcome: {kind: 'spam', service: raw.service || undefined}};
   }
 
-  const parsed = schema.safeParse(raw);
+  const parsed = schema.safeParse({
+    ...raw,
+    service: raw.service || undefined,
+  });
   if (!parsed.success) {
     const fieldErrors = parsed.error.flatten().fieldErrors;
     return {
@@ -56,10 +98,10 @@ export function parseContactFields(raw: ReturnType<typeof readContactFormData>):
         kind: 'validation_error',
         service: raw.service || undefined,
         fieldErrors: {
-          name: fieldErrors.name?.[0],
-          email: fieldErrors.email?.[0],
-          service: fieldErrors.service?.[0],
-          message: fieldErrors.message?.[0],
+          name: fieldErrors.name?.[0] ? 'contact.form.fieldErrors.name' : undefined,
+          email: fieldErrors.email?.[0] ? 'contact.form.fieldErrors.email' : undefined,
+          service: fieldErrors.service?.[0] ? 'contact.form.fieldErrors.service' : undefined,
+          message: fieldErrors.message?.[0] ? 'contact.form.fieldErrors.message' : undefined,
         },
       },
     };
@@ -70,14 +112,5 @@ export function parseContactFields(raw: ReturnType<typeof readContactFormData>):
 }
 
 export function serviceLabel(service: ContactOfferValue) {
-  switch (service) {
-    case 'ai':
-      return 'IA & automatisation';
-    case 'web':
-      return 'Web';
-    case 'realtime':
-      return 'Temps réel 3D/VR';
-    default:
-      return 'Non précisé';
-  }
+  return contactOfferOptions.find((option) => option.value === service)?.deliveryLabel ?? 'Non précisé';
 }

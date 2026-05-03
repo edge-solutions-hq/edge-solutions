@@ -5,11 +5,13 @@ import {
   readContactFormData,
   serviceLabel,
   type ContactAttemptOutcome,
+  type ContactActionMessageKey,
 } from '@/lib/contact/intake';
 
 export type ContactActionState = {
   status: 'idle' | 'success' | 'error';
   message?: string;
+  messageKey?: ContactActionMessageKey;
   fieldErrors?: Partial<Record<'name' | 'email' | 'service' | 'message', string>>;
   outcome?: ContactAttemptOutcome;
 };
@@ -43,6 +45,7 @@ export async function submitContactAttempt(
       return {
         status: 'error',
         message: 'Erreur de traitement du formulaire.',
+        messageKey: 'contact.form.genericError',
         outcome: parsed.outcome,
       };
     }
@@ -50,6 +53,7 @@ export async function submitContactAttempt(
     return {
       status: 'error',
       message: 'Champs invalides.',
+      messageKey: 'contact.form.validationError',
       fieldErrors: parsed.outcome.fieldErrors,
       outcome: parsed.outcome,
     };
@@ -68,6 +72,7 @@ export async function submitContactAttempt(
       status: 'error',
       message:
         'Configuration email manquante (RESEND_API_KEY). Ajoutez-la dans vos variables d’environnement.',
+      messageKey: 'contact.form.configError',
       outcome,
     };
   }
@@ -97,6 +102,7 @@ export async function submitContactAttempt(
     return {
       status: 'error',
       message: result.message || 'Erreur Resend.',
+      messageKey: 'contact.form.genericError',
       outcome,
     };
   }
@@ -104,6 +110,7 @@ export async function submitContactAttempt(
   return {
     status: 'success',
     message: 'Message envoyé. Je reviens vers vous rapidement.',
+    messageKey: 'contact.form.success',
     outcome: {kind: 'success', service},
   };
 }
