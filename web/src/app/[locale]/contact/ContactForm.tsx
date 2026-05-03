@@ -2,7 +2,10 @@
 
 import {useActionState, useEffect, useRef, type FormEvent} from 'react';
 import {useTranslations} from 'next-intl';
-import {trackConversionEvent} from '@/lib/analytics/events';
+import {
+  trackContactFormOutcome,
+  trackContactFormSubmit,
+} from '@/lib/analytics/events';
 import type {ContactActionState} from './actions';
 import {sendContactEmail} from './actions';
 import {Button} from '@/components/ui/Button';
@@ -20,7 +23,6 @@ function FieldError({children}: {children?: string}) {
 export function ContactForm() {
   const t = useTranslations();
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
-  const lastSubmittedServiceRef = useRef<string | undefined>(undefined);
   const submissionAttemptRef = useRef(0);
   const trackedAttemptRef = useRef(0);
 
@@ -34,35 +36,20 @@ export function ContactForm() {
       return;
     }
 
-    const currentPath = `${window.location.pathname}${window.location.search}`;
-    const submittedService = lastSubmittedServiceRef.current;
-
-    if (state.status === 'success') {
-      trackConversionEvent('contact_form_success', {
-        page_path: currentPath,
-        service: submittedService,
-        submit_attempt: currentAttempt,
-      });
+    if (state.outcome?.kind === 'spam') {
       trackedAttemptRef.current = currentAttempt;
       return;
     }
 
-    if (state.status === 'error') {
-      const fieldErrorCount = state.fieldErrors
-        ? Object.values(state.fieldErrors).filter(Boolean).length
-        : 0;
-      const hasFieldErrors = fieldErrorCount > 0;
-
-      trackConversionEvent('contact_form_error', {
-        page_path: currentPath,
-        service: submittedService,
-        submit_attempt: currentAttempt,
-        error_type: hasFieldErrors ? 'validation' : 'delivery',
-        error_field_count: hasFieldErrors ? fieldErrorCount : undefined,
+    if (state.outcome) {
+      trackContactFormOutcome({
+        outcome: state.outcome,
+        submitAttempt: currentAttempt,
       });
       trackedAttemptRef.current = currentAttempt;
+      return;
     }
-  }, [pending, state.fieldErrors, state.status]);
+  }, [pending, state.outcome]);
 
   function handleSubmitCapture(event: FormEvent<HTMLFormElement>) {
     submissionAttemptRef.current += 1;
@@ -70,14 +57,10 @@ export function ContactForm() {
     const formData = new FormData(event.currentTarget);
     const service = formData.get('service');
     const normalizedService = typeof service === 'string' ? service : undefined;
-    const currentPath = `${window.location.pathname}${window.location.search}`;
 
-    lastSubmittedServiceRef.current = normalizedService;
-
-    trackConversionEvent('contact_form_submit', {
+    trackContactFormSubmit({
       service: normalizedService,
-      page_path: currentPath,
-      submit_attempt: submissionAttemptRef.current,
+      submitAttempt: submissionAttemptRef.current,
     });
   }
 

@@ -1,10 +1,11 @@
 'use client';
 
 import {useEffect, useRef} from 'react';
-import {trackConversionEvent} from '@/lib/analytics/events';
+import {trackServiceScrollDepth} from '@/lib/analytics/events';
+import type {OfferTrackSlug} from '@/lib/offer-tracks';
 
 type ServiceScrollDepthTrackerProps = {
-  serviceSlug: string;
+  offerTrackSlug: OfferTrackSlug;
 };
 
 const SCROLL_DEPTH_THRESHOLDS = [25, 50, 75, 90, 100] as const;
@@ -21,7 +22,7 @@ function getScrollDepthPercent() {
   return Math.min(100, Math.round((scrollTop / scrollableHeight) * 100));
 }
 
-export function ServiceScrollDepthTracker({serviceSlug}: ServiceScrollDepthTrackerProps) {
+export function ServiceScrollDepthTracker({offerTrackSlug}: ServiceScrollDepthTrackerProps) {
   const firedThresholdsRef = useRef<Set<number>>(new Set());
 
   useEffect(() => {
@@ -35,10 +36,7 @@ export function ServiceScrollDepthTracker({serviceSlug}: ServiceScrollDepthTrack
         if (firedThresholdsRef.current.has(threshold)) continue;
 
         firedThresholdsRef.current.add(threshold);
-        trackConversionEvent('service_scroll_depth', {
-          service_slug: serviceSlug,
-          scroll_depth_percent: threshold,
-        });
+        trackServiceScrollDepth({offerTrackSlug, scrollDepthPercent: threshold});
       }
     };
 
@@ -55,7 +53,7 @@ export function ServiceScrollDepthTracker({serviceSlug}: ServiceScrollDepthTrack
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
     };
-  }, [serviceSlug]);
+  }, [offerTrackSlug]);
 
   return null;
 }

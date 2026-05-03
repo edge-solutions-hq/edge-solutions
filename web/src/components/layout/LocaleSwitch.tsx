@@ -2,7 +2,7 @@
 
 import {Link, usePathname} from '@/i18n/navigation';
 import {routing} from '@/i18n/routing';
-import {trackConversionEvent} from '@/lib/analytics/events';
+import {trackLocaleSwitch} from '@/lib/analytics/events';
 import {cn} from '@/lib/cn';
 
 export function LocaleSwitch({locale}: {locale: string}) {
@@ -11,13 +11,7 @@ export function LocaleSwitch({locale}: {locale: string}) {
   const handleLocaleClick = (nextLocale: string, active: boolean) => {
     if (active || typeof window === 'undefined') return;
 
-    const currentPath = `${window.location.pathname}${window.location.search}`;
-
-    trackConversionEvent('locale_switch', {
-      from_locale: locale,
-      to_locale: nextLocale,
-      page_path: currentPath,
-    });
+    trackLocaleSwitch({fromLocale: locale, toLocale: nextLocale});
   };
 
   return (
@@ -45,5 +39,4 @@ export function LocaleSwitch({locale}: {locale: string}) {
     </div>
   );
 }
-
 

@@ -45,7 +45,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 
 **Parameters:**
 
-- `service_slug` (string): `web-dev` | `realtime-games`
+- `service_slug` (string): `ai-automation` | `web-dev` | `realtime-games`
 - `placement` (string): `home_services_grid` | `services_index_grid`
 - `page_path` (string): current path where click happened
 - `link_target` (string): target route (preserves query string/hash when present)
@@ -63,7 +63,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 
 **Parameters:**
 
-- `service` (string): `web` | `realtime` | `unsure`
+- `service` (string): `ai` | `web` | `realtime` | `unsure`
 - `page_path` (string): current path
 - `submit_attempt` (number): incremental submit attempt index for the current page session (starts at `1`)
 
@@ -80,7 +80,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 **Parameters:**
 
 - `page_path` (string): current path
-- `service` (string, optional): submitted service value (`web` | `realtime` | `unsure`)
+- `service` (string, optional): submitted service value (`ai` | `web` | `realtime` | `unsure`)
 - `submit_attempt` (number): submit attempt index linked to the matching `contact_form_submit`
 
 ---
@@ -96,7 +96,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 **Parameters:**
 
 - `page_path` (string): current path
-- `service` (string, optional): submitted service value (`web` | `realtime` | `unsure`)
+- `service` (string, optional): submitted service value (`ai` | `web` | `realtime` | `unsure`)
 - `submit_attempt` (number): submit attempt index linked to the matching `contact_form_submit`
 - `error_type` (string): `validation` | `delivery`
 - `error_field_count` (number, optional): count of invalid fields when `error_type=validation`
@@ -105,6 +105,37 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 
 - `contact_form_success` / `contact_form_error` fire once per captured submit attempt, including consecutive attempts with the same final status.
 - `submit_attempt` can be used to join `contact_form_submit` with the final outcome event for that attempt.
+
+---
+
+### 6) `locale_switch`
+
+**Intent:** User clicked a non-active locale switch.
+
+**Where wired:**
+
+- `web/src/components/layout/LocaleSwitch.tsx`
+
+**Parameters:**
+
+- `from_locale` (string): current locale
+- `to_locale` (string): requested locale
+- `page_path` (string): current path
+
+---
+
+### 7) `service_scroll_depth`
+
+**Intent:** User reached a depth threshold on an offer-track detail page.
+
+**Where wired:**
+
+- `web/src/components/analytics/ServiceScrollDepthTracker.tsx`
+
+**Parameters:**
+
+- `service_slug` (string): `ai-automation` | `web-dev` | `realtime-games`
+- `scroll_depth_percent` (number): one of `25`, `50`, `75`, `90`, `100`
 
 ## GTM/GA4 mapping recommendation
 
@@ -115,6 +146,8 @@ In GTM, create custom event triggers for:
 - `contact_form_submit`
 - `contact_form_success`
 - `contact_form_error`
+- `locale_switch`
+- `service_scroll_depth`
 
 In GA4:
 

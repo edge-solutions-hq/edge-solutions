@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import {Link} from '@/i18n/navigation';
-import {trackConversionEvent} from '@/lib/analytics/events';
+import {trackContactCtaClick} from '@/lib/analytics/events';
 import {cn} from '@/lib/cn';
 
 type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -127,16 +127,14 @@ export function ButtonLink({
           return;
         }
 
-        const currentPath = `${window.location.pathname}${window.location.search}`;
         const ctaLabel =
           event.currentTarget.getAttribute('aria-label')?.trim() ||
           event.currentTarget.textContent?.trim();
 
-        trackConversionEvent('contact_cta_click', {
-          cta_target: hrefPathname,
-          page_path: currentPath,
+        trackContactCtaClick({
+          ctaTarget: hrefPathname,
           placement: trackingPlacement,
-          cta_label: ctaLabel || undefined,
+          ctaLabel: ctaLabel || undefined,
         });
       }}
       {...props}

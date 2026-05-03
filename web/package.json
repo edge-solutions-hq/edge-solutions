@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "test": "node --test tests/*.test.mjs",
     "lint": "eslint",
+    "check": "npm run test && npm run check:seo && npm run check:analytics-env && npm run lint && npm run build",
     "check:seo": "node scripts/check-seo.mjs",
     "check:analytics-env": "node scripts/validate-analytics-env.mjs",
     "check:analytics-env:prod": "node scripts/validate-analytics-env.mjs --strict"

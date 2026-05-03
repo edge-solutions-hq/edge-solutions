@@ -2,13 +2,12 @@
 
 import * as React from 'react';
 import {Link} from '@/i18n/navigation';
-import {trackConversionEvent} from '@/lib/analytics/events';
-
-type EventParams = Record<string, string | number | boolean | undefined>;
+import {trackOfferTrackClick} from '@/lib/analytics/events';
+import type {OfferTrackSlug} from '@/lib/offer-tracks';
 
 type TrackedLinkProps = React.ComponentProps<typeof Link> & {
-  eventName: string;
-  eventParams?: EventParams;
+  offerTrackSlug: OfferTrackSlug;
+  trackingPlacement: string;
 };
 
 function queryValueToStrings(value: unknown): string[] {
@@ -62,8 +61,8 @@ function hrefToPathname(href: React.ComponentProps<typeof Link>['href']) {
 }
 
 export function TrackedLink({
-  eventName,
-  eventParams,
+  offerTrackSlug,
+  trackingPlacement,
   onClick,
   href,
   ...props
@@ -80,16 +79,15 @@ export function TrackedLink({
           return;
         }
 
-        const currentPath = `${window.location.pathname}${window.location.search}`;
         const linkLabel =
           event.currentTarget.getAttribute('aria-label')?.trim() ||
           event.currentTarget.textContent?.trim();
 
-        trackConversionEvent(eventName, {
-          page_path: currentPath,
-          link_target: hrefPathname || undefined,
-          link_label: linkLabel || undefined,
-          ...eventParams,
+        trackOfferTrackClick({
+          offerTrackSlug,
+          placement: trackingPlacement,
+          linkTarget: hrefPathname || undefined,
+          linkLabel: linkLabel || undefined,
         });
       }}
       {...props}

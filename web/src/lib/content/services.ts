@@ -1,11 +1,12 @@
-export type Locale = 'fr' | 'en' | 'nl';
+import {resolveLocale, type Locale} from '@/i18n/routing';
+import {
+  isOfferTrackSlug,
+  OFFER_TRACK_SLUGS,
+  type OfferTrackSlug,
+} from '@/lib/offer-tracks';
 
-export type ServiceSlug = 'ai-automation' | 'web-dev' | 'realtime-games';
-export const SERVICE_SLUGS: ServiceSlug[] = [
-  'ai-automation',
-  'web-dev',
-  'realtime-games',
-];
+export type ServiceSlug = OfferTrackSlug;
+export const SERVICE_SLUGS = OFFER_TRACK_SLUGS;
 
 type MdxModule = {
   default: React.ComponentType;
@@ -16,6 +17,18 @@ type MdxModule = {
 };
 
 type Loader = () => Promise<MdxModule>;
+
+export type ServiceContentResult = {
+  slug: ServiceSlug;
+  requestedLocale: Locale;
+  contentLocale: Locale;
+  didFallback: boolean;
+  module: MdxModule;
+  metadata: {
+    title?: string;
+    description?: string;
+  };
+};
 
 const loaders: Record<Locale, Partial<Record<ServiceSlug, Loader>>> = {
   fr: {
@@ -35,27 +48,37 @@ const loaders: Record<Locale, Partial<Record<ServiceSlug, Loader>>> = {
   },
 };
 
-const LOCALES: Locale[] = ['fr', 'en', 'nl'];
+export async function getServiceContent(locale: string, slug: string): Promise<ServiceContentResult | null> {
+  const safeLocale = resolveLocale(locale);
 
-export async function getServiceMdx(locale: string, slug: string) {
-  const safeLocale: Locale = (LOCALES.includes(locale as Locale)
-    ? (locale as Locale)
-    : 'fr') as Locale;
+  if (!isOfferTrackSlug(slug)) return null;
 
-  if (!SERVICE_SLUGS.includes(slug as ServiceSlug)) return null;
-
-  const typedSlug = slug as ServiceSlug;
+  const typedSlug = slug;
 
   const preferred = loaders[safeLocale][typedSlug];
   const fallback = loaders.fr[typedSlug];
   if (!fallback) return null;
 
-  const load = preferred ?? fallback;
+  const preferredModule = preferred ? await preferred().catch(() => null) : null;
+  const shouldTryFallback = !preferredModule && safeLocale !== 'fr';
+  const fallbackModule = shouldTryFallback ? await fallback().catch(() => null) : null;
+  const mod = preferredModule ?? fallbackModule;
 
-  const mod =
-    (await load().catch(() => null)) ??
-    (safeLocale === 'fr' ? null : await fallback().catch(() => null));
+  if (!mod) return null;
 
-  return mod;
+  const didFallback = !preferredModule && safeLocale !== 'fr';
+
+  return {
+    slug: typedSlug,
+    requestedLocale: safeLocale,
+    contentLocale: didFallback ? 'fr' : safeLocale,
+    didFallback,
+    module: mod,
+    metadata: mod.metadata ?? {},
+  };
 }
 
+export async function getServiceMdx(locale: string, slug: string) {
+  const result = await getServiceContent(locale, slug);
+  return result?.module ?? null;
+}

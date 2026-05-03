@@ -1,16 +1,11 @@
 import type {Metadata} from 'next';
 import {notFound} from 'next/navigation';
 import {setRequestLocale} from 'next-intl/server';
-import {hasLocale} from 'next-intl';
 import {getTranslations} from 'next-intl/server';
-import {routing} from '@/i18n/routing';
-import {getServiceMdx, SERVICE_SLUGS} from '@/lib/content/services';
-import {
-  breadcrumbSchema,
-  buildLocalizedPageMetadata,
-  serviceSchema,
-  webPageSchema,
-} from '@/lib/seo';
+import {isLocale, routing} from '@/i18n/routing';
+import {getServiceContent} from '@/lib/content/services';
+import {OFFER_TRACK_SLUGS} from '@/lib/offer-tracks';
+import {getOfferTrackPageProfile} from '@/lib/page-profiles';
 import {ServiceScrollDepthTracker} from '@/components/analytics/ServiceScrollDepthTracker';
 import {JsonLd} from '@/components/seo/JsonLd';
 
@@ -20,56 +15,56 @@ type Props = {
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    SERVICE_SLUGS.map((slug) => ({locale, slug}))
+    OFFER_TRACK_SLUGS.map((slug) => ({locale, slug}))
   );
 }
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale, slug} = await params;
-  const mdx = await getServiceMdx(locale, slug);
-  if (!mdx?.metadata) return {};
+  const content = await getServiceContent(locale, slug);
+  if (!content?.metadata) return {};
 
-  return buildLocalizedPageMetadata({
+  return getOfferTrackPageProfile({
     locale,
-    pathSuffix: `/services/${slug}`,
-    title: mdx.metadata.title || slug,
-    description: mdx.metadata.description || '',
-  });
+    slug: content.slug,
+    title: content.metadata.title || slug,
+    description: content.metadata.description || '',
+  }).metadata;
 }
 
 export default async function ServicePage({params}: Props) {
   const {locale, slug} = await params;
 
-  if (!hasLocale(routing.locales, locale)) notFound();
+  if (!isLocale(locale)) notFound();
 
   setRequestLocale(locale);
 
-  const mdx = await getServiceMdx(locale, slug);
-  if (!mdx) notFound();
+  const content = await getServiceContent(locale, slug);
+  if (!content) notFound();
 
   const t = await getTranslations();
-  const Content = mdx.default;
-  const title = mdx.metadata?.title || slug;
-  const description = mdx.metadata?.description || '';
+  const Content = content.module.default;
+  const title = content.metadata.title || slug;
+  const description = content.metadata.description || '';
+  const profile = getOfferTrackPageProfile({
+    locale,
+    slug: content.slug,
+    title,
+    description,
+    breadcrumbs: [
+      {name: t('nav.home'), path: ''},
+      {name: t('services.title'), path: '/services'},
+      {name: title, path: `/services/${content.slug}`},
+    ],
+  });
 
   return (
     <>
-      <ServiceScrollDepthTracker serviceSlug={slug} />
-      <JsonLd
-        data={[
-          webPageSchema(locale, `/services/${slug}`, title, description),
-          serviceSchema(locale, slug, title, description),
-          breadcrumbSchema(locale, [
-            {name: t('nav.home'), path: ''},
-            {name: t('services.title'), path: '/services'},
-            {name: title, path: `/services/${slug}`},
-          ]),
-        ]}
-      />
+      <ServiceScrollDepthTracker offerTrackSlug={content.slug} />
+      <JsonLd data={profile.jsonLd} />
       <article className="prose prose-slate max-w-none dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground">
         <Content />
       </article>
     </>
   );
 }
-
