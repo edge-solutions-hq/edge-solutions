@@ -180,6 +180,31 @@ function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
   }
 }
 
+function assertSitemapUrlHasLocaleAlternates(sitemapXml, pagePath) {
+  const pageUrl = `${siteUrl}${pagePath}`;
+  const suffix = pagePath.replace(/^\/(?:fr|en|nl)/, '') || '';
+  const urlBlock = sitemapXml.match(
+    new RegExp(`<url>[\\s\\S]*?<loc>${escapeRegExp(pageUrl)}<\\/loc>[\\s\\S]*?<\\/url>`)
+  )?.[0];
+
+  assert(urlBlock, `Generated sitemap is missing URL block for ${pageUrl}`);
+
+  for (const alternateLocale of locales) {
+    const hreflang = hreflangByLocale[alternateLocale] || alternateLocale;
+    const alternateUrl = `${siteUrl}/${alternateLocale}${suffix}`;
+
+    assert(
+      urlBlock.includes(`hreflang="${hreflang}"`) && urlBlock.includes(`href="${alternateUrl}"`),
+      `Generated sitemap URL ${pageUrl} is missing ${hreflang} alternate ${alternateUrl}`
+    );
+  }
+
+  assert(
+    urlBlock.includes('hreflang="x-default"') && urlBlock.includes(`href="${siteUrl}/fr${suffix}"`),
+    `Generated sitemap URL ${pageUrl} is missing x-default alternate`
+  );
+}
+
 const routingSource = readSource('src/i18n/routing.ts');
 const servicesSource = readSource('src/lib/content/services.ts');
 const offerTracksSource = readSource('src/lib/offer-tracks.ts');
@@ -282,30 +307,8 @@ if (generatedSitemap) {
     assert(urls.includes(expectedUrl), `Generated sitemap is missing ${expectedUrl}`);
   }
 
-  for (const locale of locales) {
-    for (const slug of serviceSlugs) {
-      const pageUrl = `${siteUrl}/${locale}/services/${slug}`;
-      const urlBlock = sitemapXml.match(
-        new RegExp(`<url>[\\s\\S]*?<loc>${escapeRegExp(pageUrl)}<\\/loc>[\\s\\S]*?<\\/url>`)
-      )?.[0];
-
-      assert(urlBlock, `Generated sitemap is missing service URL block for ${pageUrl}`);
-
-      for (const alternateLocale of locales) {
-        const hreflang = hreflangByLocale[alternateLocale] || alternateLocale;
-        const alternateUrl = `${siteUrl}/${alternateLocale}/services/${slug}`;
-
-        assert(
-          urlBlock.includes(`hreflang="${hreflang}"`) && urlBlock.includes(`href="${alternateUrl}"`),
-          `Generated sitemap service URL ${pageUrl} is missing ${hreflang} alternate ${alternateUrl}`
-        );
-      }
-
-      assert(
-        urlBlock.includes('hreflang="x-default"') && urlBlock.includes(`href="${siteUrl}/fr/services/${slug}"`),
-        `Generated sitemap service URL ${pageUrl} is missing x-default alternate`
-      );
-    }
+  for (const expectedPath of expectedPaths) {
+    assertSitemapUrlHasLocaleAlternates(sitemapXml, expectedPath);
   }
 
   for (const locale of locales) {
