@@ -31,6 +31,23 @@
         "process": "Choix techniques clairs",
         "publicLinks": "Base exploitable"
       },
+      "signals": {
+        "publicWork": {
+          "label": "Signal public",
+          "value": "Rusty Art est consultable en ligne",
+          "description": "Un projet public vivant permet de voir une démarche IA en cours, pas seulement une promesse commerciale."
+        },
+        "tools": {
+          "label": "Outils utilisés",
+          "value": "OpenClaw, Next.js, TypeScript, MDX",
+          "description": "Le site et les preuves s’appuient sur des outils réels de delivery, d’automatisation, de contenu versionné et de contrôle qualité."
+        },
+        "process": {
+          "label": "Artefacts de méthode",
+          "value": "Prompts, rapports, mémoire et validations",
+          "description": "Les décisions importantes sont cadrées par des sources de vérité, des revues humaines et des points de contrôle avant action."
+        }
+      },
       "items": {
         "openclaw": {
           "title": "Setup OpenClaw utilisé au quotidien",
