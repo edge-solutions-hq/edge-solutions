@@ -129,6 +129,35 @@ function assertPageHasJsonLd(pathname) {
   );
 }
 
+function assertPageHasLocaleAlternates(pathname) {
+  const generated = readGeneratedPage(pathname);
+  const suffix = pathname.replace(/^\/(?:fr|en|nl)/, '') || '';
+
+  assert(
+    generated,
+    `Generated page ${pathname} was not found. Run npm run build before check:seo.`
+  );
+
+  for (const alternateLocale of locales) {
+    const hreflang = hreflangByLocale[alternateLocale] || alternateLocale;
+    const href = `${siteUrl}/${alternateLocale}${suffix}`;
+    const alternatePattern = new RegExp(
+      `<link[^>]+rel=["']alternate["'][^>]+hreflang=["']${escapeRegExp(hreflang)}["'][^>]+href=["']${escapeRegExp(href)}["']|<link[^>]+href=["']${escapeRegExp(href)}["'][^>]+rel=["']alternate["'][^>]+hreflang=["']${escapeRegExp(hreflang)}["']`,
+      'i'
+    );
+
+    assert(
+      alternatePattern.test(generated),
+      `Generated ${pathname} is missing ${hreflang} alternate ${href}`
+    );
+  }
+
+  assert(
+    /<link[^>]+rel=["']alternate["'][^>]+hreflang=["']x-default["']/i.test(generated),
+    `Generated ${pathname} is missing x-default alternate`
+  );
+}
+
 function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
   const pathname = `/${locale}/services`;
   const generated = readGeneratedPage(pathname);
@@ -221,30 +250,8 @@ assertSourceContainsAll(
   'service detail JSON-LD'
 );
 
-for (const slug of serviceSlugs) {
-  for (const locale of locales) {
-    const pagePath = `/${locale}/services/${slug}`;
-    const generated = readGeneratedPage(pagePath);
-
-    if (generated) {
-      for (const alternateLocale of locales) {
-        const hreflang = hreflangByLocale[alternateLocale] || alternateLocale;
-        const href = `${siteUrl}/${alternateLocale}/services/${slug}`;
-        const alternatePattern = new RegExp(
-          `<link[^>]+rel=["']alternate["'][^>]+hreflang=["']${escapeRegExp(hreflang)}["'][^>]+href=["']${escapeRegExp(href)}["']|<link[^>]+href=["']${escapeRegExp(href)}["'][^>]+rel=["']alternate["'][^>]+hreflang=["']${escapeRegExp(hreflang)}["']`,
-          'i'
-        );
-        assert(
-          alternatePattern.test(generated),
-          `Generated ${pagePath} is missing ${hreflang} alternate ${href}`
-        );
-      }
-      assert(
-        /<link[^>]+rel=["']alternate["'][^>]+hreflang=["']x-default["']/i.test(generated),
-        `Generated ${pagePath} is missing x-default alternate`
-      );
-    }
-  }
+for (const pagePath of expectedPaths) {
+  assertPageHasLocaleAlternates(pagePath);
 }
 
 for (const locale of locales) {
@@ -325,5 +332,5 @@ if (generatedRobots) {
 }
 
 console.log(
-  `SEO check passed: ${expectedUrls.length} localized URLs, service hreflang alternates, JSON-LD, and robots sitemap URL validated.`
+  `SEO check passed: ${expectedUrls.length} localized URLs, generated hreflang alternates, JSON-LD, and robots sitemap URL validated.`
 );
