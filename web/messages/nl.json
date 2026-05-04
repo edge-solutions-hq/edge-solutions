@@ -31,6 +31,23 @@
         "process": "Duidelijke technische keuzes",
         "publicLinks": "Bruikbare basis"
       },
+      "signals": {
+        "publicWork": {
+          "label": "Publiek signaal",
+          "value": "Rusty Art staat live en is zichtbaar",
+          "description": "Een publiek project toont een AI-workflow in uitvoering, niet alleen verkooptekst."
+        },
+        "tools": {
+          "label": "Gebruikte tools",
+          "value": "OpenClaw, Next.js, TypeScript, MDX",
+          "description": "De site en proof steunen op echte tools voor delivery, automatisatie, versiebeheer van content en kwaliteitscontrole."
+        },
+        "process": {
+          "label": "Procesartefacten",
+          "value": "Prompts, rapporten, geheugen en checks",
+          "description": "Belangrijke beslissingen worden gekaderd door sources of truth, menselijke review en checkpoints voor actie."
+        }
+      },
       "items": {
         "openclaw": {
           "title": "OpenClaw-setup in dagelijks gebruik",

@@ -31,6 +31,23 @@
         "process": "Clear technical choices",
         "publicLinks": "Usable base"
       },
+      "signals": {
+        "publicWork": {
+          "label": "Public work signal",
+          "value": "Rusty Art is live and inspectable",
+          "description": "A public project shows an AI workflow in progress instead of relying only on sales copy."
+        },
+        "tools": {
+          "label": "Tools in use",
+          "value": "OpenClaw, Next.js, TypeScript, MDX",
+          "description": "The site and proof surface use real delivery, automation, versioned-content and quality-control tools."
+        },
+        "process": {
+          "label": "Process artifacts",
+          "value": "Prompts, reports, memory and checks",
+          "description": "Important decisions are framed by sources of truth, human review and checkpoints before action."
+        }
+      },
       "items": {
         "openclaw": {
           "title": "OpenClaw setup used daily",

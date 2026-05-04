@@ -42,6 +42,23 @@ export default async function HomePage({params}: Props) {
       description: t('home.proof.items.trust.body'),
     },
   ];
+  const proofSignals = [
+    {
+      label: t('home.proof.signals.publicWork.label'),
+      value: t('home.proof.signals.publicWork.value'),
+      description: t('home.proof.signals.publicWork.description'),
+    },
+    {
+      label: t('home.proof.signals.tools.label'),
+      value: t('home.proof.signals.tools.value'),
+      description: t('home.proof.signals.tools.description'),
+    },
+    {
+      label: t('home.proof.signals.process.label'),
+      value: t('home.proof.signals.process.value'),
+      description: t('home.proof.signals.process.description'),
+    },
+  ];
 
   return (
     <div className="relative">
@@ -138,6 +155,24 @@ export default async function HomePage({params}: Props) {
               {t('home.proof.publicProject.cta')} <span aria-hidden="true">↗</span>
             </a>
           </ShowcasePanel>
+
+          <FadeIn className="mt-8 rounded-lg border border-border bg-surface/85 p-6 shadow-sm md:p-8">
+            <dl className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+              {proofSignals.map((signal) => (
+                <div key={signal.label}>
+                  <dt className="text-xs font-semibold uppercase text-subtle-foreground">
+                    {signal.label}
+                  </dt>
+                  <dd className="mt-2 text-base font-semibold tracking-tight text-foreground">
+                    {signal.value}
+                  </dd>
+                  <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {signal.description}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </FadeIn>
 
           <FadeInStagger className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
             {proofCards.map((item) => (
