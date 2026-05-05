@@ -72,10 +72,16 @@ describe('live SEO source facts', () => {
 
         assert.ok(facts.expectedPaths.includes(expectedPath), `${expectedPath} path`);
         assert.ok(facts.expectedUrls.includes(expectedUrl), `${expectedUrl} URL`);
-        assert.deepEqual(
-          facts.urlChecks.find((check) => check.locale === locale && check.suffix === suffix),
-          {locale, suffix, path: expectedPath, url: expectedUrl}
-        );
+        const urlCheck = facts.urlChecks.find((check) => check.locale === locale && check.suffix === suffix);
+        assert.ok(urlCheck, `${expectedUrl} URL check`);
+        assert.equal(urlCheck.locale, locale);
+        assert.equal(urlCheck.suffix, suffix);
+        assert.equal(urlCheck.path, expectedPath);
+        assert.equal(urlCheck.url, expectedUrl);
+        assert.equal(typeof urlCheck.title, 'string', `${expectedUrl} title`);
+        assert.equal(typeof urlCheck.description, 'string', `${expectedUrl} description`);
+        assert.ok(urlCheck.title.length > 0, `${expectedUrl} title is non-empty`);
+        assert.ok(urlCheck.description.length > 0, `${expectedUrl} description is non-empty`);
       }
     }
 

@@ -28,9 +28,25 @@ function tags(html, tagName) {
   return [...html.matchAll(new RegExp(`<${tagName}\\b[^>]*>`, 'gi'))].map((match) => match[0]);
 }
 
+function decodeHtml(value) {
+  return value
+    .replace(/&#x([0-9a-f]+);/gi, (_, code) => String.fromCodePoint(Number.parseInt(code, 16)))
+    .replace(/&#(\d+);/g, (_, code) => String.fromCodePoint(Number.parseInt(code, 10)))
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/&apos;/g, "'")
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>');
+}
+
+function normalizeText(value) {
+  return decodeHtml(value).replace(/\s+/g, ' ').trim();
+}
+
 function textBetween(html, tagName) {
   const match = html.match(new RegExp(`<${tagName}\\b[^>]*>([\\s\\S]*?)<\\/${tagName}>`, 'i'));
-  return match?.[1]?.trim() ?? '';
+  return normalizeText(match?.[1] ?? '');
 }
 
 function metaTags(html) {
@@ -42,7 +58,8 @@ function linkTags(html) {
 }
 
 function metaContent(html, name) {
-  return metaTags(html).find((attrs) => attrs.name?.toLowerCase() === name)?.content?.trim() ?? '';
+  const content = metaTags(html).find((attrs) => attrs.name?.toLowerCase() === name)?.content?.trim() ?? '';
+  return normalizeText(content);
 }
 
 function hasNoindexMeta(html) {
@@ -105,6 +122,22 @@ function assertAlternates(html, locale, suffix, url) {
   );
 }
 
+function assertMetadata(html, {title: expectedTitle, description: expectedDescription, url}) {
+  const title = textBetween(html, 'title');
+  assert(title, `${url} is missing title`);
+  assert(
+    title.includes(normalizeText(expectedTitle)),
+    `${url} title is "${title}", expected localized title containing "${expectedTitle}"`
+  );
+
+  const description = metaContent(html, 'description');
+  assert(description, `${url} is missing meta description`);
+  assert(
+    description === normalizeText(expectedDescription),
+    `${url} meta description is "${description}", expected "${expectedDescription}"`
+  );
+}
+
 function assertJsonLd(html, url) {
   const blocks = jsonLdBlocks(html);
   assert(blocks.length > 0, `${url} is missing JSON-LD`);
@@ -118,7 +151,8 @@ function assertJsonLd(html, url) {
   }
 }
 
-async function checkUrl({locale, suffix, url}) {
+async function checkUrl(urlCheck) {
+  const {locale, suffix, url} = urlCheck;
   const response = await fetch(url, {
     headers: {
       accept: 'text/html,application/xhtml+xml',
@@ -136,12 +170,7 @@ async function checkUrl({locale, suffix, url}) {
   const html = await response.text();
   assert(!hasNoindexMeta(html), `${url} has noindex meta robots`);
 
-  const title = textBetween(html, 'title');
-  assert(title, `${url} is missing title`);
-
-  const description = metaContent(html, 'description');
-  assert(description, `${url} is missing meta description`);
-
+  assertMetadata(html, urlCheck);
   assertCanonical(html, url);
   assertAlternates(html, locale, suffix, url);
   assertJsonLd(html, url);
@@ -156,5 +185,5 @@ for (const urlCheck of urlChecks) {
 }
 
 console.log(
-  `Live SEO smoke passed: ${checked.length} production URLs returned 200 with indexable self-canonical pages, locale hreflang, x-default, title, description, and JSON-LD.`
+  `Live SEO smoke passed: ${checked.length} source-derived production URLs returned 200 with indexable self-canonical pages, localized title and description, JSON-LD, locale hreflang, and x-default.`
 );
