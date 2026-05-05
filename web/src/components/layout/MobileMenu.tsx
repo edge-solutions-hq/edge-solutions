@@ -5,13 +5,16 @@ import {Link} from '@/i18n/navigation';
 import {cn} from '@/lib/cn';
 import {ButtonLink} from '@/components/ui/Button';
 import {trackContactCtaClick} from '@/lib/analytics/events';
-import type {HeaderNavItem} from './HeaderNav';
+import {
+  getHeaderNavigationContactTrackingPayload,
+  type HeaderNavigationItem,
+} from '@/lib/navigation/header-navigation';
 
 export function MobileMenu({
   items,
   ctaLabel
 }: {
-  items: HeaderNavItem[];
+  items: HeaderNavigationItem[];
   ctaLabel: string;
 }) {
   const [open, setOpen] = React.useState(false);
@@ -58,12 +61,9 @@ export function MobileMenu({
                   role="menuitem"
                   className="rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
                   onClick={() => {
-                    if (item.href === '/contact') {
-                      trackContactCtaClick({
-                        ctaTarget: '/contact',
-                        placement: 'mobile_menu_nav',
-                        ctaLabel: item.label,
-                      });
+                    const trackingPayload = getHeaderNavigationContactTrackingPayload(item, 'mobile_menu_nav');
+                    if (trackingPayload) {
+                      trackContactCtaClick(trackingPayload);
                     }
 
                     setOpen(false);
@@ -91,4 +91,3 @@ export function MobileMenu({
     </div>
   );
 }
-

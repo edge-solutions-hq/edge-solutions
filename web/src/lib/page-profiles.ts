@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import {OFFER_TRACKS, type OfferTrackSlug} from '@/lib/offer-tracks';
+import {OFFER_TRACKS, type OfferTrackSlug} from './offer-tracks';
 import {
   breadcrumbSchema,
   buildAbsoluteLocaleAlternates,
@@ -8,8 +8,8 @@ import {
   servicesItemListSchema,
   webPageSchema,
   websiteSchema,
-} from '@/lib/seo';
-import {site} from '@/lib/site';
+} from './seo';
+import {site} from './site';
 
 type LocalizedCopy = Record<string, string>;
 type Translate = (key: string) => string;

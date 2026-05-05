@@ -57,6 +57,88 @@ export type ContactAttemptOutcome =
   | {kind: 'delivery_error'; service: ContactOfferValue; message: string}
   | {kind: 'spam'; service?: string};
 
+export type ContactFormFieldName = keyof ContactFields | 'company';
+
+export type ContactFormFieldModel = {
+  name: ContactFormFieldName;
+  labelKey?: string;
+  placeholderKey?: string;
+  errorKey?: ContactFieldErrorKey;
+  control: 'input' | 'select' | 'textarea' | 'honeypot';
+  type?: 'text' | 'email';
+  required?: boolean;
+  minLength?: number;
+  rows?: number;
+  defaultValue?: ContactOfferValue;
+  autocomplete?: string;
+};
+
+export type ContactFeedbackState = {
+  status: 'idle' | 'success' | 'error';
+  message?: string;
+  messageKey?: ContactActionMessageKey;
+};
+
+export type ContactFeedbackModel =
+  | {kind: 'none'}
+  | {kind: 'success'; messageKey: ContactActionMessageKey}
+  | {kind: 'error'; messageKey?: ContactActionMessageKey; fallbackMessage?: string};
+
+export const contactFormModel = {
+  fields: {
+    name: {
+      name: 'name',
+      labelKey: 'contact.form.name',
+      placeholderKey: 'contact.form.namePlaceholder',
+      errorKey: 'contact.form.fieldErrors.name',
+      control: 'input',
+      type: 'text',
+      required: true,
+      minLength: 2,
+    },
+    email: {
+      name: 'email',
+      labelKey: 'contact.form.email',
+      placeholderKey: 'contact.form.emailPlaceholder',
+      errorKey: 'contact.form.fieldErrors.email',
+      control: 'input',
+      type: 'email',
+      required: true,
+    },
+    service: {
+      name: 'service',
+      labelKey: 'contact.form.service',
+      errorKey: 'contact.form.fieldErrors.service',
+      control: 'select',
+      defaultValue: 'unsure',
+    },
+    message: {
+      name: 'message',
+      labelKey: 'contact.form.message',
+      placeholderKey: 'contact.form.messagePlaceholder',
+      errorKey: 'contact.form.fieldErrors.message',
+      control: 'textarea',
+      required: true,
+      minLength: 10,
+      rows: 7,
+    },
+    honeypot: {
+      name: 'company',
+      control: 'honeypot',
+      type: 'text',
+      autocomplete: 'off',
+    },
+  },
+  offerOptions: contactOfferOptions,
+  submitMessageKey: 'contact.form.submit',
+  pendingLabel: '...',
+} as const satisfies {
+  fields: Record<string, ContactFormFieldModel>;
+  offerOptions: typeof contactOfferOptions;
+  submitMessageKey: string;
+  pendingLabel: string;
+};
+
 const schema = z.object({
   name: z.string().trim().min(2).max(80),
   email: z.string().trim().email().max(200),
@@ -77,6 +159,30 @@ export function readContactFormData(formData: FormData) {
     message: asFormString(formData.get('message')),
     company: asFormString(formData.get('company')),
   };
+}
+
+export function extractContactSubmitService(formData: FormData) {
+  const service = formData.get(contactFormModel.fields.service.name);
+  return typeof service === 'string' ? service : undefined;
+}
+
+export function resolveContactFeedback(state: ContactFeedbackState): ContactFeedbackModel {
+  if (state.status === 'success') {
+    return {
+      kind: 'success',
+      messageKey: state.messageKey ?? 'contact.form.success',
+    };
+  }
+
+  if (state.status === 'error') {
+    return {
+      kind: 'error',
+      messageKey: state.messageKey,
+      fallbackMessage: state.message,
+    };
+  }
+
+  return {kind: 'none'};
 }
 
 export function parseContactFields(raw: ReturnType<typeof readContactFormData>):

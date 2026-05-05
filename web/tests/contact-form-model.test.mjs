@@ -1,0 +1,61 @@
+import {describe, it} from 'node:test';
+import assert from 'node:assert/strict';
+
+const contactIntake = await import('../src/lib/contact/intake.ts');
+
+describe('contact form model behavior', () => {
+  it('exposes field defaults and validation hints from the contact module', () => {
+    const {contactFormModel} = contactIntake;
+
+    assert.equal(contactFormModel.fields.name.name, 'name');
+    assert.equal(contactFormModel.fields.name.required, true);
+    assert.equal(contactFormModel.fields.name.minLength, 2);
+    assert.equal(contactFormModel.fields.email.type, 'email');
+    assert.equal(contactFormModel.fields.service.defaultValue, 'unsure');
+    assert.equal(contactFormModel.fields.message.minLength, 10);
+    assert.equal(contactFormModel.fields.honeypot.name, 'company');
+    assert.equal(contactFormModel.fields.honeypot.autocomplete, 'off');
+    assert.deepEqual(
+      contactFormModel.offerOptions.map((option) => option.value),
+      ['ai', 'web', 'realtime', 'unsure']
+    );
+  });
+
+  it('extracts the submit service from form data without normalizing business validity', () => {
+    const formData = new FormData();
+    formData.set('service', 'web');
+
+    assert.equal(contactIntake.extractContactSubmitService(formData), 'web');
+
+    formData.set('service', 'not-a-known-service');
+    assert.equal(contactIntake.extractContactSubmitService(formData), 'not-a-known-service');
+
+    formData.delete('service');
+    assert.equal(contactIntake.extractContactSubmitService(formData), undefined);
+  });
+
+  it('resolves feedback message keys and fallbacks for the contact adapter', () => {
+    assert.deepEqual(
+      contactIntake.resolveContactFeedback({status: 'idle'}),
+      {kind: 'none'}
+    );
+
+    assert.deepEqual(
+      contactIntake.resolveContactFeedback({status: 'success'}),
+      {kind: 'success', messageKey: 'contact.form.success'}
+    );
+
+    assert.deepEqual(
+      contactIntake.resolveContactFeedback({
+        status: 'error',
+        message: 'Champs invalides.',
+        messageKey: 'contact.form.validationError',
+      }),
+      {
+        kind: 'error',
+        messageKey: 'contact.form.validationError',
+        fallbackMessage: 'Champs invalides.',
+      }
+    );
+  });
+});

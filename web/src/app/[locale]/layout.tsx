@@ -12,10 +12,9 @@ import {Header} from '@/components/layout/Header';
 import {Footer} from '@/components/layout/Footer';
 import {GoogleAnalytics} from '@/components/analytics/GoogleAnalytics';
 import {GoogleTagManager} from '@/components/analytics/GoogleTagManager';
-import {site} from '@/lib/site';
-import {buildLocalizedPageMetadata, organizationSchema} from '@/lib/seo';
 import {JsonLd} from '@/components/seo/JsonLd';
 import {getAnalyticsRuntimeConfig} from '@/lib/runtime-config';
+import {getRootLayoutProfile} from '@/lib/site-profile';
 
 const inter = Inter({variable: '--font-inter', subsets: ['latin']});
 
@@ -34,25 +33,7 @@ type Props = {
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
-
-  const descriptionByLocale: Record<string, string> = {
-    fr: 'Systèmes IA, automatisation, développement web et technologies temps réel en Belgique. Workflows utiles, sites performants et expériences 3D/VR.',
-    en: 'AI systems, automation, web development and real-time technology in Belgium. Useful workflows, high-performance websites and 3D/VR experiences.',
-    nl: 'AI-systemen, automatisatie, webontwikkeling en realtime technologie in België. Nuttige workflows, performante websites en 3D/VR-ervaringen.',
-  };
-
-  return {
-    metadataBase: new URL(site.url),
-    ...buildLocalizedPageMetadata({
-      locale,
-      title: `${site.personalBrand} · ${site.companyName}`,
-      description: descriptionByLocale[locale] || descriptionByLocale.en,
-    }),
-    title: {
-      default: `${site.personalBrand} · ${site.companyName}`,
-      template: `%s · ${site.companyName}`,
-    },
-  };
+  return getRootLayoutProfile(locale).metadata;
 }
 
 export default async function LocaleLayout({children, params}: Props) {
@@ -64,6 +45,7 @@ export default async function LocaleLayout({children, params}: Props) {
   setRequestLocale(locale);
 
   const messages = await getMessages();
+  const profile = getRootLayoutProfile(locale);
 
   return (
     <html lang={locale}>
@@ -73,7 +55,7 @@ export default async function LocaleLayout({children, params}: Props) {
           <main className="mx-auto max-w-6xl px-6 py-12 md:py-14">{children}</main>
           <Footer />
         </NextIntlClientProvider>
-        <JsonLd data={organizationSchema} />
+        <JsonLd data={profile.organizationSchema} />
         {analyticsConfig.gtmId ? <GoogleTagManager containerId={analyticsConfig.gtmId} /> : null}
         {analyticsConfig.gaMeasurementId ? (
           <Suspense fallback={null}>

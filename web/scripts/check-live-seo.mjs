@@ -1,11 +1,11 @@
-const siteUrl = 'https://edge-solutions.be';
-const locales = ['fr', 'en', 'nl'];
-const suffixes = ['', '/services'];
-const hreflangByLocale = {
-  fr: 'fr-BE',
-  en: 'en-BE',
-  nl: 'nl-BE',
-};
+import {getLiveSeoSourceFacts} from './seo-source-facts.mjs';
+
+const {
+  locales,
+  defaultLocale,
+  hreflangByLocale,
+  urlChecks,
+} = getLiveSeoSourceFacts();
 
 function assert(condition, message) {
   if (!condition) {
@@ -67,7 +67,7 @@ function jsonLdBlocks(html) {
 }
 
 function expectedUrl(locale, suffix) {
-  return `${siteUrl}/${locale}${suffix}`;
+  return urlChecks.find((check) => check.locale === locale && check.suffix === suffix)?.url ?? '';
 }
 
 function assertCanonical(html, url) {
@@ -92,7 +92,7 @@ function assertAlternates(html, locale, suffix, url) {
     assert(found === href, `${url} is missing ${hreflang} alternate ${href}`);
   }
 
-  const defaultHref = expectedUrl('fr', suffix);
+  const defaultHref = expectedUrl(defaultLocale, suffix);
   assert(
     alternatesByHreflang.get('x-default') === defaultHref,
     `${url} is missing x-default alternate ${defaultHref}`
@@ -118,8 +118,7 @@ function assertJsonLd(html, url) {
   }
 }
 
-async function checkUrl(locale, suffix) {
-  const url = expectedUrl(locale, suffix);
+async function checkUrl({locale, suffix, url}) {
   const response = await fetch(url, {
     headers: {
       accept: 'text/html,application/xhtml+xml',
@@ -152,12 +151,10 @@ async function checkUrl(locale, suffix) {
 
 const checked = [];
 
-for (const suffix of suffixes) {
-  for (const locale of locales) {
-    checked.push(await checkUrl(locale, suffix));
-  }
+for (const urlCheck of urlChecks) {
+  checked.push(await checkUrl(urlCheck));
 }
 
 console.log(
-  `Live SEO smoke passed: ${checked.length} production URLs returned 200 with indexable self-canonical pages, FR/EN/NL hreflang, x-default, title, description, and JSON-LD.`
+  `Live SEO smoke passed: ${checked.length} production URLs returned 200 with indexable self-canonical pages, locale hreflang, x-default, title, description, and JSON-LD.`
 );
