@@ -10,6 +10,7 @@ export type OfferTrack = {
   hubDescriptionKey: string;
   hubProofKey: string;
   decisionKey: string;
+  schemaServiceType: string;
   lastModified: Date;
   sitemapPriority: number;
   priorityRole: 'primary' | 'supporting';
@@ -26,6 +27,7 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     hubDescriptionKey: 'services.hubAiDesc',
     hubProofKey: 'services.hubAiProof',
     decisionKey: 'services.decisionAi',
+    schemaServiceType: 'AI systems & automation',
     lastModified: new Date('2026-04-14T05:55:40.000Z'),
     sitemapPriority: 0.7,
     priorityRole: 'primary',
@@ -40,6 +42,7 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     hubDescriptionKey: 'services.hubWebDesc',
     hubProofKey: 'services.hubWebProof',
     decisionKey: 'services.decisionWeb',
+    schemaServiceType: 'Web development',
     lastModified: new Date('2026-04-16T05:54:06.000Z'),
     sitemapPriority: 0.7,
     priorityRole: 'supporting',
@@ -54,6 +57,7 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     hubDescriptionKey: 'services.hubRealtimeDesc',
     hubProofKey: 'services.hubRealtimeProof',
     decisionKey: 'services.decisionRealtime',
+    schemaServiceType: 'Real-time 3D/VR',
     lastModified: new Date('2026-04-15T05:56:00.000Z'),
     sitemapPriority: 0.7,
     priorityRole: 'supporting',

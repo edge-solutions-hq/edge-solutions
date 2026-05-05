@@ -171,13 +171,15 @@ describe('localized content and proof seam', () => {
     assert.match(read('src/lib/content/services.ts'), /getOfferTrackProofProfile/);
     assert.match(read('src/lib/content/services.ts'), /renderPolicy/);
     assert.doesNotMatch(read('src/lib/content/services.ts'), /function getServiceMdx/);
-    assert.match(read('src/app/[locale]/services/[slug]/page.tsx'), /renderPolicy\.requestedLocale/);
+    assert.match(read('src/lib/content/service-page.ts'), /renderPolicy\.requestedLocale/);
+    assert.match(read('src/app/[locale]/services/[slug]/page.tsx'), /getServicePageModel/);
   });
 
   it('uses page profiles for metadata and JSON-LD graph selection', () => {
     assert.match(read('src/app/[locale]/page.tsx'), /getHomePageProfile/);
     assert.match(read('src/app/[locale]/services/page.tsx'), /getServicesPageProfile/);
-    assert.match(read('src/app/[locale]/services/[slug]/page.tsx'), /getOfferTrackPageProfile/);
+    assert.match(read('src/lib/content/service-page.ts'), /getOfferTrackPageProfile/);
+    assert.match(read('src/app/[locale]/services/[slug]/page.tsx'), /getServicePageMetadata/);
     assert.match(read('src/app/[locale]/contact/page.tsx'), /getContactPageProfile/);
   });
 });

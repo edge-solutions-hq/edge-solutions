@@ -215,6 +215,7 @@ const seoSource = readSource('src/lib/seo.ts');
 const homeSource = readSource('src/app/[locale]/page.tsx');
 const servicesIndexSource = readSource('src/app/[locale]/services/page.tsx');
 const serviceDetailSource = readSource('src/app/[locale]/services/[slug]/page.tsx');
+const servicePageModelSource = readSource('src/lib/content/service-page.ts');
 const sitemapUsesCentralizedPageProfiles =
   sitemapSource.includes('getLocalizedSitemapEntries') &&
   pageProfilesSource.includes('STATIC_PAGE_DEFINITIONS') &&
@@ -270,9 +271,14 @@ assertSourceContainsAll(
   'page profile JSON-LD graph helpers'
 );
 assertSourceContainsAll(
+  servicePageModelSource,
+  ['getOfferTrackPageProfile', 'const profile ='],
+  'service page model JSON-LD'
+);
+assertSourceContainsAll(
   serviceDetailSource,
-  ['getOfferTrackPageProfile', 'profile.jsonLd'],
-  'service detail JSON-LD'
+  ['getServicePageMetadata', 'model.profile.jsonLd'],
+  'service detail route JSON-LD'
 );
 
 for (const pagePath of expectedPaths) {

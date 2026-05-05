@@ -6,15 +6,12 @@ import {ButtonLink} from '@/components/ui/Button';
 import {HeaderNav} from './HeaderNav';
 import {MobileMenu} from './MobileMenu';
 import {getHeaderOfferNavItems} from '@/lib/offer-presentation';
+import {getHeaderNavigationItems} from '@/lib/navigation/header-navigation';
 
 export async function Header({locale}: {locale: string}) {
   const t = await getTranslations();
 
-  const items = [
-    {href: '/', label: t('nav.home')},
-    ...getHeaderOfferNavItems(t),
-    {href: '/contact', label: t('nav.contact')}
-  ];
+  const items = getHeaderNavigationItems(t, getHeaderOfferNavItems(t));
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">

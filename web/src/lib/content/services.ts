@@ -1,10 +1,10 @@
-import {resolveLocale, type Locale} from '@/i18n/routing';
+import {resolveLocale, type Locale} from '../../i18n/routing';
 import {
   isOfferTrackSlug,
   OFFER_TRACK_SLUGS,
   type OfferTrackSlug,
-} from '@/lib/offer-tracks';
-import {getOfferTrackProofProfile, type OfferTrackProofProfile} from '@/lib/content/proof-registry';
+} from '../offer-tracks';
+import {getOfferTrackProofProfile, type OfferTrackProofProfile} from './proof-registry';
 
 export type ServiceSlug = OfferTrackSlug;
 export const SERVICE_SLUGS = OFFER_TRACK_SLUGS;
