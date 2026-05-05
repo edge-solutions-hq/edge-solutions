@@ -3,24 +3,19 @@
 import {Link, usePathname} from '@/i18n/navigation';
 import {trackContactCtaClick} from '@/lib/analytics/events';
 import {cn} from '@/lib/cn';
+import {
+  getHeaderNavigationContactTrackingPayload,
+  isHeaderNavigationItemActive,
+  type HeaderNavigationItem,
+} from '@/lib/navigation/header-navigation';
 
-export type HeaderNavItem = {
-  href: string;
-  label: string;
-};
-
-function isActive(pathname: string, href: string) {
-  if (href === '/') return pathname === '/';
-  return pathname === href || pathname.startsWith(`${href}/`);
-}
-
-export function HeaderNav({items}: {items: HeaderNavItem[]}) {
+export function HeaderNav({items}: {items: HeaderNavigationItem[]}) {
   const pathname = usePathname();
 
   return (
     <nav className="hidden items-center gap-1 md:flex">
       {items.map((item) => {
-        const active = isActive(pathname, item.href);
+        const active = isHeaderNavigationItemActive(pathname, item);
         return (
           <Link
             key={item.href}
@@ -33,12 +28,9 @@ export function HeaderNav({items}: {items: HeaderNavItem[]}) {
                 : 'text-muted-foreground hover:bg-surface-muted hover:text-foreground'
             )}
             onClick={() => {
-              if (item.href === '/contact') {
-                trackContactCtaClick({
-                  ctaTarget: '/contact',
-                  placement: 'header_nav',
-                  ctaLabel: item.label,
-                });
+              const trackingPayload = getHeaderNavigationContactTrackingPayload(item, 'header_nav');
+              if (trackingPayload) {
+                trackContactCtaClick(trackingPayload);
               }
             }}
           >
@@ -49,4 +41,3 @@ export function HeaderNav({items}: {items: HeaderNavItem[]}) {
     </nav>
   );
 }
-

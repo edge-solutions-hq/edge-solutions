@@ -1,6 +1,7 @@
 import type {Metadata} from 'next';
-import {routing} from '@/i18n/routing';
-import {site} from '@/lib/site';
+import {routing} from '../i18n/routing';
+import {OFFER_TRACKS} from './offer-tracks';
+import {site} from './site';
 
 export const HREFLANG_BY_LOCALE: Record<string, string> = {
   fr: 'fr-BE',
@@ -118,7 +119,7 @@ export const organizationSchema = {
     },
   ],
   availableLanguage: ['fr', 'en', 'nl'],
-  serviceType: ['AI systems & automation', 'Web development', 'Real-time 3D/VR'],
+  serviceType: OFFER_TRACKS.map((track) => track.schemaServiceType),
 };
 
 export function websiteSchema(locale: string) {

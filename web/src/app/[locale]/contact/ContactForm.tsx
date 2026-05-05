@@ -11,7 +11,11 @@ import {
   createContactAttemptTrackerState,
   resolveContactAttemptCompletion,
 } from '@/lib/contact/contact-attempt-tracker';
-import {contactOfferOptions} from '@/lib/contact/intake';
+import {
+  contactFormModel,
+  extractContactSubmitService,
+  resolveContactFeedback,
+} from '@/lib/contact/intake';
 import type {ContactActionState} from './actions';
 import {sendContactEmail} from './actions';
 import {Button} from '@/components/ui/Button';
@@ -30,6 +34,8 @@ export function ContactForm() {
   const t = useTranslations();
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
   const attemptTrackerRef = useRef(createContactAttemptTrackerState());
+  const {fields, offerOptions: contactOfferOptions} = contactFormModel;
+  const feedback = resolveContactFeedback(state);
 
   useEffect(() => {
     const completion = resolveContactAttemptCompletion({
@@ -50,8 +56,7 @@ export function ContactForm() {
     const submitAttempt = captureContactSubmitAttempt(attemptTrackerRef.current);
 
     const formData = new FormData(event.currentTarget);
-    const service = formData.get('service');
-    const normalizedService = typeof service === 'string' ? service : undefined;
+    const normalizedService = extractContactSubmitService(formData);
 
     trackContactFormSubmit({
       service: normalizedService,
@@ -67,44 +72,45 @@ export function ContactForm() {
     <form action={formAction} onSubmitCapture={handleSubmitCapture} className="space-y-5">
       {/* Honeypot */}
       <input
-        type="text"
-        name="company"
+        type={fields.honeypot.type}
+        name={fields.honeypot.name}
         tabIndex={-1}
-        autoComplete="off"
+        autoComplete={fields.honeypot.autocomplete}
         className="hidden"
       />
 
       <div className="grid gap-5 md:grid-cols-2">
         <label className="block">
-          <div className="text-sm font-medium">{t('contact.form.name')}</div>
+          <div className="text-sm font-medium">{t(fields.name.labelKey)}</div>
           <input
-            name="name"
-            required
-            minLength={2}
+            name={fields.name.name}
+            type={fields.name.type}
+            required={fields.name.required}
+            minLength={fields.name.minLength}
             className={inputBase + ' h-10'}
-            placeholder={t('contact.form.namePlaceholder')}
+            placeholder={t(fields.name.placeholderKey)}
           />
           <FieldError>{fieldErrorMessage(state.fieldErrors?.name)}</FieldError>
         </label>
 
         <label className="block">
-          <div className="text-sm font-medium">{t('contact.form.email')}</div>
+          <div className="text-sm font-medium">{t(fields.email.labelKey)}</div>
           <input
-            name="email"
-            type="email"
-            required
+            name={fields.email.name}
+            type={fields.email.type}
+            required={fields.email.required}
             className={inputBase + ' h-10'}
-            placeholder={t('contact.form.emailPlaceholder')}
+            placeholder={t(fields.email.placeholderKey)}
           />
           <FieldError>{fieldErrorMessage(state.fieldErrors?.email)}</FieldError>
         </label>
       </div>
 
       <label className="block">
-        <div className="text-sm font-medium">{t('contact.form.service')}</div>
+        <div className="text-sm font-medium">{t(fields.service.labelKey)}</div>
         <select
-          name="service"
-          defaultValue="unsure"
+          name={fields.service.name}
+          defaultValue={fields.service.defaultValue}
           className={inputBase + ' h-10'}
         >
           {contactOfferOptions.map((option) => (
@@ -117,14 +123,14 @@ export function ContactForm() {
       </label>
 
       <label className="block">
-        <div className="text-sm font-medium">{t('contact.form.message')}</div>
+        <div className="text-sm font-medium">{t(fields.message.labelKey)}</div>
         <textarea
-          name="message"
-          required
-          minLength={10}
-          rows={7}
+          name={fields.message.name}
+          required={fields.message.required}
+          minLength={fields.message.minLength}
+          rows={fields.message.rows}
           className={inputBase + ' min-h-[8rem] resize-y'}
-          placeholder={t('contact.form.messagePlaceholder')}
+          placeholder={t(fields.message.placeholderKey)}
         />
         <FieldError>{fieldErrorMessage(state.fieldErrors?.message)}</FieldError>
       </label>
@@ -133,18 +139,18 @@ export function ContactForm() {
         type="submit"
         disabled={pending}
       >
-        {pending ? '...' : t('contact.form.submit')}
+        {pending ? contactFormModel.pendingLabel : t(contactFormModel.submitMessageKey)}
       </Button>
 
-      {state.status === 'success' ? (
+      {feedback.kind === 'success' ? (
         <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-900 dark:text-emerald-100">
-          {state.messageKey ? t(state.messageKey) : t('contact.form.success')}
+          {state.messageKey ? t(state.messageKey) : t(feedback.messageKey)}
         </div>
       ) : null}
 
-      {state.status === 'error' && state.message ? (
+      {feedback.kind === 'error' && (feedback.messageKey || feedback.fallbackMessage) ? (
         <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-900 dark:text-red-100">
-          {state.messageKey ? t(state.messageKey) : state.message}
+          {state.messageKey ? t(state.messageKey) : feedback.fallbackMessage}
         </div>
       ) : null}
     </form>
