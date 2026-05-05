@@ -87,6 +87,7 @@ export function ContactForm() {
             type={fields.name.type}
             required={fields.name.required}
             minLength={fields.name.minLength}
+            maxLength={fields.name.maxLength}
             className={inputBase + ' h-10'}
             placeholder={t(fields.name.placeholderKey)}
           />
@@ -99,6 +100,7 @@ export function ContactForm() {
             name={fields.email.name}
             type={fields.email.type}
             required={fields.email.required}
+            maxLength={fields.email.maxLength}
             className={inputBase + ' h-10'}
             placeholder={t(fields.email.placeholderKey)}
           />
@@ -128,6 +130,7 @@ export function ContactForm() {
           name={fields.message.name}
           required={fields.message.required}
           minLength={fields.message.minLength}
+          maxLength={fields.message.maxLength}
           rows={fields.message.rows}
           className={inputBase + ' min-h-[8rem] resize-y'}
           placeholder={t(fields.message.placeholderKey)}
@@ -144,13 +147,13 @@ export function ContactForm() {
 
       {feedback.kind === 'success' ? (
         <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-900 dark:text-emerald-100">
-          {state.messageKey ? t(state.messageKey) : t(feedback.messageKey)}
+          {t(feedback.messageKey)}
         </div>
       ) : null}
 
       {feedback.kind === 'error' && (feedback.messageKey || feedback.fallbackMessage) ? (
         <div className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-900 dark:text-red-100">
-          {state.messageKey ? t(state.messageKey) : feedback.fallbackMessage}
+          {feedback.messageKey ? t(feedback.messageKey) : feedback.fallbackMessage}
         </div>
       ) : null}
     </form>

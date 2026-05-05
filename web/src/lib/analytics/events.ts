@@ -6,13 +6,13 @@ import {
   currentBrowserPagePath,
   readBrowserAnalyticsContext,
   type BrowserAnalyticsContext,
-} from '@/lib/analytics/browser-context';
+} from './browser-context';
 import {
   analyticsEvents,
   type ContactCtaPlacement,
   type OfferTrackClickPlacement,
   type ScrollDepthThreshold,
-} from '@/lib/analytics/taxonomy';
+} from './taxonomy';
 
 declare global {
   interface Window {
@@ -22,6 +22,10 @@ declare global {
 }
 
 type EventParams = Record<string, string | number | boolean | undefined>;
+type AnalyticsEventPayload = {
+  eventName: string;
+  params: EventParams;
+};
 
 function compactParams(
   params: EventParams | BrowserAnalyticsContext
@@ -55,6 +59,28 @@ export function currentPagePath() {
   return currentBrowserPagePath();
 }
 
+export function buildContactCtaClickPayload({
+  ctaTarget,
+  placement,
+  ctaLabel,
+  pagePath,
+}: {
+  ctaTarget: string;
+  placement?: ContactCtaPlacement;
+  ctaLabel?: string;
+  pagePath?: string;
+}): AnalyticsEventPayload {
+  return {
+    eventName: analyticsEvents.contactCtaClick,
+    params: {
+      cta_target: ctaTarget,
+      page_path: pagePath,
+      placement,
+      cta_label: ctaLabel,
+    },
+  };
+}
+
 export function trackContactCtaClick({
   ctaTarget,
   placement,
@@ -64,12 +90,39 @@ export function trackContactCtaClick({
   placement?: ContactCtaPlacement;
   ctaLabel?: string;
 }) {
-  trackConversionEvent(analyticsEvents.contactCtaClick, {
-    cta_target: ctaTarget,
-    page_path: currentPagePath(),
+  const payload = buildContactCtaClickPayload({
+    ctaTarget,
     placement,
-    cta_label: ctaLabel,
+    ctaLabel,
+    pagePath: currentPagePath(),
   });
+
+  trackConversionEvent(payload.eventName, payload.params);
+}
+
+export function buildOfferTrackClickPayload({
+  offerTrackSlug,
+  placement,
+  linkTarget,
+  linkLabel,
+  pagePath,
+}: {
+  offerTrackSlug: OfferTrackSlug;
+  placement: OfferTrackClickPlacement;
+  linkTarget?: string;
+  linkLabel?: string;
+  pagePath?: string;
+}): AnalyticsEventPayload {
+  return {
+    eventName: analyticsEvents.offerTrackClick,
+    params: {
+      service_slug: offerTrackSlug,
+      placement,
+      page_path: pagePath,
+      link_target: linkTarget,
+      link_label: linkLabel,
+    },
+  };
 }
 
 export function trackOfferTrackClick({
@@ -83,13 +136,34 @@ export function trackOfferTrackClick({
   linkTarget?: string;
   linkLabel?: string;
 }) {
-  trackConversionEvent(analyticsEvents.offerTrackClick, {
-    service_slug: offerTrackSlug,
+  const payload = buildOfferTrackClickPayload({
+    offerTrackSlug,
     placement,
-    page_path: currentPagePath(),
-    link_target: linkTarget,
-    link_label: linkLabel,
+    linkTarget,
+    linkLabel,
+    pagePath: currentPagePath(),
   });
+
+  trackConversionEvent(payload.eventName, payload.params);
+}
+
+export function buildLocaleSwitchPayload({
+  fromLocale,
+  toLocale,
+  pagePath,
+}: {
+  fromLocale: string;
+  toLocale: string;
+  pagePath?: string;
+}): AnalyticsEventPayload {
+  return {
+    eventName: analyticsEvents.localeSwitch,
+    params: {
+      from_locale: fromLocale,
+      to_locale: toLocale,
+      page_path: pagePath,
+    },
+  };
 }
 
 export function trackLocaleSwitch({
@@ -99,11 +173,29 @@ export function trackLocaleSwitch({
   fromLocale: string;
   toLocale: string;
 }) {
-  trackConversionEvent(analyticsEvents.localeSwitch, {
-    from_locale: fromLocale,
-    to_locale: toLocale,
-    page_path: currentPagePath(),
+  const payload = buildLocaleSwitchPayload({
+    fromLocale,
+    toLocale,
+    pagePath: currentPagePath(),
   });
+
+  trackConversionEvent(payload.eventName, payload.params);
+}
+
+export function buildServiceScrollDepthPayload({
+  offerTrackSlug,
+  scrollDepthPercent,
+}: {
+  offerTrackSlug: OfferTrackSlug;
+  scrollDepthPercent: ScrollDepthThreshold;
+}): AnalyticsEventPayload {
+  return {
+    eventName: analyticsEvents.offerTrackScrollDepth,
+    params: {
+      service_slug: offerTrackSlug,
+      scroll_depth_percent: scrollDepthPercent,
+    },
+  };
 }
 
 export function trackServiceScrollDepth({
@@ -113,10 +205,31 @@ export function trackServiceScrollDepth({
   offerTrackSlug: OfferTrackSlug;
   scrollDepthPercent: ScrollDepthThreshold;
 }) {
-  trackConversionEvent(analyticsEvents.offerTrackScrollDepth, {
-    service_slug: offerTrackSlug,
-    scroll_depth_percent: scrollDepthPercent,
+  const payload = buildServiceScrollDepthPayload({
+    offerTrackSlug,
+    scrollDepthPercent,
   });
+
+  trackConversionEvent(payload.eventName, payload.params);
+}
+
+export function buildContactFormSubmitPayload({
+  service,
+  submitAttempt,
+  pagePath,
+}: {
+  service?: string;
+  submitAttempt: number;
+  pagePath?: string;
+}): AnalyticsEventPayload {
+  return {
+    eventName: analyticsEvents.contactFormSubmit,
+    params: {
+      service,
+      page_path: pagePath,
+      submit_attempt: submitAttempt,
+    },
+  };
 }
 
 export function trackContactFormSubmit({
@@ -126,11 +239,53 @@ export function trackContactFormSubmit({
   service?: string;
   submitAttempt: number;
 }) {
-  trackConversionEvent(analyticsEvents.contactFormSubmit, {
+  const payload = buildContactFormSubmitPayload({
     service,
-    page_path: currentPagePath(),
-    submit_attempt: submitAttempt,
+    submitAttempt,
+    pagePath: currentPagePath(),
   });
+
+  trackConversionEvent(payload.eventName, payload.params);
+}
+
+export function buildContactFormOutcomePayload({
+  outcome,
+  submitAttempt,
+  pagePath,
+}: {
+  outcome: ContactAttemptOutcome;
+  submitAttempt: number;
+  pagePath?: string;
+}): AnalyticsEventPayload | undefined {
+  if (outcome.kind === 'spam') return undefined;
+
+  if (outcome.kind === 'success') {
+    return {
+      eventName: analyticsEvents.contactFormSuccess,
+      params: {
+        page_path: pagePath,
+        service: outcome.service,
+        submit_attempt: submitAttempt,
+      },
+    };
+  }
+
+  const service = 'service' in outcome ? outcome.service : undefined;
+  const fieldErrorCount =
+    outcome.kind === 'validation_error'
+      ? Object.values(outcome.fieldErrors).filter(Boolean).length
+      : undefined;
+
+  return {
+    eventName: analyticsEvents.contactFormError,
+    params: {
+      page_path: pagePath,
+      service: service as ContactOfferValue | string | undefined,
+      submit_attempt: submitAttempt,
+      error_type: outcome.kind === 'validation_error' ? 'validation' : 'delivery',
+      error_field_count: fieldErrorCount,
+    },
+  };
 }
 
 export function trackContactFormOutcome({
@@ -140,28 +295,13 @@ export function trackContactFormOutcome({
   outcome: ContactAttemptOutcome;
   submitAttempt: number;
 }) {
-  if (outcome.kind === 'spam') return;
-
-  if (outcome.kind === 'success') {
-    trackConversionEvent(analyticsEvents.contactFormSuccess, {
-      page_path: currentPagePath(),
-      service: outcome.service,
-      submit_attempt: submitAttempt,
-    });
-    return;
-  }
-
-  const service = 'service' in outcome ? outcome.service : undefined;
-  const fieldErrorCount =
-    outcome.kind === 'validation_error'
-      ? Object.values(outcome.fieldErrors).filter(Boolean).length
-      : undefined;
-
-  trackConversionEvent(analyticsEvents.contactFormError, {
-    page_path: currentPagePath(),
-    service: service as ContactOfferValue | string | undefined,
-    submit_attempt: submitAttempt,
-    error_type: outcome.kind === 'validation_error' ? 'validation' : 'delivery',
-    error_field_count: fieldErrorCount,
+  const payload = buildContactFormOutcomePayload({
+    outcome,
+    submitAttempt,
+    pagePath: currentPagePath(),
   });
+
+  if (!payload) return;
+
+  trackConversionEvent(payload.eventName, payload.params);
 }

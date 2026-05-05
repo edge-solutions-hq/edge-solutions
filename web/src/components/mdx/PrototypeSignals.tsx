@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import type {ReactNode} from 'react';
 
 import {cn} from '@/lib/cn';
+import {ProofMediaFrame} from '@/components/ui/ProofMediaFrame';
 
 type PrototypeSignal = {
   label: string;
@@ -82,21 +82,12 @@ export function PrototypeSignals({
         </div>
 
         <div className="bg-slate-950/90 px-6 py-7 md:px-8 md:py-8">
-          <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-slate-900 shadow-[0_24px_60px_rgba(0,0,0,0.34)]">
-            <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3" aria-hidden="true">
-              <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-            </div>
-
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              width={1400}
-              height={1000}
-              className="h-auto w-full"
-            />
-          </div>
+          <ProofMediaFrame
+            imageSrc={imageSrc}
+            imageAlt={imageAlt}
+            outerClassName="overflow-hidden rounded-[1.75rem] border border-white/10 bg-slate-900 shadow-[0_24px_60px_rgba(0,0,0,0.34)]"
+            chromeClassName="border-b border-white/10 px-4 py-3"
+          />
 
           <div className="mt-6 space-y-4">
             {phases.map((phase) => (

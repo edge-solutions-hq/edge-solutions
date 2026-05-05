@@ -4,7 +4,12 @@ import {
   OFFER_TRACK_SLUGS,
   type OfferTrackSlug,
 } from '../offer-tracks';
-import {getOfferTrackProofProfile, type OfferTrackProofProfile} from './proof-registry';
+import {
+  getOfferTrackProofContract,
+  getOfferTrackProofProfile,
+  type OfferTrackProofContract,
+  type OfferTrackProofProfile,
+} from './proof-registry';
 
 export type ServiceSlug = OfferTrackSlug;
 export const SERVICE_SLUGS = OFFER_TRACK_SLUGS;
@@ -19,9 +24,15 @@ type MdxModule = {
 
 type Loader = () => Promise<MdxModule>;
 
-export type ServiceContentResult = {
+export type ServiceContentLoaderMap = Record<Locale, Partial<Record<ServiceSlug, Loader>>>;
+
+type ServiceContentAvailabilityBase = {
   slug: ServiceSlug;
   requestedLocale: Locale;
+};
+
+export type ServiceContentAvailabilityHit = ServiceContentAvailabilityBase & {
+  status: 'localized' | 'fallback';
   contentLocale: Locale;
   didFallback: boolean;
   renderPolicy: {
@@ -30,6 +41,7 @@ export type ServiceContentResult = {
     contentLocale: Locale;
   };
   proof: OfferTrackProofProfile;
+  proofContract: OfferTrackProofContract;
   module: MdxModule;
   metadata: {
     title?: string;
@@ -37,7 +49,26 @@ export type ServiceContentResult = {
   };
 };
 
-const loaders: Record<Locale, Partial<Record<ServiceSlug, Loader>>> = {
+export type ServiceContentAvailability =
+  | ServiceContentAvailabilityHit
+  | {
+      status: 'invalid_slug';
+      requestedLocale: Locale;
+      slug: string;
+    }
+  | (ServiceContentAvailabilityBase & {
+      status: 'missing_fallback';
+      fallbackLocale: Locale;
+    })
+  | (ServiceContentAvailabilityBase & {
+      status: 'loader_failure';
+      attemptedLocale: Locale;
+      error: unknown;
+    });
+
+export type ServiceContentResult = ServiceContentAvailabilityHit;
+
+const serviceContentLoaders: ServiceContentLoaderMap = {
   fr: {
     'ai-automation': () => import('@/content/fr/services/ai-automation.mdx'),
     'web-dev': () => import('@/content/fr/services/web-dev.mdx'),
@@ -55,41 +86,124 @@ const loaders: Record<Locale, Partial<Record<ServiceSlug, Loader>>> = {
   },
 };
 
-export async function getServiceContent(locale: string, slug: string): Promise<ServiceContentResult | null> {
+async function loadServiceModule(loader: Loader): Promise<{module: MdxModule} | {error: unknown}> {
+  try {
+    return {module: await loader()};
+  } catch (error) {
+    return {error};
+  }
+}
+
+export async function getServiceContentAvailability(
+  locale: string,
+  slug: string,
+  options: {loaders?: ServiceContentLoaderMap} = {}
+): Promise<ServiceContentAvailability> {
   const safeLocale = resolveLocale(locale);
 
-  if (!isOfferTrackSlug(slug)) return null;
+  if (!isOfferTrackSlug(slug)) {
+    return {
+      status: 'invalid_slug',
+      requestedLocale: safeLocale,
+      slug,
+    };
+  }
 
   const typedSlug = slug;
+  const activeLoaders = options.loaders ?? serviceContentLoaders;
+  const preferred = activeLoaders[safeLocale][typedSlug];
+  const fallback = activeLoaders.fr[typedSlug];
 
-  const preferred = loaders[safeLocale][typedSlug];
-  const fallback = loaders.fr[typedSlug];
-  if (!fallback) return null;
+  if (!fallback) {
+    return {
+      status: 'missing_fallback',
+      slug: typedSlug,
+      requestedLocale: safeLocale,
+      fallbackLocale: 'fr',
+    };
+  }
+
   const proof = getOfferTrackProofProfile(typedSlug);
-  if (!proof) return null;
+  const proofContract = getOfferTrackProofContract(typedSlug);
+  if (!proof || !proofContract) {
+    return {
+      status: 'missing_fallback',
+      slug: typedSlug,
+      requestedLocale: safeLocale,
+      fallbackLocale: 'fr',
+    };
+  }
 
-  const preferredModule = preferred ? await preferred().catch(() => null) : null;
-  const shouldTryFallback = !preferredModule && safeLocale !== 'fr';
-  const fallbackModule = shouldTryFallback ? await fallback().catch(() => null) : null;
-  const mod = preferredModule ?? fallbackModule;
+  if (preferred) {
+    const loaded = await loadServiceModule(preferred);
+    if ('error' in loaded) {
+      return {
+        status: 'loader_failure',
+        slug: typedSlug,
+        requestedLocale: safeLocale,
+        attemptedLocale: safeLocale,
+        error: loaded.error,
+      };
+    }
 
-  if (!mod) return null;
+    return {
+      status: 'localized',
+      slug: typedSlug,
+      requestedLocale: safeLocale,
+      contentLocale: safeLocale,
+      didFallback: false,
+      renderPolicy: {
+        kind: 'localized',
+        requestedLocale: safeLocale,
+        contentLocale: safeLocale,
+      },
+      proof,
+      proofContract,
+      module: loaded.module,
+      metadata: loaded.module.metadata ?? {},
+    };
+  }
 
-  const didFallback = !preferredModule && safeLocale !== 'fr';
-  const contentLocale = didFallback ? 'fr' : safeLocale;
+  if (safeLocale === 'fr') {
+    return {
+      status: 'missing_fallback',
+      slug: typedSlug,
+      requestedLocale: safeLocale,
+      fallbackLocale: 'fr',
+    };
+  }
+
+  const loadedFallback = await loadServiceModule(fallback);
+  if ('error' in loadedFallback) {
+    return {
+      status: 'loader_failure',
+      slug: typedSlug,
+      requestedLocale: safeLocale,
+      attemptedLocale: 'fr',
+      error: loadedFallback.error,
+    };
+  }
 
   return {
+    status: 'fallback',
     slug: typedSlug,
     requestedLocale: safeLocale,
-    contentLocale,
-    didFallback,
+    contentLocale: 'fr',
+    didFallback: true,
     renderPolicy: {
-      kind: didFallback ? 'fallback' : 'localized',
+      kind: 'fallback',
       requestedLocale: safeLocale,
-      contentLocale,
+      contentLocale: 'fr',
     },
     proof,
-    module: mod,
-    metadata: mod.metadata ?? {},
+    proofContract,
+    module: loadedFallback.module,
+    metadata: loadedFallback.module.metadata ?? {},
   };
+}
+
+export async function getServiceContent(locale: string, slug: string): Promise<ServiceContentResult | null> {
+  const availability = await getServiceContentAvailability(locale, slug);
+  if (availability.status !== 'localized' && availability.status !== 'fallback') return null;
+  return availability;
 }

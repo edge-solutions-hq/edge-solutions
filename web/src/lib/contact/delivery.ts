@@ -4,6 +4,7 @@ import {
   parseContactFields,
   readContactFormData,
   serviceLabel,
+  type ContactFields,
   type ContactAttemptOutcome,
   type ContactActionMessageKey,
 } from '@/lib/contact/intake';
@@ -25,6 +26,32 @@ export type ContactEmailPayload = {
 };
 
 export type ContactDeliveryAdapter = (payload: ContactEmailPayload, config: {apiKey: string}) => Promise<{ok: true} | {ok: false; message: string}>;
+
+export function buildContactEmailPayload({
+  fields,
+  from,
+  to,
+}: {
+  fields: ContactFields;
+  from: string;
+  to: string;
+}): ContactEmailPayload {
+  const {name, email, service, message} = fields;
+
+  return {
+    from,
+    to,
+    replyTo: email,
+    subject: `[${site.companyName}] Nouveau message (${serviceLabel(service)}) — ${name}`,
+    text: [
+      `Nom: ${name}`,
+      `Email: ${email}`,
+      `Service: ${serviceLabel(service)}`,
+      '',
+      message,
+    ].join('\n'),
+  };
+}
 
 type SubmitContactAttemptOptions = {
   env?: Record<string, string | undefined>;
@@ -59,7 +86,7 @@ export async function submitContactAttempt(
     };
   }
 
-  const {name, email, service, message} = parsed.fields;
+  const {service} = parsed.fields;
   const config = getContactDeliveryConfig(env);
   if (!config.ready) {
     const outcome: ContactAttemptOutcome = {
@@ -77,19 +104,11 @@ export async function submitContactAttempt(
     };
   }
 
-  const payload: ContactEmailPayload = {
+  const payload = buildContactEmailPayload({
+    fields: parsed.fields,
     from: config.from,
     to: config.to,
-    replyTo: email,
-    subject: `[${site.companyName}] Nouveau message (${serviceLabel(service)}) — ${name}`,
-    text: [
-      `Nom: ${name}`,
-      `Email: ${email}`,
-      `Service: ${serviceLabel(service)}`,
-      '',
-      message,
-    ].join('\n'),
-  };
+  });
 
   const result = await deliver(payload, {apiKey: config.apiKey});
   if (!result.ok) {

@@ -8,13 +8,38 @@ import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
+import {getHomePresentationModel} from '@/lib/home-presentation';
 import {getHomeOfferCards} from '@/lib/offer-presentation';
 import {getHomePageProfile} from '@/lib/page-profiles';
 import {JsonLd} from '@/components/seo/JsonLd';
 
+type HomeOfferCard = ReturnType<typeof getHomeOfferCards>[number];
+
 type Props = {
   params: Promise<{locale: string}>;
 };
+
+function homeOfferCardFrame(service: HomeOfferCard) {
+  return [
+    'group flex w-full flex-col rounded-lg border bg-surface p-6 no-underline shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
+    service.visualRole === 'primary-offer'
+      ? 'border-primary/45'
+      : 'border-border',
+  ].join(' ');
+}
+
+function homeOfferGridItemClass(service: HomeOfferCard) {
+  return [
+    'flex',
+    service.visualGroup === 'ai-primary' ? 'md:col-span-2 xl:col-span-2' : '',
+  ].join(' ');
+}
+
+function homeOfferTitleClass(service: HomeOfferCard) {
+  return service.visualEmphasis === 'high'
+    ? 'text-xl font-semibold tracking-tight'
+    : 'text-lg font-semibold';
+}
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
@@ -28,37 +53,7 @@ export default async function HomePage({params}: Props) {
   const t = await getTranslations();
   const profile = getHomePageProfile(locale);
   const serviceCards = getHomeOfferCards(t);
-  const proofCards = [
-    {
-      title: t('home.proof.items.method.title'),
-      description: t('home.proof.items.method.description'),
-    },
-    {
-      title: t('home.proof.items.execution.title'),
-      description: t('home.proof.items.execution.description'),
-    },
-    {
-      title: t('home.proof.items.trust.title'),
-      description: t('home.proof.items.trust.body'),
-    },
-  ];
-  const proofSignals = [
-    {
-      label: t('home.proof.signals.publicWork.label'),
-      value: t('home.proof.signals.publicWork.value'),
-      description: t('home.proof.signals.publicWork.description'),
-    },
-    {
-      label: t('home.proof.signals.tools.label'),
-      value: t('home.proof.signals.tools.value'),
-      description: t('home.proof.signals.tools.description'),
-    },
-    {
-      label: t('home.proof.signals.process.label'),
-      value: t('home.proof.signals.process.value'),
-      description: t('home.proof.signals.process.description'),
-    },
-  ];
+  const home = getHomePresentationModel(t);
 
   return (
     <div className="relative">
@@ -75,7 +70,11 @@ export default async function HomePage({params}: Props) {
             <p>{t('meta.siteTagline')}</p>
 
             <div className="not-prose mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink href="/contact" size="lg" trackingPlacement="home_hero_primary">
+              <ButtonLink
+                href={home.ctas.heroPrimary.href}
+                size="lg"
+                trackingPlacement={home.ctas.heroPrimary.trackingPlacement}
+              >
                 {t('home.primaryCta')}
               </ButtonLink>
               <ButtonLink href="/services" variant="outline" size="lg">
@@ -88,18 +87,18 @@ export default async function HomePage({params}: Props) {
         <section>
           <SectionIntro title={t('services.title')} />
 
-          <FadeInStagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          <FadeInStagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
             {serviceCards.map((service) => (
-              <FadeIn key={service.slug} className="flex">
+              <FadeIn key={service.slug} className={homeOfferGridItemClass(service)}>
                 <TrackedLink
                   href={service.href}
                   aria-label={service.label}
                   offerTrackSlug={service.slug}
                   trackingPlacement="home_services_grid"
-                  className="group flex w-full flex-col rounded-lg border border-border bg-surface p-6 no-underline shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
+                  className={homeOfferCardFrame(service)}
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <div className="text-lg font-semibold">{service.label}</div>
+                    <div className={homeOfferTitleClass(service)}>{service.label}</div>
                     <span
                       className="mt-0.5 text-sm text-subtle-foreground transition group-hover:translate-x-0.5 motion-reduce:transition-none"
                       aria-hidden="true"
@@ -134,13 +133,13 @@ export default async function HomePage({params}: Props) {
 
           <ShowcasePanel
             className="mt-10"
-            eyebrow={t('home.proof.publicProject.title')}
-            title={t('home.proof.items.openclaw.title')}
-            imageSrc="/images/proof/edge-proof-board.svg"
-            imageAlt={t('home.proof.items.openclaw.title')}
+            eyebrow={home.publicProof.eyebrow}
+            title={home.publicProof.title}
+            imageSrc={home.publicProof.imageSrc}
+            imageAlt={home.publicProof.imageAlt}
           >
-            <p>{t('home.proof.items.openclaw.description')}</p>
-            <p>{t('home.proof.publicProject.description')}</p>
+            <p>{home.publicProof.description}</p>
+            <p>{home.publicProof.supportText}</p>
             <div className="flex flex-wrap gap-2">
               {serviceCards.map((service) => (
                 <span
@@ -151,14 +150,14 @@ export default async function HomePage({params}: Props) {
                 </span>
               ))}
             </div>
-            <a href="https://rusty-art.edge-solutions.be/" target="_blank" rel="noreferrer">
-              {t('home.proof.publicProject.cta')} <span aria-hidden="true">↗</span>
+            <a href={home.publicProof.href} target="_blank" rel="noreferrer">
+              {home.publicProof.ctaLabel} <span aria-hidden="true">↗</span>
             </a>
           </ShowcasePanel>
 
           <FadeIn className="mt-8 rounded-lg border border-border bg-surface/85 p-6 shadow-sm md:p-8">
             <dl className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-              {proofSignals.map((signal) => (
+              {home.proofSignals.map((signal) => (
                 <div key={signal.label}>
                   <dt className="text-xs font-semibold uppercase text-subtle-foreground">
                     {signal.label}
@@ -175,7 +174,7 @@ export default async function HomePage({params}: Props) {
           </FadeIn>
 
           <FadeInStagger className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {proofCards.map((item) => (
+            {home.proofCards.map((item) => (
               <FadeIn key={item.title}>
                 <Card className="h-full p-6">
                   <h3 className="text-lg font-semibold tracking-tight">{item.title}</h3>
@@ -188,7 +187,7 @@ export default async function HomePage({params}: Props) {
           </FadeInStagger>
 
           <div className="not-prose mt-8">
-            <ButtonLink href="/services/ai-automation" variant="outline" size="lg">
+            <ButtonLink href={home.proofCta.href} variant="outline" size="lg">
               {t('home.proof.cta')}
             </ButtonLink>
           </div>
@@ -204,57 +203,29 @@ export default async function HomePage({params}: Props) {
           </SectionIntro>
 
           <div className="mt-10 grid grid-cols-1 gap-6 xl:grid-cols-3">
-            <Card className="p-6 md:p-8">
-              <div className="text-sm font-semibold text-foreground">
-                {t('home.process.discovery.kicker')}
-              </div>
-              <h3 className="mt-3 text-lg font-semibold tracking-tight">
-                {t('home.process.discovery.title')}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {t('home.process.discovery.body')}
-              </p>
-              <p className="mt-5 text-sm leading-relaxed text-foreground/80">
-                {t('home.process.discovery.points.plan')}
-              </p>
-            </Card>
-
-            <Card className="p-6 md:p-8">
-              <div className="text-sm font-semibold text-foreground">
-                {t('home.process.build.kicker')}
-              </div>
-              <h3 className="mt-3 text-lg font-semibold tracking-tight">
-                {t('home.process.build.title')}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {t('home.process.build.body')}
-              </p>
-              <p className="mt-5 text-sm leading-relaxed text-foreground/80">
-                {t('home.process.build.stackItems.delivery')}
-              </p>
-            </Card>
-
-            <Card className="p-6 md:p-8">
-              <div className="text-sm font-semibold text-foreground">
-                {t('home.process.launch.kicker')}
-              </div>
-              <h3 className="mt-3 text-lg font-semibold tracking-tight">
-                {t('home.process.launch.title')}
-              </h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {t('home.process.launch.body')}
-              </p>
-              <p className="mt-5 text-sm leading-relaxed text-foreground/80">
-                {t('home.process.launch.items.measure.body')}
-              </p>
-            </Card>
+            {home.processCards.map((card) => (
+              <Card key={card.title} className="p-6 md:p-8">
+                <div className="text-sm font-semibold text-foreground">
+                  {card.kicker}
+                </div>
+                <h3 className="mt-3 text-lg font-semibold tracking-tight">
+                  {card.title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {card.body}
+                </p>
+                <p className="mt-5 text-sm leading-relaxed text-foreground/80">
+                  {card.detail}
+                </p>
+              </Card>
+            ))}
           </div>
 
           <div className="not-prose mt-8">
             <ButtonLink
-              href="/contact"
+              href={home.ctas.processPrimary.href}
               size="lg"
-              trackingPlacement="home_process_primary"
+              trackingPlacement={home.ctas.processPrimary.trackingPlacement}
             >
               {t('home.process.primaryCta')}
             </ButtonLink>
@@ -282,9 +253,9 @@ export default async function HomePage({params}: Props) {
 
               <div className="not-prose mt-8 flex flex-col gap-3 sm:flex-row">
                 <ButtonLink
-                  href="/contact"
+                  href={home.ctas.bottomPrimary.href}
                   size="lg"
-                  trackingPlacement="home_bottom_primary"
+                  trackingPlacement={home.ctas.bottomPrimary.trackingPlacement}
                 >
                   {t('home.primaryCta')}
                 </ButtonLink>

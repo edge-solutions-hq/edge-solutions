@@ -39,6 +39,46 @@ describe('header navigation model', () => {
     assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/web-dev-extra', services), false);
   });
 
+  it('builds desktop and mobile render items with matching active state and placement-specific contact payloads', () => {
+    const items = headerNavigation.getHeaderNavigationItems(translate, [
+      {href: '/services/web-dev', label: 'Web'},
+    ]);
+
+    const desktopItems = headerNavigation.getHeaderNavigationRenderItems(
+      '/services/web-dev/proof',
+      items,
+      'header_nav'
+    );
+    const mobileItems = headerNavigation.getHeaderNavigationRenderItems(
+      '/services/web-dev/proof',
+      items,
+      'mobile_menu_nav'
+    );
+
+    assert.deepEqual(
+      desktopItems.map((item) => ({href: item.href, active: item.active})),
+      mobileItems.map((item) => ({href: item.href, active: item.active}))
+    );
+    assert.deepEqual(
+      desktopItems.map((item) => ({href: item.href, active: item.active})),
+      [
+        {href: '/', active: false},
+        {href: '/services/web-dev', active: true},
+        {href: '/contact', active: false},
+      ]
+    );
+    assert.deepEqual(desktopItems.at(-1).trackingPayload, {
+      ctaTarget: '/contact',
+      placement: 'header_nav',
+      ctaLabel: 'Contact',
+    });
+    assert.deepEqual(mobileItems.at(-1).trackingPayload, {
+      ctaTarget: '/contact',
+      placement: 'mobile_menu_nav',
+      ctaLabel: 'Contact',
+    });
+  });
+
   it('derives contact tracking payloads from item metadata and placement', () => {
     const contact = {
       href: '/contact',
@@ -67,6 +107,37 @@ describe('header navigation model', () => {
     );
     assert.equal(
       headerNavigation.getHeaderNavigationContactTrackingPayload({href: '/contact', label: 'Contact'}, 'header_nav'),
+      null
+    );
+  });
+
+  it('derives mobile menu CTA targets and tracking payloads from the shared contact item', () => {
+    const items = headerNavigation.getHeaderNavigationItems(translate, [
+      {href: '/services/web-dev', label: 'Web'},
+    ]);
+
+    assert.deepEqual(
+      headerNavigation.getHeaderNavigationContactAction(
+        items,
+        'Start a conversation',
+        'mobile_menu_cta'
+      ),
+      {
+        href: '/contact',
+        label: 'Start a conversation',
+        trackingPayload: {
+          ctaTarget: '/contact',
+          placement: 'mobile_menu_cta',
+          ctaLabel: 'Start a conversation',
+        },
+      }
+    );
+    assert.equal(
+      headerNavigation.getHeaderNavigationContactAction(
+        [{href: '/', label: 'Home'}],
+        'Start a conversation',
+        'mobile_menu_cta'
+      ),
       null
     );
   });

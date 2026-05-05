@@ -3,6 +3,20 @@ import type {Locale} from '@/i18n/routing';
 
 export type ProofModuleName = 'WorkflowSnapshot' | 'DeliveryBlueprint' | 'PrototypeSignals';
 
+export type ProofStructureKey =
+  | 'checklist'
+  | 'columns'
+  | 'columnPoints'
+  | 'phases'
+  | 'reviewPoints'
+  | 'signals'
+  | 'steps';
+
+export type ProofStructuralExpectation = {
+  key: ProofStructureKey;
+  expectedCount: number;
+};
+
 export type RequiredProofSignal = {
   concept: string;
   terms: Record<Locale, readonly string[]>;
@@ -12,11 +26,38 @@ export type OfferTrackProofProfile = {
   slug: OfferTrackSlug;
   proofModule: ProofModuleName;
   imagePath: string;
-  structuralCounts: Record<string, number>;
+  structuralCounts: Partial<Record<ProofStructureKey, number>>;
   requiredSignals: readonly RequiredProofSignal[];
 };
 
-export const OFFER_TRACK_PROOF_PROFILES: readonly OfferTrackProofProfile[] = [
+export type OfferTrackProofContract = {
+  slug: OfferTrackSlug;
+  render: {
+    module: ProofModuleName;
+    imagePath: string;
+  };
+  structure: readonly ProofStructuralExpectation[];
+  signals: readonly RequiredProofSignal[];
+};
+
+export interface ProofRegistryContract {
+  readonly profiles: readonly OfferTrackProofProfile[];
+  getProfile(slug: OfferTrackSlug): OfferTrackProofProfile | null;
+  getContract(slug: OfferTrackSlug): OfferTrackProofContract | null;
+  validate(): readonly string[];
+}
+
+const PROOF_STRUCTURE_KEYS = new Set<ProofStructureKey>([
+  'checklist',
+  'columns',
+  'columnPoints',
+  'phases',
+  'reviewPoints',
+  'signals',
+  'steps',
+]);
+
+export const OFFER_TRACK_PROOF_PROFILES = [
   {
     slug: 'ai-automation',
     proofModule: 'WorkflowSnapshot',
@@ -123,7 +164,69 @@ export const OFFER_TRACK_PROOF_PROFILES: readonly OfferTrackProofProfile[] = [
       },
     ],
   },
-];
+] satisfies readonly OfferTrackProofProfile[];
+
+export function getProofStructuralExpectations(
+  profile: OfferTrackProofProfile
+): readonly ProofStructuralExpectation[] {
+  return Object.entries(profile.structuralCounts).map(([key, expectedCount]) => ({
+    key: key as ProofStructureKey,
+    expectedCount,
+  }));
+}
+
+export function getOfferTrackProofContract(
+  slug: OfferTrackSlug
+): OfferTrackProofContract | null {
+  const profile = getOfferTrackProofProfile(slug);
+  if (!profile) return null;
+
+  return {
+    slug: profile.slug,
+    render: {
+      module: profile.proofModule,
+      imagePath: profile.imagePath,
+    },
+    structure: getProofStructuralExpectations(profile),
+    signals: profile.requiredSignals,
+  };
+}
+
+function validateProofProfile(profile: OfferTrackProofProfile): readonly string[] {
+  const errors: string[] = [];
+
+  if (!profile.proofModule) errors.push(`${profile.slug} missing proof module`);
+  if (!profile.imagePath) errors.push(`${profile.slug} missing proof image`);
+  if (profile.requiredSignals.length === 0) errors.push(`${profile.slug} missing proof signals`);
+
+  for (const [key, count] of Object.entries(profile.structuralCounts)) {
+    if (!PROOF_STRUCTURE_KEYS.has(key as ProofStructureKey)) {
+      errors.push(`${profile.slug} has unsupported structural expectation: ${key}`);
+    }
+    if (!Number.isInteger(count) || count < 1) {
+      errors.push(`${profile.slug} has invalid structural count for ${key}`);
+    }
+  }
+
+  for (const signal of profile.requiredSignals) {
+    for (const locale of ['fr', 'en', 'nl'] as const) {
+      if (!signal.terms[locale]?.length) {
+        errors.push(`${profile.slug} missing ${locale} terms for ${signal.concept}`);
+      }
+    }
+  }
+
+  return errors;
+}
+
+export const proofRegistry: ProofRegistryContract = {
+  profiles: OFFER_TRACK_PROOF_PROFILES,
+  getProfile: getOfferTrackProofProfile,
+  getContract: getOfferTrackProofContract,
+  validate() {
+    return OFFER_TRACK_PROOF_PROFILES.flatMap((profile) => validateProofProfile(profile));
+  },
+};
 
 export function getOfferTrackProofProfile(slug: OfferTrackSlug) {
   return OFFER_TRACK_PROOF_PROFILES.find((profile) => profile.slug === slug) ?? null;

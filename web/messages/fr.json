@@ -9,7 +9,11 @@
     "process": "Méthode",
     "web": "Développement web",
     "realtime": "Temps réel 3D/VR",
-    "contact": "Contact"
+    "contact": "Contact",
+    "mobileMenu": {
+      "open": "Ouvrir le menu de navigation",
+      "close": "Fermer le menu de navigation"
+    }
   },
   "home": {
     "headline": "J’aide les équipes à rendre leurs usages et prototypes IA réellement exploitables.",

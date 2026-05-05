@@ -9,7 +9,11 @@
     "process": "Hoe we werken",
     "web": "Webontwikkeling",
     "realtime": "Realtime 3D/VR",
-    "contact": "Contact"
+    "contact": "Contact",
+    "mobileMenu": {
+      "open": "Navigatiemenu openen",
+      "close": "Navigatiemenu sluiten"
+    }
   },
   "home": {
     "headline": "Ik help teams om hun AI-gebruik en prototypes echt bruikbaar te maken.",

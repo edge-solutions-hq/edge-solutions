@@ -6,9 +6,36 @@ import {getServicesDecisionItems, getServicesHubOfferCards} from '@/lib/offer-pr
 import {getServicesPageProfile} from '@/lib/page-profiles';
 import {JsonLd} from '@/components/seo/JsonLd';
 
+type ServicesHubOfferCard = ReturnType<typeof getServicesHubOfferCards>[number];
+type ServicesDecisionItem = ReturnType<typeof getServicesDecisionItems>[number];
+
 type Props = {
   params: Promise<{locale: string}>;
 };
+
+function servicesDecisionItemClass(item: ServicesDecisionItem) {
+  return [
+    'rounded-md px-4 py-3',
+    item.visualEmphasis === 'high'
+      ? 'border border-primary/35 bg-background text-foreground'
+      : 'bg-surface-muted text-foreground',
+  ].join(' ');
+}
+
+function servicesOfferCardClass(service: ServicesHubOfferCard) {
+  return [
+    'group rounded-lg border bg-surface p-6 shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
+    service.visualRole === 'primary-offer'
+      ? 'border-primary/45 md:col-span-2 xl:col-span-2'
+      : 'border-border',
+  ].join(' ');
+}
+
+function servicesOfferTitleClass(service: ServicesHubOfferCard) {
+  return service.visualEmphasis === 'high'
+    ? 'text-xl font-semibold tracking-tight'
+    : 'text-lg font-semibold';
+}
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
@@ -53,14 +80,14 @@ export default async function ServicesIndexPage({params}: Props) {
 
         <div className="mt-4 grid gap-3 text-sm leading-6 text-foreground md:grid-cols-3">
           {decisionItems.map((item) => (
-            <p key={item.slug} className="rounded-md bg-surface-muted px-4 py-3">
+            <p key={item.slug} className={servicesDecisionItemClass(item)}>
               {item.label}
             </p>
           ))}
         </div>
       </section>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
         {services.map((service) => (
           <TrackedLink
             key={service.slug}
@@ -68,14 +95,14 @@ export default async function ServicesIndexPage({params}: Props) {
             aria-label={service.label}
             offerTrackSlug={service.slug}
             trackingPlacement="services_index_grid"
-            className="group rounded-lg border border-border bg-surface p-6 shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none"
+            className={servicesOfferCardClass(service)}
           >
             <div className="flex items-start justify-between gap-4">
               <div className="space-y-2">
                 <div className="text-xs font-medium uppercase tracking-wide text-subtle-foreground">
                   {service.triggerLabel}
                 </div>
-                <div className="text-lg font-semibold">{service.label}</div>
+                <div className={servicesOfferTitleClass(service)}>{service.label}</div>
               </div>
               <span
                 className="mt-0.5 text-sm text-subtle-foreground transition group-hover:translate-x-0.5 motion-reduce:transition-none"

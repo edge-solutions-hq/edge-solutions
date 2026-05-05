@@ -59,7 +59,10 @@ function extractOfferTracks() {
 }
 
 const offerTracks = extractOfferTracks();
-const {OFFER_TRACK_PROOF_PROFILES: proofProfiles} = await import('../src/lib/content/proof-registry.ts');
+const {
+  OFFER_TRACK_PROOF_PROFILES: proofProfiles,
+  proofRegistry,
+} = await import('../src/lib/content/proof-registry.ts');
 
 function countArrayItems(source, propName) {
   const match = source.match(new RegExp(`${propName}=\\{\\[([\\s\\S]*?)\\]\\}`, 'm'));
@@ -97,6 +100,15 @@ describe('offer track catalog seam', () => {
     assert.ok(third > second, 'realtime track must follow web track');
     assert.match(source, /priorityRole: 'primary'/, 'AI-first hierarchy should be explicit');
     assert.equal(offerTracks[0].priorityRole, 'primary');
+    assert.equal(
+      offerTracks.filter((track) => track.priorityRole === 'primary').length,
+      1,
+      'offer catalog must identify exactly one primary track'
+    );
+    assert.ok(
+      offerTracks.slice(1).every((track) => track.priorityRole === 'supporting'),
+      'supporting tracks must remain visible after the primary AI track'
+    );
   });
 
   it('wires public route modules through the catalog', () => {
@@ -111,6 +123,25 @@ describe('offer track catalog seam', () => {
     assert.match(read('src/app/sitemap.ts'), /getLocalizedSitemapEntries/);
     assert.match(read('src/lib/page-profiles.ts'), /OFFER_TRACKS/);
     assert.match(read('src/lib/content/services.ts'), /OFFER_TRACK_SLUGS/);
+  });
+
+  it('projects role-aware offer presentation for home and services routes', () => {
+    const presentationSource = read('src/lib/offer-presentation.ts');
+    const homeSource = read('src/app/[locale]/page.tsx');
+    const servicesSource = read('src/app/[locale]/services/page.tsx');
+
+    assert.match(presentationSource, /visualRole: 'primary-offer'/);
+    assert.match(presentationSource, /visualRole: 'supporting-offer'/);
+    assert.match(presentationSource, /visualEmphasis: 'high'/);
+    assert.match(presentationSource, /visualGroup: 'execution-depth'/);
+    assert.match(presentationSource, /assertSinglePrimaryOfferTrack/);
+
+    assert.match(homeSource, /service\.visualRole/);
+    assert.match(homeSource, /service\.visualEmphasis/);
+    assert.match(homeSource, /service\.visualGroup/);
+    assert.match(servicesSource, /service\.visualRole/);
+    assert.match(servicesSource, /service\.visualEmphasis/);
+    assert.match(servicesSource, /item\.visualEmphasis/);
   });
 
   it('keeps localized message keys complete for every offer track', () => {
@@ -129,6 +160,25 @@ describe('offer track catalog seam', () => {
 });
 
 describe('localized content and proof seam', () => {
+  it('validates the proof registry through its runtime contract interface', () => {
+    assert.deepEqual(proofRegistry.validate(), []);
+    assert.deepEqual(
+      proofRegistry.profiles.map((profile) => profile.slug),
+      offerTracks.map((track) => track.slug),
+      'proof contract registry must match offer track catalog order'
+    );
+
+    for (const track of offerTracks) {
+      const contract = proofRegistry.getContract(track.slug);
+      assert.ok(contract, `${track.slug} missing proof contract`);
+      assert.equal(contract.slug, track.slug);
+      assert.ok(contract.render.module, `${track.slug} missing proof render module`);
+      assert.ok(contract.render.imagePath.endsWith('.svg'), `${track.slug} proof image must be an svg asset`);
+      assert.ok(contract.structure.length > 0, `${track.slug} missing structural expectations`);
+      assert.ok(contract.signals.length > 0, `${track.slug} missing required signals`);
+    }
+  });
+
   it('has localized MDX content, metadata, proof profile, and CTA for each offer track', () => {
     assert.deepEqual(
       proofProfiles.map((profile) => profile.slug),
@@ -169,9 +219,11 @@ describe('localized content and proof seam', () => {
     }
 
     assert.match(read('src/lib/content/services.ts'), /getOfferTrackProofProfile/);
+    assert.match(read('src/lib/content/services.ts'), /getOfferTrackProofContract/);
     assert.match(read('src/lib/content/services.ts'), /renderPolicy/);
     assert.doesNotMatch(read('src/lib/content/services.ts'), /function getServiceMdx/);
     assert.match(read('src/lib/content/service-page.ts'), /renderPolicy\.requestedLocale/);
+    assert.match(read('src/lib/content/service-page.ts'), /proofPolicy/);
     assert.match(read('src/app/[locale]/services/[slug]/page.tsx'), /getServicePageModel/);
   });
 
@@ -181,6 +233,21 @@ describe('localized content and proof seam', () => {
     assert.match(read('src/lib/content/service-page.ts'), /getOfferTrackPageProfile/);
     assert.match(read('src/app/[locale]/services/[slug]/page.tsx'), /getServicePageMetadata/);
     assert.match(read('src/app/[locale]/contact/page.tsx'), /getContactPageProfile/);
+  });
+
+  it('keeps repeated proof media frame mechanics behind a shared UI module', () => {
+    assert.match(read('src/components/ui/ProofMediaFrame.tsx'), /export function ProofMediaFrame/);
+
+    for (const filePath of [
+      'src/components/ui/ShowcasePanel.tsx',
+      'src/components/mdx/WorkflowSnapshot.tsx',
+      'src/components/mdx/DeliveryBlueprint.tsx',
+      'src/components/mdx/PrototypeSignals.tsx',
+    ]) {
+      const source = read(filePath);
+      assert.match(source, /ProofMediaFrame/, `${filePath} should consume the proof media frame`);
+      assert.doesNotMatch(source, /bg-rose-400\/80/, `${filePath} should not repeat browser chrome dots`);
+    }
   });
 });
 
@@ -201,7 +268,8 @@ describe('contact intake and analytics taxonomy seams', () => {
     assert.match(formSource, /contactOfferOptions\.map/);
     assert.doesNotMatch(formSource, /<option value="ai"/);
     assert.match(deliverySource, /messageKey/);
-    assert.match(formSource, /state\.messageKey \? t\(state\.messageKey\)/);
+    assert.match(formSource, /resolveContactFeedback/);
+    assert.match(formSource, /feedback\.messageKey \? t\(feedback\.messageKey\)/);
   });
 
   it('keeps contact attempt tracking outside the form Adapter', () => {
@@ -282,6 +350,7 @@ describe('contact intake and analytics taxonomy seams', () => {
   it('keeps contact delivery and runtime config behind named seams', () => {
     assert.match(read('src/app/[locale]/contact/actions.ts'), /submitContactAttempt/);
     assert.match(read('src/lib/contact/delivery.ts'), /ContactDeliveryAdapter/);
+    assert.match(read('src/lib/contact/delivery.ts'), /buildContactEmailPayload/);
     assert.match(read('src/lib/contact/delivery.ts'), /getContactDeliveryConfig/);
     assert.match(read('src/app/[locale]/layout.tsx'), /getAnalyticsRuntimeConfig/);
     assert.match(read('src/lib/runtime-config.ts'), /getAnalyticsRuntimeConfig/);

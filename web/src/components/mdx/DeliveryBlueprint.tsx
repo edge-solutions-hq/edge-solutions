@@ -1,7 +1,7 @@
-import Image from 'next/image';
 import type {ReactNode} from 'react';
 
 import {cn} from '@/lib/cn';
+import {ProofMediaFrame} from '@/components/ui/ProofMediaFrame';
 
 type DeliveryBlueprintColumn = {
   label: string;
@@ -70,21 +70,12 @@ export function DeliveryBlueprint({
       </div>
 
       <div className="border-b border-border/80 bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.08),transparent_45%),linear-gradient(180deg,rgba(248,250,252,1),rgba(241,245,249,0.92))] px-4 py-4 md:px-6 md:py-6">
-        <div className="overflow-hidden rounded-[1.75rem] border border-border/70 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.12)]">
-          <div className="flex items-center gap-2 border-b border-border/70 px-4 py-3" aria-hidden="true">
-            <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
-            <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-            <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-          </div>
-
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            width={1400}
-            height={1000}
-            className="h-auto w-full"
-          />
-        </div>
+        <ProofMediaFrame
+          imageSrc={imageSrc}
+          imageAlt={imageAlt}
+          outerClassName="overflow-hidden rounded-[1.75rem] border border-border/70 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
+          chromeClassName="border-b border-border/70 px-4 py-3"
+        />
       </div>
 
       <div className="grid gap-px bg-border/80 md:grid-cols-3">

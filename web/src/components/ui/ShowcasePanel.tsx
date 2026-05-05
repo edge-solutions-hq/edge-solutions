@@ -1,6 +1,6 @@
-import Image from 'next/image';
 import type {ReactNode} from 'react';
 import {cn} from '@/lib/cn';
+import {ProofMediaFrame} from '@/components/ui/ProofMediaFrame';
 
 type ShowcasePanelProps = {
   eyebrow?: string;
@@ -51,28 +51,16 @@ export function ShowcasePanel({
         </div>
       </div>
 
-      <div
-        className={cn(
+      <ProofMediaFrame
+        imageSrc={imageSrc}
+        imageAlt={imageAlt}
+        outerClassName={cn(
           'relative rounded-[1.5rem] border border-border/70 bg-[radial-gradient(circle_at_top,rgba(124,58,237,0.12),transparent_52%),radial-gradient(circle_at_bottom,rgba(37,99,235,0.12),transparent_50%),linear-gradient(135deg,rgba(255,255,255,0.98),rgba(243,244,246,0.92))] p-4',
           imageFirst ? 'lg:order-1' : 'lg:order-2',
         )}
-      >
-        <div className="flex items-center gap-2 pb-3" aria-hidden="true">
-          <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-          <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-        </div>
-
-        <div className="overflow-hidden rounded-[1.25rem] border border-border/70 bg-background/90 shadow-[0_24px_60px_rgba(15,23,42,0.12)]">
-          <Image
-            src={imageSrc}
-            alt={imageAlt}
-            width={1400}
-            height={1000}
-            className="h-auto w-full"
-          />
-        </div>
-      </div>
+        chromeClassName="pb-3"
+        imageFrameClassName="overflow-hidden rounded-[1.25rem] border border-border/70 bg-background/90 shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
+      />
     </section>
   );
 }

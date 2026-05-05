@@ -10,11 +10,15 @@ describe('contact form model behavior', () => {
     assert.equal(contactFormModel.fields.name.name, 'name');
     assert.equal(contactFormModel.fields.name.required, true);
     assert.equal(contactFormModel.fields.name.minLength, 2);
+    assert.equal(contactFormModel.fields.name.maxLength, 80);
     assert.equal(contactFormModel.fields.email.type, 'email');
+    assert.equal(contactFormModel.fields.email.maxLength, 200);
     assert.equal(contactFormModel.fields.service.defaultValue, 'unsure');
     assert.equal(contactFormModel.fields.message.minLength, 10);
+    assert.equal(contactFormModel.fields.message.maxLength, 5000);
     assert.equal(contactFormModel.fields.honeypot.name, 'company');
     assert.equal(contactFormModel.fields.honeypot.autocomplete, 'off');
+    assert.deepEqual(contactFormModel.fieldOrder, ['name', 'email', 'service', 'message']);
     assert.deepEqual(
       contactFormModel.offerOptions.map((option) => option.value),
       ['ai', 'web', 'realtime', 'unsure']
@@ -28,7 +32,7 @@ describe('contact form model behavior', () => {
     assert.equal(contactIntake.extractContactSubmitService(formData), 'web');
 
     formData.set('service', 'not-a-known-service');
-    assert.equal(contactIntake.extractContactSubmitService(formData), 'not-a-known-service');
+    assert.equal(contactIntake.extractContactSubmitService(formData), undefined);
 
     formData.delete('service');
     assert.equal(contactIntake.extractContactSubmitService(formData), undefined);

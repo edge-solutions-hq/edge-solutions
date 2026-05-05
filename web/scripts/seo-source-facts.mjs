@@ -203,8 +203,68 @@ function normalizeSiteUrl(url) {
   return url.replace(/\/$/, '');
 }
 
-function localizedPath(locale, suffix) {
+export function localizedPath(locale, suffix) {
   return `/${locale}${suffix}`;
+}
+
+function localizedAlternates({siteUrl, locales, defaultLocale, hreflangByLocale, suffix}) {
+  const byLocale = locales.map((locale) => {
+    const path = localizedPath(locale, suffix);
+    return {
+      locale,
+      hreflang: hreflangByLocale[locale] ?? locale,
+      path,
+      url: `${siteUrl}${path}`,
+    };
+  });
+  const defaultAlternate = byLocale.find((alternate) => alternate.locale === defaultLocale);
+
+  if (!defaultAlternate) throw new Error(`Default locale ${defaultLocale} is not present in locales`);
+
+  return {
+    byLocale,
+    xDefault: {
+      ...defaultAlternate,
+      hreflang: 'x-default',
+    },
+  };
+}
+
+export function stripLocalizedPathPrefix(pathname, locales) {
+  const prefixPattern = new RegExp(`^/(?:${locales.map(escapeRegExp).join('|')})(?=/|$)`);
+  return pathname.replace(prefixPattern, '') || '';
+}
+
+function buildLocalizedRouteFacts({siteUrl, locales, defaultLocale, hreflangByLocale, routeFamilies, metadataFor}) {
+  return routeFamilies.flatMap((family) =>
+    locales.map((locale) => {
+      const metadata = metadataFor(family, locale);
+      const path = localizedPath(locale, family.pathSuffix);
+      const url = `${siteUrl}${path}`;
+
+      if (!metadata.title) throw new Error(`${family.family} is missing ${locale} title`);
+      if (!metadata.description) throw new Error(`${family.family} is missing ${locale} description`);
+
+      return {
+        family: family.family,
+        kind: family.kind,
+        locale,
+        suffix: family.pathSuffix,
+        path,
+        url,
+        canonicalUrl: url,
+        alternates: localizedAlternates({
+          siteUrl,
+          locales,
+          defaultLocale,
+          hreflangByLocale,
+          suffix: family.pathSuffix,
+        }),
+        title: metadata.title,
+        description: metadata.description,
+      };
+    })
+  );
 }
 
 export function getLiveSeoSourceFacts({root = defaultRoot} = {}) {
@@ -225,32 +285,23 @@ export function getLiveSeoSourceFacts({root = defaultRoot} = {}) {
   const routeFamilies = [...staticPages, ...servicePages];
   const servicePageSuffixes = serviceSlugs.map((slug) => `/services/${slug}`);
   const pageSuffixes = unique([...staticPageSuffixes, ...servicePageSuffixes]);
-  const expectedPaths = pageSuffixes.flatMap((suffix) => locales.map((locale) => localizedPath(locale, suffix)));
-  const expectedUrls = expectedPaths.map((item) => `${siteUrl}${item}`);
-  const urlChecks = routeFamilies.flatMap((family) =>
-    locales.map((locale) => {
-      const metadata =
-        family.kind === 'service'
-          ? extractMdxMetadata(root, locale, family.slug)
-          : {
-              title: family.title[locale],
-              description: family.description[locale],
-            };
-
-      if (!metadata.title) throw new Error(`${family.family} is missing ${locale} title`);
-      if (!metadata.description) throw new Error(`${family.family} is missing ${locale} description`);
-
-      return {
-        family: family.family,
-        locale,
-        suffix: family.pathSuffix,
-        path: localizedPath(locale, family.pathSuffix),
-        url: `${siteUrl}${localizedPath(locale, family.pathSuffix)}`,
-        title: metadata.title,
-        description: metadata.description,
-      };
-    })
-  );
+  const localizedRoutes = buildLocalizedRouteFacts({
+    siteUrl,
+    locales,
+    defaultLocale,
+    hreflangByLocale,
+    routeFamilies,
+    metadataFor: (family, locale) =>
+      family.kind === 'service'
+        ? extractMdxMetadata(root, locale, family.slug)
+        : {
+            title: family.title[locale],
+            description: family.description[locale],
+          },
+  });
+  const expectedPaths = localizedRoutes.map((route) => route.path);
+  const expectedUrls = localizedRoutes.map((route) => route.url);
+  const urlChecks = localizedRoutes;
 
   return {
     siteUrl,
@@ -262,8 +313,11 @@ export function getLiveSeoSourceFacts({root = defaultRoot} = {}) {
     serviceSlugs,
     servicePageSuffixes,
     pageSuffixes,
+    routeFamilies,
+    localizedRoutes,
     expectedPaths,
     expectedUrls,
     urlChecks,
+    stripLocalizedPathPrefix: (pathname) => stripLocalizedPathPrefix(pathname, locales),
   };
 }
