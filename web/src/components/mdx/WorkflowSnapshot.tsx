@@ -1,7 +1,8 @@
-import Image, {type StaticImageData} from 'next/image';
+import type {StaticImageData} from 'next/image';
 import type {ReactNode} from 'react';
 
 import {cn} from '@/lib/cn';
+import {ProofMediaFrame} from '@/components/ui/ProofMediaFrame';
 
 type WorkflowStep = {
   label: string;
@@ -71,21 +72,12 @@ export function WorkflowSnapshot({
         </div>
 
         <div className="bg-slate-100 px-6 py-7 text-slate-900 md:px-8 md:py-8">
-          <div className="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_22px_60px_rgba(15,23,42,0.12)]">
-            <div className="flex items-center gap-2 border-b border-slate-200 px-4 py-3" aria-hidden="true">
-              <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-              <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-            </div>
-
-            <Image
-              src={imageSrc}
-              alt={imageAlt}
-              width={1400}
-              height={1000}
-              className="h-auto w-full"
-            />
-          </div>
+          <ProofMediaFrame
+            imageSrc={imageSrc}
+            imageAlt={imageAlt}
+            outerClassName="overflow-hidden rounded-[1.75rem] border border-slate-200 bg-white shadow-[0_22px_60px_rgba(15,23,42,0.12)]"
+            chromeClassName="border-b border-slate-200 px-4 py-3"
+          />
 
           <div className="relative mt-8">
             <div className="absolute left-[0.42rem] top-2 bottom-2 w-px bg-linear-to-b from-violet-300 via-cyan-300 to-emerald-300" aria-hidden="true" />

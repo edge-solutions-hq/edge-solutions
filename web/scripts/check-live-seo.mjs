@@ -1,9 +1,6 @@
 import {getLiveSeoSourceFacts} from './seo-source-facts.mjs';
 
 const {
-  locales,
-  defaultLocale,
-  hreflangByLocale,
   urlChecks,
 } = getLiveSeoSourceFacts();
 
@@ -83,17 +80,13 @@ function jsonLdBlocks(html) {
   return blocks;
 }
 
-function expectedUrl(locale, suffix) {
-  return urlChecks.find((check) => check.locale === locale && check.suffix === suffix)?.url ?? '';
-}
-
 function assertCanonical(html, url) {
   const canonical = linkTags(html).find((attrs) => attrs.rel?.toLowerCase() === 'canonical')?.href;
   assert(canonical, `${url} is missing canonical`);
   assert(canonical === url, `${url} canonical is ${canonical}, expected self-canonical ${url}`);
 }
 
-function assertAlternates(html, locale, suffix, url) {
+function assertAlternates(html, route) {
   const alternates = linkTags(html).filter((attrs) => attrs.rel?.toLowerCase() === 'alternate');
   const alternatesByHreflang = new Map(
     alternates
@@ -101,24 +94,23 @@ function assertAlternates(html, locale, suffix, url) {
       .map((attrs) => [attrs.hreflang.toLowerCase(), attrs.href])
   );
 
-  for (const alternateLocale of locales) {
-    const hreflang = hreflangByLocale[alternateLocale];
-    const href = expectedUrl(alternateLocale, suffix);
-    const found = alternatesByHreflang.get(hreflang.toLowerCase());
+  for (const alternate of route.alternates.byLocale) {
+    const found = alternatesByHreflang.get(alternate.hreflang.toLowerCase());
 
-    assert(found === href, `${url} is missing ${hreflang} alternate ${href}`);
+    assert(found === alternate.url, `${route.url} is missing ${alternate.hreflang} alternate ${alternate.url}`);
   }
 
-  const defaultHref = expectedUrl(defaultLocale, suffix);
   assert(
-    alternatesByHreflang.get('x-default') === defaultHref,
-    `${url} is missing x-default alternate ${defaultHref}`
+    alternatesByHreflang.get('x-default') === route.alternates.xDefault.url,
+    `${route.url} is missing x-default alternate ${route.alternates.xDefault.url}`
   );
 
-  const selfHreflang = hreflangByLocale[locale].toLowerCase();
+  const selfHreflang = route.alternates.byLocale
+    .find((alternate) => alternate.locale === route.locale)
+    ?.hreflang.toLowerCase();
   assert(
-    alternatesByHreflang.get(selfHreflang) === url,
-    `${url} ${hreflangByLocale[locale]} alternate must match the current URL`
+    selfHreflang && alternatesByHreflang.get(selfHreflang) === route.url,
+    `${route.url} self hreflang alternate must match the current URL`
   );
 }
 
@@ -152,7 +144,7 @@ function assertJsonLd(html, url) {
 }
 
 async function checkUrl(urlCheck) {
-  const {locale, suffix, url} = urlCheck;
+  const {url} = urlCheck;
   const response = await fetch(url, {
     headers: {
       accept: 'text/html,application/xhtml+xml',
@@ -172,7 +164,7 @@ async function checkUrl(urlCheck) {
 
   assertMetadata(html, urlCheck);
   assertCanonical(html, url);
-  assertAlternates(html, locale, suffix, url);
+  assertAlternates(html, urlCheck);
   assertJsonLd(html, url);
 
   return url;

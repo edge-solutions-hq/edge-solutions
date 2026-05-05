@@ -9,7 +9,11 @@
     "process": "How we work",
     "web": "Web development",
     "realtime": "Real-time 3D/VR",
-    "contact": "Contact"
+    "contact": "Contact",
+    "mobileMenu": {
+      "open": "Open navigation menu",
+      "close": "Close navigation menu"
+    }
   },
   "home": {
     "headline": "I help teams turn AI usage and prototypes into something genuinely usable.",

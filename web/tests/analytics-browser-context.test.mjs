@@ -1,6 +1,10 @@
 import {describe, it} from 'node:test';
 import assert from 'node:assert/strict';
+import {register} from 'node:module';
 
+register(new URL('./ts-extension-resolver.mjs', import.meta.url));
+
+const {LOCALES} = await import('../src/i18n/routing.ts');
 const {
   createBrowserAnalyticsContext,
   currentBrowserPagePath,
@@ -25,6 +29,18 @@ function fakeLocation({
 }
 
 describe('browser analytics context', () => {
+  it('derives supported locales from routing locales', () => {
+    for (const locale of LOCALES) {
+      assert.equal(
+        resolveBrowserAnalyticsLocale({
+          document: fakeDocument({lang: ''}),
+          pathname: `/${locale}/services`,
+        }),
+        locale
+      );
+    }
+  });
+
   it('prefers normalized html lang over localized path fallback', () => {
     assert.equal(
       resolveBrowserAnalyticsLocale({

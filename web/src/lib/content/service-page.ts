@@ -2,9 +2,21 @@ import type {Metadata} from 'next';
 import {isLocale, routing, type Locale} from '../../i18n/routing';
 import {OFFER_TRACK_SLUGS, type OfferTrackSlug} from '../offer-tracks';
 import {getOfferTrackPageProfile} from '../page-profiles';
-import {getServiceContent, type ServiceContentResult} from './services';
+import {
+  getServiceContentAvailability,
+  type ServiceContentLoaderMap,
+  type ServiceContentResult,
+} from './services';
 
 type Translate = (key: string) => string;
+
+export type ServicePageProofPolicy = {
+  offerTrackSlug: OfferTrackSlug;
+  renderModule: ServiceContentResult['proofContract']['render']['module'];
+  imagePath: ServiceContentResult['proofContract']['render']['imagePath'];
+  structuralExpectations: ServiceContentResult['proofContract']['structure'];
+  requiredSignals: ServiceContentResult['proofContract']['signals'];
+};
 
 export type ServicePageStaticParam = {
   locale: Locale;
@@ -14,6 +26,7 @@ export type ServicePageStaticParam = {
 export type ServicePageModel = {
   content: ServiceContentResult;
   profile: ReturnType<typeof getOfferTrackPageProfile>;
+  proofPolicy: ServicePageProofPolicy;
   title: string;
   description: string;
   scrollTracking: {
@@ -35,15 +48,19 @@ export async function getServicePageModel({
   locale,
   slug,
   translate,
+  loaders,
 }: {
   locale: string;
   slug: string;
   translate?: Translate;
+  loaders?: ServiceContentLoaderMap;
 }): Promise<ServicePageModel | null> {
   if (!isServicePageLocale(locale)) return null;
 
-  const content = await getServiceContent(locale, slug);
-  if (!content) return null;
+  const availability = await getServiceContentAvailability(locale, slug, {loaders});
+  if (availability.status !== 'localized' && availability.status !== 'fallback') return null;
+
+  const content = availability;
 
   const title = content.metadata.title || content.slug;
   const description = content.metadata.description || '';
@@ -58,6 +75,13 @@ export async function getServicePageModel({
   return {
     content,
     profile,
+    proofPolicy: {
+      offerTrackSlug: content.proofContract.slug,
+      renderModule: content.proofContract.render.module,
+      imagePath: content.proofContract.render.imagePath,
+      structuralExpectations: content.proofContract.structure,
+      requiredSignals: content.proofContract.signals,
+    },
     title,
     description,
     scrollTracking: {

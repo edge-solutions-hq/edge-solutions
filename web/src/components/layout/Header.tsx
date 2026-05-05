@@ -41,7 +41,14 @@ export async function Header({locale}: {locale: string}) {
           >
             {t('home.primaryCta')}
           </ButtonLink>
-          <MobileMenu items={items} ctaLabel={t('home.primaryCta')} />
+          <MobileMenu
+            items={items}
+            ctaLabel={t('home.primaryCta')}
+            labels={{
+              open: t('nav.mobileMenu.open'),
+              close: t('nav.mobileMenu.close'),
+            }}
+          />
         </div>
       </div>
     </header>

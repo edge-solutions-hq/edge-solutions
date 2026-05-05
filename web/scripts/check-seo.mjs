@@ -1,42 +1,22 @@
 import {existsSync, readdirSync, readFileSync, statSync} from 'node:fs';
 import path from 'node:path';
+import {getLiveSeoSourceFacts} from './seo-source-facts.mjs';
 
 const root = process.cwd();
-const siteUrl = 'https://edge-solutions.be';
-const hreflangByLocale = {
-  fr: 'fr-BE',
-  en: 'en-BE',
-  nl: 'nl-BE',
-};
+const routeFacts = getLiveSeoSourceFacts({root});
+const {
+  siteUrl,
+  locales,
+  hreflangByLocale,
+  serviceSlugs,
+  staticPageSuffixes,
+  expectedPaths,
+  expectedUrls,
+  localizedRoutes,
+} = routeFacts;
 
 function readSource(relativePath) {
   return readFileSync(path.join(root, relativePath), 'utf8');
-}
-
-function extractStringArray(source, exportName) {
-  const escapedName = exportName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const assignmentRegex = new RegExp(`${escapedName}\\s*(?::\\s*[^=]+)?\\s*=\\s*\\[([\\s\\S]*?)\\]`, 'm');
-  const propertyRegex = new RegExp(`${escapedName}\\s*:\\s*\\[([\\s\\S]*?)\\]`, 'm');
-  const match = source.match(assignmentRegex) ?? source.match(propertyRegex);
-
-  if (!match) {
-    throw new Error(`Could not find ${exportName} string array`);
-  }
-
-  const values = [...match[1].matchAll(/['"]([^'"]+)['"]/g)].map((item) => item[1]);
-
-  if (!values.length) {
-    throw new Error(`${exportName} did not contain any string values`);
-  }
-
-  return values;
-}
-
-function extractStringProperties(source, propertyName) {
-  const escapedName = propertyName.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const regex = new RegExp(`${escapedName}\\s*:\\s*['\"]([^'\"]*)['\"]`, 'g');
-  const values = [...source.matchAll(regex)].map((item) => item[1]);
-  return [...new Set(values)];
 }
 
 function findGeneratedTextFile(directory, filePattern) {
@@ -83,6 +63,8 @@ function assert(condition, message) {
 function escapeRegExp(value) {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
+
+const htmlAttributeValuePattern = String.raw`[^'"]*`;
 
 function assertSourceContainsAll(source, values, label) {
   for (const value of values) {
@@ -131,30 +113,33 @@ function assertPageHasJsonLd(pathname) {
 
 function assertPageHasLocaleAlternates(pathname) {
   const generated = readGeneratedPage(pathname);
-  const suffix = pathname.replace(/^\/(?:fr|en|nl)/, '') || '';
+  const route = localizedRoutes.find((item) => item.path === pathname);
 
   assert(
     generated,
     `Generated page ${pathname} was not found. Run npm run build before check:seo.`
   );
+  assert(route, `No route facts found for generated path ${pathname}`);
 
-  for (const alternateLocale of locales) {
-    const hreflang = hreflangByLocale[alternateLocale] || alternateLocale;
-    const href = `${siteUrl}/${alternateLocale}${suffix}`;
+  for (const alternate of route.alternates.byLocale) {
+    const hrefPattern = `${escapeRegExp(alternate.url)}${htmlAttributeValuePattern.slice(0, 0)}`;
     const alternatePattern = new RegExp(
-      `<link[^>]+rel=["']alternate["'][^>]+hreflang=["']${escapeRegExp(hreflang)}["'][^>]+href=["']${escapeRegExp(href)}["']|<link[^>]+href=["']${escapeRegExp(href)}["'][^>]+rel=["']alternate["'][^>]+hreflang=["']${escapeRegExp(hreflang)}["']`,
+      `<link[^>]+rel=["']alternate["'][^>]+hreflang=["']${escapeRegExp(alternate.hreflang)}["'][^>]+href=["']${hrefPattern}["'][^>]*>|<link[^>]+href=["']${hrefPattern}["'][^>]+rel=["']alternate["'][^>]+hreflang=["']${escapeRegExp(alternate.hreflang)}["'][^>]*>`,
       'i'
     );
 
     assert(
       alternatePattern.test(generated),
-      `Generated ${pathname} is missing ${hreflang} alternate ${href}`
+      `Generated ${pathname} is missing ${alternate.hreflang} alternate ${alternate.url}`
     );
   }
 
   assert(
-    /<link[^>]+rel=["']alternate["'][^>]+hreflang=["']x-default["']/i.test(generated),
-    `Generated ${pathname} is missing x-default alternate`
+    new RegExp(
+      `<link[^>]+rel=["']alternate["'][^>]+hreflang=["']x-default["'][^>]+href=["']${escapeRegExp(route.alternates.xDefault.url)}["'][^>]*>|<link[^>]+href=["']${escapeRegExp(route.alternates.xDefault.url)}["'][^>]+rel=["']alternate["'][^>]+hreflang=["']x-default["'][^>]*>`,
+      'i'
+    ).test(generated),
+    `Generated ${pathname} is missing x-default alternate ${route.alternates.xDefault.url}`
   );
 }
 
@@ -181,33 +166,29 @@ function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
 }
 
 function assertSitemapUrlHasLocaleAlternates(sitemapXml, pagePath) {
-  const pageUrl = `${siteUrl}${pagePath}`;
-  const suffix = pagePath.replace(/^\/(?:fr|en|nl)/, '') || '';
+  const route = localizedRoutes.find((item) => item.path === pagePath);
+  assert(route, `No route facts found for sitemap path ${pagePath}`);
   const urlBlock = sitemapXml.match(
-    new RegExp(`<url>[\\s\\S]*?<loc>${escapeRegExp(pageUrl)}<\\/loc>[\\s\\S]*?<\\/url>`)
+    new RegExp(`<url>[\\s\\S]*?<loc>${escapeRegExp(route.url)}<\\/loc>[\\s\\S]*?<\\/url>`)
   )?.[0];
 
-  assert(urlBlock, `Generated sitemap is missing URL block for ${pageUrl}`);
+  assert(urlBlock, `Generated sitemap is missing URL block for ${route.url}`);
 
-  for (const alternateLocale of locales) {
-    const hreflang = hreflangByLocale[alternateLocale] || alternateLocale;
-    const alternateUrl = `${siteUrl}/${alternateLocale}${suffix}`;
-
+  for (const alternate of route.alternates.byLocale) {
     assert(
-      urlBlock.includes(`hreflang="${hreflang}"`) && urlBlock.includes(`href="${alternateUrl}"`),
-      `Generated sitemap URL ${pageUrl} is missing ${hreflang} alternate ${alternateUrl}`
+      urlBlock.includes(`hreflang="${alternate.hreflang}"`) && urlBlock.includes(`href="${alternate.url}"`),
+      `Generated sitemap URL ${route.url} is missing ${alternate.hreflang} alternate ${alternate.url}`
     );
   }
 
   assert(
-    urlBlock.includes('hreflang="x-default"') && urlBlock.includes(`href="${siteUrl}/fr${suffix}"`),
-    `Generated sitemap URL ${pageUrl} is missing x-default alternate`
+    urlBlock.includes('hreflang="x-default"') && urlBlock.includes(`href="${route.alternates.xDefault.url}"`),
+    `Generated sitemap URL ${route.url} is missing x-default alternate ${route.alternates.xDefault.url}`
   );
 }
 
 const routingSource = readSource('src/i18n/routing.ts');
 const servicesSource = readSource('src/lib/content/services.ts');
-const offerTracksSource = readSource('src/lib/offer-tracks.ts');
 const pageProfilesSource = readSource('src/lib/page-profiles.ts');
 const sitemapSource = readSource('src/app/sitemap.ts');
 const robotsSource = readSource('src/app/robots.ts');
@@ -221,15 +202,7 @@ const sitemapUsesCentralizedPageProfiles =
   pageProfilesSource.includes('STATIC_PAGE_DEFINITIONS') &&
   pageProfilesSource.includes('OFFER_TRACKS');
 
-const locales = extractStringArray(routingSource, 'LOCALES');
-const serviceSlugs = extractStringProperties(offerTracksSource, 'slug');
-const staticSuffixes = extractStringProperties(pageProfilesSource, 'pathSuffix');
-const expectedPaths = locales.flatMap((locale) => [
-  ...staticSuffixes.map((suffix) => `/${locale}${suffix}`),
-  ...serviceSlugs.map((slug) => `/${locale}/services/${slug}`),
-]);
-const expectedUrls = expectedPaths.map((item) => `${siteUrl}${item}`);
-const expectedLocalizedUrlCount = locales.length * (staticSuffixes.length + serviceSlugs.length);
+const expectedLocalizedUrlCount = localizedRoutes.length;
 
 assert(
   expectedUrls.length === expectedLocalizedUrlCount,
@@ -320,9 +293,9 @@ if (generatedSitemap) {
   for (const locale of locales) {
     const localeUrls = urls.filter((url) => url.startsWith(`${siteUrl}/${locale}`));
     assert(
-      localeUrls.length === staticSuffixes.length + serviceSlugs.length,
+      localeUrls.length === staticPageSuffixes.length + serviceSlugs.length,
       `Generated sitemap has ${localeUrls.length} URLs for ${locale}, expected ${
-        staticSuffixes.length + serviceSlugs.length
+        staticPageSuffixes.length + serviceSlugs.length
       }`
     );
   }

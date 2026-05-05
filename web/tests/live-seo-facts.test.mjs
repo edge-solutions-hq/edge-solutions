@@ -58,10 +58,22 @@ describe('live SEO source facts', () => {
       facts.pageSuffixes,
       [...sourceStaticSuffixes, ...sourceServiceSlugs.map((slug) => `/services/${slug}`)]
     );
+    assert.equal(facts.routeFamilies.length, sourceStaticSuffixes.length + sourceServiceSlugs.length);
+    assert.deepEqual(
+      facts.routeFamilies.filter((family) => family.kind === 'static').map((family) => family.pathSuffix),
+      sourceStaticSuffixes
+    );
+    assert.deepEqual(
+      facts.routeFamilies.filter((family) => family.kind === 'service').map((family) => family.slug),
+      sourceServiceSlugs
+    );
 
     assert.ok(facts.staticPageSuffixes.includes(''), 'home suffix is covered');
     assert.ok(facts.staticPageSuffixes.includes('/services'), 'services hub suffix is covered');
     assert.ok(facts.staticPageSuffixes.includes('/contact'), 'contact suffix is covered');
+    assert.ok(facts.servicePageSuffixes.includes('/services/ai-automation'), 'offer track suffix is covered');
+    assert.ok(facts.servicePageSuffixes.includes('/services/web-dev'), 'web offer suffix is covered');
+    assert.ok(facts.servicePageSuffixes.includes('/services/realtime-games'), 'realtime offer suffix is covered');
 
     for (const locale of facts.locales) {
       assert.equal(typeof facts.hreflangByLocale[locale], 'string', `${locale} hreflang`);
@@ -78,13 +90,31 @@ describe('live SEO source facts', () => {
         assert.equal(urlCheck.suffix, suffix);
         assert.equal(urlCheck.path, expectedPath);
         assert.equal(urlCheck.url, expectedUrl);
+        assert.equal(urlCheck.canonicalUrl, expectedUrl);
+        assert.equal(facts.stripLocalizedPathPrefix(expectedPath), suffix);
         assert.equal(typeof urlCheck.title, 'string', `${expectedUrl} title`);
         assert.equal(typeof urlCheck.description, 'string', `${expectedUrl} description`);
         assert.ok(urlCheck.title.length > 0, `${expectedUrl} title is non-empty`);
         assert.ok(urlCheck.description.length > 0, `${expectedUrl} description is non-empty`);
+
+        for (const alternateLocale of facts.locales) {
+          const alternate = urlCheck.alternates.byLocale.find((item) => item.locale === alternateLocale);
+          const alternatePath = `/${alternateLocale}${suffix}`;
+
+          assert.ok(alternate, `${expectedUrl} ${alternateLocale} alternate`);
+          assert.equal(alternate.hreflang, facts.hreflangByLocale[alternateLocale]);
+          assert.equal(alternate.path, alternatePath);
+          assert.equal(alternate.url, `${facts.siteUrl}${alternatePath}`);
+        }
+
+        const defaultPath = `/${facts.defaultLocale}${suffix}`;
+        assert.equal(urlCheck.alternates.xDefault.hreflang, 'x-default');
+        assert.equal(urlCheck.alternates.xDefault.path, defaultPath);
+        assert.equal(urlCheck.alternates.xDefault.url, `${facts.siteUrl}${defaultPath}`);
       }
     }
 
     assert.equal(facts.urlChecks.length, facts.locales.length * facts.pageSuffixes.length);
+    assert.deepEqual(facts.urlChecks, facts.localizedRoutes);
   });
 });

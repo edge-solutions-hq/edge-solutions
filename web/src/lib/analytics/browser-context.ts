@@ -1,3 +1,5 @@
+import {LOCALES} from '../../i18n/routing';
+
 type BrowserAnalyticsDocument = {
   documentElement?: {
     lang?: string;
@@ -27,7 +29,7 @@ export type BrowserAnalyticsContext = {
   site_locale?: string;
 };
 
-const SUPPORTED_LOCALES = new Set<string>(['fr', 'en', 'nl']);
+const SUPPORTED_LOCALES = new Set<string>(LOCALES);
 
 function normalizeLocale(value: string | undefined) {
   return value?.trim().toLowerCase().split('-')[0];

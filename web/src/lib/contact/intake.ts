@@ -68,6 +68,7 @@ export type ContactFormFieldModel = {
   type?: 'text' | 'email';
   required?: boolean;
   minLength?: number;
+  maxLength?: number;
   rows?: number;
   defaultValue?: ContactOfferValue;
   autocomplete?: string;
@@ -84,7 +85,14 @@ export type ContactFeedbackModel =
   | {kind: 'success'; messageKey: ContactActionMessageKey}
   | {kind: 'error'; messageKey?: ContactActionMessageKey; fallbackMessage?: string};
 
+export const contactFieldConstraints = {
+  name: {minLength: 2, maxLength: 80},
+  email: {maxLength: 200},
+  message: {minLength: 10, maxLength: 5000},
+} as const;
+
 export const contactFormModel = {
+  fieldOrder: ['name', 'email', 'service', 'message'] as const,
   fields: {
     name: {
       name: 'name',
@@ -94,7 +102,8 @@ export const contactFormModel = {
       control: 'input',
       type: 'text',
       required: true,
-      minLength: 2,
+      minLength: contactFieldConstraints.name.minLength,
+      maxLength: contactFieldConstraints.name.maxLength,
     },
     email: {
       name: 'email',
@@ -104,6 +113,7 @@ export const contactFormModel = {
       control: 'input',
       type: 'email',
       required: true,
+      maxLength: contactFieldConstraints.email.maxLength,
     },
     service: {
       name: 'service',
@@ -119,7 +129,8 @@ export const contactFormModel = {
       errorKey: 'contact.form.fieldErrors.message',
       control: 'textarea',
       required: true,
-      minLength: 10,
+      minLength: contactFieldConstraints.message.minLength,
+      maxLength: contactFieldConstraints.message.maxLength,
       rows: 7,
     },
     honeypot: {
@@ -133,6 +144,7 @@ export const contactFormModel = {
   submitMessageKey: 'contact.form.submit',
   pendingLabel: '...',
 } as const satisfies {
+  fieldOrder: readonly (keyof ContactFields)[];
   fields: Record<string, ContactFormFieldModel>;
   offerOptions: typeof contactOfferOptions;
   submitMessageKey: string;
@@ -140,12 +152,16 @@ export const contactFormModel = {
 };
 
 const schema = z.object({
-  name: z.string().trim().min(2).max(80),
-  email: z.string().trim().email().max(200),
+  name: z.string().trim().min(contactFieldConstraints.name.minLength).max(contactFieldConstraints.name.maxLength),
+  email: z.string().trim().email().max(contactFieldConstraints.email.maxLength),
   service: z.enum(contactOfferValues).default('unsure'),
-  message: z.string().trim().min(10).max(5000),
+  message: z.string().trim().min(contactFieldConstraints.message.minLength).max(contactFieldConstraints.message.maxLength),
   company: z.string().optional(),
 });
+
+export function isContactOfferValue(value: string): value is ContactOfferValue {
+  return contactOfferValues.includes(value as ContactOfferValue);
+}
 
 export function asFormString(value: FormDataEntryValue | null) {
   return typeof value === 'string' ? value : '';
@@ -163,7 +179,7 @@ export function readContactFormData(formData: FormData) {
 
 export function extractContactSubmitService(formData: FormData) {
   const service = formData.get(contactFormModel.fields.service.name);
-  return typeof service === 'string' ? service : undefined;
+  return typeof service === 'string' && isContactOfferValue(service) ? service : undefined;
 }
 
 export function resolveContactFeedback(state: ContactFeedbackState): ContactFeedbackModel {
