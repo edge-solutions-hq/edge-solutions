@@ -1,6 +1,9 @@
 import {getLiveSeoSourceFacts} from './seo-source-facts.mjs';
 
 const {
+  expectedUrls,
+  localizedRoutes,
+  siteUrl,
   urlChecks,
 } = getLiveSeoSourceFacts();
 
@@ -78,6 +81,110 @@ function jsonLdBlocks(html) {
   }
 
   return blocks;
+}
+
+async function fetchTextAsset(url, {accept, expectedContentType}) {
+  const response = await fetch(url, {
+    headers: {
+      accept,
+      'user-agent': 'edge-solutions-live-seo-smoke/1.0',
+    },
+    redirect: 'follow',
+  });
+
+  assert(response.status === 200, `${url} returned HTTP ${response.status}`);
+  assert(response.url === url, `${url} resolved to ${response.url}`);
+
+  const contentType = response.headers.get('content-type') ?? '';
+  assert(
+    expectedContentType.test(contentType),
+    `${url} returned content-type "${contentType}", expected ${expectedContentType}`
+  );
+
+  return response.text();
+}
+
+async function checkRobotsTxt() {
+  const robotsUrl = `${siteUrl}/robots.txt`;
+  const sitemapUrl = `${siteUrl}/sitemap.xml`;
+  const robotsTxt = await fetchTextAsset(robotsUrl, {
+    accept: 'text/plain',
+    expectedContentType: /^text\/plain\b/i,
+  });
+
+  assert(
+    robotsTxt.includes(`Sitemap: ${sitemapUrl}`),
+    `${robotsUrl} must include Sitemap: ${sitemapUrl}`
+  );
+
+  return robotsUrl;
+}
+
+function parseSitemapUrlBlocks(sitemapXml, sitemapUrl) {
+  assert(/<\?xml\b/i.test(sitemapXml), `${sitemapUrl} is missing an XML declaration`);
+  assert(/<urlset\b/i.test(sitemapXml), `${sitemapUrl} is missing a urlset root`);
+
+  return [...sitemapXml.matchAll(/<url\b[^>]*>([\s\S]*?)<\/url>/gi)].map((match) => {
+    const block = match[0];
+    const loc = normalizeText(match[1].match(/<loc>([\s\S]*?)<\/loc>/i)?.[1] ?? '');
+    const alternates = tags(block, 'xhtml:link')
+      .map(attrsFromTag)
+      .filter((attrs) => attrs.rel?.toLowerCase() === 'alternate' && attrs.hreflang && attrs.href);
+
+    assert(loc, `${sitemapUrl} has a URL block without loc`);
+
+    return {
+      block,
+      loc,
+      alternates,
+    };
+  });
+}
+
+function assertSitemapAlternates(sitemapEntry, route, sitemapUrl) {
+  const alternatesByHreflang = new Map(
+    sitemapEntry.alternates.map((alternate) => [alternate.hreflang.toLowerCase(), alternate.href])
+  );
+
+  for (const alternate of route.alternates.byLocale) {
+    const found = alternatesByHreflang.get(alternate.hreflang.toLowerCase());
+
+    assert(
+      found === alternate.url,
+      `${sitemapUrl} URL ${route.url} is missing ${alternate.hreflang} alternate ${alternate.url}`
+    );
+  }
+
+  assert(
+    alternatesByHreflang.get('x-default') === route.alternates.xDefault.url,
+    `${sitemapUrl} URL ${route.url} is missing x-default alternate ${route.alternates.xDefault.url}`
+  );
+}
+
+async function checkSitemapXml() {
+  const sitemapUrl = `${siteUrl}/sitemap.xml`;
+  const sitemapXml = await fetchTextAsset(sitemapUrl, {
+    accept: 'application/xml,text/xml',
+    expectedContentType: /\b(?:application|text)\/xml\b/i,
+  });
+  const sitemapEntries = parseSitemapUrlBlocks(sitemapXml, sitemapUrl);
+  const sitemapUrls = sitemapEntries.map((entry) => entry.loc);
+  const sitemapEntriesByUrl = new Map(sitemapEntries.map((entry) => [entry.loc, entry]));
+
+  assert(
+    sitemapUrls.length === expectedUrls.length,
+    `${sitemapUrl} has ${sitemapUrls.length} URLs, expected ${expectedUrls.length}`
+  );
+
+  for (const expectedUrl of expectedUrls) {
+    assert(sitemapEntriesByUrl.has(expectedUrl), `${sitemapUrl} is missing ${expectedUrl}`);
+  }
+
+  for (const route of localizedRoutes) {
+    assertSitemapAlternates(sitemapEntriesByUrl.get(route.url), route, sitemapUrl);
+  }
+
+  return sitemapUrl;
 }
 
 function assertCanonical(html, url) {
@@ -172,10 +279,13 @@ async function checkUrl(urlCheck) {
 
 const checked = [];
 
+const checkedRobots = await checkRobotsTxt();
+const checkedSitemap = await checkSitemapXml();
+
 for (const urlCheck of urlChecks) {
   checked.push(await checkUrl(urlCheck));
 }
 
 console.log(
-  `Live SEO smoke passed: ${checked.length} source-derived production URLs returned 200 with indexable self-canonical pages, localized title and description, JSON-LD, locale hreflang, and x-default.`
+  `Live SEO smoke passed: ${checked.length} source-derived production URLs returned 200 with indexable self-canonical pages, localized title and description, JSON-LD, locale hreflang, and x-default; ${checkedRobots} references ${checkedSitemap}; sitemap has ${expectedUrls.length} source-derived URLs with localized alternates and x-default.`
 );
