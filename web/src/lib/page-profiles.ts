@@ -4,6 +4,7 @@ import {
   breadcrumbSchema,
   buildAbsoluteLocaleAlternates,
   buildLocalizedPageMetadata,
+  faqPageSchema,
   serviceSchema,
   servicesItemListSchema,
   webPageSchema,
@@ -34,6 +35,11 @@ type OfferTrackListItem = {
   slug: OfferTrackSlug;
   name: string;
   description: string;
+};
+
+type FaqItem = {
+  question: string;
+  answer: string;
 };
 
 type PageProfile = {
@@ -186,6 +192,7 @@ export function getOfferTrackPageProfile({
   description,
   translate,
   breadcrumbs,
+  faqItems,
 }: {
   locale: string;
   slug: OfferTrackSlug;
@@ -193,6 +200,7 @@ export function getOfferTrackPageProfile({
   description: string;
   translate?: Translate;
   breadcrumbs?: BreadcrumbItem[];
+  faqItems?: readonly FaqItem[];
 }): PageProfile {
   const pathSuffix = `/services/${slug}`;
   const derivedBreadcrumbs = breadcrumbs ?? (translate ? [
@@ -207,6 +215,10 @@ export function getOfferTrackPageProfile({
 
   if (derivedBreadcrumbs) {
     jsonLd.push(breadcrumbSchema(locale, derivedBreadcrumbs));
+  }
+
+  if (faqItems?.length) {
+    jsonLd.push(faqPageSchema(locale, slug, faqItems));
   }
 
   return {

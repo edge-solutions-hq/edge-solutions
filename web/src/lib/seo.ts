@@ -183,6 +183,31 @@ export function serviceSchema(locale: string, slug: string, title: string, descr
   };
 }
 
+type FaqItem = {
+  question: string;
+  answer: string;
+};
+
+export function faqPageSchema(locale: string, slug: string, faqItems: readonly FaqItem[]) {
+  const url = absoluteUrl(localizedPath(locale, `/services/${slug}`));
+
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    '@id': `${url}#faq`,
+    url,
+    inLanguage: locale,
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+}
+
 type ServiceListItem = {
   slug: string;
   name: string;

@@ -7,6 +7,7 @@ import {List, ListItem} from '@/components/studio/List';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {PrototypeSignals} from '@/components/mdx/PrototypeSignals';
 import {SectionIntro} from '@/components/studio/SectionIntro';
+import {ServiceFaq} from '@/components/mdx/ServiceFaq';
 import {StatList, StatListItem} from '@/components/studio/StatList';
 import {TagList, TagListItem} from '@/components/studio/TagList';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
@@ -23,6 +24,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     PageIntro,
     PrototypeSignals,
     SectionIntro,
+    ServiceFaq,
     GridList,
     GridListItem,
     List,
