@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import {isLocale, routing, type Locale} from '../../i18n/routing';
 import {OFFER_TRACK_SLUGS, type OfferTrackSlug} from '../offer-tracks';
 import {getOfferTrackPageProfile} from '../page-profiles';
+import {getServiceFaqItems} from './service-faq';
 import {
   getServiceContentAvailability,
   type ServiceContentLoaderMap,
@@ -64,12 +65,14 @@ export async function getServicePageModel({
 
   const title = content.metadata.title || content.slug;
   const description = content.metadata.description || '';
+  const faqItems = getServiceFaqItems(content.renderPolicy.requestedLocale, content.slug);
   const profile = getOfferTrackPageProfile({
     locale: content.renderPolicy.requestedLocale,
     slug: content.slug,
     title,
     description,
     translate,
+    faqItems,
   });
 
   return {

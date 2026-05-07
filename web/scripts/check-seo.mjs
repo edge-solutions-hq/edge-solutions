@@ -143,6 +143,84 @@ function assertPageHasLocaleAlternates(pathname) {
   );
 }
 
+function assertPageHasCanonical(pathname) {
+  const generated = readGeneratedPage(pathname);
+  const route = localizedRoutes.find((item) => item.path === pathname);
+
+  assert(
+    generated,
+    `Generated page ${pathname} was not found. Run npm run build before check:seo.`
+  );
+  assert(route, `No route facts found for generated path ${pathname}`);
+  assert(
+    new RegExp(
+      `<link[^>]+rel=["']canonical["'][^>]+href=["']${escapeRegExp(route.canonicalUrl)}["'][^>]*>|<link[^>]+href=["']${escapeRegExp(route.canonicalUrl)}["'][^>]+rel=["']canonical["'][^>]*>`,
+      'i'
+    ).test(generated),
+    `Generated ${pathname} is missing self-canonical ${route.canonicalUrl}`
+  );
+}
+
+function jsonLdObjects(pathname) {
+  const generated = readGeneratedPage(pathname);
+  assert(
+    generated,
+    `Generated page ${pathname} was not found. Run npm run build before check:seo.`
+  );
+
+  const objects = [];
+  const pattern = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
+
+  for (const match of generated.matchAll(pattern)) {
+    const attrs = match[1];
+    if (!/\btype=["']application\/ld\+json["']/i.test(attrs)) continue;
+
+    const rawJson = match[2].trim();
+    assert(rawJson, `Generated ${pathname} has an empty JSON-LD script`);
+
+    let parsed;
+    try {
+      parsed = JSON.parse(rawJson);
+    } catch (error) {
+      throw new Error(`Generated ${pathname} has invalid JSON-LD: ${error.message}`);
+    }
+
+    objects.push(...(Array.isArray(parsed) ? parsed : [parsed]));
+  }
+
+  return objects;
+}
+
+function assertServicePageHasFaqPageSchema(locale, slug) {
+  const pathname = `/${locale}/services/${slug}`;
+  const url = `${siteUrl}${pathname}`;
+  const objects = jsonLdObjects(pathname);
+  const faqPage = objects.find((item) => item?.['@type'] === 'FAQPage');
+
+  assert(faqPage, `Generated ${pathname} is missing FAQPage JSON-LD`);
+  assert(faqPage['@id'] === `${url}#faq`, `Generated ${pathname} FAQPage has unexpected @id`);
+  assert(faqPage.url === url, `Generated ${pathname} FAQPage has unexpected url`);
+  assert(faqPage.inLanguage === locale, `Generated ${pathname} FAQPage has unexpected inLanguage`);
+  assert(Array.isArray(faqPage.mainEntity), `Generated ${pathname} FAQPage mainEntity must be an array`);
+  assert(faqPage.mainEntity.length > 0, `Generated ${pathname} FAQPage mainEntity must not be empty`);
+
+  for (const [index, entity] of faqPage.mainEntity.entries()) {
+    assert(entity?.['@type'] === 'Question', `Generated ${pathname} FAQ ${index + 1} must be a Question`);
+    assert(
+      typeof entity.name === 'string' && entity.name.trim(),
+      `Generated ${pathname} FAQ ${index + 1} has an empty question`
+    );
+    assert(
+      entity.acceptedAnswer?.['@type'] === 'Answer',
+      `Generated ${pathname} FAQ ${index + 1} must have an Answer`
+    );
+    assert(
+      typeof entity.acceptedAnswer.text === 'string' && entity.acceptedAnswer.text.trim(),
+      `Generated ${pathname} FAQ ${index + 1} has an empty answer`
+    );
+  }
+}
+
 function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
   const pathname = `/${locale}/services`;
   const generated = readGeneratedPage(pathname);
@@ -255,6 +333,7 @@ assertSourceContainsAll(
 );
 
 for (const pagePath of expectedPaths) {
+  assertPageHasCanonical(pagePath);
   assertPageHasLocaleAlternates(pagePath);
 }
 
@@ -264,6 +343,7 @@ for (const locale of locales) {
   assertServicesHubHasServiceItemList(locale, serviceSlugs);
   for (const slug of serviceSlugs) {
     assertPageHasJsonLd(`/${locale}/services/${slug}`);
+    assertServicePageHasFaqPageSchema(locale, slug);
   }
 }
 
