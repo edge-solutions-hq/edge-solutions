@@ -221,6 +221,41 @@ function assertServicePageHasFaqPageSchema(locale, slug) {
   }
 }
 
+function assertServiceSchemaClaimSafety(service, pathname) {
+  const unsupportedProperties = [
+    'aggregateRating',
+    'award',
+    'awards',
+    'brand',
+    'certification',
+    'hasCredential',
+    'price',
+    'priceCurrency',
+    'priceRange',
+    'review',
+  ];
+
+  for (const property of unsupportedProperties) {
+    assert(
+      service[property] === undefined,
+      `Generated ${pathname} Service must not emit unsupported ${property} claims`
+    );
+  }
+
+  assert(
+    service.offers?.price === undefined,
+    `Generated ${pathname} Service offer must not emit unsupported price claims`
+  );
+  assert(
+    service.offers?.priceCurrency === undefined,
+    `Generated ${pathname} Service offer must not emit unsupported priceCurrency claims`
+  );
+  assert(
+    service.offers?.priceSpecification === undefined,
+    `Generated ${pathname} Service offer must not emit unsupported priceSpecification claims`
+  );
+}
+
 function assertServicePageHasOfferTrackServiceSchema(route) {
   assert(route, 'Missing localized service route facts for Service JSON-LD check');
 
@@ -249,6 +284,42 @@ function assertServicePageHasOfferTrackServiceSchema(route) {
     service.identifier?.value === `edge-solutions:${locale}:services:${slug}`,
     `Generated ${pathname} Service identifier has unexpected value`
   );
+  assert(
+    service.provider?.['@id'] === `${siteUrl}#organization`,
+    `Generated ${pathname} Service provider has unexpected @id`
+  );
+  assert(
+    Array.isArray(service.areaServed) &&
+      service.areaServed.some((item) => item?.['@type'] === 'Country' && item.name === 'Belgium') &&
+      service.areaServed.some((item) => item?.['@type'] === 'AdministrativeArea' && item.name === 'Wallonia'),
+    `Generated ${pathname} Service has unexpected areaServed`
+  );
+  assert(
+    service.audience?.['@type'] === 'Audience' &&
+      typeof service.audience.audienceType === 'string' &&
+      service.audience.audienceType.trim(),
+    `Generated ${pathname} Service is missing audience details`
+  );
+  assert(
+    Array.isArray(service.serviceOutput) &&
+      service.serviceOutput.length >= 3 &&
+      service.serviceOutput.every(
+        (item) => item?.['@type'] === 'Thing' && typeof item.name === 'string' && item.name.trim()
+      ),
+    `Generated ${pathname} Service is missing serviceOutput details`
+  );
+  assert(
+    service.offers?.['@type'] === 'Offer' &&
+      typeof service.offers.name === 'string' &&
+      service.offers.name.trim() &&
+      typeof service.offers.description === 'string' &&
+      service.offers.description.trim() &&
+      service.offers.url === url &&
+      service.offers.seller?.['@id'] === `${siteUrl}#organization` &&
+      service.offers.itemOffered?.['@id'] === `${url}#service`,
+    `Generated ${pathname} Service has unexpected offers details`
+  );
+  assertServiceSchemaClaimSafety(service, pathname);
 }
 
 function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
