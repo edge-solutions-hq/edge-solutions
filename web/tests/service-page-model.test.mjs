@@ -6,6 +6,8 @@ import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
 register('./ts-extension-resolver.mjs', import.meta.url);
+const {LOCALES} = await import('../src/i18n/routing.ts');
+const {OFFER_TRACKS} = await import('../src/lib/offer-tracks.ts');
 const services = await import('../src/lib/content/services.ts');
 const servicePage = await import('../src/lib/content/service-page.ts');
 
@@ -32,6 +34,20 @@ function loaderMap(overrides) {
     nl: {},
     ...overrides,
   };
+}
+
+function allServiceLoaders() {
+  return Object.fromEntries(
+    LOCALES.map((locale) => [
+      locale,
+      Object.fromEntries(
+        OFFER_TRACKS.map((track) => [
+          track.slug,
+          async () => mdxModule(`${locale.toUpperCase()} ${track.slug}`),
+        ])
+      ),
+    ])
+  );
 }
 
 describe('service content availability', () => {
@@ -129,6 +145,38 @@ describe('service content availability', () => {
 });
 
 describe('service page model ownership', () => {
+  it('emits catalog-backed Service JSON-LD identity for every localized offer track page', async () => {
+    for (const locale of LOCALES) {
+      for (const track of OFFER_TRACKS) {
+        const model = await servicePage.getServicePageModel({
+          locale,
+          slug: track.slug,
+          loaders: allServiceLoaders(),
+        });
+
+        assert.ok(model);
+
+        const service = model.profile.jsonLd.find((item) => item?.['@type'] === 'Service');
+        const expectedUrl = `https://edge-solutions.be/${locale}/services/${track.slug}`;
+
+        assert.ok(service, `${locale}/${track.slug} is missing Service JSON-LD`);
+        assert.equal(service['@id'], `${expectedUrl}#service`);
+        assert.equal(service.url, expectedUrl);
+        assert.equal(service.inLanguage, locale);
+        assert.equal(service.serviceType, track.schemaServiceType);
+        assert.equal(service.category, track.slug);
+        assert.deepEqual(service.identifier, {
+          '@type': 'PropertyValue',
+          propertyID: 'edge-solutions:service-offer-track',
+          value: `edge-solutions:${locale}:services:${track.slug}`,
+        });
+        assert.deepEqual(service.provider, {
+          '@id': 'https://edge-solutions.be#organization',
+        });
+      }
+    }
+  });
+
   it('exposes proof policy as structured page-model data', async () => {
     const model = await servicePage.getServicePageModel({
       locale: 'en',
