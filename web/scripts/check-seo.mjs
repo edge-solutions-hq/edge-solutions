@@ -221,6 +221,36 @@ function assertServicePageHasFaqPageSchema(locale, slug) {
   }
 }
 
+function assertServicePageHasOfferTrackServiceSchema(route) {
+  assert(route, 'Missing localized service route facts for Service JSON-LD check');
+
+  const {locale, slug, url, path: pathname, schemaServiceType} = route;
+  const objects = jsonLdObjects(pathname);
+  const service = objects.find((item) => item?.['@type'] === 'Service');
+
+  assert(service, `Generated ${pathname} is missing Service JSON-LD`);
+  assert(service['@id'] === `${url}#service`, `Generated ${pathname} Service has unexpected @id`);
+  assert(service.url === url, `Generated ${pathname} Service has unexpected url`);
+  assert(service.inLanguage === locale, `Generated ${pathname} Service has unexpected inLanguage`);
+  assert(
+    service.serviceType === schemaServiceType,
+    `Generated ${pathname} Service has unexpected serviceType`
+  );
+  assert(service.category === slug, `Generated ${pathname} Service has unexpected category`);
+  assert(
+    service.identifier?.['@type'] === 'PropertyValue',
+    `Generated ${pathname} Service identifier must be a PropertyValue`
+  );
+  assert(
+    service.identifier?.propertyID === 'edge-solutions:service-offer-track',
+    `Generated ${pathname} Service identifier has unexpected propertyID`
+  );
+  assert(
+    service.identifier?.value === `edge-solutions:${locale}:services:${slug}`,
+    `Generated ${pathname} Service identifier has unexpected value`
+  );
+}
+
 function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
   const pathname = `/${locale}/services`;
   const generated = readGeneratedPage(pathname);
@@ -343,6 +373,9 @@ for (const locale of locales) {
   assertServicesHubHasServiceItemList(locale, serviceSlugs);
   for (const slug of serviceSlugs) {
     assertPageHasJsonLd(`/${locale}/services/${slug}`);
+    assertServicePageHasOfferTrackServiceSchema(
+      localizedRoutes.find((route) => route.kind === 'service' && route.locale === locale && route.slug === slug)
+    );
     assertServicePageHasFaqPageSchema(locale, slug);
   }
 }

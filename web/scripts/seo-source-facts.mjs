@@ -174,6 +174,7 @@ function extractOfferTracks(source, sourceName) {
     kind: 'service',
     slug: extractStringProperty(item, 'slug', sourceName),
     pathSuffix: extractStringProperty(item, 'path', sourceName),
+    schemaServiceType: extractStringProperty(item, 'schemaServiceType', sourceName),
   }));
 }
 
@@ -248,6 +249,8 @@ function buildLocalizedRouteFacts({siteUrl, locales, defaultLocale, hreflangByLo
       return {
         family: family.family,
         kind: family.kind,
+        slug: family.slug,
+        schemaServiceType: family.schemaServiceType,
         locale,
         suffix: family.pathSuffix,
         path,

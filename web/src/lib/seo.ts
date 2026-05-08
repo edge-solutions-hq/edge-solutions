@@ -1,6 +1,6 @@
 import type {Metadata} from 'next';
 import {routing} from '../i18n/routing';
-import {OFFER_TRACKS} from './offer-tracks';
+import {getOfferTrack, OFFER_TRACKS, type OfferTrackSlug} from './offer-tracks';
 import {site} from './site';
 
 export const HREFLANG_BY_LOCALE: Record<string, string> = {
@@ -156,7 +156,14 @@ export function webPageSchema(locale: string, pathSuffix: string, title: string,
   };
 }
 
-export function serviceSchema(locale: string, slug: string, title: string, description: string) {
+export function offerTrackServiceIdentifier(locale: string, slug: OfferTrackSlug) {
+  return `edge-solutions:${locale}:services:${slug}`;
+}
+
+export function serviceSchema(locale: string, slug: OfferTrackSlug, title: string, description: string) {
+  const offerTrack = getOfferTrack(slug);
+  if (!offerTrack) throw new Error(`Unknown service schema offer track: ${slug}`);
+
   const url = absoluteUrl(localizedPath(locale, `/services/${slug}`));
 
   return {
@@ -167,6 +174,13 @@ export function serviceSchema(locale: string, slug: string, title: string, descr
     description,
     url,
     inLanguage: locale,
+    serviceType: offerTrack.schemaServiceType,
+    category: offerTrack.slug,
+    identifier: {
+      '@type': 'PropertyValue',
+      propertyID: 'edge-solutions:service-offer-track',
+      value: offerTrackServiceIdentifier(locale, offerTrack.slug),
+    },
     provider: {
       '@id': `${site.url}#organization`,
     },
