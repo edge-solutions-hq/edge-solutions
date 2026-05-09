@@ -8,6 +8,7 @@ const root = path.resolve(import.meta.dirname, '..');
 register('./ts-extension-resolver.mjs', import.meta.url);
 const {LOCALES} = await import('../src/i18n/routing.ts');
 const {OFFER_TRACKS} = await import('../src/lib/offer-tracks.ts');
+const {getServiceSchemaDetails} = await import('../src/lib/seo.ts');
 const services = await import('../src/lib/content/services.ts');
 const servicePage = await import('../src/lib/content/service-page.ts');
 
@@ -48,6 +49,27 @@ function allServiceLoaders() {
       ),
     ])
   );
+}
+
+function assertNoUnsupportedServiceClaims(service, label) {
+  for (const property of [
+    'aggregateRating',
+    'award',
+    'awards',
+    'brand',
+    'certification',
+    'hasCredential',
+    'price',
+    'priceCurrency',
+    'priceRange',
+    'review',
+  ]) {
+    assert.equal(service[property], undefined, `${label} must not emit ${property}`);
+  }
+
+  assert.equal(service.offers?.price, undefined, `${label} offer must not emit price`);
+  assert.equal(service.offers?.priceCurrency, undefined, `${label} offer must not emit priceCurrency`);
+  assert.equal(service.offers?.priceSpecification, undefined, `${label} offer must not emit priceSpecification`);
 }
 
 describe('service content availability', () => {
@@ -145,7 +167,7 @@ describe('service content availability', () => {
 });
 
 describe('service page model ownership', () => {
-  it('emits catalog-backed Service JSON-LD identity for every localized offer track page', async () => {
+  it('emits catalog-backed Service JSON-LD contract for every localized offer track page', async () => {
     for (const locale of LOCALES) {
       for (const track of OFFER_TRACKS) {
         const model = await servicePage.getServicePageModel({
@@ -158,13 +180,26 @@ describe('service page model ownership', () => {
 
         const service = model.profile.jsonLd.find((item) => item?.['@type'] === 'Service');
         const expectedUrl = `https://edge-solutions.be/${locale}/services/${track.slug}`;
+        const details = getServiceSchemaDetails(locale, track.slug);
+        const label = `${locale}/${track.slug} Service JSON-LD`;
 
-        assert.ok(service, `${locale}/${track.slug} is missing Service JSON-LD`);
+        assert.ok(service, `${label} is missing`);
         assert.equal(service['@id'], `${expectedUrl}#service`);
         assert.equal(service.url, expectedUrl);
         assert.equal(service.inLanguage, locale);
         assert.equal(service.serviceType, track.schemaServiceType);
         assert.equal(service.category, track.slug);
+        assert.deepEqual(service.audience, {
+          '@type': 'Audience',
+          audienceType: details.audienceType,
+        });
+        assert.deepEqual(
+          service.serviceOutput,
+          details.serviceOutput.map((name) => ({
+            '@type': 'Thing',
+            name,
+          }))
+        );
         assert.deepEqual(service.identifier, {
           '@type': 'PropertyValue',
           propertyID: 'edge-solutions:service-offer-track',
@@ -173,6 +208,29 @@ describe('service page model ownership', () => {
         assert.deepEqual(service.provider, {
           '@id': 'https://edge-solutions.be#organization',
         });
+        assert.deepEqual(service.areaServed, [
+          {
+            '@type': 'Country',
+            name: 'Belgium',
+          },
+          {
+            '@type': 'AdministrativeArea',
+            name: 'Wallonia',
+          },
+        ]);
+        assert.deepEqual(service.offers, {
+          '@type': 'Offer',
+          name: details.offer.name,
+          description: details.offer.description,
+          url: expectedUrl,
+          seller: {
+            '@id': 'https://edge-solutions.be#organization',
+          },
+          itemOffered: {
+            '@id': `${expectedUrl}#service`,
+          },
+        });
+        assertNoUnsupportedServiceClaims(service, label);
       }
     }
   });
