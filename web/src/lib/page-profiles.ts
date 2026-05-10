@@ -72,17 +72,17 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
   {
     id: 'services',
     pathSuffix: '/services',
-    lastModified: new Date('2026-04-27T13:06:04.000Z'),
+    lastModified: new Date('2026-05-10T05:49:00.000Z'),
     sitemapPriority: 0.7,
     title: {
-      fr: 'Services IA-first, web et 3D/VR pour équipes en Wallonie',
-      en: 'AI-first services with web and 3D/VR execution in Belgium',
-      nl: 'AI-first diensten met web- en 3D/VR-uitvoering in België',
+      fr: 'Services IA-first en Wallonie — automatisation, web et 3D/VR',
+      en: 'AI-first services in Belgium — automation, web and 3D/VR',
+      nl: 'AI-first diensten in België — automatisatie, web en 3D/VR',
     },
     description: {
-      fr: 'Services Edge Solutions : systèmes IA, automatisation, intégration web, SEO technique et exécution temps réel 3D/VR pour équipes belges qui doivent rendre l’IA réellement exploitable.',
-      en: 'Edge Solutions services: AI systems, automation, web integration, technical SEO and real-time 3D/VR execution for Belgian teams that need AI to become truly usable.',
-      nl: 'Diensten van Edge Solutions: AI-systemen, automatisatie, webintegratie, technische SEO en realtime 3D/VR-uitvoering voor Belgische teams die AI echt bruikbaar moeten maken.',
+      fr: 'Services pour équipes belges : cadrer des workflows IA utiles, intégrer des outils web fiables et valider des prototypes 3D/VR avec garde-fous humains.',
+      en: 'Services for Belgian teams: scope useful AI workflows, build reliable web integrations and validate 3D/VR prototypes with human review guardrails.',
+      nl: 'Diensten voor Belgische teams: bruikbare AI-workflows afbakenen, betrouwbare webintegraties bouwen en 3D/VR-prototypes valideren met menselijke review.',
     },
   },
   {
