@@ -156,9 +156,20 @@ export default async function HomePage({params}: Props) {
           </ShowcasePanel>
 
           <FadeIn className="mt-8 rounded-lg border border-border bg-surface/85 p-6 shadow-sm md:p-8">
+            <div className="mb-6 max-w-2xl">
+              <p className="text-sm font-semibold text-foreground">
+                {t('home.proof.tokensHeading')}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {t('home.proof.tokensIntro')}
+              </p>
+            </div>
             <dl className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               {home.proofSignals.map((signal) => (
                 <div key={signal.label}>
+                  <div className="mb-3 inline-flex rounded-full border border-border bg-background/80 px-3 py-1 text-xs font-semibold text-subtle-foreground">
+                    {signal.token}
+                  </div>
                   <dt className="text-xs font-semibold uppercase text-subtle-foreground">
                     {signal.label}
                   </dt>

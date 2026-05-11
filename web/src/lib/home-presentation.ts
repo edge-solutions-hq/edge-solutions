@@ -8,6 +8,7 @@ export type HomeProofCard = {
 };
 
 export type HomeProofSignal = {
+  token: string;
   label: string;
   value: string;
   description: string;
@@ -69,16 +70,19 @@ export function getHomePresentationModel(translate: Translate): HomePresentation
     ],
     proofSignals: [
       {
+        token: translate('home.proof.tokens.publicWork'),
         label: translate('home.proof.signals.publicWork.label'),
         value: translate('home.proof.signals.publicWork.value'),
         description: translate('home.proof.signals.publicWork.description'),
       },
       {
+        token: translate('home.proof.tokens.tools'),
         label: translate('home.proof.signals.tools.label'),
         value: translate('home.proof.signals.tools.value'),
         description: translate('home.proof.signals.tools.description'),
       },
       {
+        token: translate('home.proof.tokens.process'),
         label: translate('home.proof.signals.process.label'),
         value: translate('home.proof.signals.process.value'),
         description: translate('home.proof.signals.process.description'),
