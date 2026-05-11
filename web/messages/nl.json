@@ -30,10 +30,12 @@
         "description": "Rusty Art is een lopend publiek project. Ik gebruik het als levende testgrond voor workflows, orchestratie en productiteratie rond AI.",
         "cta": "Bekijk Rusty Art"
       },
+      "tokensHeading": "Wat je kan verifiëren voor je contact opneemt",
+      "tokensIntro": "Deze tekstuele proof-module bundelt publieke signalen, tools en procesguardrails die de AI-belofte makkelijker controleerbaar maken.",
       "tokens": {
-        "tools": "AI wanneer nuttig",
-        "process": "Duidelijke technische keuzes",
-        "publicLinks": "Bruikbare basis"
+        "publicWork": "Publiek signaal",
+        "tools": "Echte tools in gebruik",
+        "process": "Zichtbare guardrails"
       },
       "signals": {
         "publicWork": {

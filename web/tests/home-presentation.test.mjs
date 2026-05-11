@@ -23,6 +23,14 @@ describe('homepage presentation model', () => {
     assert.equal(model.processCards.length, 3);
 
     assert.deepEqual(
+      model.proofSignals.map((signal) => signal.token),
+      [
+        'home.proof.tokens.publicWork',
+        'home.proof.tokens.tools',
+        'home.proof.tokens.process',
+      ]
+    );
+    assert.deepEqual(
       model.proofCards.map((card) => card.title),
       [
         'home.proof.items.method.title',

@@ -30,10 +30,12 @@
         "description": "Rusty Art est un projet en cours accessible publiquement. Il me sert de terrain vivant pour tester des workflows, de l’orchestration et des itérations produit autour de l’IA.",
         "cta": "Voir Rusty Art"
       },
+      "tokensHeading": "Ce que vous pouvez vérifier avant de me contacter",
+      "tokensIntro": "Le module ci-dessous rassemble les signaux publics, les outils et les garde-fous de méthode qui rendent la promesse IA plus vérifiable.",
       "tokens": {
-        "tools": "IA quand utile",
-        "process": "Choix techniques clairs",
-        "publicLinks": "Base exploitable"
+        "publicWork": "Signal public",
+        "tools": "Outils réels",
+        "process": "Garde-fous visibles"
       },
       "signals": {
         "publicWork": {

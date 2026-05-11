@@ -30,10 +30,12 @@
         "description": "Rusty Art is an ongoing public project. I use it as a live ground for testing workflows, orchestration and product iteration patterns around AI.",
         "cta": "View Rusty Art"
       },
+      "tokensHeading": "What you can verify before contacting me",
+      "tokensIntro": "This text-only proof module groups the public signals, tools and process guardrails that make the AI promise easier to inspect.",
       "tokens": {
-        "tools": "AI when useful",
-        "process": "Clear technical choices",
-        "publicLinks": "Usable base"
+        "publicWork": "Public work signal",
+        "tools": "Real tools in use",
+        "process": "Visible guardrails"
       },
       "signals": {
         "publicWork": {
