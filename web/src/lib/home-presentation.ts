@@ -1,4 +1,5 @@
 import type {ContactCtaPlacement} from '@/lib/analytics/taxonomy';
+import {getProofAssetAuthority, type ProofAssetAuthority} from './content/proof-asset-authority';
 
 type Translate = (key: string) => string;
 
@@ -21,6 +22,7 @@ export type HomePublicProof = {
   supportText: string;
   imageSrc: string;
   imageAlt: string;
+  assetAuthority: ProofAssetAuthority;
   href: string;
   ctaLabel: string;
 };
@@ -95,6 +97,7 @@ export function getHomePresentationModel(translate: Translate): HomePresentation
       supportText: translate('home.proof.publicProject.description'),
       imageSrc: '/images/proof/edge-proof-board.svg',
       imageAlt: translate('home.proof.items.openclaw.title'),
+      assetAuthority: getProofAssetAuthority('edge-proof-board')!,
       href: 'https://rusty-art.edge-solutions.be/',
       ctaLabel: translate('home.proof.publicProject.cta'),
     },

@@ -1,9 +1,11 @@
 import {describe, it} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
+import {register} from 'node:module';
 import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
+register('./ts-extension-resolver.mjs', import.meta.url);
 const {getHomePresentationModel} = await import('../src/lib/home-presentation.ts');
 
 function read(relativePath) {
@@ -53,6 +55,8 @@ describe('homepage presentation model', () => {
 
     assert.equal(model.publicProof.href, 'https://rusty-art.edge-solutions.be/');
     assert.equal(model.publicProof.imageSrc, '/images/proof/edge-proof-board.svg');
+    assert.equal(model.publicProof.assetAuthority.assetId, 'edge-proof-board');
+    assert.equal(model.publicProof.assetAuthority.authority, 'authoritative');
     assert.equal(model.publicProof.title, 'home.proof.items.openclaw.title');
     assert.equal(model.publicProof.ctaLabel, 'home.proof.publicProject.cta');
   });
