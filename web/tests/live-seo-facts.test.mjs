@@ -116,5 +116,24 @@ describe('live SEO source facts', () => {
 
     assert.equal(facts.urlChecks.length, facts.locales.length * facts.pageSuffixes.length);
     assert.deepEqual(facts.urlChecks, facts.localizedRoutes);
+    assert.deepEqual(
+      facts.servicesRouteFamilyChecks.map((route) => route.path),
+      [
+        ...facts.locales.map((locale) => `/${locale}/services`),
+        ...sourceServiceSlugs.flatMap((slug) =>
+          facts.locales.map((locale) => `/${locale}/services/${slug}`)
+        ),
+      ]
+    );
+
+    for (const route of facts.servicesRouteFamilyChecks) {
+      assert.deepEqual(
+        route.expectedJsonLdTypes,
+        route.kind === 'service'
+          ? ['WebPage', 'Service', 'BreadcrumbList', 'FAQPage']
+          : ['WebPage', 'ItemList', 'BreadcrumbList'],
+        `${route.path} typed JSON-LD contract`
+      );
+    }
   });
 });
