@@ -3,6 +3,9 @@ import {getLiveSeoSourceFacts} from './seo-source-facts.mjs';
 const {
   expectedUrls,
   localizedRoutes,
+  locales,
+  serviceSlugs,
+  servicesRouteFamilyChecks,
   siteUrl,
   urlChecks,
 } = getLiveSeoSourceFacts();
@@ -83,11 +86,26 @@ function jsonLdBlocks(html) {
   return blocks;
 }
 
+function flattenJsonLd(value) {
+  if (Array.isArray(value)) {
+    return value.flatMap(flattenJsonLd);
+  }
+
+  if (value && typeof value === 'object') {
+    const graph = Array.isArray(value['@graph']) ? value['@graph'].flatMap(flattenJsonLd) : [];
+    return [value, ...graph];
+  }
+
+  return [];
+}
+
 function jsonLdObjects(html, url) {
-  return jsonLdBlocks(html).flatMap((block) => {
+  const blocks = jsonLdBlocks(html);
+  assert(blocks.length > 0, `${url} is missing JSON-LD`);
+
+  return blocks.flatMap((block) => {
     try {
-      const parsed = JSON.parse(block);
-      return Array.isArray(parsed) ? parsed : [parsed];
+      return flattenJsonLd(JSON.parse(block));
     } catch (error) {
       throw new Error(`${url} has invalid JSON-LD: ${error.message}`);
     }
@@ -253,16 +271,85 @@ function assertMetadata(html, {title: expectedTitle, description: expectedDescri
   );
 }
 
-function assertJsonLd(html, url) {
-  const blocks = jsonLdBlocks(html);
-  assert(blocks.length > 0, `${url} is missing JSON-LD`);
+function objectTypes(item) {
+  const type = item?.['@type'];
+  return Array.isArray(type) ? type : [type].filter(Boolean);
+}
 
-  for (const block of blocks) {
-    try {
-      JSON.parse(block);
-    } catch (error) {
-      throw new Error(`${url} has invalid JSON-LD: ${error.message}`);
-    }
+function findJsonLdType(objects, type) {
+  return objects.find((item) => objectTypes(item).includes(type));
+}
+
+function assertWebPageJsonLd(webPage, route) {
+  assert(webPage, `${route.url} is missing WebPage JSON-LD`);
+  assert(webPage['@id'] === `${route.url}#webpage`, `${route.url} WebPage has unexpected @id`);
+  assert(webPage.url === route.url, `${route.url} WebPage has unexpected url`);
+  assert(webPage.name === route.title, `${route.url} WebPage has unexpected name`);
+  assert(webPage.description === route.description, `${route.url} WebPage has unexpected description`);
+  assert(webPage.inLanguage === route.locale, `${route.url} WebPage has unexpected inLanguage`);
+}
+
+function assertServicesHubJsonLd(itemList, route) {
+  assert(itemList, `${route.url} is missing ItemList JSON-LD`);
+  assert(itemList['@id'] === `${route.url}#services-list`, `${route.url} ItemList has unexpected @id`);
+  assert(itemList.inLanguage === route.locale, `${route.url} ItemList has unexpected inLanguage`);
+  assert(Array.isArray(itemList.itemListElement), `${route.url} ItemList itemListElement must be an array`);
+
+  const expectedServiceUrls = serviceSlugs.map((slug) => `${siteUrl}/${route.locale}/services/${slug}`);
+  for (const expectedUrl of expectedServiceUrls) {
+    assert(
+      itemList.itemListElement.some((item) => item?.url === expectedUrl || item?.item?.url === expectedUrl),
+      `${route.url} ItemList is missing ${expectedUrl}`
+    );
+  }
+}
+
+function assertServiceJsonLd(service, route) {
+  assert(service, `${route.url} is missing Service JSON-LD`);
+  assert(service['@id'] === `${route.url}#service`, `${route.url} Service has unexpected @id`);
+  assert(service.url === route.url, `${route.url} Service has unexpected url`);
+  assert(service.name === route.title, `${route.url} Service has unexpected name`);
+  assert(service.description === route.description, `${route.url} Service has unexpected description`);
+  assert(service.inLanguage === route.locale, `${route.url} Service has unexpected inLanguage`);
+  assert(service.serviceType === route.schemaServiceType, `${route.url} Service has unexpected serviceType`);
+  assert(service.category === route.slug, `${route.url} Service has unexpected category`);
+  assert(service.provider?.['@id'] === `${siteUrl}#organization`, `${route.url} Service has unexpected provider`);
+}
+
+function assertBreadcrumbJsonLd(breadcrumb, route) {
+  assert(breadcrumb, `${route.url} is missing BreadcrumbList JSON-LD`);
+  assert(Array.isArray(breadcrumb.itemListElement), `${route.url} BreadcrumbList itemListElement must be an array`);
+  assert(breadcrumb.itemListElement.length >= 2, `${route.url} BreadcrumbList must contain at least 2 items`);
+}
+
+function assertFaqJsonLd(faqPage, route) {
+  assert(faqPage, `${route.url} is missing FAQPage JSON-LD`);
+  assert(faqPage['@id'] === `${route.url}#faq`, `${route.url} FAQPage has unexpected @id`);
+  assert(faqPage.url === route.url, `${route.url} FAQPage has unexpected url`);
+  assert(faqPage.inLanguage === route.locale, `${route.url} FAQPage has unexpected inLanguage`);
+  assert(Array.isArray(faqPage.mainEntity), `${route.url} FAQPage mainEntity must be an array`);
+  assert(faqPage.mainEntity.length > 0, `${route.url} FAQPage mainEntity must not be empty`);
+}
+
+function assertJsonLd(html, route) {
+  const objects = jsonLdObjects(html, route.url);
+
+  for (const expectedType of route.expectedJsonLdTypes) {
+    assert(findJsonLdType(objects, expectedType), `${route.url} is missing ${expectedType} JSON-LD`);
+  }
+
+  if (route.family === 'services' || route.kind === 'service') {
+    assertWebPageJsonLd(findJsonLdType(objects, 'WebPage'), route);
+    assertBreadcrumbJsonLd(findJsonLdType(objects, 'BreadcrumbList'), route);
+  }
+
+  if (route.family === 'services') {
+    assertServicesHubJsonLd(findJsonLdType(objects, 'ItemList'), route);
+  }
+
+  if (route.kind === 'service') {
+    assertServiceJsonLd(findJsonLdType(objects, 'Service'), route);
+    assertFaqJsonLd(findJsonLdType(objects, 'FAQPage'), route);
   }
 }
 
@@ -381,21 +468,40 @@ async function checkUrl(urlCheck) {
   assertMetadata(html, urlCheck);
   assertCanonical(html, url);
   assertAlternates(html, urlCheck);
-  assertJsonLd(html, url);
+  assertJsonLd(html, urlCheck);
   assertJsonLdGraph(html, urlCheck);
 
   return url;
 }
 
 const checked = [];
+const checkedServicesRoutes = [];
 
 const checkedRobots = await checkRobotsTxt();
 const checkedSitemap = await checkSitemapXml();
 
 for (const urlCheck of urlChecks) {
   checked.push(await checkUrl(urlCheck));
+  if (servicesRouteFamilyChecks.some((route) => route.url === urlCheck.url)) {
+    checkedServicesRoutes.push(urlCheck);
+  }
+}
+
+for (const locale of locales) {
+  const localeServicesRoutes = checkedServicesRoutes.filter((route) => route.locale === locale);
+  assert(
+    localeServicesRoutes.some((route) => route.family === 'services' && route.suffix === '/services'),
+    `Live SEO smoke did not check ${locale} services hub`
+  );
+
+  for (const slug of serviceSlugs) {
+    assert(
+      localeServicesRoutes.some((route) => route.kind === 'service' && route.slug === slug),
+      `Live SEO smoke did not check ${locale} services/${slug}`
+    );
+  }
 }
 
 console.log(
-  `Live SEO smoke passed: ${checked.length} source-derived production URLs returned 200 with indexable self-canonical pages, localized title and description, typed JSON-LD graphs, locale hreflang, and x-default; ${checkedRobots} references ${checkedSitemap}; sitemap has ${expectedUrls.length} source-derived URLs with localized alternates and x-default.`
+  `Live SEO smoke passed: ${checked.length} source-derived production URLs returned 200 with indexable self-canonical pages, localized title and description, typed JSON-LD graphs, locale hreflang, and x-default; ${checkedServicesRoutes.length} localized services-family URLs covered FR/EN/NL typed JSON-LD; ${checkedRobots} references ${checkedSitemap}; sitemap has ${expectedUrls.length} source-derived URLs with localized alternates and x-default.`
 );

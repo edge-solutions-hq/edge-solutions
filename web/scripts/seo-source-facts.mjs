@@ -263,11 +263,24 @@ function buildLocalizedRouteFacts({siteUrl, locales, defaultLocale, hreflangByLo
           hreflangByLocale,
           suffix: family.pathSuffix,
         }),
+        expectedJsonLdTypes: expectedJsonLdTypesForRouteFamily(family),
         title: metadata.title,
         description: metadata.description,
       };
     })
   );
+}
+
+function expectedJsonLdTypesForRouteFamily(family) {
+  if (family.kind === 'service') {
+    return ['WebPage', 'Service', 'BreadcrumbList', 'FAQPage'];
+  }
+
+  if (family.family === 'services') {
+    return ['WebPage', 'ItemList', 'BreadcrumbList'];
+  }
+
+  return ['WebPage'];
 }
 
 export function getLiveSeoSourceFacts({root = defaultRoot} = {}) {
@@ -305,6 +318,9 @@ export function getLiveSeoSourceFacts({root = defaultRoot} = {}) {
   const expectedPaths = localizedRoutes.map((route) => route.path);
   const expectedUrls = localizedRoutes.map((route) => route.url);
   const urlChecks = localizedRoutes;
+  const servicesRouteFamilyChecks = localizedRoutes.filter(
+    (route) => route.family === 'services' || route.kind === 'service'
+  );
 
   return {
     siteUrl,
@@ -321,6 +337,7 @@ export function getLiveSeoSourceFacts({root = defaultRoot} = {}) {
     expectedPaths,
     expectedUrls,
     urlChecks,
+    servicesRouteFamilyChecks,
     stripLocalizedPathPrefix: (pathname) => stripLocalizedPathPrefix(pathname, locales),
   };
 }
