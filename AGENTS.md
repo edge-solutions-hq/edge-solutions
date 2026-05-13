@@ -10,7 +10,7 @@
 - Dev: `npm run dev` (http://localhost:3000)
 - Lint: `npm run lint`
 - Build: `npm run build`; Prod: `npm run start`
-- Tests: none defined yet; add before relying on CI.
+- Tests/checks: `npm run test`, `npm run check:seo`, `npm run check:analytics-env`, and full `npm run check`.
 
 ## Environment
 - Copy `web/env.example` to `.env.local` and set:
@@ -28,6 +28,7 @@
 - SEO: `src/app/robots.ts`, `src/app/sitemap.ts`; keep metadata up to date when adding pages.
 
 ## Docs to read first
+- `WEBSITE.md`: mandatory website work entrypoint and source-of-truth contract.
 - `docs/README.md`: documentation map and source-of-truth order.
 - `docs/positioning.md`: primary positioning source for website/design/content decisions. Treat Edge Solutions as AI-first, with web/integration/realtime as supporting execution depth rather than equal top-level offers.
 - `docs/tech-stack.md`: stack choices, Node version, implementation checklist.

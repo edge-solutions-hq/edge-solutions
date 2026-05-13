@@ -1,4 +1,8 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Edge Solutions Web App
+
+Next.js 16 App Router app for `edge-solutions.be`.
+
+Before changing website strategy, copy, design, SEO, proof, or analytics behavior, read `../WEBSITE.md` and `../docs/README.md`.
 
 ## Getting Started
 
@@ -6,12 +10,6 @@ First, set environment variables (copy `env.example` into your local env setup, 
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -41,21 +39,22 @@ npm run check:analytics-env:prod
 
 For production rollout, follow `../docs/analytics/gtm-ga4-production-readiness.md` and `../docs/analytics/conversion-event-taxonomy.md`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Quality Gates
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run test
+npm run lint
+npm run build
+npm run check:seo
+npm run check
+```
 
-## Learn More
+Use `npm run check:seo:live` only when a change depends on deployed/live SEO behavior.
 
-To learn more about Next.js, take a look at the following resources:
+## Website Rules
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Keep the site AI-first: pragmatic AI systems, AI workflow hardening, AI prototypes, AI training, and internal tools are primary.
+- Keep web, integration, realtime, analytics, and performance work as supporting proof and execution depth.
+- Preserve FR/EN/NL parity for shared user-facing changes unless a task is explicitly scoped as a French-only SEO experiment.
+- Do not add client logos, testimonials, named clients, case studies, outcome metrics, screenshots, awards, or certifications without an approved source artifact.
+- Treat missing SEO/provider evidence as setup-required, not certainty.
