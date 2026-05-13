@@ -271,6 +271,110 @@ function buildLocalizedRouteFacts({siteUrl, locales, defaultLocale, hreflangByLo
   );
 }
 
+function normalizeMetadataValue(value) {
+  return value
+    .normalize('NFKD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^\p{Letter}\p{Number}]+/gu, ' ')
+    .trim()
+    .toLowerCase();
+}
+
+function assertServiceMetadataValue({route, field, slugLabel, defaultLocaleValue}) {
+  const value = route[field];
+  const normalized = normalizeMetadataValue(value);
+
+  if (!normalized) {
+    throw new Error(`${route.path} has empty localized service ${field}`);
+  }
+
+  const fallbackLooks = [
+    normalizeMetadataValue(route.slug),
+    normalizeMetadataValue(route.suffix),
+    normalizeMetadataValue(slugLabel),
+  ].filter(Boolean);
+
+  if (fallbackLooks.includes(normalized)) {
+    throw new Error(`${route.path} has fallback-looking localized service ${field}: "${value}"`);
+  }
+
+  if (route.locale !== defaultLocaleValue.locale && normalized === defaultLocaleValue.normalized) {
+    throw new Error(
+      `${route.path} has fallback-looking localized service ${field}: it matches ${defaultLocaleValue.path}`
+    );
+  }
+}
+
+function assertUniqueServiceMetadata(serviceRoutes, field) {
+  const byValue = new Map();
+
+  for (const route of serviceRoutes) {
+    const normalized = normalizeMetadataValue(route[field]);
+    if (!normalized) continue;
+
+    const routes = byValue.get(normalized) ?? [];
+    routes.push(route);
+    byValue.set(normalized, routes);
+  }
+
+  for (const routes of byValue.values()) {
+    if (routes.length <= 1) continue;
+
+    throw new Error(
+      `Duplicate localized service ${field} metadata: ${routes.map((route) => route.path).join(', ')}`
+    );
+  }
+}
+
+function assertLocalizedServiceMetadataQuality({localizedRoutes, locales, defaultLocale, serviceSlugs}) {
+  const serviceRoutes = localizedRoutes.filter((route) => route.kind === 'service');
+  const expectedCount = locales.length * serviceSlugs.length;
+
+  if (serviceRoutes.length !== expectedCount) {
+    throw new Error(`Expected ${expectedCount} localized service metadata checks, got ${serviceRoutes.length}`);
+  }
+
+  for (const field of ['title', 'description']) {
+    for (const slug of serviceSlugs) {
+      const slugRoutes = locales.map((locale) => {
+        const route = serviceRoutes.find((item) => item.locale === locale && item.slug === slug);
+        if (!route) throw new Error(`Missing localized service metadata check for /${locale}/services/${slug}`);
+        return route;
+      });
+      const defaultLocaleRoute = slugRoutes.find((route) => route.locale === defaultLocale);
+
+      if (!defaultLocaleRoute) {
+        throw new Error(`Missing default-locale service metadata check for /${defaultLocale}/services/${slug}`);
+      }
+
+      const defaultLocaleValue = {
+        locale: defaultLocaleRoute.locale,
+        normalized: normalizeMetadataValue(defaultLocaleRoute[field]),
+        path: defaultLocaleRoute.path,
+      };
+
+      for (const route of slugRoutes) {
+        assertServiceMetadataValue({
+          route,
+          field,
+          slugLabel: slug,
+          defaultLocaleValue,
+        });
+      }
+    }
+
+    assertUniqueServiceMetadata(serviceRoutes, field);
+  }
+
+  return serviceRoutes.map(({locale, slug, path, title, description}) => ({
+    locale,
+    slug,
+    path,
+    title,
+    description,
+  }));
+}
+
 function expectedJsonLdTypesForRouteFamily(family) {
   if (family.kind === 'service') {
     return ['WebPage', 'Service', 'BreadcrumbList', 'FAQPage'];
@@ -321,6 +425,12 @@ export function getLiveSeoSourceFacts({root = defaultRoot} = {}) {
   const servicesRouteFamilyChecks = localizedRoutes.filter(
     (route) => route.family === 'services' || route.kind === 'service'
   );
+  const serviceMetadataChecks = assertLocalizedServiceMetadataQuality({
+    localizedRoutes,
+    locales,
+    defaultLocale,
+    serviceSlugs,
+  });
 
   return {
     siteUrl,
@@ -338,6 +448,7 @@ export function getLiveSeoSourceFacts({root = defaultRoot} = {}) {
     expectedUrls,
     urlChecks,
     servicesRouteFamilyChecks,
+    serviceMetadataChecks,
     stripLocalizedPathPrefix: (pathname) => stripLocalizedPathPrefix(pathname, locales),
   };
 }
