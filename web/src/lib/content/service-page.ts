@@ -15,6 +15,7 @@ export type ServicePageProofPolicy = {
   offerTrackSlug: OfferTrackSlug;
   renderModule: ServiceContentResult['proofContract']['render']['module'];
   imagePath: ServiceContentResult['proofContract']['render']['imagePath'];
+  assetAuthority: ServiceContentResult['proofContract']['render']['assetAuthority'];
   structuralExpectations: ServiceContentResult['proofContract']['structure'];
   requiredSignals: ServiceContentResult['proofContract']['signals'];
 };
@@ -82,6 +83,7 @@ export async function getServicePageModel({
       offerTrackSlug: content.proofContract.slug,
       renderModule: content.proofContract.render.module,
       imagePath: content.proofContract.render.imagePath,
+      assetAuthority: content.proofContract.render.assetAuthority,
       structuralExpectations: content.proofContract.structure,
       requiredSignals: content.proofContract.signals,
     },

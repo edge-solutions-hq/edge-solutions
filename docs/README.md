@@ -4,6 +4,7 @@ This directory separates active project guidance from historical planning notes.
 
 ## Start Here
 
+- `../WEBSITE.md` — mandatory entrypoint for website work: site purpose, lane vocabulary, source-of-truth order, proof limits, design/SEO/content direction, and escalation rules.
 - `positioning.md` — primary source for website, design, and content decisions. This overrides older dual-service planning notes.
 - `architecture.md` — active Module ownership map for the Next.js app.
 - `design-baseline.md` — current visual baseline and design guardrails.
@@ -24,9 +25,11 @@ This directory separates active project guidance from historical planning notes.
 
 ## Source-Of-Truth Order
 
-1. `positioning.md`
-2. `architecture.md`
+1. `../WEBSITE.md`
+2. `positioning.md`
 3. `design-baseline.md`
-4. `tech-stack.md`
-5. Active operational docs under `analytics/`, `prd/`, and `agents/`
-6. Archive docs for historical context only
+4. `architecture.md`
+5. Active analytics docs under `analytics/`
+6. Active delivery docs under `prd/` and `agents/`
+7. `tech-stack.md` for stack history and setup notes
+8. Archive docs for historical context only

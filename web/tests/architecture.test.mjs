@@ -1,9 +1,11 @@
 import {describe, it} from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync, readFileSync} from 'node:fs';
+import {register} from 'node:module';
 import path from 'node:path';
 
 const root = path.resolve(import.meta.dirname, '..');
+register('./ts-extension-resolver.mjs', import.meta.url);
 
 const locales = ['fr', 'en', 'nl'];
 
@@ -87,6 +89,31 @@ function normalizeContent(value) {
     .replace(/[\u0300-\u036f]/g, '')
     .replace(/[’']/g, "'");
 }
+
+describe('website operating docs', () => {
+  it('keeps the website source-of-truth entrypoint discoverable', () => {
+    const website = read('../WEBSITE.md');
+    const docsReadme = read('../docs/README.md');
+    const agents = read('../AGENTS.md');
+    const webReadme = read('README.md');
+
+    assert.match(website, /mandatory entrypoint for website work/i);
+    assert.match(website, /AI-first/i);
+    assert.match(website, /technical_seo_platform/);
+    assert.match(website, /content_icp/);
+    assert.match(website, /design_conversion/);
+    assert.match(website, /pr_review/);
+    assert.match(website, /analysis_observation/);
+    assert.match(website, /Do not present AI, web, and realtime as three equal studio offers/);
+    assert.match(website, /Generated visuals are allowed only as synthetic diagrams/);
+    assert.match(website, /Missing provider access is a setup-required state/);
+
+    assert.match(docsReadme, /`\.\.\/WEBSITE\.md`/);
+    assert.match(agents, /`WEBSITE\.md`/);
+    assert.match(webReadme, /`\.\.\/WEBSITE\.md`/);
+    assert.doesNotMatch(agents, /Tests: none defined yet/);
+  });
+});
 
 describe('offer track catalog seam', () => {
   it('keeps offer track identity and ordering in the catalog', () => {
@@ -174,6 +201,8 @@ describe('localized content and proof seam', () => {
       assert.equal(contract.slug, track.slug);
       assert.ok(contract.render.module, `${track.slug} missing proof render module`);
       assert.ok(contract.render.imagePath.endsWith('.svg'), `${track.slug} proof image must be an svg asset`);
+      assert.equal(contract.render.assetAuthority.approvalStatus, 'approved', `${track.slug} proof asset must be approved`);
+      assert.equal(contract.render.assetAuthority.authority, 'authoritative', `${track.slug} proof asset must be authoritative`);
       assert.ok(contract.structure.length > 0, `${track.slug} missing structural expectations`);
       assert.ok(contract.signals.length > 0, `${track.slug} missing required signals`);
     }

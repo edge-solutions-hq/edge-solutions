@@ -1,5 +1,9 @@
 import type {OfferTrackSlug} from '@/lib/offer-tracks';
 import type {Locale} from '@/i18n/routing';
+import {
+  getProofAssetAuthority,
+  type ProofAssetAuthority,
+} from './proof-asset-authority';
 
 export type ProofModuleName = 'WorkflowSnapshot' | 'DeliveryBlueprint' | 'PrototypeSignals';
 
@@ -26,6 +30,7 @@ export type OfferTrackProofProfile = {
   slug: OfferTrackSlug;
   proofModule: ProofModuleName;
   imagePath: string;
+  authorityId: string;
   structuralCounts: Partial<Record<ProofStructureKey, number>>;
   requiredSignals: readonly RequiredProofSignal[];
 };
@@ -35,6 +40,8 @@ export type OfferTrackProofContract = {
   render: {
     module: ProofModuleName;
     imagePath: string;
+    authorityId: string;
+    assetAuthority: ProofAssetAuthority;
   };
   structure: readonly ProofStructuralExpectation[];
   signals: readonly RequiredProofSignal[];
@@ -62,6 +69,7 @@ export const OFFER_TRACK_PROOF_PROFILES = [
     slug: 'ai-automation',
     proofModule: 'WorkflowSnapshot',
     imagePath: 'services-ai-workflow-board.svg',
+    authorityId: 'services-ai-workflow-board',
     structuralCounts: {
       reviewPoints: 3,
       steps: 3,
@@ -97,6 +105,7 @@ export const OFFER_TRACK_PROOF_PROFILES = [
     slug: 'web-dev',
     proofModule: 'DeliveryBlueprint',
     imagePath: 'web-delivery-board.svg',
+    authorityId: 'web-delivery-board',
     structuralCounts: {
       checklist: 3,
       columns: 3,
@@ -133,6 +142,7 @@ export const OFFER_TRACK_PROOF_PROFILES = [
     slug: 'realtime-games',
     proofModule: 'PrototypeSignals',
     imagePath: 'services-realtime-prototype-board.svg',
+    authorityId: 'services-realtime-prototype-board',
     structuralCounts: {
       signals: 3,
       phases: 3,
@@ -180,12 +190,16 @@ export function getOfferTrackProofContract(
 ): OfferTrackProofContract | null {
   const profile = getOfferTrackProofProfile(slug);
   if (!profile) return null;
+  const assetAuthority = getProofAssetAuthority(profile.authorityId);
+  if (!assetAuthority) return null;
 
   return {
     slug: profile.slug,
     render: {
       module: profile.proofModule,
       imagePath: profile.imagePath,
+      authorityId: profile.authorityId,
+      assetAuthority,
     },
     structure: getProofStructuralExpectations(profile),
     signals: profile.requiredSignals,
@@ -197,6 +211,7 @@ function validateProofProfile(profile: OfferTrackProofProfile): readonly string[
 
   if (!profile.proofModule) errors.push(`${profile.slug} missing proof module`);
   if (!profile.imagePath) errors.push(`${profile.slug} missing proof image`);
+  if (!getProofAssetAuthority(profile.authorityId)) errors.push(`${profile.slug} missing proof asset authority`);
   if (profile.requiredSignals.length === 0) errors.push(`${profile.slug} missing proof signals`);
 
   for (const [key, count] of Object.entries(profile.structuralCounts)) {
