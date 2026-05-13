@@ -83,6 +83,22 @@ function jsonLdBlocks(html) {
   return blocks;
 }
 
+function jsonLdObjects(html, url) {
+  return jsonLdBlocks(html).flatMap((block) => {
+    try {
+      const parsed = JSON.parse(block);
+      return Array.isArray(parsed) ? parsed : [parsed];
+    } catch (error) {
+      throw new Error(`${url} has invalid JSON-LD: ${error.message}`);
+    }
+  });
+}
+
+function hasSchemaType(item, type) {
+  const schemaType = item?.['@type'];
+  return Array.isArray(schemaType) ? schemaType.includes(type) : schemaType === type;
+}
+
 async function fetchTextAsset(url, {accept, expectedContentType}) {
   const response = await fetch(url, {
     headers: {
@@ -250,6 +266,99 @@ function assertJsonLd(html, url) {
   }
 }
 
+function assertSchemaObject(objects, type, url) {
+  const object = objects.find((item) => hasSchemaType(item, type));
+  assert(object, `${url} is missing ${type} JSON-LD`);
+  return object;
+}
+
+function assertClaimSafeServiceSchema(service, url) {
+  const unsupportedProperties = [
+    'aggregateRating',
+    'award',
+    'awards',
+    'brand',
+    'certification',
+    'hasCredential',
+    'price',
+    'priceCurrency',
+    'priceRange',
+    'review',
+  ];
+
+  for (const property of unsupportedProperties) {
+    assert(
+      service[property] === undefined,
+      `${url} Service JSON-LD must not emit unsupported ${property} claims`
+    );
+  }
+
+  assert(service.offers?.price === undefined, `${url} Service offer must not emit unsupported price claims`);
+  assert(
+    service.offers?.priceCurrency === undefined,
+    `${url} Service offer must not emit unsupported priceCurrency claims`
+  );
+  assert(
+    service.offers?.priceSpecification === undefined,
+    `${url} Service offer must not emit unsupported priceSpecification claims`
+  );
+}
+
+function assertJsonLdGraph(html, route) {
+  const objects = jsonLdObjects(html, route.url);
+
+  const organization = assertSchemaObject(objects, 'ProfessionalService', route.url);
+  assert(
+    organization['@id'] === `${siteUrl}#organization`,
+    `${route.url} ProfessionalService JSON-LD has unexpected @id`
+  );
+
+  const webpage = assertSchemaObject(objects, 'WebPage', route.url);
+  assert(webpage['@id'] === `${route.url}#webpage`, `${route.url} WebPage JSON-LD has unexpected @id`);
+  assert(webpage.url === route.url, `${route.url} WebPage JSON-LD has unexpected url`);
+  assert(webpage.inLanguage === route.locale, `${route.url} WebPage JSON-LD has unexpected inLanguage`);
+  assert(
+    webpage.about?.['@id'] === `${siteUrl}#organization`,
+    `${route.url} WebPage JSON-LD must reference the organization`
+  );
+
+  if (route.suffix === '') {
+    const website = assertSchemaObject(objects, 'WebSite', route.url);
+    assert(website['@id'] === `${route.url}#website`, `${route.url} WebSite JSON-LD has unexpected @id`);
+    assert(website.url === route.url, `${route.url} WebSite JSON-LD has unexpected url`);
+  }
+
+  if (route.suffix === '/services') {
+    const itemList = assertSchemaObject(objects, 'ItemList', route.url);
+    assert(itemList['@id'] === `${route.url}#services-list`, `${route.url} ItemList JSON-LD has unexpected @id`);
+    assert(
+      Array.isArray(itemList.itemListElement) && itemList.itemListElement.length > 0,
+      `${route.url} ItemList JSON-LD must include service entries`
+    );
+  }
+
+  if (route.kind === 'service') {
+    const service = assertSchemaObject(objects, 'Service', route.url);
+    assert(service['@id'] === `${route.url}#service`, `${route.url} Service JSON-LD has unexpected @id`);
+    assert(service.url === route.url, `${route.url} Service JSON-LD has unexpected url`);
+    assert(service.inLanguage === route.locale, `${route.url} Service JSON-LD has unexpected inLanguage`);
+    assert(service.serviceType === route.schemaServiceType, `${route.url} Service JSON-LD has unexpected type`);
+    assert(
+      service.provider?.['@id'] === `${siteUrl}#organization`,
+      `${route.url} Service JSON-LD must reference the organization`
+    );
+    assertClaimSafeServiceSchema(service, route.url);
+
+    const faqPage = assertSchemaObject(objects, 'FAQPage', route.url);
+    assert(faqPage['@id'] === `${route.url}#faq`, `${route.url} FAQPage JSON-LD has unexpected @id`);
+    assert(faqPage.url === route.url, `${route.url} FAQPage JSON-LD has unexpected url`);
+    assert(
+      Array.isArray(faqPage.mainEntity) && faqPage.mainEntity.length > 0,
+      `${route.url} FAQPage JSON-LD must include questions`
+    );
+  }
+}
+
 async function checkUrl(urlCheck) {
   const {url} = urlCheck;
   const response = await fetch(url, {
@@ -273,6 +382,7 @@ async function checkUrl(urlCheck) {
   assertCanonical(html, url);
   assertAlternates(html, urlCheck);
   assertJsonLd(html, url);
+  assertJsonLdGraph(html, urlCheck);
 
   return url;
 }
@@ -287,5 +397,5 @@ for (const urlCheck of urlChecks) {
 }
 
 console.log(
-  `Live SEO smoke passed: ${checked.length} source-derived production URLs returned 200 with indexable self-canonical pages, localized title and description, JSON-LD, locale hreflang, and x-default; ${checkedRobots} references ${checkedSitemap}; sitemap has ${expectedUrls.length} source-derived URLs with localized alternates and x-default.`
+  `Live SEO smoke passed: ${checked.length} source-derived production URLs returned 200 with indexable self-canonical pages, localized title and description, typed JSON-LD graphs, locale hreflang, and x-default; ${checkedRobots} references ${checkedSitemap}; sitemap has ${expectedUrls.length} source-derived URLs with localized alternates and x-default.`
 );
