@@ -1,6 +1,14 @@
 import {describe, it} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
+import {
+  copyFileSync,
+  mkdirSync,
+  mkdtempSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 
 import {getLiveSeoSourceFacts} from '../scripts/seo-source-facts.mjs';
@@ -13,6 +21,55 @@ function read(relativePath) {
 
 function extractQuotedValues(source) {
   return [...source.matchAll(/'([^']+)'/g)].map((item) => item[1]);
+}
+
+function copyFixtureFile(fixtureRoot, relativePath) {
+  const sourcePath = path.join(root, relativePath);
+  const fixturePath = path.join(fixtureRoot, relativePath);
+
+  mkdirSync(path.dirname(fixturePath), {recursive: true});
+  copyFileSync(sourcePath, fixturePath);
+}
+
+function withSourceFixture(mutate) {
+  const fixtureRoot = mkdtempSync(path.join(os.tmpdir(), 'edge-seo-source-facts-'));
+  const sourceFiles = [
+    'src/lib/site.ts',
+    'src/i18n/routing.ts',
+    'src/lib/seo.ts',
+    'src/lib/page-profiles.ts',
+    'src/lib/offer-tracks.ts',
+  ];
+  const facts = getLiveSeoSourceFacts({root});
+
+  try {
+    for (const relativePath of sourceFiles) {
+      copyFixtureFile(fixtureRoot, relativePath);
+    }
+
+    for (const locale of facts.locales) {
+      for (const slug of facts.serviceSlugs) {
+        copyFixtureFile(fixtureRoot, `src/content/${locale}/services/${slug}.mdx`);
+      }
+    }
+
+    mutate({fixtureRoot, facts});
+    return getLiveSeoSourceFacts({root: fixtureRoot});
+  } finally {
+    rmSync(fixtureRoot, {recursive: true, force: true});
+  }
+}
+
+function rewriteMdxMetadata(relativePath, field, value, fixtureRoot) {
+  const filePath = path.join(fixtureRoot, relativePath);
+  const source = readFileSync(filePath, 'utf8');
+  const nextSource = source.replace(
+    new RegExp(`(\\b${field}\\s*:\\s*)(['"])([\\s\\S]*?)\\2`),
+    `$1${JSON.stringify(value)}`
+  );
+
+  assert.notEqual(nextSource, source, `${relativePath} ${field} was not rewritten`);
+  writeFileSync(filePath, nextSource);
 }
 
 describe('live SEO source facts', () => {
@@ -135,5 +192,86 @@ describe('live SEO source facts', () => {
         `${route.path} typed JSON-LD contract`
       );
     }
+
+    assert.deepEqual(
+      facts.serviceMetadataChecks.map((route) => route.path),
+      facts.serviceSlugs.flatMap((slug) =>
+        facts.locales.map((locale) => `/${locale}/services/${slug}`)
+      )
+    );
+    assert.equal(facts.serviceMetadataChecks.length, facts.locales.length * facts.serviceSlugs.length);
+  });
+
+  it('rejects empty localized service titles and meta descriptions', () => {
+    assert.throws(
+      () =>
+        withSourceFixture(({fixtureRoot}) => {
+          rewriteMdxMetadata('src/content/fr/services/web-dev.mdx', 'title', '   ', fixtureRoot);
+        }),
+      /\/fr\/services\/web-dev has empty localized service title/
+    );
+
+    assert.throws(
+      () =>
+        withSourceFixture(({fixtureRoot}) => {
+          rewriteMdxMetadata('src/content/nl/services/realtime-games.mdx', 'description', '   ', fixtureRoot);
+        }),
+      /\/nl\/services\/realtime-games has empty localized service description/
+    );
+  });
+
+  it('rejects duplicated localized service titles and meta descriptions', () => {
+    assert.throws(
+      () =>
+        withSourceFixture(({fixtureRoot, facts}) => {
+          const existingTitle = facts.serviceMetadataChecks.find(
+            (route) => route.path === '/fr/services/ai-automation'
+          ).title;
+          rewriteMdxMetadata('src/content/en/services/web-dev.mdx', 'title', existingTitle, fixtureRoot);
+        }),
+      /Duplicate localized service title metadata:/
+    );
+
+    assert.throws(
+      () =>
+        withSourceFixture(({fixtureRoot, facts}) => {
+          const existingDescription = facts.serviceMetadataChecks.find(
+            (route) => route.path === '/en/services/web-dev'
+          ).description;
+          rewriteMdxMetadata(
+            'src/content/nl/services/realtime-games.mdx',
+            'description',
+            existingDescription,
+            fixtureRoot
+          );
+        }),
+      /Duplicate localized service description metadata:/
+    );
+  });
+
+  it('rejects fallback-looking localized service metadata for the full FR/EN/NL route family', () => {
+    assert.throws(
+      () =>
+        withSourceFixture(({fixtureRoot}) => {
+          rewriteMdxMetadata('src/content/fr/services/web-dev.mdx', 'title', 'web-dev', fixtureRoot);
+        }),
+      /\/fr\/services\/web-dev has fallback-looking localized service title/
+    );
+
+    assert.throws(
+      () =>
+        withSourceFixture(({fixtureRoot, facts}) => {
+          const fallbackDescription = facts.serviceMetadataChecks.find(
+            (route) => route.path === '/fr/services/ai-automation'
+          ).description;
+          rewriteMdxMetadata(
+            'src/content/en/services/ai-automation.mdx',
+            'description',
+            fallbackDescription,
+            fixtureRoot
+          );
+        }),
+      /\/en\/services\/ai-automation has fallback-looking localized service description: it matches \/fr\/services\/ai-automation/
+    );
   });
 });
