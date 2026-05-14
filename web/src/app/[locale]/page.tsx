@@ -2,7 +2,6 @@ import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {ButtonLink} from '@/components/ui/Button';
-import {Card} from '@/components/ui/Card';
 import {TrackedLink} from '@/components/ui/TrackedLink';
 import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {PageIntro} from '@/components/studio/PageIntro';
@@ -155,53 +154,50 @@ export default async function HomePage({params}: Props) {
             </a>
           </ShowcasePanel>
 
-          <FadeIn className="mt-8 rounded-lg border border-border bg-surface/85 p-6 shadow-sm md:p-8">
-            <div className="mb-6 max-w-2xl">
+          <FadeIn className="mt-8 grid gap-6 rounded-lg border border-border bg-surface/90 p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
+            <div>
+              <div className="max-w-2xl">
+                <p className="text-sm font-semibold text-foreground">
+                  {t('home.proof.tokensHeading')}
+                </p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {t('home.proof.tokensIntro')}
+                </p>
+              </div>
+              <dl className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
+                {home.proofSignals.map((signal) => (
+                  <div key={signal.label}>
+                    <div className="mb-3 inline-flex rounded-full border border-border bg-background/80 px-3 py-1 text-xs font-semibold text-subtle-foreground">
+                      {signal.token}
+                    </div>
+                    <dt className="text-xs font-semibold uppercase text-subtle-foreground">
+                      {signal.label}
+                    </dt>
+                    <dd className="mt-2 text-base font-semibold tracking-tight text-foreground">
+                      {signal.value}
+                    </dd>
+                    <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                      {signal.description}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+
+            <div className="flex flex-col justify-between border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
               <p className="text-sm font-semibold text-foreground">
-                {t('home.proof.tokensHeading')}
+                {t('services.aiTitle')}
               </p>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {t('home.proof.tokensIntro')}
+                {t('services.aiDesc')}
               </p>
+              <div className="not-prose mt-5">
+                <ButtonLink href={home.proofCta.href} variant="outline" size="lg">
+                  {t('home.proof.cta')}
+                </ButtonLink>
+              </div>
             </div>
-            <dl className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-              {home.proofSignals.map((signal) => (
-                <div key={signal.label}>
-                  <div className="mb-3 inline-flex rounded-full border border-border bg-background/80 px-3 py-1 text-xs font-semibold text-subtle-foreground">
-                    {signal.token}
-                  </div>
-                  <dt className="text-xs font-semibold uppercase text-subtle-foreground">
-                    {signal.label}
-                  </dt>
-                  <dd className="mt-2 text-base font-semibold tracking-tight text-foreground">
-                    {signal.value}
-                  </dd>
-                  <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {signal.description}
-                  </dd>
-                </div>
-              ))}
-            </dl>
           </FadeIn>
-
-          <FadeInStagger className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-3">
-            {home.proofCards.map((item) => (
-              <FadeIn key={item.title}>
-                <Card className="h-full p-6">
-                  <h3 className="text-lg font-semibold tracking-tight">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                    {item.description}
-                  </p>
-                </Card>
-              </FadeIn>
-            ))}
-          </FadeInStagger>
-
-          <div className="not-prose mt-8">
-            <ButtonLink href={home.proofCta.href} variant="outline" size="lg">
-              {t('home.proof.cta')}
-            </ButtonLink>
-          </div>
         </section>
 
         <section id="how-we-work" aria-labelledby="how-we-work-title">
@@ -213,55 +209,44 @@ export default async function HomePage({params}: Props) {
             <p>{t('home.process.intro')}</p>
           </SectionIntro>
 
-          <div className="mt-10 grid grid-cols-1 gap-6 xl:grid-cols-3">
-            {home.processCards.map((card) => (
-              <Card key={card.title} className="p-6 md:p-8">
-                <div className="text-sm font-semibold text-foreground">
-                  {card.kicker}
-                </div>
-                <h3 className="mt-3 text-lg font-semibold tracking-tight">
-                  {card.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {card.body}
-                </p>
-                <p className="mt-5 text-sm leading-relaxed text-foreground/80">
-                  {card.detail}
-                </p>
-              </Card>
-            ))}
-          </div>
+          <FadeIn className="mt-10 grid gap-8 rounded-lg border border-border bg-surface p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]">
+            <ol className="divide-y divide-border">
+              {home.processCards.map((card, index) => (
+                <li
+                  key={card.title}
+                  className="grid gap-4 py-5 first:pt-0 last:pb-0 sm:grid-cols-[3rem_1fr]"
+                >
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-sm font-semibold text-subtle-foreground"
+                    aria-hidden="true"
+                  >
+                    {index + 1}
+                  </div>
+                  <div>
+                    <div className="text-sm font-semibold text-foreground">
+                      {card.kicker}
+                    </div>
+                    <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                      {card.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {card.body}
+                    </p>
+                    <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+                      {card.detail}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ol>
 
-          <div className="not-prose mt-8">
-            <ButtonLink
-              href={home.ctas.processPrimary.href}
-              size="lg"
-              trackingPlacement={home.ctas.processPrimary.trackingPlacement}
-            >
-              {t('home.process.primaryCta')}
-            </ButtonLink>
-          </div>
-        </section>
-
-        <section>
-          <Card className="relative overflow-hidden p-8 md:p-12">
-            <div
-              className="pointer-events-none absolute -right-28 -top-24 h-72 w-72 rounded-full bg-secondary/15 blur-3xl"
-              aria-hidden="true"
-            />
-            <div
-              className="pointer-events-none absolute -bottom-28 -left-24 h-72 w-72 rounded-full bg-primary/10 blur-3xl"
-              aria-hidden="true"
-            />
-
-            <FadeIn>
-              <h2 className="text-2xl font-semibold tracking-tight">
+            <div className="flex flex-col justify-center border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
+              <h3 className="text-2xl font-semibold tracking-tight">
                 {t('contact.title')}
-              </h2>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground">
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {t('contact.intro')}
               </p>
-
               <div className="not-prose mt-8 flex flex-col gap-3 sm:flex-row">
                 <ButtonLink
                   href={home.ctas.bottomPrimary.href}
@@ -274,8 +259,8 @@ export default async function HomePage({params}: Props) {
                   {t('home.secondaryCta')}
                 </ButtonLink>
               </div>
-            </FadeIn>
-          </Card>
+            </div>
+          </FadeIn>
         </section>
       </div>
     </div>
