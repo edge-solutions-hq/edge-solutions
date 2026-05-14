@@ -56,15 +56,15 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
   {
     id: 'home',
     pathSuffix: '',
-    lastModified: new Date('2026-04-24T10:10:11.000Z'),
+    lastModified: new Date('2026-05-13T18:05:00.000Z'),
     sitemapPriority: 0.7,
     title: {
-      fr: 'Systèmes IA pragmatiques et delivery fiable pour équipes wallonnes',
+      fr: 'Systèmes IA pragmatiques en Wallonie, revue humaine incluse',
       en: 'Pragmatic AI systems and delivery hardening for Belgian teams',
       nl: 'Pragmatische AI-systemen en betrouwbare delivery voor Belgische teams',
     },
     description: {
-      fr: 'Edge Solutions aide les équipes à rendre leurs usages IA réellement exploitables, avec revue humaine, garde-fous, intégration web et exécution temps réel quand le produit le demande.',
+      fr: 'En Wallonie et en Belgique, Edge Solutions cadre vos usages IA utiles avec revue humaine, garde-fous et un premier pas clair vers le contact.',
       en: 'Edge Solutions helps teams turn AI usage into something truly usable, with human review, guardrails, web integration and real-time execution when the product needs it.',
       nl: 'Edge Solutions helpt teams om AI-gebruik echt bruikbaar te maken, met menselijke review, guardrails, webintegratie en realtime uitvoering wanneer het product dat vraagt.',
     },
@@ -72,15 +72,15 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
   {
     id: 'services',
     pathSuffix: '/services',
-    lastModified: new Date('2026-05-10T05:49:00.000Z'),
+    lastModified: new Date('2026-05-13T18:05:00.000Z'),
     sitemapPriority: 0.7,
     title: {
-      fr: 'Services IA-first en Wallonie — automatisation, web et 3D/VR',
+      fr: 'Services IA-first en Wallonie — cadrage, web et 3D/VR',
       en: 'AI-first services in Belgium — automation, web and 3D/VR',
       nl: 'AI-first diensten in België — automatisatie, web en 3D/VR',
     },
     description: {
-      fr: 'Services pour équipes belges : cadrer des workflows IA utiles, intégrer des outils web fiables et valider des prototypes 3D/VR avec garde-fous humains.',
+      fr: 'Pour équipes wallonnes et belges : cadrer un workflow IA utile, intégrer le web ou valider la 3D/VR avec revue humaine et garde-fous avant un premier contact.',
       en: 'Services for Belgian teams: scope useful AI workflows, build reliable web integrations and validate 3D/VR prototypes with human review guardrails.',
       nl: 'Diensten voor Belgische teams: bruikbare AI-workflows afbakenen, betrouwbare webintegraties bouwen en 3D/VR-prototypes valideren met menselijke review.',
     },
