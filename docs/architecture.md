@@ -52,7 +52,7 @@ This note names the main Modules that future iterations should preserve.
 
 ## Browser analytics context
 
-`web/src/lib/analytics/browser-context.ts` owns browser-derived analytics defaults such as page path, page location, page title, page referrer, and site locale. GA page-view tracking and conversion-event tracking should use this context instead of resolving those facts separately.
+`web/src/lib/analytics/browser-context.ts` owns browser-derived analytics defaults such as page path, page location, page title, page referrer, site locale, page family, and service-detail source track. GA page-view tracking and conversion-event tracking should use this context instead of resolving those facts separately.
 
 ## Tracked link targets
 

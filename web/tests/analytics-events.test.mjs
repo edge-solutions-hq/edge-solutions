@@ -186,6 +186,7 @@ describe('analytics browser transport adapter', () => {
     });
 
     const expectedPayload = {
+      page_family: 'contact',
       site_locale: 'fr',
       page_path: '/fr/contact?source=override',
       page_location: 'https://example.com/fr/contact?source=hero',
@@ -202,6 +203,40 @@ describe('analytics browser transport adapter', () => {
       },
     ]);
     assert.deepEqual(gtagCalls, [['event', 'contact_form_submit', expectedPayload]]);
+  });
+
+  it('adds service-detail source context to conversion events', () => {
+    const {dataLayer, gtagCalls} = installBrowser({
+      pathname: '/fr/services/ai-automation',
+      search: '',
+      href: 'https://example.com/fr/services/ai-automation',
+      title: 'Automatisation IA',
+    });
+
+    trackConversionEvent('contact_cta_click', {
+      cta_target: '/contact',
+      placement: 'service_detail_cta',
+    });
+
+    const expectedPayload = {
+      page_family: 'service_detail',
+      site_locale: 'fr',
+      source_offer_track: 'ai-automation',
+      page_path: '/fr/services/ai-automation',
+      page_location: 'https://example.com/fr/services/ai-automation',
+      page_title: 'Automatisation IA',
+      page_referrer: 'https://referrer.example/start',
+      cta_target: '/contact',
+      placement: 'service_detail_cta',
+    };
+
+    assert.deepEqual(dataLayer, [
+      {
+        event: 'contact_cta_click',
+        ...expectedPayload,
+      },
+    ]);
+    assert.deepEqual(gtagCalls, [['event', 'contact_cta_click', expectedPayload]]);
   });
 
   it('does not emit browser events for spam contact outcomes', () => {
