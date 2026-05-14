@@ -1,6 +1,6 @@
 # Conversion event taxonomy (Edge Solutions)
 
-Last updated: 2026-05-03
+Last updated: 2026-05-14
 
 ## Scope
 
@@ -12,6 +12,19 @@ Transport layer:
 - `window.gtag('event', event, params)`
 
 Both are emitted by `web/src/lib/analytics/events.ts` when available.
+
+## Shared browser context parameters
+
+Every browser-emitted conversion event also includes stable page context from
+`web/src/lib/analytics/browser-context.ts`:
+
+- `page_path` (string): localized current path plus query string
+- `page_location` (string): full browser URL
+- `page_family` (string): `home` | `services_index` | `service_detail` | `contact` | `other`
+- `site_locale` (string, optional): `fr` | `en` | `nl`
+- `source_offer_track` (string, optional): current service detail track (`ai-automation` | `web-dev` | `realtime-games`)
+- `page_title` (string, optional): current document title
+- `page_referrer` (string, optional): browser referrer
 
 ## Event catalog
 
@@ -30,6 +43,7 @@ Both are emitted by `web/src/lib/analytics/events.ts` when available.
 - `cta_target` (string): target path (typically `/contact`)
 - `page_path` (string): current path where click happened
 - `placement` (string, optional): source location (`header_cta`, `header_nav`, `mobile_menu_cta`, `mobile_menu_nav`, `home_hero_primary`, `home_process_primary`, `home_bottom_primary`, `service_detail_cta`)
+- `cta_label` (string, optional): clicked CTA label
 
 ---
 
@@ -155,6 +169,7 @@ In GA4:
 - Keep `contact_form_submit` as an intent signal and `contact_form_error` as a friction signal.
 - Use `contact_cta_click` + `placement` to compare where intent starts.
 - Use `service_card_click` + `placement` to compare interest from homepage vs services index.
+- Use `page_family`, `site_locale`, and `source_offer_track` to interpret low-volume FR/EN/NL conversion paths without relying on URL parsing in reports.
 
 ## Naming rules for new events
 

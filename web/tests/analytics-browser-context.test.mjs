@@ -9,6 +9,7 @@ const {
   createBrowserAnalyticsContext,
   currentBrowserPagePath,
   readBrowserAnalyticsContext,
+  resolveBrowserAnalyticsPageContext,
   resolveBrowserAnalyticsLocale,
 } = await import('../src/lib/analytics/browser-context.ts');
 
@@ -82,11 +83,13 @@ describe('browser analytics context', () => {
         location: fakeLocation(),
       }),
       {
+        page_family: 'services_index',
         site_locale: 'fr',
         page_path: '/fr/services?source=hero',
         page_location: 'https://example.com/fr/services?source=hero',
         page_title: 'Edge Solutions',
         page_referrer: 'https://referrer.example/path',
+        source_offer_track: undefined,
       }
     );
   });
@@ -104,11 +107,13 @@ describe('browser analytics context', () => {
         pathname: '/en/pricing',
       }),
       {
+        page_family: 'other',
         site_locale: 'en',
         page_path: '/en/pricing?plan=pro',
         page_location: 'https://example.com/en/pricing?plan=pro',
         page_title: 'Pricing',
         page_referrer: undefined,
+        source_offer_track: undefined,
       }
     );
   });
@@ -116,5 +121,31 @@ describe('browser analytics context', () => {
   it('keeps browser reads optional outside a real browser', () => {
     assert.equal(readBrowserAnalyticsContext(), undefined);
     assert.equal(currentBrowserPagePath(), undefined);
+  });
+
+  it('classifies localized page families and current service-track source', () => {
+    assert.deepEqual(
+      resolveBrowserAnalyticsPageContext('/fr'),
+      {pageFamily: 'home'}
+    );
+    assert.deepEqual(
+      resolveBrowserAnalyticsPageContext('/nl/services/'),
+      {pageFamily: 'services_index'}
+    );
+    assert.deepEqual(
+      resolveBrowserAnalyticsPageContext('/en/services/ai-automation?from=nav'),
+      {
+        pageFamily: 'service_detail',
+        sourceOfferTrack: 'ai-automation',
+      }
+    );
+    assert.deepEqual(
+      resolveBrowserAnalyticsPageContext('/fr/contact'),
+      {pageFamily: 'contact'}
+    );
+    assert.deepEqual(
+      resolveBrowserAnalyticsPageContext('/fr/services/unknown-offer'),
+      {pageFamily: 'other'}
+    );
   });
 });
