@@ -186,6 +186,8 @@
   "contact": {
     "title": "Contact",
     "intro": "Beschrijf de context, wat er al bestaat en wat geblokkeerd zit. Ik antwoord snel met een heldere kijk op wat gestructureerd, herwerkt of gebouwd moet worden.",
+    "fitLabel": "Goede aanleiding",
+    "fitText": "Pragmatische AI, workflowautomatisatie, interne tools, teamtraining en herstel van bestaande systemen wanneer de huidige basis het werk al blokkeert.",
     "form": {
       "name": "Naam",
       "email": "Email",
