@@ -86,7 +86,7 @@ export const OFFER_TRACK_PROOF_PROFILES = [
       {
         concept: 'source of truth',
         terms: {
-          fr: ['source de verite'],
+          fr: ['source de vérité'],
           en: ['source of truth'],
           nl: ['bron van waarheid'],
         },
