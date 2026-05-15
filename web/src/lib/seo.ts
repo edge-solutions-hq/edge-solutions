@@ -175,16 +175,16 @@ export const SERVICE_SCHEMA_DETAILS: Record<OfferTrackSlug, LocalizedServiceSche
   'ai-automation': {
     fr: {
       audienceType:
-        'Equipes belges qui doivent cadrer, prototyper et integrer des systemes IA utiles avec revue humaine',
+        'Équipes belges qui doivent cadrer, prototyper et intégrer des systèmes IA utiles avec revue humaine',
       serviceOutput: [
         'Cadrage d\'un cas d\'usage IA prioritaire',
-        'Prototype testable sur cas reels',
-        'Revue humaine et garde-fous d\'integration',
+        'Prototype testable sur cas réels',
+        'Revue humaine et garde-fous d\'intégration',
       ],
       offer: {
         name: 'Cycle de cadrage, prototype et garde-fous IA',
         description:
-          'Accompagnement du cadrage au prototype pour rendre un usage IA lisible, testable et decidable avant une integration plus sensible.',
+          'Accompagnement du cadrage au prototype pour rendre un usage IA lisible, testable et décidable avant une intégration plus sensible.',
       },
     },
     en: {
