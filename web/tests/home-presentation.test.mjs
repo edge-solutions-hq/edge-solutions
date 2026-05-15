@@ -23,6 +23,11 @@ describe('homepage presentation model', () => {
     assert.equal(model.proofCards.length, 3);
     assert.equal(model.proofSignals.length, 3);
     assert.equal(model.processCards.length, 3);
+    assert.deepEqual(model.finalCta, {
+      eyebrow: 'home.finalCta.eyebrow',
+      title: 'home.finalCta.title',
+      body: 'home.finalCta.body',
+    });
 
     assert.deepEqual(
       model.proofSignals.map((signal) => signal.token),

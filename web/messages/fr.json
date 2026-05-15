@@ -148,6 +148,11 @@
           }
         }
       }
+    },
+    "finalCta": {
+      "eyebrow": "Prochaine étape",
+      "title": "Vous avez un usage IA à clarifier ou à durcir ?",
+      "body": "Envoyez le contexte, ce qui existe déjà et ce qui bloque. Je vous réponds avec une lecture claire du premier pas utile."
     }
   },
   "services": {

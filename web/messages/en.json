@@ -148,6 +148,11 @@
           }
         }
       }
+    },
+    "finalCta": {
+      "eyebrow": "Next step",
+      "title": "Do you have an AI use case to clarify or harden?",
+      "body": "Send the context, what already exists and what is blocked. I’ll reply with a clear read on the first useful step."
     }
   },
   "services": {

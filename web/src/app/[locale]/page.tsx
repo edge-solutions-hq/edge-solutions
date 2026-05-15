@@ -63,7 +63,7 @@ export default async function HomePage({params}: Props) {
         className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(900px_circle_at_75%_18%,rgba(37,99,235,0.20),transparent_60%),radial-gradient(800px_circle_at_20%_78%,rgba(124,58,237,0.16),transparent_60%)]"
       />
 
-      <div className="relative z-10 space-y-24">
+      <div className="relative z-10 space-y-16 md:space-y-20">
         <section className="relative">
           <PageIntro eyebrow={t('home.subheadline')} title={t('home.headline')}>
             <p>{t('meta.siteTagline')}</p>
@@ -209,12 +209,12 @@ export default async function HomePage({params}: Props) {
             <p>{t('home.process.intro')}</p>
           </SectionIntro>
 
-          <FadeIn className="mt-10 grid gap-8 rounded-lg border border-border bg-surface p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]">
+          <FadeIn className="mt-8 grid gap-6 rounded-lg border border-border bg-surface p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]">
             <ol className="divide-y divide-border">
               {home.processCards.map((card, index) => (
                 <li
                   key={card.title}
-                  className="grid gap-4 py-5 first:pt-0 last:pb-0 sm:grid-cols-[3rem_1fr]"
+                  className="grid gap-4 py-4 first:pt-0 last:pb-0 sm:grid-cols-[3rem_1fr]"
                 >
                   <div
                     className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background text-sm font-semibold text-subtle-foreground"
@@ -232,7 +232,7 @@ export default async function HomePage({params}: Props) {
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                       {card.body}
                     </p>
-                    <p className="mt-4 text-sm leading-relaxed text-foreground/80">
+                    <p className="mt-3 text-sm leading-relaxed text-foreground/80">
                       {card.detail}
                     </p>
                   </div>
@@ -247,18 +247,37 @@ export default async function HomePage({params}: Props) {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 {t('contact.intro')}
               </p>
-              <div className="not-prose mt-8 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink
-                  href={home.ctas.bottomPrimary.href}
-                  size="lg"
-                  trackingPlacement={home.ctas.bottomPrimary.trackingPlacement}
-                >
-                  {t('home.primaryCta')}
-                </ButtonLink>
-                <ButtonLink href="/services" variant="outline" size="lg">
-                  {t('home.secondaryCta')}
-                </ButtonLink>
-              </div>
+            </div>
+          </FadeIn>
+        </section>
+
+        <section aria-labelledby="home-final-cta-title">
+          <FadeIn className="flex flex-col gap-5 rounded-lg border border-primary/25 bg-surface/95 p-5 shadow-sm sm:p-6 md:flex-row md:items-center md:justify-between md:gap-8">
+            <div className="max-w-2xl">
+              <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+                {home.finalCta.eyebrow}
+              </p>
+              <h2
+                id="home-final-cta-title"
+                className="mt-2 text-2xl font-semibold tracking-tight text-foreground"
+              >
+                {home.finalCta.title}
+              </h2>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {home.finalCta.body}
+              </p>
+            </div>
+            <div className="not-prose flex flex-col gap-3 sm:flex-row md:shrink-0">
+              <ButtonLink
+                href={home.ctas.bottomPrimary.href}
+                size="lg"
+                trackingPlacement={home.ctas.bottomPrimary.trackingPlacement}
+              >
+                {t('home.primaryCta')}
+              </ButtonLink>
+              <ButtonLink href="/services" variant="outline" size="lg">
+                {t('home.secondaryCta')}
+              </ButtonLink>
             </div>
           </FadeIn>
         </section>

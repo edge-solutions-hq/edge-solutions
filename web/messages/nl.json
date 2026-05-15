@@ -148,6 +148,11 @@
           }
         }
       }
+    },
+    "finalCta": {
+      "eyebrow": "Volgende stap",
+      "title": "Heb je een AI-use case die duidelijker of steviger moet worden?",
+      "body": "Stuur de context, wat al bestaat en wat vastzit. Ik antwoord met een heldere kijk op de eerste nuttige stap."
     }
   },
   "services": {

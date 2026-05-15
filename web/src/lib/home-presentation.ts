@@ -34,6 +34,12 @@ export type HomeProcessCard = {
   detail: string;
 };
 
+export type HomeFinalCta = {
+  eyebrow: string;
+  title: string;
+  body: string;
+};
+
 export type HomeCtaIntent = {
   href: string;
   trackingPlacement: ContactCtaPlacement;
@@ -44,6 +50,7 @@ export type HomePresentationModel = {
   proofSignals: HomeProofSignal[];
   publicProof: HomePublicProof;
   processCards: HomeProcessCard[];
+  finalCta: HomeFinalCta;
   ctas: {
     heroPrimary: HomeCtaIntent;
     processPrimary: HomeCtaIntent;
@@ -121,6 +128,11 @@ export function getHomePresentationModel(translate: Translate): HomePresentation
         detail: translate('home.process.launch.items.measure.body'),
       },
     ],
+    finalCta: {
+      eyebrow: translate('home.finalCta.eyebrow'),
+      title: translate('home.finalCta.title'),
+      body: translate('home.finalCta.body'),
+    },
     ctas: {
       heroPrimary: {
         href: '/contact',
