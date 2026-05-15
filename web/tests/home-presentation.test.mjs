@@ -88,9 +88,11 @@ describe('homepage presentation model', () => {
     assert.doesNotMatch(route, /const proofCards = \[/);
     assert.doesNotMatch(route, /const proofSignals = \[/);
     assert.doesNotMatch(route, /home_process_primary/);
+    assert.doesNotMatch(route, /home\.ctas\.processPrimary/);
     assert.doesNotMatch(route, /https:\/\/rusty-art\.edge-solutions\.be\//);
     assert.match(route, /home\.processCards\.map/);
-    assert.match(route, /home\.proofCards\.map/);
+    assert.doesNotMatch(route, /home\.proofCards\.map/);
     assert.match(route, /home\.proofSignals\.map/);
+    assert.match(route, /home\.ctas\.bottomPrimary/);
   });
 });
