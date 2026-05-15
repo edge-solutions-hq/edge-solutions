@@ -186,6 +186,8 @@
   "contact": {
     "title": "Contact",
     "intro": "Décrivez le contexte, ce qui existe déjà et ce qui bloque. Je vous réponds rapidement avec une lecture claire de ce qu’il faut structurer, reprendre ou construire.",
+    "fitLabel": "Bon point de départ",
+    "fitText": "IA pragmatique, automatisation de workflows, outils internes, formation d’équipe et reprise de systèmes existants quand la base bloque déjà le travail.",
     "form": {
       "name": "Nom",
       "email": "Email",

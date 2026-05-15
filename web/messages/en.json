@@ -186,6 +186,8 @@
   "contact": {
     "title": "Contact",
     "intro": "Share the context, what already exists and what is blocked. I’ll reply quickly with a clear read on what should be structured, rebuilt or developed.",
+    "fitLabel": "Good fit",
+    "fitText": "Pragmatic AI, workflow automation, internal tools, team training and recovery of existing systems when the current base is already blocking the work.",
     "form": {
       "name": "Name",
       "email": "Email",
