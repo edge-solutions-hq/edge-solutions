@@ -20,6 +20,14 @@
     "subheadline": "Als senior developer help ik om AI-workflows en producten te structureren, te verstevigen of te bouwen zonder black box, zonder onnodige schuld en zonder hype.",
     "primaryCta": "Contacteer mij",
     "secondaryCta": "Bekijk services",
+    "finalCta": {
+      "eyebrow": "Volgende stap",
+      "processTitle": "Een kort gesprek volstaat om te zien of het onderwerp scherp genoeg is om te kaderen.",
+      "processBody": "Het doel is om het gebruik, de risico’s en de eerste nuttige stap helder te krijgen voor het zwaarder werk wordt.",
+      "title": "Heb je een AI-workflow die betrouwbaarder moet worden?",
+      "body": "Stuur de context in enkele regels. Ik antwoord met een heldere lezing van het onderwerp en de redelijke eerste stap.",
+      "cta": "Start het gesprek"
+    },
     "proof": {
       "eyebrow": "Concrete proof",
       "title": "Operationele proof nog voor afgewerkte publieke case studies",
