@@ -20,6 +20,14 @@
     "subheadline": "Développeur senior, j’interviens pour structurer, fiabiliser ou construire des workflows et produits IA sans boîte noire, sans dette inutile et sans hype.",
     "primaryCta": "Me contacter",
     "secondaryCta": "Voir les services",
+    "finalCta": {
+      "eyebrow": "Prochaine étape",
+      "processTitle": "Un échange court suffit pour voir si le sujet mérite d’être cadré.",
+      "processBody": "L’objectif est de clarifier l’usage, les risques et le premier pas utile avant de lancer un chantier plus lourd.",
+      "title": "Vous avez un usage IA à rendre plus fiable ?",
+      "body": "Envoyez le contexte en quelques lignes. Je vous réponds avec une lecture claire du sujet et du premier pas raisonnable.",
+      "cta": "Démarrer l’échange"
+    },
     "proof": {
       "eyebrow": "Preuves concrètes",
       "title": "Des preuves opérationnelles avant les grandes études de cas publiques",

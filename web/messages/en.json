@@ -20,6 +20,14 @@
     "subheadline": "As a senior developer, I step in to structure, harden or build AI workflows and products without black boxes, unnecessary debt or hype.",
     "primaryCta": "Contact me",
     "secondaryCta": "View services",
+    "finalCta": {
+      "eyebrow": "Next step",
+      "processTitle": "A short exchange is enough to see whether the topic is worth scoping.",
+      "processBody": "The goal is to clarify the use case, the risks and the first useful step before turning it into heavier work.",
+      "title": "Do you have an AI workflow that needs to become more reliable?",
+      "body": "Send the context in a few lines. I’ll reply with a clear read of the topic and the reasonable first step.",
+      "cta": "Start the conversation"
+    },
     "proof": {
       "eyebrow": "Concrete proof",
       "title": "Operational proof before polished public case studies",

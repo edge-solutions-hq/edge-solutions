@@ -4,6 +4,7 @@ import {getTranslations} from 'next-intl/server';
 import {ButtonLink} from '@/components/ui/Button';
 import {TrackedLink} from '@/components/ui/TrackedLink';
 import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
+import {Container} from '@/components/studio/Container';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
@@ -63,7 +64,7 @@ export default async function HomePage({params}: Props) {
         className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(900px_circle_at_75%_18%,rgba(37,99,235,0.20),transparent_60%),radial-gradient(800px_circle_at_20%_78%,rgba(124,58,237,0.16),transparent_60%)]"
       />
 
-      <div className="relative z-10 space-y-24">
+      <div className="relative z-10 space-y-14 sm:space-y-16 lg:space-y-20">
         <section className="relative">
           <PageIntro eyebrow={t('home.subheadline')} title={t('home.headline')}>
             <p>{t('meta.siteTagline')}</p>
@@ -209,7 +210,10 @@ export default async function HomePage({params}: Props) {
             <p>{t('home.process.intro')}</p>
           </SectionIntro>
 
-          <FadeIn className="mt-10 grid gap-8 rounded-lg border border-border bg-surface p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]">
+          <FadeIn
+            initiallyVisible
+            className="mt-10 grid gap-8 rounded-lg border border-border bg-surface p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]"
+          >
             <ol className="divide-y divide-border">
               {home.processCards.map((card, index) => (
                 <li
@@ -241,26 +245,50 @@ export default async function HomePage({params}: Props) {
             </ol>
 
             <div className="flex flex-col justify-center border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-8 lg:pt-0">
-              <h3 className="text-2xl font-semibold tracking-tight">
-                {t('contact.title')}
+              <p className="text-sm font-semibold text-foreground">
+                {t('home.finalCta.eyebrow')}
+              </p>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight">
+                {t('home.finalCta.processTitle')}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {t('contact.intro')}
+                {t('home.finalCta.processBody')}
               </p>
-              <div className="not-prose mt-8 flex flex-col gap-3 sm:flex-row">
-                <ButtonLink
-                  href={home.ctas.bottomPrimary.href}
-                  size="lg"
-                  trackingPlacement={home.ctas.bottomPrimary.trackingPlacement}
-                >
-                  {t('home.primaryCta')}
-                </ButtonLink>
-                <ButtonLink href="/services" variant="outline" size="lg">
-                  {t('home.secondaryCta')}
-                </ButtonLink>
-              </div>
             </div>
           </FadeIn>
+        </section>
+
+        <section aria-labelledby="home-final-cta" className="pb-10 sm:pb-12">
+          <Container className="not-prose">
+            <FadeIn
+              initiallyVisible
+              className="flex flex-col gap-5 rounded-lg border border-primary/25 bg-surface/95 p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6"
+            >
+              <div className="max-w-2xl">
+                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                  {t('home.finalCta.eyebrow')}
+                </p>
+                <h2
+                  id="home-final-cta"
+                  className="mt-2 text-xl font-semibold tracking-tight text-foreground sm:text-2xl"
+                >
+                  {t('home.finalCta.title')}
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                  {t('home.finalCta.body')}
+                </p>
+              </div>
+
+              <ButtonLink
+                href={home.ctas.bottomPrimary.href}
+                size="lg"
+                trackingPlacement={home.ctas.bottomPrimary.trackingPlacement}
+                className="w-full shrink-0 sm:w-auto"
+              >
+                {t('home.finalCta.cta')}
+              </ButtonLink>
+            </FadeIn>
+          </Container>
         </section>
       </div>
     </div>
