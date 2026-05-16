@@ -93,22 +93,23 @@ function normalizeContent(value) {
 describe('website operating docs', () => {
   it('keeps the website source-of-truth entrypoint discoverable', () => {
     const website = read('../WEBSITE.md');
-    const docsReadme = read('../docs/README.md');
+    const positioning = read('../docs/positioning.md');
     const agents = read('../AGENTS.md');
     const webReadme = read('README.md');
 
     assert.match(website, /mandatory entrypoint for website work/i);
-    assert.match(website, /AI-first/i);
+    assert.match(website, /docs\/positioning\.md/);
     assert.match(website, /technical_seo_platform/);
     assert.match(website, /content_icp/);
     assert.match(website, /design_conversion/);
     assert.match(website, /pr_review/);
     assert.match(website, /analysis_observation/);
-    assert.match(website, /Do not present AI, web, and realtime as three equal studio offers/);
+    assert.match(positioning, /AI-first/i);
+    assert.match(positioning, /not a three-equal-services studio/);
     assert.match(website, /Generated visuals are allowed only as synthetic diagrams/);
-    assert.match(website, /Missing provider access is a setup-required state/);
+    assert.match(website, /Missing provider access is a setup-required state, not evidence/);
 
-    assert.match(docsReadme, /`\.\.\/WEBSITE\.md`/);
+    assert.equal(existsSync(path.join(root, '../docs/README.md')), false);
     assert.match(agents, /`WEBSITE\.md`/);
     assert.match(webReadme, /`\.\.\/WEBSITE\.md`/);
     assert.doesNotMatch(agents, /Tests: none defined yet/);

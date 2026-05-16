@@ -1,35 +1,28 @@
-# Edge Solutions website positioning
+# Edge Solutions Positioning
 
-_Last updated: 2026-04-13_
+This file owns the market promise, target audience, offer hierarchy, and tone for `edge-solutions.be`.
 
-## Core positioning
+## Positioning Statement
 
-Edge Solutions is not a three-equal-services studio.
+Edge Solutions presents Gil as a senior, pragmatic builder who makes AI usable in real operations.
 
-The site should position Gil as a senior, pragmatic builder who helps teams make AI actually usable in real operations.
+The business is AI-first, not a three-equal-services studio.
 
-## Promise hierarchy
+## Target Audience
 
-1. Primary promise: make AI workflows, prototypes, and internal tools real, usable, and maintainable.
-2. Supporting proof: web delivery, integrations, productization, and real-time / 3D execution.
-3. Tone: no hype, no black box, no fake case studies, concrete operational proof.
+- Belgium-first teams, especially Wallonia-facing teams.
+- SMEs, startups, agencies, and technical decision-makers.
+- Teams feeling operational friction around AI adoption, internal tools, automation, data/process handoffs, or unclear delivery systems.
 
-## Target audience
+## Offer Hierarchy
 
-- Belgium-first, especially Wallonia-facing teams
-- SMEs, startups, agencies, and technical decision-makers
-- Teams already feeling the mess of fast AI adoption on top of a fragile or unclear base
+1. Primary promise: pragmatic AI systems, workflow hardening, AI prototypes, AI training, and internal tools that survive real use.
+2. Supporting depth: web delivery, integrations, productization, analytics, performance, and realtime/3D execution.
+3. Tone: concrete, senior, calm, technical, no hype, no black box, no fake proof.
 
-## Proof to emphasize
+## Anti-Drift Rules
 
-- Human review and delivery guardrails
-- Clear sources of truth and visible working method
-- Operational AI setups and public proof projects
-- Ability to execute surrounding web, integration, and realtime work when needed
-
-## Anti-drift rules
-
-- Do not force equal visual or messaging weight across AI, web, and realtime.
+- Do not force equal visual or messaging weight across services.
 - Do not optimize the site for recruiter-facing positioning.
 - Do not invent polished case studies when truthful process proof is stronger.
-- Judge design and content recommendations against this intent first, not generic agency-site heuristics.
+- Judge design and content recommendations against this positioning before generic agency-site heuristics.

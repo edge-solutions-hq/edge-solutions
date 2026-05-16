@@ -103,7 +103,7 @@ function assertPageHasJsonLd(pathname) {
   const generated = readGeneratedPage(pathname);
   assert(
     generated,
-    `Generated page ${pathname} was not found. Run npm run build before check:seo.`
+    `Generated page ${pathname} was not found. Run pnpm run build before check:seo.`
   );
   assert(
     generated.includes('application/ld+json'),
@@ -117,7 +117,7 @@ function assertPageHasLocaleAlternates(pathname) {
 
   assert(
     generated,
-    `Generated page ${pathname} was not found. Run npm run build before check:seo.`
+    `Generated page ${pathname} was not found. Run pnpm run build before check:seo.`
   );
   assert(route, `No route facts found for generated path ${pathname}`);
 
@@ -149,7 +149,7 @@ function assertPageHasCanonical(pathname) {
 
   assert(
     generated,
-    `Generated page ${pathname} was not found. Run npm run build before check:seo.`
+    `Generated page ${pathname} was not found. Run pnpm run build before check:seo.`
   );
   assert(route, `No route facts found for generated path ${pathname}`);
   assert(
@@ -165,7 +165,7 @@ function jsonLdObjects(pathname) {
   const generated = readGeneratedPage(pathname);
   assert(
     generated,
-    `Generated page ${pathname} was not found. Run npm run build before check:seo.`
+    `Generated page ${pathname} was not found. Run pnpm run build before check:seo.`
   );
 
   const objects = [];
@@ -329,7 +329,7 @@ function assertServicesHubHasServiceItemList(locale, serviceSlugs) {
 
   assert(
     generated,
-    `Generated ${pathname} was not found. Run npm run build before check:seo.`
+    `Generated ${pathname} was not found. Run pnpm run build before check:seo.`
   );
   assert(
     generated.includes('ItemList') && generated.includes('#services-list'),
@@ -484,7 +484,7 @@ if (generatedSitemap) {
     );
   }
 } else {
-  throw new Error('Generated sitemap.xml was not found. Run npm run build before check:seo.');
+  throw new Error('Generated sitemap.xml was not found. Run pnpm run build before check:seo.');
 }
 
 if (generatedRobots) {
@@ -494,7 +494,7 @@ if (generatedRobots) {
     `Generated robots.txt must include Sitemap: ${siteUrl}/sitemap.xml`
   );
 } else {
-  throw new Error('Generated robots.txt was not found. Run npm run build before check:seo.');
+  throw new Error('Generated robots.txt was not found. Run pnpm run build before check:seo.');
 }
 
 console.log(
