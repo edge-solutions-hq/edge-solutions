@@ -95,7 +95,7 @@ export const proofAssetAuthorityRegistry = [
     approvalStatus: 'approved',
     authority: 'authoritative',
     usageScopes: ['services', 'realtime-games', 'proof'],
-    sourceArtifactRefs: ['../WEBSITE.md', '../docs/design-baseline.md'],
+    sourceArtifactRefs: ['../WEBSITE.md', '../DESIGN.md'],
     claimRestrictions: defaultClaimRestrictions,
     provenanceSummary: 'Repo-owned realtime prototype board for capability framing, not evidence for external client outcomes.',
   },

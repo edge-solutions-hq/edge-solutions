@@ -1,61 +1,68 @@
 # AGENTS.md
 
-## Project overview
-- Main app in `web/`: Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS v4, MDX content, i18n with `next-intl` (FR default, EN/NL locales), contact email via Resend.
-- Support docs in `docs/` (stack, design, content plan, repo arborescence) and personal info in `ressources/` (CVs, LinkedIn).
+Agent-facing instructions for this repo. Keep this file practical: setup, checks, structure, and rules that help a coding agent work safely. Put strategy, design, architecture, and stack detail in their owning docs.
 
-## Quick start
-- Prereq: Node 18.17+ (per `docs/tech-stack.md`). Uses npm (`package-lock.json` present).
-- Install: `cd web && npm install`
-- Dev: `npm run dev` (http://localhost:3000)
-- Lint: `npm run lint`
-- Build: `npm run build`; Prod: `npm run start`
-- Tests/checks: `npm run test`, `npm run check:seo`, `npm run check:analytics-env`, and full `npm run check`.
+## Project
+
+- Public website for Edge Solutions: `edge-solutions.be`.
+- Main app: `web/`, a Next.js App Router site with TypeScript, Tailwind CSS, MDX content, FR/EN/NL routes, analytics, and a Resend-backed contact form.
+- Personal source material lives in `ressources/` and may be used for truthful bios or experience wording.
+
+## Setup Commands
+
+Use pnpm from `web/`; `pnpm-lock.yaml` is the lockfile. If the `pnpm` shim is unavailable, use Corepack: `corepack pnpm ...`.
+
+- Install: `cd web && pnpm install`
+- Develop: `cd web && pnpm run dev`
+- Unit tests: `cd web && pnpm run test`
+- Lint: `cd web && pnpm run lint`
+- Build: `cd web && pnpm run build`
+- SEO check: `cd web && pnpm run check:seo`
+- Full gate: `cd web && pnpm run check`
+
+Next.js 16 requires Node.js 20.9 or newer. Prefer the full gate before finishing code changes. For docs-only edits, run targeted consistency checks instead of the full app gate unless the docs affect behavior.
 
 ## Environment
-- Copy `web/env.example` to `.env.local` and set:
-  - `RESEND_API_KEY`
-  - `RESEND_FROM_EMAIL` (update after domain verification)
-  - `RESEND_TO_EMAIL` (target inbox)
-- Keep secrets out of VCS; required for contact form/server action emails.
 
-## App structure & content
-- Routing: `src/app/[locale]/...` with locales `fr/en/nl` (see `src/i18n/routing.ts`, `src/proxy.ts`). Default locale FR; URLs are prefixed.
-- Content: MDX per locale in `src/content/{locale}/services/{slug}.mdx` (stable slugs: `web-dev`, `realtime-games`). Mirror files across locales when translating.
-- UI messages: `messages/{locale}.json`; update when adding copy.
-- MDX components available globally via `src/mdx-components.tsx` (CTA, Callout, custom headings/links).
-- Key layout/components: `src/components/layout/*`, `src/components/mdx/*`, `src/lib/content/services.ts`.
-- SEO: `src/app/robots.ts`, `src/app/sitemap.ts`; keep metadata up to date when adding pages.
+- Copy `web/env.example` to a local env file such as `web/.env.local`.
+- Contact delivery uses `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `RESEND_TO_EMAIL`.
+- Optional analytics use `NEXT_PUBLIC_GA_MEASUREMENT_ID` and `NEXT_PUBLIC_GTM_ID`.
+- Never print or commit secret values.
 
-## Docs to read first
-- `WEBSITE.md`: mandatory website work entrypoint and source-of-truth contract.
-- `docs/README.md`: documentation map and source-of-truth order.
-- `docs/positioning.md`: primary positioning source for website/design/content decisions. Treat Edge Solutions as AI-first, with web/integration/realtime as supporting execution depth rather than equal top-level offers.
-- `docs/tech-stack.md`: stack choices, Node version, implementation checklist.
-- `docs/design-baseline.md`: current Tailwind Plus-derived design baseline and the signals future cron/design work should preserve.
-- `docs/architecture.md`: active Module ownership map.
-- Historical planning notes live under `docs/archive/initial-planning/`; use them as context only, not current direction.
+## Docs To Read
 
-## Personal profile sources
-- CVs and LinkedIn profile in `ressources/` (e.g., `CV_Guminski_Gil-Tech Lead-2025-04-17.md`, `Linkedin Profile.md`) for bios, experience highlights, and wording.
+- Start with `WEBSITE.md`; it is the mandatory website work entrypoint and source-of-truth order.
+- Owner docs referenced there: `docs/positioning.md`, `DESIGN.md`, `docs/architecture.md`, `docs/analytics/conversion-event-taxonomy.md`, and `docs/tech-stack.md`.
 
-## Contribution tips
-- Before changing layout, typography, section order, or service emphasis, read `docs/positioning.md` and preserve the AI-first hierarchy in the presentation.
-- When adding copy/features: update MDX for all locales, align `messages/*.json`, and keep slugs stable.
-- Run `npm run lint` before delivery.
-- Preserve content in Markdown/MDX; default authoring language is French, then translate to EN/NL.
-- If expanding services or pages, add corresponding MDX files, metadata, and translations; adjust navigation labels if needed.
+## App Structure
 
-## Agent skills
+- Routes: `web/src/app/[locale]/...`
+- Locales: `fr`, `en`, `nl`; default locale is `fr`; URLs are always prefixed.
+- Public service content: `web/src/content/{locale}/services/{slug}.mdx`
+- UI messages: `web/messages/{locale}.json`
+- Offer tracks: `web/src/lib/offer-tracks.ts`; do not rebuild service order or slugs elsewhere.
+- Content registries live under `web/src/lib/content/`.
+- Analytics contracts live under `web/src/lib/analytics/` and `docs/analytics/`.
 
-### Issue tracker
+## Working Rules
+
+- Do not duplicate durable direction. Update the owning doc from `WEBSITE.md`'s source-of-truth order, then point other files to it.
+- For shared public copy or layout changes, preserve FR/EN/NL parity unless the task is explicitly scoped as French-only.
+- Default public authoring language is French, then translate to EN/NL.
+- Keep AI-first positioning intact: web, integration, and realtime work support the AI promise instead of competing with it.
+- Follow `WEBSITE.md`; do not add fake clients, metrics, screenshots, logos, testimonials, awards, or case studies.
+- Before changing module boundaries, read `docs/architecture.md` and preserve the named ownership seams.
+
+## Agent Skills
+
+### Issue Tracker
 
 Issues and PRDs are tracked in GitHub Issues for `Gil-1/edge-solutions`. See `docs/agents/issue-tracker.md`.
 
-### Triage labels
+### Triage Labels
 
 Use the default triage label vocabulary: `needs-triage`, `needs-info`, `ready-for-agent`, `ready-for-human`, and `wontfix`. See `docs/agents/triage-labels.md`.
 
-### Domain docs
+### Domain Docs
 
-Use the single-context layout; read repo docs as the domain source, and consume `CONTEXT.md`/`docs/adr/` if they are added later. See `docs/agents/domain.md`.
+Use the single-context layout. Read repo docs as the domain source, and consume `CONTEXT.md` or `docs/adr/` if they are added later. See `docs/agents/domain.md`.
