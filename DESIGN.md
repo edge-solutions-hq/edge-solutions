@@ -283,6 +283,8 @@ components:
 
 The visual direction is a cream-and-navy technical portfolio system. It combines poster-like display typography, sharp gridded panels, gold action accents, blueprint line work, translucent glass UI, and restrained isometric or mechanical 3D details.
 
+Use `docs/ai_developer_landing_page.png` as the new visual direction and inspiration for how the website represents Edge Solutions visually. Treat it as guidance only: do not copy/paste images, schemas, or literal structures from the reference.
+
 The mood is solid, engineered, and reassuring. It should feel distinctive and precise rather than generic, glossy, or overly futuristic.
 
 ## Colors
