@@ -90,7 +90,7 @@ export function MobileMenu({
               <div className="mt-2 border-t border-border pt-2">
                 <Link
                   href={contactAction.href}
-                  className="inline-flex h-11 w-full items-center justify-center gap-2 whitespace-nowrap rounded-md bg-primary px-5 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60 motion-reduce:transition-none"
+                  className="inline-flex h-11 w-full items-center justify-center gap-2 whitespace-nowrap rounded-md border border-border bg-primary px-5 text-sm font-medium text-primary-foreground shadow-[3px_3px_0_var(--secondary)] transition-colors hover:bg-accent hover:shadow-[2px_2px_0_var(--secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60 motion-reduce:transition-none"
                   onClick={(event) => {
                     if (!event.defaultPrevented) {
                       trackContactCtaClick(contactAction.trackingPayload);

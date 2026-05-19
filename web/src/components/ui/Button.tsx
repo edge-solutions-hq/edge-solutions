@@ -14,7 +14,8 @@ const base =
   'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60 motion-reduce:transition-none';
 
 const variants: Record<ButtonVariant, string> = {
-  primary: 'bg-primary text-primary-foreground hover:bg-primary/90',
+  primary:
+    'border border-border bg-primary text-primary-foreground shadow-[3px_3px_0_var(--secondary)] hover:bg-accent hover:shadow-[2px_2px_0_var(--secondary)]',
   secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
   outline: 'border border-border bg-surface text-foreground hover:bg-surface-muted',
   ghost: 'text-foreground hover:bg-surface-muted'

@@ -59,11 +59,6 @@ export default async function HomePage({params}: Props) {
     <div className="relative">
       <JsonLd data={profile.jsonLd} />
 
-      <div
-        aria-hidden="true"
-        className="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(900px_circle_at_75%_18%,rgba(37,99,235,0.20),transparent_60%),radial-gradient(800px_circle_at_20%_78%,rgba(124,58,237,0.16),transparent_60%)]"
-      />
-
       <div className="relative z-10 space-y-14 sm:space-y-16 lg:space-y-20">
         <section className="relative">
           <PageIntro eyebrow={t('home.subheadline')} title={t('home.headline')}>
