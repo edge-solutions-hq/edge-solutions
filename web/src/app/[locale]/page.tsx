@@ -41,6 +41,9 @@ function homeOfferTitleClass(service: HomeOfferCard) {
     : 'text-lg font-semibold';
 }
 
+const homeSectionGap = 'mt-14 sm:mt-16 lg:mt-20';
+const homeTokenSectionGap = 'mt-14 sm:mt-16';
+
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
   return getHomePageProfile(locale).metadata;
@@ -59,7 +62,7 @@ export default async function HomePage({params}: Props) {
     <div className="relative">
       <JsonLd data={profile.jsonLd} />
 
-      <div className="relative z-10 space-y-14 sm:space-y-16 lg:space-y-20">
+      <div className="relative z-10">
         <section className="relative">
           <PageIntro eyebrow={t('home.subheadline')} title={t('home.headline')}>
             <p>{t('meta.siteTagline')}</p>
@@ -79,7 +82,7 @@ export default async function HomePage({params}: Props) {
           </PageIntro>
         </section>
 
-        <section>
+        <section className={homeSectionGap}>
           <SectionIntro title={t('services.title')} />
 
           <FadeInStagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
@@ -121,7 +124,7 @@ export default async function HomePage({params}: Props) {
           </FadeInStagger>
         </section>
 
-        <section>
+        <section className={homeTokenSectionGap}>
           <SectionIntro eyebrow={t('home.proof.eyebrow')} title={t('home.proof.title')}>
             <p>{t('home.proof.intro')}</p>
           </SectionIntro>
@@ -196,7 +199,11 @@ export default async function HomePage({params}: Props) {
           </FadeIn>
         </section>
 
-        <section id="how-we-work" aria-labelledby="how-we-work-title">
+        <section
+          id="how-we-work"
+          aria-labelledby="how-we-work-title"
+          className={homeTokenSectionGap}
+        >
           <SectionIntro
             eyebrow={t('home.process.eyebrow')}
             title={t('home.process.title')}
@@ -253,7 +260,7 @@ export default async function HomePage({params}: Props) {
           </FadeIn>
         </section>
 
-        <section aria-labelledby="home-final-cta" className="pb-10 sm:pb-12">
+        <section aria-labelledby="home-final-cta" className={`${homeSectionGap} pb-10 sm:pb-12`}>
           <Container className="not-prose">
             <FadeIn
               initiallyVisible
