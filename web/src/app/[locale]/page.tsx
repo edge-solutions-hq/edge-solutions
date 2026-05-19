@@ -59,7 +59,7 @@ export default async function HomePage({params}: Props) {
     <div className="relative">
       <JsonLd data={profile.jsonLd} />
 
-      <div className="relative z-10 space-y-12 sm:space-y-14 lg:space-y-16">
+      <div className="relative z-10 space-y-14 sm:space-y-16 lg:space-y-20">
         <section className="relative">
           <PageIntro eyebrow={t('home.subheadline')} title={t('home.headline')}>
             <p>{t('meta.siteTagline')}</p>
