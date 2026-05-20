@@ -4,23 +4,21 @@ import * as React from 'react';
 import {cn} from '@/lib/cn';
 
 /**
- * Lightweight reveal-on-scroll components.
+ * Lightweight content wrappers.
  *
  * This replaces framer-motion to reduce first-load JS.
- * Uses IntersectionObserver + CSS transitions.
+ * Content is visible by default so full-page captures, no-JS rendering, and
+ * below-the-fold content do not leave blank layout slots.
  */
 
 type FadeInProps = React.HTMLAttributes<HTMLDivElement> & {
   /** Optional delay (ms) used by FadeInStagger. */
   delayMs?: number;
-  /**
-   * Render content visible on the first server render.
-   * Useful for above-the-fold content to avoid delaying LCP behind hydration.
-   */
+  /** Keep compatibility with existing callers; content now defaults visible. */
   initiallyVisible?: boolean;
 };
 
-export function FadeIn({className, style, delayMs, initiallyVisible = false, ...props}: FadeInProps) {
+export function FadeIn({className, style, delayMs, initiallyVisible = true, ...props}: FadeInProps) {
   const ref = React.useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = React.useState(initiallyVisible);
 
@@ -102,5 +100,4 @@ export function FadeInStagger({faster = false, className, children, ...props}: F
     </div>
   );
 }
-
 

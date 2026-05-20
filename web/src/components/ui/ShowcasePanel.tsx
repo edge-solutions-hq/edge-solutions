@@ -26,13 +26,13 @@ export function ShowcasePanel({
   return (
     <section
       className={cn(
-        'not-prose grid gap-2 overflow-hidden rounded-[2rem] border border-border/80 bg-surface/95 p-2 shadow-sm lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)]',
+        'not-prose grid gap-2 overflow-hidden rounded-lg border border-border/80 bg-surface/95 p-2 shadow-sm lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)]',
         className,
       )}
     >
       <div
         className={cn(
-          'rounded-[1.5rem] bg-surface px-6 py-6 md:px-8 md:py-8',
+          'rounded-lg bg-surface px-6 py-6 md:px-8 md:py-8',
           imageFirst ? 'lg:order-2' : 'lg:order-1',
         )}
       >
@@ -55,11 +55,11 @@ export function ShowcasePanel({
         imageSrc={imageSrc}
         imageAlt={imageAlt}
         outerClassName={cn(
-          'relative rounded-[1.5rem] border border-border/70 bg-[radial-gradient(circle_at_top,rgba(124,58,237,0.12),transparent_52%),radial-gradient(circle_at_bottom,rgba(37,99,235,0.12),transparent_50%),linear-gradient(135deg,rgba(255,255,255,0.98),rgba(243,244,246,0.92))] p-4',
+          'relative rounded-lg border border-border/70 bg-surface-muted p-4 shadow-[inset_0_0_0_1px_rgba(16,43,74,0.08)]',
           imageFirst ? 'lg:order-1' : 'lg:order-2',
         )}
         chromeClassName="pb-3"
-        imageFrameClassName="overflow-hidden rounded-[1.25rem] border border-border/70 bg-background/90 shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
+        imageFrameClassName="overflow-hidden rounded-xl border border-border/70 bg-background/90 shadow-[6px_6px_0_rgba(170,142,75,0.35)]"
       />
     </section>
   );

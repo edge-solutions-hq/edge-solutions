@@ -41,8 +41,9 @@ function homeOfferTitleClass(service: HomeOfferCard) {
     : 'text-lg font-semibold';
 }
 
-const homeSectionGap = 'mt-14 sm:mt-16 lg:mt-20';
-const homeTokenSectionGap = 'mt-14 sm:mt-16';
+const homeSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
+const homeTokenSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
+const homeSectionContentGap = 'mt-8 lg:mt-10';
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
@@ -85,7 +86,7 @@ export default async function HomePage({params}: Props) {
         <section className={homeSectionGap}>
           <SectionIntro title={t('services.title')} />
 
-          <FadeInStagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4">
+          <FadeInStagger className={`${homeSectionContentGap} grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4`}>
             {serviceCards.map((service) => (
               <FadeIn key={service.slug} className={homeOfferGridItemClass(service)}>
                 <TrackedLink
@@ -130,7 +131,7 @@ export default async function HomePage({params}: Props) {
           </SectionIntro>
 
           <ShowcasePanel
-            className="mt-10"
+            className={homeSectionContentGap}
             eyebrow={home.publicProof.eyebrow}
             title={home.publicProof.title}
             imageSrc={home.publicProof.imageSrc}
@@ -153,7 +154,7 @@ export default async function HomePage({params}: Props) {
             </a>
           </ShowcasePanel>
 
-          <FadeIn className="mt-8 grid gap-6 rounded-lg border border-border bg-surface/90 p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
+          <FadeIn className="mt-6 grid gap-6 rounded-lg border border-border bg-surface/90 p-6 shadow-sm md:mt-8 md:p-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
             <div>
               <div className="max-w-2xl">
                 <p className="text-sm font-semibold text-foreground">
@@ -214,7 +215,7 @@ export default async function HomePage({params}: Props) {
 
           <FadeIn
             initiallyVisible
-            className="mt-10 grid gap-8 rounded-lg border border-border bg-surface p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]"
+            className={`${homeSectionContentGap} grid gap-8 rounded-lg border border-border bg-surface p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]`}
           >
             <ol className="divide-y divide-border">
               {home.processCards.map((card, index) => (
