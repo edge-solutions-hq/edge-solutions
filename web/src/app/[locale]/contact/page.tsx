@@ -30,13 +30,13 @@ export default async function ContactPage({params}: Props) {
           {t('contact.title')}
         </h1>
         <p className="text-sm text-muted-foreground">{t('contact.intro')}</p>
-        <div className="rounded-md border border-primary/15 bg-primary/5 p-4">
+        <div className="rounded-lg border-2 border-border bg-surface p-5 shadow-[6px_6px_0_var(--primary)]">
           <p className="text-xs font-semibold text-primary">{t('contact.fitLabel')}</p>
           <p className="mt-2 text-sm leading-6 text-foreground">{t('contact.fitText')}</p>
         </div>
       </div>
 
-      <Card className="p-6">
+      <Card className="border-2 border-border p-6 shadow-[8px_8px_0_var(--primary)]">
         <ContactForm />
       </Card>
     </div>
