@@ -1,6 +1,6 @@
 import type {Metadata} from 'next';
 import {Suspense} from 'react';
-import {Fira_Code, Inter} from 'next/font/google';
+import {Archivo_Narrow, Fira_Code, Inter} from 'next/font/google';
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import {Analytics} from '@vercel/analytics/react';
 import {SpeedInsights} from '@vercel/speed-insights/next';
@@ -17,6 +17,12 @@ import {getAnalyticsRuntimeConfig} from '@/lib/runtime-config';
 import {getRootLayoutProfile} from '@/lib/site-profile';
 
 const inter = Inter({variable: '--font-inter', subsets: ['latin']});
+
+const archivoNarrow = Archivo_Narrow({
+  variable: '--font-archivo-narrow',
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700']
+});
 
 const firaCode = Fira_Code({variable: '--font-fira-code', subsets: ['latin']});
 
@@ -49,7 +55,9 @@ export default async function LocaleLayout({children, params}: Props) {
 
   return (
     <html lang={locale}>
-      <body className={`${inter.variable} ${firaCode.variable} antialiased`}>
+      <body
+        className={`${inter.variable} ${archivoNarrow.variable} ${firaCode.variable} antialiased`}
+      >
         <NextIntlClientProvider messages={messages}>
           <Header locale={locale} />
           <main className="mx-auto max-w-6xl px-6 py-12 md:py-14">{children}</main>

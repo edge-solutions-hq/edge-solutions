@@ -25,7 +25,7 @@ export function PageIntro({
         <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
           {eyebrow}
         </p>
-        <h1 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+        <h1 className="mt-4 text-balance font-display text-4xl leading-[0.95] font-bold tracking-normal text-foreground sm:text-5xl sm:leading-[0.92]">
           {title}
         </h1>
         <div className="mt-4 space-y-4 text-lg leading-relaxed text-muted-foreground">
@@ -35,5 +35,4 @@ export function PageIntro({
     </Container>
   );
 }
-
 

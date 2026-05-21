@@ -37,7 +37,7 @@ export function SectionIntro({
         <h2
           id={titleId}
           className={cn(
-            'mt-3 text-balance font-semibold tracking-tight',
+            'mt-3 text-balance font-display leading-[0.98] font-bold tracking-normal',
             smaller ? 'text-xl sm:text-2xl' : 'text-3xl sm:text-4xl',
             invert ? 'text-white' : 'text-foreground'
           )}
@@ -59,5 +59,4 @@ export function SectionIntro({
     </Container>
   );
 }
-
 
