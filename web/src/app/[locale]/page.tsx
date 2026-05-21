@@ -21,9 +21,9 @@ type Props = {
 
 function homeOfferCardFrame(service: HomeOfferCard) {
   return [
-    'group flex w-full flex-col rounded-lg border bg-surface p-6 no-underline shadow-sm transition-colors hover:bg-surface-muted hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
+    'group relative flex w-full flex-col overflow-hidden rounded-lg border bg-surface p-6 pt-8 no-underline shadow-[6px_6px_0_rgba(170,142,75,0.34)] transition-colors hover:bg-surface-muted hover:shadow-[4px_4px_0_rgba(170,142,75,0.48)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
     service.visualRole === 'primary-offer'
-      ? 'border-primary/45'
+      ? 'border-primary/70'
       : 'border-border',
   ].join(' ');
 }
@@ -96,7 +96,25 @@ export default async function HomePage({params}: Props) {
                   trackingPlacement="home_services_grid"
                   className={homeOfferCardFrame(service)}
                 >
-                  <div className="flex items-start justify-between gap-4">
+                  <div
+                    className="pointer-events-none absolute inset-x-5 top-4 flex items-center gap-2"
+                    aria-hidden="true"
+                  >
+                    <span className="h-px flex-1 bg-[repeating-linear-gradient(90deg,rgba(194,164,91,0.82)_0_0.38rem,transparent_0.38rem_0.62rem)]" />
+                    <span className="h-2 w-2 rounded-full border border-primary/70 bg-background" />
+                    <span className="h-px w-10 bg-primary/55" />
+                  </div>
+
+                  <div
+                    className="pointer-events-none absolute inset-x-5 bottom-5 grid grid-cols-3 gap-2 opacity-45"
+                    aria-hidden="true"
+                  >
+                    <span className="h-1.5 rounded-full bg-primary/60" />
+                    <span className="h-1.5 rounded-full border border-border/70 bg-background/50" />
+                    <span className="h-1.5 rounded-full bg-border/50" />
+                  </div>
+
+                  <div className="relative z-10 flex items-start justify-between gap-4">
                     <div className={homeOfferTitleClass(service)}>{service.label}</div>
                     <span
                       className="mt-0.5 text-sm text-subtle-foreground transition group-hover:translate-x-0.5 motion-reduce:transition-none"
@@ -106,11 +124,11 @@ export default async function HomePage({params}: Props) {
                     </span>
                   </div>
 
-                  <p className="mt-2 text-sm text-muted-foreground">
+                  <p className="relative z-10 mt-2 text-sm text-muted-foreground">
                     {service.description}
                   </p>
 
-                  <div className="mt-auto pt-5 inline-flex items-center gap-1 text-sm font-medium text-link">
+                  <div className="relative z-10 mt-auto inline-flex items-center gap-1 pt-8 text-sm font-medium text-link">
                     {t('services.cta')}
                     <span
                       className="transition group-hover:translate-x-0.5 motion-reduce:transition-none"
