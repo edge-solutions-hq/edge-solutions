@@ -5,7 +5,6 @@ import {ButtonLink} from '@/components/ui/Button';
 import {TrackedLink} from '@/components/ui/TrackedLink';
 import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {Container} from '@/components/studio/Container';
-import {PageIntro} from '@/components/studio/PageIntro';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
 import {getHomePresentationModel} from '@/lib/home-presentation';
@@ -45,6 +44,24 @@ const homeSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
 const homeTokenSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
 const homeSectionContentGap = 'mt-8 lg:mt-10';
 
+function HeroTechnicalAccent() {
+  return (
+    <div
+      className="pointer-events-none relative h-24 w-24 shrink-0 sm:h-32 sm:w-32 lg:h-56 lg:w-56"
+      aria-hidden="true"
+    >
+      <div className="absolute inset-0 rounded-lg border border-border/70 bg-[linear-gradient(135deg,rgba(200,210,204,0.7),rgba(244,238,214,0.28)_48%,rgba(170,142,75,0.42))] shadow-[6px_6px_0_rgba(170,142,75,0.3)]" />
+      <div className="absolute inset-3 rotate-45 rounded-md border border-border bg-surface/70 shadow-inner sm:inset-4" />
+      <div className="absolute inset-7 rotate-45 rounded-sm border border-primary/80 bg-primary/45 sm:inset-9 lg:inset-16" />
+      <div className="absolute left-2 top-1/2 h-px w-10 -translate-y-1/2 bg-border/70 sm:w-14 lg:w-24" />
+      <div className="absolute right-2 top-1/2 h-px w-10 -translate-y-1/2 bg-border/70 sm:w-14 lg:w-24" />
+      <div className="absolute left-1/2 top-2 h-10 w-px -translate-x-1/2 bg-border/70 sm:h-14 lg:h-24" />
+      <div className="absolute bottom-2 left-1/2 h-10 w-px -translate-x-1/2 bg-border/70 sm:h-14 lg:h-24" />
+      <div className="absolute -right-2 bottom-3 h-8 w-8 rounded-full border border-primary bg-background/80 shadow-[3px_3px_0_rgba(170,142,75,0.32)] sm:h-10 sm:w-10 lg:h-14 lg:w-14" />
+    </div>
+  );
+}
+
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
   return getHomePageProfile(locale).metadata;
@@ -64,23 +81,57 @@ export default async function HomePage({params}: Props) {
       <JsonLd data={profile.jsonLd} />
 
       <div className="relative z-10">
-        <section className="relative">
-          <PageIntro eyebrow={t('home.subheadline')} title={t('home.headline')}>
-            <p>{t('meta.siteTagline')}</p>
+        <section className="relative overflow-hidden">
+          <Container className="not-prose">
+            <FadeIn
+              initiallyVisible
+              className="relative overflow-hidden border-y border-border py-6 sm:py-8 lg:py-10"
+            >
+              <div
+                className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(16,43,74,0.09)_1px,transparent_1px),linear-gradient(180deg,rgba(16,43,74,0.06)_1px,transparent_1px)] bg-[length:3rem_3rem]"
+                aria-hidden="true"
+              />
+              <div className="relative grid gap-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start lg:gap-10">
+                <div>
+                  <div className="grid grid-cols-[minmax(0,1fr)_6rem] items-start gap-4 sm:grid-cols-[minmax(0,1fr)_8rem] lg:grid-cols-1">
+                    <p className="text-xs font-semibold uppercase tracking-normal text-muted-foreground">
+                      {t('home.subheadline')}
+                    </p>
+                    <div className="justify-self-end lg:hidden">
+                      <HeroTechnicalAccent />
+                    </div>
+                  </div>
 
-            <div className="not-prose mt-8 flex flex-col gap-3 sm:flex-row">
-              <ButtonLink
-                href={home.ctas.heroPrimary.href}
-                size="lg"
-                trackingPlacement={home.ctas.heroPrimary.trackingPlacement}
-              >
-                {t('home.primaryCta')}
-              </ButtonLink>
-              <ButtonLink href="/services" variant="outline" size="lg">
-                {t('home.secondaryCta')}
-              </ButtonLink>
-            </div>
-          </PageIntro>
+                  <h1 className="mt-4 max-w-5xl text-balance font-display text-5xl font-extrabold uppercase leading-[0.86] tracking-normal text-foreground sm:text-7xl sm:leading-[0.84] lg:text-8xl">
+                    {t('home.headline')}
+                  </h1>
+
+                  <div className="mt-6 grid gap-5 border-t border-border pt-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+                    <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
+                      {t('meta.siteTagline')}
+                    </p>
+
+                    <div className="flex flex-col gap-3 sm:flex-row md:justify-end">
+                      <ButtonLink
+                        href={home.ctas.heroPrimary.href}
+                        size="lg"
+                        trackingPlacement={home.ctas.heroPrimary.trackingPlacement}
+                      >
+                        {t('home.primaryCta')}
+                      </ButtonLink>
+                      <ButtonLink href="/services" variant="outline" size="lg">
+                        {t('home.secondaryCta')}
+                      </ButtonLink>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="hidden justify-end lg:flex">
+                  <HeroTechnicalAccent />
+                </div>
+              </div>
+            </FadeIn>
+          </Container>
         </section>
 
         <section className={homeSectionGap}>
