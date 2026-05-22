@@ -41,6 +41,61 @@ function homeOfferTitleClass(service: HomeOfferCard) {
     : 'text-lg font-semibold';
 }
 
+function HomeOfferBlueprintIcon({service}: {service: HomeOfferCard}) {
+  const frameClass = [
+    'pointer-events-none relative mb-5 flex h-14 w-14 items-center justify-center rounded-md border bg-background/55 text-foreground shadow-[inset_0_0_0_1px_rgba(194,164,91,0.25)]',
+    service.visualRole === 'primary-offer'
+      ? 'border-primary/75 bg-primary/10'
+      : 'border-border/75 bg-background/45',
+  ].join(' ');
+
+  return (
+    <span className={frameClass} aria-hidden="true">
+      <span className="absolute inset-1 rounded-[0.35rem] border border-primary/25" />
+      <span className="absolute left-2 top-2 h-1.5 w-1.5 rounded-full bg-primary/70" />
+      <svg
+        viewBox="0 0 48 48"
+        className="relative h-10 w-10"
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="1.8"
+      >
+        {service.slug === 'ai-automation' ? (
+          <>
+            <circle cx="24" cy="24" r="7" className="fill-background/70" />
+            <path d="M24 9v8M24 31v8M9 24h8M31 24h8M13.5 13.5l5.5 5.5M34.5 13.5 29 19M13.5 34.5 19 29M34.5 34.5 29 29" />
+            <circle cx="24" cy="24" r="2.7" className="fill-primary stroke-primary" />
+            <circle cx="8.5" cy="24" r="2.2" className="fill-background" />
+            <circle cx="39.5" cy="24" r="2.2" className="fill-background" />
+            <circle cx="24" cy="8.5" r="2.2" className="fill-background" />
+            <circle cx="24" cy="39.5" r="2.2" className="fill-background" />
+          </>
+        ) : null}
+
+        {service.slug === 'web-dev' ? (
+          <>
+            <rect x="8" y="11" width="32" height="27" rx="2.5" className="fill-background/70" />
+            <path d="M8 18h32M14 14.5h.1M19 14.5h.1M24 14.5h.1" />
+            <path d="M14 24h12M14 29h20M14 34h14" />
+            <path d="M31 23h5v5h-5z" className="fill-primary/20 stroke-primary" />
+          </>
+        ) : null}
+
+        {service.slug === 'realtime-games' ? (
+          <>
+            <path d="m24 8 14 8-14 8-14-8 14-8Z" className="fill-background/70" />
+            <path d="M10 16v16l14 8 14-8V16M24 24v16" />
+            <path d="m16 13 14 8M32 20v8M18 31l6 3.5 6-3.5" className="stroke-primary" />
+            <path d="M13 24h-4M39 24h-4M24 4v4M24 40v4" />
+          </>
+        ) : null}
+      </svg>
+    </span>
+  );
+}
+
 const homeSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
 const homeTokenSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
 const homeSectionContentGap = 'mt-8 lg:mt-10';
@@ -113,6 +168,8 @@ export default async function HomePage({params}: Props) {
                     <span className="h-1.5 rounded-full border border-border/70 bg-background/50" />
                     <span className="h-1.5 rounded-full bg-border/50" />
                   </div>
+
+                  <HomeOfferBlueprintIcon service={service} />
 
                   <div className="relative z-10 flex items-start justify-between gap-4">
                     <div className={homeOfferTitleClass(service)}>{service.label}</div>
