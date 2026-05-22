@@ -35,11 +35,11 @@ export function DeliveryBlueprint({
   return (
     <section
       className={cn(
-        'not-prose overflow-hidden rounded-[2.25rem] border border-border/80 bg-surface/95 shadow-sm',
+        'not-prose overflow-hidden rounded-lg border-2 border-border bg-surface shadow-[6px_6px_0_var(--primary)]',
         className,
       )}
     >
-      <div className="grid gap-px border-b border-border/80 lg:grid-cols-[minmax(0,1.2fr)_22rem]">
+      <div className="grid gap-px border-b border-border bg-border lg:grid-cols-[minmax(0,1.2fr)_22rem]">
         <div className="bg-surface px-6 py-7 md:px-8 md:py-8">
           {eyebrow ? (
             <p className="text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -54,14 +54,14 @@ export function DeliveryBlueprint({
           </div>
         </div>
 
-        <div className="bg-slate-950 px-6 py-7 text-white md:px-8 md:py-8">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200/90">
+        <div className="bg-secondary px-6 py-7 text-secondary-foreground md:px-8 md:py-8">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
             {checklistTitle}
           </p>
-          <ul className="mt-5 space-y-3 text-sm leading-relaxed text-slate-200">
+          <ul className="mt-5 space-y-3 text-sm leading-relaxed text-secondary-foreground/85">
             {checklist.map((item) => (
               <li key={item} className="flex gap-3">
-                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-300" aria-hidden="true" />
+                <span className="mt-1.5 h-2.5 w-2.5 shrink-0 rounded-full border border-secondary-foreground/70 bg-primary" aria-hidden="true" />
                 <span>{item}</span>
               </li>
             ))}
@@ -69,22 +69,22 @@ export function DeliveryBlueprint({
         </div>
       </div>
 
-      <div className="border-b border-border/80 bg-[radial-gradient(circle_at_top,rgba(37,99,235,0.08),transparent_45%),linear-gradient(180deg,rgba(248,250,252,1),rgba(241,245,249,0.92))] px-4 py-4 md:px-6 md:py-6">
+      <div className="border-b border-border bg-[linear-gradient(90deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,var(--surface-muted),var(--surface))] bg-[length:28px_28px,28px_28px,auto] px-4 py-4 md:px-6 md:py-6">
         <ProofMediaFrame
           imageSrc={imageSrc}
           imageAlt={imageAlt}
-          outerClassName="overflow-hidden rounded-[1.75rem] border border-border/70 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.12)]"
+          outerClassName="overflow-hidden rounded-lg border border-border/70 bg-surface shadow-[6px_6px_0_color-mix(in_srgb,var(--primary)_35%,transparent)]"
           chromeClassName="border-b border-border/70 px-4 py-3"
         />
       </div>
 
-      <div className="grid gap-px bg-border/80 md:grid-cols-3">
+      <div className="grid gap-px bg-border md:grid-cols-3">
         {columns.map((column, index) => (
           <div
             key={`${column.label}-${column.title}`}
             className={cn(
               'bg-surface px-6 py-6 md:px-7 md:py-7',
-              index === 1 ? 'bg-slate-50/80' : '',
+              index === 1 ? 'bg-surface-muted' : '',
             )}
           >
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
@@ -96,7 +96,7 @@ export function DeliveryBlueprint({
             <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
               {column.points.map((point) => (
                 <li key={point} className="flex gap-3">
-                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-slate-400/70" aria-hidden="true" />
+                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full border border-border/70 bg-primary/70" aria-hidden="true" />
                   <span>{point}</span>
                 </li>
               ))}
