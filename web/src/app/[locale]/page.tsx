@@ -154,6 +154,7 @@ export default async function HomePage({params}: Props) {
             title={home.publicProof.title}
             imageSrc={home.publicProof.imageSrc}
             imageAlt={home.publicProof.imageAlt}
+            imagePriority
           >
             <p>{home.publicProof.description}</p>
             <p>{home.publicProof.supportText}</p>

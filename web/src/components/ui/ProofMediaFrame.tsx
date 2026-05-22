@@ -9,6 +9,7 @@ type ProofMediaFrameProps = {
   chromeClassName?: string;
   imageFrameClassName?: string;
   imageClassName?: string;
+  imagePriority?: boolean;
   width?: number;
   height?: number;
 };
@@ -30,6 +31,7 @@ export function ProofMediaFrame({
   chromeClassName,
   imageFrameClassName,
   imageClassName = 'h-auto w-full',
+  imagePriority = false,
   width = 1400,
   height = 1000,
 }: ProofMediaFrameProps) {
@@ -40,6 +42,7 @@ export function ProofMediaFrame({
       width={width}
       height={height}
       className={imageClassName}
+      priority={imagePriority}
     />
   );
 
