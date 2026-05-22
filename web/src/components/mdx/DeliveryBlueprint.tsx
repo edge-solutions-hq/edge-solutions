@@ -71,14 +71,14 @@ export function DeliveryBlueprint({
 
       <div className="relative border-b-2 border-border bg-surface-muted px-4 py-4 md:px-6 md:py-6">
         <div
-          className="pointer-events-none absolute inset-0 opacity-45 [background-image:linear-gradient(rgba(16,43,74,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(16,43,74,0.12)_1px,transparent_1px)] [background-size:34px_34px]"
+          className="pointer-events-none absolute inset-0 opacity-55 [background-image:linear-gradient(rgba(16,43,74,0.12)_1px,transparent_1px),linear-gradient(90deg,rgba(16,43,74,0.12)_1px,transparent_1px)] [background-size:28px_28px]"
           aria-hidden="true"
         />
         <div className="relative">
           <ProofMediaFrame
             imageSrc={imageSrc}
             imageAlt={imageAlt}
-            outerClassName="overflow-hidden rounded-xl border-2 border-border bg-background/85 shadow-[6px_6px_0_rgba(170,142,75,0.34)]"
+            outerClassName="overflow-hidden rounded-lg border-2 border-border bg-background/85 shadow-[6px_6px_0_rgba(170,142,75,0.34)]"
             chromeClassName="border-b border-border/70 bg-surface/75 px-4 py-3"
           />
         </div>
