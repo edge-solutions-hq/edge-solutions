@@ -44,10 +44,14 @@ const homeSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
 const homeTokenSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
 const homeSectionContentGap = 'mt-8 lg:mt-10';
 
-function HeroTechnicalAccent() {
+function HeroTechnicalAccent({poster = false}: {poster?: boolean}) {
+  const sizeClass = poster
+    ? 'h-36 w-36 sm:h-44 sm:w-44'
+    : 'h-24 w-24 sm:h-32 sm:w-32 lg:h-56 lg:w-56';
+
   return (
     <div
-      className="pointer-events-none relative h-24 w-24 shrink-0 sm:h-32 sm:w-32 lg:h-56 lg:w-56"
+      className={`pointer-events-none relative shrink-0 ${sizeClass}`}
       aria-hidden="true"
     >
       <div className="absolute inset-0 rounded-lg border border-border/70 bg-[linear-gradient(135deg,rgba(200,210,204,0.7),rgba(244,238,214,0.28)_48%,rgba(170,142,75,0.42))] shadow-[6px_6px_0_rgba(170,142,75,0.3)]" />
@@ -58,6 +62,7 @@ function HeroTechnicalAccent() {
       <div className="absolute left-1/2 top-2 h-10 w-px -translate-x-1/2 bg-border/70 sm:h-14 lg:h-24" />
       <div className="absolute bottom-2 left-1/2 h-10 w-px -translate-x-1/2 bg-border/70 sm:h-14 lg:h-24" />
       <div className="absolute -right-2 bottom-3 h-8 w-8 rounded-full border border-primary bg-background/80 shadow-[3px_3px_0_rgba(170,142,75,0.32)] sm:h-10 sm:w-10 lg:h-14 lg:w-14" />
+      <div className="absolute -left-1 top-4 h-5 w-5 rounded-full border border-border/70 bg-[#c8d2cc]/70 sm:h-6 sm:w-6 lg:top-8" />
     </div>
   );
 }
@@ -85,24 +90,32 @@ export default async function HomePage({params}: Props) {
           <Container className="not-prose">
             <FadeIn
               initiallyVisible
-              className="relative overflow-hidden border-y border-border py-6 sm:py-8 lg:py-10"
+              className="relative overflow-hidden rounded-lg border border-border bg-surface/90 p-4 shadow-[8px_8px_0_rgba(170,142,75,0.3)] sm:p-6 lg:rounded-none lg:border-x-0 lg:bg-transparent lg:px-0 lg:py-10 lg:shadow-none"
             >
               <div
                 className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(16,43,74,0.09)_1px,transparent_1px),linear-gradient(180deg,rgba(16,43,74,0.06)_1px,transparent_1px)] bg-[length:3rem_3rem]"
                 aria-hidden="true"
               />
-              <div className="relative grid gap-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start lg:gap-10">
+              <div
+                className="pointer-events-none absolute inset-x-4 top-4 flex items-center gap-2 sm:inset-x-6 lg:hidden"
+                aria-hidden="true"
+              >
+                <span className="h-px flex-1 bg-[repeating-linear-gradient(90deg,rgba(16,43,74,0.68)_0_0.55rem,transparent_0.55rem_0.8rem)]" />
+                <span className="h-2 w-2 rounded-full border border-primary bg-background/90" />
+                <span className="h-px w-12 bg-primary/65" />
+              </div>
+              <div className="pointer-events-none absolute -right-8 top-16 z-0 opacity-90 sm:-right-4 sm:top-20 lg:hidden">
+                <HeroTechnicalAccent poster />
+              </div>
+              <div className="relative z-10 grid gap-7 pt-6 sm:pt-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start lg:gap-10 lg:pt-0">
                 <div>
-                  <div className="grid grid-cols-[minmax(0,1fr)_6rem] items-start gap-4 sm:grid-cols-[minmax(0,1fr)_8rem] lg:grid-cols-1">
+                  <div className="grid items-start lg:grid-cols-1">
                     <p className="text-xs font-semibold uppercase tracking-normal text-muted-foreground">
                       {t('home.subheadline')}
                     </p>
-                    <div className="justify-self-end lg:hidden">
-                      <HeroTechnicalAccent />
-                    </div>
                   </div>
 
-                  <h1 className="mt-4 max-w-5xl text-balance font-display text-5xl font-extrabold uppercase leading-[0.86] tracking-normal text-foreground sm:text-7xl sm:leading-[0.84] lg:text-8xl">
+                  <h1 className="relative z-10 mt-5 max-w-5xl text-balance pr-8 font-display text-5xl font-extrabold uppercase leading-[0.86] tracking-normal text-foreground sm:pr-24 sm:text-7xl sm:leading-[0.84] lg:mt-4 lg:pr-0 lg:text-8xl">
                     {t('home.headline')}
                   </h1>
 
