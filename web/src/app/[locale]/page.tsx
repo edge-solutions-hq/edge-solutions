@@ -280,23 +280,26 @@ export default async function HomePage({params}: Props) {
           </FadeIn>
         </section>
 
-        <section aria-labelledby="home-final-cta" className={`${homeSectionGap} pb-10 sm:pb-12`}>
+        <section
+          aria-labelledby="home-final-cta"
+          className={`${homeSectionGap} bg-secondary py-10 text-secondary-foreground shadow-[0_-1px_0_rgba(170,142,75,0.72),0_1px_0_rgba(170,142,75,0.72)] sm:py-12`}
+        >
           <Container className="not-prose">
             <FadeIn
               initiallyVisible
-              className="flex flex-col gap-5 rounded-lg border border-primary/25 bg-surface/95 p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6"
+              className="flex flex-col gap-6 border-y border-primary/70 py-6 sm:flex-row sm:items-center sm:justify-between sm:py-7"
             >
               <div className="max-w-2xl">
-                <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                <p className="text-xs font-semibold uppercase tracking-wide text-primary">
                   {t('home.finalCta.eyebrow')}
                 </p>
                 <h2
                   id="home-final-cta"
-                  className="mt-2 text-xl font-semibold tracking-tight text-foreground sm:text-2xl"
+                  className="mt-2 text-xl font-semibold tracking-tight text-secondary-foreground sm:text-2xl"
                 >
                   {t('home.finalCta.title')}
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-secondary-foreground/80">
                   {t('home.finalCta.body')}
                 </p>
               </div>
@@ -305,7 +308,7 @@ export default async function HomePage({params}: Props) {
                 href={home.ctas.bottomPrimary.href}
                 size="lg"
                 trackingPlacement={home.ctas.bottomPrimary.trackingPlacement}
-                className="w-full shrink-0 sm:w-auto"
+                className="w-full shrink-0 shadow-[3px_3px_0_rgba(242,237,215,0.22)] hover:shadow-[2px_2px_0_rgba(242,237,215,0.28)] sm:w-auto"
               >
                 {t('home.finalCta.cta')}
               </ButtonLink>
