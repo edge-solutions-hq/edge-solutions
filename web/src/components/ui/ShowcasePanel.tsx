@@ -7,6 +7,7 @@ type ShowcasePanelProps = {
   title: string;
   imageSrc: string;
   imageAlt: string;
+  imagePriority?: boolean;
   imageSide?: 'left' | 'right';
   className?: string;
   children: ReactNode;
@@ -17,6 +18,7 @@ export function ShowcasePanel({
   title,
   imageSrc,
   imageAlt,
+  imagePriority = false,
   imageSide = 'right',
   className,
   children,
@@ -60,6 +62,7 @@ export function ShowcasePanel({
         )}
         chromeClassName="pb-3"
         imageFrameClassName="overflow-hidden rounded-xl border border-border/70 bg-background/90 shadow-[6px_6px_0_rgba(170,142,75,0.35)]"
+        imagePriority={imagePriority}
       />
     </section>
   );
