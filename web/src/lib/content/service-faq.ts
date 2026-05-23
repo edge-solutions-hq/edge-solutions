@@ -58,22 +58,22 @@ export const SERVICE_FAQS: ServiceFaqMap = {
       {
         question: 'Vous pouvez partir d’un concept flou ?',
         answer:
-          'Oui. Je peux aider a clarifier le besoin, la plateforme et les risques pour proposer un plan de prototype realiste.',
+          'Oui. Je peux aider à clarifier le besoin, la plateforme et les risques pour proposer un plan de prototype réaliste.',
       },
       {
         question: 'Quest, PCVR, ou les deux ?',
         answer:
-          'On choisit selon l’usage, le niveau de rendu attendu, le budget et les contraintes de diffusion. Le plus important est d’eviter les promesses qui ne tiennent pas sur le materiel cible.',
+          'On choisit selon l’usage, le niveau de rendu attendu, le budget et les contraintes de diffusion. Le plus important est d’éviter les promesses qui ne tiennent pas sur le matériel cible.',
       },
       {
         question: 'Et la performance ?',
         answer:
-          'Elle fait partie du cadrage des le debut: budgets, profiling, optimisation et validation sur le vrai support.',
+          'Elle fait partie du cadrage dès le début: budgets, profiling, optimisation et validation sur le vrai support.',
       },
       {
-        question: 'Comment estimez-vous budget et delais ?',
+        question: 'Comment estimez-vous budget et délais ?',
         answer:
-          'Apres un cadrage court, je propose une estimation par options, prototype vs. production, avec jalons clairs et risques identifies.',
+          'Après un cadrage court, je propose une estimation par options, prototype vs. production, avec jalons clairs et risques identifiés.',
       },
     ],
   },

@@ -38,23 +38,23 @@ export function PrototypeSignals({
   return (
     <section
       className={cn(
-        'not-prose overflow-hidden rounded-[2.5rem] border border-white/10 bg-linear-to-br from-slate-950 via-slate-950 to-indigo-950 text-white shadow-[0_28px_90px_rgba(15,23,42,0.34)]',
+        'not-prose overflow-hidden rounded-lg border-2 border-border bg-surface shadow-[6px_6px_0_var(--primary)]',
         className,
       )}
     >
-      <div className="grid gap-px xl:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.95fr)]">
-        <div className="bg-linear-to-br from-slate-950 via-slate-900 to-indigo-950 px-6 py-7 md:px-8 md:py-8">
+      <div className="grid gap-px bg-border xl:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.95fr)]">
+        <div className="bg-secondary px-6 py-7 text-secondary-foreground md:px-8 md:py-8">
           {eyebrow ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200/90">
+            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
               {eyebrow}
             </p>
           ) : null}
 
-          <h3 className="mt-3 max-w-xl text-balance text-2xl font-semibold tracking-tight text-white sm:text-3xl">
+          <h3 className="mt-3 max-w-xl text-balance text-2xl font-semibold tracking-tight text-secondary-foreground sm:text-3xl">
             {title}
           </h3>
 
-          <div className="mt-5 max-w-xl space-y-4 text-sm leading-relaxed text-slate-200 [&_strong]:font-semibold [&_strong]:text-white">
+          <div className="mt-5 max-w-xl space-y-4 text-sm leading-relaxed text-secondary-foreground/82 [&_strong]:font-semibold [&_strong]:text-secondary-foreground">
             {children}
           </div>
 
@@ -63,17 +63,15 @@ export function PrototypeSignals({
               <div
                 key={`${signal.label}-${signal.value}`}
                 className={cn(
-                  'rounded-[1.35rem] border px-4 py-4 backdrop-blur-sm',
-                  index === 0 && 'border-cyan-300/25 bg-cyan-400/8',
-                  index === 1 && 'border-violet-300/25 bg-violet-400/10',
-                  index === 2 && 'border-emerald-300/25 bg-emerald-400/10',
-                  index > 2 && 'border-white/12 bg-white/6',
+                  'rounded-lg border border-primary/55 bg-secondary-foreground/8 px-4 py-4',
+                  index === 1 && 'bg-secondary-foreground/12',
+                  index > 2 && 'border-secondary-foreground/25 bg-secondary-foreground/6',
                 )}
               >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-300">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
                   {signal.label}
                 </p>
-                <p className="mt-2 text-lg font-semibold tracking-tight text-white">
+                <p className="mt-2 text-lg font-semibold tracking-tight text-secondary-foreground">
                   {signal.value}
                 </p>
               </div>
@@ -81,27 +79,27 @@ export function PrototypeSignals({
           </div>
         </div>
 
-        <div className="bg-slate-950/90 px-6 py-7 md:px-8 md:py-8">
+        <div className="bg-[linear-gradient(90deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,var(--surface-muted),var(--surface))] bg-[length:28px_28px,28px_28px,auto] px-6 py-7 text-foreground md:px-8 md:py-8">
           <ProofMediaFrame
             imageSrc={imageSrc}
             imageAlt={imageAlt}
-            outerClassName="overflow-hidden rounded-[1.75rem] border border-white/10 bg-slate-900 shadow-[0_24px_60px_rgba(0,0,0,0.34)]"
-            chromeClassName="border-b border-white/10 px-4 py-3"
+            outerClassName="overflow-hidden rounded-lg border border-border/70 bg-surface shadow-[6px_6px_0_color-mix(in_srgb,var(--primary)_35%,transparent)]"
+            chromeClassName="border-b border-border/70 px-4 py-3"
           />
 
           <div className="mt-6 space-y-4">
             {phases.map((phase) => (
               <div
                 key={`${phase.label}-${phase.title}`}
-                className="rounded-[1.35rem] border border-white/10 bg-white/6 p-5"
+                className="rounded-lg border border-border/70 bg-surface p-5 shadow-[3px_3px_0_color-mix(in_srgb,var(--foreground)_12%,transparent)]"
               >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-cyan-200/90">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                   {phase.label}
                 </p>
-                <h4 className="mt-2 text-base font-semibold tracking-tight text-white">
+                <h4 className="mt-2 text-base font-semibold tracking-tight text-foreground">
                   {phase.title}
                 </h4>
-                <p className="mt-2 text-sm leading-relaxed text-slate-300">
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {phase.detail}
                 </p>
               </div>
