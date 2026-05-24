@@ -73,6 +73,7 @@ export function DeliveryBlueprint({
         <ProofMediaFrame
           imageSrc={imageSrc}
           imageAlt={imageAlt}
+          imagePriority
           outerClassName="overflow-hidden rounded-lg border border-border/70 bg-surface shadow-[6px_6px_0_color-mix(in_srgb,var(--primary)_35%,transparent)]"
           chromeClassName="border-b border-border/70 px-4 py-3"
         />
