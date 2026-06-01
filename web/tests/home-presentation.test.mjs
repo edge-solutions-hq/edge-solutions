@@ -23,7 +23,8 @@ describe('homepage presentation model', () => {
     assert.equal(model.processCards.length, 3);
 
     assert.equal(model.publicProject.href, 'https://rusty-art.edge-solutions.be/');
-    assert.equal(model.publicProject.title, 'home.showcase.items.openclaw.title');
+    assert.equal(model.publicProject.title, 'home.showcase.publicProject.title');
+    assert.equal(model.publicProject.description, 'home.showcase.publicProject.description');
     assert.deepEqual(
       model.processCards.map((card) => card.title),
       [
@@ -41,7 +42,8 @@ describe('homepage presentation model', () => {
     assert.equal(model.publicProject.imageSrc, '/images/work/rusty-art-showcase.jpg');
     assert.equal(model.publicProject.assetAuthority.assetId, 'rusty-art-showcase');
     assert.equal(model.publicProject.assetAuthority.authority, 'authoritative');
-    assert.equal(model.publicProject.title, 'home.showcase.items.openclaw.title');
+    assert.equal(model.publicProject.title, 'home.showcase.publicProject.title');
+    assert.equal(model.publicProject.imageAlt, 'home.showcase.publicProject.title');
     assert.equal(model.publicProject.ctaLabel, 'home.showcase.publicProject.cta');
   });
 

@@ -1,29 +1,23 @@
 import {z} from 'zod';
+import {
+  contactOfferOptions,
+  contactOfferValues,
+  defaultContactOfferValue,
+  isContactOfferValue,
+  resolveContactServiceSearchParam,
+  resolveContactServiceTarget,
+  type ContactOfferValue,
+} from './options';
 
-export const contactOfferValues = ['ai', 'realtime', 'unsure'] as const;
-export type ContactOfferValue = (typeof contactOfferValues)[number];
-
-export const contactOfferOptions = [
-  {
-    value: 'ai',
-    messageKey: 'contact.form.service_ai',
-    deliveryLabel: 'IA & automatisation',
-  },
-  {
-    value: 'realtime',
-    messageKey: 'contact.form.service_realtime',
-    deliveryLabel: '3D / XR temps réel',
-  },
-  {
-    value: 'unsure',
-    messageKey: 'contact.form.service_unsure',
-    deliveryLabel: 'Non précisé',
-  },
-] as const satisfies readonly {
-  value: ContactOfferValue;
-  messageKey: string;
-  deliveryLabel: string;
-}[];
+export {
+  contactOfferOptions,
+  contactOfferValues,
+  defaultContactOfferValue,
+  isContactOfferValue,
+  resolveContactServiceSearchParam,
+  resolveContactServiceTarget,
+};
+export type {ContactOfferValue};
 
 export type ContactActionMessageKey =
   | 'contact.form.success'
@@ -115,7 +109,7 @@ export const contactFormModel = {
       labelKey: 'contact.form.service',
       errorKey: 'contact.form.fieldErrors.service',
       control: 'select',
-      defaultValue: 'unsure',
+      defaultValue: defaultContactOfferValue,
     },
     message: {
       name: 'message',
@@ -153,25 +147,6 @@ const schema = z.object({
   message: z.string().trim().min(contactFieldConstraints.message.minLength).max(contactFieldConstraints.message.maxLength),
   company: z.string().optional(),
 });
-
-export function isContactOfferValue(value: string): value is ContactOfferValue {
-  return contactOfferValues.includes(value as ContactOfferValue);
-}
-
-export function resolveContactServiceSearchParam(
-  value: string | string[] | null | undefined
-): ContactOfferValue | undefined {
-  const candidate = Array.isArray(value) ? value[0] : value;
-
-  return typeof candidate === 'string' && isContactOfferValue(candidate)
-    ? candidate
-    : undefined;
-}
-
-export function resolveContactServiceTarget(target: string): ContactOfferValue | undefined {
-  const queryString = target.split('#', 1)[0]?.split('?', 2)[1] ?? '';
-  return resolveContactServiceSearchParam(new URLSearchParams(queryString).get('service'));
-}
 
 export function asFormString(value: FormDataEntryValue | null) {
   return typeof value === 'string' ? value : '';

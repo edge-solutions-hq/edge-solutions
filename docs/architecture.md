@@ -23,7 +23,7 @@ Keep route files and UI surfaces thin.
 | Service FAQ | `web/src/lib/content/service-faq.ts` | Localized FAQ copy by locale and offer track for service pages and FAQ JSON-LD. |
 | Service evidence registry | `web/src/lib/content/service-evidence-registry.ts` | Evidence module expected by each offer track, including visual asset and evidence counts. |
 | Asset authority | `web/src/lib/content/asset-authority.ts` | Approved source asset provenance, usage scopes, and public path authority. |
-| Contact intake | `web/src/lib/contact/intake.ts` | Validation, spam classification, delivery outcome vocabulary, offer options, localized errors, and contact form model. |
+| Contact intake | `web/src/lib/contact/options.ts` and `web/src/lib/contact/intake.ts` | Lightweight offer options and service-target helpers for client code; validation, spam classification, delivery outcome vocabulary, localized errors, and contact form model in intake. |
 | Contact modal | `web/src/components/contact/ContactModalContext.tsx` and `web/src/app/[locale]/contact/ContactModalProvider.tsx` | Modal-first contact CTA behavior, service preselection, focus handling, and page fallback preservation. |
 | Contact attempt tracking | `web/src/lib/contact/contact-attempt-tracker.ts` | Submit-attempt counting and one-outcome-per-attempt completion rules. |
 | Contact delivery | `web/src/lib/contact/delivery.ts` | Contact workflow after intake, email payload shape, success/error state, and delivery adapter seam. |

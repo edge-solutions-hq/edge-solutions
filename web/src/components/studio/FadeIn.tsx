@@ -1,63 +1,35 @@
-'use client';
-
-import * as React from 'react';
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type HTMLAttributes,
+  type ReactElement,
+  type ReactNode,
+} from 'react';
 import {cn} from '@/lib/cn';
 
 /**
  * Lightweight content wrappers.
  *
  * This replaces framer-motion to reduce first-load JS.
- * Content is visible by default so full-page captures, no-JS rendering, and
- * below-the-fold content do not leave blank layout slots.
+ * Content stays visible by default so no-JS rendering, screenshots, and LCP text
+ * do not depend on hydration.
  */
 
-type FadeInProps = React.HTMLAttributes<HTMLDivElement> & {
+type FadeInProps = HTMLAttributes<HTMLDivElement> & {
   /** Optional delay (ms) used by FadeInStagger. */
   delayMs?: number;
-  /** Keep compatibility with existing callers; content now defaults visible. */
+  /** Kept for compatibility with older callers; content is always visible. */
   initiallyVisible?: boolean;
 };
 
-export function FadeIn({className, style, delayMs, initiallyVisible = true, ...props}: FadeInProps) {
-  const ref = React.useRef<HTMLDivElement | null>(null);
-  const [visible, setVisible] = React.useState(initiallyVisible);
-
-  React.useEffect(() => {
-    const el = ref.current;
-    if (!el || visible) return;
-
-    // If IO isn't available, just show.
-    if (typeof IntersectionObserver === 'undefined') {
-      setVisible(true);
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setVisible(true);
-            observer.disconnect();
-            return;
-          }
-        }
-      },
-      // Match the previous framer viewport margin.
-      {root: null, rootMargin: '0px 0px -200px 0px', threshold: 0.01}
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [visible]);
+export function FadeIn({className, style, delayMs, initiallyVisible, ...props}: FadeInProps) {
+  void initiallyVisible;
 
   return (
     <div
-      ref={ref}
       className={cn(
-        'transition-all duration-500 will-change-transform motion-reduce:transition-none',
-        visible
-          ? 'opacity-100 translate-y-0'
-          : 'opacity-0 translate-y-6 motion-reduce:translate-y-0',
+        'opacity-100 transition-opacity duration-500 motion-reduce:transition-none',
         className
       )}
       style={{
@@ -69,27 +41,29 @@ export function FadeIn({className, style, delayMs, initiallyVisible = true, ...p
   );
 }
 
-type FadeInStaggerProps = React.HTMLAttributes<HTMLDivElement> & {
+type FadeInStaggerProps = HTMLAttributes<HTMLDivElement> & {
   faster?: boolean;
-  children: React.ReactNode;
+  children: ReactNode;
 };
+
+function reactComponentName(type: ReactElement['type']) {
+  if (typeof type === 'string') return '';
+  const component = type as {displayName?: string; name?: string};
+  return component.displayName || component.name || '';
+}
 
 export function FadeInStagger({faster = false, className, children, ...props}: FadeInStaggerProps) {
   const step = faster ? 120 : 200;
 
-  const staggered = React.Children.map(children, (child, index) => {
-    if (!React.isValidElement(child)) return child;
+  const staggered = Children.map(children, (child, index) => {
+    if (!isValidElement(child)) return child;
 
     // Only inject delay into our FadeIn wrapper.
-    const isFadeIn =
-      typeof child.type !== 'string' &&
-      // @ts-expect-error - name is not in the type, but is safe to inspect.
-      (child.type?.name === 'FadeIn' || child.type?.displayName === 'FadeIn');
+    const isFadeIn = reactComponentName(child.type) === 'FadeIn';
 
     if (!isFadeIn) return child;
 
-    return React.cloneElement(child, {
-      // @ts-expect-error - delayMs is our prop; cloneElement typing is conservative.
+    return cloneElement(child as ReactElement<FadeInProps>, {
       delayMs: index * step
     });
   });

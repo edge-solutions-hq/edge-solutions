@@ -16,6 +16,7 @@ import {
   extractContactSubmitService,
   resolveContactFeedback,
   resolveContactServiceSearchParam,
+  type ContactFieldErrors,
   type ContactOfferValue,
 } from '@/lib/contact/intake';
 import type {ContactActionState} from './actions';
@@ -32,6 +33,31 @@ function FieldError({children}: {children?: string}) {
   return <div className="mt-1 text-xs text-red-600 dark:text-red-400">{children}</div>;
 }
 
+function isValidatableControl(
+  element: Element | RadioNodeList | null
+): element is HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement {
+  return (
+    element instanceof HTMLInputElement ||
+    element instanceof HTMLSelectElement ||
+    element instanceof HTMLTextAreaElement
+  );
+}
+
+function nativeValidationFieldErrors(form: HTMLFormElement): ContactFieldErrors {
+  const fieldErrors: ContactFieldErrors = {};
+
+  for (const fieldName of contactFormModel.fieldOrder) {
+    const field = contactFormModel.fields[fieldName];
+    const element = form.elements.namedItem(field.name);
+
+    if (field.errorKey && isValidatableControl(element) && !element.validity.valid) {
+      fieldErrors[fieldName] = field.errorKey;
+    }
+  }
+
+  return fieldErrors;
+}
+
 export function ContactForm({
   preselectedService,
 }: {
@@ -40,6 +66,7 @@ export function ContactForm({
   const t = useTranslations();
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
   const attemptTrackerRef = useRef(createContactAttemptTrackerState());
+  const invalidTrackingQueuedRef = useRef(false);
   const serviceSelectRef = useRef<HTMLSelectElement>(null);
   const {fields, offerOptions: contactOfferOptions} = contactFormModel;
   const feedback = resolveContactFeedback(state);
@@ -83,12 +110,45 @@ export function ContactForm({
     });
   }
 
+  function handleInvalidCapture(event: FormEvent<HTMLFormElement>) {
+    if (invalidTrackingQueuedRef.current) return;
+
+    invalidTrackingQueuedRef.current = true;
+    window.setTimeout(() => {
+      invalidTrackingQueuedRef.current = false;
+    }, 0);
+
+    const submitAttempt = captureContactSubmitAttempt(attemptTrackerRef.current);
+    const formData = new FormData(event.currentTarget);
+    const normalizedService = extractContactSubmitService(formData);
+    const fieldErrors = nativeValidationFieldErrors(event.currentTarget);
+
+    trackContactFormSubmit({
+      service: normalizedService,
+      submitAttempt,
+    });
+
+    trackContactFormOutcome({
+      outcome: {
+        kind: 'validation_error',
+        service: normalizedService,
+        fieldErrors,
+      },
+      submitAttempt,
+    });
+  }
+
   function fieldErrorMessage(messageKey?: string) {
     return messageKey ? t(messageKey) : undefined;
   }
 
   return (
-    <form action={formAction} onSubmitCapture={handleSubmitCapture} className="space-y-5">
+    <form
+      action={formAction}
+      onInvalidCapture={handleInvalidCapture}
+      onSubmitCapture={handleSubmitCapture}
+      className="space-y-5"
+    >
       {/* Honeypot */}
       <input
         type={fields.honeypot.type}

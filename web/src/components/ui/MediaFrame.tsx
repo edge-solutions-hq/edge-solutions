@@ -12,6 +12,7 @@ type MediaFrameProps = {
   imagePriority?: boolean;
   width?: number;
   height?: number;
+  sizes?: string;
 };
 
 function BrowserChrome({className}: {className?: string}) {
@@ -34,6 +35,7 @@ export function MediaFrame({
   imagePriority = false,
   width = 1400,
   height = 1000,
+  sizes = '(min-width: 1280px) 34rem, (min-width: 1024px) 45vw, calc(100vw - 4rem)',
 }: MediaFrameProps) {
   const image = (
     <Image
@@ -41,6 +43,7 @@ export function MediaFrame({
       alt={imageAlt}
       width={width}
       height={height}
+      sizes={sizes}
       className={imageClassName}
       priority={imagePriority}
     />

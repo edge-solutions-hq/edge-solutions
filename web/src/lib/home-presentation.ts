@@ -7,7 +7,7 @@ export type HomePublicProject = {
   eyebrow: string;
   title: string;
   description: string;
-  supportText: string;
+  supportText?: string;
   imageSrc: string;
   imageAlt: string;
   assetAuthority: AssetAuthorityRecord;
@@ -40,12 +40,11 @@ export type HomePresentationModel = {
 export function getHomePresentationModel(translate: Translate): HomePresentationModel {
   return {
     publicProject: {
-      eyebrow: translate('home.showcase.publicProject.title'),
-      title: translate('home.showcase.items.openclaw.title'),
-      description: translate('home.showcase.items.openclaw.description'),
-      supportText: translate('home.showcase.publicProject.description'),
+      eyebrow: translate('home.showcase.eyebrow'),
+      title: translate('home.showcase.publicProject.title'),
+      description: translate('home.showcase.publicProject.description'),
       imageSrc: '/images/work/rusty-art-showcase.jpg',
-      imageAlt: translate('home.showcase.items.openclaw.title'),
+      imageAlt: translate('home.showcase.publicProject.title'),
       assetAuthority: getAssetAuthorityRecord('rusty-art-showcase')!,
       href: 'https://rusty-art.edge-solutions.be/',
       ctaLabel: translate('home.showcase.publicProject.cta'),

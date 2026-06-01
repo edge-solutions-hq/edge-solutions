@@ -25,9 +25,16 @@ const archivoNarrow = Archivo_Narrow({
   weight: ['400', '500', '600', '700']
 });
 
-const firaCode = Fira_Code({variable: '--font-fira-code', subsets: ['latin']});
+const firaCode = Fira_Code({
+  variable: '--font-fira-code',
+  subsets: ['latin'],
+  preload: false,
+});
 
 const analyticsConfig = getAnalyticsRuntimeConfig();
+const shouldLoadDirectGoogleAnalytics = Boolean(
+  analyticsConfig.gaMeasurementId && !analyticsConfig.gtmId
+);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
@@ -68,7 +75,7 @@ export default async function LocaleLayout({children, params}: Props) {
         </NextIntlClientProvider>
         <JsonLd data={profile.jsonLd} />
         {analyticsConfig.gtmId ? <GoogleTagManager containerId={analyticsConfig.gtmId} /> : null}
-        {analyticsConfig.gaMeasurementId ? (
+        {shouldLoadDirectGoogleAnalytics ? (
           <Suspense fallback={null}>
             <GoogleAnalytics measurementId={analyticsConfig.gaMeasurementId} />
           </Suspense>

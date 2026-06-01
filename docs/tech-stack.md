@@ -49,6 +49,7 @@ Copy `web/env.example` to a local env file such as `web/.env.local`.
 - `next.config.ts` enables MDX page extensions, `remark-gfm`, Next Intl, security headers, Turbopack root configuration, and one-day caching for SEO/static endpoints such as `robots.txt`, `sitemap.xml`, and `llms.txt`.
 - `web/src/i18n/routing.ts` owns locale list, default locale, and always-prefixed locale routing.
 - `web/src/lib/runtime-config-core.mjs` owns GA4/GTM ID validation for app runtime and scripts.
+- When both GA4 and GTM public IDs are configured, the app loads GTM only and sends conversion events through `dataLayer`; direct GA4 loading is used when GA4 is configured without GTM.
 - `web/src/lib/runtime-config.ts` adds contact delivery defaults.
 - `web/scripts/seo-source-facts.mjs` keeps SEO script facts aligned with app routing and service slugs.
 - `pnpm-workspace.yaml` allows required native dependency build scripts for Next/SWC, image handling, and file watching.

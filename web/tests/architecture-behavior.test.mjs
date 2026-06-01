@@ -1,5 +1,8 @@
 import {describe, it} from 'node:test';
 import assert from 'node:assert/strict';
+import {register} from 'node:module';
+
+register(new URL('./ts-extension-resolver.mjs', import.meta.url));
 
 const contactIntake = await import('../src/lib/contact/intake.ts');
 const contactAttemptTracker = await import('../src/lib/contact/contact-attempt-tracker.ts');

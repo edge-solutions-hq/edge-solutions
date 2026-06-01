@@ -257,7 +257,9 @@ export default async function HomePage({params}: Props) {
             imagePriority
           >
             <p>{home.publicProject.description}</p>
-            <p>{home.publicProject.supportText}</p>
+            {home.publicProject.supportText ? (
+              <p>{home.publicProject.supportText}</p>
+            ) : null}
             <div className="flex flex-wrap gap-2">
               {serviceCards.map((service) => (
                 <span

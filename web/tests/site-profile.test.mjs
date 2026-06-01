@@ -41,6 +41,16 @@ describe('global site profile ownership', () => {
     assert.match(seoSource, /serviceType: OFFER_TRACKS\.map\(\(track\) => track\.schemaServiceType\)/);
   });
 
+  it('keeps localized metadata wired to an approved social preview image', () => {
+    const seoSource = read('src/lib/seo.ts');
+
+    assert.match(seoSource, /DEFAULT_SOCIAL_IMAGE/);
+    assert.match(seoSource, /\/images\/work\/rusty-art-showcase\.jpg/);
+    assert.match(seoSource, /images: \[socialImage\]/);
+    assert.match(seoSource, /summary_large_image/);
+    assert.match(seoSource, /images: \[socialImage\.url\]/);
+  });
+
   it('emits a standalone Person schema for Gil without unsupported authority claims', () => {
     const seoSource = read('src/lib/seo.ts');
 

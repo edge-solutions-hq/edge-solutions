@@ -1,6 +1,8 @@
 'use client';
 
 import {
+  lazy,
+  Suspense,
   useCallback,
   useEffect,
   useId,
@@ -16,11 +18,15 @@ import {
 } from '@/components/contact/ContactModalContext';
 import {cn} from '@/lib/cn';
 import {
-  contactFormModel,
+  defaultContactOfferValue,
   resolveContactServiceTarget,
   type ContactOfferValue,
-} from '@/lib/contact/intake';
-import {ContactForm} from './ContactForm';
+} from '@/lib/contact/options';
+
+const LazyContactForm = lazy(async () => {
+  const contactFormModule = await import('./ContactForm');
+  return {default: contactFormModule.ContactForm};
+});
 
 type ContactModalState = {
   formKey: number;
@@ -58,7 +64,7 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
     const service =
       request?.service ??
       resolveContactServiceTarget(request?.href ?? '') ??
-      contactFormModel.fields.service.defaultValue;
+      defaultContactOfferValue;
 
     setModal((current) => ({
       formKey: current.formKey + 1,
@@ -172,10 +178,19 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
               </div>
 
               <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6 sm:py-6">
-                <ContactForm
-                  key={modal.formKey}
-                  preselectedService={modal.service}
-                />
+                <Suspense
+                  fallback={
+                    <div
+                      className="h-64 rounded-md border border-border/40 bg-surface-muted/60"
+                      aria-hidden="true"
+                    />
+                  }
+                >
+                  <LazyContactForm
+                    key={modal.formKey}
+                    preselectedService={modal.service}
+                  />
+                </Suspense>
               </div>
             </div>
           </div>

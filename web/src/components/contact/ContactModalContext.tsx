@@ -1,7 +1,7 @@
 'use client';
 
 import * as React from 'react';
-import type {ContactOfferValue} from '@/lib/contact/intake';
+import type {ContactOfferValue} from '@/lib/contact/options';
 
 export type ContactModalRequest = {
   href?: string;

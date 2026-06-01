@@ -56,33 +56,33 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
   {
     id: 'home',
     pathSuffix: '',
-    lastModified: new Date('2026-05-13T18:05:00.000Z'),
+    lastModified: new Date('2026-06-01T00:00:00.000Z'),
     sitemapPriority: 0.7,
     title: {
       fr: 'Automatisation IA et applications 3D / XR en Wallonie - Edge Solutions',
-      en: 'AI automation and 3D / XR applications in Belgium - Edge Solutions',
-      nl: 'AI-automatisatie en 3D / XR-applicaties in België - Edge Solutions',
+      en: 'AI automation and 3D / XR applications in Wallonia and Belgium - Edge Solutions',
+      nl: 'AI-automatisatie en 3D / XR-applicaties in Wallonië en België - Edge Solutions',
     },
     description: {
       fr: 'Gil Guminski aide les équipes belges à auditer les tâches répétitives, automatiser avec LLM et développer des applications 3D / XR.',
-      en: 'Gil Guminski helps Belgian teams audit repeated tasks, automate with LLMs and build 3D / XR applications.',
-      nl: 'Gil Guminski helpt Belgische teams om repetitieve taken te auditen, met LLMs te automatiseren en 3D / XR-applicaties te bouwen.',
+      en: 'Gil Guminski, near Liège in Wallonia, helps Belgian teams audit repeated tasks, automate with LLMs and build 3D / XR applications.',
+      nl: 'Gil Guminski, bij Luik in Wallonië, helpt Belgische teams repetitieve taken te auditen, met LLMs te automatiseren en 3D / XR-applicaties te bouwen.',
     },
   },
   {
     id: 'services',
     pathSuffix: '/services',
-    lastModified: new Date('2026-05-13T18:05:00.000Z'),
+    lastModified: new Date('2026-06-01T00:00:00.000Z'),
     sitemapPriority: 0.7,
     title: {
       fr: 'Services IA et 3D / XR en Wallonie',
-      en: 'AI and 3D / XR services in Belgium',
-      nl: 'AI- en 3D / XR-diensten in België',
+      en: 'AI and 3D / XR services in Wallonia and Belgium',
+      nl: 'AI- en 3D / XR-diensten in Wallonië en België',
     },
     description: {
       fr: 'Pour équipes wallonnes et belges : audit de tâches répétitives, automatisations IA, assistants internes et applications 3D / XR.',
-      en: 'Services for Belgian teams: repeated-task audits, AI automation, internal assistants and 3D / XR applications.',
-      nl: 'Diensten voor Belgische teams: audit van repetitieve taken, AI-automatisatie, interne assistenten en 3D / XR-applicaties.',
+      en: 'Services for Walloon and Belgian teams: repeated-task audits, AI automation, internal assistants and 3D / XR applications.',
+      nl: 'Diensten voor Waalse en Belgische teams: audit van repetitieve taken, AI-automatisatie, interne assistenten en 3D / XR-applicaties.',
     },
   },
   {
@@ -92,8 +92,8 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
     sitemapPriority: 0.6,
     title: {
       fr: 'Contact - projet IA ou 3D / XR en Wallonie',
-      en: 'Contact - AI or 3D / XR project in Belgium',
-      nl: 'Contact - AI- of 3D / XR-project in België',
+      en: 'Contact - AI or 3D / XR project in Wallonia or Belgium',
+      nl: 'Contact - AI- of 3D / XR-project in Wallonië of België',
     },
     description: {
       fr: 'Décrivez votre projet (IA, automatisation, 3D / XR) et recevez un retour rapide avec périmètre, délai et prochaines étapes.',

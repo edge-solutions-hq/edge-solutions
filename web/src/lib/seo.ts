@@ -25,6 +25,12 @@ export function absoluteUrl(path: string) {
   return `${base}${path.startsWith('/') ? path : `/${path}`}`;
 }
 
+const DEFAULT_SOCIAL_IMAGE = {
+  path: '/images/work/rusty-art-showcase.jpg',
+  width: 1280,
+  height: 700,
+};
+
 export function buildLocaleAlternates(locale: string, pathSuffix = ''): NonNullable<Metadata['alternates']> {
   const suffix = normalizeSuffix(pathSuffix);
   const languages: Record<string, string> = {};
@@ -73,6 +79,12 @@ export function buildLocalizedPageMetadata({
 }: LocalizedPageMetadataInput): Metadata {
   const path = localizedPath(locale, pathSuffix);
   const url = absoluteUrl(path);
+  const socialImage = {
+    url: absoluteUrl(DEFAULT_SOCIAL_IMAGE.path),
+    width: DEFAULT_SOCIAL_IMAGE.width,
+    height: DEFAULT_SOCIAL_IMAGE.height,
+    alt: title,
+  };
 
   return {
     title,
@@ -85,11 +97,13 @@ export function buildLocalizedPageMetadata({
       siteName: site.companyName,
       locale,
       type,
+      images: [socialImage],
     },
     twitter: {
-      card: 'summary',
+      card: 'summary_large_image',
       title,
       description,
+      images: [socialImage.url],
     },
   };
 }
@@ -251,7 +265,7 @@ export const SERVICE_SCHEMA_DETAILS: Record<OfferTrackSlug, LocalizedServiceSche
   'realtime-games': {
     fr: {
       audienceType:
-        'Studios, producteurs et entreprises belges qui doivent construire une application 3D temps réel ou XR interactive, notamment en VR ou réalité augmentée',
+        'PME, agences, équipes techniques, studios et entreprises belges qui doivent construire une application 3D temps réel ou XR interactive pour configurateurs, simulations, formation, usages industriels, VR ou réalité augmentée',
       serviceOutput: [
         'Build jouable ou montrable sur la plateforme cible',
         'Validation performance, confort et risques techniques',
@@ -265,7 +279,7 @@ export const SERVICE_SCHEMA_DETAILS: Record<OfferTrackSlug, LocalizedServiceSche
     },
     en: {
       audienceType:
-        'Belgian studios, producers and teams that need to build an interactive real-time 3D or XR application, including VR or augmented reality',
+        'Belgian SMEs, agencies, technical teams, studios and producers that need to build an interactive real-time 3D or XR application for configurators, simulations, training, industrial uses, VR or augmented reality',
       serviceOutput: [
         'Playable or showable build on the target platform',
         'Performance, comfort and technical-risk validation',
@@ -279,7 +293,7 @@ export const SERVICE_SCHEMA_DETAILS: Record<OfferTrackSlug, LocalizedServiceSche
     },
     nl: {
       audienceType:
-        'Belgische studios, producers en teams die een interactieve realtime 3D- of XR-applicatie moeten bouwen, inclusief VR of augmented reality',
+        'Belgische kmo’s, agencies, technische teams, studios en producers die een interactieve realtime 3D- of XR-applicatie moeten bouwen voor configuratoren, simulaties, training, industriële toepassingen, VR of augmented reality',
       serviceOutput: [
         'Speelbare of toonbare build op het doelplatform',
         'Validatie van performance, comfort en technisch risico',
