@@ -2,6 +2,7 @@ import type {ReactNode} from 'react';
 import {cn} from '@/lib/cn';
 import {Container} from './Container';
 import {FadeIn} from './FadeIn';
+import {unwrapMdxParagraphs} from '@/lib/unwrap-mdx-paragraphs';
 
 export function SectionIntro({
   title,
@@ -20,6 +21,8 @@ export function SectionIntro({
   className?: string;
   titleId?: string;
 }) {
+  const content = unwrapMdxParagraphs(children);
+
   return (
     <Container className={cn('not-prose', className)}>
       <FadeIn className="max-w-2xl">
@@ -39,20 +42,20 @@ export function SectionIntro({
           className={cn(
             'mt-3 text-balance font-display leading-[0.98] font-bold tracking-normal',
             smaller ? 'text-xl sm:text-2xl' : 'text-3xl sm:text-4xl',
-            invert ? 'text-white' : 'text-foreground'
+            invert ? 'text-white' : 'text-technical-blue'
           )}
         >
           {title}
         </h2>
 
-        {children ? (
+        {content ? (
           <div
             className={cn(
               'mt-4 space-y-3 text-lg leading-relaxed',
               invert ? 'text-white/70' : 'text-muted-foreground'
             )}
           >
-            {children}
+            {content}
           </div>
         ) : null}
       </FadeIn>

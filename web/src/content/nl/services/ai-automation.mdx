@@ -1,139 +1,148 @@
-import workflowBoard from '../../../../public/images/proof/services-ai-workflow-board.svg';
+import workflowBoard from '../../../../public/images/work/services-ai-workflow-board.svg';
 
 export const metadata = {
-  title: "AI-automatisatie in België — assistenten, workflows, guardrails",
+  title: "AI-automatisatie in België - assistenten en bedrijfsprocessen",
   description:
-    "AI-workflows afbakenen en prototypen voor Belgische teams: interne assistenten, documentworkflows, nuttige automatisatie en menselijke guardrails."
+    "AI-automatisatie auditen en bouwen voor Belgische teams: repetitieve taken, interne assistenten, documentverwerking en menselijke review."
 };
 
 <PageIntro eyebrow="Dienst" title="AI-systemen & automatisatie">
   <p>
-    Ik help teams om vage AI-ideeën om te zetten in bruikbare systemen: interne
-    assistenten, documentworkflows, kwalificatie, businessautomatisatie en
-    guardrails voor gevoelige stappen.
+    Ik help repetitieve taken te vinden die aandacht opslorpen: aanvragen,
+    documenten, research, samenvattingen, kwalificatie of controles. We starten
+    vanuit een duidelijke bron van waarheid, automatiseren eerst wat eenvoudig
+    is, en voegen pas AI toe wanneer taal of context echt telt.
   </p>
   <p>
-    Vanuit België werk ik van scoping tot prototype tot integratie, met één
-    eenvoudige regel: duidelijke bronnen van waarheid, expliciete menselijke
-    review en concrete proof in plaats van vage AI-beloftes.
+    Het doel is eenvoudig: het dagelijkse werk lichter maken zonder controle te
+    verliezen over gevoelige beslissingen.
   </p>
 </PageIntro>
 
 <WorkflowSnapshot
-  className="mt-16"
-  eyebrow="Operationele proof"
-  title="Het workflow board dat een AI-lane leesbaar maakt voor ze groter wordt"
+  className="mt-14"
+  eyebrow="Methode"
+  title="Eerst vinden wat zich herhaalt, dan automatiseren"
   imageSrc={workflowBoard}
-  imageAlt="Abstract schema van een AI-workflow met verbonden stappen en een menselijke review-lane."
-  reviewTitle="Menselijke review-lane"
+  imageAlt="Abstract schema van een AI-proces met verbonden stappen en menselijke review."
+  reviewTitle="Beslismoment"
   reviewPoints={[
-    'de risicovolle output is zichtbaar voor iemand te veel van het model vraagt',
-    'iemand draagt expliciet het go / herkaderen / stop-verdict',
-    'de volgende integratiestap wordt verdiend door bewijs, niet door demo-enthousiasme',
+    'gevoelige output blijft nagelezen of beperkt',
+    'de volgende stap hangt af van observeerbare resultaten',
+    'we behouden, herkaderen of stoppen voor het project zwaarder wordt',
   ]}
   steps={[
     {
       label: 'Stap 01',
-      title: 'Eén afgebakende use case kiezen',
+      title: 'Het echte werk bekijken',
       detail:
-        'Kies de gebruiker, bron van waarheid en exacte beslissing die de workflow moet ondersteunen voor je meer tooling toevoegt.',
+        'Terugkerende taken, gebruikte bronnen en beslissingen vinden die het team vaak moet herhalen.',
     },
     {
       label: 'Stap 02',
-      title: 'Testen op echte voorbeelden',
+      title: 'Een testbare flow bouwen',
       detail:
-        'Laat de lane draaien op representatieve documenten, aanvragen of edge cases met sporen die zichtbaar genoeg zijn om te reviewen.',
+        'Automatisatie testen op representatieve voorbeelden, met AI alleen waar ze nuttig begrip toevoegt.',
     },
     {
       label: 'Stap 03',
-      title: 'Beslissen met bewijs',
+      title: 'Beslissen over de volgende stap',
       detail:
-        'Behoud wat al werkt, herkadreer wat fragiel blijft en stop vroeg als de workflow nog meer onzekerheid dan waarde oplevert.',
+        'Behoud wat werkt, vereenvoudig wat fragiel blijft of stop vroeg als de waarde niet duidelijk is.',
     },
   ]}
 >
   <p>
-    Als de use case, de risico’s of de volgende stap nog onduidelijk zijn, breng
-    ik eerst structuur aan. Het punt is niet om abstracte “AI-capaciteit” te
-    tonen, maar om de operationele lane leesbaar genoeg te maken zodat een team
-    de volgende beslissing kan vertrouwen.
+    AI is niet het startpunt. Het startpunt is repetitief werk dat mensen
+    weghoudt van oordeel, klantrelaties of het echte vakwerk.
   </p>
 </WorkflowSnapshot>
 
 <SectionIntro
-  className="mt-16"
-  eyebrow="Wanneer ik instap"
-  title="De situaties waarin AI eerst structuur nodig heeft"
+  className="mt-14"
+  eyebrow="Nuttige gevallen"
+  title="Wanneer automatiseer je een taak met AI?"
 >
   <p>
-    Deze dienst is vooral nuttig wanneer AI sneller vooruitgaat dan de kadering,
-    het vertrouwen of het beslissingsvermogen errond.
+    Een taak is geschikt voor AI-automatisatie wanneer ze vaak terugkomt,
+    aandacht vraagt en genoeg taal of context nodig heeft om verder te gaan dan
+    eenvoudige regels.
   </p>
 </SectionIntro>
 
 <GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Veelbelovend maar nog vaag">
-    Je ziet potentieel, maar niemand heeft scherp beslist welke use case eerst
-    telt of hoe succes beoordeeld moet worden.
+  <GridListItem title="Repetitief werk">
+    Aanvragen, documenten, research of samenvattingen komen vaak terug met
+    dezelfde logica.
   </GridListItem>
-  <GridListItem title="Prototype dat moeilijk te vertrouwen is">
-    Een eerste versie bestaat al, maar bronnen, limieten en reviewstappen zijn
-    nog te impliciet om veilig te voelen.
+  <GridListItem title="Interpretatie nodig">
+    Regels alleen volstaan niet: het werk vraagt lezen, classificeren,
+    samenvatten of prioriteren met context.
   </GridListItem>
-  <GridListItem title="Nood aan een echt verdict">
-    Je moet snel kunnen beslissen go, herkaderen of stop in plaats van een demo
-    levend te houden zonder operationele toekomst.
+  <GridListItem title="Menselijke review">
+    Gevoelige acties blijven nagelezen, gevalideerd of beperkt voor bredere
+    integratie.
   </GridListItem>
 </GridList>
 
 <SectionIntro
-  className="mt-16"
+  className="mt-14"
   eyebrow="Eerste cyclus"
-  title="Wat je snel krijgt, en waarom het geloofwaardig voelt"
+  title="Wat levert een eerste AI-automatisatiecyclus op?"
 >
   <p>
-    Het doel is niet om een stapel deliverables te produceren. Het doel is een
-    eerste cyclus op te leveren die bruikbaar, leesbaar en beslisbaar is, met
-    zichtbare proof van methode.
+    Een eerste cyclus levert een korte versie op die je op eigen voorbeelden
+    kunt testen. Daarna moet de beslissing duidelijk zijn: doorgaan,
+    herkaderen of stoppen zonder te zwaar te bouwen.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-2">
-  <GridListItem title="Korte scopingfase">
-    We kiezen één prioritaire use case, de juiste bronnen, de risico’s en het
-    exacte punt waar een mens moet overnemen.
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Korte scope">
+    Eén prioritaire taak, de nuttige bronnen, de risico’s en het punt waar een
+    mens overneemt.
   </GridListItem>
-  <GridListItem title="Prototype op echte cases">
-    Ik bouw een flow die op je echte voorbeelden testbaar is: assistent,
-    documenttriage, kwalificatie of interne workflow met zichtbare sporen.
+  <GridListItem title="Versie op echte cases">
+    Een testbare flow op je voorbeelden: assistent, documenttriage,
+    kwalificatie, samenvatting of intern proces.
   </GridListItem>
-  <GridListItem title="Review & guardrails">
-    Verificatie, critic mode, escalatie en actielimieten voor er iets gevoeligs
-    automatisch gebeurt.
-  </GridListItem>
-  <GridListItem title="Zichtbare publieke proof bestaat al">
-    Mijn OpenClaw-setup, aangevuld met Rusty Art, toont vandaag al een concrete
-    werkwijze zonder glanzende publieke case studies te verzinnen.
+  <GridListItem title="Zichtbare limieten">
+    Sporen, review, critic mode en actielimieten voor gevoelige automatisatie.
   </GridListItem>
 </GridList>
 
-<Stats className="mt-10">
-  <StatsItem label="Scope" value="1 prioritaire use case" />
-  <StatsItem label="Validatie" value="Echte voorbeelden" />
-  <StatsItem label="Controle" value="Expliciete review" />
-  <StatsItem label="Beslissing" value="Go / herkaderen / stop" />
-</Stats>
+<SectionIntro
+  className="mt-14"
+  eyebrow="Controle"
+  title="Hoe hou je menselijke review in een LLM-proces?"
+>
+  <p>
+    Gevoelige acties blijven zichtbaar, beperkt en gevalideerd door een
+    persoon. De automatisatie bereidt het werk voor, maar mag het oordeel niet
+    vervangen wanneer het risico echt is.
+  </p>
+</SectionIntro>
 
-<Callout>
-  Wat ik hier eigenlijk verkoop, is niet “meer AI”. Het is een duidelijkere,
-  betrouwbaardere en meer verantwoordbare manier om AI in een echte werking te gebruiken.
-</Callout>
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Duidelijke rollen">
+    We scheiden wat het systeem kan voorbereiden, wat het kan voorstellen en
+    wat een persoon moet valideren.
+  </GridListItem>
+  <GridListItem title="Bruikbare sporen">
+    Belangrijke bronnen, beslissingen en outputs blijven beschikbaar zodat het
+    resultaat kan worden gecorrigeerd of uitgelegd.
+  </GridListItem>
+  <GridListItem title="Actielimieten">
+    Verzenden, wijzigen of beslissen rond gevoelige punten houdt een
+    validatiestap voor bredere integratie.
+  </GridListItem>
+</GridList>
 
-<SectionIntro className="mt-16" eyebrow="FAQ" title="Veelgestelde vragen" smaller />
+<SectionIntro className="mt-14" eyebrow="FAQ" title="Veelgestelde vragen" smaller />
 
 <ServiceFaq locale="nl" slug="ai-automation" />
 
-<CTA title="Laten we je AI-workflow bespreken" href="/contact" buttonLabel="Contacteer me">
-  Stuur de context, wat er al bestaat en wat nog onduidelijk is. Ik kom terug
-  met een concrete eerste kadering en de beste volgende stap.
+<CTA title="Laten we je AI-automatisatie bespreken" href="/contact?service=ai" buttonLabel="Contacteer me">
+  Stuur de context en één voorbeeld van repetitief werk. Ik antwoord met een
+  eerste heldere richting.
 </CTA>

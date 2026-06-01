@@ -35,7 +35,7 @@ describe('header navigation model', () => {
     assert.equal(headerNavigation.isHeaderNavigationItemActive('/', home), true);
     assert.equal(headerNavigation.isHeaderNavigationItemActive('/fr', home), false);
     assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/ai-automation', services), true);
-    assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/ai-automation/proof', services), true);
+    assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/ai-automation/details', services), true);
     assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/ai-automation-extra', services), false);
   });
 
@@ -45,12 +45,12 @@ describe('header navigation model', () => {
     ]);
 
     const desktopItems = headerNavigation.getHeaderNavigationRenderItems(
-      '/services/ai-automation/proof',
+      '/services/ai-automation/details',
       items,
       'header_nav'
     );
     const mobileItems = headerNavigation.getHeaderNavigationRenderItems(
-      '/services/ai-automation/proof',
+      '/services/ai-automation/details',
       items,
       'mobile_menu_nav'
     );

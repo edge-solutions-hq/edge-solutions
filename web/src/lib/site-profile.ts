@@ -1,19 +1,21 @@
 import type {Metadata} from 'next';
 import {resolveLocale, type Locale} from '../i18n/routing';
 import {site} from './site';
-import {buildLocalizedPageMetadata, organizationSchema} from './seo';
+import {buildLocalizedPageMetadata, organizationSchema, personSchema} from './seo';
 
 type LocalizedCopy = Record<Locale, string>;
 
 export type RootLayoutProfile = {
+  jsonLd: unknown[];
   metadata: Metadata;
   organizationSchema: typeof organizationSchema;
+  personSchema: typeof personSchema;
 };
 
 const rootDescription: LocalizedCopy = {
-  fr: 'Systèmes IA, automatisation et technologies temps réel en Belgique. Workflows utiles, garde-fous humains et expériences 3D/VR.',
-  en: 'AI systems, automation and real-time technology in Belgium. Useful workflows, human guardrails and 3D/VR experiences.',
-  nl: 'AI-systemen, automatisatie en realtime technologie in België. Nuttige workflows, menselijke guardrails en 3D/VR-ervaringen.',
+  fr: 'Automatisations IA et technologies temps réel en Belgique. Audit de tâches répétitives, assistants internes et applications 3D / XR.',
+  en: 'AI automation and real-time technology in Belgium. Repeated-task audits, internal assistants and 3D / XR applications.',
+  nl: 'AI-automatisatie en realtime technologie in België. Audit van repetitieve taken, interne assistenten en 3D / XR-applicaties.',
 };
 
 export function getRootLayoutProfile(locale: string): RootLayoutProfile {
@@ -33,6 +35,8 @@ export function getRootLayoutProfile(locale: string): RootLayoutProfile {
         template: `%s · ${site.companyName}`,
       },
     },
+    jsonLd: [organizationSchema, personSchema],
     organizationSchema,
+    personSchema,
   };
 }

@@ -94,6 +94,32 @@ export function buildLocalizedPageMetadata({
   };
 }
 
+export const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  '@id': `${site.url}#gil-guminski`,
+  name: site.personalBrand,
+  url: site.url,
+  email: site.contactEmail,
+  jobTitle: 'Freelance AI automation and real-time 3D / XR developer',
+  worksFor: {
+    '@id': `${site.url}#organization`,
+  },
+  sameAs: Object.values(site.social),
+  knowsAbout: [
+    'AI automation',
+    'LLM-assisted workflows',
+    'Business process automation',
+    'Real-time 3D applications',
+    'XR applications',
+    'Virtual reality',
+    'Augmented reality',
+    'Unity',
+    'Unreal Engine',
+    'Technical production',
+  ],
+};
+
 export const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'ProfessionalService',
@@ -104,8 +130,7 @@ export const organizationSchema = {
   email: site.contactEmail,
   vatID: site.vatNumber,
   founder: {
-    '@type': 'Person',
-    name: site.personalBrand,
+    '@id': `${site.url}#gil-guminski`,
   },
   sameAs: Object.values(site.social),
   areaServed: [
@@ -136,7 +161,13 @@ export function websiteSchema(locale: string) {
   };
 }
 
-export function webPageSchema(locale: string, pathSuffix: string, title: string, description: string) {
+export function webPageSchema(
+  locale: string,
+  pathSuffix: string,
+  title: string,
+  description: string,
+  options: {dateModified?: Date} = {}
+) {
   const url = absoluteUrl(localizedPath(locale, pathSuffix));
 
   return {
@@ -146,6 +177,7 @@ export function webPageSchema(locale: string, pathSuffix: string, title: string,
     url,
     name: title,
     description,
+    ...(options.dateModified ? {dateModified: options.dateModified.toISOString()} : {}),
     inLanguage: locale,
     isPartOf: {
       '@id': `${site.url}/${locale}#website`,
@@ -175,88 +207,88 @@ export const SERVICE_SCHEMA_DETAILS: Record<OfferTrackSlug, LocalizedServiceSche
   'ai-automation': {
     fr: {
       audienceType:
-        'Équipes belges qui doivent cadrer, prototyper et intégrer des systèmes IA utiles avec revue humaine',
+        'Équipes belges qui veulent auditer des tâches répétitives et intégrer des automatisations IA utiles',
       serviceOutput: [
-        'Cadrage d\'un cas d\'usage IA prioritaire',
-        'Prototype testable sur cas réels',
-        'Revue humaine et garde-fous d\'intégration',
+        'Audit d\'une tâche répétitive prioritaire',
+        'Première version testable sur cas réels',
+        'Revue humaine et limites d\'action',
       ],
       offer: {
-        name: 'Cycle de cadrage, prototype et garde-fous IA',
+        name: 'Cycle d\'audit, automatisation et revue humaine',
         description:
-          'Accompagnement du cadrage au prototype pour rendre un usage IA lisible, testable et décidable avant une intégration plus sensible.',
+          'Accompagnement de l\'audit à une première version testable pour automatiser une tâche répétitive avec assez d\'intelligence et de contrôle.',
       },
     },
     en: {
       audienceType:
-        'Belgian teams that need to scope, prototype and integrate useful AI systems with human review',
+        'Belgian teams that want to audit repeated tasks and integrate useful AI automation',
       serviceOutput: [
-        'Priority AI use-case framing',
-        'Prototype tested on real examples',
-        'Human review and integration guardrails',
+        'Priority repeated-task audit',
+        'First testable version on real examples',
+        'Human review and action limits',
       ],
       offer: {
-        name: 'AI scoping, prototype and guardrails cycle',
+        name: 'AI audit, automation and human review cycle',
         description:
-          'Support from framing to prototype so an AI workflow becomes readable, testable and decidable before deeper integration.',
+          'Support from audit to a first testable version to automate a repeated task with enough intelligence and control.',
       },
     },
     nl: {
       audienceType:
-        'Belgische teams die bruikbare AI-systemen willen afbakenen, prototypen en integreren met menselijke review',
+        'Belgische teams die repetitieve taken willen auditen en bruikbare AI-automatisatie willen integreren',
       serviceOutput: [
-        'Afbakening van een prioritaire AI-use case',
-        'Prototype getest op echte voorbeelden',
-        'Menselijke review en integratieguardrails',
+        'Audit van een prioritaire repetitieve taak',
+        'Eerste testbare versie op echte voorbeelden',
+        'Menselijke review en actielimieten',
       ],
       offer: {
-        name: 'AI-scoping, prototype en guardrails-cyclus',
+        name: 'AI-audit, automatisatie en menselijke review',
         description:
-          'Begeleiding van kadering tot prototype zodat een AI-workflow leesbaar, testbaar en beslisbaar wordt voor diepere integratie.',
+          'Begeleiding van audit tot een eerste testbare versie om een repetitieve taak met genoeg intelligentie en controle te automatiseren.',
       },
     },
   },
   'realtime-games': {
     fr: {
       audienceType:
-        'Studios, producteurs et entreprises belges qui doivent valider une experience VR ou 3D interactive',
+        'Studios, producteurs et entreprises belges qui doivent construire une application 3D temps réel ou XR interactive, notamment en VR ou réalité augmentée',
       serviceOutput: [
-        'Prototype jouable ou montrable sur la plateforme cible',
+        'Build jouable ou montrable sur la plateforme cible',
         'Validation performance, confort et risques techniques',
         'Verdict de production garder, couper ou polir',
       ],
       offer: {
-        name: 'Prototype temps reel VR ou 3D interactive',
+        name: 'Application 3D / XR temps reel',
         description:
-          'Creation d\'une base jouable pour valider l\'experience, le risque technique et les prochaines decisions de production.',
+          'Creation d\'une base interactive pour valider l\'experience, le risque technique et les prochaines decisions de production.',
       },
     },
     en: {
       audienceType:
-        'Belgian studios, producers and teams that need to validate a VR or interactive 3D experience',
+        'Belgian studios, producers and teams that need to build an interactive real-time 3D or XR application, including VR or augmented reality',
       serviceOutput: [
-        'Playable or showable prototype on the target platform',
+        'Playable or showable build on the target platform',
         'Performance, comfort and technical-risk validation',
         'Production verdict on what to keep, cut or polish',
       ],
       offer: {
-        name: 'Realtime VR or interactive 3D prototype',
+        name: 'Real-time 3D / XR application',
         description:
-          'Creation of a playable base to validate the experience, technical risk and next production decisions.',
+          'Creation of an interactive base to validate the experience, technical risk and next production decisions.',
       },
     },
     nl: {
       audienceType:
-        'Belgische studios, producers en teams die een VR- of interactieve 3D-ervaring moeten valideren',
+        'Belgische studios, producers en teams die een interactieve realtime 3D- of XR-applicatie moeten bouwen, inclusief VR of augmented reality',
       serviceOutput: [
-        'Speelbaar of toonbaar prototype op het doelplatform',
+        'Speelbare of toonbare build op het doelplatform',
         'Validatie van performance, comfort en technisch risico',
         'Productieverdict over wat te behouden, schrappen of polijsten',
       ],
       offer: {
-        name: 'Realtime VR- of interactieve 3D-prototype',
+        name: 'Realtime 3D / XR-applicatie',
         description:
-          'Creatie van een speelbare basis om de ervaring, technische risico\'s en volgende productiebeslissingen te valideren.',
+          'Creatie van een interactieve basis om de ervaring, technische risico\'s en volgende productiebeslissingen te valideren.',
       },
     },
   },
@@ -267,7 +299,13 @@ export function getServiceSchemaDetails(locale: string, slug: OfferTrackSlug): S
   return localized[locale] ?? localized.en;
 }
 
-export function serviceSchema(locale: string, slug: OfferTrackSlug, title: string, description: string) {
+export function serviceSchema(
+  locale: string,
+  slug: OfferTrackSlug,
+  title: string,
+  description: string,
+  options: {dateModified?: Date} = {}
+) {
   const offerTrack = getOfferTrack(slug);
   if (!offerTrack) throw new Error(`Unknown service schema offer track: ${slug}`);
 
@@ -281,6 +319,7 @@ export function serviceSchema(locale: string, slug: OfferTrackSlug, title: strin
     name: title,
     description,
     url,
+    ...(options.dateModified ? {dateModified: options.dateModified.toISOString()} : {}),
     inLanguage: locale,
     serviceType: offerTrack.schemaServiceType,
     category: offerTrack.slug,

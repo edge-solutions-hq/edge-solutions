@@ -2,7 +2,7 @@ import Image, {type StaticImageData} from 'next/image';
 
 import {cn} from '@/lib/cn';
 
-type ProofMediaFrameProps = {
+type MediaFrameProps = {
   imageSrc: string | StaticImageData;
   imageAlt: string;
   outerClassName: string;
@@ -14,7 +14,7 @@ type ProofMediaFrameProps = {
   height?: number;
 };
 
-function ProofBrowserChrome({className}: {className?: string}) {
+function BrowserChrome({className}: {className?: string}) {
   return (
     <div className={cn('flex items-center gap-2', className)} aria-hidden="true">
       <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
@@ -24,7 +24,7 @@ function ProofBrowserChrome({className}: {className?: string}) {
   );
 }
 
-export function ProofMediaFrame({
+export function MediaFrame({
   imageSrc,
   imageAlt,
   outerClassName,
@@ -34,7 +34,7 @@ export function ProofMediaFrame({
   imagePriority = false,
   width = 1400,
   height = 1000,
-}: ProofMediaFrameProps) {
+}: MediaFrameProps) {
   const image = (
     <Image
       src={imageSrc}
@@ -48,7 +48,7 @@ export function ProofMediaFrame({
 
   return (
     <div className={outerClassName}>
-      <ProofBrowserChrome className={chromeClassName} />
+      <BrowserChrome className={chromeClassName} />
       {imageFrameClassName ? (
         <div className={imageFrameClassName}>
           {image}

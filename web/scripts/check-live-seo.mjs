@@ -221,6 +221,34 @@ async function checkSitemapXml() {
   return sitemapUrl;
 }
 
+async function checkLlmsTxt() {
+  const llmsUrl = `${siteUrl}/llms.txt`;
+  const response = await fetch(llmsUrl, {
+    headers: {
+      accept: 'text/plain',
+      'user-agent': 'edge-solutions-live-seo-smoke/1.0',
+    },
+    redirect: 'follow',
+  });
+
+  assert(response.status === 200, `${llmsUrl} returned HTTP ${response.status}`);
+  assert(response.url === llmsUrl, `${llmsUrl} resolved to ${response.url}`);
+
+  const contentType = response.headers.get('content-type') ?? '';
+  assert(/^text\/plain\b/i.test(contentType), `${llmsUrl} returned content-type "${contentType}"`);
+
+  const robotsHeader = response.headers.get('x-robots-tag') ?? '';
+  assert(/\bnoindex\b/i.test(robotsHeader), `${llmsUrl} must send X-Robots-Tag: noindex`);
+
+  const text = await response.text();
+  assert(text.includes('# Edge Solutions'), `${llmsUrl} is missing the site heading`);
+  for (const expectedUrl of expectedUrls) {
+    assert(text.includes(expectedUrl), `${llmsUrl} is missing ${expectedUrl}`);
+  }
+
+  return llmsUrl;
+}
+
 function assertCanonical(html, url) {
   const canonical = linkTags(html).find((attrs) => attrs.rel?.toLowerCase() === 'canonical')?.href;
   assert(canonical, `${url} is missing canonical`);
@@ -400,10 +428,18 @@ function assertJsonLdGraph(html, route) {
     `${route.url} ProfessionalService JSON-LD has unexpected @id`
   );
 
+  const person = assertSchemaObject(objects, 'Person', route.url);
+  assert(person['@id'] === `${siteUrl}#gil-guminski`, `${route.url} Person JSON-LD has unexpected @id`);
+  assert(
+    person.worksFor?.['@id'] === `${siteUrl}#organization`,
+    `${route.url} Person JSON-LD must reference the organization`
+  );
+
   const webpage = assertSchemaObject(objects, 'WebPage', route.url);
   assert(webpage['@id'] === `${route.url}#webpage`, `${route.url} WebPage JSON-LD has unexpected @id`);
   assert(webpage.url === route.url, `${route.url} WebPage JSON-LD has unexpected url`);
   assert(webpage.inLanguage === route.locale, `${route.url} WebPage JSON-LD has unexpected inLanguage`);
+  assert(webpage.dateModified === route.lastModified, `${route.url} WebPage JSON-LD has unexpected dateModified`);
   assert(
     webpage.about?.['@id'] === `${siteUrl}#organization`,
     `${route.url} WebPage JSON-LD must reference the organization`
@@ -429,6 +465,7 @@ function assertJsonLdGraph(html, route) {
     assert(service['@id'] === `${route.url}#service`, `${route.url} Service JSON-LD has unexpected @id`);
     assert(service.url === route.url, `${route.url} Service JSON-LD has unexpected url`);
     assert(service.inLanguage === route.locale, `${route.url} Service JSON-LD has unexpected inLanguage`);
+    assert(service.dateModified === route.lastModified, `${route.url} Service JSON-LD has unexpected dateModified`);
     assert(service.serviceType === route.schemaServiceType, `${route.url} Service JSON-LD has unexpected type`);
     assert(
       service.provider?.['@id'] === `${siteUrl}#organization`,
@@ -479,6 +516,7 @@ const checkedServicesRoutes = [];
 
 const checkedRobots = await checkRobotsTxt();
 const checkedSitemap = await checkSitemapXml();
+const checkedLlmsTxt = await checkLlmsTxt();
 
 for (const urlCheck of urlChecks) {
   checked.push(await checkUrl(urlCheck));
@@ -503,5 +541,5 @@ for (const locale of locales) {
 }
 
 console.log(
-  `Live SEO smoke passed: ${checked.length} source-derived production URLs returned 200 with indexable self-canonical pages, localized title and description, typed JSON-LD graphs, locale hreflang, and x-default; ${checkedServicesRoutes.length} localized services-family URLs covered FR/EN/NL typed JSON-LD; ${checkedRobots} references ${checkedSitemap}; sitemap has ${expectedUrls.length} source-derived URLs with localized alternates and x-default.`
+  `Live SEO smoke passed: ${checked.length} source-derived production URLs returned 200 with indexable self-canonical pages, localized title and description, typed JSON-LD graphs, locale hreflang, and x-default; ${checkedServicesRoutes.length} localized services-family URLs covered FR/EN/NL typed JSON-LD; ${checkedRobots} references ${checkedSitemap}; ${checkedLlmsTxt} lists the source-derived URLs; sitemap has ${expectedUrls.length} source-derived URLs with localized alternates and x-default.`
 );

@@ -1,138 +1,150 @@
-import workflowBoard from '../../../../public/images/proof/services-ai-workflow-board.svg';
+import workflowBoard from '../../../../public/images/work/services-ai-workflow-board.svg';
 
 export const metadata = {
-  title: "Expert IA en Wallonie — workflows, assistants et garde-fous",
+  title: "Automatisation IA en Wallonie - assistants et processus métier",
   description:
-    "Cadrage et prototypage IA pour équipes belges: assistants internes, workflows documentaires, automatisation utile et garde-fous humains avant intégration."
+    "Audit et développement d’automatisations IA pour équipes belges: tâches répétitives, assistants internes, traitement documentaire et revue humaine."
 };
 
 <PageIntro eyebrow="Service" title="IA appliquée & automatisation">
   <p>
-    J’aide les équipes à transformer des idées IA floues en systèmes utiles:
-    assistants internes, workflows documentaires, qualification, automatisations
-    métier et garde-fous avant mise en production.
+    J’aide à repérer les tâches répétitives qui consomment de l’attention:
+    demandes, documents, recherches, résumés, qualification ou contrôles. On
+    part d’une source de vérité claire, on automatise d’abord ce qui est simple,
+    puis on ajoute de l’IA quand le langage ou le contexte compte vraiment.
   </p>
   <p>
-    Basé en Belgique, j’interviens du cadrage au prototype puis à l’intégration,
-    avec une règle simple: source de vérité claire, validation humaine sur les
-    points sensibles et preuves concrètes plutôt que promesses vagues.
+    Le but est simple: alléger le quotidien de l’équipe sans perdre le contrôle
+    sur les décisions sensibles.
   </p>
 </PageIntro>
 
 <WorkflowSnapshot
-  className="mt-16"
-  eyebrow="Preuve opérationnelle"
-  title="Le workflow board qui rend l’IA lisible avant qu’elle prenne trop de place"
+  className="mt-14"
+  eyebrow="Méthode"
+  title="Repérer ce qui se répète avant d’automatiser"
   imageSrc={workflowBoard}
-  imageAlt="Schéma abstrait d’un workflow IA avec étapes reliées et piste de revue humaine."
-  reviewTitle="Piste de revue humaine"
+  imageAlt="Schéma abstrait d’un processus IA avec étapes reliées et revue humaine."
+  reviewTitle="Point de décision"
   reviewPoints={[
-    'la sortie risquée est identifiée avant de demander trop au modèle',
-    'quelqu’un porte le verdict go / recadrage / stop au lieu de le laisser implicite',
-    'l’étape d’intégration suivante est méritée par des preuves, pas par l’enthousiasme d’une démo',
+    'ce qui est sensible reste relu ou limité',
+    'la suite dépend de résultats observables',
+    'on garde, recadre ou arrête avant d’alourdir le projet',
   ]}
   steps={[
     {
       label: 'Étape 01',
-      title: 'Cadrer un cas d’usage borné',
+      title: 'Observer le travail réel',
       detail:
-        'Choisir l’utilisateur, la source de vérité et la décision exacte que le workflow doit aider à prendre avant d’ajouter plus d’outillage.',
+        'Identifier les tâches qui reviennent, les sources utilisées et les décisions répétées par l’équipe.',
     },
     {
       label: 'Étape 02',
-      title: 'Tester sur des exemples réels',
+      title: 'Construire un flux testable',
       detail:
-        'Faire tourner la lane sur des documents, demandes ou cas limites représentatifs avec des traces assez visibles pour être revues.',
+        'Tester l’automatisation sur des exemples représentatifs, avec IA seulement là où elle apporte de la compréhension.',
     },
     {
       label: 'Étape 03',
-      title: 'Décider avec des preuves',
+      title: 'Décider de la suite',
       detail:
-        'Garder ce qui marche déjà, recadrer ce qui reste fragile et stopper tôt si le workflow crée encore plus d’incertitude que de valeur.',
+        'Conserver ce qui marche, simplifier ce qui reste fragile ou arrêter tôt si la valeur n’est pas claire.',
     },
   ]}
 >
   <p>
-    Si le cas d’usage, les risques ou la marche à suivre restent flous, je
-    remets d’abord de la structure. Le but n’est pas de montrer une “capacité
-    IA” dans l’abstrait, mais de rendre la lane assez lisible pour qu’une
-    équipe puisse faire confiance à la décision suivante.
+    L’IA n’est pas le point de départ. Le point de départ, c’est le travail qui
+    se répète et qui empêche les personnes de se concentrer sur leur jugement,
+    leur relation client ou leur métier.
   </p>
 </WorkflowSnapshot>
 
 <SectionIntro
-  className="mt-16"
-  eyebrow="Quand j’interviens"
-  title="Les situations où il faut cadrer avant d’automatiser"
+  className="mt-14"
+  eyebrow="Cas utiles"
+  title="Quand automatiser une tâche avec l’IA ?"
 >
   <p>
-    Cette offre est utile quand l’IA avance plus vite que le cadre, la confiance
-    ou la capacité de décision.
+    Une tâche mérite une automatisation IA quand elle revient souvent, consomme
+    de l’attention et demande assez de langage ou de contexte pour dépasser de
+    simples règles.
   </p>
 </SectionIntro>
 
 <GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Usage prometteur mais flou">
-    Vous voyez des gains possibles, mais personne ne sait encore exactement quel
-    cas d’usage prioriser ni comment le juger proprement.
+  <GridListItem title="Travail répétitif">
+    Des demandes, documents, recherches ou synthèses reviennent souvent avec la
+    même logique.
   </GridListItem>
-  <GridListItem title="Prototype difficile à fiabiliser">
-    Une première version existe déjà, mais les sources, les limites et les
-    points de validation restent trop implicites.
+  <GridListItem title="Interprétation nécessaire">
+    Les règles seules ne suffisent pas: il faut lire, classer, résumer ou
+    prioriser avec du contexte.
   </GridListItem>
-  <GridListItem title="Besoin d’un vrai verdict">
-    Il faut pouvoir dire rapidement go, recadrage ou stop au lieu d’entretenir
-    une démo impressionnante mais difficile à exploiter.
+  <GridListItem title="Revue humaine">
+    Les actions sensibles restent relues, validées ou limitées avant d’être
+    intégrées plus largement.
   </GridListItem>
 </GridList>
 
 <SectionIntro
-  className="mt-16"
+  className="mt-14"
   eyebrow="Premier cycle"
-  title="Ce que vous obtenez rapidement, et pourquoi c’est crédible"
+  title="Que livre un premier cycle d’automatisation IA ?"
 >
   <p>
-    Le but n’est pas d’empiler des livrables. Le but est de produire un premier
-    cycle utile, lisible et décidable avec une preuve de méthode déjà visible.
+    Un premier cycle livre une version courte et testable sur vos exemples. Il
+    doit permettre de décider vite: continuer, recadrer ou arrêter sans avoir
+    construit trop lourd.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-2">
-  <GridListItem title="Cadrage court">
-    On choisit un cas prioritaire, les sources à utiliser, les risques et le
-    point exact où un humain doit reprendre la main.
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Périmètre court">
+    Une tâche prioritaire, les sources utiles, les risques et le moment où un
+    humain reprend la main.
   </GridListItem>
-  <GridListItem title="Prototype sur cas réels">
-    Je monte un flux testable sur vos vrais exemples: assistant, tri
-    documentaire, qualification ou workflow interne avec traces visibles.
+  <GridListItem title="Version sur cas réels">
+    Un flux testable sur vos exemples: assistant, tri documentaire,
+    qualification, résumé ou processus interne.
   </GridListItem>
-  <GridListItem title="Revue & garde-fous">
-    Vérification, mode critique, escalade, limites d’action et relecture avant
-    qu’une automation fasse quelque chose de sensible.
-  </GridListItem>
-  <GridListItem title="Preuve publique déjà visible">
-    Mon setup OpenClaw, complété par Rusty Art, montre déjà une méthode de
-    travail concrète sans inventer de faux cas clients.
+  <GridListItem title="Limites visibles">
+    Traces, relecture, mode critique et limites d’action avant toute
+    automatisation sensible.
   </GridListItem>
 </GridList>
 
-<Stats className="mt-10">
-  <StatsItem label="Périmètre" value="1 cas prioritaire" />
-  <StatsItem label="Validation" value="Exemples réels" />
-  <StatsItem label="Contrôle" value="Humain explicite" />
-  <StatsItem label="Décision" value="Go / recadrage / stop" />
-</Stats>
+<SectionIntro
+  className="mt-14"
+  eyebrow="Contrôle"
+  title="Comment garder une revue humaine dans une automatisation LLM ?"
+>
+  <p>
+    Les actions sensibles restent visibles, limitées et validées par une
+    personne. L’automatisation prépare le travail, mais elle ne doit pas
+    remplacer le jugement quand le risque est réel.
+  </p>
+</SectionIntro>
 
-<Callout>
-  Ce que j’essaie de vendre ici n’est pas “plus d’IA”. C’est une façon plus
-  claire, plus fiable et plus assumable d’utiliser l’IA dans un vrai contexte.
-</Callout>
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Rôles clairs">
+    On distingue ce que le système peut préparer, ce qu’il peut proposer et ce
+    qu’une personne doit valider.
+  </GridListItem>
+  <GridListItem title="Traces utiles">
+    Les sources, décisions et sorties importantes restent consultables pour
+    pouvoir corriger ou expliquer le résultat.
+  </GridListItem>
+  <GridListItem title="Limites d’action">
+    Les envois, changements ou décisions sensibles gardent un seuil de
+    validation avant toute intégration plus large.
+  </GridListItem>
+</GridList>
 
-<SectionIntro className="mt-16" eyebrow="FAQ" title="Questions fréquentes" smaller />
+<SectionIntro className="mt-14" eyebrow="FAQ" title="Questions fréquentes" smaller />
 
 <ServiceFaq locale="fr" slug="ai-automation" />
 
-<CTA title="Parlons de votre usage IA" href="/contact" buttonLabel="Me contacter">
-  Envoyez le contexte, ce qui existe déjà et ce qui reste flou. Je reviens vers
-  vous avec un premier cadrage concret et la meilleure prochaine étape.
+<CTA title="Parlons de votre automatisation IA" href="/contact?service=ai" buttonLabel="Me contacter">
+  Envoyez le contexte et un exemple de tâche répétitive. Je vous réponds avec
+  une première piste claire.
 </CTA>

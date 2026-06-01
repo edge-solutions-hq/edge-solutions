@@ -2,7 +2,9 @@ import type {StaticImageData} from 'next/image';
 import type {ReactNode} from 'react';
 
 import {cn} from '@/lib/cn';
-import {ProofMediaFrame} from '@/components/ui/ProofMediaFrame';
+import {MediaFrame} from '@/components/ui/MediaFrame';
+import {surfaceClass} from '@/components/ui/Surface';
+import {unwrapMdxParagraphs} from '@/lib/unwrap-mdx-paragraphs';
 
 type WorkflowStep = {
   label: string;
@@ -33,10 +35,12 @@ export function WorkflowSnapshot({
   className,
   children,
 }: WorkflowSnapshotProps) {
+  const content = unwrapMdxParagraphs(children);
+
   return (
     <section
       className={cn(
-        'not-prose overflow-hidden rounded-lg border-2 border-border bg-surface shadow-[6px_6px_0_var(--primary)]',
+        surfaceClass('feature', 'not-prose overflow-hidden'),
         className,
       )}
     >
@@ -48,12 +52,12 @@ export function WorkflowSnapshot({
             </p>
           ) : null}
 
-          <h3 className="mt-3 max-w-xl text-balance text-2xl font-semibold tracking-tight text-secondary-foreground sm:text-3xl">
+          <h2 className="mt-3 max-w-xl text-balance text-2xl font-semibold tracking-tight text-secondary-foreground sm:text-3xl">
             {title}
-          </h3>
+          </h2>
 
           <div className="mt-5 space-y-4 text-sm leading-relaxed text-secondary-foreground/82 [&_strong]:font-semibold [&_strong]:text-secondary-foreground">
-            {children}
+            {content}
           </div>
 
           <div className="mt-8 rounded-lg border border-primary/70 bg-secondary-foreground/8 p-5">
@@ -72,10 +76,10 @@ export function WorkflowSnapshot({
         </div>
 
         <div className="bg-[linear-gradient(90deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,var(--surface-muted),var(--surface))] bg-[length:28px_28px,28px_28px,auto] px-6 py-7 text-foreground md:px-8 md:py-8">
-          <ProofMediaFrame
+          <MediaFrame
             imageSrc={imageSrc}
             imageAlt={imageAlt}
-            outerClassName="overflow-hidden rounded-lg border border-border/70 bg-surface shadow-[6px_6px_0_color-mix(in_srgb,var(--primary)_35%,transparent)]"
+            outerClassName={surfaceClass('media', 'overflow-hidden')}
             chromeClassName="border-b border-border/70 px-4 py-3"
           />
 
@@ -85,13 +89,13 @@ export function WorkflowSnapshot({
               {steps.map((step) => (
                 <li key={`${step.label}-${step.title}`} className="relative pl-6">
                   <span className="absolute left-0 top-2.5 h-3.5 w-3.5 rounded-full border-2 border-surface bg-primary shadow-[0_0_0_4px_color-mix(in_srgb,var(--primary)_20%,transparent)]" aria-hidden="true" />
-                  <div className="rounded-lg border border-border/70 bg-surface p-5 shadow-[3px_3px_0_color-mix(in_srgb,var(--foreground)_12%,transparent)]">
+                  <div className={surfaceClass('card', 'border-border/70 p-5 shadow-[3px_3px_0_rgba(16,43,74,0.12)]')}>
                     <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
                       {step.label}
                     </p>
-                    <h4 className="mt-2 text-base font-semibold tracking-tight text-foreground">
+                    <h3 className="mt-2 text-base font-semibold tracking-tight text-technical-blue">
                       {step.title}
-                    </h4>
+                    </h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                       {step.detail}
                     </p>

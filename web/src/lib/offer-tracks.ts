@@ -8,7 +8,7 @@ export type OfferTrack = {
   descriptionKey: string;
   hubTriggerKey: string;
   hubDescriptionKey: string;
-  hubProofKey: string;
+  hubCheckKey: string;
   decisionKey: string;
   schemaServiceType: string;
   lastModified: Date;
@@ -25,10 +25,10 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     descriptionKey: 'services.aiDesc',
     hubTriggerKey: 'services.hubAiTrigger',
     hubDescriptionKey: 'services.hubAiDesc',
-    hubProofKey: 'services.hubAiProof',
+    hubCheckKey: 'services.hubAiCheck',
     decisionKey: 'services.decisionAi',
     schemaServiceType: 'AI systems & automation',
-    lastModified: new Date('2026-05-10T05:49:00.000Z'),
+    lastModified: new Date('2026-06-01T00:00:00.000Z'),
     sitemapPriority: 0.7,
     priorityRole: 'primary',
   },
@@ -40,10 +40,10 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     descriptionKey: 'services.realtimeDesc',
     hubTriggerKey: 'services.hubRealtimeTrigger',
     hubDescriptionKey: 'services.hubRealtimeDesc',
-    hubProofKey: 'services.hubRealtimeProof',
+    hubCheckKey: 'services.hubRealtimeCheck',
     decisionKey: 'services.decisionRealtime',
-    schemaServiceType: 'Real-time 3D/VR',
-    lastModified: new Date('2026-05-10T05:49:00.000Z'),
+    schemaServiceType: 'Real-time 3D / XR',
+    lastModified: new Date('2026-06-01T00:00:00.000Z'),
     sitemapPriority: 0.7,
     priorityRole: 'supporting',
   },

@@ -139,7 +139,7 @@ describe('analytics event payload policy', () => {
         offerTrackSlug: 'realtime-games',
         placement: 'home_services_grid',
         linkTarget: '/fr/services/realtime-games',
-        linkLabel: 'Real-time 3D/VR',
+        linkLabel: 'Real-time 3D / XR',
         pagePath: '/fr',
       }),
       {
@@ -149,7 +149,7 @@ describe('analytics event payload policy', () => {
           placement: 'home_services_grid',
           page_path: '/fr',
           link_target: '/fr/services/realtime-games',
-          link_label: 'Real-time 3D/VR',
+          link_label: 'Real-time 3D / XR',
         },
       }
     );

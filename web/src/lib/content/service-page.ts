@@ -11,13 +11,13 @@ import {
 
 type Translate = (key: string) => string;
 
-export type ServicePageProofPolicy = {
+export type ServicePageEvidencePolicy = {
   offerTrackSlug: OfferTrackSlug;
-  renderModule: ServiceContentResult['proofContract']['render']['module'];
-  imagePath: ServiceContentResult['proofContract']['render']['imagePath'];
-  assetAuthority: ServiceContentResult['proofContract']['render']['assetAuthority'];
-  structuralExpectations: ServiceContentResult['proofContract']['structure'];
-  requiredSignals: ServiceContentResult['proofContract']['signals'];
+  renderModule: ServiceContentResult['evidenceContract']['render']['module'];
+  imagePath: ServiceContentResult['evidenceContract']['render']['imagePath'];
+  assetAuthority: ServiceContentResult['evidenceContract']['render']['assetAuthority'];
+  structuralExpectations: ServiceContentResult['evidenceContract']['structure'];
+  requiredSignals: ServiceContentResult['evidenceContract']['signals'];
 };
 
 export type ServicePageStaticParam = {
@@ -28,7 +28,7 @@ export type ServicePageStaticParam = {
 export type ServicePageModel = {
   content: ServiceContentResult;
   profile: ReturnType<typeof getOfferTrackPageProfile>;
-  proofPolicy: ServicePageProofPolicy;
+  evidencePolicy: ServicePageEvidencePolicy;
   title: string;
   description: string;
   scrollTracking: {
@@ -79,13 +79,13 @@ export async function getServicePageModel({
   return {
     content,
     profile,
-    proofPolicy: {
-      offerTrackSlug: content.proofContract.slug,
-      renderModule: content.proofContract.render.module,
-      imagePath: content.proofContract.render.imagePath,
-      assetAuthority: content.proofContract.render.assetAuthority,
-      structuralExpectations: content.proofContract.structure,
-      requiredSignals: content.proofContract.signals,
+    evidencePolicy: {
+      offerTrackSlug: content.evidenceContract.slug,
+      renderModule: content.evidenceContract.render.module,
+      imagePath: content.evidenceContract.render.imagePath,
+      assetAuthority: content.evidenceContract.render.assetAuthority,
+      structuralExpectations: content.evidenceContract.structure,
+      requiredSignals: content.evidenceContract.signals,
     },
     title,
     description,

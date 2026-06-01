@@ -41,7 +41,7 @@ export default async function ServicePage({params}: Props) {
     <>
       <ServiceScrollDepthTracker offerTrackSlug={model.scrollTracking.offerTrackSlug} />
       <JsonLd data={model.profile.jsonLd} />
-      <article className="prose prose-slate max-w-none dark:prose-invert prose-headings:tracking-tight prose-headings:text-foreground prose-p:text-muted-foreground">
+      <article className="prose prose-slate max-w-none dark:prose-invert prose-headings:tracking-tight prose-headings:text-technical-blue prose-p:text-muted-foreground">
         <Content />
       </article>
     </>

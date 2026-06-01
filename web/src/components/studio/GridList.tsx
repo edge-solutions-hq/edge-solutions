@@ -49,7 +49,7 @@ export function GridListItem({
           <strong
             className={cn(
               'font-semibold',
-              invert ? 'text-white' : 'text-foreground'
+              invert ? 'text-white' : 'text-technical-blue'
             )}
           >
             {title}.

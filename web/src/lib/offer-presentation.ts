@@ -33,7 +33,7 @@ export type ServicesHubOfferCard = {
   label: string;
   triggerLabel: string;
   description: string;
-  proofCue: string;
+  checkCue: string;
   slug: OfferTrackSlug;
 } & OfferVisualPresentation;
 
@@ -101,7 +101,7 @@ export function getServicesHubOfferCards(translate: Translate): ServicesHubOffer
     label: translate(track.titleKey),
     triggerLabel: translate(track.hubTriggerKey),
     description: translate(track.hubDescriptionKey),
-    proofCue: translate(track.hubProofKey),
+    checkCue: translate(track.hubCheckKey),
     slug: track.slug,
     ...offerVisualPresentation(track.priorityRole),
   }));

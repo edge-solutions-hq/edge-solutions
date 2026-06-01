@@ -53,7 +53,7 @@ function extractOfferTracks() {
     hubKeys: [
       extractStringProperty(block, 'hubTriggerKey').replace('services.', ''),
       extractStringProperty(block, 'hubDescriptionKey').replace('services.', ''),
-      extractStringProperty(block, 'hubProofKey').replace('services.', ''),
+      extractStringProperty(block, 'hubCheckKey').replace('services.', ''),
     ],
     decisionKey: extractStringProperty(block, 'decisionKey').replace('services.', ''),
     priorityRole: extractStringProperty(block, 'priorityRole'),
@@ -62,9 +62,9 @@ function extractOfferTracks() {
 
 const offerTracks = extractOfferTracks();
 const {
-  OFFER_TRACK_PROOF_PROFILES: proofProfiles,
-  proofRegistry,
-} = await import('../src/lib/content/proof-registry.ts');
+  OFFER_TRACK_EVIDENCE_PROFILES: evidenceProfiles,
+  serviceEvidenceRegistry,
+} = await import('../src/lib/content/service-evidence-registry.ts');
 
 function countArrayItems(source, propName) {
   const match = source.match(new RegExp(`${propName}=\\{\\[([\\s\\S]*?)\\]\\}`, 'm'));
@@ -105,7 +105,7 @@ describe('website operating docs', () => {
     assert.match(website, /pr_review/);
     assert.match(website, /analysis_observation/);
     assert.match(positioning, /AI-first/i);
-    assert.match(positioning, /not a three-equal-services studio/);
+    assert.match(positioning, /not a generic agency/);
     assert.match(website, /Generated visuals are allowed only as synthetic diagrams/);
     assert.match(website, /Missing provider access is a setup-required state, not evidence/);
 
@@ -148,10 +148,17 @@ describe('offer track catalog seam', () => {
     assert.doesNotMatch(read('src/components/layout/Header.tsx'), /OFFER_TRACKS\.map/);
     assert.match(read('src/app/sitemap.ts'), /getLocalizedSitemapEntries/);
     assert.match(read('src/lib/page-profiles.ts'), /OFFER_TRACKS/);
+    assert.match(read('src/app/llms.txt/route.ts'), /buildLlmsTxt/);
+    assert.match(read('src/lib/ai-discovery.ts'), /OFFER_TRACKS/);
+    assert.match(read('src/lib/ai-discovery.ts'), /STATIC_PAGE_DEFINITIONS/);
     assert.match(read('src/lib/content/services.ts'), /OFFER_TRACK_SLUGS/);
+    assert.match(read('../docs/architecture.md'), /UI surfaces/);
+    assert.match(read('../docs/architecture.md'), /Surface\.tsx/);
+    assert.match(read('../docs/architecture.md'), /External CTA links/);
+    assert.match(read('../docs/architecture.md'), /ExternalLinkButton\.tsx/);
   });
 
-  it('projects role-aware offer presentation for home and services routes', () => {
+  it('projects role-aware offer presentation while homepage cards stay visually balanced', () => {
     const presentationSource = read('src/lib/offer-presentation.ts');
     const homeSource = read('src/app/[locale]/page.tsx');
     const servicesSource = read('src/app/[locale]/services/page.tsx');
@@ -162,9 +169,10 @@ describe('offer track catalog seam', () => {
     assert.match(presentationSource, /visualGroup: 'execution-depth'/);
     assert.match(presentationSource, /assertSinglePrimaryOfferTrack/);
 
-    assert.match(homeSource, /service\.visualRole/);
-    assert.match(homeSource, /service\.visualEmphasis/);
-    assert.match(homeSource, /service\.visualGroup/);
+    assert.match(homeSource, /getHomeOfferCards/);
+    assert.match(homeSource, /homeOfferGridItemClass/);
+    assert.doesNotMatch(homeSource, /service\.visualGroup === 'ai-primary'/);
+    assert.doesNotMatch(homeSource, /md:col-span-2 xl:col-span-2/);
     assert.match(servicesSource, /service\.visualRole/);
     assert.match(servicesSource, /service\.visualEmphasis/);
     assert.match(servicesSource, /item\.visualEmphasis/);
@@ -185,49 +193,49 @@ describe('offer track catalog seam', () => {
   });
 });
 
-describe('localized content and proof seam', () => {
-  it('validates the proof registry through its runtime contract interface', () => {
-    assert.deepEqual(proofRegistry.validate(), []);
+describe('localized content and evidence seam', () => {
+  it('validates the evidence registry through its runtime contract interface', () => {
+    assert.deepEqual(serviceEvidenceRegistry.validate(), []);
     assert.deepEqual(
-      proofRegistry.profiles.map((profile) => profile.slug),
+      serviceEvidenceRegistry.profiles.map((profile) => profile.slug),
       offerTracks.map((track) => track.slug),
-      'proof contract registry must match offer track catalog order'
+      'evidence contract registry must match offer track catalog order'
     );
 
     for (const track of offerTracks) {
-      const contract = proofRegistry.getContract(track.slug);
-      assert.ok(contract, `${track.slug} missing proof contract`);
+      const contract = serviceEvidenceRegistry.getContract(track.slug);
+      assert.ok(contract, `${track.slug} missing evidence contract`);
       assert.equal(contract.slug, track.slug);
-      assert.ok(contract.render.module, `${track.slug} missing proof render module`);
-      assert.ok(contract.render.imagePath.endsWith('.svg'), `${track.slug} proof image must be an svg asset`);
-      assert.equal(contract.render.assetAuthority.approvalStatus, 'approved', `${track.slug} proof asset must be approved`);
-      assert.equal(contract.render.assetAuthority.authority, 'authoritative', `${track.slug} proof asset must be authoritative`);
+      assert.ok(contract.render.module, `${track.slug} missing evidence render module`);
+      assert.ok(contract.render.imagePath.endsWith('.svg'), `${track.slug} evidence image must be an svg asset`);
+      assert.equal(contract.render.assetAuthority.approvalStatus, 'approved', `${track.slug} source asset must be approved`);
+      assert.equal(contract.render.assetAuthority.authority, 'authoritative', `${track.slug} source asset must be authoritative`);
       assert.ok(contract.structure.length > 0, `${track.slug} missing structural expectations`);
       assert.ok(contract.signals.length > 0, `${track.slug} missing required signals`);
     }
   });
 
-  it('has localized MDX content, metadata, proof profile, and CTA for each offer track', () => {
+  it('has localized MDX content, metadata, evidence profile, and CTA for each offer track', () => {
     assert.deepEqual(
-      proofProfiles.map((profile) => profile.slug),
+      evidenceProfiles.map((profile) => profile.slug),
       offerTracks.map((track) => track.slug),
-      'proof registry must match offer track catalog order'
+      'evidence registry must match offer track catalog order'
     );
 
     for (const locale of locales) {
       for (const track of offerTracks) {
-        const proof = proofProfiles.find((profile) => profile.slug === track.slug);
-        assert.ok(proof, `${track.slug} missing proof profile`);
-        assert.ok(proof.requiredSignals.length > 0, `${track.slug} missing proof signals`);
+        const evidence = evidenceProfiles.find((profile) => profile.slug === track.slug);
+        assert.ok(evidence, `${track.slug} missing evidence profile`);
+        assert.ok(evidence.requiredSignals.length > 0, `${track.slug} missing evidence signals`);
         const filePath = `src/content/${locale}/services/${track.slug}.mdx`;
         assert.ok(existsSync(path.join(root, filePath)), `${filePath} missing`);
         const source = read(filePath);
         assert.match(source, /export const metadata = \{/, `${filePath} missing metadata`);
-        assert.match(source, new RegExp(`<${proof.proofModule}\\b`), `${filePath} missing ${proof.proofModule}`);
-        assert.match(source, new RegExp(proof.imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${filePath} missing proof image`);
+        assert.match(source, new RegExp(`<${evidence.evidenceModule}\\b`), `${filePath} missing ${evidence.evidenceModule}`);
+        assert.match(source, new RegExp(evidence.imagePath.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${filePath} missing evidence image`);
         assert.match(source, /<CTA\b/, `${filePath} missing CTA`);
 
-        for (const [propName, expectedCount] of Object.entries(proof.structuralCounts)) {
+        for (const [propName, expectedCount] of Object.entries(evidence.structuralCounts)) {
           const actualCount = propName === 'columnPoints'
             ? countColumnPoints(source)
             : countArrayItems(source, propName);
@@ -235,23 +243,23 @@ describe('localized content and proof seam', () => {
         }
 
         const normalizedSource = normalizeContent(source);
-        for (const signal of proof.requiredSignals) {
+        for (const signal of evidence.requiredSignals) {
           const terms = signal.terms[locale];
           assert.ok(terms?.length, `${track.slug} missing ${locale} terms for ${signal.concept}`);
           assert.ok(
             terms.some((term) => normalizedSource.includes(normalizeContent(term))),
-            `${filePath} missing proof signal: ${signal.concept}`
+            `${filePath} missing evidence signal: ${signal.concept}`
           );
         }
       }
     }
 
-    assert.match(read('src/lib/content/services.ts'), /getOfferTrackProofProfile/);
-    assert.match(read('src/lib/content/services.ts'), /getOfferTrackProofContract/);
+    assert.match(read('src/lib/content/services.ts'), /getOfferTrackEvidenceProfile/);
+    assert.match(read('src/lib/content/services.ts'), /getOfferTrackEvidenceContract/);
     assert.match(read('src/lib/content/services.ts'), /renderPolicy/);
     assert.doesNotMatch(read('src/lib/content/services.ts'), /function getServiceMdx/);
     assert.match(read('src/lib/content/service-page.ts'), /renderPolicy\.requestedLocale/);
-    assert.match(read('src/lib/content/service-page.ts'), /proofPolicy/);
+    assert.match(read('src/lib/content/service-page.ts'), /evidencePolicy/);
     assert.match(read('src/app/[locale]/services/[slug]/page.tsx'), /getServicePageModel/);
   });
 
@@ -263,8 +271,8 @@ describe('localized content and proof seam', () => {
     assert.match(read('src/app/[locale]/contact/page.tsx'), /getContactPageProfile/);
   });
 
-  it('keeps repeated proof media frame mechanics behind a shared UI module', () => {
-    assert.match(read('src/components/ui/ProofMediaFrame.tsx'), /export function ProofMediaFrame/);
+  it('keeps repeated media frame mechanics behind a shared UI module', () => {
+    assert.match(read('src/components/ui/MediaFrame.tsx'), /export function MediaFrame/);
 
     for (const filePath of [
       'src/components/ui/ShowcasePanel.tsx',
@@ -273,7 +281,7 @@ describe('localized content and proof seam', () => {
       'src/components/mdx/PrototypeSignals.tsx',
     ]) {
       const source = read(filePath);
-      assert.match(source, /ProofMediaFrame/, `${filePath} should consume the proof media frame`);
+      assert.match(source, /MediaFrame/, `${filePath} should consume the shared media frame`);
       assert.doesNotMatch(source, /bg-rose-400\/80/, `${filePath} should not repeat browser chrome dots`);
     }
   });
@@ -326,6 +334,8 @@ describe('contact intake and analytics taxonomy seams', () => {
     assert.match(trackerSource, /service-scroll-depth/);
     assert.match(trackerSource, /trackServiceScrollDepth/);
     assert.match(read('src/lib/analytics/taxonomy.ts'), /scrollDepthThresholds/);
+    assert.match(read('src/lib/analytics/browser-context.ts'), /classifyAiReferrer/);
+    assert.match(read('src/lib/analytics/browser-context.ts'), /safeReferrer/);
   });
 
   it('routes event taxonomy through named domain actions', () => {

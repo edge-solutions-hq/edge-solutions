@@ -42,7 +42,7 @@ export function buildContactEmailPayload({
     from,
     to,
     replyTo: email,
-    subject: `[${site.companyName}] Nouveau message (${serviceLabel(service)}) — ${name}`,
+    subject: `[${site.companyName}] Nouveau message (${serviceLabel(service)}) - ${name}`,
     text: [
       `Nom: ${name}`,
       `Email: ${email}`,

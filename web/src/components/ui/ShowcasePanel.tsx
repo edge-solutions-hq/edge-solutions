@@ -1,6 +1,7 @@
 import type {ReactNode} from 'react';
 import {cn} from '@/lib/cn';
-import {ProofMediaFrame} from '@/components/ui/ProofMediaFrame';
+import {MediaFrame} from '@/components/ui/MediaFrame';
+import {surfaceClass} from '@/components/ui/Surface';
 
 type ShowcasePanelProps = {
   eyebrow?: string;
@@ -28,7 +29,7 @@ export function ShowcasePanel({
   return (
     <section
       className={cn(
-        'not-prose grid gap-2 overflow-hidden rounded-lg border border-border/80 bg-surface/95 p-2 shadow-sm lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)]',
+        surfaceClass('feature', 'not-prose grid gap-2 overflow-hidden p-2 lg:grid-cols-[minmax(0,1.05fr)_minmax(18rem,0.95fr)]'),
         className,
       )}
     >
@@ -44,7 +45,7 @@ export function ShowcasePanel({
           </p>
         ) : null}
 
-        <h3 className="mt-3 text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+        <h3 className="mt-3 text-balance text-2xl font-semibold tracking-tight text-technical-blue sm:text-3xl">
           {title}
         </h3>
 
@@ -53,7 +54,7 @@ export function ShowcasePanel({
         </div>
       </div>
 
-      <ProofMediaFrame
+      <MediaFrame
         imageSrc={imageSrc}
         imageAlt={imageAlt}
         outerClassName={cn(
@@ -61,7 +62,7 @@ export function ShowcasePanel({
           imageFirst ? 'lg:order-1' : 'lg:order-2',
         )}
         chromeClassName="pb-3"
-        imageFrameClassName="overflow-hidden rounded-xl border border-border/70 bg-background/90 shadow-[6px_6px_0_rgba(170,142,75,0.35)]"
+        imageFrameClassName={surfaceClass('media', 'overflow-hidden bg-background/90')}
         imagePriority={imagePriority}
       />
     </section>

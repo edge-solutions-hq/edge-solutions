@@ -22,7 +22,10 @@ describe('global site profile ownership', () => {
     assert.match(profileSource, /getRootLayoutProfile/);
     assert.match(profileSource, /buildLocalizedPageMetadata/);
     assert.match(profileSource, /rootDescription/);
+    assert.match(profileSource, /personSchema/);
+    assert.match(profileSource, /jsonLd: \[organizationSchema, personSchema\]/);
     assert.match(layoutSource, /getRootLayoutProfile/);
+    assert.match(layoutSource, /profile\.jsonLd/);
     assert.doesNotMatch(layoutSource, /descriptionByLocale/);
   });
 
@@ -33,8 +36,21 @@ describe('global site profile ownership', () => {
 
     assert.deepEqual(schemaServiceTypes, [
       'AI systems & automation',
-      'Real-time 3D/VR',
+      'Real-time 3D / XR',
     ]);
     assert.match(seoSource, /serviceType: OFFER_TRACKS\.map\(\(track\) => track\.schemaServiceType\)/);
+  });
+
+  it('emits a standalone Person schema for Gil without unsupported authority claims', () => {
+    const seoSource = read('src/lib/seo.ts');
+
+    assert.match(seoSource, /export const personSchema/);
+    assert.match(seoSource, /'@type': 'Person'/);
+    assert.match(seoSource, /'@id': `\$\{site\.url\}#gil-guminski`/);
+    assert.match(seoSource, /sameAs: Object\.values\(site\.social\)/);
+    assert.match(seoSource, /'AI automation'/);
+    assert.match(seoSource, /'Real-time 3D applications'/);
+    assert.doesNotMatch(seoSource, /aggregateRating/);
+    assert.doesNotMatch(seoSource, /award/);
   });
 });

@@ -6,6 +6,7 @@ import {GridList, GridListItem} from '@/components/studio/GridList';
 import {List, ListItem} from '@/components/studio/List';
 import {PageIntro} from '@/components/studio/PageIntro';
 import {PrototypeSignals} from '@/components/mdx/PrototypeSignals';
+import {ProjectGallery} from '@/components/mdx/ProjectGallery';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ServiceFaq} from '@/components/mdx/ServiceFaq';
 import {StatList, StatListItem} from '@/components/studio/StatList';
@@ -23,6 +24,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     DeliveryBlueprint,
     PageIntro,
     PrototypeSignals,
+    ProjectGallery,
     SectionIntro,
     ServiceFaq,
     GridList,

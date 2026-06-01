@@ -1,7 +1,5 @@
 # AGENTS.md
 
-Agent-facing instructions for this repo. Keep this file practical: setup, checks, structure, and rules that help a coding agent work safely. Put strategy, design, architecture, and stack detail in their owning docs.
-
 ## Project
 
 - Public website for Edge Solutions: `edge-solutions.be`.
@@ -43,14 +41,16 @@ Next.js 16 requires Node.js 20.9 or newer. Prefer the full gate before finishing
 - Offer tracks: `web/src/lib/offer-tracks.ts`; do not rebuild service order or slugs elsewhere.
 - Content registries live under `web/src/lib/content/`.
 - Analytics contracts live under `web/src/lib/analytics/` and `docs/analytics/`.
+- Shared surface styling lives in `web/src/components/ui/Surface.tsx`; reuse those variants before adding page-specific card or panel shadows.
 
 ## Working Rules
 
 - Do not duplicate durable direction. Update the owning doc from `WEBSITE.md`'s source-of-truth order, then point other files to it.
 - For shared public copy or layout changes, preserve FR/EN/NL parity unless the task is explicitly scoped as French-only.
 - Default public authoring language is French, then translate to EN/NL.
-- Keep AI-first positioning intact: web, integration, and realtime work support the AI promise instead of competing with it.
-- Follow `WEBSITE.md`; do not add fake clients, metrics, screenshots, logos, testimonials, awards, or case studies.
+- Keep AI-first acquisition priority intact in offer order and SEO, while treating AI automation and 3D / XR as two clear project families. Do not make realtime work look like a minor add-on or turn the site into a generic agency menu.
+- Follow `WEBSITE.md`; do not add fake clients, metrics, client screenshots, logos, testimonials, awards, or case studies. Use only approved source assets from the asset authority registry.
+- For external CTA links, reuse `web/src/components/ui/ExternalLinkButton.tsx` instead of adding unicode external-arrow glyphs or one-off button classes.
 - Before changing module boundaries, read `docs/architecture.md` and preserve the named ownership seams.
 
 ## Agent Skills

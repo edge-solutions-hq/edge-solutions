@@ -1,13 +1,13 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Pragmatische AI, gecontroleerde delivery en bruikbare producten"
+    "siteTagline": "AI-automatisatie en 3D / XR-applicaties door een senior realtime developer"
   },
   "nav": {
     "home": "Home",
     "ai": "AI-systemen",
     "process": "Hoe we werken",
-    "realtime": "Realtime 3D/VR",
+    "realtime": "Realtime 3D / XR",
     "contact": "Contact",
     "mobileMenu": {
       "open": "Navigatiemenu openen",
@@ -15,89 +15,69 @@
     }
   },
   "home": {
-    "headline": "Ik help teams om hun AI-gebruik en prototypes echt bruikbaar te maken.",
-    "subheadline": "Als senior developer help ik om AI-workflows en producten te structureren, te verstevigen of te bouwen zonder black box, zonder onnodige schuld en zonder hype.",
+    "headline": "AI-, automatisatie- en 3D / XR-applicaties kaderen en bouwen.",
+    "subheadline": "Ik ben freelance developer uit de regio Luik. Ik help teams repetitief werk te automatiseren en 3D / XR-applicaties te bouwen.",
     "primaryCta": "Contacteer mij",
     "secondaryCta": "Bekijk services",
+    "profile": {
+      "eyebrow": "Over mij",
+      "title": "Het project scherp krijgen en daarna bouwen wat telt.",
+      "body": "Ik werk aan technische projecten die AI, automatisatie, web en 3D / XR combineren: de behoefte kaderen, een onderhoudbare architectuur kiezen, het teamwerk vereenvoudigen en een bruikbare basis achterlaten.",
+      "signals": {
+        "experience": {
+          "label": "Achtergrond",
+          "value": "16+ jaar in technische productie, realtime 3D en developer tools; AI-assisted development sinds eind 2024"
+        },
+        "delivery": {
+          "label": "Hoe ik help",
+          "value": "Kadering, onderhoudbare architectuur, coördinatie, optimalisatie en automatisatie"
+        },
+        "stack": {
+          "label": "Tech",
+          "value": "Unreal Engine, Unity, C++, C#, WebGL, Python, Next.js"
+        },
+        "aiStack": {
+          "label": "AI-tools",
+          "value": "OpenClaw, CrewAI, OpenCode, Codex"
+        }
+      }
+    },
     "finalCta": {
       "eyebrow": "Volgende stap",
-      "processTitle": "Een kort gesprek volstaat om te zien of het onderwerp scherp genoeg is om te kaderen.",
-      "processBody": "Het doel is om het gebruik, de risico’s en de eerste nuttige stap helder te krijgen voor het zwaarder werk wordt.",
-      "title": "Heb je een AI-workflow die betrouwbaarder moet worden?",
-      "body": "Stuur de context in enkele regels. Ik antwoord met een heldere lezing van het onderwerp en de redelijke eerste stap.",
-      "cta": "Start het gesprek"
+      "processTitle": "Een kort gesprek volstaat om de volgende stap helder te krijgen.",
+      "processBody": "We bekijken het gebruik, de risico’s en de eerste nuttige stap voor het zwaarder werk wordt.",
+      "title": "Laten we je AI- of 3D / XR-project bespreken.",
+      "body": "Stuur me de context, wat al bestaat en wat blokkeert. Ik antwoord met een eerste heldere richting.",
+      "cta": "Contacteer mij"
     },
-    "proof": {
-      "eyebrow": "Concrete proof",
-      "title": "Operationele proof nog voor afgewerkte publieke case studies",
-      "intro": "Ik toon liever methode, systemen en guardrails: hoe AI wordt afgebakend, geverifieerd en gekoppeld aan een echte businessworkflow.",
-      "cta": "Bekijk AI-dienst",
+    "showcase": {
+      "eyebrow": "Om te bekijken",
+      "title": "Een paar aanknopingspunten over hoe ik werk",
+      "intro": "Tools, kadering, technische keuzes: mijn aanpak in het kort.",
       "publicProject": {
-        "title": "Publiek project in opbouw: Rusty Art",
-        "description": "Rusty Art is een lopend publiek project. Ik gebruik het als levende testgrond voor workflows, orchestratie en productiteratie rond AI.",
+        "title": "Rusty Art, een publiek project in opbouw",
+        "description": "Rusty Art is een publiek project. Ik gebruik het om processen, orchestratie en productiteratie rond AI te testen.",
         "cta": "Bekijk Rusty Art"
-      },
-      "tokensHeading": "Wat je kan verifiëren voor je contact opneemt",
-      "tokensIntro": "Deze tekstuele proof-module bundelt publieke signalen, tools en procesguardrails die de AI-belofte makkelijker controleerbaar maken.",
-      "tokens": {
-        "publicWork": "Publiek signaal",
-        "tools": "Echte tools in gebruik",
-        "process": "Zichtbare guardrails"
-      },
-      "signals": {
-        "publicWork": {
-          "label": "Publiek signaal",
-          "value": "Rusty Art staat live en is zichtbaar",
-          "description": "Een publiek project toont een AI-workflow in uitvoering, niet alleen verkooptekst."
-        },
-        "tools": {
-          "label": "Gebruikte tools",
-          "value": "OpenClaw, TypeScript, MDX, reviews",
-          "description": "De site en proof steunen op echte tools voor delivery, automatisatie, versiebeheer van content en kwaliteitscontrole."
-        },
-        "process": {
-          "label": "Procesartefacten",
-          "value": "Prompts, rapporten, geheugen en checks",
-          "description": "Belangrijke beslissingen worden gekaderd door sources of truth, menselijke review en checkpoints voor actie."
-        }
       },
       "items": {
         "openclaw": {
-          "title": "OpenClaw-setup in dagelijks gebruik",
-          "description": "Een werkende omgeving met specialistische assistenten, geplande rapporten, duurzaam geheugen en gated acties: concrete proof van operationele AI-capaciteit."
-        },
-        "method": {
-          "title": "Menselijk geleide AI-delivery",
-          "description": "Expliciete sources of truth, versiebeheer voor prompts, quality review, guardrails en menselijke escalatie wanneer de workflow gevoelig wordt."
-        },
-        "execution": {
-          "title": "Volledige uitvoeringscapaciteit",
-          "description": "Als een use case gevalideerd is, kan ik die doortrekken tot code, automatisatie en deployment."
-        },
-        "realtime": {
-          "kicker": "Versnellen zonder vertroebelen",
-          "title": "Technische keuzes leesbaar houden, ook als delivery versnelt",
-          "body": "AI kan helpen om sneller te gaan. Het mag code, afwegingen of onderhoud achteraf niet moeilijker maken om te dragen."
-        },
-        "trust": {
-          "kicker": "Een bruikbare basis achterlaten",
-          "title": "Iets bouwen dat later opnieuw kan worden opgepakt en verbeterd",
-          "body": "Het resultaat moet begrijpelijk, onderhoudbaar en proper genoeg blijven om later zonder pijn op verder te bouwen."
+          "title": "Mijn dagelijkse AI-omgeving",
+          "description": "Ik gebruik OpenClaw en gespecialiseerde assistenten om ideeën te ordenen, werkgeheugen bij te houden, rapporten voor te bereiden en belangrijke acties te valideren."
         }
       }
     },
     "trust": {
-      "eyebrow": "Wanneer AI sneller gaat dan de structuur",
-      "title": "De situaties waarin opnieuw structuur nodig is",
-      "intro": "Veel teams experimenteren, knutselen en versnellen met AI. De echte uitdaging komt daarna: alles begrijpelijk, betrouwbaar en bruikbaar maken binnen een product- of businesscontext.",
+      "eyebrow": "Wanneer ideeën sneller gaan dan de structuur",
+      "title": "De situaties waarin ik kan helpen",
+      "intro": "Een AI-project, automatisatie of 3D / XR-applicatie kan snel vooruitgaan zonder een duidelijk genoeg kader. Mijn rol is om de basis begrijpelijk, betrouwbaar en bruikbaar te maken.",
       "items": {
         "direct": {
           "value": "Veel experimenten",
-          "label": "Ideeën, prototypes of automatiseringen gaan snel vooruit, maar zonder een basis die echt duidelijk genoeg is om te blijven bestaan"
+          "label": "Ideeën, applicaties of automatiseringen gaan snel vooruit, maar zonder een basis die echt duidelijk genoeg is om te blijven bestaan"
         },
         "delivery": {
-          "value": "Tijdswinst, minder leesbaarheid",
-          "label": "AI versnelt delen van het werk, maar code, beslissingen en eigenaarschap worden moeilijker te volgen"
+          "value": "Sneller, maar minder duidelijk",
+          "label": "Tools versnellen het werk, maar beslissingen, eigenaarschap of code worden moeilijker te volgen"
         },
         "quality": {
           "value": "Nood aan iets echts",
@@ -107,45 +87,45 @@
     },
     "process": {
       "eyebrow": "Wat ik opneem",
-      "title": "Drie manieren waarop ik meestal op een AI-onderwerp instap",
-      "intro": "Ik stap meestal in om orde te brengen in bestaand AI-gebruik, om een al bestaande basis te verstevigen, of om een AI-functionaliteit te bouwen die een echt gebruik dient.",
-      "primaryCta": "Bespreek je AI-project of prototype",
+      "title": "Een gestructureerde missie, zonder onnodige zwaarte",
+      "intro": "Of het nu om AI-automatisatie of een 3D / XR-applicatie gaat: ik start met het echte werk te begrijpen, kies een duidelijke scope en werk daarna met korte, controleerbare opleveringen.",
+      "primaryCta": "Bespreek je AI- of 3D / XR-project",
       "discovery": {
-        "kicker": "AI-workflow",
-        "title": "AI-gebruik structureren dat moeilijk te sturen wordt",
-        "body": "Helder maken waar AI echt helpt in delivery, productie of operations, en vermijden dat het een extra laag verwarring wordt.",
+        "kicker": "Startpunt",
+        "title": "De context begrijpen en de juiste invalshoek kiezen",
+        "body": "Doelen, gebruikers, repetitieve taken, technische beperkingen, beschikbare data of assets, timing: we leggen vast wat telt voor er gebouwd wordt.",
         "points": {
-          "goals": "De stappen identificeren waar AI echte hefboom geeft in plaats van extra ruis.",
-          "queries": "Gebruik, rollen en grenzen begrijpelijker maken voor het team.",
-          "plan": "Een kader zetten dat bruikbaar blijft wanneer het project groeit of van eigenaar verandert."
+          "goals": "Bepalen wat zich herhaalt en welk concreet resultaat eerst nodig is.",
+          "queries": "Rollen, grenzen en beslissingen begrijpelijker maken voor het team.",
+          "plan": "Aan het einde van deze stap: een duidelijke prioriteit en scope voor een eerste versie."
         }
       },
       "build": {
-        "kicker": "Basis verstevigen",
-        "title": "Een prototype of implementatie overnemen die al bestaat",
-        "body": "Wanneer er al een eerste versie is, gaat het werk vaak over leesbaarheid, structuur en een kwaliteitsniveau terugbrengen dat een echte productverderzetting aankan.",
+        "kicker": "Bouw",
+        "title": "Een eerste bruikbare versie ontwikkelen",
+        "body": "Automatisatie, integratie, interface, 3D / XR-scene of gerichte overname: de vorm hangt af van de nood, niet van een vaste formule.",
         "stackItems": {
-          "backend": "Vage technische keuzes herwerken",
-          "realtime": "Het project onderhoudbaarder maken",
-          "delivery": "Iets geloofwaardigs voorbereiden voor productie"
+          "backend": "Technische keuzes verduidelijken",
+          "realtime": "De basis onderhoudbaarder maken",
+          "delivery": "Regelmatig opleveren zodat er getest, bijgestuurd en beslist kan worden voor het einde."
         }
       },
       "launch": {
-        "kicker": "Gericht bouwen",
-        "title": "Een AI-functionaliteit of tool bouwen die een echt gebruik dient",
-        "body": "Wanneer er iets gebouwd moet worden, is het doel niet om AI toe te voegen om de hype te volgen. Het gaat om iets nuttigs, begrijpelijks en duurzaam op te zetten.",
+        "kicker": "Vervolg",
+        "title": "Stabiliseren en voorbereiden wat daarna komt",
+        "body": "Opschonen, documentatie, deployment, overdracht of volgende iteraties: het project moet bruikbaar blijven na mijn interventie.",
         "items": {
           "verify": {
             "step": "Het gebruik verduidelijken",
-            "body": "Bepalen wat AI echt moet verbeteren voor de gebruiker of het team."
+            "body": "Bepalen wat het project echt moet verbeteren voor de gebruiker of het team."
           },
           "publish": {
             "step": "Bouwen zonder te vertroebelen",
-            "body": "Architectuur, beslissingen en eigenaarschap leesbaar houden, ook wanneer delivery sneller gaat."
+            "body": "Architectuur, beslissingen en eigenaarschap leesbaar houden tijdens de ontwikkeling."
           },
           "measure": {
             "step": "Een bruikbare basis achterlaten",
-            "body": "Zorgen dat het project later kan worden hervat, uitgebreid of verstevigd zonder enkele weken later opnieuw te beginnen."
+            "body": "Zorgen dat het project later kan worden hervat, onderhouden of uitgebreid zonder opnieuw te beginnen."
           }
         }
       }
@@ -153,34 +133,34 @@
   },
   "services": {
     "title": "Diensten",
-    "hubTitle": "AI-first diensten voor teams die AI bruikbaar moeten maken in de praktijk",
-    "hubIntro": "Ik help eerst om AI-systemen, automatisatie en guardrails op te zetten die ook in de praktijk standhouden. Wanneer het project meer vraagt dan alleen orkestratie, neem ik ook realtime prototypes mee zodat een veelbelovende pilot geen vaag oplevertraject wordt.",
+    "hubTitle": "Diensten voor AI-automatisatie en 3D / XR-applicaties",
+    "hubIntro": "Ik vertrek bij toegepaste AI vanuit het echte werk: repetitieve taken vinden, automatiseren wat zinvol is en menselijke review houden waar dat nodig blijft. Wanneer het project interactief wordt, kan ik ook realtime 3D / XR-applicaties ontwikkelen.",
     "decisionTitle": "Sneller kiezen",
-    "decisionAi": "AI wanneer het risico operationeel is.",
-    "decisionRealtime": "3D/VR wanneer het idee visueel getest moet worden.",
+    "decisionAi": "AI wanneer repetitieve taken makkelijker moeten worden.",
+    "decisionRealtime": "3D / XR wanneer het project simulatie, configuratie of een immersieve ervaring vraagt.",
     "aiTitle": "AI-systemen & automatisatie",
-    "aiDesc": "Interne assistenten, documentworkflows, bedrijfsautomatisatie en guardrails voor productie.",
+    "aiDesc": "Audit van repetitieve taken, interne assistenten, documentverwerking en bedrijfsautomatisatie.",
     "hubAiTrigger": "Wanneer AI voorbij de test gaat",
-    "hubAiDesc": "Kies dit wanneer je een interne assistent, documentworkflow of guardrails nodig hebt voordat AI naar meer teams gaat.",
-    "hubAiProof": "Bewijs: gedocumenteerde methode, menselijke review en guardrails voor actie.",
-    "realtimeTitle": "Realtime 3D/VR",
-    "realtimeDesc": "VR-prototypes en interactieve 3D-ervaringen om te tonen, te testen en verder te verfijnen.",
-    "hubRealtimeTrigger": "Wanneer een idee zichtbaar en testbaar moet worden",
-    "hubRealtimeDesc": "Voor teams die een realtime prototype nodig hebben om een ruimtelijk, industrieel of immersief product te tonen, te testen of te verkopen vóór zwaardere productie.",
-    "hubRealtimeProof": "Bewijs: 3D-prototypes om te demonstreren, itereren en beslissen.",
+    "hubAiDesc": "Kies dit wanneer je wilt zien wat zich herhaalt, met genoeg intelligentie wilt automatiseren en het team wilt laten focussen op waar het goed in is.",
+    "hubAiCheck": "Te controleren: gedocumenteerde methode, menselijke review en actielimieten.",
+    "realtimeTitle": "Realtime 3D / XR",
+    "realtimeDesc": "Realtime 3D- en XR-applicaties voor configuratoren, simulaties, VR, augmented reality en immersieve ervaringen.",
+    "hubRealtimeTrigger": "Wanneer het project 3D / XR-interactie vraagt",
+    "hubRealtimeDesc": "Voor configuratie, simulatie, training of presentatie van een ruimtelijk, industrieel of immersief product.",
+    "hubRealtimeCheck": "Te controleren: performance, comfort, compatibiliteit en technische beslissingen.",
     "cta": "Ontdek"
   },
   "contact": {
-    "title": "Contact",
-    "intro": "Beschrijf de context, wat er al bestaat en wat geblokkeerd zit. Ik antwoord snel met een heldere kijk op wat gestructureerd, herwerkt of gebouwd moet worden.",
+    "title": "Contact voor een AI- of 3D / XR-project",
+    "modalClose": "Contactformulier sluiten",
     "fitLabel": "Goede aanleiding",
-    "fitText": "Pragmatische AI, workflowautomatisatie, interne tools, teamtraining en herstel van bestaande systemen wanneer de huidige basis het werk al blokkeert.",
+    "fitText": "Audit van repetitieve taken, procesautomatisatie, AI-assistenten, 3D / XR-applicaties en herstel van bestaande bases.",
     "form": {
       "name": "Naam",
       "email": "Email",
       "service": "Type project",
       "service_ai": "AI-systemen & automatisatie",
-      "service_realtime": "Realtime 3D/VR",
+      "service_realtime": "Realtime 3D / XR",
       "service_unsure": "Niet zeker / ander",
       "message": "Bericht",
       "namePlaceholder": "Je naam",

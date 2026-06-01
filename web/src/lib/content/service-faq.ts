@@ -12,31 +12,31 @@ export const SERVICE_FAQS: ServiceFaqMap = {
   fr: {
     'ai-automation': [
       {
-        question: 'Faut-il deja avoir un cas d’usage tres precise ?',
+        question: 'Faut-il déjà avoir un cas d’usage très précis ?',
         answer:
-          'Non. Je peux justement aider a transformer une intuition ou un besoin diffus en cas d’usage priorise et testable.',
+          'Non. Je peux commencer par auditer le travail réel, repérer les tâches répétitives et transformer une intuition en automatisation priorisée et testable.',
       },
       {
-        question: 'Faut-il deja avoir des donnees propres ?',
+        question: 'Faut-il déjà avoir des données propres ?',
         answer:
-          'Pas forcement. On peut commencer petit, auditer ce qui existe, puis remettre au propre seulement les sources qui comptent vraiment pour le premier cycle.',
+          'Pas forcément. On peut commencer petit, regarder ce qui existe, puis remettre au propre seulement les sources qui comptent vraiment pour le premier cycle.',
       },
       {
         question: 'Vous fournissez seulement des prompts ?',
         answer:
-          'Non. Je peux cadrer, prototyper, integrer, documenter et fiabiliser le flux, avec une vraie logique de supervision et de responsabilite.',
+          'Non. Je peux cadrer, développer une première version, intégrer, documenter et fiabiliser le processus, avec une vraie logique de supervision et de responsabilité.',
       },
       {
         question: 'Et si le verdict est “stop” ?',
         answer:
-          'C’est aussi un bon resultat. Le but est d’eviter qu’un sujet fragile absorbe du budget ou de l’energie sans produire de valeur exploitable.',
+          'C’est aussi un bon résultat. Le but est d’éviter qu’un sujet fragile absorbe du budget ou de l’énergie sans produire de valeur exploitable.',
       },
     ],
     'realtime-games': [
       {
         question: 'Vous pouvez partir d’un concept flou ?',
         answer:
-          'Oui. Je peux aider à clarifier le besoin, la plateforme et les risques pour proposer un plan de prototype réaliste.',
+          'Oui. Je peux aider à clarifier le besoin, la plateforme et les risques pour proposer une approche réaliste.',
       },
       {
         question: 'Quest, PCVR, ou les deux ?',
@@ -51,7 +51,7 @@ export const SERVICE_FAQS: ServiceFaqMap = {
       {
         question: 'Comment estimez-vous budget et délais ?',
         answer:
-          'Après un cadrage court, je propose une estimation par options, prototype vs. production, avec jalons clairs et risques identifiés.',
+          'Après un cadrage court, je propose une estimation par options, premier build vs. production, avec jalons clairs et risques identifiés.',
       },
     ],
   },
@@ -59,7 +59,7 @@ export const SERVICE_FAQS: ServiceFaqMap = {
     'ai-automation': [
       {
         question: 'Do we need a very precise use case already?',
-        answer: 'No. I can help turn an intuition or messy need into a prioritized and testable use case.',
+        answer: 'No. I can start by auditing the real work, spotting repeated tasks and turning an intuition into prioritized, testable automation.',
       },
       {
         question: 'Do our data sources already need to be clean?',
@@ -69,7 +69,7 @@ export const SERVICE_FAQS: ServiceFaqMap = {
       {
         question: 'Do you only provide prompts?',
         answer:
-          'No. I can scope, prototype, integrate, document and harden the workflow with real supervision and accountability around it.',
+          'No. I can scope, build a first version, integrate, document and harden the process with real supervision and accountability around it.',
       },
       {
         question: 'What if the verdict is “stop”?',
@@ -81,7 +81,7 @@ export const SERVICE_FAQS: ServiceFaqMap = {
       {
         question: 'Can you start from a fuzzy concept?',
         answer:
-          'Yes. I can help clarify the need, the platform and the main risks so the prototype plan stays realistic.',
+          'Yes. I can help clarify the need, the platform and the main risks so the approach stays realistic.',
       },
       {
         question: 'Quest, PCVR, or both?',
@@ -96,7 +96,7 @@ export const SERVICE_FAQS: ServiceFaqMap = {
       {
         question: 'How do you estimate budget and timing?',
         answer:
-          'After a short framing step, I propose options, prototype vs production, with clear milestones and identified risks.',
+          'After a short framing step, I propose options, first build vs production, with clear milestones and identified risks.',
       },
     ],
   },
@@ -105,7 +105,7 @@ export const SERVICE_FAQS: ServiceFaqMap = {
       {
         question: 'Moeten we al een heel precieze use case hebben?',
         answer:
-          'Nee. Ik kan helpen om een intuïtie of diffuus probleem om te zetten in een geprioriteerde en testbare use case.',
+          'Nee. Ik kan starten met het echte werk te auditen, repetitieve taken te vinden en een intuïtie om te zetten in geprioriteerde, testbare automatisatie.',
       },
       {
         question: 'Moeten onze bronnen al proper zijn?',
@@ -115,7 +115,7 @@ export const SERVICE_FAQS: ServiceFaqMap = {
       {
         question: 'Lever je alleen prompts?',
         answer:
-          'Nee. Ik kan de workflow afbakenen, prototypen, integreren, documenteren en hardenen met echte supervisie en duidelijke verantwoordelijkheid.',
+          'Nee. Ik kan het proces afbakenen, een eerste versie bouwen, integreren, documenteren en verstevigen met echte supervisie en duidelijke verantwoordelijkheid.',
       },
       {
         question: 'Wat als het verdict “stop” is?',
@@ -127,7 +127,7 @@ export const SERVICE_FAQS: ServiceFaqMap = {
       {
         question: 'Kan je starten van een vaag concept?',
         answer:
-          'Ja. Ik kan helpen om behoefte, platform en grootste risico’s te verduidelijken zodat het prototypeplan realistisch blijft.',
+          'Ja. Ik kan helpen om behoefte, platform en grootste risico’s te verduidelijken zodat de aanpak realistisch blijft.',
       },
       {
         question: 'Quest, PCVR of allebei?',
@@ -142,7 +142,7 @@ export const SERVICE_FAQS: ServiceFaqMap = {
       {
         question: 'Hoe schat je budget en timing in?',
         answer:
-          'Na een korte framing stap stel ik opties voor, prototype versus productie, met duidelijke mijlpalen en geïdentificeerde risico’s.',
+          'Na een korte framing stap stel ik opties voor, eerste build versus productie, met duidelijke mijlpalen en geïdentificeerde risico’s.',
       },
     ],
   },

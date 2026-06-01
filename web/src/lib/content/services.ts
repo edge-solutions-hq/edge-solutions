@@ -5,11 +5,11 @@ import {
   type OfferTrackSlug,
 } from '../offer-tracks';
 import {
-  getOfferTrackProofContract,
-  getOfferTrackProofProfile,
-  type OfferTrackProofContract,
-  type OfferTrackProofProfile,
-} from './proof-registry';
+  getOfferTrackEvidenceContract,
+  getOfferTrackEvidenceProfile,
+  type OfferTrackEvidenceContract,
+  type OfferTrackEvidenceProfile,
+} from './service-evidence-registry';
 
 export type ServiceSlug = OfferTrackSlug;
 export const SERVICE_SLUGS = OFFER_TRACK_SLUGS;
@@ -40,8 +40,8 @@ export type ServiceContentAvailabilityHit = ServiceContentAvailabilityBase & {
     requestedLocale: Locale;
     contentLocale: Locale;
   };
-  proof: OfferTrackProofProfile;
-  proofContract: OfferTrackProofContract;
+  evidence: OfferTrackEvidenceProfile;
+  evidenceContract: OfferTrackEvidenceContract;
   module: MdxModule;
   metadata: {
     title?: string;
@@ -120,9 +120,9 @@ export async function getServiceContentAvailability(
     };
   }
 
-  const proof = getOfferTrackProofProfile(typedSlug);
-  const proofContract = getOfferTrackProofContract(typedSlug);
-  if (!proof || !proofContract) {
+  const evidence = getOfferTrackEvidenceProfile(typedSlug);
+  const evidenceContract = getOfferTrackEvidenceContract(typedSlug);
+  if (!evidence || !evidenceContract) {
     return {
       status: 'missing_fallback',
       slug: typedSlug,
@@ -154,8 +154,8 @@ export async function getServiceContentAvailability(
         requestedLocale: safeLocale,
         contentLocale: safeLocale,
       },
-      proof,
-      proofContract,
+      evidence,
+      evidenceContract,
       module: loaded.module,
       metadata: loaded.module.metadata ?? {},
     };
@@ -192,8 +192,8 @@ export async function getServiceContentAvailability(
       requestedLocale: safeLocale,
       contentLocale: 'fr',
     },
-    proof,
-    proofContract,
+    evidence,
+    evidenceContract,
     module: loadedFallback.module,
     metadata: loadedFallback.module.metadata ?? {},
   };

@@ -2,6 +2,8 @@ import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {ButtonLink} from '@/components/ui/Button';
+import {ExternalLinkButton} from '@/components/ui/ExternalLinkButton';
+import {surfaceClass} from '@/components/ui/Surface';
 import {TrackedLink} from '@/components/ui/TrackedLink';
 import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {Container} from '@/components/studio/Container';
@@ -18,34 +20,25 @@ type Props = {
   params: Promise<{locale: string}>;
 };
 
-function homeOfferCardFrame(service: HomeOfferCard) {
-  return [
-    'group relative flex w-full flex-col overflow-hidden rounded-lg border bg-surface p-6 pt-8 no-underline shadow-[6px_6px_0_rgba(170,142,75,0.34)] transition-colors hover:bg-surface-muted hover:shadow-[4px_4px_0_rgba(170,142,75,0.48)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
-    service.visualRole === 'primary-offer'
-      ? 'border-primary/70'
-      : 'border-border',
-  ].join(' ');
+function homeOfferCardFrame() {
+  return surfaceClass(
+    'interactive-card',
+    'group relative flex w-full flex-col overflow-hidden p-6 pt-8 no-underline'
+  );
 }
 
-function homeOfferGridItemClass(service: HomeOfferCard) {
-  return [
-    'flex',
-    service.visualGroup === 'ai-primary' ? 'md:col-span-2 xl:col-span-2' : '',
-  ].join(' ');
+function homeOfferGridItemClass() {
+  return 'flex';
 }
 
-function homeOfferTitleClass(service: HomeOfferCard) {
-  return service.visualEmphasis === 'high'
-    ? 'text-xl font-semibold tracking-tight'
-    : 'text-lg font-semibold';
+function homeOfferTitleClass() {
+  return 'text-lg font-semibold';
 }
 
 function HomeOfferBlueprintIcon({service}: {service: HomeOfferCard}) {
   const frameClass = [
     'pointer-events-none relative mb-5 flex h-14 w-14 items-center justify-center rounded-md border bg-background/55 text-foreground shadow-[inset_0_0_0_1px_rgba(194,164,91,0.25)]',
-    service.visualRole === 'primary-offer'
-      ? 'border-primary/75 bg-primary/10'
-      : 'border-border/75 bg-background/45',
+    'border-border/75 bg-background/45',
   ].join(' ');
 
   return (
@@ -87,31 +80,8 @@ function HomeOfferBlueprintIcon({service}: {service: HomeOfferCard}) {
 }
 
 const homeSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
-const homeTokenSectionGap = 'mt-10 sm:mt-12 lg:mt-16';
+const homeTokenSectionGap = 'mt-12 sm:mt-16 lg:mt-20';
 const homeSectionContentGap = 'mt-8 lg:mt-10';
-
-function HeroTechnicalAccent({poster = false}: {poster?: boolean}) {
-  const sizeClass = poster
-    ? 'h-36 w-36 sm:h-44 sm:w-44'
-    : 'h-24 w-24 sm:h-32 sm:w-32 lg:h-56 lg:w-56';
-
-  return (
-    <div
-      className={`pointer-events-none relative shrink-0 ${sizeClass}`}
-      aria-hidden="true"
-    >
-      <div className="absolute inset-0 rounded-lg border border-border/70 bg-[linear-gradient(135deg,rgba(200,210,204,0.7),rgba(244,238,214,0.28)_48%,rgba(170,142,75,0.42))] shadow-[6px_6px_0_rgba(170,142,75,0.3)]" />
-      <div className="absolute inset-3 rotate-45 rounded-md border border-border bg-surface/70 shadow-inner sm:inset-4" />
-      <div className="absolute inset-7 rotate-45 rounded-sm border border-primary/80 bg-primary/45 sm:inset-9 lg:inset-16" />
-      <div className="absolute left-2 top-1/2 h-px w-10 -translate-y-1/2 bg-border/70 sm:w-14 lg:w-24" />
-      <div className="absolute right-2 top-1/2 h-px w-10 -translate-y-1/2 bg-border/70 sm:w-14 lg:w-24" />
-      <div className="absolute left-1/2 top-2 h-10 w-px -translate-x-1/2 bg-border/70 sm:h-14 lg:h-24" />
-      <div className="absolute bottom-2 left-1/2 h-10 w-px -translate-x-1/2 bg-border/70 sm:h-14 lg:h-24" />
-      <div className="absolute -right-2 bottom-3 h-8 w-8 rounded-full border border-primary bg-background/80 shadow-[3px_3px_0_rgba(170,142,75,0.32)] sm:h-10 sm:w-10 lg:h-14 lg:w-14" />
-      <div className="absolute -left-1 top-4 h-5 w-5 rounded-full border border-border/70 bg-[#c8d2cc]/70 sm:h-6 sm:w-6 lg:top-8" />
-    </div>
-  );
-}
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
   const {locale} = await params;
@@ -136,36 +106,29 @@ export default async function HomePage({params}: Props) {
           <Container className="not-prose">
             <FadeIn
               initiallyVisible
-              className="relative overflow-hidden rounded-lg border border-border bg-surface/90 p-4 shadow-[8px_8px_0_rgba(170,142,75,0.3)] sm:p-6 lg:rounded-none lg:border-x-0 lg:bg-transparent lg:px-0 lg:py-10 lg:shadow-none"
+              className="relative overflow-hidden rounded-lg border border-border/70 bg-surface/90 p-4 shadow-[6px_6px_0_rgba(170,142,75,0.26)] sm:p-6 lg:rounded-none lg:border-x-0 lg:border-b lg:border-t lg:bg-transparent lg:px-0 lg:py-8 lg:shadow-none"
             >
               <div
-                className="pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgba(16,43,74,0.09)_1px,transparent_1px),linear-gradient(180deg,rgba(16,43,74,0.06)_1px,transparent_1px)] bg-[length:3rem_3rem]"
-                aria-hidden="true"
-              />
-              <div
-                className="pointer-events-none absolute inset-x-4 top-4 flex items-center gap-2 sm:inset-x-6 lg:hidden"
+                className="pointer-events-none absolute inset-x-4 top-4 flex items-center gap-2 opacity-60 sm:inset-x-6 lg:hidden"
                 aria-hidden="true"
               >
                 <span className="h-px flex-1 bg-[repeating-linear-gradient(90deg,rgba(16,43,74,0.68)_0_0.55rem,transparent_0.55rem_0.8rem)]" />
                 <span className="h-2 w-2 rounded-full border border-primary bg-background/90" />
                 <span className="h-px w-12 bg-primary/65" />
               </div>
-              <div className="pointer-events-none absolute -right-8 top-16 z-0 opacity-90 sm:-right-4 sm:top-20 lg:hidden">
-                <HeroTechnicalAccent poster />
-              </div>
-              <div className="relative z-10 grid gap-7 pt-6 sm:pt-7 lg:grid-cols-[minmax(0,1fr)_16rem] lg:items-start lg:gap-10 lg:pt-0">
+              <div className="relative z-10 pt-6 sm:pt-7 lg:pt-0">
                 <div>
                   <div className="grid items-start lg:grid-cols-1">
-                    <p className="text-xs font-semibold uppercase tracking-normal text-muted-foreground">
+                    <p className="max-w-3xl text-xs font-semibold uppercase tracking-normal text-muted-foreground">
                       {t('home.subheadline')}
                     </p>
                   </div>
 
-                  <h1 className="relative z-10 mt-5 max-w-5xl text-balance pr-8 font-display text-5xl font-extrabold uppercase leading-[0.86] tracking-normal text-foreground sm:pr-24 sm:text-7xl sm:leading-[0.84] lg:mt-4 lg:pr-0 lg:text-8xl">
+                  <h1 className="relative z-10 mt-5 max-w-4xl text-balance font-display text-4xl font-extrabold uppercase leading-[0.94] tracking-normal text-technical-blue sm:text-5xl sm:leading-[0.92] lg:mt-4 lg:text-6xl">
                     {t('home.headline')}
                   </h1>
 
-                  <div className="mt-6 grid gap-5 border-t border-border pt-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+                  <div className="mt-6 grid gap-5 border-t border-border/70 pt-5 md:grid-cols-[minmax(0,1fr)_auto] md:items-center">
                     <p className="max-w-2xl text-lg leading-relaxed text-muted-foreground">
                       {t('meta.siteTagline')}
                     </p>
@@ -184,10 +147,6 @@ export default async function HomePage({params}: Props) {
                     </div>
                   </div>
                 </div>
-
-                <div className="hidden justify-end lg:flex">
-                  <HeroTechnicalAccent />
-                </div>
               </div>
             </FadeIn>
           </Container>
@@ -196,15 +155,15 @@ export default async function HomePage({params}: Props) {
         <section className={homeSectionGap}>
           <SectionIntro title={t('services.title')} />
 
-          <FadeInStagger className={`${homeSectionContentGap} grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3`}>
+          <FadeInStagger className={`${homeSectionContentGap} grid grid-cols-1 gap-6 md:grid-cols-2`}>
             {serviceCards.map((service) => (
-              <FadeIn key={service.slug} className={homeOfferGridItemClass(service)}>
+              <FadeIn key={service.slug} className={homeOfferGridItemClass()}>
                 <TrackedLink
                   href={service.href}
                   aria-label={service.label}
                   offerTrackSlug={service.slug}
                   trackingPlacement="home_services_grid"
-                  className={homeOfferCardFrame(service)}
+                  className={homeOfferCardFrame()}
                 >
                   <div
                     className="pointer-events-none absolute inset-x-5 top-4 flex items-center gap-2"
@@ -227,7 +186,7 @@ export default async function HomePage({params}: Props) {
                   <HomeOfferBlueprintIcon service={service} />
 
                   <div className="relative z-10 flex items-start justify-between gap-4">
-                    <div className={homeOfferTitleClass(service)}>{service.label}</div>
+                    <div className={homeOfferTitleClass()}>{service.label}</div>
                     <span
                       className="mt-0.5 text-sm text-subtle-foreground transition group-hover:translate-x-0.5 motion-reduce:transition-none"
                       aria-hidden="true"
@@ -255,21 +214,50 @@ export default async function HomePage({params}: Props) {
           </FadeInStagger>
         </section>
 
+        <section className={homeSectionGap}>
+          <FadeIn className={surfaceClass('panel', 'grid gap-8 p-6 md:p-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start')}>
+            <div>
+              <h2 className="max-w-2xl text-balance font-display text-3xl font-bold leading-[0.98] tracking-normal text-technical-blue sm:text-4xl">
+                {t('home.profile.title')}
+              </h2>
+              <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
+                {t('home.profile.body')}
+              </p>
+            </div>
+
+            <dl className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+              {['experience', 'delivery', 'stack', 'aiStack'].map((signal) => (
+                <div
+                  key={signal}
+                  className={surfaceClass('inset', 'p-4')}
+                >
+                  <dt className="text-xs font-semibold uppercase text-subtle-foreground">
+                    {t(`home.profile.signals.${signal}.label`)}
+                  </dt>
+                  <dd className="mt-2 text-sm font-semibold leading-relaxed text-foreground">
+                    {t(`home.profile.signals.${signal}.value`)}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </FadeIn>
+        </section>
+
         <section className={homeTokenSectionGap}>
-          <SectionIntro eyebrow={t('home.proof.eyebrow')} title={t('home.proof.title')}>
-            <p>{t('home.proof.intro')}</p>
+          <SectionIntro eyebrow={t('home.showcase.eyebrow')} title={t('home.showcase.title')}>
+            <p>{t('home.showcase.intro')}</p>
           </SectionIntro>
 
           <ShowcasePanel
             className={homeSectionContentGap}
-            eyebrow={home.publicProof.eyebrow}
-            title={home.publicProof.title}
-            imageSrc={home.publicProof.imageSrc}
-            imageAlt={home.publicProof.imageAlt}
+            eyebrow={home.publicProject.eyebrow}
+            title={home.publicProject.title}
+            imageSrc={home.publicProject.imageSrc}
+            imageAlt={home.publicProject.imageAlt}
             imagePriority
           >
-            <p>{home.publicProof.description}</p>
-            <p>{home.publicProof.supportText}</p>
+            <p>{home.publicProject.description}</p>
+            <p>{home.publicProject.supportText}</p>
             <div className="flex flex-wrap gap-2">
               {serviceCards.map((service) => (
                 <span
@@ -280,55 +268,13 @@ export default async function HomePage({params}: Props) {
                 </span>
               ))}
             </div>
-            <a href={home.publicProof.href} target="_blank" rel="noreferrer">
-              {home.publicProof.ctaLabel} <span aria-hidden="true">↗</span>
-            </a>
+            <ExternalLinkButton
+              href={home.publicProject.href}
+              className="!no-underline"
+            >
+              {home.publicProject.ctaLabel}
+            </ExternalLinkButton>
           </ShowcasePanel>
-
-          <FadeIn className="mt-6 grid gap-6 rounded-lg border border-border bg-surface/90 p-6 shadow-sm md:mt-8 md:p-8 lg:grid-cols-[minmax(0,1.45fr)_minmax(18rem,0.55fr)]">
-            <div>
-              <div className="max-w-2xl">
-                <p className="text-sm font-semibold text-foreground">
-                  {t('home.proof.tokensHeading')}
-                </p>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                  {t('home.proof.tokensIntro')}
-                </p>
-              </div>
-              <dl className="mt-6 grid grid-cols-1 gap-6 md:grid-cols-3">
-                {home.proofSignals.map((signal) => (
-                  <div key={signal.label}>
-                    <div className="mb-3 inline-flex rounded-full border border-border bg-background/80 px-3 py-1 text-xs font-semibold text-subtle-foreground">
-                      {signal.token}
-                    </div>
-                    <dt className="text-xs font-semibold uppercase text-subtle-foreground">
-                      {signal.label}
-                    </dt>
-                    <dd className="mt-2 text-base font-semibold tracking-tight text-foreground">
-                      {signal.value}
-                    </dd>
-                    <dd className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                      {signal.description}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-
-            <div className="flex flex-col justify-between border-t border-border pt-6 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
-              <p className="text-sm font-semibold text-foreground">
-                {t('services.aiTitle')}
-              </p>
-              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                {t('services.aiDesc')}
-              </p>
-              <div className="not-prose mt-5">
-                <ButtonLink href={home.proofCta.href} variant="outline" size="lg">
-                  {t('home.proof.cta')}
-                </ButtonLink>
-              </div>
-            </div>
-          </FadeIn>
         </section>
 
         <section
@@ -346,7 +292,7 @@ export default async function HomePage({params}: Props) {
 
           <FadeIn
             initiallyVisible
-            className={`${homeSectionContentGap} grid gap-8 rounded-lg border border-border bg-surface p-6 shadow-sm md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]`}
+            className={surfaceClass('panel', `${homeSectionContentGap} grid gap-8 p-6 md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]`)}
           >
             <ol className="divide-y divide-border">
               {home.processCards.map((card, index) => (
@@ -364,7 +310,7 @@ export default async function HomePage({params}: Props) {
                     <div className="text-sm font-semibold text-foreground">
                       {card.kicker}
                     </div>
-                    <h3 className="mt-2 text-lg font-semibold tracking-tight">
+                    <h3 className="mt-2 text-lg font-semibold tracking-tight text-technical-blue">
                       {card.title}
                     </h3>
                     <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -382,7 +328,7 @@ export default async function HomePage({params}: Props) {
               <p className="text-sm font-semibold text-foreground">
                 {t('home.finalCta.eyebrow')}
               </p>
-              <h3 className="mt-3 text-2xl font-semibold tracking-tight">
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-technical-blue">
                 {t('home.finalCta.processTitle')}
               </h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -394,24 +340,27 @@ export default async function HomePage({params}: Props) {
 
         <section
           aria-labelledby="home-final-cta"
-          className={`${homeSectionGap} bg-secondary py-10 text-secondary-foreground shadow-[0_-1px_0_rgba(170,142,75,0.72),0_1px_0_rgba(170,142,75,0.72)] sm:py-12`}
+          className={homeSectionGap}
         >
-          <Container className="not-prose">
+          <Container
+            className="not-prose"
+            innerClassName="max-w-6xl px-6 lg:max-w-6xl"
+          >
             <FadeIn
               initiallyVisible
-              className="flex flex-col gap-6 border-y border-primary/70 py-6 sm:flex-row sm:items-center sm:justify-between sm:py-7"
+              className={surfaceClass('panel', 'grid gap-6 p-6 sm:p-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center')}
             >
-              <div className="max-w-2xl">
-                <p className="text-xs font-semibold uppercase tracking-wide text-primary">
+              <div className="max-w-3xl">
+                <p className="text-xs font-semibold uppercase tracking-normal text-subtle-foreground">
                   {t('home.finalCta.eyebrow')}
                 </p>
                 <h2
                   id="home-final-cta"
-                  className="mt-2 text-xl font-semibold tracking-tight text-secondary-foreground sm:text-2xl"
+                  className="mt-2 text-balance text-2xl font-semibold tracking-tight text-technical-blue sm:text-3xl"
                 >
                   {t('home.finalCta.title')}
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-secondary-foreground/80">
+                <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
                   {t('home.finalCta.body')}
                 </p>
               </div>
@@ -420,7 +369,7 @@ export default async function HomePage({params}: Props) {
                 href={home.ctas.bottomPrimary.href}
                 size="lg"
                 trackingPlacement={home.ctas.bottomPrimary.trackingPlacement}
-                className="w-full shrink-0 shadow-[3px_3px_0_rgba(242,237,215,0.22)] hover:shadow-[2px_2px_0_rgba(242,237,215,0.28)] sm:w-auto"
+                className="w-full shrink-0 sm:w-auto"
               >
                 {t('home.finalCta.cta')}
               </ButtonLink>

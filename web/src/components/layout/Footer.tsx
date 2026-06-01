@@ -13,37 +13,46 @@ export async function Footer() {
   ];
 
   return (
-    <footer className="border-t border-border py-12">
-      <div className="mx-auto grid max-w-6xl gap-8 px-6 md:grid-cols-3">
+    <footer className="mt-16 border-t border-primary bg-secondary text-secondary-foreground">
+      <div className="overflow-hidden border-b border-primary/65 py-3">
+        <div
+          className="whitespace-nowrap font-display text-5xl font-extrabold uppercase leading-none tracking-normal text-primary sm:text-6xl"
+          aria-hidden="true"
+        >
+          Edge Solutions · Edge Solutions · Edge Solutions · Edge Solutions ·
+        </div>
+      </div>
+
+      <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-3">
         <div className="space-y-2">
-          <div className="text-sm font-semibold text-foreground">
+          <div className="text-sm font-semibold text-secondary-foreground">
             {site.personalBrand} · {site.companyName}
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-secondary-foreground/75">
             <a
-              className="text-link underline underline-offset-4 decoration-link/30 transition-colors hover:decoration-link motion-reduce:transition-none"
+              className="text-secondary-foreground underline underline-offset-4 decoration-primary/60 transition-colors hover:decoration-secondary-foreground motion-reduce:transition-none"
               href={`mailto:${site.contactEmail}`}
             >
               {site.contactEmail}
             </a>
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-secondary-foreground/75">
             {site.vatNumber}
           </div>
         </div>
 
         <div className="space-y-2">
-          <div className="text-sm font-semibold text-foreground">
+          <div className="text-sm font-semibold text-secondary-foreground">
             {t('footer.links')}
           </div>
-          <ul className="space-y-1 text-sm text-muted-foreground">
+          <ul className="space-y-1 text-sm text-secondary-foreground/75">
             {links.map((l) => (
               <li key={l.label}>
                 <a
                   href={l.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-link underline underline-offset-4 decoration-link/30 transition-colors hover:decoration-link motion-reduce:transition-none"
+                  className="text-secondary-foreground underline underline-offset-4 decoration-primary/60 transition-colors hover:decoration-secondary-foreground motion-reduce:transition-none"
                 >
                   {l.label}
                 </a>
@@ -51,17 +60,17 @@ export async function Footer() {
             ))}
           </ul>
           {!site.social.github ? (
-            <div className="text-xs text-subtle-foreground">
+            <div className="text-xs text-secondary-foreground/65">
               GitHub : à renseigner
             </div>
           ) : null}
         </div>
 
         <div className="space-y-2">
-          <div className="text-sm font-semibold text-foreground">
+          <div className="text-sm font-semibold text-secondary-foreground">
             edge-solutions.be
           </div>
-          <div className="text-sm text-muted-foreground">
+          <div className="text-sm text-secondary-foreground/75">
             {t('footer.copyright', {year: new Date().getFullYear()})}
           </div>
         </div>

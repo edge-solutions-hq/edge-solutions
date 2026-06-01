@@ -38,6 +38,17 @@ describe('contact form model behavior', () => {
     assert.equal(contactIntake.extractContactSubmitService(formData), undefined);
   });
 
+  it('resolves contact service query params for preselected CTAs', () => {
+    assert.equal(contactIntake.resolveContactServiceSearchParam('ai'), 'ai');
+    assert.equal(contactIntake.resolveContactServiceSearchParam('realtime'), 'realtime');
+    assert.equal(contactIntake.resolveContactServiceSearchParam(['realtime', 'ai']), 'realtime');
+    assert.equal(contactIntake.resolveContactServiceSearchParam('unknown'), undefined);
+    assert.equal(contactIntake.resolveContactServiceSearchParam(undefined), undefined);
+    assert.equal(contactIntake.resolveContactServiceTarget('/contact?service=ai'), 'ai');
+    assert.equal(contactIntake.resolveContactServiceTarget('/fr/contact?service=realtime'), 'realtime');
+    assert.equal(contactIntake.resolveContactServiceTarget('/contact?service=unknown'), undefined);
+  });
+
   it('resolves feedback message keys and fallbacks for the contact adapter', () => {
     assert.deepEqual(
       contactIntake.resolveContactFeedback({status: 'idle'}),

@@ -1,6 +1,6 @@
 <svg width="1400" height="1000" viewBox="0 0 1400 1000" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
-  <title id="title">Edge Solutions proof board</title>
-  <desc id="desc">Schematic proof board showing AI planning, delivery checks, realtime prototyping, and a shared verification rail.</desc>
+  <title id="title">Edge Solutions work board</title>
+  <desc id="desc">Schematic work board showing AI planning, delivery checks, realtime prototyping, and a shared verification rail.</desc>
 
   <rect width="1400" height="1000" rx="44" fill="#102B4A"/>
   <rect x="44" y="44" width="1312" height="912" rx="36" fill="#F2EDD7"/>

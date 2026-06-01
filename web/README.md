@@ -2,7 +2,7 @@
 
 Next.js 16 App Router app for `edge-solutions.be`.
 
-Before changing website strategy, copy, design, SEO, proof, or analytics behavior, read `../WEBSITE.md`.
+Before changing website strategy, copy, design, SEO, public source material, or analytics behavior, read `../WEBSITE.md`.
 Package management uses pnpm. If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example `corepack pnpm install`.
 
 ## Getting Started
@@ -53,4 +53,4 @@ pnpm run check
 
 Use `pnpm run check:seo:live` only when a change depends on deployed/live SEO behavior.
 
-Website strategy, positioning, design, proof, SEO, and escalation rules live in `../WEBSITE.md` and the owner docs it lists.
+Website strategy, positioning, design, source material, SEO, and escalation rules live in `../WEBSITE.md` and the owner docs it lists.

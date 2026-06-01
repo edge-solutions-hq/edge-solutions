@@ -6,6 +6,7 @@ register(new URL('./ts-extension-resolver.mjs', import.meta.url));
 
 const {LOCALES} = await import('../src/i18n/routing.ts');
 const {
+  classifyAiReferrer,
   createBrowserAnalyticsContext,
   currentBrowserPagePath,
   readBrowserAnalyticsContext,
@@ -89,6 +90,42 @@ describe('browser analytics context', () => {
         page_location: 'https://example.com/fr/services?source=hero',
         page_title: 'Edge Solutions',
         page_referrer: 'https://referrer.example/path',
+        source_offer_track: undefined,
+      }
+    );
+  });
+
+  it('classifies AI referrers without retaining prompt or query details', () => {
+    assert.equal(classifyAiReferrer('https://chatgpt.com/c/abc?prompt=private'), 'chatgpt');
+    assert.equal(classifyAiReferrer('https://www.perplexity.ai/search?q=private'), 'perplexity');
+    assert.equal(classifyAiReferrer('https://gemini.google.com/app/123'), 'gemini');
+    assert.equal(classifyAiReferrer('https://claude.ai/chat/123'), 'claude');
+    assert.equal(classifyAiReferrer('https://copilot.microsoft.com/chats/123'), 'copilot');
+    assert.equal(classifyAiReferrer('https://www.bing.com/chat?q=private'), 'copilot');
+    assert.equal(classifyAiReferrer('not a url'), undefined);
+    assert.equal(classifyAiReferrer('https://example.com/search?q=private'), undefined);
+
+    assert.deepEqual(
+      createBrowserAnalyticsContext({
+        document: fakeDocument({
+          lang: 'en',
+          title: 'Contact',
+          referrer: 'https://chatgpt.com/c/abc?prompt=private',
+        }),
+        location: fakeLocation({
+          href: 'https://example.com/en/contact',
+          pathname: '/en/contact',
+          search: '',
+        }),
+      }),
+      {
+        ai_referrer: 'chatgpt',
+        page_family: 'contact',
+        site_locale: 'en',
+        page_path: '/en/contact',
+        page_location: 'https://example.com/en/contact',
+        page_title: 'Contact',
+        page_referrer: 'https://chatgpt.com',
         source_offer_track: undefined,
       }
     );

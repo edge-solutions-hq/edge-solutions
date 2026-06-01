@@ -102,9 +102,9 @@ describe('tracked link target behavior', () => {
       trackedLinkTarget.hrefToTrackedTarget({
         pathname: '/services/ai-automation',
         query: {source: 'home', tags: ['ai', null, 'ops'], empty: undefined},
-        hash: 'proof',
+        hash: 'details',
       }),
-      '/services/ai-automation?source=home&tags=ai&tags=ops#proof'
+      '/services/ai-automation?source=home&tags=ai&tags=ops#details'
     );
   });
 

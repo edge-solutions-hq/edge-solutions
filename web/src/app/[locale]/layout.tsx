@@ -10,6 +10,7 @@ import {routing} from '@/i18n/routing';
 import '@/styles/globals.css';
 import {Header} from '@/components/layout/Header';
 import {Footer} from '@/components/layout/Footer';
+import {ContactModalProvider} from './contact/ContactModalProvider';
 import {GoogleAnalytics} from '@/components/analytics/GoogleAnalytics';
 import {GoogleTagManager} from '@/components/analytics/GoogleTagManager';
 import {JsonLd} from '@/components/seo/JsonLd';
@@ -56,14 +57,16 @@ export default async function LocaleLayout({children, params}: Props) {
   return (
     <html lang={locale}>
       <body
-        className={`${inter.variable} ${archivoNarrow.variable} ${firaCode.variable} antialiased`}
+        className={`${inter.variable} ${archivoNarrow.variable} ${firaCode.variable} flex min-h-dvh flex-col antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <Header locale={locale} />
-          <main className="mx-auto max-w-6xl px-6 py-12 md:py-14">{children}</main>
-          <Footer />
+          <ContactModalProvider>
+            <Header locale={locale} />
+            <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-12 md:py-14">{children}</main>
+            <Footer />
+          </ContactModalProvider>
         </NextIntlClientProvider>
-        <JsonLd data={profile.organizationSchema} />
+        <JsonLd data={profile.jsonLd} />
         {analyticsConfig.gtmId ? <GoogleTagManager containerId={analyticsConfig.gtmId} /> : null}
         {analyticsConfig.gaMeasurementId ? (
           <Suspense fallback={null}>

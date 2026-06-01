@@ -1,7 +1,8 @@
 import type {ReactNode} from 'react';
 
 import {cn} from '@/lib/cn';
-import {ProofMediaFrame} from '@/components/ui/ProofMediaFrame';
+import {MediaFrame} from '@/components/ui/MediaFrame';
+import {surfaceClass} from '@/components/ui/Surface';
 
 type DeliveryBlueprintColumn = {
   label: string;
@@ -35,7 +36,7 @@ export function DeliveryBlueprint({
   return (
     <section
       className={cn(
-        'not-prose overflow-hidden rounded-lg border-2 border-border bg-surface shadow-[6px_6px_0_var(--primary)]',
+        surfaceClass('feature', 'not-prose overflow-hidden'),
         className,
       )}
     >
@@ -46,7 +47,7 @@ export function DeliveryBlueprint({
               {eyebrow}
             </p>
           ) : null}
-          <h3 className="mt-3 max-w-2xl text-balance text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
+          <h3 className="mt-3 max-w-2xl text-balance text-2xl font-semibold tracking-tight text-technical-blue sm:text-3xl">
             {title}
           </h3>
           <div className="mt-5 max-w-2xl space-y-4 text-sm leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-foreground">
@@ -70,11 +71,11 @@ export function DeliveryBlueprint({
       </div>
 
       <div className="border-b border-border bg-[linear-gradient(90deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,var(--surface-muted),var(--surface))] bg-[length:28px_28px,28px_28px,auto] px-4 py-4 md:px-6 md:py-6">
-        <ProofMediaFrame
+        <MediaFrame
           imageSrc={imageSrc}
           imageAlt={imageAlt}
           imagePriority
-          outerClassName="overflow-hidden rounded-lg border border-border/70 bg-surface shadow-[6px_6px_0_color-mix(in_srgb,var(--primary)_35%,transparent)]"
+          outerClassName={surfaceClass('media', 'overflow-hidden')}
           chromeClassName="border-b border-border/70 px-4 py-3"
         />
       </div>
@@ -91,7 +92,7 @@ export function DeliveryBlueprint({
             <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
               {column.label}
             </p>
-            <h4 className="mt-2 text-lg font-semibold tracking-tight text-foreground">
+            <h4 className="mt-2 text-lg font-semibold tracking-tight text-technical-blue">
               {column.title}
             </h4>
             <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">

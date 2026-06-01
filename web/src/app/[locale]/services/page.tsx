@@ -2,6 +2,7 @@ import type {Metadata} from 'next';
 import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {TrackedLink} from '@/components/ui/TrackedLink';
+import {surfaceClass} from '@/components/ui/Surface';
 import {getServicesDecisionItems, getServicesHubOfferCards} from '@/lib/offer-presentation';
 import {getServicesPageProfile} from '@/lib/page-profiles';
 import {JsonLd} from '@/components/seo/JsonLd';
@@ -24,17 +25,17 @@ function servicesDecisionItemClass(item: ServicesDecisionItem) {
 
 function servicesOfferCardClass(service: ServicesHubOfferCard) {
   return [
-    'group relative overflow-hidden rounded-lg border bg-surface p-6 pt-8 shadow-[6px_6px_0_rgba(170,142,75,0.28)] transition-colors hover:bg-surface-muted hover:shadow-[4px_4px_0_rgba(170,142,75,0.44)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
+    surfaceClass('interactive-card', 'group relative overflow-hidden p-6 pt-8'),
     service.visualRole === 'primary-offer'
       ? 'border-primary/65 md:col-span-2 xl:col-span-2'
-      : 'border-border',
+      : undefined,
   ].join(' ');
 }
 
 function servicesOfferTitleClass(service: ServicesHubOfferCard) {
   return service.visualEmphasis === 'high'
-    ? 'text-xl font-semibold tracking-tight'
-    : 'text-lg font-semibold';
+    ? 'text-xl font-semibold tracking-tight text-technical-blue'
+    : 'text-lg font-semibold text-technical-blue';
 }
 
 export async function generateMetadata({params}: Props): Promise<Metadata> {
@@ -58,7 +59,7 @@ export default async function ServicesIndexPage({params}: Props) {
       />
 
       <header className="max-w-3xl space-y-3">
-        <h1 className="text-3xl font-semibold tracking-tight">
+        <h1 className="text-3xl font-semibold tracking-tight text-technical-blue">
           {t('services.hubTitle')}
         </h1>
 
@@ -69,7 +70,7 @@ export default async function ServicesIndexPage({params}: Props) {
 
       <section
         aria-labelledby="services-decision-strip"
-        className="rounded-lg border border-border bg-surface p-5"
+        className={surfaceClass('card', 'p-5')}
       >
         <h2
           id="services-decision-strip"
@@ -135,7 +136,7 @@ export default async function ServicesIndexPage({params}: Props) {
             </p>
 
             <p className="relative z-10 mt-4 border-t border-border pt-4 text-sm leading-6 text-foreground">
-              {service.proofCue}
+              {service.checkCue}
             </p>
 
             <div className="relative z-10 mt-5 inline-flex items-center gap-1 text-sm font-medium text-link">

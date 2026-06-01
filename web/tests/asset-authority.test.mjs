@@ -5,31 +5,31 @@ import {register} from 'node:module';
 register('./ts-extension-resolver.mjs', import.meta.url);
 
 const {
-  evaluateProofClaimAuthority,
-  getProofAssetAuthority,
-  isPublicProofAssetApproved,
-  proofAssetAuthorityRegistry,
-  publicProofAssetMetadata,
-  resolveProofAssetAuthority,
-} = await import('../src/lib/content/proof-asset-authority.ts');
-const {proofRegistry} = await import('../src/lib/content/proof-registry.ts');
+  evaluateClaimAuthority,
+  getAssetAuthorityRecord,
+  isPublicAssetApproved,
+  assetAuthorityRegistry,
+  publicAssetMetadata,
+  resolveAssetAuthorityRecord,
+} = await import('../src/lib/content/asset-authority.ts');
+const {serviceEvidenceRegistry} = await import('../src/lib/content/service-evidence-registry.ts');
 const {getHomePresentationModel} = await import('../src/lib/home-presentation.ts');
 
 function translate(key) {
   return key;
 }
 
-describe('proof asset authority', () => {
-  it('keeps public proof assets approved, scoped, and non-leaky', () => {
-    assert.ok(proofAssetAuthorityRegistry.length >= 3);
-    for (const asset of proofAssetAuthorityRegistry) {
+describe('asset authority', () => {
+  it('keeps public source assets approved, scoped, and non-leaky', () => {
+    assert.ok(assetAuthorityRegistry.length >= 3);
+    for (const asset of assetAuthorityRegistry) {
       assert.equal(asset.approvalStatus, 'approved');
       assert.equal(asset.authority, 'authoritative');
-      assert.ok(asset.publicPath.startsWith('/images/proof/'));
+      assert.ok(asset.publicPath.startsWith('/images/work/'));
       assert.ok(asset.claimRestrictions.includes('no_client_marks'));
       assert.ok(asset.sourceArtifactRefs.length > 0);
 
-      const metadata = publicProofAssetMetadata(asset);
+      const metadata = publicAssetMetadata(asset);
       assert.deepEqual(
         Object.keys(metadata).sort(),
         ['approvalStatus', 'assetId', 'authority', 'claimRestrictions', 'provenanceSummary', 'publicPath', 'sourceType', 'usageScopes'].sort()
@@ -40,51 +40,51 @@ describe('proof asset authority', () => {
     }
   });
 
-  it('wires service proof contracts and homepage proof through approved authority records', () => {
-    assert.deepEqual(proofRegistry.validate(), []);
-    for (const profile of proofRegistry.profiles) {
-      const contract = proofRegistry.getContract(profile.slug);
-      assert.ok(contract.render.assetAuthority, `${profile.slug} missing proof authority`);
+  it('wires service evidence contracts and homepage public project through approved authority records', () => {
+    assert.deepEqual(serviceEvidenceRegistry.validate(), []);
+    for (const profile of serviceEvidenceRegistry.profiles) {
+      const contract = serviceEvidenceRegistry.getContract(profile.slug);
+      assert.ok(contract.render.assetAuthority, `${profile.slug} missing asset authority`);
       assert.equal(contract.render.assetAuthority.approvalStatus, 'approved');
-      assert.equal(isPublicProofAssetApproved(contract.render.assetAuthority.publicPath), true);
+      assert.equal(isPublicAssetApproved(contract.render.assetAuthority.publicPath), true);
     }
 
     const home = getHomePresentationModel(translate);
-    assert.equal(home.publicProof.assetAuthority.assetId, 'edge-proof-board');
-    assert.equal(home.publicProof.assetAuthority.authority, 'authoritative');
+    assert.equal(home.publicProject.assetAuthority.assetId, 'rusty-art-showcase');
+    assert.equal(home.publicProject.assetAuthority.authority, 'authoritative');
   });
 
-  it('forbids restricted proof claims without an authoritative approved source', () => {
-    assert.equal(getProofAssetAuthority('missing-asset'), null);
-    assert.deepEqual(resolveProofAssetAuthority('missing-asset'), {
+  it('forbids restricted claims without an authoritative approved source', () => {
+    assert.equal(getAssetAuthorityRecord('missing-asset'), null);
+    assert.deepEqual(resolveAssetAuthorityRecord('missing-asset'), {
       status: 'setup_required',
       asset: null,
       reason: 'missing_media_or_unregistered_asset',
     });
-    assert.deepEqual(evaluateProofClaimAuthority({claimType: 'testimonial', sourceAssetIds: []}), {
+    assert.deepEqual(evaluateClaimAuthority({claimType: 'testimonial', sourceAssetIds: []}), {
       allowed: false,
       reason: 'missing_authoritative_source_artifact',
       sourceAssetId: null,
     });
-    assert.deepEqual(evaluateProofClaimAuthority({claimType: 'screenshot', sourceAssetIds: ['edge-proof-board']}), {
+    assert.deepEqual(evaluateClaimAuthority({claimType: 'screenshot', sourceAssetIds: ['rusty-art-showcase']}), {
       allowed: true,
       reason: 'authorized_by_verified_source_artifact',
-      sourceAssetId: 'edge-proof-board',
+      sourceAssetId: 'rusty-art-showcase',
     });
   });
 
   it('fails closed for image-backed claims and generated visual support', () => {
-    assert.deepEqual(evaluateProofClaimAuthority({claimType: 'process', imageBacked: true, sourceAssetIds: []}), {
+    assert.deepEqual(evaluateClaimAuthority({claimType: 'process', imageBacked: true, sourceAssetIds: []}), {
       allowed: false,
       reason: 'missing_authoritative_source_artifact',
       sourceAssetId: null,
     });
-    assert.deepEqual(evaluateProofClaimAuthority({
+    assert.deepEqual(evaluateClaimAuthority({
       claimType: 'metric',
       imageBacked: true,
       sourceAssets: [{
         assetId: 'generated-concept',
-        publicPath: '/images/proof/generated-concept.svg',
+        publicPath: '/images/work/generated-concept.svg',
         sourceType: 'generated_visual',
         approvalStatus: 'approved',
         authority: 'non_authoritative',
@@ -98,12 +98,12 @@ describe('proof asset authority', () => {
       reason: 'generated_visual_cannot_authorize_restricted_claim',
       sourceAssetId: null,
     });
-    assert.deepEqual(evaluateProofClaimAuthority({
+    assert.deepEqual(evaluateClaimAuthority({
       claimType: 'metric',
       imageBacked: true,
       sourceAssets: [{
         assetId: 'misconfigured-generated-concept',
-        publicPath: '/images/proof/misconfigured-generated-concept.svg',
+        publicPath: '/images/work/misconfigured-generated-concept.svg',
         sourceType: 'generated_visual',
         approvalStatus: 'approved',
         authority: 'authoritative',

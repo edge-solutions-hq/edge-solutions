@@ -1,13 +1,13 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "Practical AI, controlled delivery and usable products"
+    "siteTagline": "AI automation and 3D / XR applications by a senior real-time developer"
   },
   "nav": {
     "home": "Home",
     "ai": "AI systems",
     "process": "How we work",
-    "realtime": "Real-time 3D/VR",
+    "realtime": "Real-time 3D / XR",
     "contact": "Contact",
     "mobileMenu": {
       "open": "Open navigation menu",
@@ -15,89 +15,69 @@
     }
   },
   "home": {
-    "headline": "I help teams turn AI usage and prototypes into something genuinely usable.",
-    "subheadline": "As a senior developer, I step in to structure, harden or build AI workflows and products without black boxes, unnecessary debt or hype.",
+    "headline": "Scope and build AI, automation and 3D / XR applications.",
+    "subheadline": "I’m a freelance developer near Liège, Belgium. I help teams automate repetitive work and build 3D / XR applications.",
     "primaryCta": "Contact me",
     "secondaryCta": "View services",
+    "profile": {
+      "eyebrow": "About",
+      "title": "Clarify the project, then build what matters.",
+      "body": "I work on technical projects that combine AI, automation, web and 3D / XR: scope the need, choose a maintainable architecture, make teamwork easier and leave behind a usable base.",
+      "signals": {
+        "experience": {
+          "label": "Background",
+          "value": "16+ years in technical production, real-time 3D and developer tools; AI-assisted development since late 2024"
+        },
+        "delivery": {
+          "label": "How I help",
+          "value": "Scoping, maintainable architecture, coordination, optimization and automation"
+        },
+        "stack": {
+          "label": "Tech",
+          "value": "Unreal Engine, Unity, C++, C#, WebGL, Python, Next.js"
+        },
+        "aiStack": {
+          "label": "AI tools",
+          "value": "OpenClaw, CrewAI, OpenCode, Codex"
+        }
+      }
+    },
     "finalCta": {
       "eyebrow": "Next step",
-      "processTitle": "A short exchange is enough to see whether the topic is worth scoping.",
-      "processBody": "The goal is to clarify the use case, the risks and the first useful step before turning it into heavier work.",
-      "title": "Do you have an AI workflow that needs to become more reliable?",
-      "body": "Send the context in a few lines. I’ll reply with a clear read of the topic and the reasonable first step.",
-      "cta": "Start the conversation"
+      "processTitle": "A short exchange is enough to clarify the next step.",
+      "processBody": "We check the use case, the risks and the first useful step before turning it into heavier work.",
+      "title": "Let’s talk about your AI or 3D / XR project.",
+      "body": "Send me the context, what already exists and what is blocking you. I’ll reply with a clear first direction.",
+      "cta": "Contact me"
     },
-    "proof": {
-      "eyebrow": "Concrete proof",
-      "title": "Operational proof before polished public case studies",
-      "intro": "I prefer to show method, systems and guardrails: how AI is scoped, verified and connected to a real business workflow.",
-      "cta": "View AI service",
+    "showcase": {
+      "eyebrow": "To look at",
+      "title": "A few markers of how I work",
+      "intro": "Tools, scoping, technical decisions: my approach in short.",
       "publicProject": {
-        "title": "Public project in progress: Rusty Art",
-        "description": "Rusty Art is an ongoing public project. I use it as a live ground for testing workflows, orchestration and product iteration patterns around AI.",
+        "title": "Rusty Art, a public project in progress",
+        "description": "Rusty Art is a public project. I use it to test processes, orchestration and product iteration around AI.",
         "cta": "View Rusty Art"
-      },
-      "tokensHeading": "What you can verify before contacting me",
-      "tokensIntro": "This text-only proof module groups the public signals, tools and process guardrails that make the AI promise easier to inspect.",
-      "tokens": {
-        "publicWork": "Public work signal",
-        "tools": "Real tools in use",
-        "process": "Visible guardrails"
-      },
-      "signals": {
-        "publicWork": {
-          "label": "Public work signal",
-          "value": "Rusty Art is live and inspectable",
-          "description": "A public project shows an AI workflow in progress instead of relying only on sales copy."
-        },
-        "tools": {
-          "label": "Tools in use",
-          "value": "OpenClaw, TypeScript, MDX, reviews",
-          "description": "The site and proof surface use real delivery, automation, versioned-content and quality-control tools."
-        },
-        "process": {
-          "label": "Process artifacts",
-          "value": "Prompts, reports, memory and checks",
-          "description": "Important decisions are framed by sources of truth, human review and checkpoints before action."
-        }
       },
       "items": {
         "openclaw": {
-          "title": "OpenClaw setup used daily",
-          "description": "A working environment with specialist assistants, scheduled reports, durable memory and gated actions: a concrete proof of operational AI capability."
-        },
-        "method": {
-          "title": "Human-led AI delivery",
-          "description": "Explicit sources of truth, versioned prompts, quality review, guardrails and human escalation when the workflow gets sensitive."
-        },
-        "execution": {
-          "title": "Full execution capacity",
-          "description": "When a use case is validated, I can carry it through code, automation and deployment."
-        },
-        "realtime": {
-          "kicker": "Speed up without obscuring things",
-          "title": "Keep technical decisions readable even when delivery accelerates",
-          "body": "AI can help move faster. It should not make code, trade-offs or maintenance harder to own afterwards."
-        },
-        "trust": {
-          "kicker": "Leave behind a usable base",
-          "title": "Build something that can be resumed and improved later",
-          "body": "The result should stay understandable, maintainable and clean enough to evolve without pain later on."
+          "title": "My daily AI environment",
+          "description": "I use OpenClaw and specialist assistants to organize ideas, keep a working memory, prepare reports and validate important actions."
         }
       }
     },
     "trust": {
-      "eyebrow": "When AI moves faster than structure",
-      "title": "The situations where structure needs to be restored",
-      "intro": "Many teams experiment, patch things together and move faster with AI. The real challenge comes after that: making it understandable, reliable and usable inside a product or business context.",
+      "eyebrow": "When ideas move faster than structure",
+      "title": "The situations where I can help",
+      "intro": "An AI project, automation or 3D / XR application can move quickly without a clear enough frame. My role is to make the base understandable, reliable and usable.",
       "items": {
         "direct": {
           "value": "Lots of experiments",
-          "label": "Ideas, prototypes or automations move quickly, but without a base that is really clear enough to last"
+          "label": "Ideas, applications or automations move quickly, but without a base that is really clear enough to last"
         },
         "delivery": {
-          "value": "Time gained, clarity lost",
-          "label": "AI speeds parts of the work up, but code, decisions and ownership become harder to follow"
+          "value": "Faster, but less clear",
+          "label": "Tools speed up the work, but decisions, ownership or code become harder to follow"
         },
         "quality": {
           "value": "A need to make it real",
@@ -107,45 +87,45 @@
     },
     "process": {
       "eyebrow": "What I take on",
-      "title": "Three ways I usually step into an AI topic",
-      "intro": "I usually step in either to bring order to an existing AI usage, to harden a base that already exists, or to build an AI feature that serves a real use case.",
-      "primaryCta": "Discuss your AI project or prototype",
+      "title": "A structured mission, without unnecessary weight",
+      "intro": "Whether the topic is AI automation or a 3D / XR application, I start by understanding the real work, choosing a clear scope and moving through short, verifiable deliveries.",
+      "primaryCta": "Discuss your AI or 3D / XR project",
       "discovery": {
-        "kicker": "AI workflow",
-        "title": "Structure AI usage that is getting hard to manage",
-        "body": "Clarify where AI genuinely helps in delivery, production or operations, and stop it from becoming an extra layer of confusion.",
+        "kicker": "Starting point",
+        "title": "Understand the context and choose the angle of attack",
+        "body": "Goals, users, repeated tasks, technical constraints, available data or assets, timeline: we establish what matters before producing.",
         "points": {
-          "goals": "Identify the steps where AI creates real leverage instead of extra noise.",
-          "queries": "Make usages, roles and limits easier for the team to understand.",
-          "plan": "Put a frame around it that remains usable as the project grows or changes hands."
+          "goals": "Identify what repeats and the first concrete result to obtain.",
+          "queries": "Make roles, limits and decisions easier for the team to understand.",
+          "plan": "By the end of this step: a clear priority and a first-version scope."
         }
       },
       "build": {
-        "kicker": "Base to harden",
-        "title": "Take over a prototype or implementation that already exists",
-        "body": "When a first version is already there, the work is often about restoring readability, structure and a level of quality that can support a real product path.",
+        "kicker": "Build",
+        "title": "Develop a first usable version",
+        "body": "Automation, integration, interface, 3D / XR scene or targeted recovery: the format depends on the need, not on a fixed recipe.",
         "stackItems": {
-          "backend": "Rework blurry technical choices",
-          "realtime": "Make the project easier to maintain",
-          "delivery": "Prepare something credible for production"
+          "backend": "Clarify technical choices",
+          "realtime": "Make the base easier to maintain",
+          "delivery": "Deliver regularly so the work can be tested, adjusted and decided on before the end."
         }
       },
       "launch": {
-        "kicker": "Targeted build",
-        "title": "Build an AI feature or tool that serves a real use case",
-        "body": "When something needs to be built, the goal is not to add AI for the sake of it. It is to design something useful, understandable and usable over time.",
+        "kicker": "Next",
+        "title": "Stabilize and prepare what comes after",
+        "body": "Cleanup, documentation, deployment, handover or next iterations: the project should remain usable after my intervention.",
         "items": {
           "verify": {
             "step": "Clarify the use case",
-            "body": "Define what AI should actually improve for the user or the team."
+            "body": "Define what the project should actually improve for the user or the team."
           },
           "publish": {
-            "step": "Build without making things opaque",
-            "body": "Keep the architecture, decisions and ownership readable even when delivery speeds up."
+            "step": "Build without blurring things",
+            "body": "Keep architecture, decisions and ownership readable during development."
           },
           "measure": {
             "step": "Leave a usable base behind",
-            "body": "Make sure the project can be resumed, iterated on or hardened later without starting over a few weeks later."
+            "body": "Make sure the project can be resumed, maintained or extended later without starting over."
           }
         }
       }
@@ -153,34 +133,34 @@
   },
   "services": {
     "title": "Services",
-    "hubTitle": "AI-first services for teams that need AI to work in real operations",
-    "hubIntro": "I start by structuring AI systems, automation and guardrails that can survive real operations. When the project needs more than orchestration, I also handle real-time prototypes so a promising pilot does not turn into a vague delivery mess.",
+    "hubTitle": "Services for AI automation and 3D / XR applications",
+    "hubIntro": "I approach applied AI from the real work: spot repeated tasks, automate what makes sense and keep human review where it matters. When the need becomes interactive, I can also build real-time 3D / XR applications.",
     "decisionTitle": "Decide faster",
-    "decisionAi": "AI when the risk is operational.",
-    "decisionRealtime": "3D/VR when the idea needs visual testing.",
+    "decisionAi": "AI when repeated tasks should become easier.",
+    "decisionRealtime": "3D / XR when the project needs simulation, configuration or an immersive experience.",
     "aiTitle": "AI systems & automation",
-    "aiDesc": "Internal assistants, document workflows, business automation and guardrails before production rollout.",
+    "aiDesc": "Repeated-task audits, internal assistants, document handling and business automation.",
     "hubAiTrigger": "When AI moves beyond the test",
-    "hubAiDesc": "Choose this when you need an internal assistant, document workflow or rollout guardrails before exposing AI to more teams.",
-    "hubAiProof": "Proof: documented method, human review and guardrails before action.",
-    "realtimeTitle": "Real-time 3D/VR",
-    "realtimeDesc": "VR prototypes and interactive 3D experiences designed to be shown, tested and improved.",
-    "hubRealtimeTrigger": "When an idea needs to be seen and tested",
-    "hubRealtimeDesc": "For teams that need a real-time prototype to explain, test or sell a spatial, industrial or immersive product before heavier production.",
-    "hubRealtimeProof": "Proof: 3D prototypes designed to demonstrate, iterate and decide.",
+    "hubAiDesc": "Choose this when you want to spot what repeats, automate with enough intelligence and help the team focus on what it does best.",
+    "hubAiCheck": "To check: documented method, human review and action limits.",
+    "realtimeTitle": "Real-time 3D / XR",
+    "realtimeDesc": "Real-time 3D and XR applications for configurators, simulations, VR, augmented reality and immersive experiences.",
+    "hubRealtimeTrigger": "When the project needs 3D / XR interaction",
+    "hubRealtimeDesc": "For configuring, simulating, training or presenting a spatial, industrial or immersive product.",
+    "hubRealtimeCheck": "To check: performance, comfort, compatibility and technical decisions.",
     "cta": "Explore"
   },
   "contact": {
-    "title": "Contact",
-    "intro": "Share the context, what already exists and what is blocked. I’ll reply quickly with a clear read on what should be structured, rebuilt or developed.",
+    "title": "Contact for an AI or 3D / XR project",
+    "modalClose": "Close contact form",
     "fitLabel": "Good fit",
-    "fitText": "Pragmatic AI, workflow automation, internal tools, team training and recovery of existing systems when the current base is already blocking the work.",
+    "fitText": "Repeated-task audits, process automation, AI assistants, 3D / XR applications and recovery of existing bases.",
     "form": {
       "name": "Name",
       "email": "Email",
       "service": "Project type",
       "service_ai": "AI systems & automation",
-      "service_realtime": "Real-time 3D/VR",
+      "service_realtime": "Real-time 3D / XR",
       "service_unsure": "Not sure / other",
       "message": "Message",
       "namePlaceholder": "Your name",

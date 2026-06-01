@@ -1,148 +1,171 @@
 export const metadata = {
-  title: "VR et 3D interactive en Wallonie — prototypes utiles",
+  title: "Applications 3D temps réel et XR en Wallonie",
   description:
-    "Prototypes VR et 3D interactive pour équipes belges: valider faisabilité, performance et expérience avant d'investir, avec itérations IA revues par humain."
+    "Applications 3D temps réel et XR pour équipes belges: VR, réalité augmentée, configurateurs, simulations et expériences interactives utilisables."
 };
 
-<PageIntro eyebrow="Service" title="Temps réel — VR & 3D interactive">
+<PageIntro eyebrow="Service" title="Applications 3D temps réel et XR">
   <p>
-    Je développe des expériences temps réel : VR, 3D interactive, prototypes
-    jouables et démos immersives. Objectif : une expérience fluide, confortable
-    et fiable — prête à être montrée, testée et améliorée.
+    Je développe des applications temps réel: 3D interactive, VR, réalité
+    augmentée, configurateurs, simulations, formations immersives et versions
+    jouables. L’objectif est une expérience fluide, confortable et fiable sur
+    le matériel cible.
   </p>
   <p>
-    Basé en Belgique, j’accompagne studios, producteurs et entreprises de
-    l’idée au prototype, puis jusqu’à la production si le sujet le mérite.
+    J’interviens sur le cadrage, la première version, l’optimisation ou la
+    reprise technique quand la base doit devenir plus saine.
   </p>
 </PageIntro>
 
-<Callout>
-  Le but n’est pas de produire une démo “wow” difficile à reprendre. Le but est
-  d’obtenir rapidement une base jouable qui valide une direction sans cacher les
-  risques techniques.
-</Callout>
+<SectionIntro
+  className="mt-14"
+  eyebrow="Projets"
+  title="Projets 3D / XR"
+>
+  <p>
+    Une sélection de projets publics issus de mon parcours en temps réel,
+    VR, WebGL et jeu. Chaque carte renvoie vers la source publique du projet.
+  </p>
+</SectionIntro>
+
+<ProjectGallery
+  className="mt-8"
+  items={[
+    {
+      title: 'SafETHIgame',
+      category: 'WebGL - Industries',
+      description: 'Application WebGL pour la prévention des risques en milieu industriel.',
+      imageSrc: '/images/work/realtime-gallery/safethigame.png',
+      imageAlt: 'Capture du projet SafETHIgame, application WebGL de prévention des risques.',
+      href: 'https://www.newsroom.ethias.be/ethias-doublement-recompensee-aux-trophees-decavi-2026-une-reconnaissance-de-son-expertise-au-service-des-entreprises-et-de-leurs-enjeux',
+    },
+    {
+      title: 'HexoCity',
+      category: 'Jeu PC - Steam',
+      description: 'Puzzle game relaxant publié sur Steam.',
+      imageSrc: '/images/work/realtime-gallery/hexocity.jpg',
+      imageAlt: 'Capsule officielle du jeu HexoCity sur Steam.',
+      href: 'https://store.steampowered.com/app/2820100/HexoCity/',
+    },
+    {
+      title: 'Glitch Moba',
+      category: 'Jeu VR - Meta Quest 2',
+      description: 'First multiplayer MOBA shooter in VR, released for Meta Quest 2.',
+      imageSrc: '/images/work/realtime-gallery/glitch-moba-capsule.jpg',
+      imageAlt: 'Image capsule du projet Glitch Moba.',
+      href: 'https://www.artstation.com/artwork/qe2EzL',
+    },
+    {
+      title: 'Crinoid fields',
+      category: 'Animation - Musée',
+      description: 'Rendu et animation technique autour d’un environnement 3D.',
+      imageSrc: '/images/work/realtime-gallery/crinoid-fields-scene.jpg',
+      imageAlt: 'Scène sous-marine du projet Crinoid fields.',
+      href: 'https://www.artstation.com/artwork/vD9oNa',
+    },
+    {
+      title: 'Silva VR',
+      category: 'Application VR - Médical',
+      description: 'Expérience VR avec environnements animés et contraintes de confort & performances.',
+      imageSrc: '/images/work/realtime-gallery/silva-vr.jpg',
+      imageAlt: 'Capture du projet Silva VR publié sur ArtStation.',
+      href: 'https://www.artstation.com/artwork/lDrmzY',
+    },
+    {
+      title: 'Vision-It',
+      category: 'WebGL - Médical',
+      description: 'Application WebGL interactive avec interface et contenu 3D.',
+      imageSrc: '/images/work/realtime-gallery/vision-it.jpg',
+      imageAlt: 'Capture du projet Vision-It publié sur ArtStation.',
+      href: 'https://www.artstation.com/artwork/LRZzDv',
+    },
+  ]}
+  linksTitle="Explorer davantage"
+  links={[
+    {
+      label: 'Portfolio personnel ArtStation',
+      description: 'Projets 3D, captures, rendus et travaux publics.',
+      href: 'https://www.artstation.com/gilguminski',
+    },
+    {
+      label: 'Vidéos Cynaptek sur Vimeo',
+      description: 'Anciennes productions, démos et expériences interactives.',
+      href: 'https://vimeo.com/cynaptek',
+    },
+  ]}
+/>
 
 <PrototypeSignals
-  className="mt-16"
-  eyebrow="Signaux prototype"
-  title="Ce qui doit sembler réel avant qu’un build temps réel mérite plus de budget"
-  imageSrc="/images/proof/services-realtime-prototype-board.svg"
-  imageAlt="Schéma abstrait d’un prototype temps réel avec vue 3D, courbe de performance et jalons de validation."
+  className="mt-14"
+  eyebrow="Validation"
+  title="Que contient une première version testable ?"
+  imageSrc="/images/work/services-realtime-prototype-board.svg"
+  imageAlt="Schéma abstrait d’un build temps réel avec vue 3D, courbe de performance et jalons de validation."
   signals={[
-    {label: 'Cible', value: 'Build jouable sur le bon appareil'},
-    {label: 'Risque', value: 'Performance et confort vérifiés tôt'},
-    {label: 'Verdict', value: 'Décisions claires garder / couper / polir'},
+    {label: 'Usage', value: 'Expérience utile dans le contexte réel'},
+    {label: 'Cible', value: 'Version testable sur le bon appareil'},
+    {label: 'Décision', value: 'Continuer / simplifier / arrêter'},
   ]}
   phases={[
     {
       label: 'Phase 01',
-      title: 'Faisabilité d’abord',
+      title: 'Usage',
       detail:
-        'Verrouiller l’appareil, le style d’interaction, le coût asset et les contraintes de frame-rate avant que l’ambition ne dérape.',
+        'Comprendre qui utilise l’application, dans quel contexte et pour quelle décision ou action.',
     },
     {
       label: 'Phase 02',
-      title: 'Build montrable',
+      title: 'Version testable',
       detail:
-        'Obtenir vite une version présentable ou jouable pour juger le confort, la fluidité et l’onboarding avec du vrai feedback.',
+        'Tester une version courte avec le bon matériel, les bonnes contraintes et un scénario représentatif.',
     },
     {
       label: 'Phase 03',
-      title: 'Porte de production',
+      title: 'Décision',
       detail:
-        'Utiliser le prototype pour décider ce qui mérite d’être poli, ce qui doit être simplifié et ce qui doit rester hors scope.',
+        'Décider ce qui apporte vraiment de la valeur, ce qui doit être simplifié et ce qui reste hors périmètre.',
     },
   ]}
 >
   <p>
-    Un bon projet temps réel gagne en confiance quand l’expérience, les risques
-    et les prochaines décisions de production sont visibles avant que le budget
-    ne devienne plus lourd.
+    La première version sert surtout à vérifier que l’expérience aide vraiment
+    ses utilisateurs. La technique compte, mais elle vient soutenir cette
+    validation: bon appareil, bon niveau de performance, bonnes contraintes.
   </p>
 </PrototypeSignals>
 
 <SectionIntro
-  className="mt-16"
-  eyebrow="Périmètre prototype"
-  title="Le build doit prouver à la fois le risque de livraison et la qualité de l’expérience"
+  className="mt-14"
+  eyebrow="Performance"
+  title="Comment valider performance et confort VR/XR ?"
 >
   <p>
-    Le même prototype doit répondre vite à deux questions : est-ce que
-    l’expérience tient sur la bonne machine, et est-ce que la suite reste assez
-    saine pour continuer sans déraper.
+    La validation se fait sur le matériel cible, avec un scénario réaliste et
+    des critères observables. Le rendu, le confort et la stabilité doivent être
+    testés avant de promettre une version plus large.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-2 xl:grid-cols-3">
-  <GridListItem title="Budgets performance">
-    Profiling, temps de chargement et stabilité doivent être traités dès le
-    prototype, pas “réparés à la fin”.
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Matériel réel">
+    Les essais se font sur l’appareil visé, pas seulement sur une machine de
+    développement confortable.
   </GridListItem>
-  <GridListItem title="Confort sur le vrai matériel">
-    En VR surtout, locomotion, lisibilité, onboarding et interactions doivent
-    être testés sur l’appareil cible.
+  <GridListItem title="Budget clair">
+    On suit les limites utiles: fréquence, charge, assets, interactions et
+    zones où l’expérience peut devenir inconfortable.
   </GridListItem>
-  <GridListItem title="Pipeline capable de continuer">
-    Assets, versioning, builds et handoff doivent rester assez propres pour que
-    le projet avance sans friction évitable.
-  </GridListItem>
-  <GridListItem title="Expérience VR">
-    Jeu, formation, démo ou parcours immersif avec confort utilisateur et
-    onboarding traités comme des contraintes de premier plan.
-  </GridListItem>
-  <GridListItem title="Prototype 3D interactif">
-    Simulation, configurateur, serious game ou proof of concept jouable pour
-    valider un usage avant une phase de production plus lourde.
-  </GridListItem>
-  <GridListItem title="Démo 3D interactive">
-    Expérience montrable en rendez-vous, salon ou revue interne, avec focus sur
-    compatibilité, temps de chargement et rendu acceptable sur les bons supports.
+  <GridListItem title="Décision">
+    Le test doit indiquer ce qui peut rester, ce qui doit être simplifié et ce
+    qui demande plus de production.
   </GridListItem>
 </GridList>
 
-<SectionIntro
-  className="mt-16"
-  eyebrow="Mode de travail"
-  title="Comment je réduis le risque"
->
-  <p>
-    Une approche pragmatique : cadrer, montrer vite, puis décider avec des
-    signaux concrets plutôt qu’avec des suppositions.
-  </p>
-</SectionIntro>
-
-<Stats className="mt-10">
-  <StatsItem label="1. Cadrage" value="Plateforme + risque principal" />
-  <StatsItem label="2. Prototype" value="Base jouable très tôt" />
-  <StatsItem label="3. Validation" value="Performance + confort" />
-</Stats>
-
-<List className="mt-10">
-  <ListItem title="Fixer le bon périmètre">
-    Objectif, public, plateforme cible, contraintes et niveau d’ambition doivent
-    être posés clairement avant d’empiler les features.
-  </ListItem>
-  <ListItem title="Montrer quelque chose de réel">
-    Je cherche rapidement une version jouable ou montrable pour juger fluidité,
-    compréhension et priorités de production avec du vrai retour.
-  </ListItem>
-  <ListItem title="Passer ou non à la suite">
-    Le prototype doit aider à décider quoi polir, quoi simplifier et ce qui ne
-    vaut pas encore une phase de production complète.
-  </ListItem>
-</List>
-
-<Callout>
-  En temps réel, une bonne démo tient surtout grâce à un pipeline clair, des
-  choix techniques assumés et une validation fréquente sur la machine ou le
-  casque cible.
-</Callout>
-
-<SectionIntro className="mt-16" eyebrow="FAQ" title="Questions fréquentes" smaller />
+<SectionIntro className="mt-14" eyebrow="FAQ" title="Questions fréquentes" smaller />
 
 <ServiceFaq locale="fr" slug="realtime-games" />
 
-<CTA title="Discutons de votre idée" href="/contact" buttonLabel="Me contacter">
-  Envoyez la plateforme cible, l’objectif et l’échéance. Je reviens vers vous
-  avec un plan de prototype pragmatique, lisible et adapté au contexte.
+<CTA title="Discutons de votre application 3D / XR" href="/contact?service=realtime" buttonLabel="Me contacter">
+  Envoyez la plateforme cible, l’objectif et l’échéance. Je vous réponds avec
+  une première approche pragmatique.
 </CTA>

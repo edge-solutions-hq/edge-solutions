@@ -1,13 +1,13 @@
 {
   "meta": {
     "siteName": "Edge Solutions",
-    "siteTagline": "IA pragmatique, delivery maîtrise et produits exploitables"
+    "siteTagline": "Automatisations IA et applications 3D / XR par un développeur temps réel senior"
   },
   "nav": {
     "home": "Accueil",
     "ai": "IA & automatisation",
     "process": "Méthode",
-    "realtime": "Temps réel 3D/VR",
+    "realtime": "3D / XR temps réel",
     "contact": "Contact",
     "mobileMenu": {
       "open": "Ouvrir le menu de navigation",
@@ -15,89 +15,69 @@
     }
   },
   "home": {
-    "headline": "J’aide les équipes à rendre leurs usages et prototypes IA réellement exploitables.",
-    "subheadline": "Développeur senior, j’interviens pour structurer, fiabiliser ou construire des workflows et produits IA sans boîte noire, sans dette inutile et sans hype.",
+    "headline": "Cadrer vos projets IA, vos automatisations et vos applications 3D / XR.",
+    "subheadline": "Développeur freelance en région de Liège, j’aide les équipes à automatiser des tâches répétitives et à créer des applications 3D / XR.",
     "primaryCta": "Me contacter",
     "secondaryCta": "Voir les services",
+    "profile": {
+      "eyebrow": "À propos",
+      "title": "Clarifier le projet, puis construire ce qui compte.",
+      "body": "J’interviens sur des projets techniques qui mêlent IA, automatisation, web et 3D / XR : cadrer le besoin, choisir une architecture maintenable, faciliter le travail de l’équipe et livrer une base exploitable.",
+      "signals": {
+        "experience": {
+          "label": "Parcours",
+          "value": "16+ ans en production technique, 3D temps réel et outils de développement ; IA assistée depuis fin 2024"
+        },
+        "delivery": {
+          "label": "Comment j’aide",
+          "value": "Cadrage, architecture maintenable, coordination, optimisation et automatisation"
+        },
+        "stack": {
+          "label": "Tech",
+          "value": "Unreal Engine, Unity, C++, C#, WebGL, Python, Next.js"
+        },
+        "aiStack": {
+          "label": "Outils IA",
+          "value": "OpenClaw, CrewAI, OpenCode, Codex"
+        }
+      }
+    },
     "finalCta": {
       "eyebrow": "Prochaine étape",
-      "processTitle": "Un échange court suffit pour voir si le sujet mérite d’être cadré.",
-      "processBody": "L’objectif est de clarifier l’usage, les risques et le premier pas utile avant de lancer un chantier plus lourd.",
-      "title": "Vous avez un usage IA à rendre plus fiable ?",
-      "body": "Envoyez le contexte en quelques lignes. Je vous réponds avec une lecture claire du sujet et du premier pas raisonnable.",
-      "cta": "Démarrer l’échange"
+      "processTitle": "Un échange court suffit pour clarifier la suite.",
+      "processBody": "On vérifie l’usage, les risques et le premier pas utile avant de lancer un chantier plus lourd.",
+      "title": "Parlons de votre projet IA ou 3D / XR.",
+      "body": "Envoyez-moi le contexte, ce qui existe déjà et ce qui bloque. Je vous réponds avec une première piste claire.",
+      "cta": "Me contacter"
     },
-    "proof": {
-      "eyebrow": "Preuves concrètes",
-      "title": "Des preuves opérationnelles avant les grandes études de cas publiques",
-      "intro": "Je privilégie les preuves de méthode, de système et de garde-fous : comment l’IA est cadrée, vérifiée et reliée à un vrai usage métier.",
-      "cta": "Voir l’offre IA",
+    "showcase": {
+      "eyebrow": "À voir",
+      "title": "Quelques repères sur ma façon de travailler",
+      "intro": "Outils, cadrage, décisions techniques : l’essentiel de mon approche.",
       "publicProject": {
-        "title": "Projet public en cours : Rusty Art",
-        "description": "Rusty Art est un projet en cours accessible publiquement. Il me sert de terrain vivant pour tester des workflows, de l’orchestration et des itérations produit autour de l’IA.",
+        "title": "Rusty Art, un projet public en cours",
+        "description": "Rusty Art est un projet accessible publiquement. Je l’utilise pour tester des processus, de l’orchestration et des itérations produit autour de l’IA.",
         "cta": "Voir Rusty Art"
-      },
-      "tokensHeading": "Ce que vous pouvez vérifier avant de me contacter",
-      "tokensIntro": "Le module ci-dessous rassemble les signaux publics, les outils et les garde-fous de méthode qui rendent la promesse IA plus vérifiable.",
-      "tokens": {
-        "publicWork": "Signal public",
-        "tools": "Outils réels",
-        "process": "Garde-fous visibles"
-      },
-      "signals": {
-        "publicWork": {
-          "label": "Signal public",
-          "value": "Rusty Art est consultable en ligne",
-          "description": "Un projet public vivant permet de voir une démarche IA en cours, pas seulement une promesse commerciale."
-        },
-        "tools": {
-          "label": "Outils utilisés",
-          "value": "OpenClaw, TypeScript, MDX, revues",
-          "description": "Le site et les preuves s’appuient sur des outils réels de delivery, d’automatisation, de contenu versionné et de contrôle qualité."
-        },
-        "process": {
-          "label": "Artefacts de méthode",
-          "value": "Prompts, rapports, mémoire et validations",
-          "description": "Les décisions importantes sont cadrées par des sources de vérité, des revues humaines et des points de contrôle avant action."
-        }
       },
       "items": {
         "openclaw": {
-          "title": "Setup OpenClaw utilisé au quotidien",
-          "description": "Un environnement d’assistants spécialisés, de rapports planifiés, de mémoire durable et de validations avant action : une vraie preuve de capacité opérationnelle."
-        },
-        "method": {
-          "title": "IA pilotée par un humain",
-          "description": "Sources de vérité explicites, prompts versionnés, revue qualité, garde-fous et escalade humaine sur les cas sensibles."
-        },
-        "execution": {
-          "title": "Capacité d’exécution complète",
-          "description": "Quand un cas d’usage est validé, je peux aller jusqu’au code, à l’automatisation et au déploiement."
-        },
-        "realtime": {
-          "kicker": "Accélérer sans opacifier",
-          "title": "Garder des choix techniques lisibles malgré la vitesse",
-          "body": "L’IA peut aider à produire plus vite. Elle ne doit pas rendre le code, les arbitrages ou la maintenance plus difficiles à assumer ensuite."
-        },
-        "trust": {
-          "kicker": "Laisser une base exploitable",
-          "title": "Construire quelque chose qu’on peut reprendre et faire évoluer",
-          "body": "Le résultat doit rester compréhensible, maintenable et assez propre pour être poursuivi sans douleur par la suite."
+          "title": "Mon environnement IA au quotidien",
+          "description": "J’utilise OpenClaw et des assistants spécialisés pour organiser les idées, garder une mémoire de travail, préparer des rapports et valider les actions importantes."
         }
       }
     },
     "trust": {
-      "eyebrow": "Quand l’IA va plus vite que la structure",
-      "title": "Les situations où il faut remettre de la structure",
-      "intro": "Beaucoup d’équipes testent, bricolent et accélèrent avec l’IA. Le vrai sujet arrive après : rendre tout cela compréhensible, fiable et utilisable dans un cadre produit ou métier.",
+      "eyebrow": "Quand les idées avancent plus vite que la structure",
+      "title": "Les situations où je peux aider",
+      "intro": "Un projet IA, une automatisation ou une application 3D / XR peut vite avancer sans cadre assez clair. Mon rôle est de rendre la base compréhensible, fiable et utilisable.",
       "items": {
         "direct": {
           "value": "Beaucoup d’essais",
-          "label": "Des idées, prototypes ou automatisations qui avancent vite, mais sans base vraiment claire pour durer"
+          "label": "Des idées, applications ou automatisations qui avancent vite, mais sans base vraiment claire pour durer"
         },
         "delivery": {
-          "value": "Du gain de temps, moins de lisibilité",
-          "label": "L’IA accélère certaines tâches, mais le code, les décisions et les responsabilités deviennent plus flous"
+          "value": "Plus vite, mais moins clair",
+          "label": "Les outils accélèrent le travail, mais les décisions, les responsabilités ou le code deviennent difficiles à suivre"
         },
         "quality": {
           "value": "Un besoin de passage au réel",
@@ -107,45 +87,45 @@
     },
     "process": {
       "eyebrow": "Ce que je prends en charge",
-      "title": "Trois façons d’intervenir sur un sujet IA",
-      "intro": "J’interviens soit pour mettre de l’ordre dans un usage existant, soit pour fiabiliser une base déjà démarrée, soit pour construire une fonctionnalité IA qui sert un vrai usage.",
-      "primaryCta": "Parler de votre projet ou prototype IA",
+      "title": "Une mission structurée, sans lourdeur",
+      "intro": "Que le sujet soit une automatisation IA ou une application 3D / XR, je commence par comprendre le travail réel, choisir un périmètre clair puis avancer par livraisons courtes et vérifiables.",
+      "primaryCta": "Parler de votre projet IA ou 3D / XR",
       "discovery": {
-        "kicker": "Workflow IA",
-        "title": "Structurer des usages IA qui deviennent difficiles à piloter",
-        "body": "Clarifier où l’IA aide vraiment dans le delivery, la production ou les opérations, et éviter qu’elle ne devienne une couche de confusion supplémentaire.",
+        "kicker": "Point de départ",
+        "title": "Comprendre le contexte et choisir l’angle d’attaque",
+        "body": "Objectifs, utilisateurs, tâches répétitives, contraintes techniques, données ou assets disponibles, délais : on pose ce qui compte avant de produire.",
         "points": {
-          "goals": "Identifier les étapes où l’IA apporte un vrai gain au lieu d’ajouter du bruit.",
-          "queries": "Rendre les usages, rôles et limites plus compréhensibles pour l’équipe.",
-          "plan": "Poser un cadre qui reste exploitable quand le projet grossit ou change de main."
+          "goals": "Identifier ce qui se répète et le premier résultat concret à obtenir.",
+          "queries": "Rendre les rôles, limites et décisions compréhensibles pour l’équipe.",
+          "plan": "À la fin de cette étape : une priorité claire et un périmètre de première version."
         }
       },
       "build": {
-        "kicker": "Base à fiabiliser",
-        "title": "Reprendre un prototype ou une implémentation déjà lancée",
-        "body": "Quand une première version existe déjà, le travail consiste souvent à remettre de la lisibilité, de la structure et un niveau de qualité compatible avec une vraie suite produit.",
+        "kicker": "Construction",
+        "title": "Développer une première version utilisable",
+        "body": "Automatisation, intégration, interface, scène 3D / XR ou reprise ciblée : le format dépend du besoin, pas d’une recette imposée.",
         "stackItems": {
-          "backend": "Reprendre des choix techniques flous",
-          "realtime": "Rendre le projet plus maintenable",
-          "delivery": "Préparer une suite crédible côté prod"
+          "backend": "Clarifier les choix techniques",
+          "realtime": "Rendre la base plus maintenable",
+          "delivery": "Livrer régulièrement pour tester, ajuster et décider sans attendre la fin."
         }
       },
       "launch": {
-        "kicker": "Construction ciblée",
-        "title": "Développer une fonctionnalité ou un outil IA qui sert un vrai usage",
-        "body": "Quand il faut construire, l’objectif n’est pas de rajouter de l’IA pour le principe. Il s’agit de concevoir quelque chose d’utile, compréhensible et exploitable dans le temps.",
+        "kicker": "Suite",
+        "title": "Stabiliser et préparer l’évolution",
+        "body": "Nettoyage, documentation, déploiement, transfert ou prochaines itérations : le projet doit rester exploitable après mon intervention.",
         "items": {
           "verify": {
             "step": "Clarifier l’usage",
-            "body": "Définir ce que l’IA doit réellement améliorer pour l’utilisateur ou l’équipe."
+            "body": "Définir ce que le projet doit réellement améliorer pour l’utilisateur ou l’équipe."
           },
           "publish": {
-            "step": "Construire sans opacifier",
-            "body": "Garder une architecture, des choix et une responsabilité lisibles malgré l’accélération du delivery."
+            "step": "Construire sans brouiller",
+            "body": "Garder une architecture, des choix et une responsabilité lisibles pendant le développement."
           },
           "measure": {
             "step": "Laisser une base exploitable",
-            "body": "Permettre au projet d’être repris, itéré ou durci sans repartir de zéro quelques semaines plus tard."
+            "body": "Permettre au projet d’être repris, maintenu ou étendu sans repartir de zéro."
           }
         }
       }
@@ -153,34 +133,34 @@
   },
   "services": {
     "title": "Services",
-    "hubTitle": "Services IA-first pour équipes qui doivent rendre l’IA exploitable en conditions réelles",
-    "hubIntro": "J’interviens d’abord pour cadrer des systèmes IA, des automatisations et des garde-fous qui tiennent dans le réel. Quand le besoin va plus loin, je prends aussi les prototypes temps réel pour éviter qu’un pilote prometteur devienne un chantier flou.",
+    "hubTitle": "Services pour automatisations IA et applications 3D / XR",
+    "hubIntro": "J’interviens sur l’IA appliquée en partant du travail réel : repérer les tâches répétitives, automatiser ce qui peut l’être et garder une revue humaine quand c’est nécessaire. Quand le besoin devient interactif, je peux aussi développer des applications 3D / XR en temps réel.",
     "decisionTitle": "Décider vite",
-    "decisionAi": "IA si le risque est opérationnel.",
-    "decisionRealtime": "3D/VR si l’idée doit être testée visuellement.",
+    "decisionAi": "IA quand des tâches répétitives méritent d’être facilitées.",
+    "decisionRealtime": "3D / XR si le projet demande simulation, configuration ou expérience immersive.",
     "aiTitle": "IA & automatisation",
-    "aiDesc": "Assistants internes, workflows documentaires, automatisations métier et garde-fous avant mise en production.",
+    "aiDesc": "Audit des tâches répétitives, assistants internes, traitement documentaire et automatisations métier.",
     "hubAiTrigger": "Quand l’IA sort du test",
-    "hubAiDesc": "À choisir quand vous avez besoin d’un assistant interne, d’un workflow documentaire ou de garde-fous avant d’ouvrir l’IA à plus d’équipes.",
-    "hubAiProof": "Preuve : méthode documentée, revue humaine et garde-fous avant action.",
-    "realtimeTitle": "Temps réel 3D/VR",
-    "realtimeDesc": "Prototypes VR et expériences 3D interactives conçus pour être montrés, testés puis améliorés.",
-    "hubRealtimeTrigger": "Quand une idée doit être vue et testée",
-    "hubRealtimeDesc": "Pour montrer, tester ou vendre un produit spatial, industriel ou immersif avec un prototype temps réel avant un build plus lourd.",
-    "hubRealtimeProof": "Preuve : prototypes 3D conçus pour démontrer, itérer et décider.",
+    "hubAiDesc": "À choisir quand vous voulez repérer ce qui se répète, automatiser avec assez d’intelligence et aider l’équipe à se concentrer sur ce qu’elle fait le mieux.",
+    "hubAiCheck": "À vérifier : méthode documentée, revue humaine et limites d’action.",
+    "realtimeTitle": "3D / XR temps réel",
+    "realtimeDesc": "Applications 3D temps réel et XR pour configurateurs, simulations, VR, réalité augmentée et expériences immersives.",
+    "hubRealtimeTrigger": "Quand le projet demande une interaction 3D / XR",
+    "hubRealtimeDesc": "Pour configurer, simuler, former ou présenter un produit spatial, industriel ou immersif.",
+    "hubRealtimeCheck": "À vérifier : performance, confort, compatibilité et décisions techniques.",
     "cta": "Voir le service"
   },
   "contact": {
-    "title": "Contact",
-    "intro": "Décrivez le contexte, ce qui existe déjà et ce qui bloque. Je vous réponds rapidement avec une lecture claire de ce qu’il faut structurer, reprendre ou construire.",
+    "title": "Contact pour un projet IA ou 3D / XR",
+    "modalClose": "Fermer le formulaire de contact",
     "fitLabel": "Bon point de départ",
-    "fitText": "IA pragmatique, automatisation de workflows, outils internes, formation d’équipe et reprise de systèmes existants quand la base bloque déjà le travail.",
+    "fitText": "Audit de tâches répétitives, automatisation de processus, assistants IA, applications 3D / XR et reprise de bases existantes.",
     "form": {
       "name": "Nom",
       "email": "Email",
       "service": "Type de projet",
       "service_ai": "IA & automatisation",
-      "service_realtime": "Temps réel 3D/VR",
+      "service_realtime": "3D / XR temps réel",
       "service_unsure": "Je ne sais pas / autre",
       "message": "Message",
       "namePlaceholder": "Votre nom",

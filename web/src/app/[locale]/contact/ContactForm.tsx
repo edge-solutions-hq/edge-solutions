@@ -15,6 +15,8 @@ import {
   contactFormModel,
   extractContactSubmitService,
   resolveContactFeedback,
+  resolveContactServiceSearchParam,
+  type ContactOfferValue,
 } from '@/lib/contact/intake';
 import type {ContactActionState} from './actions';
 import {sendContactEmail} from './actions';
@@ -30,12 +32,29 @@ function FieldError({children}: {children?: string}) {
   return <div className="mt-1 text-xs text-red-600 dark:text-red-400">{children}</div>;
 }
 
-export function ContactForm() {
+export function ContactForm({
+  preselectedService,
+}: {
+  preselectedService?: ContactOfferValue;
+}) {
   const t = useTranslations();
   const [state, formAction, pending] = useActionState(sendContactEmail, initialState);
   const attemptTrackerRef = useRef(createContactAttemptTrackerState());
+  const serviceSelectRef = useRef<HTMLSelectElement>(null);
   const {fields, offerOptions: contactOfferOptions} = contactFormModel;
   const feedback = resolveContactFeedback(state);
+
+  useEffect(() => {
+    const selectedService =
+      preselectedService ??
+      resolveContactServiceSearchParam(
+        new URLSearchParams(window.location.search).get(fields.service.name)
+      );
+
+    if (selectedService && serviceSelectRef.current) {
+      serviceSelectRef.current.value = selectedService;
+    }
+  }, [fields.service.name, preselectedService]);
 
   useEffect(() => {
     const completion = resolveContactAttemptCompletion({
@@ -111,6 +130,7 @@ export function ContactForm() {
       <label className="block">
         <div className="text-sm font-medium">{t(fields.service.labelKey)}</div>
         <select
+          ref={serviceSelectRef}
           name={fields.service.name}
           defaultValue={fields.service.defaultValue}
           className={inputBase + ' h-10'}

@@ -1,18 +1,10 @@
 import * as React from 'react';
-import {cn} from '@/lib/cn';
+import {Surface} from '@/components/ui/Surface';
 
-export type CardProps = React.HTMLAttributes<HTMLDivElement>;
+export type CardProps = React.ComponentProps<typeof Surface>;
 
-export function Card({className, ...props}: CardProps) {
-  return (
-    <div
-      className={cn(
-        'rounded-lg border border-border bg-surface shadow-sm',
-        className
-      )}
-      {...props}
-    />
-  );
+export function Card({variant = 'card', ...props}: CardProps) {
+  return <Surface variant={variant} {...props} />;
 }
 
 

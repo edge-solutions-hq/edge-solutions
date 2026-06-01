@@ -14,7 +14,7 @@ export async function Header({locale}: {locale: string}) {
   const items = getHeaderNavigationItems(t, getHeaderOfferNavItems(t));
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/70">
+    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/82">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
         <div className="flex items-center gap-6">
           <Link

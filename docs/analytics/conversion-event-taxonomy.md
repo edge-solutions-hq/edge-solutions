@@ -1,6 +1,6 @@
 # Conversion event taxonomy (Edge Solutions)
 
-Last updated: 2026-05-14
+Last updated: 2026-06-01
 
 ## Scope
 
@@ -25,6 +25,9 @@ Every browser-emitted conversion event also includes stable page context from
 - `source_offer_track` (string, optional): current service detail track (`ai-automation` | `realtime-games`)
 - `page_title` (string, optional): current document title
 - `page_referrer` (string, optional): browser referrer
+- `ai_referrer` (string, optional): known AI assistant/source referrer (`chatgpt` | `perplexity` | `gemini` | `claude` | `copilot` | `poe`)
+
+When a known AI referrer is detected, `page_referrer` is reduced to the referrer origin before transport so assistant query strings or chat identifiers are not sent.
 
 ## Event catalog
 
@@ -170,6 +173,7 @@ In GA4:
 - Use `contact_cta_click` + `placement` to compare where intent starts.
 - Use `service_card_click` + `placement` to compare interest from homepage vs services index.
 - Use `page_family`, `site_locale`, and `source_offer_track` to interpret low-volume FR/EN/NL conversion paths without relying on URL parsing in reports.
+- Register `ai_referrer` as a custom dimension if AI referral analysis becomes useful; keep `page_referrer` secondary because known AI referrers are intentionally stripped to origin.
 
 ## Naming rules for new events
 

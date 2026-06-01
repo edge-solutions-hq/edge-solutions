@@ -152,6 +152,7 @@ describe('live SEO source facts', () => {
         assert.equal(typeof urlCheck.description, 'string', `${expectedUrl} description`);
         assert.ok(urlCheck.title.length > 0, `${expectedUrl} title is non-empty`);
         assert.ok(urlCheck.description.length > 0, `${expectedUrl} description is non-empty`);
+        assert.match(urlCheck.lastModified, /^\d{4}-\d{2}-\d{2}T/, `${expectedUrl} lastModified`);
 
         for (const alternateLocale of facts.locales) {
           const alternate = urlCheck.alternates.byLocale.find((item) => item.locale === alternateLocale);

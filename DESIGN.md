@@ -1,380 +1,128 @@
 ---
-version: alpha
+version: beta
 name: Edge Solutions
-description: Cream-and-navy technical portfolio design system for edge-solutions.be, updated from docs/ai_developer_landing_page.png.
+description: Simplified cream-and-navy freelance design system for edge-solutions.be.
 colors:
   background: "#f2edd7"
   foreground: "#102b4a"
+  technical-blue: "#334b72"
   surface: "#f4eed6"
   surface-muted: "#e7dfc4"
   border: "#102b4a"
   muted-foreground: "#273a4d"
   subtle-foreground: "#726a53"
-  primary: "#aa8e4b"
-  on-primary: "#102b4a"
+  primary: "#d8bf74"
+  primary-foreground: "#102b4a"
+  accent: "#c9ad63"
   secondary: "#102b4a"
-  on-secondary: "#f4eed6"
-  accent: "#c2a45b"
-  on-accent: "#102b4a"
-  link: "#102b4a"
-  ring: "#aa8e4b"
-  dark-background: "#0f2a52"
-  dark-surface: "#12305a"
-  dark-surface-muted: "#183962"
-  dark-border: "#aa8e4b"
-  dark-foreground: "#f2edd7"
-  dark-muted-foreground: "#d6cda9"
-  dark-subtle-foreground: "#d6cda9"
-  dark-link: "#f2edd7"
-  navy-deep: "#102b4a"
-  technical-blue: "#334b72"
+  secondary-foreground: "#f4eed6"
   glass-cyan: "#c8d2cc"
-  blueprint-green: "#b8b89a"
-  success-background: "#e5ead2"
-  success-foreground: "#12391f"
-  danger-background: "#ead9d7"
-  danger-foreground: "#64212c"
 typography:
-  display-lg:
-    fontFamily: Archivo Narrow
-    fontSize: 3rem
-    fontWeight: 800
-    lineHeight: 0.92
-    letterSpacing: 0em
-  display-md:
-    fontFamily: Archivo Narrow
-    fontSize: 2.25rem
-    fontWeight: 800
-    lineHeight: 0.95
-    letterSpacing: 0em
-  headline-md:
-    fontFamily: Archivo Narrow
-    fontSize: 1.5rem
-    fontWeight: 800
-    lineHeight: 1
-    letterSpacing: 0em
-  headline-sm:
-    fontFamily: Archivo Narrow
-    fontSize: 1.125rem
-    fontWeight: 700
-    lineHeight: 1.05
-    letterSpacing: 0em
-  body-lg:
-    fontFamily: Inter
-    fontSize: 1.125rem
-    fontWeight: 400
-    lineHeight: 1.65
-    letterSpacing: 0em
-  body-md:
-    fontFamily: Inter
-    fontSize: 1rem
-    fontWeight: 400
-    lineHeight: 1.65
-    letterSpacing: 0em
-  body-sm:
-    fontFamily: Inter
-    fontSize: 0.875rem
-    fontWeight: 400
-    lineHeight: 1.55
-    letterSpacing: 0em
-  label-md:
-    fontFamily: Inter
-    fontSize: 0.875rem
-    fontWeight: 500
-    lineHeight: 1.25
-    letterSpacing: 0em
-  label-caps:
-    fontFamily: Inter
-    fontSize: 0.75rem
-    fontWeight: 600
-    lineHeight: 1.2
-    letterSpacing: 0.08em
-  code-sm:
-    fontFamily: Fira Code
-    fontSize: 0.8125rem
-    fontWeight: 400
-    lineHeight: 1.5
-    letterSpacing: 0em
-spacing:
-  xs: 0.25rem
-  sm: 0.5rem
-  md: 0.75rem
-  lg: 1rem
-  xl: 1.25rem
-  "2xl": 1.5rem
-  "3xl": 2rem
-  "4xl": 2.5rem
-  "5xl": 3rem
-  "6xl": 4rem
-  page-x: 1.5rem
-  page-y: 3rem
-  section-gap: 4rem
-  max-content: 72rem
-  max-readable: 48rem
-rounded:
-  none: 0px
-  sm: 0.25rem
-  md: 0.375rem
-  lg: 0.5rem
-  xl: 0.75rem
-  media-md: 1.25rem
-  media-lg: 1.5rem
-  media-xl: 2rem
-  full: 9999px
-components:
-  page-shell:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.foreground}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.none}"
-    padding: 1.5rem
-  muted-panel:
-    backgroundColor: "{colors.surface-muted}"
-    textColor: "{colors.muted-foreground}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.lg}"
-    padding: 1.25rem
-  subtle-label:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.subtle-foreground}"
-    typography: "{typography.label-caps}"
-    rounded: "{rounded.none}"
-    padding: 0.25rem
-  inline-link:
-    backgroundColor: "{colors.background}"
-    textColor: "{colors.link}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.none}"
-    padding: 0px
-  focus-indicator:
-    backgroundColor: "{colors.ring}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 0.25rem
-  accent-chip:
-    backgroundColor: "{colors.accent}"
-    textColor: "{colors.on-accent}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 0.75rem
-  divider:
-    backgroundColor: "{colors.border}"
-    textColor: "{colors.on-secondary}"
-    rounded: "{rounded.none}"
-    height: 1px
-  button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.md}"
-    padding: 1rem
-    height: 2.5rem
-  button-primary-lg:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-primary}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.md}"
-    padding: 1.25rem
-    height: 2.75rem
-  button-secondary:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.on-secondary}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.md}"
-    padding: 1rem
-    height: 2.5rem
-  button-outline:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.foreground}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.md}"
-    padding: 1rem
-    height: 2.5rem
-  card:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.foreground}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.lg}"
-    padding: 1.5rem
-  media-panel:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.foreground}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.media-xl}"
-    padding: 0.5rem
-  technical-panel:
-    backgroundColor: "{colors.navy-deep}"
-    textColor: "{colors.dark-foreground}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.media-xl}"
-    padding: 1.75rem
-  dark-page-shell:
-    backgroundColor: "{colors.dark-background}"
-    textColor: "{colors.dark-foreground}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.none}"
-    padding: 1.5rem
-  dark-surface-panel:
-    backgroundColor: "{colors.dark-surface}"
-    textColor: "{colors.dark-muted-foreground}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.lg}"
-    padding: 1.5rem
-  dark-muted-panel:
-    backgroundColor: "{colors.dark-surface-muted}"
-    textColor: "{colors.dark-subtle-foreground}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.lg}"
-    padding: 1.25rem
-  dark-link-reference:
-    backgroundColor: "{colors.dark-background}"
-    textColor: "{colors.dark-link}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.none}"
-    padding: 0px
-  dark-divider:
-    backgroundColor: "{colors.dark-border}"
-    textColor: "{colors.on-accent}"
-    rounded: "{rounded.none}"
-    height: 1px
-  technical-signal:
-    backgroundColor: "{colors.technical-blue}"
-    textColor: "{colors.dark-foreground}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 0.75rem
-  glass-signal:
-    backgroundColor: "{colors.glass-cyan}"
-    textColor: "{colors.on-accent}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 0.75rem
-  blueprint-signal:
-    backgroundColor: "{colors.blueprint-green}"
-    textColor: "{colors.on-accent}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 0.75rem
-  success-notice:
-    backgroundColor: "{colors.success-background}"
-    textColor: "{colors.success-foreground}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.lg}"
-    padding: 1rem
-  danger-notice:
-    backgroundColor: "{colors.danger-background}"
-    textColor: "{colors.danger-foreground}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.lg}"
-    padding: 1rem
-  form-field:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.foreground}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.md}"
-    padding: 0.75rem
-    height: 2.5rem
+  display: "Archivo Narrow, bold, condensed, tight line-height"
+  body: "Inter, compact, readable"
+  mono: "Fira Code only for technical tokens"
+shapes:
+  controls: "rounded-md"
+  panels: "rounded-lg"
+  media: "0.75rem to 1.25rem"
 ---
 
 # Edge Solutions Design System
 
-## Overview
+## Direction
 
-The visual direction is a cream-and-navy technical portfolio system. It combines poster-like display typography, sharp gridded panels, gold action accents, blueprint line work, translucent glass UI, and restrained isometric or mechanical 3D details.
+The site is a clear freelance portfolio for Gil Guminski, not a SaaS landing page. It should feel technical, calm, and approachable: cream background, navy structure, precise typography, restrained gold actions, and a few blueprint-like details.
 
-Use `docs/ai_developer_landing_page.png` as the new visual direction and inspiration for how the website represents Edge Solutions visually. Treat it as guidance only: do not copy/paste images, schemas, or literal structures from the reference.
+Use `docs/ai_developer_landing_page.png` as inspiration for the technical/print feeling only. Do not copy the reference literally. The current website direction is simpler than the reference: fewer decorative layers, less contrast where it feels heavy, and more focus on readable sections.
 
-The mood is solid, engineered, and reassuring. It should feel distinctive and precise rather than generic, glossy, or overly futuristic.
+## Core Rules
 
-## Colors
+- Make the page easy to understand before making it decorative.
+- Prefer one strong visual idea per section. If the page background already has a grid, do not add another grid inside the section unless it adds clear structure.
+- Use navy for structure, borders, labels, body text, and strong bands.
+- Use `technical-blue` for large hero/display text and prominent section headings; full navy remains for body text, links, borders, and structure.
+- Use gold for primary actions and small accents only. It should feel warm and quiet, not like a dark mustard block.
+- Keep work-example and process sections simple. Avoid repeating the same reassurance in multiple panels.
+- Keep spacing generous enough to scan, but avoid oversized hero or marketing-style empty space.
 
-The palette is cream-first and navy-led. Deep navy carries type, borders, dividers, and dark bands. Warm gold is used for actions, accents, offset shadows, and marquee moments. Grey-green glass colors support translucent interface plates and technical illustrations.
+## Color Use
 
-- **Background (`#f2edd7`)**: warm cream page base.
-- **Surface (`#f4eed6`)**: panels, cards, form fields, and structured blocks.
-- **Surface muted (`#e7dfc4`)**: inset areas, hover states, and quieter panels.
-- **Foreground (`#102b4a`)**: display type, body text, borders, labels, and links.
-- **Primary (`#aa8e4b`)**: gold action fill, offset shadow, and marquee accent.
-- **Secondary (`#102b4a`)**: dark navy actions, dark bands, and strong dividers.
-- **Accent (`#c2a45b`)**: blueprint strokes, chips, isometric highlights, and mechanical details.
-- **Glass colors**: `#c8d2cc` and nearby desaturated greens for translucent UI surfaces.
+- `background #f2edd7`: page base.
+- `surface #f4eed6`: cards, forms, panels.
+- `surface-muted #e7dfc4`: active nav, quieter hover, inset details.
+- `foreground #102b4a`: default text, borders, links, dark sections.
+- `technical-blue #334b72`: softer large display text and prominent section headings.
+- `primary #d8bf74`: primary buttons and small action accents.
+- `accent #c9ad63`: primary hover state and stronger gold details.
+- `secondary #102b4a`: dark CTA bands and navy buttons.
 
-Avoid bright-blue SaaS palettes, neon AI gradients, and decorative purple surfaces. The accent system should stay warm, technical, and restrained.
+The site does not automatically switch to dark mode. Dark navy is a deliberate section treatment only.
 
 ## Typography
 
-Use a condensed grotesque display face for the hero, section titles, card headings, and marquee text. `Archivo Narrow` is the preferred tokenized display family. If it is unavailable, use a strong sans-serif with tight line-height and heavy weight.
+Use `Archivo Narrow` for hero titles, section headings, and compact card headings. Keep it bold, condensed, and aligned, but do not let it overpower the page.
 
-Use Inter for paragraph text, navigation, controls, and dense card copy. Use Fira Code only for code-like tokens, identifiers, telemetry, or technical snippets.
+Use `Inter` for navigation, paragraphs, forms, buttons, and dense content. Body copy should feel direct and readable, not tiny or overly styled.
 
-The type system is compressed and high-contrast. Large headings should stack tightly and feel like a poster or architectural label. Body text should remain compact but legible.
+Do not use negative letter spacing. Do not scale font size with viewport width.
 
 ## Layout
 
-Use a structured grid with visible alignment. The page should feel deliberately engineered:
+The page should feel engineered, but not busy.
 
-- Split large hero title blocks across the top rather than centering a conventional hero.
-- Use strong horizontal sections with cards aligned to a consistent grid.
-- Use visible navy panel boundaries.
-- Use gold offset shadows to give cards a physical, printed-object quality.
-- Keep content blocks dense enough to feel technical, but leave enough breathing room for scanning.
-- Place dark navy bands sparingly for strong identity moments, especially near the footer or a final callout.
+- Keep a visible alignment grid across the page.
+- Use horizontal structure in the hero and CTA areas, but soften borders when the section starts to feel boxed in.
+- Use cards for repeated service/details items, not for every page section.
+- Avoid nested cards.
+- Let the homepage flow stay simple: hero, services, profile/context, public project, process, final contact.
+- On the homepage, the two service cards use equal visual weight. Keep AI first in order, but do not make the 3D / XR card look like a minor secondary option.
+- On mobile, preserve the same order and clarity with a single-column layout.
 
-Mobile should keep the same poster-like identity while stacking into a single column. Do not rely on tiny embedded image text for essential meaning.
+## Patterns And Decoration
 
-## Elevation & Depth
+The global square background pattern is enough for most pages. Additional internal grids, dashed lines, browser-chrome marks, blueprint strokes, or mechanical details must be subtle and purposeful.
 
-Depth is graphic and mechanical, not soft SaaS elevation.
+Use decorative marks to support hierarchy or technical identity. Remove them when they compete with the copy.
 
-- Cards use navy outlines and a gold/right-bottom offset shadow.
-- Interface mockups use translucent glass panels, muted grey-green fills, and subtle inner shadows.
-- Technical illustrations use blueprint strokes, small schematic marks, and isometric block forms.
-- Mechanical or crystalline 3D objects can appear as focal accents when they reinforce precision.
-
-Avoid arbitrary glow, blur-only depth, decorative blobs, and heavy gradients.
-
-## Shapes
-
-The shape language is compact, precise, and lightly industrial:
-
-- Buttons, nav items, and form fields use `rounded-md`.
-- Cards and standard panels use `rounded-lg`.
-- Glass interface modules and media frames can use moderate radii from `0.75rem` to `1.25rem`.
-- Chips and small counters can use pill shapes.
-
-Avoid oversized rounded containers for ordinary page sections.
+Avoid gradient blobs, glow effects, decorative orbs, heavy shadows, and generic AI/SaaS visuals.
 
 ## Components
 
 **Buttons**
 
-Primary buttons use gold fill, navy text, compact radius, medium label weight, and a dark outline or shadow. Secondary buttons use navy fill with cream text. Outline buttons use cream surfaces, navy text, and dark borders.
+Primary buttons use light gold fill, navy text, a navy border, compact radius, and a small offset shadow. The hover state can use the stronger gold accent, but the default state should stay soft.
+
+Secondary buttons use navy fill with cream text. Outline buttons use a cream surface, navy text, and navy border.
+
+External links that behave like CTAs use `web/src/components/ui/ExternalLinkButton.tsx`: soft gold fill, navy text, compact radius, small offset shadow, and the inline SVG external-link icon. Do not use unicode external-arrow glyphs such as `↗`; they can render like emoji and feel less professional.
 
 **Cards**
 
-Cards use cream fill, navy borders, aligned internals, compact headings, blueprint-style iconography, and a gold offset shadow. They should feel like engineered physical panels, not soft floating cards.
+Cards use cream surfaces, navy borders, compact headings, and a restrained gold offset shadow. Service cards can use blueprint-style iconography, but the copy must remain the main signal.
 
-**Media Panels**
+Use the shared surface vocabulary in `web/src/components/ui/Surface.tsx` instead of writing new one-off shadows:
 
-Media panels may use glassmorphism, blueprint line art, schematic backgrounds, and isometric or mechanical 3D elements. Keep these elements restrained and structural.
+- `card`: default repeated item or simple content card.
+- `interactive-card`: clickable service, project, or navigation card.
+- `panel`: page-level grouped content such as profile, contact form, or final CTA.
+- `feature`: higher-emphasis project/process module, still using the same gold offset language.
+- `inset`: inner detail area with border and no shadow.
+- `media`: framed project, process, or browser-like visual.
+
+Only add custom shadows for tiny controls, focus rings, inset technical details, or intentionally responsive hero behavior. Avoid mixing saturated `var(--primary)` block shadows with softer rgba shadows on ordinary cards.
 
 **Forms**
 
-Form fields use cream surfaces, navy borders, compact labels, and gold focus rings. Error and success states should stay direct and legible.
+Forms use cream fields, navy borders, compact labels, and gold focus rings. Error and success messages should be direct and legible.
 
-**Marquee Bands**
+Contact CTAs open a modal on the current page. Keep the modal visually close to the contact page form: cream surface, navy border, restrained shadow, simple title, clear close button, and no extra marketing copy. On small screens it should behave like a full-screen sheet. The `/contact` page stays available as the fallback.
 
-A dark navy band with large condensed gold type can act as a strong identity moment. Use it sparingly so it feels intentional.
+**Dark Bands**
 
-## Do's and Don'ts
+Use dark navy bands sparingly, mainly for high-emphasis CTA or footer moments. Do not turn the whole site dark-first.
 
-- Do use a cream page base, deep navy display type, visible grids, gold accents, blueprint line art, glass UI, and subtle 3D/isometric technical objects.
-- Do keep headings compressed, bold, and aligned.
-- Do use gold for action and physical offset, not as a broad background wash.
-- Do make panels feel solid and deliberately placed.
-- Do reserve dark navy bands for high-emphasis moments.
-- Don't drift into generic bright-blue AI SaaS styling.
-- Don't turn the system dark-first; the reference is cream-first with dark navy emphasis.
-- Don't use decorative gradient blobs or unrelated glow effects.
-- Don't make every visual element look like a dashboard screenshot.
+## Copy Fit
+
+Visual design must support the copywriting direction in `docs/positioning.md`: direct, freelance, simple, and grounded.
+
+If a section needs a lot of explanatory text to justify itself, simplify the section. If a visual block repeats a point already made nearby, remove it.

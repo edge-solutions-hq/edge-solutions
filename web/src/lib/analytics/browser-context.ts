@@ -23,6 +23,7 @@ type BrowserAnalyticsContextInput = {
 };
 
 export type BrowserAnalyticsContext = {
+  ai_referrer?: AiReferralSource;
   page_family: AnalyticsPageFamily;
   page_location: string;
   page_path: string;
@@ -40,6 +41,14 @@ export type AnalyticsPageFamily =
   | 'service_detail'
   | 'contact'
   | 'other';
+
+export type AiReferralSource =
+  | 'chatgpt'
+  | 'perplexity'
+  | 'gemini'
+  | 'claude'
+  | 'copilot'
+  | 'poe';
 
 function normalizeLocale(value: string | undefined) {
   return value?.trim().toLowerCase().split('-')[0];
@@ -103,6 +112,42 @@ export function resolveBrowserAnalyticsPageContext(pathname: string): {
   return {pageFamily: 'other'};
 }
 
+export function classifyAiReferrer(referrer: string | undefined): AiReferralSource | undefined {
+  if (!referrer?.trim()) return undefined;
+
+  let url: URL;
+
+  try {
+    url = new URL(referrer);
+  } catch {
+    return undefined;
+  }
+
+  const hostname = url.hostname.toLowerCase().replace(/^www\./, '');
+  const pathname = url.pathname.toLowerCase();
+
+  if (hostname === 'chatgpt.com' || hostname === 'chat.openai.com') return 'chatgpt';
+  if (hostname === 'perplexity.ai' || hostname.endsWith('.perplexity.ai')) return 'perplexity';
+  if (hostname === 'gemini.google.com' || hostname === 'bard.google.com') return 'gemini';
+  if (hostname === 'claude.ai' || hostname.endsWith('.claude.ai')) return 'claude';
+  if (hostname === 'copilot.microsoft.com') return 'copilot';
+  if (hostname === 'bing.com' && pathname.startsWith('/chat')) return 'copilot';
+  if (hostname === 'poe.com') return 'poe';
+
+  return undefined;
+}
+
+function safeReferrer(referrer: string | undefined, aiReferrer: AiReferralSource | undefined) {
+  if (!referrer) return undefined;
+  if (!aiReferrer) return referrer;
+
+  try {
+    return new URL(referrer).origin;
+  } catch {
+    return undefined;
+  }
+}
+
 export function createBrowserAnalyticsContext({
   document,
   location,
@@ -112,15 +157,17 @@ export function createBrowserAnalyticsContext({
   const title = document.title?.trim();
   const referrer = document.referrer?.trim();
   const pageContext = resolveBrowserAnalyticsPageContext(pathname);
+  const aiReferrer = classifyAiReferrer(referrer);
 
   return {
+    ...(aiReferrer ? {ai_referrer: aiReferrer} : {}),
     page_family: pageContext.pageFamily,
     site_locale: resolveBrowserAnalyticsLocale({document, pathname}),
     source_offer_track: pageContext.sourceOfferTrack,
     page_path: pagePath ?? `${location.pathname}${location.search}`,
     page_location: location.href,
     page_title: title || undefined,
-    page_referrer: referrer || undefined,
+    page_referrer: safeReferrer(referrer, aiReferrer),
   };
 }
 

@@ -46,7 +46,7 @@ Copy `web/env.example` to a local env file such as `web/.env.local`.
 
 ## Implementation Notes
 
-- `next.config.ts` enables MDX page extensions, `remark-gfm`, Next Intl, security headers, Turbopack root configuration, and one-day caching for SEO/static endpoints.
+- `next.config.ts` enables MDX page extensions, `remark-gfm`, Next Intl, security headers, Turbopack root configuration, and one-day caching for SEO/static endpoints such as `robots.txt`, `sitemap.xml`, and `llms.txt`.
 - `web/src/i18n/routing.ts` owns locale list, default locale, and always-prefixed locale routing.
 - `web/src/lib/runtime-config-core.mjs` owns GA4/GTM ID validation for app runtime and scripts.
 - `web/src/lib/runtime-config.ts` adds contact delivery defaults.

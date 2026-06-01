@@ -53,6 +53,10 @@ const nextConfig: NextConfig = {
         headers: [...securityHeaders, {key: 'Cache-Control', value: cacheOneDay}]
       },
       {
+        source: '/llms.txt',
+        headers: [...securityHeaders, {key: 'Cache-Control', value: cacheOneDay}]
+      },
+      {
         source: '/favicon.ico',
         headers: [...securityHeaders, {key: 'Cache-Control', value: cacheOneDay}]
       }

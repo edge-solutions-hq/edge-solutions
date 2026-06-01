@@ -51,14 +51,14 @@ describe('offer presentation hierarchy', () => {
     assert.match(presentation, /assertSinglePrimaryOfferTrack/);
   });
 
-  it('has homepage and services hub consume role-aware presentation fields', () => {
+  it('keeps homepage cards equal while services hub consumes role-aware presentation fields', () => {
     const home = read('src/app/[locale]/page.tsx');
     const services = read('src/app/[locale]/services/page.tsx');
 
     assert.match(home, /getHomeOfferCards/);
-    assert.match(home, /service\.visualRole/);
-    assert.match(home, /service\.visualEmphasis/);
-    assert.match(home, /service\.visualGroup/);
+    assert.match(home, /homeOfferGridItemClass/);
+    assert.doesNotMatch(home, /service\.visualGroup === 'ai-primary'/);
+    assert.doesNotMatch(home, /md:col-span-2 xl:col-span-2/);
 
     assert.match(services, /getServicesHubOfferCards/);
     assert.match(services, /getServicesDecisionItems/);

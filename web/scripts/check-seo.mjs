@@ -221,6 +221,33 @@ function assertServicePageHasFaqPageSchema(locale, slug) {
   }
 }
 
+function assertPageHasWebPageDateModified(route) {
+  const objects = jsonLdObjects(route.path);
+  const webPage = objects.find((item) => item?.['@type'] === 'WebPage');
+
+  assert(webPage, `Generated ${route.path} is missing WebPage JSON-LD`);
+  assert(
+    webPage.dateModified === route.lastModified,
+    `Generated ${route.path} WebPage has unexpected dateModified`
+  );
+}
+
+function assertPageHasPersonSchema(pathname) {
+  const objects = jsonLdObjects(pathname);
+  const person = objects.find((item) => item?.['@type'] === 'Person');
+
+  assert(person, `Generated ${pathname} is missing Person JSON-LD`);
+  assert(
+    person['@id'] === `${siteUrl}#gil-guminski`,
+    `Generated ${pathname} Person has unexpected @id`
+  );
+  assert(
+    person.worksFor?.['@id'] === `${siteUrl}#organization`,
+    `Generated ${pathname} Person must reference the organization`
+  );
+  assert(Array.isArray(person.sameAs) && person.sameAs.length > 0, `Generated ${pathname} Person is missing sameAs`);
+}
+
 function assertServiceSchemaClaimSafety(service, pathname) {
   const unsupportedProperties = [
     'aggregateRating',
@@ -267,6 +294,7 @@ function assertServicePageHasOfferTrackServiceSchema(route) {
   assert(service['@id'] === `${url}#service`, `Generated ${pathname} Service has unexpected @id`);
   assert(service.url === url, `Generated ${pathname} Service has unexpected url`);
   assert(service.inLanguage === locale, `Generated ${pathname} Service has unexpected inLanguage`);
+  assert(service.dateModified === route.lastModified, `Generated ${pathname} Service has unexpected dateModified`);
   assert(
     service.serviceType === schemaServiceType,
     `Generated ${pathname} Service has unexpected serviceType`
@@ -371,7 +399,9 @@ const servicesSource = readSource('src/lib/content/services.ts');
 const pageProfilesSource = readSource('src/lib/page-profiles.ts');
 const sitemapSource = readSource('src/app/sitemap.ts');
 const robotsSource = readSource('src/app/robots.ts');
+const llmsTxtSource = readSource('src/app/llms.txt/route.ts');
 const seoSource = readSource('src/lib/seo.ts');
+const aiDiscoverySource = readSource('src/lib/ai-discovery.ts');
 const homeSource = readSource('src/app/[locale]/page.tsx');
 const servicesIndexSource = readSource('src/app/[locale]/services/page.tsx');
 const serviceDetailSource = readSource('src/app/[locale]/services/[slug]/page.tsx');
@@ -402,6 +432,10 @@ assert(
   'content registry must derive service slugs from OFFER_TRACK_SLUGS'
 );
 assert(robotsSource.includes('/sitemap.xml'), 'robots.ts must point crawlers to sitemap.xml');
+assert(llmsTxtSource.includes('buildLlmsTxt'), 'llms.txt route must use the AI discovery builder');
+assert(llmsTxtSource.includes('X-Robots-Tag'), 'llms.txt route must explicitly set an X-Robots-Tag');
+assert(aiDiscoverySource.includes('OFFER_TRACKS'), 'AI discovery must derive services from OFFER_TRACKS');
+assert(aiDiscoverySource.includes('STATIC_PAGE_DEFINITIONS'), 'AI discovery must derive static pages from page profiles');
 assertSourceContainsAll(seoSource, Object.values(hreflangByLocale), 'src/lib/seo.ts hreflang map');
 assert(
   seoSource.includes("languages['x-default']"),
@@ -438,8 +472,13 @@ for (const pagePath of expectedPaths) {
   assertPageHasLocaleAlternates(pagePath);
 }
 
+for (const route of localizedRoutes) {
+  assertPageHasWebPageDateModified(route);
+}
+
 for (const locale of locales) {
   assertPageHasJsonLd(`/${locale}`);
+  assertPageHasPersonSchema(`/${locale}`);
   assertPageHasJsonLd(`/${locale}/services`);
   assertServicesHubHasServiceItemList(locale, serviceSlugs);
   for (const slug of serviceSlugs) {
@@ -498,5 +537,5 @@ if (generatedRobots) {
 }
 
 console.log(
-  `SEO check passed: ${expectedUrls.length} localized URLs, generated hreflang alternates, JSON-LD, and robots sitemap URL validated.`
+  `SEO check passed: ${expectedUrls.length} localized URLs, generated hreflang alternates, dateModified JSON-LD, Person schema, llms.txt source, and robots sitemap URL validated.`
 );

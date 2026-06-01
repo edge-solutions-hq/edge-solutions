@@ -10,9 +10,9 @@ gilguminski.artstation.com/
 
 ### Top Skills
 
-Video Game Production
-Production Management
-Team Leadership
+Software Design
+Virtualization
+Unreal Engine
 
 ### Languages
 
@@ -21,13 +21,34 @@ English (Professional Working)
 
 # Gil Guminski
 
-#### Real-Time Technologies Consultant, Producer, Game Developer,
-
-#### Technical Artist
+#### Producer, Game Developer, Technical Artist
 
 #### Liège, Walloon Region, Belgium
 
 ## Summary
+
+#### I’m a developer / producer - I love problem solving & to create
+
+#### systems. I like to dive into the code and optimize with profilers or
+
+#### other tools. Stay on the lookout to help the team achieve the best
+
+#### result. Need to learn new things every day.
+
+#### My expertise includes:
+
+- Team and project management to ensure smooth production and
+
+#### effective client feedback
+
+- Conducting R&D to select the appropriate technologies and
+
+#### architecture based on project needs
+
+- Love to automate, AI development, Agentic workflows
+- Curating, integrating, and optimizing assets, creating procedural
+
+#### content
 
 #### Previously co-founder of Cynaptek, a 3D studio, I’m a seasoned
 
@@ -65,6 +86,7 @@ English (Professional Working)
 
 #### experiences used in the healthcare industry.
 
+
 #### In leading Cynaptek, I have honed my management abilities,
 
 #### developed an aptitude for creating efficient workflows, coordinated
@@ -83,27 +105,32 @@ English (Professional Working)
 
 #### my commitment to pushing the boundaries of technical artistry.
 
-
 ## Experience
 
-#### PRISMIFY (formerly Owlion)
+#### PRISMIFY
 
 #### Tech Lead Gaming
 
-September 2024 - Present (8 months)
-Louvain-la-Neuve, Walloon Region, Belgium
+September 2024 - Present (1 year 10 months)
+Louvain-la-Neuve
 
-Development of serious games using Unity, optimizing production pipelines
-for WebGL, Android, and iOS applications. My focus is on enhancing team
-performance, guiding them towards streamlined production, and fostering skill
-growth. I also handle project budgeting and management, ensuring technical
-and business alignment for long-term success.
+- Lead the team of devs (C#) & artists for better quality and efficiency.
+- Development of a web application using NextJS, Postgres, Hasura, Docker
+for Wallonie Bruxelles International
+- Bug hunter & solution architect
+- Improved delivery time by 30% with better workflow, organization and
+automations.
+- Produces optimized WebGL builds, developed and released iOS & Android
+applications.
+- Manage CI/CD with Github Actions and bug hunting with Sentry.
+- Knowledge transmission and research of AI Tools (Cursor, OpenCode,
+OpenClaw, CrewAI, ComfyUI...).
 
 #### Cronos Wallonia
 
-#### Tech Lead Gamification
+#### Tech Lead Gaming
 
-September 2024 - Present (8 months)
+September 2024 - Present (1 year 10 months)
 Louvain-la-Neuve, Walloon Region, Belgium
 
 #### Way16a
@@ -113,7 +140,13 @@ Louvain-la-Neuve, Walloon Region, Belgium
 January 2024 - August 2024 (8 months)
 Belgium
 
-Video Game development (Blueprint & c++) and Tech Art with Unreal Engine 5
+
+- Development with blueprint & c++ for gameplay systems, save, steam
+communication, controls...
+- Various optimizations (graphical, performances, stability)
+- Setup the Unreal Engine rendering pipeline for PC gaming
+- Create shaders & VFX, ensure imported assets are optimized
+- Various AI research with web scrapper, rag, python devlopment
 
 #### Cynaptek
 
@@ -136,8 +169,6 @@ patient comfort and widely adopted by several hospitals
 - Producing high-quality images and animations for various sectors
 - Developing a range of web applications using PHP (Laravel), JavaScript
 (Vue), and WebGL (Babylonjs)
-
-
 - Staying updated in the industry with ongoing professional development
 
 I'm always on the lookout for new ways to streamline processes, and I believe
@@ -156,6 +187,7 @@ WordPress. Guided students in creating their first website and understanding
 web development fundamentals.
 
 #### Teleperformance Netherlands
+
 
 #### Customer Service 2nd level for LG
 

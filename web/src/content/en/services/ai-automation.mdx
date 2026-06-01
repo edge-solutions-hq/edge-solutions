@@ -1,137 +1,149 @@
-import workflowBoard from '../../../../public/images/proof/services-ai-workflow-board.svg';
+import workflowBoard from '../../../../public/images/work/services-ai-workflow-board.svg';
 
 export const metadata = {
-  title: "AI automation in Belgium — assistants, workflows, guardrails",
+  title: "AI automation in Belgium - assistants and business processes",
   description:
-    "Scope and prototype AI workflows for Belgian teams: internal assistants, document workflows, useful automation and human review guardrails before integration."
+    "Audit and build AI automation for Belgian teams: repeated tasks, internal assistants, document handling and human review."
 };
 
 <PageIntro eyebrow="Service" title="AI systems & automation">
   <p>
-    I help teams turn fuzzy AI ideas into useful systems: internal assistants,
-    document workflows, qualification, business automation and guardrails before
-    anything sensitive reaches production.
+    I help identify repeated tasks that consume attention: requests, documents,
+    research, summaries, qualification or checks. We start from a clear source of truth,
+    automate what is simple first, then add AI when language or context
+    genuinely matters.
   </p>
   <p>
-    Based in Belgium, I work from scoping to prototype to integration with one
-    simple rule: clear sources of truth, explicit human review on sensitive
-    steps, and concrete proof instead of vague AI promises.
+    The goal is simple: make daily work lighter for the team without losing
+    control over sensitive decisions.
   </p>
 </PageIntro>
 
 <WorkflowSnapshot
-  className="mt-16"
-  eyebrow="Operational proof"
-  title="The workflow board that makes an AI lane readable before it grows"
+  className="mt-14"
+  eyebrow="Method"
+  title="Find what repeats before automating it"
   imageSrc={workflowBoard}
-  imageAlt="Abstract AI workflow diagram with connected stages and a human review lane."
-  reviewTitle="Human review lane"
+  imageAlt="Abstract AI process diagram with connected stages and human review."
+  reviewTitle="Decision point"
   reviewPoints={[
-    'the risky output is identified before anyone asks too much from the model',
-    'someone owns the go / reframe / stop verdict instead of leaving it implicit',
-    'the next integration step is earned by evidence, not by demo enthusiasm',
+    'sensitive output stays reviewed or limited',
+    'the next step depends on observable results',
+    'we keep, reframe or stop before the project gets heavier',
   ]}
   steps={[
     {
       label: 'Stage 01',
-      title: 'Scope one bounded use case',
+      title: 'Observe real work',
       detail:
-        'Choose the user, source of truth and exact decision the workflow should help with before adding more tooling.',
+        'Identify recurring tasks, sources and decisions the team has to repeat.',
     },
     {
       label: 'Stage 02',
-      title: 'Test on real examples',
+      title: 'Build a testable flow',
       detail:
-        'Run the lane on representative documents, requests or edge cases with traces visible enough for review.',
+        'Test automation on representative examples, with AI only where it brings useful understanding.',
     },
     {
       label: 'Stage 03',
-      title: 'Decide with evidence',
+      title: 'Decide what comes next',
       detail:
-        'Keep what already works, reframe what stays fragile and stop early if the workflow still creates more uncertainty than value.',
+        'Keep what works, simplify what stays fragile or stop early if value is not clear.',
     },
   ]}
 >
   <p>
-    If the use case, risk or next step is still unclear, I start by adding
-    structure. The goal is not to show abstract “AI capability”, but to make the
-    operating lane readable enough that a team can trust the next decision.
+    AI is not the starting point. The starting point is repeated work that keeps
+    people away from judgment, customer relationships or the craft of the
+    business.
   </p>
 </WorkflowSnapshot>
 
 <SectionIntro
-  className="mt-16"
-  eyebrow="When I step in"
-  title="The situations where AI needs structure before scale"
+  className="mt-14"
+  eyebrow="Useful cases"
+  title="When should you automate a task with AI?"
 >
   <p>
-    This service is useful when AI is moving faster than the framing, trust or
-    decision-making around it.
+    A task is a good AI automation candidate when it happens often, consumes
+    attention and needs enough language or context to go beyond simple rules.
   </p>
 </SectionIntro>
 
 <GridList className="mt-8 sm:grid-cols-3">
-  <GridListItem title="Promising but still vague">
-    You can see potential value, but nobody has clearly decided which use case to
-    prioritize or how success should be judged.
+  <GridListItem title="Repeated work">
+    Requests, documents, research or summaries often come back with the same
+    logic.
   </GridListItem>
-  <GridListItem title="Prototype that is hard to trust">
-    A first version exists already, but the sources, limits and review steps are
-    still too implicit to feel safe.
+  <GridListItem title="Interpretation needed">
+    Rules alone are not enough: the work requires reading, classifying,
+    summarizing or prioritizing with context.
   </GridListItem>
-  <GridListItem title="Need a real verdict">
-    You need to decide go, reframe or stop quickly instead of keeping an
-    impressive demo alive without an operational future.
+  <GridListItem title="Human review">
+    Sensitive actions stay reviewed, validated or limited before wider
+    integration.
   </GridListItem>
 </GridList>
 
 <SectionIntro
-  className="mt-16"
+  className="mt-14"
   eyebrow="First cycle"
-  title="What you get quickly, and why it feels credible"
+  title="What does a first AI automation cycle deliver?"
 >
   <p>
-    The goal is not to stack deliverables. It is to produce a first cycle that is
-    useful, readable and easy to decide on, with visible proof of method.
+    A first cycle delivers a short version that can be tested on your examples.
+    It should make the next decision clear: continue, reframe or stop before
+    the project becomes too heavy.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-2">
-  <GridListItem title="Short scoping phase">
-    We choose one priority use case, the right sources, the risks and the exact
-    step where a human should take control.
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Short scope">
+    One priority task, the useful sources, the risks and the point where a human
+    takes over.
   </GridListItem>
-  <GridListItem title="Prototype on real cases">
-    I build a flow that can be tested on your actual examples: assistant,
-    document triage, qualification or internal workflow with visible traces.
+  <GridListItem title="Version on real cases">
+    A testable flow on your examples: assistant, document triage, qualification,
+    summary or internal process.
   </GridListItem>
-  <GridListItem title="Review & guardrails">
-    Verification, critic mode, escalation and action limits before anything
-    sensitive happens automatically.
-  </GridListItem>
-  <GridListItem title="Visible public proof already exists">
-    My OpenClaw setup, backed by Rusty Art, already shows a concrete working
-    method without inventing glossy public case studies.
+  <GridListItem title="Visible limits">
+    Traces, review, critic mode and action limits before any sensitive
+    automation.
   </GridListItem>
 </GridList>
 
-<Stats className="mt-10">
-  <StatsItem label="Scope" value="1 priority use case" />
-  <StatsItem label="Validation" value="Real examples" />
-  <StatsItem label="Control" value="Explicit human review" />
-  <StatsItem label="Decision" value="Go / reframe / stop" />
-</Stats>
+<SectionIntro
+  className="mt-14"
+  eyebrow="Control"
+  title="How do you keep human review in an LLM workflow?"
+>
+  <p>
+    Sensitive actions stay visible, limited and validated by a person. The
+    automation prepares the work, but it should not replace judgment when the
+    risk is real.
+  </p>
+</SectionIntro>
 
-<Callout>
-  What I am really selling here is not “more AI”. It is a clearer, more reliable
-  and more accountable way to use AI in a real operating context.
-</Callout>
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Clear roles">
+    We separate what the system can prepare, what it can propose and what a
+    person must validate.
+  </GridListItem>
+  <GridListItem title="Useful traces">
+    Important sources, decisions and outputs stay available so the result can
+    be corrected or explained.
+  </GridListItem>
+  <GridListItem title="Action limits">
+    Sending, changing or deciding on sensitive items keeps a validation step
+    before wider integration.
+  </GridListItem>
+</GridList>
 
-<SectionIntro className="mt-16" eyebrow="FAQ" title="Frequently asked" smaller />
+<SectionIntro className="mt-14" eyebrow="FAQ" title="Frequently asked" smaller />
 
 <ServiceFaq locale="en" slug="ai-automation" />
 
-<CTA title="Let’s talk about your AI workflow" href="/contact" buttonLabel="Contact me">
-  Send the context, what already exists and what is still unclear. I’ll come back
-  with a concrete first framing and the best next step.
+<CTA title="Let’s talk about your AI automation" href="/contact?service=ai" buttonLabel="Contact me">
+  Send the context and one example of repeated work. I’ll reply with a clear
+  first direction.
 </CTA>

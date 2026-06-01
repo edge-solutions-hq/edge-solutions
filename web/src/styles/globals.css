@@ -12,16 +12,18 @@
   --subtle-foreground: #726a53;
 
   /* Brand */
-  --primary: #aa8e4b;
+  --primary: #d8bf74;
   --primary-foreground: #102b4a;
   --secondary: #102b4a;
   --secondary-foreground: #f4eed6;
-  --accent: #c2a45b;
+  --accent: #c9ad63;
   --accent-foreground: #102b4a;
+  --technical-blue: #334b72;
 
   /* Interactive */
-  --link: var(--primary);
+  --link: var(--foreground);
   --ring: var(--primary);
+  color-scheme: light;
 }
 
 @theme inline {
@@ -39,6 +41,7 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-technical-blue: var(--technical-blue);
   --color-link: var(--link);
   --color-ring: var(--ring);
 
@@ -47,26 +50,20 @@
   --font-mono: var(--font-fira-code);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark tokens from DESIGN.md */
-    --background: #0f2a52;
-    --foreground: #f2edd7;
-    --surface: #12305a;
-    --surface-muted: #183962;
-    --border: #aa8e4b;
-    --muted-foreground: #d6cda9;
-    --subtle-foreground: #d6cda9;
-
-    --link: #f2edd7;
-    --ring: #aa8e4b;
-  }
-}
-
 body {
   min-height: 100dvh;
-  background: var(--background);
+  overflow-x: clip;
+  background:
+    linear-gradient(90deg, rgba(16, 43, 74, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(16, 43, 74, 0.028) 1px, transparent 1px),
+    var(--background);
+  background-size: 4rem 4rem;
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, -apple-system, Segoe UI, Roboto,
     Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--primary-foreground);
 }

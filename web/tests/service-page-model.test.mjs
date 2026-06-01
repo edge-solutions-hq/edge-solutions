@@ -87,11 +87,11 @@ describe('service content availability', () => {
     assert.equal(result.didFallback, false);
     assert.equal(result.renderPolicy.kind, 'localized');
     assert.equal(result.metadata.title, 'EN realtime');
-    assert.equal(result.proofContract.slug, 'realtime-games');
-    assert.equal(result.proofContract.render.module, 'PrototypeSignals');
-    assert.equal(result.proofContract.render.imagePath, 'services-realtime-prototype-board.svg');
+    assert.equal(result.evidenceContract.slug, 'realtime-games');
+    assert.equal(result.evidenceContract.render.module, 'PrototypeSignals');
+    assert.equal(result.evidenceContract.render.imagePath, 'services-realtime-prototype-board.svg');
     assert.deepEqual(
-      result.proofContract.structure.map((item) => [item.key, item.expectedCount]),
+      result.evidenceContract.structure.map((item) => [item.key, item.expectedCount]),
       [
         ['signals', 3],
         ['phases', 3],
@@ -112,8 +112,8 @@ describe('service content availability', () => {
     assert.equal(result.didFallback, true);
     assert.equal(result.renderPolicy.kind, 'fallback');
     assert.equal(result.metadata.title, 'FR realtime');
-    assert.equal(result.proofContract.slug, 'realtime-games');
-    assert.equal(result.proofContract.render.module, 'PrototypeSignals');
+    assert.equal(result.evidenceContract.slug, 'realtime-games');
+    assert.equal(result.evidenceContract.render.module, 'PrototypeSignals');
   });
 
   it('returns invalid slug state before loading content', async () => {
@@ -178,6 +178,7 @@ describe('service page model ownership', () => {
         assert.ok(model);
 
         const service = model.profile.jsonLd.find((item) => item?.['@type'] === 'Service');
+        const webPage = model.profile.jsonLd.find((item) => item?.['@type'] === 'WebPage');
         const expectedUrl = `https://edge-solutions.be/${locale}/services/${track.slug}`;
         const details = getServiceSchemaDetails(locale, track.slug);
         const label = `${locale}/${track.slug} Service JSON-LD`;
@@ -186,6 +187,7 @@ describe('service page model ownership', () => {
         assert.equal(service['@id'], `${expectedUrl}#service`);
         assert.equal(service.url, expectedUrl);
         assert.equal(service.inLanguage, locale);
+        assert.equal(service.dateModified, track.lastModified.toISOString());
         assert.equal(service.serviceType, track.schemaServiceType);
         assert.equal(service.category, track.slug);
         assert.deepEqual(service.audience, {
@@ -230,11 +232,12 @@ describe('service page model ownership', () => {
           },
         });
         assertNoUnsupportedServiceClaims(service, label);
+        assert.equal(webPage.dateModified, track.lastModified.toISOString());
       }
     }
   });
 
-  it('exposes proof policy as structured page-model data', async () => {
+  it('exposes evidence policy as structured page-model data', async () => {
     const model = await servicePage.getServicePageModel({
       locale: 'en',
       slug: 'ai-automation',
@@ -245,19 +248,19 @@ describe('service page model ownership', () => {
     });
 
     assert.ok(model);
-    assert.equal(model.proofPolicy.offerTrackSlug, 'ai-automation');
-    assert.equal(model.proofPolicy.renderModule, 'WorkflowSnapshot');
-    assert.equal(model.proofPolicy.imagePath, 'services-ai-workflow-board.svg');
+    assert.equal(model.evidencePolicy.offerTrackSlug, 'ai-automation');
+    assert.equal(model.evidencePolicy.renderModule, 'WorkflowSnapshot');
+    assert.equal(model.evidencePolicy.imagePath, 'services-ai-workflow-board.svg');
     assert.deepEqual(
-      model.proofPolicy.structuralExpectations.map((item) => [item.key, item.expectedCount]),
+      model.evidencePolicy.structuralExpectations.map((item) => [item.key, item.expectedCount]),
       [
         ['reviewPoints', 3],
         ['steps', 3],
       ]
     );
     assert.deepEqual(
-      model.proofPolicy.requiredSignals.map((signal) => signal.concept),
-      ['human review', 'source of truth', 'guardrails']
+      model.evidencePolicy.requiredSignals.map((signal) => signal.concept),
+      ['human review', 'source of truth', 'action limits']
     );
   });
 
@@ -279,8 +282,8 @@ describe('service page model ownership', () => {
     assert.match(modelSource, /availability\.status !== 'localized'/);
     assert.match(modelSource, /getOfferTrackPageProfile/);
     assert.match(modelSource, /renderPolicy\.requestedLocale/);
-    assert.match(modelSource, /proofPolicy/);
-    assert.match(modelSource, /proofContract/);
+    assert.match(modelSource, /evidencePolicy/);
+    assert.match(modelSource, /evidenceContract/);
     assert.match(modelSource, /scrollTracking/);
     assert.match(routeSource, /getServicePageStaticParams/);
     assert.match(routeSource, /getServicePageMetadata/);

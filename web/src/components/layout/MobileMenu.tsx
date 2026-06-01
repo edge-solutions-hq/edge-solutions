@@ -3,7 +3,13 @@
 import * as React from 'react';
 import {Link, usePathname} from '@/i18n/navigation';
 import {cn} from '@/lib/cn';
+import {buttonClass} from '@/components/ui/Button';
+import {surfaceClass} from '@/components/ui/Surface';
 import {trackContactCtaClick} from '@/lib/analytics/events';
+import {
+  shouldOpenContactModalForClick,
+  useContactModal,
+} from '@/components/contact/ContactModalContext';
 import {
   getHeaderNavigationContactAction,
   getHeaderNavigationRenderItems,
@@ -26,6 +32,7 @@ export function MobileMenu({
   const pathname = usePathname();
   const navItems = getHeaderNavigationRenderItems(pathname, items, 'mobile_menu_nav');
   const contactAction = getHeaderNavigationContactAction(items, ctaLabel, 'mobile_menu_cta');
+  const contactModal = useContactModal();
 
   return (
     <div className="md:hidden">
@@ -45,7 +52,7 @@ export function MobileMenu({
           aria-expanded={open}
           aria-label={open ? labels.close : labels.open}
           className={cn(
-            'inline-flex h-10 items-center justify-center rounded-md border border-border bg-surface px-3 text-sm font-medium text-foreground shadow-sm transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none'
+            buttonClass({variant: 'outline', size: 'md', className: 'px-3'})
           )}
           onClick={() => setOpen((v) => !v)}
         >
@@ -60,7 +67,7 @@ export function MobileMenu({
         {open ? (
           <div
             role="menu"
-            className="absolute right-0 mt-2 w-[min(22rem,calc(100vw-3rem))] rounded-lg border border-border bg-surface p-2 shadow-lg"
+            className={surfaceClass('card', 'absolute right-0 mt-2 w-[min(22rem,calc(100vw-3rem))] p-2')}
           >
             <div className="grid gap-1">
               {navItems.map((item) => (
@@ -73,9 +80,19 @@ export function MobileMenu({
                     'rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
                     item.active ? 'bg-surface-muted' : undefined
                   )}
-                  onClick={() => {
+                  onClick={(event) => {
                     if (item.trackingPayload) {
                       trackContactCtaClick(item.trackingPayload);
+                    }
+
+                    if (
+                      item.trackingPayload &&
+                      contactModal &&
+                      !event.defaultPrevented &&
+                      shouldOpenContactModalForClick(event)
+                    ) {
+                      event.preventDefault();
+                      contactModal.openContactModal({href: item.href});
                     }
 
                     setOpen(false);
@@ -90,10 +107,19 @@ export function MobileMenu({
               <div className="mt-2 border-t border-border pt-2">
                 <Link
                   href={contactAction.href}
-                  className="inline-flex h-11 w-full items-center justify-center gap-2 whitespace-nowrap rounded-md border border-border bg-primary px-5 text-sm font-medium text-primary-foreground shadow-[3px_3px_0_var(--secondary)] transition-colors hover:bg-accent hover:shadow-[2px_2px_0_var(--secondary)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60 motion-reduce:transition-none"
+                  className={buttonClass({size: 'lg', className: 'w-full'})}
                   onClick={(event) => {
                     if (!event.defaultPrevented) {
                       trackContactCtaClick(contactAction.trackingPayload);
+                    }
+
+                    if (
+                      contactModal &&
+                      !event.defaultPrevented &&
+                      shouldOpenContactModalForClick(event)
+                    ) {
+                      event.preventDefault();
+                      contactModal.openContactModal({href: contactAction.href});
                     }
 
                     setOpen(false);

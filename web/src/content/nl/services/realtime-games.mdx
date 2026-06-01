@@ -1,147 +1,171 @@
 export const metadata = {
-  title: "Realtime 3D en VR in België — bruikbare prototypes",
+  title: "Realtime 3D- en XR-applicaties in België",
   description:
-    "VR- en interactieve 3D-prototypes voor Belgische teams: haalbaarheid, performance en ervaring valideren voor investering, met menselijk gereviewde AI-iteratie."
+    "Realtime 3D- en XR-applicaties voor Belgische teams: VR, augmented reality, configuratoren, simulaties en bruikbare interactieve ervaringen."
 };
 
-<PageIntro eyebrow="Dienst" title="Realtime — VR & interactieve 3D">
+<PageIntro eyebrow="Dienst" title="Realtime 3D- en XR-applicaties">
   <p>
-    Ik bouw realtime ervaringen: VR, interactieve 3D, speelbare prototypes en
-    immersieve demo's. Doel: een vloeiende, comfortabele en betrouwbare ervaring —
-    klaar om te tonen, te testen en te verbeteren.
+    Ik bouw realtime applicaties: interactieve 3D, VR, augmented reality,
+    configuratoren, simulaties, immersieve training en speelbare versies. Het
+    doel is een vloeiende, comfortabele en betrouwbare ervaring op de
+    doelhardware.
   </p>
   <p>
-    Vanuit België werk ik met studios, producers en teams van idee tot
-    prototype, en tot productie wanneer het concept zichzelf bewijst.
+    Ik help met kadering, eerste versies, optimalisatie of technische recovery
+    wanneer de basis gezonder moet worden.
   </p>
 </PageIntro>
 
-<Callout>
-  Het doel is niet om een “wow”-demo te maken die moeilijk verder te zetten is.
-  Het doel is snel een speelbare basis te krijgen zodat de richting gevalideerd
-  wordt zonder technisch risico te verbergen.
-</Callout>
+<SectionIntro
+  className="mt-14"
+  eyebrow="Projecten"
+  title="3D / XR-projecten"
+>
+  <p>
+    Een selectie publieke projecten uit mijn realtime, VR-, WebGL- en gamewerk.
+    Elke kaart linkt naar de publieke bron van het project.
+  </p>
+</SectionIntro>
+
+<ProjectGallery
+  className="mt-8"
+  items={[
+    {
+      title: 'SafETHIgame',
+      category: 'WebGL - Industrie',
+      description: 'WebGL-applicatie voor risicopreventie in industriële contexten.',
+      imageSrc: '/images/work/realtime-gallery/safethigame.png',
+      imageAlt: 'Capture van SafETHIgame, een WebGL-applicatie voor risicopreventie.',
+      href: 'https://www.newsroom.ethias.be/ethias-dubbel-bekroond-tijdens-de-decavi-trofeeen-2026-een-erkenning-voor-haar-expertise-in-het-ondersteunen-van-ondernemingen-en-hun-uitdagingen',
+    },
+    {
+      title: 'HexoCity',
+      category: 'PC-game - Steam',
+      description: 'Relaxing puzzle game gepubliceerd op Steam.',
+      imageSrc: '/images/work/realtime-gallery/hexocity.jpg',
+      imageAlt: 'Officiële Steam-capsule voor de game HexoCity.',
+      href: 'https://store.steampowered.com/app/2820100/HexoCity/',
+    },
+    {
+      title: 'Glitch Moba',
+      category: 'VR-game - Meta Quest 2',
+      description: 'First multiplayer MOBA shooter in VR, released for Meta Quest 2.',
+      imageSrc: '/images/work/realtime-gallery/glitch-moba-capsule.jpg',
+      imageAlt: 'Capsule-afbeelding voor het Glitch Moba-project.',
+      href: 'https://www.artstation.com/artwork/qe2EzL',
+    },
+    {
+      title: 'Crinoid fields',
+      category: 'Animatie - Museum',
+      description: 'Technische rendering en animatie rond een 3D-omgeving.',
+      imageSrc: '/images/work/realtime-gallery/crinoid-fields-scene.jpg',
+      imageAlt: 'Onderwaterscène uit het Crinoid fields-project.',
+      href: 'https://www.artstation.com/artwork/vD9oNa',
+    },
+    {
+      title: 'Silva VR',
+      category: 'VR-applicatie - Medisch',
+      description: 'VR-ervaring met geanimeerde omgevingen en comfort- en performancebeperkingen.',
+      imageSrc: '/images/work/realtime-gallery/silva-vr.jpg',
+      imageAlt: 'Capture van het Silva VR-project gepubliceerd op ArtStation.',
+      href: 'https://www.artstation.com/artwork/lDrmzY',
+    },
+    {
+      title: 'Vision-It',
+      category: 'WebGL - Medisch',
+      description: 'Interactieve WebGL-applicatie met interface en 3D-content.',
+      imageSrc: '/images/work/realtime-gallery/vision-it.jpg',
+      imageAlt: 'Capture van het Vision-It-project gepubliceerd op ArtStation.',
+      href: 'https://www.artstation.com/artwork/LRZzDv',
+    },
+  ]}
+  linksTitle="Meer bekijken"
+  links={[
+    {
+      label: 'Persoonlijk ArtStation-portfolio',
+      description: '3D-projecten, captures, renders en publiek werk.',
+      href: 'https://www.artstation.com/gilguminski',
+    },
+    {
+      label: 'Cynaptek-video’s op Vimeo',
+      description: 'Oudere producties, demo’s en interactieve ervaringen.',
+      href: 'https://vimeo.com/cynaptek',
+    },
+  ]}
+/>
 
 <PrototypeSignals
-  className="mt-16"
-  eyebrow="Prototype-signalen"
-  title="Wat echt moet aanvoelen voor een realtime build meer budget verdient"
-  imageSrc="/images/proof/services-realtime-prototype-board.svg"
-  imageAlt="Abstract realtime prototypebord met een 3D-view, performancegrafiek en validatiecheckpoints."
+  className="mt-14"
+  eyebrow="Validatie"
+  title="Wat bevat een eerste testbare versie?"
+  imageSrc="/images/work/services-realtime-prototype-board.svg"
+  imageAlt="Abstract realtime buildbord met een 3D-view, performancegrafiek en validatiecheckpoints."
   signals={[
-    {label: 'Doel', value: 'Speelbare build op het juiste toestel'},
-    {label: 'Risico', value: 'Performance en comfort vroeg gecheckt'},
-    {label: 'Verdict', value: 'Duidelijke keep / cut / polish-beslissingen'},
+    {label: 'Gebruik', value: 'Nuttige ervaring in de echte context'},
+    {label: 'Doel', value: 'Testbare versie op het juiste toestel'},
+    {label: 'Beslissing', value: 'Doorgaan / vereenvoudigen / stoppen'},
   ]}
   phases={[
     {
       label: 'Fase 01',
-      title: 'Eerst haalbaarheid',
+      title: 'Gebruik',
       detail:
-        'Leg toestel, interactiestijl, assetkost en frame-ratebeperkingen vast voor de ambitie begint te schuiven.',
+        'Begrijpen wie de applicatie gebruikt, in welke context en voor welke beslissing of actie.',
     },
     {
       label: 'Fase 02',
-      title: 'Toonbare build',
+      title: 'Testbare versie',
       detail:
-        'Zorg vroeg voor een presenteerbare of speelbare versie om comfort, vloeiendheid en onboarding te beoordelen met echte feedback.',
+        'Een korte versie testen met de juiste hardware, de juiste beperkingen en een representatief scenario.',
     },
     {
       label: 'Fase 03',
-      title: 'Productiepoort',
+      title: 'Beslissing',
       detail:
-        'Gebruik het prototype om te beslissen wat polijsting verdient, wat eenvoudiger moet en wat buiten scope moet blijven.',
+        'Beslissen wat echt waarde brengt, wat eenvoudiger moet en wat buiten scope blijft.',
     },
   ]}
 >
   <p>
-    Een sterk realtime project wint vertrouwen wanneer de ervaring, de risico’s
-    en de volgende productiebeslissingen zichtbaar zijn voor het budget zwaarder
-    wordt.
+    De eerste versie dient vooral om te controleren of de ervaring de gebruikers
+    echt helpt. De techniek blijft belangrijk, maar ondersteunt die validatie:
+    het juiste toestel, het juiste performanceniveau en de juiste beperkingen.
   </p>
 </PrototypeSignals>
 
 <SectionIntro
-  className="mt-16"
-  eyebrow="Prototypekader"
-  title="De build moet tegelijk leveringsrisico en ervaringskwaliteit bewijzen"
+  className="mt-14"
+  eyebrow="Performance"
+  title="Hoe valideer je VR/XR-performance en comfort?"
 >
   <p>
-    Hetzelfde prototype moet snel twee vragen beantwoorden: houdt de ervaring
-    stand op het juiste toestel, en is het vervolg nog beheersbaar genoeg om
-    zonder ontsporing verder te gaan?
+    Validatie gebeurt op de doelhardware, met een realistisch scenario en
+    observeerbare criteria. Rendering, comfort en stabiliteit moeten getest
+    worden voor je een grotere versie belooft.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-2 xl:grid-cols-3">
-  <GridListItem title="Performancebudgetten">
-    Profiling, laadtijd en stabiliteit moeten al in het prototype aangepakt
-    worden, niet pas “op het einde gefixt”.
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Echte hardware">
+    Tests gebeuren op het doeltoestel, niet alleen op een comfortabele
+    ontwikkelmachine.
   </GridListItem>
-  <GridListItem title="Comfort op echte hardware">
-    Zeker in VR moeten locomotion, leesbaarheid, onboarding en interacties
-    getest worden op het doeltoestel.
+  <GridListItem title="Duidelijk budget">
+    We volgen nuttige limieten: framerate, belasting, assets, interacties en
+    zones waar de ervaring oncomfortabel kan worden.
   </GridListItem>
-  <GridListItem title="Pipeline die kan doorgaan">
-    Assets, versiebeheer, builds en handoff moeten proper genoeg blijven om het
-    project zonder vermijdbare frictie te laten doorgaan.
-  </GridListItem>
-  <GridListItem title="VR-ervaring">
-    Game, trainingsflow, eventopstelling of immersieve demo waarbij comfort en
-    onboarding als eerste orde vereisten behandeld worden.
-  </GridListItem>
-  <GridListItem title="Interactief 3D-prototype">
-    Simulatie, configurator, serious game of speelbare proof of concept om een
-    idee te valideren voor een zwaardere productiefase.
-  </GridListItem>
-  <GridListItem title="Interactieve 3D-demo">
-    Een toonbare ervaring voor afspraak, event of interne review, met focus op compatibiliteit,
-    laadtijd en aanvaardbare rendering op de juiste toestellen.
+  <GridListItem title="Beslissing">
+    De test moet tonen wat kan blijven, wat eenvoudiger moet en wat meer
+    productiewerk vraagt.
   </GridListItem>
 </GridList>
 
-<SectionIntro
-  className="mt-16"
-  eyebrow="Werkwijze"
-  title="Hoe ik risico verklein"
->
-  <p>
-    Een pragmatische aanpak: scopen, snel iets echts tonen en dan beslissen op
-    basis van concrete signalen in plaats van aannames.
-  </p>
-</SectionIntro>
-
-<Stats className="mt-10">
-  <StatsItem label="1. Scope" value="Platform + grootste risico" />
-  <StatsItem label="2. Prototype" value="Vroege speelbare basis" />
-  <StatsItem label="3. Validatie" value="Performance + comfort" />
-</Stats>
-
-<List className="mt-10">
-  <ListItem title="De juiste scope vastleggen">
-    Doel, doelgroep, doelplatform, constraints en ambitieniveau moeten helder
-    zijn voor features zich beginnen opstapelen.
-  </ListItem>
-  <ListItem title="Iets echts tonen">
-    Ik mik vroeg op een speelbare of presenteerbare versie zodat vloeiendheid,
-    duidelijkheid en productieprioriteiten met echte feedback beoordeeld kunnen worden.
-  </ListItem>
-  <ListItem title="Beslissen of het verder moet">
-    Het prototype moet helpen beslissen wat gepolijst wordt, wat eenvoudiger moet
-    en wat nog niet in een volledige productiefase hoort.
-  </ListItem>
-</List>
-
-<Callout>
-  In realtime werk staat of valt een sterke demo met een duidelijke pipeline,
-  expliciete technische keuzes en frequente validatie op de doelmachine of headset.
-</Callout>
-
-<SectionIntro className="mt-16" eyebrow="FAQ" title="Veelgestelde vragen" smaller />
+<SectionIntro className="mt-14" eyebrow="FAQ" title="Veelgestelde vragen" smaller />
 
 <ServiceFaq locale="nl" slug="realtime-games" />
 
-<CTA title="Laten we je realtime concept bespreken" href="/contact" buttonLabel="Contacteer me">
-  Stuur het doelplatform, de businessdoelstelling en de timing. Ik kom terug met
-  een pragmatisch prototypeplan en de duidelijkste volgende stap.
+<CTA title="Laten we je 3D / XR-applicatie bespreken" href="/contact?service=realtime" buttonLabel="Contacteer me">
+  Stuur het doelplatform, het doel en de timing. Ik antwoord met een eerste
+  pragmatische aanpak.
 </CTA>

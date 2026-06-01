@@ -7,10 +7,15 @@ import {
   getHeaderNavigationRenderItems,
   type HeaderNavigationItem,
 } from '@/lib/navigation/header-navigation';
+import {
+  shouldOpenContactModalForClick,
+  useContactModal,
+} from '@/components/contact/ContactModalContext';
 
 export function HeaderNav({items}: {items: HeaderNavigationItem[]}) {
   const pathname = usePathname();
   const navItems = getHeaderNavigationRenderItems(pathname, items, 'header_nav');
+  const contactModal = useContactModal();
 
   return (
     <nav className="hidden items-center gap-1 md:flex">
@@ -25,9 +30,19 @@ export function HeaderNav({items}: {items: HeaderNavigationItem[]}) {
               ? 'bg-surface-muted text-foreground'
               : 'text-muted-foreground hover:bg-surface-muted hover:text-foreground'
           )}
-          onClick={() => {
+          onClick={(event) => {
             if (item.trackingPayload) {
               trackContactCtaClick(item.trackingPayload);
+            }
+
+            if (
+              item.trackingPayload &&
+              contactModal &&
+              !event.defaultPrevented &&
+              shouldOpenContactModalForClick(event)
+            ) {
+              event.preventDefault();
+              contactModal.openContactModal({href: item.href});
             }
           }}
         >

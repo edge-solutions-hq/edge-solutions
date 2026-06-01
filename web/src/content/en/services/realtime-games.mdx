@@ -1,146 +1,170 @@
 export const metadata = {
-  title: "Realtime 3D and VR in Belgium — usable prototypes",
+  title: "Real-time 3D and XR applications in Belgium",
   description:
-    "VR and interactive 3D prototypes for Belgian teams: validate feasibility, performance and experience before investing, with human-reviewed AI iteration."
+    "Real-time 3D and XR applications for Belgian teams: VR, augmented reality, configurators, simulations and usable interactive experiences."
 };
 
-<PageIntro eyebrow="Service" title="Real-time — VR & interactive 3D">
+<PageIntro eyebrow="Service" title="Real-time 3D and XR applications">
   <p>
-    I build real-time experiences: VR, interactive 3D, playable prototypes and
-    immersive demos. The goal is a fluid, comfortable and reliable experience —
-    ready to be shown, tested and improved.
+    I build real-time applications: interactive 3D, VR, augmented reality,
+    configurators, simulations, immersive training and playable bases. The goal
+    is a fluid, comfortable and reliable experience on the target hardware.
   </p>
   <p>
-    Based in Belgium, I work with studios, producers and teams from idea to
-    prototype, and up to production when the concept proves itself.
+    I can help with scoping, first builds, optimization or technical recovery
+    when the base needs to become healthier.
   </p>
 </PageIntro>
 
-<Callout>
-  The goal is not to create a “wow” demo that is hard to continue. It is to get
-  to a playable base quickly, so the direction is validated without hiding the
-  technical risk.
-</Callout>
+<SectionIntro
+  className="mt-14"
+  eyebrow="Projects"
+  title="3D / XR projects"
+>
+  <p>
+    A selection of public projects from my real-time, VR, WebGL and game work.
+    Each card links back to the public project source.
+  </p>
+</SectionIntro>
+
+<ProjectGallery
+  className="mt-8"
+  items={[
+    {
+      title: 'SafETHIgame',
+      category: 'WebGL - Industries',
+      description: 'WebGL application for risk prevention in industrial contexts.',
+      imageSrc: '/images/work/realtime-gallery/safethigame.png',
+      imageAlt: 'Capture from SafETHIgame, a WebGL risk-prevention application.',
+      href: 'https://www.newsroom.ethias.be/ethias-doublement-recompensee-aux-trophees-decavi-2026-une-reconnaissance-de-son-expertise-au-service-des-entreprises-et-de-leurs-enjeux',
+    },
+    {
+      title: 'HexoCity',
+      category: 'PC game - Steam',
+      description: 'Relaxing puzzle game published on Steam.',
+      imageSrc: '/images/work/realtime-gallery/hexocity.jpg',
+      imageAlt: 'Official Steam capsule for the game HexoCity.',
+      href: 'https://store.steampowered.com/app/2820100/HexoCity/',
+    },
+    {
+      title: 'Glitch Moba',
+      category: 'VR game - Meta Quest 2',
+      description: 'First multiplayer MOBA shooter in VR, released for Meta Quest 2.',
+      imageSrc: '/images/work/realtime-gallery/glitch-moba-capsule.jpg',
+      imageAlt: 'Capsule image for the Glitch Moba project.',
+      href: 'https://www.artstation.com/artwork/qe2EzL',
+    },
+    {
+      title: 'Crinoid fields',
+      category: 'Animation - Museum',
+      description: 'Technical rendering and animation around a 3D environment.',
+      imageSrc: '/images/work/realtime-gallery/crinoid-fields-scene.jpg',
+      imageAlt: 'Underwater scene from the Crinoid fields project.',
+      href: 'https://www.artstation.com/artwork/vD9oNa',
+    },
+    {
+      title: 'Silva VR',
+      category: 'VR application - Medical',
+      description: 'VR experience with animated environments, comfort and performance constraints.',
+      imageSrc: '/images/work/realtime-gallery/silva-vr.jpg',
+      imageAlt: 'Capture from the Silva VR project published on ArtStation.',
+      href: 'https://www.artstation.com/artwork/lDrmzY',
+    },
+    {
+      title: 'Vision-It',
+      category: 'WebGL - Medical',
+      description: 'Interactive WebGL application with interface and 3D content.',
+      imageSrc: '/images/work/realtime-gallery/vision-it.jpg',
+      imageAlt: 'Capture from the Vision-It project published on ArtStation.',
+      href: 'https://www.artstation.com/artwork/LRZzDv',
+    },
+  ]}
+  linksTitle="Explore more"
+  links={[
+    {
+      label: 'Personal ArtStation portfolio',
+      description: '3D projects, captures, renders and public work.',
+      href: 'https://www.artstation.com/gilguminski',
+    },
+    {
+      label: 'Cynaptek videos on Vimeo',
+      description: 'Older productions, demos and interactive experiences.',
+      href: 'https://vimeo.com/cynaptek',
+    },
+  ]}
+/>
 
 <PrototypeSignals
-  className="mt-16"
-  eyebrow="Prototype signals"
-  title="What needs to feel real before a realtime build deserves more budget"
-  imageSrc="/images/proof/services-realtime-prototype-board.svg"
-  imageAlt="Abstract realtime prototype board with a 3D viewport, performance graph and validation checkpoints."
+  className="mt-14"
+  eyebrow="Validation"
+  title="What does a first testable version include?"
+  imageSrc="/images/work/services-realtime-prototype-board.svg"
+  imageAlt="Abstract realtime build board with a 3D viewport, performance graph and validation checkpoints."
   signals={[
-    {label: 'Target', value: 'Playable build on the right device'},
-    {label: 'Risk', value: 'Performance and comfort checked early'},
-    {label: 'Verdict', value: 'Clear keep / cut / polish decisions'},
+    {label: 'Use', value: 'Useful experience in the real context'},
+    {label: 'Target', value: 'Testable build on the right device'},
+    {label: 'Decision', value: 'Continue / simplify / stop'},
   ]}
   phases={[
     {
       label: 'Phase 01',
-      title: 'Feasibility first',
+      title: 'Use case',
       detail:
-        'Lock the device, interaction style, asset cost and frame-rate constraints before ambition starts drifting.',
+        'Understand who uses the application, in which context and for which decision or action.',
     },
     {
       label: 'Phase 02',
-      title: 'Showable build',
+      title: 'Testable build',
       detail:
-        'Get to a presentable or playable version early enough to judge comfort, fluidity and onboarding with real feedback.',
+        'Test a short version with the right hardware, the right constraints and a representative scenario.',
     },
     {
       label: 'Phase 03',
-      title: 'Production gate',
+      title: 'Decision',
       detail:
-        'Use the prototype to decide what deserves polish, what should be simplified and what should stay out of scope.',
+        'Decide what creates real value, what should be simplified and what stays out of scope.',
     },
   ]}
 >
   <p>
-    A strong realtime project earns trust when the experience, the risks and the
-    next production decisions are visible before the budget gets heavier.
+    The first version is mainly there to check that the experience truly helps
+    its users. The technical side matters, but it supports that validation: the
+    right device, the right performance level and the right constraints.
   </p>
 </PrototypeSignals>
 
 <SectionIntro
-  className="mt-16"
-  eyebrow="Prototype scope"
-  title="The build has to prove both delivery risk and experience quality"
+  className="mt-14"
+  eyebrow="Performance"
+  title="How do you validate VR/XR performance and comfort?"
 >
   <p>
-    The same prototype should answer two questions quickly: does the experience
-    hold up on the target device, and is the production path still sane enough
-    to continue?
+    Validation happens on the target hardware, with a realistic scenario and
+    observable criteria. Rendering, comfort and stability should be tested
+    before promising a larger version.
   </p>
 </SectionIntro>
 
-<GridList className="mt-8 sm:grid-cols-2 xl:grid-cols-3">
-  <GridListItem title="Performance budgets">
-    Profiling, load time and stability need to be handled during the prototype,
-    not “fixed at the end”.
+<GridList className="mt-8 sm:grid-cols-3">
+  <GridListItem title="Real hardware">
+    Tests happen on the target device, not only on a comfortable development
+    machine.
   </GridListItem>
-  <GridListItem title="Comfort on real hardware">
-    Especially in VR, locomotion, readability, onboarding and interactions need
-    testing on the target device.
+  <GridListItem title="Clear budget">
+    We track useful limits: frame rate, load, assets, interactions and areas
+    where the experience can become uncomfortable.
   </GridListItem>
-  <GridListItem title="A pipeline that can continue">
-    Assets, versioning, builds and handoff need to stay clean enough that the
-    project can move forward without avoidable friction.
-  </GridListItem>
-  <GridListItem title="VR experience">
-    Game, training flow, event setup or immersive demo with comfort and
-    onboarding treated as first-class constraints.
-  </GridListItem>
-  <GridListItem title="Interactive 3D prototype">
-    Simulation, configurator, serious game or playable proof of concept to
-    validate an idea before a heavier production phase.
-  </GridListItem>
-  <GridListItem title="Interactive 3D demo">
-    A showable experience for a meeting, event or internal review, with focus on compatibility,
-    load time and acceptable rendering on the right devices.
+  <GridListItem title="Decision">
+    The test should show what can stay, what needs to be simplified and what
+    needs more production work.
   </GridListItem>
 </GridList>
 
-<SectionIntro
-  className="mt-16"
-  eyebrow="Working style"
-  title="How I reduce risk"
->
-  <p>
-    A pragmatic approach: scope, show something real quickly, then decide with
-    concrete signals instead of assumptions.
-  </p>
-</SectionIntro>
-
-<Stats className="mt-10">
-  <StatsItem label="1. Scope" value="Platform + main risk" />
-  <StatsItem label="2. Prototype" value="Playable base early" />
-  <StatsItem label="3. Validation" value="Performance + comfort" />
-</Stats>
-
-<List className="mt-10">
-  <ListItem title="Set the right scope">
-    Goal, audience, target platform, constraints and ambition level need to be
-    clear before features start piling up.
-  </ListItem>
-  <ListItem title="Show something real">
-    I aim for a playable or presentable version early enough to judge fluidity,
-    clarity and production priorities with real feedback.
-  </ListItem>
-  <ListItem title="Decide whether it should continue">
-    The prototype should help decide what to polish, what to simplify and what is
-    not worth taking into a full production phase yet.
-  </ListItem>
-</List>
-
-<Callout>
-  In real-time work, a strong demo mostly depends on a clear pipeline, explicit
-  technical choices and frequent validation on the target machine or headset.
-</Callout>
-
-<SectionIntro className="mt-16" eyebrow="FAQ" title="Frequently asked" smaller />
+<SectionIntro className="mt-14" eyebrow="FAQ" title="Frequently asked" smaller />
 
 <ServiceFaq locale="en" slug="realtime-games" />
 
-<CTA title="Let’s talk about your realtime concept" href="/contact" buttonLabel="Contact me">
-  Send the target platform, the business goal and the timeline. I’ll come back
-  with a pragmatic prototype plan and the clearest next step.
+<CTA title="Let’s talk about your 3D / XR application" href="/contact?service=realtime" buttonLabel="Contact me">
+  Send the target platform, goal and timeline. I’ll reply with a pragmatic
+  first approach.
 </CTA>

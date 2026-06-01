@@ -92,6 +92,12 @@ function extractStringProperty(source, propertyName, sourceName) {
   return match[2];
 }
 
+function extractDateIsoProperty(source, propertyName, sourceName) {
+  const match = source.match(new RegExp(`\\b${propertyName}\\s*:\\s*new Date\\((['"])([\\s\\S]*?)\\1\\)`));
+  if (!match) throw new Error(`${sourceName} is missing ${propertyName}`);
+  return new Date(match[2]).toISOString();
+}
+
 function extractConstStringArray(source, constName, sourceName) {
   const match = source.match(new RegExp(`\\b${constName}\\s*=\\s*\\[([\\s\\S]*?)\\]\\s*as const`));
   if (!match) throw new Error(`${sourceName} is missing ${constName}`);
@@ -144,6 +150,7 @@ function extractStaticPageDefinitions(source, sourceName) {
   return extractTopLevelObjects(arrayBody).map((item) => {
     const id = extractStringProperty(item, 'id', sourceName);
     const pathSuffix = extractStringProperty(item, 'pathSuffix', sourceName);
+    const lastModified = extractDateIsoProperty(item, 'lastModified', sourceName);
     const title = parseLocalizedCopy(extractObjectBody(item, 'title', sourceName), `${id} title`);
     const description = parseLocalizedCopy(extractObjectBody(item, 'description', sourceName), `${id} description`);
 
@@ -151,6 +158,7 @@ function extractStaticPageDefinitions(source, sourceName) {
       family: id,
       kind: 'static',
       pathSuffix,
+      lastModified,
       title,
       description,
     };
@@ -175,6 +183,7 @@ function extractOfferTracks(source, sourceName) {
     slug: extractStringProperty(item, 'slug', sourceName),
     pathSuffix: extractStringProperty(item, 'path', sourceName),
     schemaServiceType: extractStringProperty(item, 'schemaServiceType', sourceName),
+    lastModified: extractDateIsoProperty(item, 'lastModified', sourceName),
   }));
 }
 
@@ -264,6 +273,7 @@ function buildLocalizedRouteFacts({siteUrl, locales, defaultLocale, hreflangByLo
           suffix: family.pathSuffix,
         }),
         expectedJsonLdTypes: expectedJsonLdTypesForRouteFamily(family),
+        lastModified: family.lastModified,
         title: metadata.title,
         description: metadata.description,
       };
