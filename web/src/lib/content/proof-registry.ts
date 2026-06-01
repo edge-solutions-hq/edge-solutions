@@ -102,43 +102,6 @@ export const OFFER_TRACK_PROOF_PROFILES = [
     ],
   },
   {
-    slug: 'web-dev',
-    proofModule: 'DeliveryBlueprint',
-    imagePath: 'web-delivery-board.svg',
-    authorityId: 'web-delivery-board',
-    structuralCounts: {
-      checklist: 3,
-      columns: 3,
-      columnPoints: 9,
-    },
-    requiredSignals: [
-      {
-        concept: 'SEO',
-        terms: {
-          fr: ['SEO'],
-          en: ['SEO'],
-          nl: ['SEO'],
-        },
-      },
-      {
-        concept: 'performance',
-        terms: {
-          fr: ['performance'],
-          en: ['performance'],
-          nl: ['performance'],
-        },
-      },
-      {
-        concept: 'handover',
-        terms: {
-          fr: ['handover', 'reprise future'],
-          en: ['handover'],
-          nl: ['handover'],
-        },
-      },
-    ],
-  },
-  {
     slug: 'realtime-games',
     proofModule: 'PrototypeSignals',
     imagePath: 'services-realtime-prototype-board.svg',

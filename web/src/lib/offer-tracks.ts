@@ -1,4 +1,4 @@
-export type OfferTrackSlug = 'ai-automation' | 'web-dev' | 'realtime-games';
+export type OfferTrackSlug = 'ai-automation' | 'realtime-games';
 
 export type OfferTrack = {
   slug: OfferTrackSlug;
@@ -31,21 +31,6 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     lastModified: new Date('2026-05-10T05:49:00.000Z'),
     sitemapPriority: 0.7,
     priorityRole: 'primary',
-  },
-  {
-    slug: 'web-dev',
-    path: '/services/web-dev',
-    navKey: 'nav.web',
-    titleKey: 'services.webTitle',
-    descriptionKey: 'services.webDesc',
-    hubTriggerKey: 'services.hubWebTrigger',
-    hubDescriptionKey: 'services.hubWebDesc',
-    hubProofKey: 'services.hubWebProof',
-    decisionKey: 'services.decisionWeb',
-    schemaServiceType: 'Web development',
-    lastModified: new Date('2026-05-10T05:49:00.000Z'),
-    sitemapPriority: 0.7,
-    priorityRole: 'supporting',
   },
   {
     slug: 'realtime-games',

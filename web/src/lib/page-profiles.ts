@@ -65,8 +65,8 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
     },
     description: {
       fr: 'En Wallonie et en Belgique, Edge Solutions cadre vos usages IA utiles avec revue humaine, garde-fous et un premier pas clair vers le contact.',
-      en: 'Edge Solutions helps teams turn AI usage into something truly usable, with human review, guardrails, web integration and real-time execution when the product needs it.',
-      nl: 'Edge Solutions helpt teams om AI-gebruik echt bruikbaar te maken, met menselijke review, guardrails, webintegratie en realtime uitvoering wanneer het product dat vraagt.',
+      en: 'Edge Solutions helps teams turn AI usage into something truly usable, with human review, guardrails and real-time execution when the product needs it.',
+      nl: 'Edge Solutions helpt teams om AI-gebruik echt bruikbaar te maken, met menselijke review, guardrails en realtime uitvoering wanneer het product dat vraagt.',
     },
   },
   {
@@ -75,14 +75,14 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
     lastModified: new Date('2026-05-13T18:05:00.000Z'),
     sitemapPriority: 0.7,
     title: {
-      fr: 'Services IA-first en Wallonie — cadrage, web et 3D/VR',
-      en: 'AI-first services in Belgium — automation, web and 3D/VR',
-      nl: 'AI-first diensten in België — automatisatie, web en 3D/VR',
+      fr: 'Services IA-first en Wallonie — cadrage et 3D/VR',
+      en: 'AI-first services in Belgium — automation and 3D/VR',
+      nl: 'AI-first diensten in België — automatisatie en 3D/VR',
     },
     description: {
-      fr: 'Pour équipes wallonnes et belges : cadrer un workflow IA utile, intégrer le web ou valider la 3D/VR avec revue humaine et garde-fous avant un premier contact.',
-      en: 'Services for Belgian teams: scope useful AI workflows, build reliable web integrations and validate 3D/VR prototypes with human review guardrails.',
-      nl: 'Diensten voor Belgische teams: bruikbare AI-workflows afbakenen, betrouwbare webintegraties bouwen en 3D/VR-prototypes valideren met menselijke review.',
+      fr: 'Pour équipes wallonnes et belges : cadrer un workflow IA utile ou valider la 3D/VR avec revue humaine et garde-fous avant un premier contact.',
+      en: 'Services for Belgian teams: scope useful AI workflows and validate 3D/VR prototypes with human review guardrails.',
+      nl: 'Diensten voor Belgische teams: bruikbare AI-workflows afbakenen en 3D/VR-prototypes valideren met menselijke review.',
     },
   },
   {
@@ -91,14 +91,14 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
     lastModified: new Date('2026-04-05T14:34:58.000Z'),
     sitemapPriority: 0.6,
     title: {
-      fr: 'Contact — projet IA, web ou 3D/VR en Wallonie',
-      en: 'Contact — AI, web or 3D/VR project in Belgium',
-      nl: 'Contact — AI-, web- of 3D/VR-project in België',
+      fr: 'Contact — projet IA ou 3D/VR en Wallonie',
+      en: 'Contact — AI or 3D/VR project in Belgium',
+      nl: 'Contact — AI- of 3D/VR-project in België',
     },
     description: {
-      fr: 'Décrivez votre projet (IA, automatisation, web, SEO, 3D/VR) et recevez un retour rapide avec périmètre, délai et prochaines étapes.',
-      en: 'Share your project scope (AI, automation, web, SEO, 3D/VR) and get a fast reply with timeline, scope and next steps.',
-      nl: 'Beschrijf je project (AI, automatisatie, web, SEO, 3D/VR) en ontvang snel feedback met scope, timing en volgende stappen.',
+      fr: 'Décrivez votre projet (IA, automatisation, 3D/VR) et recevez un retour rapide avec périmètre, délai et prochaines étapes.',
+      en: 'Share your project scope (AI, automation, 3D/VR) and get a fast reply with timeline, scope and next steps.',
+      nl: 'Beschrijf je project (AI, automatisatie, 3D/VR) en ontvang snel feedback met scope, timing en volgende stappen.',
     },
   },
 ];

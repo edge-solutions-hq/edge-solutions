@@ -74,10 +74,10 @@ function assertNoUnsupportedServiceClaims(service, label) {
 
 describe('service content availability', () => {
   it('returns localized hit state when requested content exists', async () => {
-    const result = await services.getServiceContentAvailability('en', 'web-dev', {
+    const result = await services.getServiceContentAvailability('en', 'realtime-games', {
       loaders: loaderMap({
-        fr: {'web-dev': async () => mdxModule('FR web')},
-        en: {'web-dev': async () => mdxModule('EN web')},
+        fr: {'realtime-games': async () => mdxModule('FR realtime')},
+        en: {'realtime-games': async () => mdxModule('EN realtime')},
       }),
     });
 
@@ -86,24 +86,23 @@ describe('service content availability', () => {
     assert.equal(result.contentLocale, 'en');
     assert.equal(result.didFallback, false);
     assert.equal(result.renderPolicy.kind, 'localized');
-    assert.equal(result.metadata.title, 'EN web');
-    assert.equal(result.proofContract.slug, 'web-dev');
-    assert.equal(result.proofContract.render.module, 'DeliveryBlueprint');
-    assert.equal(result.proofContract.render.imagePath, 'web-delivery-board.svg');
+    assert.equal(result.metadata.title, 'EN realtime');
+    assert.equal(result.proofContract.slug, 'realtime-games');
+    assert.equal(result.proofContract.render.module, 'PrototypeSignals');
+    assert.equal(result.proofContract.render.imagePath, 'services-realtime-prototype-board.svg');
     assert.deepEqual(
       result.proofContract.structure.map((item) => [item.key, item.expectedCount]),
       [
-        ['checklist', 3],
-        ['columns', 3],
-        ['columnPoints', 9],
+        ['signals', 3],
+        ['phases', 3],
       ]
     );
   });
 
   it('returns fallback hit state when localized content is absent and FR content exists', async () => {
-    const result = await services.getServiceContentAvailability('nl', 'web-dev', {
+    const result = await services.getServiceContentAvailability('nl', 'realtime-games', {
       loaders: loaderMap({
-        fr: {'web-dev': async () => mdxModule('FR web')},
+        fr: {'realtime-games': async () => mdxModule('FR realtime')},
       }),
     });
 
@@ -112,15 +111,15 @@ describe('service content availability', () => {
     assert.equal(result.contentLocale, 'fr');
     assert.equal(result.didFallback, true);
     assert.equal(result.renderPolicy.kind, 'fallback');
-    assert.equal(result.metadata.title, 'FR web');
-    assert.equal(result.proofContract.slug, 'web-dev');
-    assert.equal(result.proofContract.render.module, 'DeliveryBlueprint');
+    assert.equal(result.metadata.title, 'FR realtime');
+    assert.equal(result.proofContract.slug, 'realtime-games');
+    assert.equal(result.proofContract.render.module, 'PrototypeSignals');
   });
 
   it('returns invalid slug state before loading content', async () => {
     const result = await services.getServiceContentAvailability('en', 'missing-service', {
       loaders: loaderMap({
-        fr: {'web-dev': async () => mdxModule('FR web')},
+        fr: {'realtime-games': async () => mdxModule('FR realtime')},
       }),
     });
 
@@ -132,7 +131,7 @@ describe('service content availability', () => {
   });
 
   it('returns missing fallback state when FR content is unavailable', async () => {
-    const result = await services.getServiceContentAvailability('nl', 'web-dev', {
+    const result = await services.getServiceContentAvailability('nl', 'realtime-games', {
       loaders: loaderMap({
         nl: {},
         fr: {},
@@ -141,7 +140,7 @@ describe('service content availability', () => {
 
     assert.deepEqual(result, {
       status: 'missing_fallback',
-      slug: 'web-dev',
+      slug: 'realtime-games',
       requestedLocale: 'nl',
       fallbackLocale: 'fr',
     });
@@ -149,17 +148,17 @@ describe('service content availability', () => {
 
   it('returns loader failure state instead of hiding a broken localized loader behind fallback', async () => {
     const error = new Error('broken mdx import');
-    const result = await services.getServiceContentAvailability('en', 'web-dev', {
+    const result = await services.getServiceContentAvailability('en', 'realtime-games', {
       loaders: loaderMap({
-        fr: {'web-dev': async () => mdxModule('FR web')},
-        en: {'web-dev': async () => {
+        fr: {'realtime-games': async () => mdxModule('FR realtime')},
+        en: {'realtime-games': async () => {
           throw error;
         }},
       }),
     });
 
     assert.equal(result.status, 'loader_failure');
-    assert.equal(result.slug, 'web-dev');
+    assert.equal(result.slug, 'realtime-games');
     assert.equal(result.requestedLocale, 'en');
     assert.equal(result.attemptedLocale, 'en');
     assert.equal(result.error, error);

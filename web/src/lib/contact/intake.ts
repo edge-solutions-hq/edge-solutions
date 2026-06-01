@@ -1,6 +1,6 @@
 import {z} from 'zod';
 
-export const contactOfferValues = ['ai', 'web', 'realtime', 'unsure'] as const;
+export const contactOfferValues = ['ai', 'realtime', 'unsure'] as const;
 export type ContactOfferValue = (typeof contactOfferValues)[number];
 
 export const contactOfferOptions = [
@@ -8,11 +8,6 @@ export const contactOfferOptions = [
     value: 'ai',
     messageKey: 'contact.form.service_ai',
     deliveryLabel: 'IA & automatisation',
-  },
-  {
-    value: 'web',
-    messageKey: 'contact.form.service_web',
-    deliveryLabel: 'Web',
   },
   {
     value: 'realtime',

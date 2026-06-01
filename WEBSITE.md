@@ -10,7 +10,7 @@ Make the positioning in `docs/positioning.md` concrete on the website and turn q
 
 ## Conversion Model
 
-- Primary conversion: a relevant prospect starts contact about an AI, workflow, training, internal-tooling, web/integration, or realtime problem.
+- Primary conversion: a relevant prospect starts contact about an AI, workflow, training, internal-tooling, or realtime problem.
 - Secondary conversion: the visitor can inspect services, proof, process, and next steps without fake authority signals.
 - Measurement: event names and placements must stay aligned with `docs/analytics/conversion-event-taxonomy.md`.
 
@@ -32,7 +32,7 @@ Notion prompt blocks may steer scheduled automation. Stable website strategy bel
 - Default public authoring language is French, then translate shared public changes to EN/NL.
 - Preserve FR/EN/NL parity unless the task is explicitly scoped as a French-only SEO experiment.
 - Keep service pages compact, buyer-oriented, and proof-led. Prefer clearer next steps over more prose when pages are already healthy.
-- Avoid recruiter-facing positioning, generic agency copy, and equal-weight AI/web/realtime framing.
+- Avoid recruiter-facing positioning, generic agency copy, and equal-weight AI/realtime framing.
 
 ## Automation Lanes
 

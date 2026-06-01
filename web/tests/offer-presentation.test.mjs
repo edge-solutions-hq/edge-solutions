@@ -32,7 +32,7 @@ describe('offer presentation hierarchy', () => {
 
     assert.deepEqual(
       tracks.map((track) => track.slug),
-      ['ai-automation', 'web-dev', 'realtime-games']
+      ['ai-automation', 'realtime-games']
     );
     assert.equal(tracks.filter((track) => track.priorityRole === 'primary').length, 1);
     assert.equal(tracks[0].priorityRole, 'primary');

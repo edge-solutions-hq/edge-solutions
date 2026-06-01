@@ -120,12 +120,10 @@ describe('offer track catalog seam', () => {
   it('keeps offer track identity and ordering in the catalog', () => {
     const source = read('src/lib/offer-tracks.ts');
     const first = source.indexOf("slug: 'ai-automation'");
-    const second = source.indexOf("slug: 'web-dev'");
-    const third = source.indexOf("slug: 'realtime-games'");
+    const second = source.indexOf("slug: 'realtime-games'");
 
     assert.ok(first > -1, 'missing AI offer track');
-    assert.ok(second > first, 'web track must follow AI track');
-    assert.ok(third > second, 'realtime track must follow web track');
+    assert.ok(second > first, 'realtime track must follow AI track');
     assert.match(source, /priorityRole: 'primary'/, 'AI-first hierarchy should be explicit');
     assert.equal(offerTracks[0].priorityRole, 'primary');
     assert.equal(
@@ -361,7 +359,7 @@ describe('contact intake and analytics taxonomy seams', () => {
     ];
     const thresholds = extractConstNumberValues(taxonomySource, 'scrollDepthThresholds');
 
-    assert.match(taxonomy, /`ai` \| `web` \| `realtime` \| `unsure`/);
+    assert.match(taxonomy, /`ai` \| `realtime` \| `unsure`/);
     for (const eventName of eventNames) {
       assert.match(taxonomy, new RegExp(eventName), `taxonomy docs missing ${eventName}`);
     }

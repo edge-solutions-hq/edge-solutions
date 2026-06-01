@@ -17,7 +17,7 @@ The business is AI-first, not a three-equal-services studio.
 ## Offer Hierarchy
 
 1. Primary promise: pragmatic AI systems, workflow hardening, AI prototypes, AI training, and internal tools that survive real use.
-2. Supporting depth: web delivery, integrations, productization, analytics, performance, and realtime/3D execution.
+2. Supporting depth: integrations, productization, analytics, performance, and realtime/3D execution.
 3. Tone: concrete, senior, calm, technical, no hype, no black box, no fake proof.
 
 ## Anti-Drift Rules

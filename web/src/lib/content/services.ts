@@ -71,17 +71,14 @@ export type ServiceContentResult = ServiceContentAvailabilityHit;
 const serviceContentLoaders: ServiceContentLoaderMap = {
   fr: {
     'ai-automation': () => import('@/content/fr/services/ai-automation.mdx'),
-    'web-dev': () => import('@/content/fr/services/web-dev.mdx'),
     'realtime-games': () => import('@/content/fr/services/realtime-games.mdx'),
   },
   en: {
     'ai-automation': () => import('@/content/en/services/ai-automation.mdx'),
-    'web-dev': () => import('@/content/en/services/web-dev.mdx'),
     'realtime-games': () => import('@/content/en/services/realtime-games.mdx'),
   },
   nl: {
     'ai-automation': () => import('@/content/nl/services/ai-automation.mdx'),
-    'web-dev': () => import('@/content/nl/services/web-dev.mdx'),
     'realtime-games': () => import('@/content/nl/services/realtime-games.mdx'),
   },
 };

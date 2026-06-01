@@ -7,7 +7,6 @@
     "home": "Home",
     "ai": "AI-systemen",
     "process": "Hoe we werken",
-    "web": "Webontwikkeling",
     "realtime": "Realtime 3D/VR",
     "contact": "Contact",
     "mobileMenu": {
@@ -53,7 +52,7 @@
         },
         "tools": {
           "label": "Gebruikte tools",
-          "value": "OpenClaw, Next.js, TypeScript, MDX",
+          "value": "OpenClaw, TypeScript, MDX, reviews",
           "description": "De site en proof steunen op echte tools voor delivery, automatisatie, versiebeheer van content en kwaliteitscontrole."
         },
         "process": {
@@ -73,12 +72,7 @@
         },
         "execution": {
           "title": "Volledige uitvoeringscapaciteit",
-          "description": "Als een use case gevalideerd is, kan ik die doortrekken tot code, automatisatie, webintegratie en deployment."
-        },
-        "web": {
-          "kicker": "Afbakenen voor je automatiseert",
-          "title": "Vertrekken van een echt gebruik in plaats van een trend",
-          "body": "Het juiste vertrekpunt is niet de AI-tool van de maand, maar het probleem dat de moeite waard is om op te lossen en de verwachte waarde voor team of gebruiker."
+          "description": "Als een use case gevalideerd is, kan ik die doortrekken tot code, automatisatie en deployment."
         },
         "realtime": {
           "kicker": "Versnellen zonder vertroebelen",
@@ -131,7 +125,6 @@
         "title": "Een prototype of implementatie overnemen die al bestaat",
         "body": "Wanneer er al een eerste versie is, gaat het werk vaak over leesbaarheid, structuur en een kwaliteitsniveau terugbrengen dat een echte productverderzetting aankan.",
         "stackItems": {
-          "web": "Een fragiele basis opschonen",
           "backend": "Vage technische keuzes herwerken",
           "realtime": "Het project onderhoudbaarder maken",
           "delivery": "Iets geloofwaardigs voorbereiden voor productie"
@@ -161,26 +154,20 @@
   "services": {
     "title": "Diensten",
     "hubTitle": "AI-first diensten voor teams die AI bruikbaar moeten maken in de praktijk",
-    "hubIntro": "Ik help eerst om AI-systemen, automatisatie en guardrails op te zetten die ook in de praktijk standhouden. Wanneer het project meer vraagt dan alleen orkestratie, neem ik ook de weblaag, integraties en realtime prototypes mee zodat een veelbelovende pilot geen vaag oplevertraject wordt.",
+    "hubIntro": "Ik help eerst om AI-systemen, automatisatie en guardrails op te zetten die ook in de praktijk standhouden. Wanneer het project meer vraagt dan alleen orkestratie, neem ik ook realtime prototypes mee zodat een veelbelovende pilot geen vaag oplevertraject wordt.",
     "decisionTitle": "Sneller kiezen",
     "decisionAi": "AI wanneer het risico operationeel is.",
-    "decisionWeb": "Web wanneer de pilot een productbasis nodig heeft.",
     "decisionRealtime": "3D/VR wanneer het idee visueel getest moet worden.",
     "aiTitle": "AI-systemen & automatisatie",
     "aiDesc": "Interne assistenten, documentworkflows, bedrijfsautomatisatie en guardrails voor productie.",
     "hubAiTrigger": "Wanneer AI voorbij de test gaat",
     "hubAiDesc": "Kies dit wanneer je een interne assistent, documentworkflow of guardrails nodig hebt voordat AI naar meer teams gaat.",
     "hubAiProof": "Bewijs: gedocumenteerde methode, menselijke review en guardrails voor actie.",
-    "webTitle": "Webontwikkeling",
-    "webDesc": "Websites, landingspagina’s, bedrijfsapps en webintegraties op maat die snel blijven en makkelijk kunnen meegroeien.",
-    "hubWebTrigger": "Wanneer een pilot in het product moet landen",
-    "hubWebDesc": "Voor teams die een website, portaal of interne tool aan AI-workflows moeten koppelen zonder opnieuw een fragiele basis te bouwen.",
-    "hubWebProof": "Bewijs: webdelivery, integraties en een onderhoudbare basis rond AI-workflows.",
     "realtimeTitle": "Realtime 3D/VR",
-    "realtimeDesc": "VR-prototypes, interactieve 3D-ervaringen en WebGL-projecten om te tonen, te testen en verder te verfijnen.",
+    "realtimeDesc": "VR-prototypes en interactieve 3D-ervaringen om te tonen, te testen en verder te verfijnen.",
     "hubRealtimeTrigger": "Wanneer een idee zichtbaar en testbaar moet worden",
     "hubRealtimeDesc": "Voor teams die een realtime prototype nodig hebben om een ruimtelijk, industrieel of immersief product te tonen, te testen of te verkopen vóór zwaardere productie.",
-    "hubRealtimeProof": "Bewijs: 3D/WebGL-prototypes om te demonstreren, itereren en beslissen.",
+    "hubRealtimeProof": "Bewijs: 3D-prototypes om te demonstreren, itereren en beslissen.",
     "cta": "Ontdek"
   },
   "contact": {
@@ -193,7 +180,6 @@
       "email": "Email",
       "service": "Type project",
       "service_ai": "AI-systemen & automatisatie",
-      "service_web": "Webontwikkeling",
       "service_realtime": "Realtime 3D/VR",
       "service_unsure": "Niet zeker / ander",
       "message": "Bericht",

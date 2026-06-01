@@ -216,89 +216,45 @@ export const SERVICE_SCHEMA_DETAILS: Record<OfferTrackSlug, LocalizedServiceSche
       },
     },
   },
-  'web-dev': {
-    fr: {
-      audienceType:
-        'PME, startups et agences belges qui ont besoin d\'une base web rapide, fiable, trouvable et maintenable',
-      serviceOutput: [
-        'Site vitrine, landing page ou application web sur-mesure',
-        'Structure SEO technique et parcours de conversion lisible',
-        'Verification performance, QA et handover',
-      ],
-      offer: {
-        name: 'Livraison web sur-mesure orientee SEO, conversion et maintenance',
-        description:
-          'Creation ou amelioration d\'une base web avec structure de page, integrations explicites, verification technique et chemin d\'iteration clair.',
-      },
-    },
-    en: {
-      audienceType:
-        'Belgian SMEs, startups and agencies that need a fast, reliable, findable and maintainable web foundation',
-      serviceOutput: [
-        'Custom website, landing page or web application',
-        'Technical SEO structure and readable conversion path',
-        'Performance, QA and handover verification',
-      ],
-      offer: {
-        name: 'Custom web delivery for SEO, conversion and maintainability',
-        description:
-          'Build or improve a web foundation with clear page structure, explicit integrations, technical verification and a clean next-iteration path.',
-      },
-    },
-    nl: {
-      audienceType:
-        'Belgische KMO\'s, startups en agencies die een snelle, betrouwbare, vindbare en onderhoudbare webbasis nodig hebben',
-      serviceOutput: [
-        'Website, landing page of webapplicatie op maat',
-        'Technische SEO-structuur en duidelijk conversiepad',
-        'Performance, QA en handover-verificatie',
-      ],
-      offer: {
-        name: 'Webdelivery op maat voor SEO, conversie en onderhoudbaarheid',
-        description:
-          'Bouw of verbetering van een webbasis met duidelijke paginastructuur, expliciete integraties, technische verificatie en een helder iteratiepad.',
-      },
-    },
-  },
   'realtime-games': {
     fr: {
       audienceType:
-        'Studios, producteurs et entreprises belges qui doivent valider une experience VR, 3D interactive ou WebGL',
+        'Studios, producteurs et entreprises belges qui doivent valider une experience VR ou 3D interactive',
       serviceOutput: [
         'Prototype jouable ou montrable sur la plateforme cible',
         'Validation performance, confort et risques techniques',
         'Verdict de production garder, couper ou polir',
       ],
       offer: {
-        name: 'Prototype temps reel VR, 3D interactive ou WebGL',
+        name: 'Prototype temps reel VR ou 3D interactive',
         description:
           'Creation d\'une base jouable pour valider l\'experience, le risque technique et les prochaines decisions de production.',
       },
     },
     en: {
       audienceType:
-        'Belgian studios, producers and teams that need to validate a VR, interactive 3D or WebGL experience',
+        'Belgian studios, producers and teams that need to validate a VR or interactive 3D experience',
       serviceOutput: [
         'Playable or showable prototype on the target platform',
         'Performance, comfort and technical-risk validation',
         'Production verdict on what to keep, cut or polish',
       ],
       offer: {
-        name: 'Realtime VR, interactive 3D or WebGL prototype',
+        name: 'Realtime VR or interactive 3D prototype',
         description:
           'Creation of a playable base to validate the experience, technical risk and next production decisions.',
       },
     },
     nl: {
       audienceType:
-        'Belgische studios, producers en teams die een VR-, interactieve 3D- of WebGL-ervaring moeten valideren',
+        'Belgische studios, producers en teams die een VR- of interactieve 3D-ervaring moeten valideren',
       serviceOutput: [
         'Speelbaar of toonbaar prototype op het doelplatform',
         'Validatie van performance, comfort en technisch risico',
         'Productieverdict over wat te behouden, schrappen of polijsten',
       ],
       offer: {
-        name: 'Realtime VR-, interactieve 3D- of WebGL-prototype',
+        name: 'Realtime VR- of interactieve 3D-prototype',
         description:
           'Creatie van een speelbare basis om de ervaring, technische risico\'s en volgende productiebeslissingen te valideren.',
       },

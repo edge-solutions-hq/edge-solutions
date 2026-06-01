@@ -78,17 +78,6 @@ export const proofAssetAuthorityRegistry = [
     provenanceSummary: 'Repo-owned AI workflow board for process-proof framing, not evidence for external client outcomes.',
   },
   {
-    assetId: 'web-delivery-board',
-    publicPath: '/images/proof/web-delivery-board.svg',
-    sourceType: 'approved_asset',
-    approvalStatus: 'approved',
-    authority: 'authoritative',
-    usageScopes: ['services', 'web-dev', 'proof'],
-    sourceArtifactRefs: ['../WEBSITE.md', '../docs/architecture.md'],
-    claimRestrictions: defaultClaimRestrictions,
-    provenanceSummary: 'Repo-owned web delivery board for process-proof framing, not evidence for external client outcomes.',
-  },
-  {
     assetId: 'services-realtime-prototype-board',
     publicPath: '/images/proof/services-realtime-prototype-board.svg',
     sourceType: 'approved_asset',

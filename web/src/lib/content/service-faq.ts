@@ -32,28 +32,6 @@ export const SERVICE_FAQS: ServiceFaqMap = {
           'C’est aussi un bon resultat. Le but est d’eviter qu’un sujet fragile absorbe du budget ou de l’energie sans produire de valeur exploitable.',
       },
     ],
-    'web-dev': [
-      {
-        question: 'Vous faites aussi le design ?',
-        answer:
-          'Oui, seul ou avec un designer, tant que la page reste claire, crédible et orientée conversion.',
-      },
-      {
-        question: 'WordPress ou Next.js ?',
-        answer:
-          'Ça dépend surtout de vos contraintes de publication, de budget, de performance et d’évolution. Je vous aide à trancher sans complexifier pour rien.',
-      },
-      {
-        question: 'De quoi avez-vous besoin pour démarrer ?',
-        answer:
-          'Un objectif, une échéance et l’existant. Avec ça, je peux proposer une approche réaliste et un premier plan d’action.',
-      },
-      {
-        question: 'Et après la mise en ligne ?',
-        answer:
-          'Je peux assurer maintenance, améliorations continues et optimisations SEO/performance si vous voulez une suite claire plutôt qu’un lancement jetable.',
-      },
-    ],
     'realtime-games': [
       {
         question: 'Vous pouvez partir d’un concept flou ?',
@@ -97,28 +75,6 @@ export const SERVICE_FAQS: ServiceFaqMap = {
         question: 'What if the verdict is “stop”?',
         answer:
           'That is still a good result. The point is to stop fragile work from consuming more budget and attention than it should.',
-      },
-    ],
-    'web-dev': [
-      {
-        question: 'Do you also handle design?',
-        answer:
-          'Yes, alone or with a designer, as long as the page stays clear, credible and conversion-oriented.',
-      },
-      {
-        question: 'WordPress or Next.js?',
-        answer:
-          'That mostly depends on publishing constraints, budget, performance and future evolution. I help decide without making the project more complex than it needs to be.',
-      },
-      {
-        question: 'What do you need to start?',
-        answer:
-          'A goal, a timeline and the current situation. With that, I can suggest a realistic approach and a first action plan.',
-      },
-      {
-        question: 'What happens after launch?',
-        answer:
-          'I can handle maintenance, continuous improvements and SEO/performance work if you want a site that keeps progressing instead of going stale.',
       },
     ],
     'realtime-games': [
@@ -165,28 +121,6 @@ export const SERVICE_FAQS: ServiceFaqMap = {
         question: 'Wat als het verdict “stop” is?',
         answer:
           'Dat is nog altijd een goed resultaat. Het doel is net te vermijden dat een fragiel onderwerp meer budget en aandacht opslorpt dan het waard is.',
-      },
-    ],
-    'web-dev': [
-      {
-        question: 'Doe je ook design?',
-        answer:
-          'Ja, alleen of met een designer, zolang de pagina helder, geloofwaardig en op conversie gericht blijft.',
-      },
-      {
-        question: 'WordPress of Next.js?',
-        answer:
-          'Dat hangt vooral af van publicatieconstraints, budget, performance en verdere evolutie. Ik help kiezen zonder onnodige complexiteit toe te voegen.',
-      },
-      {
-        question: 'Wat heb je nodig om te starten?',
-        answer:
-          'Een doel, een timing en de huidige situatie. Daarmee kan ik een realistische aanpak en een eerste actieplan voorstellen.',
-      },
-      {
-        question: 'Wat gebeurt er na livegang?',
-        answer:
-          'Ik kan onderhoud, continue verbeteringen en SEO/performancewerk opnemen als je een site wil die blijft vooruitgaan in plaats van stil te vallen.',
       },
     ],
     'realtime-games': [

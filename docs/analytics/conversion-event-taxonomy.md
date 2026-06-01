@@ -22,7 +22,7 @@ Every browser-emitted conversion event also includes stable page context from
 - `page_location` (string): full browser URL
 - `page_family` (string): `home` | `services_index` | `service_detail` | `contact` | `other`
 - `site_locale` (string, optional): `fr` | `en` | `nl`
-- `source_offer_track` (string, optional): current service detail track (`ai-automation` | `web-dev` | `realtime-games`)
+- `source_offer_track` (string, optional): current service detail track (`ai-automation` | `realtime-games`)
 - `page_title` (string, optional): current document title
 - `page_referrer` (string, optional): browser referrer
 
@@ -59,7 +59,7 @@ Every browser-emitted conversion event also includes stable page context from
 
 **Parameters:**
 
-- `service_slug` (string): `ai-automation` | `web-dev` | `realtime-games`
+- `service_slug` (string): `ai-automation` | `realtime-games`
 - `placement` (string): `home_services_grid` | `services_index_grid`
 - `page_path` (string): current path where click happened
 - `link_target` (string): target route (preserves query string/hash when present)
@@ -77,7 +77,7 @@ Every browser-emitted conversion event also includes stable page context from
 
 **Parameters:**
 
-- `service` (string): `ai` | `web` | `realtime` | `unsure`
+- `service` (string): `ai` | `realtime` | `unsure`
 - `page_path` (string): current path
 - `submit_attempt` (number): incremental submit attempt index for the current page session (starts at `1`)
 
@@ -94,7 +94,7 @@ Every browser-emitted conversion event also includes stable page context from
 **Parameters:**
 
 - `page_path` (string): current path
-- `service` (string, optional): submitted service value (`ai` | `web` | `realtime` | `unsure`)
+- `service` (string, optional): submitted service value (`ai` | `realtime` | `unsure`)
 - `submit_attempt` (number): submit attempt index linked to the matching `contact_form_submit`
 
 ---
@@ -110,7 +110,7 @@ Every browser-emitted conversion event also includes stable page context from
 **Parameters:**
 
 - `page_path` (string): current path
-- `service` (string, optional): submitted service value (`ai` | `web` | `realtime` | `unsure`)
+- `service` (string, optional): submitted service value (`ai` | `realtime` | `unsure`)
 - `submit_attempt` (number): submit attempt index linked to the matching `contact_form_submit`
 - `error_type` (string): `validation` | `delivery`
 - `error_field_count` (number, optional): count of invalid fields when `error_type=validation`
@@ -148,7 +148,7 @@ Every browser-emitted conversion event also includes stable page context from
 
 **Parameters:**
 
-- `service_slug` (string): `ai-automation` | `web-dev` | `realtime-games`
+- `service_slug` (string): `ai-automation` | `realtime-games`
 - `scroll_depth_percent` (number): one of `25`, `50`, `75`, `90`, `100`
 
 ## GTM/GA4 mapping recommendation

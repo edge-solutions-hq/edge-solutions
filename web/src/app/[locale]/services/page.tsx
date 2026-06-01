@@ -78,7 +78,7 @@ export default async function ServicesIndexPage({params}: Props) {
           {t('services.decisionTitle')}
         </h2>
 
-        <div className="mt-4 grid gap-3 text-sm leading-6 text-foreground md:grid-cols-3">
+        <div className="mt-4 grid gap-3 text-sm leading-6 text-foreground md:grid-cols-2">
           {decisionItems.map((item) => (
             <p key={item.slug} className={servicesDecisionItemClass(item)}>
               {item.label}
@@ -87,7 +87,7 @@ export default async function ServicesIndexPage({params}: Props) {
         </div>
       </section>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {services.map((service) => (
           <TrackedLink
             key={service.slug}

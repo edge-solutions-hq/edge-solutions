@@ -7,7 +7,6 @@
     "home": "Accueil",
     "ai": "IA & automatisation",
     "process": "Méthode",
-    "web": "Développement web",
     "realtime": "Temps réel 3D/VR",
     "contact": "Contact",
     "mobileMenu": {
@@ -53,7 +52,7 @@
         },
         "tools": {
           "label": "Outils utilisés",
-          "value": "OpenClaw, Next.js, TypeScript, MDX",
+          "value": "OpenClaw, TypeScript, MDX, revues",
           "description": "Le site et les preuves s’appuient sur des outils réels de delivery, d’automatisation, de contenu versionné et de contrôle qualité."
         },
         "process": {
@@ -73,12 +72,7 @@
         },
         "execution": {
           "title": "Capacité d’exécution complète",
-          "description": "Quand un cas d’usage est validé, je peux aller jusqu’au code, à l’automatisation, à l’intégration web et au déploiement."
-        },
-        "web": {
-          "kicker": "Cadrer avant d’automatiser",
-          "title": "Partir d’un usage réel plutôt que d’un effet de mode",
-          "body": "Le bon point de départ n’est pas l’outil IA du moment, mais le problème à résoudre et la valeur attendue pour l’équipe ou l’utilisateur."
+          "description": "Quand un cas d’usage est validé, je peux aller jusqu’au code, à l’automatisation et au déploiement."
         },
         "realtime": {
           "kicker": "Accélérer sans opacifier",
@@ -131,7 +125,6 @@
         "title": "Reprendre un prototype ou une implémentation déjà lancée",
         "body": "Quand une première version existe déjà, le travail consiste souvent à remettre de la lisibilité, de la structure et un niveau de qualité compatible avec une vraie suite produit.",
         "stackItems": {
-          "web": "Nettoyer une base devenue fragile",
           "backend": "Reprendre des choix techniques flous",
           "realtime": "Rendre le projet plus maintenable",
           "delivery": "Préparer une suite crédible côté prod"
@@ -161,26 +154,20 @@
   "services": {
     "title": "Services",
     "hubTitle": "Services IA-first pour équipes qui doivent rendre l’IA exploitable en conditions réelles",
-    "hubIntro": "J’interviens d’abord pour cadrer des systèmes IA, des automatisations et des garde-fous qui tiennent dans le réel. Quand le besoin va plus loin, je prends aussi la couche web, les intégrations et les prototypes temps réel pour éviter qu’un pilote prometteur devienne un chantier flou.",
+    "hubIntro": "J’interviens d’abord pour cadrer des systèmes IA, des automatisations et des garde-fous qui tiennent dans le réel. Quand le besoin va plus loin, je prends aussi les prototypes temps réel pour éviter qu’un pilote prometteur devienne un chantier flou.",
     "decisionTitle": "Décider vite",
     "decisionAi": "IA si le risque est opérationnel.",
-    "decisionWeb": "Web si le pilote doit vivre dans un produit.",
     "decisionRealtime": "3D/VR si l’idée doit être testée visuellement.",
     "aiTitle": "IA & automatisation",
     "aiDesc": "Assistants internes, workflows documentaires, automatisations métier et garde-fous avant mise en production.",
     "hubAiTrigger": "Quand l’IA sort du test",
     "hubAiDesc": "À choisir quand vous avez besoin d’un assistant interne, d’un workflow documentaire ou de garde-fous avant d’ouvrir l’IA à plus d’équipes.",
     "hubAiProof": "Preuve : méthode documentée, revue humaine et garde-fous avant action.",
-    "webTitle": "Développement web",
-    "webDesc": "Sites, landing pages, applications métier et intégrations web sur-mesure, rapides et faciles à faire évoluer.",
-    "hubWebTrigger": "Quand le pilote doit rejoindre le produit",
-    "hubWebDesc": "Pour les équipes qui doivent relier un site, un portail ou un outil métier à leurs flux IA sans recréer une base fragile.",
-    "hubWebProof": "Preuve : delivery web, intégrations et base maintenable autour des workflows IA.",
     "realtimeTitle": "Temps réel 3D/VR",
-    "realtimeDesc": "Prototypes VR, expériences 3D interactives et contenus WebGL conçus pour être montrés, testés puis améliorés.",
+    "realtimeDesc": "Prototypes VR et expériences 3D interactives conçus pour être montrés, testés puis améliorés.",
     "hubRealtimeTrigger": "Quand une idée doit être vue et testée",
     "hubRealtimeDesc": "Pour montrer, tester ou vendre un produit spatial, industriel ou immersif avec un prototype temps réel avant un build plus lourd.",
-    "hubRealtimeProof": "Preuve : prototypes 3D/WebGL conçus pour démontrer, itérer et décider.",
+    "hubRealtimeProof": "Preuve : prototypes 3D conçus pour démontrer, itérer et décider.",
     "cta": "Voir le service"
   },
   "contact": {
@@ -193,7 +180,6 @@
       "email": "Email",
       "service": "Type de projet",
       "service_ai": "IA & automatisation",
-      "service_web": "Développement web",
       "service_realtime": "Temps réel 3D/VR",
       "service_unsure": "Je ne sais pas / autre",
       "message": "Message",

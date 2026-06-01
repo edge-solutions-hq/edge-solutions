@@ -73,15 +73,6 @@ function HomeOfferBlueprintIcon({service}: {service: HomeOfferCard}) {
           </>
         ) : null}
 
-        {service.slug === 'web-dev' ? (
-          <>
-            <rect x="8" y="11" width="32" height="27" rx="2.5" className="fill-background/70" />
-            <path d="M8 18h32M14 14.5h.1M19 14.5h.1M24 14.5h.1" />
-            <path d="M14 24h12M14 29h20M14 34h14" />
-            <path d="M31 23h5v5h-5z" className="fill-primary/20 stroke-primary" />
-          </>
-        ) : null}
-
         {service.slug === 'realtime-games' ? (
           <>
             <path d="m24 8 14 8-14 8-14-8 14-8Z" className="fill-background/70" />
@@ -205,7 +196,7 @@ export default async function HomePage({params}: Props) {
         <section className={homeSectionGap}>
           <SectionIntro title={t('services.title')} />
 
-          <FadeInStagger className={`${homeSectionContentGap} grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-4`}>
+          <FadeInStagger className={`${homeSectionContentGap} grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3`}>
             {serviceCards.map((service) => (
               <FadeIn key={service.slug} className={homeOfferGridItemClass(service)}>
                 <TrackedLink

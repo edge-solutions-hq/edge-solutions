@@ -11,12 +11,12 @@ describe('header navigation model', () => {
 
   it('builds shared header navigation items with contact tracking metadata', () => {
     const items = headerNavigation.getHeaderNavigationItems(translate, [
-      {href: '/services/web-dev', label: 'Web'},
+      {href: '/services/ai-automation', label: 'AI'},
     ]);
 
     assert.deepEqual(items, [
       {href: '/', label: 'Home'},
-      {href: '/services/web-dev', label: 'Web'},
+      {href: '/services/ai-automation', label: 'AI'},
       {
         href: '/contact',
         label: 'Contact',
@@ -30,27 +30,27 @@ describe('header navigation model', () => {
 
   it('matches active items exactly for home and by path segment for nested pages', () => {
     const home = {href: '/', label: 'Home'};
-    const services = {href: '/services/web-dev', label: 'Web'};
+    const services = {href: '/services/ai-automation', label: 'AI'};
 
     assert.equal(headerNavigation.isHeaderNavigationItemActive('/', home), true);
     assert.equal(headerNavigation.isHeaderNavigationItemActive('/fr', home), false);
-    assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/web-dev', services), true);
-    assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/web-dev/proof', services), true);
-    assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/web-dev-extra', services), false);
+    assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/ai-automation', services), true);
+    assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/ai-automation/proof', services), true);
+    assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/ai-automation-extra', services), false);
   });
 
   it('builds desktop and mobile render items with matching active state and placement-specific contact payloads', () => {
     const items = headerNavigation.getHeaderNavigationItems(translate, [
-      {href: '/services/web-dev', label: 'Web'},
+      {href: '/services/ai-automation', label: 'AI'},
     ]);
 
     const desktopItems = headerNavigation.getHeaderNavigationRenderItems(
-      '/services/web-dev/proof',
+      '/services/ai-automation/proof',
       items,
       'header_nav'
     );
     const mobileItems = headerNavigation.getHeaderNavigationRenderItems(
-      '/services/web-dev/proof',
+      '/services/ai-automation/proof',
       items,
       'mobile_menu_nav'
     );
@@ -63,7 +63,7 @@ describe('header navigation model', () => {
       desktopItems.map((item) => ({href: item.href, active: item.active})),
       [
         {href: '/', active: false},
-        {href: '/services/web-dev', active: true},
+        {href: '/services/ai-automation', active: true},
         {href: '/contact', active: false},
       ]
     );
@@ -113,7 +113,7 @@ describe('header navigation model', () => {
 
   it('derives mobile menu CTA targets and tracking payloads from the shared contact item', () => {
     const items = headerNavigation.getHeaderNavigationItems(translate, [
-      {href: '/services/web-dev', label: 'Web'},
+      {href: '/services/ai-automation', label: 'AI'},
     ]);
 
     assert.deepEqual(

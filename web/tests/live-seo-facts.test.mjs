@@ -129,7 +129,6 @@ describe('live SEO source facts', () => {
     assert.ok(facts.staticPageSuffixes.includes('/services'), 'services hub suffix is covered');
     assert.ok(facts.staticPageSuffixes.includes('/contact'), 'contact suffix is covered');
     assert.ok(facts.servicePageSuffixes.includes('/services/ai-automation'), 'offer track suffix is covered');
-    assert.ok(facts.servicePageSuffixes.includes('/services/web-dev'), 'web offer suffix is covered');
     assert.ok(facts.servicePageSuffixes.includes('/services/realtime-games'), 'realtime offer suffix is covered');
 
     for (const locale of facts.locales) {
@@ -206,9 +205,9 @@ describe('live SEO source facts', () => {
     assert.throws(
       () =>
         withSourceFixture(({fixtureRoot}) => {
-          rewriteMdxMetadata('src/content/fr/services/web-dev.mdx', 'title', '   ', fixtureRoot);
+          rewriteMdxMetadata('src/content/fr/services/ai-automation.mdx', 'title', '   ', fixtureRoot);
         }),
-      /\/fr\/services\/web-dev has empty localized service title/
+      /\/fr\/services\/ai-automation has empty localized service title/
     );
 
     assert.throws(
@@ -227,7 +226,7 @@ describe('live SEO source facts', () => {
           const existingTitle = facts.serviceMetadataChecks.find(
             (route) => route.path === '/fr/services/ai-automation'
           ).title;
-          rewriteMdxMetadata('src/content/en/services/web-dev.mdx', 'title', existingTitle, fixtureRoot);
+          rewriteMdxMetadata('src/content/en/services/realtime-games.mdx', 'title', existingTitle, fixtureRoot);
         }),
       /Duplicate localized service title metadata:/
     );
@@ -236,7 +235,7 @@ describe('live SEO source facts', () => {
       () =>
         withSourceFixture(({fixtureRoot, facts}) => {
           const existingDescription = facts.serviceMetadataChecks.find(
-            (route) => route.path === '/en/services/web-dev'
+            (route) => route.path === '/en/services/ai-automation'
           ).description;
           rewriteMdxMetadata(
             'src/content/nl/services/realtime-games.mdx',
@@ -253,9 +252,9 @@ describe('live SEO source facts', () => {
     assert.throws(
       () =>
         withSourceFixture(({fixtureRoot}) => {
-          rewriteMdxMetadata('src/content/fr/services/web-dev.mdx', 'title', 'web-dev', fixtureRoot);
+          rewriteMdxMetadata('src/content/fr/services/realtime-games.mdx', 'title', 'realtime-games', fixtureRoot);
         }),
-      /\/fr\/services\/web-dev has fallback-looking localized service title/
+      /\/fr\/services\/realtime-games has fallback-looking localized service title/
     );
 
     assert.throws(

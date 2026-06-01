@@ -64,7 +64,7 @@ describe('analytics event payload policy', () => {
   it('builds contact outcome payloads and keeps spam silent', () => {
     assert.deepEqual(
       buildContactFormOutcomePayload({
-        outcome: {kind: 'success', service: 'web'},
+        outcome: {kind: 'success', service: 'realtime'},
         submitAttempt: 3,
         pagePath: '/fr/contact',
       }),
@@ -72,7 +72,7 @@ describe('analytics event payload policy', () => {
         eventName: 'contact_form_success',
         params: {
           page_path: '/fr/contact',
-          service: 'web',
+          service: 'realtime',
           submit_attempt: 3,
         },
       }
@@ -136,20 +136,20 @@ describe('analytics event payload policy', () => {
   it('builds offer and contact click payloads with documented parameters', () => {
     assert.deepEqual(
       buildOfferTrackClickPayload({
-        offerTrackSlug: 'web-dev',
+        offerTrackSlug: 'realtime-games',
         placement: 'home_services_grid',
-        linkTarget: '/fr/services/web-dev',
-        linkLabel: 'Web development',
+        linkTarget: '/fr/services/realtime-games',
+        linkLabel: 'Real-time 3D/VR',
         pagePath: '/fr',
       }),
       {
         eventName: 'service_card_click',
         params: {
-          service_slug: 'web-dev',
+          service_slug: 'realtime-games',
           placement: 'home_services_grid',
           page_path: '/fr',
-          link_target: '/fr/services/web-dev',
-          link_label: 'Web development',
+          link_target: '/fr/services/realtime-games',
+          link_label: 'Real-time 3D/VR',
         },
       }
     );
@@ -243,7 +243,7 @@ describe('analytics browser transport adapter', () => {
     const {dataLayer, gtagCalls} = installBrowser();
 
     trackContactFormOutcome({
-      outcome: {kind: 'spam', service: 'web'},
+      outcome: {kind: 'spam', service: 'realtime'},
       submitAttempt: 1,
     });
 

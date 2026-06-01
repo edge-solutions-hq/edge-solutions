@@ -85,9 +85,9 @@ describe('contact attempt tracker behavior', () => {
       contactAttemptTracker.resolveContactAttemptCompletion({
         state,
         pending: false,
-        outcome: {kind: 'spam', service: 'web'},
+        outcome: {kind: 'spam', service: 'realtime'},
       }),
-      {shouldTrack: false, submitAttempt: 1, outcome: {kind: 'spam', service: 'web'}}
+      {shouldTrack: false, submitAttempt: 1, outcome: {kind: 'spam', service: 'realtime'}}
     );
   });
 });
@@ -110,7 +110,7 @@ describe('tracked link target behavior', () => {
 
   it('detects contact targets without query or hash drift', () => {
     assert.equal(trackedLinkTarget.isContactTarget('/fr/contact?source=header'), true);
-    assert.equal(trackedLinkTarget.isContactTarget('/services/web-dev'), false);
+    assert.equal(trackedLinkTarget.isContactTarget('/services/ai-automation'), false);
     assert.equal(trackedLinkTarget.hrefToTrackedTarget(null), '');
   });
 });

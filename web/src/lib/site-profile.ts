@@ -11,9 +11,9 @@ export type RootLayoutProfile = {
 };
 
 const rootDescription: LocalizedCopy = {
-  fr: 'Systèmes IA, automatisation, développement web et technologies temps réel en Belgique. Workflows utiles, sites performants et expériences 3D/VR.',
-  en: 'AI systems, automation, web development and real-time technology in Belgium. Useful workflows, high-performance websites and 3D/VR experiences.',
-  nl: 'AI-systemen, automatisatie, webontwikkeling en realtime technologie in België. Nuttige workflows, performante websites en 3D/VR-ervaringen.',
+  fr: 'Systèmes IA, automatisation et technologies temps réel en Belgique. Workflows utiles, garde-fous humains et expériences 3D/VR.',
+  en: 'AI systems, automation and real-time technology in Belgium. Useful workflows, human guardrails and 3D/VR experiences.',
+  nl: 'AI-systemen, automatisatie en realtime technologie in België. Nuttige workflows, menselijke guardrails en 3D/VR-ervaringen.',
 };
 
 export function getRootLayoutProfile(locale: string): RootLayoutProfile {

@@ -21,15 +21,15 @@ describe('contact form model behavior', () => {
     assert.deepEqual(contactFormModel.fieldOrder, ['name', 'email', 'service', 'message']);
     assert.deepEqual(
       contactFormModel.offerOptions.map((option) => option.value),
-      ['ai', 'web', 'realtime', 'unsure']
+      ['ai', 'realtime', 'unsure']
     );
   });
 
   it('extracts the submit service from form data without normalizing business validity', () => {
     const formData = new FormData();
-    formData.set('service', 'web');
+    formData.set('service', 'realtime');
 
-    assert.equal(contactIntake.extractContactSubmitService(formData), 'web');
+    assert.equal(contactIntake.extractContactSubmitService(formData), 'realtime');
 
     formData.set('service', 'not-a-known-service');
     assert.equal(contactIntake.extractContactSubmitService(formData), undefined);

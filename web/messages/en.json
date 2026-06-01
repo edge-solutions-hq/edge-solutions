@@ -7,7 +7,6 @@
     "home": "Home",
     "ai": "AI systems",
     "process": "How we work",
-    "web": "Web development",
     "realtime": "Real-time 3D/VR",
     "contact": "Contact",
     "mobileMenu": {
@@ -53,7 +52,7 @@
         },
         "tools": {
           "label": "Tools in use",
-          "value": "OpenClaw, Next.js, TypeScript, MDX",
+          "value": "OpenClaw, TypeScript, MDX, reviews",
           "description": "The site and proof surface use real delivery, automation, versioned-content and quality-control tools."
         },
         "process": {
@@ -73,12 +72,7 @@
         },
         "execution": {
           "title": "Full execution capacity",
-          "description": "When a use case is validated, I can carry it through code, automation, web integration and deployment."
-        },
-        "web": {
-          "kicker": "Scope before automating",
-          "title": "Start from a real use case instead of a trend",
-          "body": "The right starting point is not the AI tool of the month, but the problem worth solving and the value expected for the team or the user."
+          "description": "When a use case is validated, I can carry it through code, automation and deployment."
         },
         "realtime": {
           "kicker": "Speed up without obscuring things",
@@ -131,7 +125,6 @@
         "title": "Take over a prototype or implementation that already exists",
         "body": "When a first version is already there, the work is often about restoring readability, structure and a level of quality that can support a real product path.",
         "stackItems": {
-          "web": "Clean up a fragile base",
           "backend": "Rework blurry technical choices",
           "realtime": "Make the project easier to maintain",
           "delivery": "Prepare something credible for production"
@@ -161,26 +154,20 @@
   "services": {
     "title": "Services",
     "hubTitle": "AI-first services for teams that need AI to work in real operations",
-    "hubIntro": "I start by structuring AI systems, automation and guardrails that can survive real operations. When the project needs more than orchestration, I also handle the web layer, integrations and real-time prototypes so a promising pilot does not turn into a vague delivery mess.",
+    "hubIntro": "I start by structuring AI systems, automation and guardrails that can survive real operations. When the project needs more than orchestration, I also handle real-time prototypes so a promising pilot does not turn into a vague delivery mess.",
     "decisionTitle": "Decide faster",
     "decisionAi": "AI when the risk is operational.",
-    "decisionWeb": "Web when the pilot needs a product home.",
     "decisionRealtime": "3D/VR when the idea needs visual testing.",
     "aiTitle": "AI systems & automation",
     "aiDesc": "Internal assistants, document workflows, business automation and guardrails before production rollout.",
     "hubAiTrigger": "When AI moves beyond the test",
     "hubAiDesc": "Choose this when you need an internal assistant, document workflow or rollout guardrails before exposing AI to more teams.",
     "hubAiProof": "Proof: documented method, human review and guardrails before action.",
-    "webTitle": "Web development",
-    "webDesc": "Custom sites, landing pages, business apps and web integrations that stay fast and easy to evolve.",
-    "hubWebTrigger": "When a pilot needs to join the product",
-    "hubWebDesc": "For teams that need a site, portal or internal tool connected to AI workflows without creating another fragile delivery layer.",
-    "hubWebProof": "Proof: web delivery, integrations and a maintainable base around AI workflows.",
     "realtimeTitle": "Real-time 3D/VR",
-    "realtimeDesc": "VR prototypes, interactive 3D experiences and WebGL builds designed to be shown, tested and improved.",
+    "realtimeDesc": "VR prototypes and interactive 3D experiences designed to be shown, tested and improved.",
     "hubRealtimeTrigger": "When an idea needs to be seen and tested",
     "hubRealtimeDesc": "For teams that need a real-time prototype to explain, test or sell a spatial, industrial or immersive product before heavier production.",
-    "hubRealtimeProof": "Proof: 3D/WebGL prototypes designed to demonstrate, iterate and decide.",
+    "hubRealtimeProof": "Proof: 3D prototypes designed to demonstrate, iterate and decide.",
     "cta": "Explore"
   },
   "contact": {
@@ -193,7 +180,6 @@
       "email": "Email",
       "service": "Project type",
       "service_ai": "AI systems & automation",
-      "service_web": "Web development",
       "service_realtime": "Real-time 3D/VR",
       "service_unsure": "Not sure / other",
       "message": "Message",

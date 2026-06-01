@@ -33,7 +33,6 @@ describe('global site profile ownership', () => {
 
     assert.deepEqual(schemaServiceTypes, [
       'AI systems & automation',
-      'Web development',
       'Real-time 3D/VR',
     ]);
     assert.match(seoSource, /serviceType: OFFER_TRACKS\.map\(\(track\) => track\.schemaServiceType\)/);
