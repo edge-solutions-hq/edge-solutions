@@ -56,7 +56,7 @@
       "intro": "Tools, scoping, technical decisions: my approach in short.",
       "publicProject": {
         "title": "Rusty Art, a public project in progress",
-        "description": "Rusty Art is a public project. I use it to test processes, orchestration and product iteration around AI.",
+        "description": "Rusty Art is a public project. I use it to test AI processes, task orchestration and product iteration with OpenClaw.",
         "cta": "View Rusty Art"
       },
       "items": {

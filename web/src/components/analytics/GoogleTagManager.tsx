@@ -7,7 +7,12 @@ type GoogleTagManagerProps = {
 export function GoogleTagManager({containerId}: GoogleTagManagerProps) {
   return (
     <>
-      <Script id="gtm-init" strategy="afterInteractive">
+      <Script id="gtm-datalayer" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+        `}
+      </Script>
+      <Script id="gtm-init" strategy="lazyOnload">
         {`
           (function(w,d,s,l,i){
             w[l]=w[l]||[];
