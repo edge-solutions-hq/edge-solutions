@@ -73,6 +73,8 @@ export function ButtonLink({
   size = 'md',
   className,
   onClick,
+  onFocus,
+  onMouseEnter,
   href,
   trackingPlacement,
   ...props
@@ -81,10 +83,30 @@ export function ButtonLink({
   const isContactCta = isContactTarget(hrefPathname);
   const contactModal = useContactModal();
 
+  const preloadContactModal = React.useCallback(() => {
+    if (isContactCta) {
+      contactModal?.preloadContactModal();
+    }
+  }, [contactModal, isContactCta]);
+
   return (
     <Link
       href={href}
       className={buttonClass({variant, size, className})}
+      onFocus={(event) => {
+        onFocus?.(event);
+
+        if (!event.defaultPrevented) {
+          preloadContactModal();
+        }
+      }}
+      onMouseEnter={(event) => {
+        onMouseEnter?.(event);
+
+        if (!event.defaultPrevented) {
+          preloadContactModal();
+        }
+      }}
       onClick={(event) => {
         onClick?.(event);
 

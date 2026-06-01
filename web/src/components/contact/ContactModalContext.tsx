@@ -10,6 +10,7 @@ export type ContactModalRequest = {
 
 type ContactModalContextValue = {
   openContactModal: (request?: ContactModalRequest) => void;
+  preloadContactModal: () => void;
 };
 
 export const ContactModalContext = React.createContext<ContactModalContextValue | null>(null);

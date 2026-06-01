@@ -21,7 +21,7 @@
     "secondaryCta": "View services",
     "profile": {
       "eyebrow": "About",
-      "title": "Clarify the project, then build what matters.",
+      "title": "Analyze the project, then build intelligently.",
       "body": "I work on technical projects that combine AI, automation, web and 3D / XR: scope the need, choose a maintainable architecture, make teamwork easier and leave behind a usable base.",
       "signals": {
         "experience": {
@@ -44,18 +44,18 @@
     },
     "finalCta": {
       "eyebrow": "Next step",
-      "processTitle": "A short exchange is enough to clarify the next step.",
+      "processTitle": "An exchange is enough to clarify the next step.",
       "processBody": "We check the use case, the risks and the first useful step before turning it into heavier work.",
       "title": "Let’s talk about your AI or 3D / XR project.",
-      "body": "Send me the context, what already exists and what is blocking you. I’ll reply with a clear first direction.",
+      "body": "Send me a summary of what already exists and what is blocking you. I’ll reply with a clear first direction.",
       "cta": "Contact me"
     },
     "showcase": {
       "eyebrow": "To look at",
-      "title": "A few markers of how I work",
+      "title": "How I work",
       "intro": "Tools, scoping, technical decisions: my approach in short.",
       "publicProject": {
-        "title": "Rusty Art, a public project in progress",
+        "title": "Rusty Art, AI orchestration with OpenClaw",
         "description": "Rusty Art is a public project. I use it to test AI processes, task orchestration and product iteration with OpenClaw.",
         "cta": "View Rusty Art"
       },
@@ -87,8 +87,8 @@
     },
     "process": {
       "eyebrow": "What I take on",
-      "title": "A structured mission, without unnecessary weight",
-      "intro": "Whether the topic is AI automation or a 3D / XR application, I start by understanding the real work, choosing a clear scope and moving through short, verifiable deliveries.",
+      "title": "A structured mission",
+      "intro": "Whether the topic is AI automation or a 3D / XR application, I start by analyzing the work, defining a clear scope with you, then moving forward with progressive, verifiable builds.",
       "primaryCta": "Discuss your AI or 3D / XR project",
       "discovery": {
         "kicker": "Starting point",

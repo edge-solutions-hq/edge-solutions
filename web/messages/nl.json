@@ -21,7 +21,7 @@
     "secondaryCta": "Bekijk services",
     "profile": {
       "eyebrow": "Over mij",
-      "title": "Het project scherp krijgen en daarna bouwen wat telt.",
+      "title": "Het project analyseren en daarna slim bouwen.",
       "body": "Ik werk aan technische projecten die AI, automatisatie, web en 3D / XR combineren: de behoefte kaderen, een onderhoudbare architectuur kiezen, het teamwerk vereenvoudigen en een bruikbare basis achterlaten.",
       "signals": {
         "experience": {
@@ -44,18 +44,18 @@
     },
     "finalCta": {
       "eyebrow": "Volgende stap",
-      "processTitle": "Een kort gesprek volstaat om de volgende stap helder te krijgen.",
+      "processTitle": "Een gesprek volstaat om de volgende stap helder te krijgen.",
       "processBody": "We bekijken het gebruik, de risico’s en de eerste nuttige stap voor het zwaarder werk wordt.",
       "title": "Laten we je AI- of 3D / XR-project bespreken.",
-      "body": "Stuur me de context, wat al bestaat en wat blokkeert. Ik antwoord met een eerste heldere richting.",
+      "body": "Stuur me een samenvatting van wat al bestaat en wat blokkeert. Ik antwoord met een eerste heldere richting.",
       "cta": "Contacteer mij"
     },
     "showcase": {
       "eyebrow": "Om te bekijken",
-      "title": "Een paar aanknopingspunten over hoe ik werk",
+      "title": "Hoe ik werk",
       "intro": "Tools, kadering, technische keuzes: mijn aanpak in het kort.",
       "publicProject": {
-        "title": "Rusty Art, een publiek project in opbouw",
+        "title": "Rusty Art, AI-orchestratie met OpenClaw",
         "description": "Rusty Art is een publiek project. Ik gebruik het om AI-processen, taakorchestratie en productiteratie met OpenClaw te testen.",
         "cta": "Bekijk Rusty Art"
       },
@@ -87,8 +87,8 @@
     },
     "process": {
       "eyebrow": "Wat ik opneem",
-      "title": "Een gestructureerde missie, zonder onnodige zwaarte",
-      "intro": "Of het nu om AI-automatisatie of een 3D / XR-applicatie gaat: ik start met het echte werk te begrijpen, kies een duidelijke scope en werk daarna met korte, controleerbare opleveringen.",
+      "title": "Een gestructureerde missie",
+      "intro": "Of het nu om AI-automatisatie of een 3D / XR-applicatie gaat: ik start met het werk te analyseren, samen met jou een duidelijke scope te bepalen en daarna verder te gaan met progressieve, verifieerbare builds.",
       "primaryCta": "Bespreek je AI- of 3D / XR-project",
       "discovery": {
         "kicker": "Startpunt",

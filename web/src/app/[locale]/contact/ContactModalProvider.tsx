@@ -23,10 +23,21 @@ import {
   type ContactOfferValue,
 } from '@/lib/contact/options';
 
-const LazyContactForm = lazy(async () => {
-  const contactFormModule = await import('./ContactForm');
-  return {default: contactFormModule.ContactForm};
-});
+type ContactFormModule = {
+  default: typeof import('./ContactForm').ContactForm;
+};
+
+let contactFormPromise: Promise<ContactFormModule> | undefined;
+
+function preloadContactForm() {
+  contactFormPromise ??= import('./ContactForm').then((contactFormModule) => ({
+    default: contactFormModule.ContactForm,
+  }));
+
+  return contactFormPromise;
+}
+
+const LazyContactForm = lazy(preloadContactForm);
 
 type ContactModalState = {
   formKey: number;
@@ -60,7 +71,13 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
     setModal((current) => ({...current, open: false}));
   }, []);
 
+  const preloadContactModal = useCallback(() => {
+    void preloadContactForm();
+  }, []);
+
   const openContactModal = useCallback((request?: ContactModalRequest) => {
+    void preloadContactForm();
+
     const service =
       request?.service ??
       resolveContactServiceTarget(request?.href ?? '') ??
@@ -71,6 +88,14 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
       open: true,
       service,
     }));
+  }, []);
+
+  useEffect(() => {
+    const timeoutId = window.setTimeout(() => {
+      void preloadContactForm();
+    }, 1200);
+
+    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -127,7 +152,7 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
   }
 
   return (
-    <ContactModalContext.Provider value={{openContactModal}}>
+    <ContactModalContext.Provider value={{openContactModal, preloadContactModal}}>
       {children}
 
       {modal.open ? (

@@ -21,7 +21,7 @@
     "secondaryCta": "Voir les services",
     "profile": {
       "eyebrow": "À propos",
-      "title": "Clarifier le projet, puis construire ce qui compte.",
+      "title": "Analyser le projet, puis construire intelligemment.",
       "body": "J’interviens sur des projets techniques qui mêlent IA, automatisation, web et 3D / XR : cadrer le besoin, choisir une architecture maintenable, faciliter le travail de l’équipe et livrer une base exploitable.",
       "signals": {
         "experience": {
@@ -44,18 +44,18 @@
     },
     "finalCta": {
       "eyebrow": "Prochaine étape",
-      "processTitle": "Un échange court suffit pour clarifier la suite.",
+      "processTitle": "Un échange suffit pour clarifier la suite.",
       "processBody": "On vérifie l’usage, les risques et le premier pas utile avant de lancer un chantier plus lourd.",
       "title": "Parlons de votre projet IA ou 3D / XR.",
-      "body": "Envoyez-moi le contexte, ce qui existe déjà et ce qui bloque. Je vous réponds avec une première piste claire.",
+      "body": "Envoyez-moi une synthèse de ce qui existe déjà et de ce qui bloque. Je vous réponds avec une première piste claire.",
       "cta": "Me contacter"
     },
     "showcase": {
       "eyebrow": "À voir",
-      "title": "Quelques repères sur ma façon de travailler",
+      "title": "Ma façon de travailler",
       "intro": "Outils, cadrage, décisions techniques : l’essentiel de mon approche.",
       "publicProject": {
-        "title": "Rusty Art, un projet public en cours",
+        "title": "Rusty Art, orchestration IA avec OpenClaw",
         "description": "Rusty Art est un projet accessible publiquement. Je l’utilise pour tester des processus IA, de l’orchestration de tâches et des itérations produit avec OpenClaw.",
         "cta": "Voir Rusty Art"
       },
@@ -87,8 +87,8 @@
     },
     "process": {
       "eyebrow": "Ce que je prends en charge",
-      "title": "Une mission structurée, sans lourdeur",
-      "intro": "Que le sujet soit une automatisation IA ou une application 3D / XR, je commence par comprendre le travail réel, choisir un périmètre clair puis avancer par livraisons courtes et vérifiables.",
+      "title": "Une mission structurée",
+      "intro": "Que le sujet soit une automatisation IA ou une application 3D / XR, je commence par analyser le travail, définir un périmètre clair avec vous, puis avancer avec des builds progressifs et vérifiables.",
       "primaryCta": "Parler de votre projet IA ou 3D / XR",
       "discovery": {
         "kicker": "Point de départ",
