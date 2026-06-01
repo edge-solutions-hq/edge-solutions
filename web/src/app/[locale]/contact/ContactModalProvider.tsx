@@ -1,8 +1,6 @@
 'use client';
 
 import {
-  lazy,
-  Suspense,
   useCallback,
   useEffect,
   useId,
@@ -22,22 +20,7 @@ import {
   resolveContactServiceTarget,
   type ContactOfferValue,
 } from '@/lib/contact/options';
-
-type ContactFormModule = {
-  default: typeof import('./ContactForm').ContactForm;
-};
-
-let contactFormPromise: Promise<ContactFormModule> | undefined;
-
-function preloadContactForm() {
-  contactFormPromise ??= import('./ContactForm').then((contactFormModule) => ({
-    default: contactFormModule.ContactForm,
-  }));
-
-  return contactFormPromise;
-}
-
-const LazyContactForm = lazy(preloadContactForm);
+import {ContactForm} from './ContactForm';
 
 type ContactModalState = {
   formKey: number;
@@ -71,13 +54,7 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
     setModal((current) => ({...current, open: false}));
   }, []);
 
-  const preloadContactModal = useCallback(() => {
-    void preloadContactForm();
-  }, []);
-
   const openContactModal = useCallback((request?: ContactModalRequest) => {
-    void preloadContactForm();
-
     const service =
       request?.service ??
       resolveContactServiceTarget(request?.href ?? '') ??
@@ -88,14 +65,6 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
       open: true,
       service,
     }));
-  }, []);
-
-  useEffect(() => {
-    const timeoutId = window.setTimeout(() => {
-      void preloadContactForm();
-    }, 1200);
-
-    return () => window.clearTimeout(timeoutId);
   }, []);
 
   useEffect(() => {
@@ -152,7 +121,7 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
   }
 
   return (
-    <ContactModalContext.Provider value={{openContactModal, preloadContactModal}}>
+    <ContactModalContext.Provider value={{openContactModal}}>
       {children}
 
       {modal.open ? (
@@ -184,7 +153,7 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
                   ref={closeButtonRef}
                   type="button"
                   aria-label={t('contact.modalClose')}
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border bg-background text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface motion-reduce:transition-none"
+                  className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-background text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface motion-reduce:transition-none"
                   onClick={closeContactModal}
                 >
                   <svg
@@ -203,19 +172,10 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
               </div>
 
               <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5 sm:px-6 sm:py-6">
-                <Suspense
-                  fallback={
-                    <div
-                      className="h-64 rounded-md border border-border/40 bg-surface-muted/60"
-                      aria-hidden="true"
-                    />
-                  }
-                >
-                  <LazyContactForm
-                    key={modal.formKey}
-                    preselectedService={modal.service}
-                  />
-                </Suspense>
+                <ContactForm
+                  key={modal.formKey}
+                  preselectedService={modal.service}
+                />
               </div>
             </div>
           </div>

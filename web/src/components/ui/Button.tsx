@@ -15,7 +15,7 @@ type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 const base =
-  'inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[background-color,border-color,color,box-shadow] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:pointer-events-none disabled:opacity-60 motion-reduce:transition-none';
+  'inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[background-color,border-color,color,box-shadow] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60 motion-reduce:transition-none';
 
 const variants: Record<ButtonVariant, string> = {
   primary:
@@ -73,8 +73,6 @@ export function ButtonLink({
   size = 'md',
   className,
   onClick,
-  onFocus,
-  onMouseEnter,
   href,
   trackingPlacement,
   ...props
@@ -83,30 +81,10 @@ export function ButtonLink({
   const isContactCta = isContactTarget(hrefPathname);
   const contactModal = useContactModal();
 
-  const preloadContactModal = React.useCallback(() => {
-    if (isContactCta) {
-      contactModal?.preloadContactModal();
-    }
-  }, [contactModal, isContactCta]);
-
   return (
     <Link
       href={href}
       className={buttonClass({variant, size, className})}
-      onFocus={(event) => {
-        onFocus?.(event);
-
-        if (!event.defaultPrevented) {
-          preloadContactModal();
-        }
-      }}
-      onMouseEnter={(event) => {
-        onMouseEnter?.(event);
-
-        if (!event.defaultPrevented) {
-          preloadContactModal();
-        }
-      }}
       onClick={(event) => {
         onClick?.(event);
 

@@ -45,16 +45,6 @@ export function HeaderNav({items}: {items: HeaderNavigationItem[]}) {
               contactModal.openContactModal({href: item.href});
             }
           }}
-          onFocus={() => {
-            if (item.trackingPayload) {
-              contactModal?.preloadContactModal();
-            }
-          }}
-          onMouseEnter={() => {
-            if (item.trackingPayload) {
-              contactModal?.preloadContactModal();
-            }
-          }}
         >
           {item.label}
         </Link>

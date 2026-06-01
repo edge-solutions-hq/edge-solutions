@@ -97,16 +97,6 @@ export function MobileMenu({
 
                     setOpen(false);
                   }}
-                  onFocus={() => {
-                    if (item.trackingPayload) {
-                      contactModal?.preloadContactModal();
-                    }
-                  }}
-                  onMouseEnter={() => {
-                    if (item.trackingPayload) {
-                      contactModal?.preloadContactModal();
-                    }
-                  }}
                 >
                   {item.label}
                 </Link>
@@ -133,12 +123,6 @@ export function MobileMenu({
                     }
 
                     setOpen(false);
-                  }}
-                  onFocus={() => {
-                    contactModal?.preloadContactModal();
-                  }}
-                  onMouseEnter={() => {
-                    contactModal?.preloadContactModal();
                   }}
                 >
                   {contactAction.label}
