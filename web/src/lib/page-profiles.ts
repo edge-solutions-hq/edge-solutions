@@ -15,11 +15,11 @@ import {site} from './site';
 type LocalizedCopy = Record<string, string>;
 type Translate = (key: string) => string;
 
-type StaticPageId = 'home' | 'services' | 'contact';
+type StaticPageId = 'home' | 'services' | 'contact' | 'privacyPolicy';
 
 type StaticPageDefinition = {
   id: StaticPageId;
-  pathSuffix: '' | '/services' | '/contact';
+  pathSuffix: '' | '/services' | '/contact' | '/privacy-policy';
   lastModified: Date;
   sitemapPriority: number;
   title: LocalizedCopy;
@@ -99,6 +99,22 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
       fr: 'Décrivez votre projet (IA, automatisation, 3D / XR) et recevez un retour rapide avec périmètre, délai et prochaines étapes.',
       en: 'Share your project scope (AI, automation, 3D / XR) and get a fast reply with timeline, scope and next steps.',
       nl: 'Beschrijf je project (AI, automatisatie, 3D / XR) en ontvang snel feedback met scope, timing en volgende stappen.',
+    },
+  },
+  {
+    id: 'privacyPolicy',
+    pathSuffix: '/privacy-policy',
+    lastModified: new Date('2026-06-04T00:00:00.000Z'),
+    sitemapPriority: 0.3,
+    title: {
+      fr: 'Politique de confidentialité - Edge Solutions',
+      en: 'Privacy Policy - Edge Solutions',
+      nl: 'Privacybeleid - Edge Solutions',
+    },
+    description: {
+      fr: 'Politique de confidentialité concise pour le site Edge Solutions : contact, cookies, Google tags, analytics et droits RGPD.',
+      en: 'Concise privacy policy for the Edge Solutions website: contact, cookies, Google tags, analytics and GDPR rights.',
+      nl: 'Beknopt privacybeleid voor de Edge Solutions-website: contact, cookies, Google-tags, analytics en GDPR-rechten.',
     },
   },
 ];
@@ -187,6 +203,17 @@ export function getContactPageProfile(locale: string): PageProfile {
   const title = localized(definition.title, locale);
   const description = localized(definition.description, locale);
   return staticPageProfile(locale, 'contact', [
+    webPageSchema(locale, definition.pathSuffix, title, description, {
+      dateModified: definition.lastModified,
+    }),
+  ]);
+}
+
+export function getPrivacyPolicyPageProfile(locale: string): PageProfile {
+  const definition = staticPageDefinition('privacyPolicy');
+  const title = localized(definition.title, locale);
+  const description = localized(definition.description, locale);
+  return staticPageProfile(locale, 'privacyPolicy', [
     webPageSchema(locale, definition.pathSuffix, title, description, {
       dateModified: definition.lastModified,
     }),

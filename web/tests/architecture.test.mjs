@@ -269,6 +269,7 @@ describe('localized content and evidence seam', () => {
     assert.match(read('src/lib/content/service-page.ts'), /getOfferTrackPageProfile/);
     assert.match(read('src/app/[locale]/services/[slug]/page.tsx'), /getServicePageMetadata/);
     assert.match(read('src/app/[locale]/contact/page.tsx'), /getContactPageProfile/);
+    assert.match(read('src/app/[locale]/privacy-policy/page.tsx'), /getPrivacyPolicyPageProfile/);
   });
 
   it('keeps repeated media frame mechanics behind a shared UI module', () => {

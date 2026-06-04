@@ -1,7 +1,11 @@
 import {getTranslations} from 'next-intl/server';
+import {Link} from '@/i18n/navigation';
 import {site} from '@/lib/site';
 
 type SocialLink = {label: string; href: string};
+
+const footerLinkClass =
+  'text-secondary-foreground underline underline-offset-4 decoration-primary/60 transition-colors hover:decoration-secondary-foreground motion-reduce:transition-none';
 
 export async function Footer() {
   const t = await getTranslations();
@@ -30,7 +34,7 @@ export async function Footer() {
           </div>
           <div className="text-sm text-secondary-foreground/75">
             <a
-              className="text-secondary-foreground underline underline-offset-4 decoration-primary/60 transition-colors hover:decoration-secondary-foreground motion-reduce:transition-none"
+              className={footerLinkClass}
               href={`mailto:${site.contactEmail}`}
             >
               {site.contactEmail}
@@ -52,12 +56,17 @@ export async function Footer() {
                   href={l.href}
                   target="_blank"
                   rel="noreferrer"
-                  className="text-secondary-foreground underline underline-offset-4 decoration-primary/60 transition-colors hover:decoration-secondary-foreground motion-reduce:transition-none"
+                  className={footerLinkClass}
                 >
                   {l.label}
                 </a>
               </li>
             ))}
+            <li>
+              <Link href="/privacy-policy" className={footerLinkClass}>
+                {t('footer.privacyPolicy')}
+              </Link>
+            </li>
           </ul>
           {!site.social.github ? (
             <div className="text-xs text-secondary-foreground/65">

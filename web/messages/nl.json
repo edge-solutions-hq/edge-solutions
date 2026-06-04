@@ -179,9 +179,78 @@
       }
     }
   },
+  "privacy": {
+    "title": "Privacybeleid",
+    "intro": "Deze pagina legt eenvoudig uit welke gegevens de website edge-solutions.be kan verwerken en waarom.",
+    "sections": {
+      "whoWeAre": {
+        "title": "Wie we zijn",
+        "body": [
+          "Edge Solutions is de publieke website van Gil Guminski, een freelance developer in België.",
+          "De website biedt geen gebruikersaccounts, login, reacties, checkout of door gebruikers gegenereerde inhoud."
+        ]
+      },
+      "whatDataWeCollect": {
+        "title": "Welke gegevens we verzamelen",
+        "body": [
+          "Als je de website alleen bezoekt, verzamelen we vooral technische en statistische informatie over het bezoek.",
+          "Als je ons contacteert via formulier, email of telefoon, kunnen we de informatie verwerken die je vrijwillig geeft: naam, emailadres, telefoonnummer, type project en inhoud van het bericht."
+        ]
+      },
+      "cookiesAndGoogleTags": {
+        "title": "Cookies en Google-tags",
+        "body": [
+          "De website gebruikt Google-tags, Google Analytics en Google Tag Manager, wanneer de relevante ID’s geconfigureerd zijn, om basisverkeer en prestaties van de website te begrijpen.",
+          "Google kan technische gegevens verwerken zoals cookies, IP-adres, browser- en apparaatinformatie, bezochte pagina’s, referrer en geschatte locatie.",
+          "De huidige configuratie verzendt navigatie- en conversie-events, zoals klikken naar contact, bekeken servicepagina’s, gekozen taal, scrolldiepte en het algemene resultaat van een formulier. Ze verzendt niet bewust de naam, het emailadres, het telefoonnummer of de inhoud van het bericht naar Google.",
+          "De website gebruikt ook Vercel Web Analytics en Speed Insights voor geaggregeerde statistieken over verkeer en prestaties."
+        ]
+      },
+      "whyWeUseData": {
+        "title": "Waarom we gegevens gebruiken",
+        "body": [
+          "We gebruiken gegevens om aanvragen te beantwoorden, te begrijpen welke pagina’s nuttig zijn, de prestaties van de website te verbeteren en de website technisch goed te laten werken."
+        ]
+      },
+      "dataSharing": {
+        "title": "Delen van gegevens",
+        "body": [
+          "Edge Solutions verkoopt geen persoonlijke gegevens.",
+          "Sommige gegevens kunnen worden verwerkt door dienstverleners die nodig zijn voor de website: Google voor tags en analytics, Vercel voor hosting en prestatiemeting, en Resend of de emailprovider voor het afleveren van contactberichten."
+        ]
+      },
+      "dataRetention": {
+        "title": "Bewaartermijn",
+        "body": [
+          "Contactberichten worden alleen bewaard zolang dat nodig is om de aanvraag te beantwoorden, normale opvolging te doen en toepasselijke administratieve of wettelijke verplichtingen na te leven.",
+          "Analytics- en prestatiegegevens worden bewaard volgens de instellingen en bewaartermijnen van de gebruikte tools. Geaggregeerde rapporten kunnen langer worden bewaard."
+        ]
+      },
+      "yourGdprRights": {
+        "title": "Je GDPR-rechten",
+        "body": [
+          "Je kunt vragen om toegang, correctie, verwijdering, beperking of een kopie van je persoonlijke gegevens. Je kunt ook bezwaar maken tegen bepaalde verwerkingen of je toestemming intrekken wanneer de verwerking op toestemming gebaseerd is.",
+          "Je kunt ook een klacht indienen bij je lokale gegevensbeschermingsautoriteit."
+        ]
+      },
+      "contact": {
+        "title": "Contact",
+        "body": [
+          "Voor privacyvragen of aanvragen over je persoonlijke gegevens kun je Edge Solutions contacteren via email:"
+        ]
+      },
+      "lastUpdated": {
+        "title": "Laatst bijgewerkt",
+        "body": [
+          "4 juni 2026."
+        ]
+      }
+    }
+  },
   "footer": {
     "copyright": "© {year} Edge Solutions",
-    "links": "Links"
+    "links": "Links",
+    "privacyPolicy": "Privacy Policy"
   },
   "notFound": {
     "title": "Pagina niet gevonden",

@@ -179,9 +179,78 @@
       }
     }
   },
+  "privacy": {
+    "title": "Privacy Policy",
+    "intro": "This page explains, in plain terms, what data the edge-solutions.be website may process and why.",
+    "sections": {
+      "whoWeAre": {
+        "title": "Who we are",
+        "body": [
+          "Edge Solutions is the public website of Gil Guminski, a freelance developer based in Belgium.",
+          "The website does not provide user accounts, login, comments, checkout, or user-generated content."
+        ]
+      },
+      "whatDataWeCollect": {
+        "title": "What data we collect",
+        "body": [
+          "If you only browse the website, we mainly collect technical and statistical information related to the visit.",
+          "If you contact us by form, email or phone, we may process the information you voluntarily provide: name, email address, phone number, project type and message content."
+        ]
+      },
+      "cookiesAndGoogleTags": {
+        "title": "Cookies and Google tags",
+        "body": [
+          "The website uses Google tags, Google Analytics and Google Tag Manager, when the relevant IDs are configured, to understand basic website traffic and performance.",
+          "Google may process technical data such as cookies, IP address, browser and device information, pages visited, referrer and approximate location.",
+          "The current setup sends navigation and conversion events, such as contact clicks, service pages viewed, selected language, scroll depth and the general result of a form submission. It does not intentionally send Google the visitor’s name, email address, phone number or message content.",
+          "The website also uses Vercel Web Analytics and Speed Insights for aggregated traffic and performance statistics."
+        ]
+      },
+      "whyWeUseData": {
+        "title": "Why we use data",
+        "body": [
+          "We use data to respond to requests, understand which pages are useful, improve website performance and keep the website working correctly."
+        ]
+      },
+      "dataSharing": {
+        "title": "Data sharing",
+        "body": [
+          "Edge Solutions does not sell personal data.",
+          "Some data may be processed by providers needed to run the website: Google for tags and analytics, Vercel for hosting and performance measurement, and Resend or the email provider for contact message delivery."
+        ]
+      },
+      "dataRetention": {
+        "title": "Data retention",
+        "body": [
+          "Contact messages are kept only as long as needed to respond to the request, handle normal follow-up and meet applicable administrative or legal obligations.",
+          "Analytics and performance data are retained according to the settings and retention periods of the tools used. Aggregated reports may be kept for longer."
+        ]
+      },
+      "yourGdprRights": {
+        "title": "Your GDPR rights",
+        "body": [
+          "You can ask to access, correct, erase, restrict or receive a copy of your personal data. You can also object to certain processing or withdraw consent where the processing is based on consent.",
+          "You may also lodge a complaint with your local data protection authority."
+        ]
+      },
+      "contact": {
+        "title": "Contact",
+        "body": [
+          "For privacy questions or requests about your personal data, contact Edge Solutions by email:"
+        ]
+      },
+      "lastUpdated": {
+        "title": "Last updated",
+        "body": [
+          "June 4, 2026."
+        ]
+      }
+    }
+  },
   "footer": {
     "copyright": "© {year} Edge Solutions",
-    "links": "Links"
+    "links": "Links",
+    "privacyPolicy": "Privacy Policy"
   },
   "notFound": {
     "title": "Page not found",

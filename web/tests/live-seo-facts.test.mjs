@@ -128,6 +128,7 @@ describe('live SEO source facts', () => {
     assert.ok(facts.staticPageSuffixes.includes(''), 'home suffix is covered');
     assert.ok(facts.staticPageSuffixes.includes('/services'), 'services hub suffix is covered');
     assert.ok(facts.staticPageSuffixes.includes('/contact'), 'contact suffix is covered');
+    assert.ok(facts.staticPageSuffixes.includes('/privacy-policy'), 'privacy policy suffix is covered');
     assert.ok(facts.servicePageSuffixes.includes('/services/ai-automation'), 'offer track suffix is covered');
     assert.ok(facts.servicePageSuffixes.includes('/services/realtime-games'), 'realtime offer suffix is covered');
 

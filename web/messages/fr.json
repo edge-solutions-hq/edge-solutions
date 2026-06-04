@@ -179,9 +179,78 @@
       }
     }
   },
+  "privacy": {
+    "title": "Politique de confidentialité",
+    "intro": "Cette page explique, simplement, quelles données le site edge-solutions.be peut traiter et pourquoi.",
+    "sections": {
+      "whoWeAre": {
+        "title": "Qui nous sommes",
+        "body": [
+          "Edge Solutions est le site public de Gil Guminski, freelance basé en Belgique.",
+          "Le site ne propose pas de comptes utilisateurs, de connexion, de commentaires, de checkout, ni de contenu généré par les utilisateurs."
+        ]
+      },
+      "whatDataWeCollect": {
+        "title": "Quelles données nous collectons",
+        "body": [
+          "Si vous utilisez seulement le site, nous collectons principalement des informations techniques et statistiques liées à la visite.",
+          "Si vous nous contactez par formulaire, email ou téléphone, nous pouvons traiter les informations que vous donnez volontairement : nom, adresse email, numéro de téléphone, type de projet et contenu du message."
+        ]
+      },
+      "cookiesAndGoogleTags": {
+        "title": "Cookies et Google tags",
+        "body": [
+          "Le site utilise Google tags, Google Analytics et Google Tag Manager, quand les identifiants correspondants sont configurés, pour comprendre le trafic de base et la performance du site.",
+          "Google peut traiter des données techniques comme les cookies, l’adresse IP, le navigateur, l’appareil, les pages visitées, le référent et la localisation approximative.",
+          "La configuration actuelle envoie des événements de navigation et de conversion, comme les clics vers le contact, les pages de service consultées, la langue choisie, la profondeur de scroll et le résultat général d’un formulaire. Elle n’envoie pas volontairement à Google le nom, l’email, le téléphone ou le contenu du message.",
+          "Le site utilise aussi Vercel Web Analytics et Speed Insights pour des statistiques agrégées de trafic et de performance."
+        ]
+      },
+      "whyWeUseData": {
+        "title": "Pourquoi nous utilisons les données",
+        "body": [
+          "Nous utilisons les données pour répondre aux demandes, comprendre quelles pages sont utiles, améliorer la performance du site et maintenir son bon fonctionnement technique."
+        ]
+      },
+      "dataSharing": {
+        "title": "Partage des données",
+        "body": [
+          "Edge Solutions ne vend pas de données personnelles.",
+          "Certaines données peuvent être traitées par des prestataires nécessaires au site : Google pour les tags et analytics, Vercel pour l’hébergement et les mesures de performance, et Resend ou le fournisseur email pour l’envoi des messages de contact."
+        ]
+      },
+      "dataRetention": {
+        "title": "Conservation des données",
+        "body": [
+          "Les messages de contact sont conservés seulement le temps nécessaire pour répondre à la demande, assurer le suivi normal et respecter les obligations administratives ou légales applicables.",
+          "Les données analytics et performance sont conservées selon les réglages et durées de conservation des outils utilisés. Les rapports agrégés peuvent être gardés plus longtemps."
+        ]
+      },
+      "yourGdprRights": {
+        "title": "Vos droits RGPD",
+        "body": [
+          "Vous pouvez demander l’accès, la rectification, l’effacement, la limitation ou la portabilité de vos données personnelles. Vous pouvez aussi vous opposer à certains traitements ou retirer votre consentement lorsque le traitement dépend du consentement.",
+          "Vous pouvez également introduire une réclamation auprès de votre autorité locale de protection des données."
+        ]
+      },
+      "contact": {
+        "title": "Contact",
+        "body": [
+          "Pour toute question liée à la confidentialité ou à vos données personnelles, contactez Edge Solutions par email :"
+        ]
+      },
+      "lastUpdated": {
+        "title": "Dernière mise à jour",
+        "body": [
+          "4 juin 2026."
+        ]
+      }
+    }
+  },
   "footer": {
     "copyright": "© {year} Edge Solutions",
-    "links": "Liens"
+    "links": "Liens",
+    "privacyPolicy": "Privacy Policy"
   },
   "notFound": {
     "title": "Page introuvable",
