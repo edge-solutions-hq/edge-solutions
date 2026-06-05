@@ -16,7 +16,7 @@ This file owns current implementation tooling for the Edge Solutions web app. It
 - Internationalization: `next-intl` with prefixed `fr`, `en`, and `nl` routes; `fr` is default
 - Forms: `react-hook-form`, `zod`, `@hookform/resolvers`
 - Email delivery: Resend through server-side contact delivery
-- Analytics: Vercel Analytics, Vercel Speed Insights, optional GA4 and GTM runtime IDs
+- Analytics: Vercel Analytics, Vercel Speed Insights, optional Google tag runtime ID
 
 ## Commands
 
@@ -41,15 +41,14 @@ Copy `web/env.example` to a local env file such as `web/.env.local`.
 - `RESEND_API_KEY`: required for real contact email delivery.
 - `RESEND_FROM_EMAIL`: sender address; use a verified domain for production.
 - `RESEND_TO_EMAIL`: destination inbox for contact messages.
-- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: optional GA4 measurement ID.
-- `NEXT_PUBLIC_GTM_ID`: optional Google Tag Manager container ID.
+- `NEXT_PUBLIC_GTM_ID`: optional Google tag / GA4 measurement ID, such as `G-XXXXXXXXXX`.
 
 ## Implementation Notes
 
 - `next.config.ts` enables MDX page extensions, `remark-gfm`, Next Intl, security headers, Turbopack root configuration, and one-day caching for SEO/static endpoints such as `robots.txt`, `sitemap.xml`, and `llms.txt`.
 - `web/src/i18n/routing.ts` owns locale list, default locale, and always-prefixed locale routing.
-- `web/src/lib/runtime-config-core.mjs` owns GA4/GTM ID validation for app runtime and scripts.
-- When both GA4 and GTM public IDs are configured, the app loads GTM only and sends conversion events through `dataLayer`; direct GA4 loading is used when GA4 is configured without GTM.
+- `web/src/lib/runtime-config-core.mjs` owns Google tag ID validation for app runtime and scripts.
+- The app loads `gtag.js` from `NEXT_PUBLIC_GTM_ID` and sends conversion events through `dataLayer` and `gtag` when available.
 - `web/src/lib/runtime-config.ts` adds contact delivery defaults.
 - `web/scripts/seo-source-facts.mjs` keeps SEO script facts aligned with app routing and service slugs.
 - `pnpm-workspace.yaml` allows required native dependency build scripts for Next/SWC, image handling, and file watching.

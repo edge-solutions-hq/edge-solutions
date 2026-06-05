@@ -16,21 +16,15 @@ pnpm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-### Optional analytics setup (GA4 + GTM)
+### Optional analytics setup (Google tag)
 
-If you want GA4 tracking enabled, set:
-
-```bash
-NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
-```
-
-If you want Google Tag Manager enabled, set:
+If you want GA4 tracking enabled, set the Google tag ID:
 
 ```bash
-NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
+NEXT_PUBLIC_GTM_ID=G-XXXXXXXXXX
 ```
 
-When these variables are present, the app loads GA4/GTM and emits conversion events (`contact_cta_click`, `contact_form_submit`, `contact_form_success`, `contact_form_error`, `service_card_click`, `locale_switch`, `service_scroll_depth`) via `dataLayer` and `gtag` when available.
+When this variable is present, the app loads `gtag.js` and emits conversion events (`contact_cta_click`, `contact_form_submit`, `contact_form_success`, `contact_form_error`, `service_card_click`, `locale_switch`, `service_scroll_depth`) via `dataLayer` and `gtag` when available.
 
 You can validate variable formats locally with:
 

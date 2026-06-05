@@ -24,7 +24,7 @@ Next.js 16 requires Node.js 20.9 or newer. Prefer the full gate before finishing
 
 - Copy `web/env.example` to a local env file such as `web/.env.local`.
 - Contact delivery uses `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `RESEND_TO_EMAIL`.
-- Optional analytics use `NEXT_PUBLIC_GA_MEASUREMENT_ID` and `NEXT_PUBLIC_GTM_ID`.
+- Optional Google tag analytics use `NEXT_PUBLIC_GTM_ID` with a GA4 Measurement ID such as `G-XXXXXXXXXX`.
 - Never print or commit secret values.
 
 ## Docs To Read

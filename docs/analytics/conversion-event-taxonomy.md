@@ -155,9 +155,12 @@ When a known AI referrer is detected, `page_referrer` is reduced to the referrer
 - `service_slug` (string): `ai-automation` | `realtime-games`
 - `scroll_depth_percent` (number): one of `25`, `50`, `75`, `90`, `100`
 
-## GTM/GA4 mapping recommendation
+## GA4 mapping recommendation
 
-In GTM, create custom event triggers for:
+The app loads the Google tag directly through `gtag.js` when `NEXT_PUBLIC_GTM_ID`
+is set to a GA4 Measurement ID such as `G-XXXXXXXXXX`.
+
+In GA4, use these custom events:
 
 - `contact_cta_click`
 - `service_card_click`
@@ -166,8 +169,6 @@ In GTM, create custom event triggers for:
 - `contact_form_error`
 - `locale_switch`
 - `service_scroll_depth`
-
-In GA4:
 
 - Mark `contact_form_success` as a conversion event.
 - Keep `contact_form_submit` as an intent signal and `contact_form_error` as a friction signal.

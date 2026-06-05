@@ -12,7 +12,6 @@ import {Header} from '@/components/layout/Header';
 import {Footer} from '@/components/layout/Footer';
 import {ContactModalProvider} from './contact/ContactModalProvider';
 import {GoogleAnalytics} from '@/components/analytics/GoogleAnalytics';
-import {GoogleTagManager} from '@/components/analytics/GoogleTagManager';
 import {JsonLd} from '@/components/seo/JsonLd';
 import {getAnalyticsRuntimeConfig} from '@/lib/runtime-config';
 import {getRootLayoutProfile} from '@/lib/site-profile';
@@ -32,9 +31,6 @@ const firaCode = Fira_Code({
 });
 
 const analyticsConfig = getAnalyticsRuntimeConfig();
-const shouldLoadDirectGoogleAnalytics = Boolean(
-  analyticsConfig.gaMeasurementId && !analyticsConfig.gtmId
-);
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({locale}));
@@ -74,10 +70,9 @@ export default async function LocaleLayout({children, params}: Props) {
           </ContactModalProvider>
         </NextIntlClientProvider>
         <JsonLd data={profile.jsonLd} />
-        {analyticsConfig.gtmId ? <GoogleTagManager containerId={analyticsConfig.gtmId} /> : null}
-        {shouldLoadDirectGoogleAnalytics ? (
+        {analyticsConfig.googleTagId ? (
           <Suspense fallback={null}>
-            <GoogleAnalytics measurementId={analyticsConfig.gaMeasurementId} />
+            <GoogleAnalytics measurementId={analyticsConfig.googleTagId} />
           </Suspense>
         ) : null}
         <Analytics />

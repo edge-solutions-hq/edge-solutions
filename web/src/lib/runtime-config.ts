@@ -4,10 +4,8 @@ import {cleanEnvValue} from '@/lib/runtime-config-core.mjs';
 export {
   analyticsEnvKeys,
   cleanEnvValue,
-  GA4_PATTERN,
-  GTM_PATTERN,
-  GA4_PLACEHOLDER_PATTERN,
-  GTM_PLACEHOLDER_PATTERN,
+  GOOGLE_TAG_PATTERN,
+  GOOGLE_TAG_PLACEHOLDER_PATTERN,
   getAnalyticsRuntimeConfig,
   validateRuntimeId,
 } from '@/lib/runtime-config-core.mjs';
