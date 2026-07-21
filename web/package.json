@@ -8,10 +8,11 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "corepack pnpm run typecheck && next build",
     "start": "next start",
     "test": "node --test tests/*.test.mjs",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "check": "corepack pnpm run test && corepack pnpm run check:analytics-env && corepack pnpm run lint && corepack pnpm run build && corepack pnpm run check:seo",
     "check:seo": "node scripts/check-seo.mjs",
     "check:seo:live": "node scripts/check-live-seo.mjs",
@@ -43,9 +44,10 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
     "tailwindcss": "^4",
-    "typescript": "^7"
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }
