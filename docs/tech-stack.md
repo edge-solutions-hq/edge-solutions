@@ -7,10 +7,10 @@ This file owns current implementation tooling for the Edge Solutions web app. It
 - App path: `web/`
 - Package manager: pnpm (`web/pnpm-lock.yaml`, pinned by `packageManager` in `web/package.json`)
 - Build-script approvals: `web/pnpm-workspace.yaml`
-- Node.js: 20.9 or newer for Next.js 16
+- Node.js: 20.19 or newer for the current lint toolchain
 - Framework: Next.js 16 App Router
 - React: 19
-- Language: TypeScript 7 native CLI, with the TypeScript 6 compatibility API for tools that require programmatic compiler access
+- Language: TypeScript 7 native CLI
 - Styling: Tailwind CSS v4 through `@tailwindcss/postcss`
 - Content: local MDX with `@next/mdx`, `@mdx-js/react`, and `remark-gfm`
 - Internationalization: `next-intl` with prefixed `fr`, `en`, and `nl` routes; `fr` is default
@@ -52,5 +52,5 @@ Copy `web/env.example` to a local env file such as `web/.env.local`.
 - The app loads `gtag.js` from `NEXT_PUBLIC_GTM_ID` and sends conversion events through `dataLayer` and `gtag` when available.
 - `web/src/lib/runtime-config.ts` adds contact delivery defaults.
 - `web/scripts/seo-source-facts.mjs` keeps SEO script facts aligned with app routing and service slugs.
-- `web/package.json` installs TypeScript 7 as `@typescript/native` and aliases `typescript` to `@typescript/typescript6` for Next.js and typescript-eslint. The build runs the TypeScript 7 CLI before `next build`.
+- `web/package.json` installs TypeScript 7 directly and aliases the same package under Next.js 16.2's recognized `@typescript/native-preview` name. The build runs the TypeScript 7 CLI before `next build`; Oxlint handles native TypeScript linting, and ESLint uses Next's Babel parser for framework-specific rules.
 - `pnpm-workspace.yaml` allows required native dependency build scripts for Next/SWC, image handling, and file watching.

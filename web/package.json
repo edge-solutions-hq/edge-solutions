@@ -4,14 +4,14 @@
   "private": true,
   "packageManager": "pnpm@11.1.2",
   "engines": {
-    "node": ">=20.9.0"
+    "node": ">=20.19.0"
   },
   "scripts": {
     "dev": "next dev",
     "build": "corepack pnpm run typecheck && next build",
     "start": "next start",
     "test": "node --test tests/*.test.mjs",
-    "lint": "eslint",
+    "lint": "oxlint && eslint",
     "typecheck": "tsc --noEmit",
     "check": "corepack pnpm run test && corepack pnpm run check:analytics-env && corepack pnpm run lint && corepack pnpm run build && corepack pnpm run check:seo",
     "check:seo": "node scripts/check-seo.mjs",
@@ -39,15 +39,21 @@
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@next/eslint-plugin-next": "16.2.10",
     "@tailwindcss/postcss": "^4",
     "@types/mdx": "^2.0.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@typescript/native": "npm:typescript@^7.0.2",
+    "@typescript/native-preview": "npm:typescript@^7.0.2",
     "eslint": "^9",
-    "eslint-config-next": "16.1.1",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "globals": "^16.4.0",
+    "oxlint": "^1.74.0",
     "tailwindcss": "^4",
-    "typescript": "npm:@typescript/typescript6@^6.0.2"
+    "typescript": "^7.0.2"
   }
 }
