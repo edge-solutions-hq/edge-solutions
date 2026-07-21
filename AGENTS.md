@@ -18,7 +18,7 @@ Use pnpm from `web/`; `pnpm-lock.yaml` is the lockfile. If the `pnpm` shim is un
 - SEO check: `cd web && pnpm run check:seo`
 - Full gate: `cd web && pnpm run check`
 
-Next.js 16 requires Node.js 20.9 or newer, and the current lint toolchain requires Node.js 20.19 or newer. Prefer the full gate before finishing code changes. For docs-only edits, run targeted consistency checks instead of the full app gate unless the docs affect behavior.
+Node.js 24 is required by `.nvmrc`, `web/package.json`, and CI. Prefer the full gate before finishing code changes. For docs-only edits, run targeted consistency checks instead of the full app gate unless the docs affect behavior.
 
 ## Environment
 

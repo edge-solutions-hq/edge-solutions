@@ -7,7 +7,7 @@ This file owns current implementation tooling for the Edge Solutions web app. It
 - App path: `web/`
 - Package manager: pnpm (`web/pnpm-lock.yaml`, pinned by `packageManager` in `web/package.json`)
 - Build-script approvals: `web/pnpm-workspace.yaml`
-- Node.js: 20.19 or newer for the current lint toolchain
+- Node.js: 24 (`.nvmrc`, `web/package.json`, and CI)
 - Framework: Next.js 16 App Router
 - React: 19
 - Language: TypeScript 7 native CLI
