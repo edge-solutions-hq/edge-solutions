@@ -26,6 +26,7 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 - Install: `pnpm install`
 - Develop: `pnpm run dev`
 - Unit tests: `pnpm run test`
+- Built-server HTTP contracts: `pnpm run test:http`
 - Lint: `pnpm run lint`
 - Type-check: `pnpm run typecheck`
 - Build: `pnpm run build`
@@ -53,5 +54,6 @@ Copy `web/env.example` to a local env file such as `web/.env.local`.
 - The app loads `gtag.js` from `NEXT_PUBLIC_GTM_ID` and sends conversion events through `dataLayer` and `gtag` when available.
 - `web/src/lib/runtime-config.ts` adds contact delivery defaults.
 - `web/scripts/seo-source-facts.mjs` keeps SEO script facts aligned with app routing and service slugs.
+- `web/tests/http-contracts.contract.mjs` builds through `test:http`, starts the production server on an isolated localhost port, and verifies routing, status, header, and metadata endpoint contracts.
 - `web/package.json` installs TypeScript 7 directly and aliases the same package under Next.js 16.2's recognized `@typescript/native-preview` name. The build runs the TypeScript 7 CLI before `next build`; Oxlint handles native TypeScript linting, and ESLint uses Next's Babel parser for framework-specific rules.
 - `pnpm-workspace.yaml` allows required native dependency build scripts for Next/SWC, image handling, and file watching.
