@@ -35,7 +35,7 @@ export default defineConfig({
   webServer: {
     command: `corepack pnpm exec next start --hostname 127.0.0.1 --port ${port}`,
     url: baseURL,
-    reuseExistingServer: !process.env.CI,
+    reuseExistingServer: false,
     env: {
       ...process.env,
       PLAYWRIGHT_TEST: '1',

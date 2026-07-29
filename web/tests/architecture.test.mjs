@@ -425,6 +425,10 @@ describe('contact intake and analytics taxonomy seams', () => {
       );
     }
   });
+
+  it('always launches the configured browser harness server', () => {
+    assert.match(read('playwright.config.ts'), /reuseExistingServer: false/);
+  });
 });
 
 describe('page profile seam', () => {
