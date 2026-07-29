@@ -39,10 +39,17 @@ async function candidatePort() {
 async function waitForExit(child, timeout) {
   if (child.exitCode !== null || child.signalCode !== null) return true;
 
-  return Promise.race([
-    once(child, 'exit').then(() => true),
-    delay(timeout).then(() => false),
-  ]);
+  let timeoutId;
+  try {
+    return await Promise.race([
+      once(child, 'exit').then(() => true),
+      new Promise((resolve) => {
+        timeoutId = setTimeout(() => resolve(false), timeout);
+      }),
+    ]);
+  } finally {
+    clearTimeout(timeoutId);
+  }
 }
 
 async function stopApp() {
