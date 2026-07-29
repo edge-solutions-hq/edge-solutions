@@ -107,7 +107,7 @@ describe('analytics event payload policy', () => {
 
     assert.deepEqual(
       buildContactFormOutcomePayload({
-        outcome: {kind: 'delivery_error', service: 'ai', message: 'Resend failed'},
+        outcome: {kind: 'delivery_error', service: 'ai'},
         submitAttempt: 5,
         pagePath: '/fr/contact',
       }),
