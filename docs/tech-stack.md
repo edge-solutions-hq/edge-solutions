@@ -57,7 +57,7 @@ Copy `web/env.example` to a local env file such as `web/.env.local`.
 - `web/src/lib/runtime-config.ts` adds contact delivery defaults.
 - `web/scripts/seo-source-facts.mjs` keeps SEO script facts aligned with app routing and service slugs.
 - `web/tests/http-contracts.contract.mjs` builds through `test:http`, starts the production server on an isolated localhost port, and verifies routing, status, header, and metadata endpoint contracts.
-- `web/e2e/` runs against an already-built production app. Its server-only `PLAYWRIGHT_TEST=1` harness selects a no-I/O contact delivery adapter outside Vercel production; this private test flag is not application configuration.
+- `web/e2e/` runs against an already-built production app. Its server-only harness selects a no-I/O contact delivery adapter only for requests carrying the per-run Playwright token; test mode otherwise fails closed. These private test values are not application configuration.
 - The aggregate `check` command performs one production build, then reuses it for HTTP contracts, Chromium browser tests, and SEO checks.
 - `web/package.json` installs TypeScript 7 directly and aliases the same package under Next.js 16.2's recognized `@typescript/native-preview` name. The build runs the TypeScript 7 CLI before `next build`; Oxlint handles native TypeScript linting, and ESLint uses Next's Babel parser for framework-specific rules.
 - `pnpm-workspace.yaml` allows required native dependency build scripts for Next/SWC, image handling, and file watching.

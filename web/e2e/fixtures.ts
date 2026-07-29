@@ -3,6 +3,32 @@ import {ANALYTICS_CONSENT_STORAGE_KEY} from '../src/lib/analytics/consent';
 
 const appOrigin = 'http://127.0.0.1:3100';
 
+function googleHarnessScript(urlString: string) {
+  const measurementId = new URL(urlString).searchParams.get('id');
+  return `
+    window.dataLayer = window.dataLayer || [];
+    window.__googleHarness = {delivered: [], suppressed: []};
+    const originalPush = window.dataLayer.push.bind(window.dataLayer);
+    window.dataLayer.push = function (...items) {
+      for (const item of items) {
+        const args = item && typeof item.length === 'number'
+          ? Array.from(item)
+          : [];
+        const eventName = item && typeof item.event === 'string'
+          ? item.event
+          : args[0] === 'event' ? args[1] : undefined;
+        if (typeof eventName === 'string') {
+          const target = window['ga-disable-' + ${JSON.stringify(measurementId)}]
+            ? window.__googleHarness.suppressed
+            : window.__googleHarness.delivered;
+          target.push(eventName);
+        }
+      }
+      return originalPush(...items);
+    };
+  `;
+}
+
 export {expect, ANALYTICS_CONSENT_STORAGE_KEY};
 
 export type NetworkEvidence = {
@@ -36,7 +62,9 @@ export async function guardBrowserNetwork(page: Page): Promise<NetworkEvidence> 
         contentType: request.resourceType() === 'script'
           ? 'application/javascript'
           : 'text/plain',
-        body: '',
+        body: url.includes('googletagmanager.com/gtag/js')
+          ? googleHarnessScript(url)
+          : '',
       });
       return;
     }

@@ -22,12 +22,17 @@ async function fakeDeliveryAdapter(payload, config) {
 }
 
 const {sendContactEmail} = await import('../src/app/[locale]/contact/actions.ts');
+const {isBrowserHarnessRequest} = await import(
+  '../src/lib/contact/browser-harness.ts'
+);
 
 const contactEnvKeys = [
+  'NODE_ENV',
   'RESEND_API_KEY',
   'RESEND_FROM_EMAIL',
   'RESEND_TO_EMAIL',
   'PLAYWRIGHT_TEST',
+  'PLAYWRIGHT_TEST_TOKEN',
   'VERCEL_ENV',
 ];
 const originalContactEnv = Object.fromEntries(
@@ -45,10 +50,13 @@ after(() => {
 beforeEach(() => {
   deliveries.length = 0;
   deliveryBehavior = 'success';
+  if (originalContactEnv.NODE_ENV === undefined) delete process.env.NODE_ENV;
+  else process.env.NODE_ENV = originalContactEnv.NODE_ENV;
   process.env.RESEND_API_KEY = 'test-api-key';
   process.env.RESEND_FROM_EMAIL = 'Edge Test <from@example.com>';
   process.env.RESEND_TO_EMAIL = 'inbox@example.com';
   delete process.env.PLAYWRIGHT_TEST;
+  delete process.env.PLAYWRIGHT_TEST_TOKEN;
   delete process.env.VERCEL_ENV;
 });
 
@@ -75,18 +83,31 @@ async function submit(formData) {
 }
 
 describe('contact Server Action delivery', () => {
-  it('uses a no-I/O success adapter for the browser harness', async () => {
-    process.env.PLAYWRIGHT_TEST = '1';
+  it('requires the exact per-run request marker for the browser harness', () => {
+    const harness = {
+      enabled: '1',
+      expectedToken: 'random-per-run-token',
+    };
 
-    const state = await sendContactEmail({status: 'idle'}, contactForm());
-
-    assert.equal(state.status, 'success');
-    assert.deepEqual(state.outcome, {kind: 'success', service: 'ai'});
+    assert.equal(isBrowserHarnessRequest({...harness, requestToken: null}), false);
+    assert.equal(
+      isBrowserHarnessRequest({...harness, requestToken: 'wrong-token'}),
+      false
+    );
+    assert.equal(
+      isBrowserHarnessRequest({
+        ...harness,
+        requestToken: 'random-per-run-token',
+      }),
+      true
+    );
   });
 
-  it('fails closed instead of selecting the browser adapter in Vercel production', async () => {
+  it('fails closed in self-hosted production without the browser request marker', async () => {
+    process.env.NODE_ENV = 'production';
     process.env.PLAYWRIGHT_TEST = '1';
-    process.env.VERCEL_ENV = 'production';
+    process.env.PLAYWRIGHT_TEST_TOKEN = 'random-per-run-token';
+    delete process.env.VERCEL_ENV;
 
     const state = await sendContactEmail({status: 'idle'}, contactForm());
 

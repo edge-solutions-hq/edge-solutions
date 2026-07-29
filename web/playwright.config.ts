@@ -1,7 +1,11 @@
+import {randomUUID} from 'node:crypto';
 import {defineConfig, devices} from '@playwright/test';
+import {BROWSER_HARNESS_HEADER} from './src/lib/contact/browser-harness';
 
 const port = 3100;
 const baseURL = `http://127.0.0.1:${port}`;
+const browserHarnessToken = process.env.PLAYWRIGHT_TEST_TOKEN ?? randomUUID();
+process.env.PLAYWRIGHT_TEST_TOKEN = browserHarnessToken;
 
 export default defineConfig({
   testDir: './e2e',
@@ -15,6 +19,9 @@ export default defineConfig({
     : [['list'], ['html', {open: 'never', outputFolder: 'playwright-report'}]],
   use: {
     baseURL,
+    extraHTTPHeaders: {
+      [BROWSER_HARNESS_HEADER]: browserHarnessToken,
+    },
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -32,6 +39,7 @@ export default defineConfig({
     env: {
       ...process.env,
       PLAYWRIGHT_TEST: '1',
+      PLAYWRIGHT_TEST_TOKEN: browserHarnessToken,
       RESEND_API_KEY: 'playwright-no-io-key',
       RESEND_FROM_EMAIL: 'Edge Browser Test <browser@example.test>',
       RESEND_TO_EMAIL: 'inbox@example.test',

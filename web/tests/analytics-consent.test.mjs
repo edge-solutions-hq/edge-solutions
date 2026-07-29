@@ -6,8 +6,10 @@ register(new URL('./ts-extension-resolver.mjs', import.meta.url));
 
 const {
   ANALYTICS_CONSENT_STORAGE_KEY,
+  hasAnalyticsConsent,
   parseAnalyticsConsent,
   readAnalyticsConsent,
+  setAnalyticsConsentForSession,
   writeAnalyticsConsent,
 } = await import('../src/lib/analytics/consent.ts');
 
@@ -47,5 +49,43 @@ describe('analytics consent persistence', () => {
 
     assert.equal(readAnalyticsConsent(unavailableStorage), 'undecided');
     assert.equal(writeAnalyticsConsent('accepted', unavailableStorage), false);
+  });
+
+  it('guards localStorage property access and session rejection', () => {
+    const originalWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+    Object.defineProperty(globalThis, 'window', {
+      configurable: true,
+      value: Object.defineProperty({}, 'localStorage', {
+        configurable: true,
+        get() {
+          throw new Error('blocked getter');
+        },
+      }),
+    });
+
+    try {
+      assert.equal(readAnalyticsConsent(), 'undecided');
+      assert.equal(writeAnalyticsConsent('accepted'), false);
+
+      const acceptedStorage = {
+        getItem: () => 'accepted',
+        setItem() {},
+      };
+      Object.defineProperty(globalThis.window, 'localStorage', {
+        configurable: true,
+        value: acceptedStorage,
+      });
+      setAnalyticsConsentForSession('rejected');
+      assert.equal(hasAnalyticsConsent(), false);
+      setAnalyticsConsentForSession('accepted');
+      assert.equal(hasAnalyticsConsent(), true);
+    } finally {
+      if (originalWindow) {
+        Object.defineProperty(globalThis, 'window', originalWindow);
+      } else {
+        delete globalThis.window;
+      }
+      setAnalyticsConsentForSession('accepted');
+    }
   });
 });

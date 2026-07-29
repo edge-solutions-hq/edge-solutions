@@ -19,6 +19,7 @@ import {Link} from '@/i18n/navigation';
 import {
   hasAnalyticsConsent,
   readAnalyticsConsent,
+  setAnalyticsConsentForSession,
   writeAnalyticsConsent,
   type AnalyticsConsent,
 } from '@/lib/analytics/consent';
@@ -74,18 +75,33 @@ export function AnalyticsConsentProvider({
   }, [closeSettings, settingsOpen]);
 
   function accept() {
-    writeAnalyticsConsent('accepted');
+    if (!writeAnalyticsConsent('accepted')) return;
+
+    setAnalyticsConsentForSession('accepted');
+    if (googleTagId) {
+      const googleWindow = window as unknown as Window & Record<string, unknown>;
+      googleWindow[`ga-disable-${googleTagId}`] = false;
+      window.gtag?.('consent', 'update', {analytics_storage: 'granted'});
+    }
     setSessionConsent('accepted');
     setSettingsOpen(false);
   }
 
   function reject() {
     const hadConsent = consent === 'accepted';
-    writeAnalyticsConsent('rejected');
+    setAnalyticsConsentForSession('rejected');
+
+    if (hadConsent && googleTagId) {
+      const googleWindow = window as unknown as Window & Record<string, unknown>;
+      googleWindow[`ga-disable-${googleTagId}`] = true;
+      window.gtag?.('consent', 'update', {analytics_storage: 'denied'});
+    }
+
+    const persisted = writeAnalyticsConsent('rejected');
     setSessionConsent('rejected');
     setSettingsOpen(false);
 
-    if (hadConsent) window.location.reload();
+    if (hadConsent && persisted) window.location.reload();
   }
 
   const showPanel = consent === 'undecided' || settingsOpen;

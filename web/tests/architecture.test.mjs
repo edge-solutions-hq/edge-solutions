@@ -415,7 +415,7 @@ describe('contact intake and analytics taxonomy seams', () => {
     assert.match(eventsSource, /from '.\/consent'/);
     assert.match(eventsSource, /hasAnalyticsConsent/);
     assert.match(actionSource, /PLAYWRIGHT_TEST/);
-    assert.match(actionSource, /VERCEL_ENV === 'production'/);
+    assert.match(actionSource, /BROWSER_HARNESS_HEADER/);
 
     for (const locale of locales.slice(1)) {
       assert.deepEqual(
