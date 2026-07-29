@@ -13,13 +13,19 @@ export function parseAnalyticsConsent(value: string | null): AnalyticsConsent {
 
 export function readAnalyticsConsent(storage?: ConsentStorage): AnalyticsConsent {
   try {
-    const consentStorage = storage ?? (
-      typeof window === 'undefined' ? undefined : window.localStorage
-    );
-    if (!consentStorage) return 'undecided';
+    if (storage) {
+      return parseAnalyticsConsent(
+        storage.getItem(ANALYTICS_CONSENT_STORAGE_KEY)
+      );
+    }
+    if (typeof window === 'undefined') return 'undecided';
 
+    const fallbackConsent = parseAnalyticsConsent(
+      window.sessionStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY)
+    );
+    if (fallbackConsent === 'rejected') return fallbackConsent;
     return parseAnalyticsConsent(
-      consentStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY)
+      window.localStorage.getItem(ANALYTICS_CONSENT_STORAGE_KEY)
     );
   } catch {
     return 'undecided';
@@ -30,16 +36,42 @@ export function writeAnalyticsConsent(
   consent: StoredAnalyticsConsent,
   storage?: ConsentStorage
 ): boolean {
-  try {
-    const consentStorage = storage ?? (
-      typeof window === 'undefined' ? undefined : window.localStorage
-    );
-    if (!consentStorage) return false;
+  if (storage) {
+    try {
+      storage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, consent);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  if (typeof window === 'undefined') return false;
 
-    consentStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, consent);
+  if (consent === 'accepted') {
+    try {
+      window.sessionStorage.removeItem(ANALYTICS_CONSENT_STORAGE_KEY);
+      window.localStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, consent);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  try {
+    window.localStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, consent);
     return true;
   } catch {
-    return false;
+    let fallbackPersisted = false;
+
+    try {
+      window.sessionStorage.setItem(ANALYTICS_CONSENT_STORAGE_KEY, consent);
+      fallbackPersisted = true;
+    } catch {}
+
+    try {
+      window.localStorage.removeItem(ANALYTICS_CONSENT_STORAGE_KEY);
+    } catch {}
+
+    return fallbackPersisted;
   }
 }
 

@@ -51,6 +51,54 @@ describe('analytics consent persistence', () => {
     assert.equal(writeAnalyticsConsent('accepted', unavailableStorage), false);
   });
 
+  it('keeps a failed withdrawal rejected across reloads', () => {
+    const originalWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+    const localValues = new Map([
+      [ANALYTICS_CONSENT_STORAGE_KEY, 'accepted'],
+    ]);
+    const sessionValues = new Map();
+    const localStorage = {
+      getItem: (key) => localValues.get(key) ?? null,
+      setItem(key, value) {
+        if (value === 'rejected') throw new Error('blocked write');
+        localValues.set(key, value);
+      },
+      removeItem() {
+        throw new Error('blocked removal');
+      },
+    };
+    const sessionStorage = {
+      getItem: (key) => sessionValues.get(key) ?? null,
+      setItem: (key, value) => sessionValues.set(key, value),
+      removeItem: (key) => sessionValues.delete(key),
+    };
+    Object.defineProperty(globalThis, 'window', {
+      configurable: true,
+      value: {localStorage, sessionStorage},
+    });
+
+    try {
+      assert.equal(readAnalyticsConsent(), 'accepted');
+      assert.equal(writeAnalyticsConsent('rejected'), true);
+      assert.equal(localValues.get(ANALYTICS_CONSENT_STORAGE_KEY), 'accepted');
+      assert.equal(
+        sessionValues.get(ANALYTICS_CONSENT_STORAGE_KEY),
+        'rejected'
+      );
+      assert.equal(readAnalyticsConsent(), 'rejected');
+
+      assert.equal(writeAnalyticsConsent('accepted'), true);
+      assert.equal(sessionValues.has(ANALYTICS_CONSENT_STORAGE_KEY), false);
+      assert.equal(readAnalyticsConsent(), 'accepted');
+    } finally {
+      if (originalWindow) {
+        Object.defineProperty(globalThis, 'window', originalWindow);
+      } else {
+        delete globalThis.window;
+      }
+    }
+  });
+
   it('guards localStorage property access and session rejection', () => {
     const originalWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
     Object.defineProperty(globalThis, 'window', {
@@ -74,6 +122,14 @@ describe('analytics consent persistence', () => {
       Object.defineProperty(globalThis.window, 'localStorage', {
         configurable: true,
         value: acceptedStorage,
+      });
+      Object.defineProperty(globalThis.window, 'sessionStorage', {
+        configurable: true,
+        value: {
+          getItem: () => null,
+          removeItem() {},
+          setItem() {},
+        },
       });
       setAnalyticsConsentForSession('rejected');
       assert.equal(hasAnalyticsConsent(), false);

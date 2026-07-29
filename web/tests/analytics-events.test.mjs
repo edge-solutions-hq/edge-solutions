@@ -37,6 +37,11 @@ function installBrowser({
       getItem: (key) => key === ANALYTICS_CONSENT_STORAGE_KEY ? 'accepted' : null,
       setItem() {},
     },
+    sessionStorage: {
+      getItem: () => null,
+      removeItem() {},
+      setItem() {},
+    },
   };
   globalThis.document = {
     documentElement: {lang},

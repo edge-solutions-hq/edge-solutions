@@ -123,7 +123,7 @@ test('acceptance persists, enables configured runtimes, and withdrawal disables 
   expect(network.unexpectedExternalRequests).toEqual([]);
 });
 
-test('failed withdrawal persistence blocks the session without reloading', async ({page}) => {
+test('failed withdrawal persistence survives reload and blocks stale acceptance', async ({page}) => {
   const network = await guardBrowserNetwork(page);
   await page.addInitScript(
     ({key}) => window.localStorage.setItem(key, 'accepted'),
@@ -136,63 +136,48 @@ test('failed withdrawal persistence blocks the session without reloading', async
   ).size).toBe(3);
   await page.getByRole('button', {name: 'Analytics settings'}).click();
 
-  const documentMarker = await page.evaluate(({key}) => {
-    const marker = crypto.randomUUID();
-    const browserWindow = window as unknown as Window & Record<string, unknown>;
-    browserWindow.__documentMarker = marker;
+  await page.evaluate(({key}) => {
     const originalSetItem = Storage.prototype.setItem;
+    const originalRemoveItem = Storage.prototype.removeItem;
     Storage.prototype.setItem = function (storageKey, value) {
-      if (storageKey === key && value === 'rejected') {
+      if (
+        this === window.localStorage &&
+        storageKey === key &&
+        value === 'rejected'
+      ) {
         throw new DOMException('Storage is blocked', 'SecurityError');
       }
       return originalSetItem.call(this, storageKey, value);
     };
-    return marker;
+    Storage.prototype.removeItem = function (storageKey) {
+      if (this === window.localStorage && storageKey === key) {
+        throw new DOMException('Storage is blocked', 'SecurityError');
+      }
+      return originalRemoveItem.call(this, storageKey);
+    };
   }, {key: ANALYTICS_CONSENT_STORAGE_KEY});
 
+  network.optionalRequests.length = 0;
+  const reloaded = page.waitForEvent('load');
   await page.getByRole('button', {name: 'Disable measurement'}).click();
-  await expect.poll(() => page.evaluate(
-    () => (window as unknown as Window & Record<string, unknown>).__documentMarker
-  )).toBe(documentMarker);
+  await reloaded;
   await expect.poll(() => page.evaluate(
     (key) => window.localStorage.getItem(key),
     ANALYTICS_CONSENT_STORAGE_KEY
   )).toBe('accepted');
+  await expect.poll(() => page.evaluate(
+    (key) => window.sessionStorage.getItem(key),
+    ANALYTICS_CONSENT_STORAGE_KEY
+  )).toBe('rejected');
+  await page.getByRole('button', {name: 'Analytics settings'}).click();
+  await expect(page.getByText(
+    'Optional measurement is disabled. You can allow it at any time.'
+  )).toBeVisible();
+  await expectNoOptionalRuntime(page, network);
 
-  const googleEvidence = await page.evaluate(() => {
-    const googleWindow = window as unknown as Window & Record<string, unknown>;
-    const harness = googleWindow.__googleHarness as {
-      delivered: string[];
-      suppressed: string[];
-    };
-    const denied = (window.dataLayer ?? []).some((entry) => {
-      const args = Array.from(entry as unknown as ArrayLike<unknown>);
-      return args[0] === 'consent' && args[1] === 'update' &&
-        (args[2] as {analytics_storage?: string})?.analytics_storage === 'denied';
-    });
-    window.gtag?.('event', 'failed_withdrawal_probe');
-    return {
-      disabled: googleWindow['ga-disable-G-PLAYWRIGHT'] === true,
-      denied,
-      delivered: harness.delivered.includes('failed_withdrawal_probe'),
-      suppressed: harness.suppressed.includes('failed_withdrawal_probe'),
-    };
-  });
-  expect(googleEvidence).toEqual({
-    disabled: true,
-    denied: true,
-    delivered: false,
-    suppressed: true,
-  });
-
-  const contactEventsBefore = await page.evaluate(() => (
-    window.dataLayer ?? []
-  ).filter((entry) => entry.event === 'contact_cta_click').length);
   await page.locator('header').getByRole('link', {name: 'Contact me', exact: true}).click();
   await expect(page.getByRole('dialog')).toBeVisible();
-  await expect.poll(() => page.evaluate(() => (
-    window.dataLayer ?? []
-  ).filter((entry) => entry.event === 'contact_cta_click').length)).toBe(contactEventsBefore);
+  await expectNoOptionalRuntime(page, network);
 });
 
 test('withdrawing in another page blocks the previously accepted page', async ({page, context}) => {
