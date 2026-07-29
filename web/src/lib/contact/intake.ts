@@ -43,7 +43,7 @@ export type ContactFieldErrors = Partial<Record<keyof ContactFields, ContactFiel
 export type ContactAttemptOutcome =
   | {kind: 'success'; service: ContactOfferValue}
   | {kind: 'validation_error'; service?: string; fieldErrors: ContactFieldErrors}
-  | {kind: 'delivery_error'; service: ContactOfferValue; message: string}
+  | {kind: 'delivery_error'; service: ContactOfferValue}
   | {kind: 'spam'; service?: string};
 
 export type ContactFormFieldName = keyof ContactFields | 'company';

@@ -25,7 +25,21 @@ export type ContactEmailPayload = {
   text: string;
 };
 
-export type ContactDeliveryAdapter = (payload: ContactEmailPayload, config: {apiKey: string}) => Promise<{ok: true} | {ok: false; message: string}>;
+export type ContactDeliveryAdapter = (
+  payload: ContactEmailPayload,
+  config: {apiKey: string}
+) => Promise<{ok: true} | {ok: false}>;
+
+function deliveryErrorState(
+  service: ContactFields['service'],
+  messageKey: Extract<ContactActionMessageKey, 'contact.form.configError' | 'contact.form.genericError'>
+): ContactActionState {
+  return {
+    status: 'error',
+    messageKey,
+    outcome: {kind: 'delivery_error', service},
+  };
+}
 
 export function buildContactEmailPayload({
   fields,
@@ -89,19 +103,7 @@ export async function submitContactAttempt(
   const {service} = parsed.fields;
   const config = getContactDeliveryConfig(env);
   if (!config.ready) {
-    const outcome: ContactAttemptOutcome = {
-      kind: 'delivery_error',
-      service,
-      message: `missing_${config.missingKeys.join('_') || 'delivery_config'}`,
-    };
-
-    return {
-      status: 'error',
-      message:
-        'Configuration email manquante (RESEND_API_KEY). Ajoutez-la dans vos variables d’environnement.',
-      messageKey: 'contact.form.configError',
-      outcome,
-    };
+    return deliveryErrorState(service, 'contact.form.configError');
   }
 
   const payload = buildContactEmailPayload({
@@ -110,20 +112,15 @@ export async function submitContactAttempt(
     to: config.to,
   });
 
-  const result = await deliver(payload, {apiKey: config.apiKey});
-  if (!result.ok) {
-    const outcome: ContactAttemptOutcome = {
-      kind: 'delivery_error',
-      service,
-      message: result.message || 'resend_error',
-    };
+  let result: Awaited<ReturnType<ContactDeliveryAdapter>>;
+  try {
+    result = await deliver(payload, {apiKey: config.apiKey});
+  } catch {
+    return deliveryErrorState(service, 'contact.form.genericError');
+  }
 
-    return {
-      status: 'error',
-      message: result.message || 'Erreur Resend.',
-      messageKey: 'contact.form.genericError',
-      outcome,
-    };
+  if (!result.ok) {
+    return deliveryErrorState(service, 'contact.form.genericError');
   }
 
   return {
