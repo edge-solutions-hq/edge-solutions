@@ -195,6 +195,97 @@ test('failed withdrawal persistence blocks the session without reloading', async
   ).filter((entry) => entry.event === 'contact_cta_click').length)).toBe(contactEventsBefore);
 });
 
+test('withdrawing in another page blocks the previously accepted page', async ({page, context}) => {
+  const acceptedPageNetwork = await guardBrowserNetwork(page);
+
+  await page.goto('/en');
+  await page.getByRole('button', {name: 'Accept', exact: true}).click();
+  await expect.poll(() => new Set(
+    acceptedPageNetwork.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
+  ).size).toBe(3);
+
+  const withdrawingPage = await context.newPage();
+  const withdrawingPageNetwork = await guardBrowserNetwork(withdrawingPage);
+  await withdrawingPage.goto('/en');
+  await expect.poll(() => new Set(
+    withdrawingPageNetwork.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
+  ).size).toBe(3);
+  await withdrawingPage.getByRole('button', {name: 'Analytics settings'}).click();
+  const reloaded = withdrawingPage.waitForEvent('load');
+  await withdrawingPage.getByRole('button', {name: 'Disable measurement'}).click();
+  await reloaded;
+
+  await expect.poll(() => page.evaluate(() => {
+    const googleWindow = window as unknown as Window & Record<string, unknown>;
+    return googleWindow['ga-disable-G-PLAYWRIGHT'];
+  })).toBe(true);
+  await page.getByRole('button', {name: 'Analytics settings'}).click();
+  await expect(page.getByText(
+    'Optional measurement is disabled. You can allow it at any time.'
+  )).toBeVisible();
+
+  const transportGates = await page.evaluate(() => {
+    const analyticsWindow = window as unknown as Window & {
+      __googleHarness: {delivered: string[]; suppressed: string[]};
+      vaq?: Array<[string, unknown?]>;
+      siq?: Array<[string, unknown?]>;
+    };
+    const analyticsBeforeSend = analyticsWindow.vaq?.find(
+      ([command]) => command === 'beforeSend'
+    )?.[1] as ((event: object) => object | null) | undefined;
+    const speedBeforeSend = analyticsWindow.siq?.find(
+      ([command]) => command === 'beforeSend'
+    )?.[1] as ((event: object) => object | null) | undefined;
+    window.gtag?.('event', 'cross_tab_withdrawal_probe');
+
+    return {
+      googleDelivered: analyticsWindow.__googleHarness.delivered.includes(
+        'cross_tab_withdrawal_probe'
+      ),
+      googleSuppressed: analyticsWindow.__googleHarness.suppressed.includes(
+        'cross_tab_withdrawal_probe'
+      ),
+      vercelAnalytics: analyticsBeforeSend?.({}),
+      vercelSpeed: speedBeforeSend?.({}),
+    };
+  });
+  expect(transportGates).toEqual({
+    googleDelivered: false,
+    googleSuppressed: true,
+    vercelAnalytics: null,
+    vercelSpeed: null,
+  });
+
+  const emissionsBefore = await page.evaluate(() => ({
+    configs: (window.dataLayer ?? []).filter((entry) => {
+      const args = Array.from(entry as unknown as ArrayLike<unknown>);
+      return args[0] === 'config';
+    }).length,
+    conversions: (window.dataLayer ?? []).filter(
+      (entry) => entry.event === 'service_card_click'
+    ).length,
+  }));
+  acceptedPageNetwork.optionalRequests.length = 0;
+  await page.getByRole('button', {name: 'Close'}).click();
+  await page.getByRole('main').getByRole('link', {
+    name: 'AI systems & automation',
+    exact: true,
+  }).click();
+  await expect(page).toHaveURL(/\/en\/services\/ai-automation$/);
+
+  await expect.poll(() => page.evaluate(() => ({
+    configs: (window.dataLayer ?? []).filter((entry) => {
+      const args = Array.from(entry as unknown as ArrayLike<unknown>);
+      return args[0] === 'config';
+    }).length,
+    conversions: (window.dataLayer ?? []).filter(
+      (entry) => entry.event === 'service_card_click'
+    ).length,
+  }))).toEqual(emissionsBefore);
+  expect(acceptedPageNetwork.optionalRequests).toEqual([]);
+  expect(acceptedPageNetwork.unexpectedExternalRequests).toEqual([]);
+});
+
 test('rejection persists while essential navigation and contact remain available', async ({page}) => {
   const network = await guardBrowserNetwork(page);
 

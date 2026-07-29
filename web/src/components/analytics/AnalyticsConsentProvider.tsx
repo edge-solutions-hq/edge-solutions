@@ -17,6 +17,7 @@ import {SpeedInsights} from '@vercel/speed-insights/next';
 import {useTranslations} from 'next-intl';
 import {Link} from '@/i18n/navigation';
 import {
+  ANALYTICS_CONSENT_STORAGE_KEY,
   hasAnalyticsConsent,
   readAnalyticsConsent,
   setAnalyticsConsentForSession,
@@ -32,11 +33,24 @@ type ConsentContextValue = {
 
 const AnalyticsConsentContext = createContext<ConsentContextValue | null>(null);
 
-const subscribeToConsent = () => () => {};
 const readServerConsent = () => 'loading' as const;
 
 function allowWhenConsented<T>(event: T): T | null {
   return hasAnalyticsConsent() ? event : null;
+}
+
+function updateGoogleConsent(
+  googleTagId: string | undefined,
+  consent: AnalyticsConsent
+) {
+  if (!googleTagId) return;
+
+  const accepted = consent === 'accepted';
+  const googleWindow = window as unknown as Window & Record<string, unknown>;
+  googleWindow[`ga-disable-${googleTagId}`] = !accepted;
+  window.gtag?.('consent', 'update', {
+    analytics_storage: accepted ? 'granted' : 'denied',
+  });
 }
 
 export function AnalyticsConsentProvider({
@@ -49,13 +63,30 @@ export function AnalyticsConsentProvider({
   const t = useTranslations('analyticsConsent');
   const titleId = useId();
   const settingsTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const [sessionConsent, setSessionConsent] = useState<AnalyticsConsent | null>(null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
+  const subscribeToConsent = useCallback((onStoreChange: () => void) => {
+    function handleStorage(event: StorageEvent) {
+      if (event.key !== ANALYTICS_CONSENT_STORAGE_KEY) return;
+
+      const externalConsent = readAnalyticsConsent();
+      setAnalyticsConsentForSession(
+        externalConsent === 'accepted' ? 'accepted' : 'rejected'
+      );
+      updateGoogleConsent(googleTagId, externalConsent);
+      setSessionConsent(externalConsent);
+      setSettingsOpen(false);
+      onStoreChange();
+    }
+
+    window.addEventListener('storage', handleStorage);
+    return () => window.removeEventListener('storage', handleStorage);
+  }, [googleTagId]);
   const persistedConsent = useSyncExternalStore(
     subscribeToConsent,
     readAnalyticsConsent,
     readServerConsent
   );
-  const [sessionConsent, setSessionConsent] = useState<AnalyticsConsent | null>(null);
-  const [settingsOpen, setSettingsOpen] = useState(false);
   const consent = sessionConsent ?? persistedConsent;
 
   const closeSettings = useCallback(() => {
@@ -78,11 +109,7 @@ export function AnalyticsConsentProvider({
     if (!writeAnalyticsConsent('accepted')) return;
 
     setAnalyticsConsentForSession('accepted');
-    if (googleTagId) {
-      const googleWindow = window as unknown as Window & Record<string, unknown>;
-      googleWindow[`ga-disable-${googleTagId}`] = false;
-      window.gtag?.('consent', 'update', {analytics_storage: 'granted'});
-    }
+    updateGoogleConsent(googleTagId, 'accepted');
     setSessionConsent('accepted');
     setSettingsOpen(false);
   }
@@ -91,11 +118,7 @@ export function AnalyticsConsentProvider({
     const hadConsent = consent === 'accepted';
     setAnalyticsConsentForSession('rejected');
 
-    if (hadConsent && googleTagId) {
-      const googleWindow = window as unknown as Window & Record<string, unknown>;
-      googleWindow[`ga-disable-${googleTagId}`] = true;
-      window.gtag?.('consent', 'update', {analytics_storage: 'denied'});
-    }
+    if (hadConsent) updateGoogleConsent(googleTagId, 'rejected');
 
     const persisted = writeAnalyticsConsent('rejected');
     setSessionConsent('rejected');
