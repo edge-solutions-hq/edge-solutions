@@ -25,6 +25,7 @@ import {
   type AnalyticsConsent,
 } from '@/lib/analytics/consent';
 import {buttonClass} from '@/components/ui/Button';
+import {surfaceClass} from '@/components/ui/Surface';
 import {GoogleAnalytics} from './GoogleAnalytics';
 
 type ConsentContextValue = {
@@ -67,7 +68,7 @@ export function AnalyticsConsentProvider({
   const [settingsOpen, setSettingsOpen] = useState(false);
   const subscribeToConsent = useCallback((onStoreChange: () => void) => {
     function handleStorage(event: StorageEvent) {
-      if (event.key !== ANALYTICS_CONSENT_STORAGE_KEY) return;
+      if (event.key !== null && event.key !== ANALYTICS_CONSENT_STORAGE_KEY) return;
 
       const externalConsent = readAnalyticsConsent();
       setAnalyticsConsentForSession(
@@ -145,7 +146,10 @@ export function AnalyticsConsentProvider({
         <section
           role="region"
           aria-labelledby={titleId}
-          className="fixed inset-x-4 bottom-4 z-[90] mx-auto max-w-2xl rounded-lg border border-border bg-surface p-5 text-foreground shadow-[6px_6px_0_rgba(170,142,75,0.3)]"
+          className={surfaceClass(
+            'panel',
+            'fixed inset-x-4 bottom-4 z-[90] mx-auto max-w-2xl p-5 text-foreground'
+          )}
         >
           <div className="flex items-start justify-between gap-4">
             <div>

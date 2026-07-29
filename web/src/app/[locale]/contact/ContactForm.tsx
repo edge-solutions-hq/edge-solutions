@@ -147,6 +147,10 @@ export function ContactForm({
     return `${formId}-${field}-error`;
   }
 
+  function fieldControlId(field: keyof ContactFieldErrors) {
+    return `${formId}-${field}`;
+  }
+
   return (
     <form
       action={formAction}
@@ -164,9 +168,12 @@ export function ContactForm({
       />
 
       <div className="grid gap-5 md:grid-cols-2">
-        <label className="block">
-          <div className="text-sm font-medium">{t(fields.name.labelKey)}</div>
+        <div>
+          <label htmlFor={fieldControlId('name')} className="block text-sm font-medium">
+            {t(fields.name.labelKey)}
+          </label>
           <input
+            id={fieldControlId('name')}
             name={fields.name.name}
             type={fields.name.type}
             required={fields.name.required}
@@ -178,11 +185,14 @@ export function ContactForm({
             placeholder={t(fields.name.placeholderKey)}
           />
           <FieldError id={fieldErrorId('name')}>{fieldErrorMessage(state.fieldErrors?.name)}</FieldError>
-        </label>
+        </div>
 
-        <label className="block">
-          <div className="text-sm font-medium">{t(fields.email.labelKey)}</div>
+        <div>
+          <label htmlFor={fieldControlId('email')} className="block text-sm font-medium">
+            {t(fields.email.labelKey)}
+          </label>
           <input
+            id={fieldControlId('email')}
             name={fields.email.name}
             type={fields.email.type}
             required={fields.email.required}
@@ -193,12 +203,15 @@ export function ContactForm({
             placeholder={t(fields.email.placeholderKey)}
           />
           <FieldError id={fieldErrorId('email')}>{fieldErrorMessage(state.fieldErrors?.email)}</FieldError>
-        </label>
+        </div>
       </div>
 
-      <label className="block">
-        <div className="text-sm font-medium">{t(fields.service.labelKey)}</div>
+      <div>
+        <label htmlFor={fieldControlId('service')} className="block text-sm font-medium">
+          {t(fields.service.labelKey)}
+        </label>
         <select
+          id={fieldControlId('service')}
           ref={serviceSelectRef}
           name={fields.service.name}
           defaultValue={fields.service.defaultValue}
@@ -213,11 +226,14 @@ export function ContactForm({
           ))}
         </select>
         <FieldError id={fieldErrorId('service')}>{fieldErrorMessage(state.fieldErrors?.service)}</FieldError>
-      </label>
+      </div>
 
-      <label className="block">
-        <div className="text-sm font-medium">{t(fields.message.labelKey)}</div>
+      <div>
+        <label htmlFor={fieldControlId('message')} className="block text-sm font-medium">
+          {t(fields.message.labelKey)}
+        </label>
         <textarea
+          id={fieldControlId('message')}
           name={fields.message.name}
           required={fields.message.required}
           minLength={fields.message.minLength}
@@ -229,7 +245,7 @@ export function ContactForm({
           placeholder={t(fields.message.placeholderKey)}
         />
         <FieldError id={fieldErrorId('message')}>{fieldErrorMessage(state.fieldErrors?.message)}</FieldError>
-      </label>
+      </div>
 
       <Button
         type="submit"

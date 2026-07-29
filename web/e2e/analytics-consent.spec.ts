@@ -286,6 +286,38 @@ test('withdrawing in another page blocks the previously accepted page', async ({
   expect(acceptedPageNetwork.unexpectedExternalRequests).toEqual([]);
 });
 
+test('clearing storage in another page withdraws consent', async ({page, context}) => {
+  const network = await guardBrowserNetwork(page);
+
+  await page.goto('/en');
+  await page.getByRole('button', {name: 'Accept', exact: true}).click();
+  await expect.poll(() => new Set(
+    network.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
+  ).size).toBe(3);
+
+  const clearingPage = await context.newPage();
+  await clearingPage.goto('/en');
+  await clearingPage.evaluate(() => window.localStorage.clear());
+
+  await expect(page.getByRole('region', {name: 'Optional measurement'})).toBeVisible();
+  await expect.poll(() => page.evaluate(() => {
+    const googleWindow = window as unknown as Window & Record<string, unknown>;
+    return googleWindow['ga-disable-G-PLAYWRIGHT'];
+  })).toBe(true);
+
+  const emissionsBefore = await page.evaluate(() => (
+    window.dataLayer ?? []
+  ).filter((entry) => entry.event === 'service_card_click').length);
+  await page.getByRole('main').getByRole('link', {
+    name: 'AI systems & automation',
+    exact: true,
+  }).click();
+  await expect(page).toHaveURL(/\/en\/services\/ai-automation$/);
+  await expect.poll(() => page.evaluate(() => (
+    window.dataLayer ?? []
+  ).filter((entry) => entry.event === 'service_card_click').length)).toBe(emissionsBefore);
+});
+
 test('rejection persists while essential navigation and contact remain available', async ({page}) => {
   const network = await guardBrowserNetwork(page);
 

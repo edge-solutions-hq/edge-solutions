@@ -12,6 +12,16 @@ export function LocaleSwitch({locale}: {locale: string}) {
   const queryString = searchParams.toString();
   const href = queryString ? `${pathname}?${queryString}` : pathname;
 
+  return <LocaleLinks locale={locale} href={href} />;
+}
+
+export function LocaleSwitchFallback({locale}: {locale: string}) {
+  const pathname = usePathname();
+
+  return <LocaleLinks locale={locale} href={pathname} />;
+}
+
+function LocaleLinks({locale, href}: {locale: string; href: string}) {
   const handleLocaleClick = (nextLocale: string, active: boolean) => {
     if (active || typeof window === 'undefined') return;
 

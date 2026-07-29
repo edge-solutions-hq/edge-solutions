@@ -35,6 +35,7 @@ test('homepage service journey preselects contact and submits through the server
 
   await expect(dialog.getByRole('alert')).toHaveText('Certains champs sont invalides.');
   await expect(name).toHaveAttribute('aria-invalid', 'true');
+  await expect(name).toHaveAccessibleName('Nom');
   const errorId = await name.getAttribute('aria-describedby');
   expect(errorId).toBeTruthy();
   await expect(dialog.locator(`[id="${errorId}"]`)).toHaveText(
@@ -64,6 +65,18 @@ test('locale switching preserves contact query state and preselection', async ({
   await expect(page).toHaveURL(/\/en\/contact\?service=ai&source=browser$/);
   await expect(page.getByRole('combobox', {name: 'Project type'})).toHaveValue('ai');
   await expectNoOptionalRuntime(page, network);
+});
+
+test('locale links remain available without client JavaScript', async ({browser}) => {
+  const context = await browser.newContext({javaScriptEnabled: false});
+  const page = await context.newPage();
+
+  await page.goto('/fr/contact?service=ai');
+  const englishLink = page.getByRole('link', {name: 'EN', exact: true});
+  await expect(englishLink).toBeVisible();
+  await expect(englishLink).toHaveAttribute('href', '/en/contact');
+
+  await context.close();
 });
 
 test('mobile navigation and contact modal preserve keyboard focus', async ({page}) => {
