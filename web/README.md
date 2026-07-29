@@ -37,6 +37,12 @@ For event names and parameters, follow `../docs/analytics/conversion-event-taxon
 
 ## Quality Gates
 
+After installing dependencies, install Playwright's Chromium binary once before running the browser tests or full gate:
+
+```bash
+pnpm exec playwright install chromium
+```
+
 ```bash
 pnpm run test
 pnpm run lint

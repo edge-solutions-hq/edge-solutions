@@ -24,7 +24,8 @@ This file owns current implementation tooling for the Edge Solutions web app. It
 Run commands from `web/`.
 If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example `corepack pnpm install`.
 
-- Install: `pnpm install`
+- Install dependencies: `pnpm install`
+- Install Chromium for browser tests and the full gate (once after dependency installation): `pnpm exec playwright install chromium`
 - Develop: `pnpm run dev`
 - Unit tests: `pnpm run test`
 - Built-server HTTP contracts: `pnpm run test:http`
