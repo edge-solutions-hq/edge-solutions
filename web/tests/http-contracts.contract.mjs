@@ -23,7 +23,7 @@ const errorCache = 'private, no-cache, no-store, max-age=0, must-revalidate';
 let app;
 let baseUrl;
 
-async function availablePort() {
+async function candidatePort() {
   const probe = createServer();
   await new Promise((resolve, reject) => {
     probe.once('error', reject);
@@ -56,59 +56,66 @@ async function stopApp() {
 }
 
 async function startApp() {
-  const port = await availablePort();
   const nextCli = path.join(root, 'node_modules', 'next', 'dist', 'bin', 'next');
-  let output = '';
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const port = await candidatePort();
+    let output = '';
 
-  baseUrl = `http://127.0.0.1:${port}`;
-  app = spawn(
-    process.execPath,
-    [nextCli, 'start', '--hostname', '127.0.0.1', '--port', String(port)],
-    {
-      cwd: root,
-      env: {...process.env, NEXT_TELEMETRY_DISABLED: '1', NODE_ENV: 'production'},
-      stdio: ['ignore', 'pipe', 'pipe'],
-    }
-  );
-  app.stdout.on('data', (chunk) => {
-    output += chunk;
-  });
-  app.stderr.on('data', (chunk) => {
-    output += chunk;
-  });
+    baseUrl = `http://127.0.0.1:${port}`;
+    app = spawn(
+      process.execPath,
+      [nextCli, 'start', '--hostname', '127.0.0.1', '--port', String(port)],
+      {
+        cwd: root,
+        env: {...process.env, NEXT_TELEMETRY_DISABLED: '1', NODE_ENV: 'production'},
+        stdio: ['ignore', 'pipe', 'pipe'],
+      }
+    );
+    app.stdout.on('data', (chunk) => {
+      output += chunk;
+    });
+    app.stderr.on('data', (chunk) => {
+      output += chunk;
+    });
 
-  const deadline = Date.now() + 30_000;
-  try {
-    while (Date.now() < deadline) {
-      if (app.exitCode !== null || app.signalCode !== null) {
-        throw new Error(`Production server exited before readiness.\n${output}`);
+    const deadline = Date.now() + 30_000;
+    try {
+      while (Date.now() < deadline) {
+        if (app.exitCode !== null || app.signalCode !== null) {
+          throw new Error(`Production server exited before readiness.\n${output}`);
+        }
+
+        try {
+          const response = await fetch(`${baseUrl}/robots.txt`, {
+            redirect: 'manual',
+            signal: AbortSignal.timeout(1_000),
+          });
+          if (response.status === 200) {
+            await response.arrayBuffer();
+            return;
+          }
+        } catch {}
+
+        await delay(100);
       }
 
-      try {
-        const response = await fetch(`${baseUrl}/robots.txt`, {
-          redirect: 'manual',
-          signal: AbortSignal.timeout(1_000),
-        });
-        if (response.status === 200) {
-          await response.arrayBuffer();
-          return;
-        }
-      } catch {}
-
-      await delay(100);
+      throw new Error(`Production server was not ready within 30 seconds.\n${output}`);
+    } catch (error) {
+      await stopApp();
+      if (attempt === 0 && output.includes('EADDRINUSE')) continue;
+      throw error;
     }
-
-    throw new Error(`Production server was not ready within 30 seconds.\n${output}`);
-  } catch (error) {
-    await stopApp();
-    throw error;
   }
 }
 
 function request(pathname, options = {}) {
   const url = new URL(pathname, baseUrl);
   assert.equal(url.origin, baseUrl, `HTTP contracts may only request ${baseUrl}`);
-  return fetch(url, {...options, redirect: 'manual'});
+  return fetch(url, {
+    ...options,
+    redirect: 'manual',
+    signal: options.signal ?? AbortSignal.timeout(10_000),
+  });
 }
 
 function assertSecurityHeaders(response, label) {
@@ -123,6 +130,7 @@ describe('built site HTTP contracts', () => {
 
   it('negotiates supported locale preferences', async () => {
     for (const [preference, expectedLocation] of [
+      ['fr-BE,fr;q=0.9', '/fr'],
       ['en-US,en;q=0.9', '/en'],
       ['nl-BE,nl;q=0.9', '/nl'],
     ]) {
