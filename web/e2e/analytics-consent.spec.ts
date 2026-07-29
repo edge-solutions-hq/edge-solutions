@@ -39,6 +39,25 @@ test('storage getter failure keeps acceptance fail closed', async ({page}) => {
   await expectNoOptionalRuntime(page, network);
 });
 
+test('analytics settings choices restore focus to the footer trigger', async ({page}) => {
+  await guardBrowserNetwork(page);
+  await page.addInitScript(
+    ({key}) => window.localStorage.setItem(key, 'rejected'),
+    {key: ANALYTICS_CONSENT_STORAGE_KEY}
+  );
+
+  await page.goto('/en');
+  const settingsTrigger = page.getByRole('button', {name: 'Analytics settings'});
+
+  await settingsTrigger.click();
+  await page.getByRole('button', {name: 'Reject', exact: true}).click();
+  await expect(settingsTrigger).toBeFocused();
+
+  await settingsTrigger.click();
+  await page.getByRole('button', {name: 'Accept', exact: true}).click();
+  await expect(settingsTrigger).toBeFocused();
+});
+
 test('acceptance persists, enables configured runtimes, and withdrawal disables them', async ({page}) => {
   const network = await guardBrowserNetwork(page);
 
@@ -195,16 +214,20 @@ test('withdrawing in another page blocks the previously accepted page', async ({
   await expect.poll(() => new Set(
     withdrawingPageNetwork.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
   ).size).toBe(3);
+  const settingsTrigger = page.getByRole('button', {name: 'Analytics settings'});
+  await settingsTrigger.click();
+  await page.getByRole('button', {name: 'Disable measurement'}).focus();
   await withdrawingPage.getByRole('button', {name: 'Analytics settings'}).click();
   const reloaded = withdrawingPage.waitForEvent('load');
   await withdrawingPage.getByRole('button', {name: 'Disable measurement'}).click();
   await reloaded;
 
+  await expect(settingsTrigger).toBeFocused();
   await expect.poll(() => page.evaluate(() => {
     const googleWindow = window as unknown as Window & Record<string, unknown>;
     return googleWindow['ga-disable-G-PLAYWRIGHT'];
   })).toBe(true);
-  await page.getByRole('button', {name: 'Analytics settings'}).click();
+  await settingsTrigger.click();
   await expect(page.getByText(
     'Optional measurement is disabled. You can allow it at any time.'
   )).toBeVisible();

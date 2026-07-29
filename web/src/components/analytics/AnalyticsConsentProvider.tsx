@@ -64,8 +64,14 @@ export function AnalyticsConsentProvider({
   const t = useTranslations('analyticsConsent');
   const titleId = useId();
   const settingsTriggerRef = useRef<HTMLButtonElement | null>(null);
+  const settingsOpenRef = useRef(false);
   const [sessionConsent, setSessionConsent] = useState<AnalyticsConsent | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const closeSettings = useCallback(() => {
+    settingsOpenRef.current = false;
+    setSettingsOpen(false);
+    settingsTriggerRef.current?.focus();
+  }, []);
   const subscribeToConsent = useCallback((onStoreChange: () => void) => {
     function handleStorage(event: StorageEvent) {
       if (event.key !== null && event.key !== ANALYTICS_CONSENT_STORAGE_KEY) return;
@@ -76,24 +82,19 @@ export function AnalyticsConsentProvider({
       );
       updateGoogleConsent(googleTagId, externalConsent);
       setSessionConsent(externalConsent);
-      setSettingsOpen(false);
+      if (settingsOpenRef.current) closeSettings();
       onStoreChange();
     }
 
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
-  }, [googleTagId]);
+  }, [closeSettings, googleTagId]);
   const persistedConsent = useSyncExternalStore(
     subscribeToConsent,
     readAnalyticsConsent,
     readServerConsent
   );
   const consent = sessionConsent ?? persistedConsent;
-
-  const closeSettings = useCallback(() => {
-    setSettingsOpen(false);
-    settingsTriggerRef.current?.focus();
-  }, []);
 
   useEffect(() => {
     if (!settingsOpen) return;
@@ -112,7 +113,7 @@ export function AnalyticsConsentProvider({
     setAnalyticsConsentForSession('accepted');
     updateGoogleConsent(googleTagId, 'accepted');
     setSessionConsent('accepted');
-    setSettingsOpen(false);
+    closeSettings();
   }
 
   function reject() {
@@ -123,7 +124,7 @@ export function AnalyticsConsentProvider({
 
     const persisted = writeAnalyticsConsent('rejected');
     setSessionConsent('rejected');
-    setSettingsOpen(false);
+    closeSettings();
 
     if (hadConsent && persisted) window.location.reload();
   }
@@ -136,6 +137,7 @@ export function AnalyticsConsentProvider({
       value={{
         openSettings(trigger) {
           settingsTriggerRef.current = trigger;
+          settingsOpenRef.current = true;
           setSettingsOpen(true);
         },
       }}
