@@ -200,10 +200,11 @@
       "cookiesAndGoogleTags": {
         "title": "Cookies en Google-tags",
         "body": [
-          "De website gebruikt Google-tags, Google Analytics en Google Tag Manager, wanneer de relevante ID’s geconfigureerd zijn, om basisverkeer en prestaties van de website te begrijpen.",
+          "Google-tags en Google Analytics, wanneer een ID geconfigureerd is, en Vercel Web Analytics en Speed Insights zijn optionele meetinstrumenten. Ze worden pas geladen na je uitdrukkelijke toestemming.",
+          "Als je weigert, blijven ze uitgeschakeld. Je browser bewaart je keuze en via de link Analytics-instellingen in de footer kun je die wijzigen of je toestemming intrekken.",
           "Google kan technische gegevens verwerken zoals cookies, IP-adres, browser- en apparaatinformatie, bezochte pagina’s, referrer en geschatte locatie.",
           "De huidige configuratie verzendt navigatie- en conversie-events, zoals klikken naar contact, bekeken servicepagina’s, gekozen taal, scrolldiepte en het algemene resultaat van een formulier. Ze verzendt niet bewust de naam, het emailadres, het telefoonnummer of de inhoud van het bericht naar Google.",
-          "De website gebruikt ook Vercel Web Analytics en Speed Insights voor geaggregeerde statistieken over verkeer en prestaties."
+          "Vercel blijft nodig om de website te hosten en aan te bieden, ongeacht je keuze. De optionele tools Web Analytics en Speed Insights leveren alleen na toestemming geaggregeerde statistieken over verkeer en prestaties."
         ]
       },
       "whyWeUseData": {
@@ -216,7 +217,7 @@
         "title": "Delen van gegevens",
         "body": [
           "Edge Solutions verkoopt geen persoonlijke gegevens.",
-          "Sommige gegevens kunnen worden verwerkt door dienstverleners die nodig zijn voor de website: Google voor tags en analytics, Vercel voor hosting en prestatiemeting, en Resend of de emailprovider voor het afleveren van contactberichten."
+          "Sommige gegevens kunnen door dienstverleners worden verwerkt: Vercel voor essentiële hosting en, na je toestemming, Google voor tags en analytics en Vercel voor optionele verkeers- en prestatiemeting; Resend of de emailprovider verzorgt de aflevering van contactberichten."
         ]
       },
       "dataRetention": {
@@ -242,10 +243,23 @@
       "lastUpdated": {
         "title": "Laatst bijgewerkt",
         "body": [
-          "4 juni 2026."
+          "29 juli 2026."
         ]
       }
     }
+  },
+  "analyticsConsent": {
+    "promptTitle": "Optionele meting",
+    "promptDescription": "Sta je Google Analytics, Vercel Web Analytics en Speed Insights toe om bezoeken en prestaties te meten? De website en het contactformulier blijven zonder deze tools beschikbaar.",
+    "accept": "Accepteren",
+    "reject": "Weigeren",
+    "settingsButton": "Analytics-instellingen",
+    "settingsTitle": "Analytics-instellingen",
+    "acceptedDescription": "Optionele meting is ingeschakeld. Je kunt je toestemming op elk moment intrekken.",
+    "rejectedDescription": "Optionele meting is uitgeschakeld. Je kunt ze op elk moment toestaan.",
+    "withdraw": "Meting uitschakelen",
+    "close": "Sluiten",
+    "privacyLink": "Lees het privacybeleid"
   },
   "footer": {
     "copyright": "© {year} Edge Solutions",

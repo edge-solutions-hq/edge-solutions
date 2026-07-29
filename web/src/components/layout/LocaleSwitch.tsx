@@ -1,12 +1,16 @@
 'use client';
 
 import {Link, usePathname} from '@/i18n/navigation';
+import {useSearchParams} from 'next/navigation';
 import {routing} from '@/i18n/routing';
 import {trackLocaleSwitch} from '@/lib/analytics/events';
 import {cn} from '@/lib/cn';
 
 export function LocaleSwitch({locale}: {locale: string}) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const queryString = searchParams.toString();
+  const href = queryString ? `${pathname}?${queryString}` : pathname;
 
   const handleLocaleClick = (nextLocale: string, active: boolean) => {
     if (active || typeof window === 'undefined') return;
@@ -21,7 +25,7 @@ export function LocaleSwitch({locale}: {locale: string}) {
         return (
           <Link
             key={l}
-            href={pathname}
+            href={href}
             locale={l}
             onClick={() => handleLocaleClick(l, active)}
             aria-current={active ? 'page' : undefined}
@@ -39,4 +43,3 @@ export function LocaleSwitch({locale}: {locale: string}) {
     </div>
   );
 }
-

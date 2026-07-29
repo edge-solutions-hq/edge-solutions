@@ -1,9 +1,6 @@
 import type {Metadata} from 'next';
-import {Suspense} from 'react';
 import {Archivo_Narrow, Fira_Code, Inter} from 'next/font/google';
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
-import {Analytics} from '@vercel/analytics/react';
-import {SpeedInsights} from '@vercel/speed-insights/next';
 import {getMessages, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
 import {routing} from '@/i18n/routing';
@@ -11,7 +8,7 @@ import '@/styles/globals.css';
 import {Header} from '@/components/layout/Header';
 import {Footer} from '@/components/layout/Footer';
 import {ContactModalProvider} from './contact/ContactModalProvider';
-import {GoogleAnalytics} from '@/components/analytics/GoogleAnalytics';
+import {AnalyticsConsentProvider} from '@/components/analytics/AnalyticsConsentProvider';
 import {JsonLd} from '@/components/seo/JsonLd';
 import {getAnalyticsRuntimeConfig} from '@/lib/runtime-config';
 import {getRootLayoutProfile} from '@/lib/site-profile';
@@ -63,20 +60,15 @@ export default async function LocaleLayout({children, params}: Props) {
         className={`${inter.variable} ${archivoNarrow.variable} ${firaCode.variable} flex min-h-dvh flex-col antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <ContactModalProvider>
-            <Header locale={locale} />
-            <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-12 md:py-14">{children}</main>
-            <Footer />
-          </ContactModalProvider>
+          <AnalyticsConsentProvider googleTagId={analyticsConfig.googleTagId}>
+            <ContactModalProvider>
+              <Header locale={locale} />
+              <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-12 md:py-14">{children}</main>
+              <Footer />
+            </ContactModalProvider>
+          </AnalyticsConsentProvider>
         </NextIntlClientProvider>
         <JsonLd data={profile.jsonLd} />
-        {analyticsConfig.googleTagId ? (
-          <Suspense fallback={null}>
-            <GoogleAnalytics measurementId={analyticsConfig.googleTagId} />
-          </Suspense>
-        ) : null}
-        <Analytics />
-        <SpeedInsights />
       </body>
     </html>
   );

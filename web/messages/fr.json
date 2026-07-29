@@ -200,10 +200,11 @@
       "cookiesAndGoogleTags": {
         "title": "Cookies et Google tags",
         "body": [
-          "Le site utilise Google tags, Google Analytics et Google Tag Manager, quand les identifiants correspondants sont configurés, pour comprendre le trafic de base et la performance du site.",
+          "Les Google tags et Google Analytics, lorsqu’un identifiant est configuré, ainsi que Vercel Web Analytics et Speed Insights sont des mesures optionnelles. Ils ne se chargent qu’après votre accord explicite.",
+          "Un refus les maintient désactivés. Le navigateur conserve votre choix et le lien Réglages analytics du pied de page permet de le modifier ou de retirer votre consentement.",
           "Google peut traiter des données techniques comme les cookies, l’adresse IP, le navigateur, l’appareil, les pages visitées, le référent et la localisation approximative.",
           "La configuration actuelle envoie des événements de navigation et de conversion, comme les clics vers le contact, les pages de service consultées, la langue choisie, la profondeur de scroll et le résultat général d’un formulaire. Elle n’envoie pas volontairement à Google le nom, l’email, le téléphone ou le contenu du message.",
-          "Le site utilise aussi Vercel Web Analytics et Speed Insights pour des statistiques agrégées de trafic et de performance."
+          "Vercel reste nécessaire pour héberger et servir le site, indépendamment de votre choix. Ses outils optionnels Web Analytics et Speed Insights servent uniquement aux statistiques agrégées de trafic et de performance après accord."
         ]
       },
       "whyWeUseData": {
@@ -216,7 +217,7 @@
         "title": "Partage des données",
         "body": [
           "Edge Solutions ne vend pas de données personnelles.",
-          "Certaines données peuvent être traitées par des prestataires nécessaires au site : Google pour les tags et analytics, Vercel pour l’hébergement et les mesures de performance, et Resend ou le fournisseur email pour l’envoi des messages de contact."
+          "Certaines données peuvent être traitées par des prestataires : Vercel pour l’hébergement essentiel et, après votre accord, Google pour les tags et analytics ainsi que Vercel pour les mesures optionnelles de trafic et de performance ; Resend ou le fournisseur email intervient pour l’envoi des messages de contact."
         ]
       },
       "dataRetention": {
@@ -242,10 +243,23 @@
       "lastUpdated": {
         "title": "Dernière mise à jour",
         "body": [
-          "4 juin 2026."
+          "29 juillet 2026."
         ]
       }
     }
+  },
+  "analyticsConsent": {
+    "promptTitle": "Mesures optionnelles",
+    "promptDescription": "Autorisez-vous Google Analytics, Vercel Web Analytics et Speed Insights pour mesurer les visites et les performances ? Le site et le formulaire restent disponibles sans ces outils.",
+    "accept": "Accepter",
+    "reject": "Refuser",
+    "settingsButton": "Réglages analytics",
+    "settingsTitle": "Réglages analytics",
+    "acceptedDescription": "Les mesures optionnelles sont activées. Vous pouvez retirer votre consentement à tout moment.",
+    "rejectedDescription": "Les mesures optionnelles sont désactivées. Vous pouvez les autoriser à tout moment.",
+    "withdraw": "Désactiver les mesures",
+    "close": "Fermer",
+    "privacyLink": "Lire la politique de confidentialité"
   },
   "footer": {
     "copyright": "© {year} Edge Solutions",

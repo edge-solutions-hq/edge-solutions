@@ -24,7 +24,7 @@ If you want GA4 tracking enabled, set the Google tag ID:
 NEXT_PUBLIC_GTM_ID=G-XXXXXXXXXX
 ```
 
-When this variable is present, the app loads `gtag.js` and emits conversion events (`contact_cta_click`, `contact_form_submit`, `contact_form_success`, `contact_form_error`, `service_card_click`, `locale_switch`, `service_scroll_depth`) via `dataLayer` and `gtag` when available.
+When this variable is present, the app can load `gtag.js` after the visitor explicitly accepts optional analytics. It then emits conversion events (`contact_cta_click`, `contact_form_submit`, `contact_form_success`, `contact_form_error`, `service_card_click`, `locale_switch`, `service_scroll_depth`) via `dataLayer` and `gtag` when available. Rejection keeps Google and optional Vercel measurement disabled; the footer analytics settings allow withdrawal.
 
 You can validate variable formats locally with:
 
@@ -41,6 +41,7 @@ For event names and parameters, follow `../docs/analytics/conversion-event-taxon
 pnpm run test
 pnpm run lint
 pnpm run build
+pnpm run test:browser
 pnpm run check:seo
 pnpm run check
 ```

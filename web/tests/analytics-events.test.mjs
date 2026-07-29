@@ -12,6 +12,7 @@ const {
   trackContactFormOutcome,
   trackConversionEvent,
 } = await import('../src/lib/analytics/events.ts');
+const {ANALYTICS_CONSENT_STORAGE_KEY} = await import('../src/lib/analytics/consent.ts');
 
 afterEach(() => {
   delete globalThis.window;
@@ -32,6 +33,10 @@ function installBrowser({
     dataLayer,
     gtag: (...args) => gtagCalls.push(args),
     location: {href, pathname, search},
+    localStorage: {
+      getItem: (key) => key === ANALYTICS_CONSENT_STORAGE_KEY ? 'accepted' : null,
+      setItem() {},
+    },
   };
   globalThis.document = {
     documentElement: {lang},
@@ -175,6 +180,25 @@ describe('analytics event payload policy', () => {
 });
 
 describe('analytics browser transport adapter', () => {
+  it('does not read context or touch transports without accepted consent', () => {
+    for (const storedConsent of [null, 'rejected', 'unknown']) {
+      const dataLayer = [];
+      const gtagCalls = [];
+      installBrowser({dataLayer, gtagCalls});
+      globalThis.window.localStorage.getItem = () => storedConsent;
+      globalThis.window.location = {
+        get href() {
+          throw new Error('browser context should not be read');
+        },
+      };
+
+      trackConversionEvent('contact_cta_click');
+
+      assert.deepEqual(dataLayer, []);
+      assert.deepEqual(gtagCalls, []);
+    }
+  });
+
   it('merges browser context, compacts undefined params, and fans out to dataLayer and gtag', () => {
     const {dataLayer, gtagCalls} = installBrowser();
 

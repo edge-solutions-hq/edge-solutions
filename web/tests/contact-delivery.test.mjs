@@ -23,7 +23,13 @@ async function fakeDeliveryAdapter(payload, config) {
 
 const {sendContactEmail} = await import('../src/app/[locale]/contact/actions.ts');
 
-const contactEnvKeys = ['RESEND_API_KEY', 'RESEND_FROM_EMAIL', 'RESEND_TO_EMAIL'];
+const contactEnvKeys = [
+  'RESEND_API_KEY',
+  'RESEND_FROM_EMAIL',
+  'RESEND_TO_EMAIL',
+  'PLAYWRIGHT_TEST',
+  'VERCEL_ENV',
+];
 const originalContactEnv = Object.fromEntries(
   contactEnvKeys.map((key) => [key, process.env[key]])
 );
@@ -42,6 +48,8 @@ beforeEach(() => {
   process.env.RESEND_API_KEY = 'test-api-key';
   process.env.RESEND_FROM_EMAIL = 'Edge Test <from@example.com>';
   process.env.RESEND_TO_EMAIL = 'inbox@example.com';
+  delete process.env.PLAYWRIGHT_TEST;
+  delete process.env.VERCEL_ENV;
 });
 
 function contactForm(overrides = {}) {
@@ -67,6 +75,28 @@ async function submit(formData) {
 }
 
 describe('contact Server Action delivery', () => {
+  it('uses a no-I/O success adapter for the browser harness', async () => {
+    process.env.PLAYWRIGHT_TEST = '1';
+
+    const state = await sendContactEmail({status: 'idle'}, contactForm());
+
+    assert.equal(state.status, 'success');
+    assert.deepEqual(state.outcome, {kind: 'success', service: 'ai'});
+  });
+
+  it('fails closed instead of selecting the browser adapter in Vercel production', async () => {
+    process.env.PLAYWRIGHT_TEST = '1';
+    process.env.VERCEL_ENV = 'production';
+
+    const state = await sendContactEmail({status: 'idle'}, contactForm());
+
+    assert.deepEqual(state, {
+      status: 'error',
+      messageKey: 'contact.form.genericError',
+      outcome: {kind: 'delivery_error', service: 'ai'},
+    });
+  });
+
   it('normalizes valid data, delivers through the action binding, and returns success', async () => {
     const state = await submit(contactForm());
 

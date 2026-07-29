@@ -15,10 +15,20 @@ const deliverWithResend: ContactDeliveryAdapter = async (payload, config) => {
   return error ? {ok: false} : {ok: true};
 };
 
+const deliverWithoutIo: ContactDeliveryAdapter = async () => ({ok: true});
+const rejectPlaywrightInProduction: ContactDeliveryAdapter = async () => ({ok: false});
+
+function defaultDeliveryAdapter(): ContactDeliveryAdapter {
+  if (process.env.PLAYWRIGHT_TEST !== '1') return deliverWithResend;
+  return process.env.VERCEL_ENV === 'production'
+    ? rejectPlaywrightInProduction
+    : deliverWithoutIo;
+}
+
 export async function sendContactEmail(
   _prevState: ContactActionState,
   formData: FormData,
-  deliver: ContactDeliveryAdapter = deliverWithResend
+  deliver?: ContactDeliveryAdapter
 ): Promise<ContactActionState> {
-  return submitContactAttempt(formData, {deliver});
+  return submitContactAttempt(formData, {deliver: deliver ?? defaultDeliveryAdapter()});
 }

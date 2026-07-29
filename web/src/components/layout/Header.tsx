@@ -1,4 +1,5 @@
 import {getTranslations} from 'next-intl/server';
+import {Suspense} from 'react';
 import {Link} from '@/i18n/navigation';
 import {LocaleSwitch} from './LocaleSwitch';
 import {site} from '@/lib/site';
@@ -33,7 +34,9 @@ export async function Header({locale}: {locale: string}) {
         </div>
 
         <div className="flex items-center gap-3">
-          <LocaleSwitch locale={locale} />
+          <Suspense fallback={null}>
+            <LocaleSwitch locale={locale} />
+          </Suspense>
           <ButtonLink
             href="/contact"
             className="hidden md:inline-flex"
