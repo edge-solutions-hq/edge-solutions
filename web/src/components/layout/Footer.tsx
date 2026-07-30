@@ -1,6 +1,7 @@
 import {getTranslations} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
 import {site} from '@/lib/site';
+import {AnalyticsSettingsButton} from '@/components/analytics/AnalyticsConsentProvider';
 
 type SocialLink = {label: string; href: string};
 
@@ -67,6 +68,9 @@ export async function Footer() {
                 {t('footer.privacyPolicy')}
               </Link>
             </li>
+            <li>
+              <AnalyticsSettingsButton className={footerLinkClass} />
+            </li>
           </ul>
           {!site.social.github ? (
             <div className="text-xs text-secondary-foreground/65">
@@ -87,5 +91,4 @@ export async function Footer() {
     </footer>
   );
 }
-
 

@@ -200,10 +200,11 @@
       "cookiesAndGoogleTags": {
         "title": "Cookies and Google tags",
         "body": [
-          "The website uses Google tags, Google Analytics and Google Tag Manager, when the relevant IDs are configured, to understand basic website traffic and performance.",
+          "Google tags and Google Analytics, when an ID is configured, as well as Vercel Web Analytics and Speed Insights are optional measurement tools. They load only after your explicit consent.",
+          "Rejecting keeps them disabled. Your browser stores your choice, and the Analytics settings link in the footer lets you change it or withdraw consent.",
           "Google may process technical data such as cookies, IP address, browser and device information, pages visited, referrer and approximate location.",
           "The current setup sends navigation and conversion events, such as contact clicks, service pages viewed, selected language, scroll depth and the general result of a form submission. It does not intentionally send Google the visitor’s name, email address, phone number or message content.",
-          "The website also uses Vercel Web Analytics and Speed Insights for aggregated traffic and performance statistics."
+          "Vercel remains necessary to host and serve the website regardless of your choice. Its optional Web Analytics and Speed Insights tools provide aggregated traffic and performance statistics only after consent."
         ]
       },
       "whyWeUseData": {
@@ -216,7 +217,7 @@
         "title": "Data sharing",
         "body": [
           "Edge Solutions does not sell personal data.",
-          "Some data may be processed by providers needed to run the website: Google for tags and analytics, Vercel for hosting and performance measurement, and Resend or the email provider for contact message delivery."
+          "Some data may be processed by providers: Vercel for essential hosting and, after your consent, Google for tags and analytics and Vercel for optional traffic and performance measurement; Resend or the email provider handles contact message delivery."
         ]
       },
       "dataRetention": {
@@ -242,10 +243,23 @@
       "lastUpdated": {
         "title": "Last updated",
         "body": [
-          "June 4, 2026."
+          "July 29, 2026."
         ]
       }
     }
+  },
+  "analyticsConsent": {
+    "promptTitle": "Optional measurement",
+    "promptDescription": "Do you allow Google Analytics, Vercel Web Analytics and Speed Insights to measure visits and performance? The website and contact form remain available without them.",
+    "accept": "Accept",
+    "reject": "Reject",
+    "settingsButton": "Analytics settings",
+    "settingsTitle": "Analytics settings",
+    "acceptedDescription": "Optional measurement is enabled. You can withdraw consent at any time.",
+    "rejectedDescription": "Optional measurement is disabled. You can allow it at any time.",
+    "withdraw": "Disable measurement",
+    "close": "Close",
+    "privacyLink": "Read the privacy policy"
   },
   "footer": {
     "copyright": "© {year} Edge Solutions",

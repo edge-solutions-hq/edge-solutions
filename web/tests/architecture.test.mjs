@@ -17,6 +17,13 @@ function readJson(relativePath) {
   return JSON.parse(read(relativePath));
 }
 
+function messageKeyPaths(value, prefix = '') {
+  if (Array.isArray(value) || value === null || typeof value !== 'object') return [prefix];
+  return Object.entries(value).flatMap(([key, child]) =>
+    messageKeyPaths(child, prefix ? `${prefix}.${key}` : key)
+  );
+}
+
 function extractObjectBlocks(source, arrayName) {
   const start = source.indexOf(`const ${arrayName}`) > -1
     ? source.indexOf(`const ${arrayName}`)
@@ -395,6 +402,32 @@ describe('contact intake and analytics taxonomy seams', () => {
     assert.match(read('src/lib/runtime-config.ts'), /getAnalyticsRuntimeConfig/);
     assert.match(read('scripts/validate-analytics-env.mjs'), /runtime-config-core/);
     assert.match(read('src/lib/runtime-config.ts'), /getContactDeliveryConfig/);
+  });
+
+  it('keeps optional analytics behind consent ownership with localized parity', () => {
+    const layoutSource = read('src/app/[locale]/layout.tsx');
+    const eventsSource = read('src/lib/analytics/events.ts');
+    const actionSource = read('src/app/[locale]/contact/actions.ts');
+    const referenceKeys = messageKeyPaths(readJson('messages/fr.json')).sort();
+
+    assert.match(layoutSource, /AnalyticsConsentProvider/);
+    assert.doesNotMatch(layoutSource, /@vercel\/analytics|@vercel\/speed-insights/);
+    assert.match(eventsSource, /from '.\/consent'/);
+    assert.match(eventsSource, /hasAnalyticsConsent/);
+    assert.match(actionSource, /PLAYWRIGHT_TEST/);
+    assert.match(actionSource, /BROWSER_HARNESS_HEADER/);
+
+    for (const locale of locales.slice(1)) {
+      assert.deepEqual(
+        messageKeyPaths(readJson(`messages/${locale}.json`)).sort(),
+        referenceKeys,
+        `${locale} message keys must match French`
+      );
+    }
+  });
+
+  it('always launches the configured browser harness server', () => {
+    assert.match(read('playwright.config.ts'), /reuseExistingServer: false/);
   });
 });
 

@@ -55,6 +55,10 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
   }, []);
 
   const openContactModal = useCallback((request?: ContactModalRequest) => {
+    previouslyFocusedRef.current = document.activeElement instanceof HTMLElement
+      ? document.activeElement
+      : null;
+
     const service =
       request?.service ??
       resolveContactServiceTarget(request?.href ?? '') ??
@@ -72,10 +76,6 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
       return;
     }
 
-    previouslyFocusedRef.current = document.activeElement instanceof HTMLElement
-      ? document.activeElement
-      : null;
-
     const previousOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
     closeButtonRef.current?.focus();
@@ -91,7 +91,9 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
     return () => {
       document.body.style.overflow = previousOverflow;
       document.removeEventListener('keydown', handleKeyDown);
-      previouslyFocusedRef.current?.focus();
+      if (previouslyFocusedRef.current?.isConnected) {
+        previouslyFocusedRef.current.focus();
+      }
     };
   }, [closeContactModal, modal.open]);
 

@@ -11,7 +11,11 @@ Transport layer:
 - `window.dataLayer.push({ event, ...params })`
 - `window.gtag('event', event, params)`
 
-Both are emitted by `web/src/lib/analytics/events.ts` when available.
+Both are emitted by `web/src/lib/analytics/events.ts` when available and only
+after explicit analytics consent. Google tags, Vercel Web Analytics, and Vercel
+Speed Insights do not load or emit while consent is undecided or rejected.
+Withdrawing consent updates the persisted browser choice synchronously before
+the loaded optional runtimes are removed by a page reload.
 
 ## Shared browser context parameters
 
@@ -157,8 +161,9 @@ When a known AI referrer is detected, `page_referrer` is reduced to the referrer
 
 ## GA4 mapping recommendation
 
-The app loads the Google tag directly through `gtag.js` when `NEXT_PUBLIC_GTM_ID`
-is set to a GA4 Measurement ID such as `G-XXXXXXXXXX`.
+The app makes the Google tag available through `gtag.js` when
+`NEXT_PUBLIC_GTM_ID` is set to a GA4 Measurement ID such as `G-XXXXXXXXXX`; it
+loads only after the visitor explicitly accepts optional analytics.
 
 In GA4, use these custom events:
 

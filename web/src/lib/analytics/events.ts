@@ -13,6 +13,7 @@ import {
   type OfferTrackClickPlacement,
   type ScrollDepthThreshold,
 } from './taxonomy';
+import {hasAnalyticsConsent} from './consent';
 
 declare global {
   interface Window {
@@ -36,7 +37,7 @@ function compactParams(
 }
 
 export function trackConversionEvent(eventName: string, params: EventParams = {}) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === 'undefined' || !hasAnalyticsConsent()) return;
 
   const payload = compactParams({
     ...readBrowserAnalyticsContext(),

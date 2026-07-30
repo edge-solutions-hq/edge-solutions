@@ -29,10 +29,25 @@ export function MobileMenu({
   };
 }) {
   const [open, setOpen] = React.useState(false);
+  const menuId = React.useId();
+  const toggleRef = React.useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
   const navItems = getHeaderNavigationRenderItems(pathname, items, 'mobile_menu_nav');
   const contactAction = getHeaderNavigationContactAction(items, ctaLabel, 'mobile_menu_cta');
   const contactModal = useContactModal();
+
+  React.useEffect(() => {
+    if (!open) return;
+
+    function handleKeyDown(event: KeyboardEvent) {
+      if (event.key !== 'Escape') return;
+      setOpen(false);
+      toggleRef.current?.focus();
+    }
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [open]);
 
   return (
     <div className="md:hidden">
@@ -47,9 +62,10 @@ export function MobileMenu({
 
       <div className="relative z-50">
         <button
+          ref={toggleRef}
           type="button"
-          aria-haspopup="menu"
           aria-expanded={open}
+          aria-controls={menuId}
           aria-label={open ? labels.close : labels.open}
           className={cn(
             buttonClass({variant: 'outline', size: 'md', className: 'px-3'})
@@ -66,7 +82,7 @@ export function MobileMenu({
 
         {open ? (
           <div
-            role="menu"
+            id={menuId}
             className={surfaceClass('card', 'absolute right-0 mt-2 w-[min(22rem,calc(100vw-3rem))] p-2')}
           >
             <div className="grid gap-1">
@@ -74,7 +90,6 @@ export function MobileMenu({
                 <Link
                   key={item.href}
                   href={item.href}
-                  role="menuitem"
                   aria-current={item.active ? 'page' : undefined}
                   className={cn(
                     'rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
@@ -92,6 +107,8 @@ export function MobileMenu({
                       shouldOpenContactModalForClick(event)
                     ) {
                       event.preventDefault();
+                      setOpen(false);
+                      toggleRef.current?.focus();
                       contactModal.openContactModal({href: item.href});
                     }
 
@@ -119,6 +136,8 @@ export function MobileMenu({
                       shouldOpenContactModalForClick(event)
                     ) {
                       event.preventDefault();
+                      setOpen(false);
+                      toggleRef.current?.focus();
                       contactModal.openContactModal({href: contactAction.href});
                     }
 

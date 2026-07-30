@@ -29,6 +29,7 @@ Keep route files and UI surfaces thin.
 | Contact delivery | `web/src/lib/contact/delivery.ts` | Contact workflow after intake, email payload shape, success/error state, and delivery adapter seam. |
 | Analytics taxonomy | `web/src/lib/analytics/taxonomy.ts` | Event names, placement values, and scroll-depth thresholds. |
 | Analytics events | `web/src/lib/analytics/events.ts` | Named conversion actions and transport adapter boundary for GTM/GA4. |
+| Analytics consent | `web/src/lib/analytics/consent.ts` and `web/src/components/analytics/AnalyticsConsentProvider.tsx` | Versioned browser preference, synchronous optional-transport policy, localized controls, and consent-gated Google/Vercel runtime mounting. |
 | Browser analytics context | `web/src/lib/analytics/browser-context.ts` | Browser-derived page path, location, title, sanitized referrer, AI referrer source, locale, family, and service source track. |
 | Service scroll depth | `web/src/lib/analytics/service-scroll-depth.ts` | Pure scroll-depth percent calculation and threshold progression. |
 | Tracked link targets | `web/src/lib/navigation/tracked-link-target.ts` | Conversion from localized link hrefs into analytics target strings. |
