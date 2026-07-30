@@ -35,6 +35,12 @@ pnpm run check:analytics-env:prod
 
 For event names and parameters, follow `../docs/analytics/conversion-event-taxonomy.md`.
 
+## Contact Abuse Protection
+
+Contact abuse protection requires no additional local environment variable, credential, or provider setup. Local browser tests use the repository's no-I/O harness and do not require Vercel or Resend access. See [`docs/tech-stack.md`](../docs/tech-stack.md#environment-keys) for the authoritative abuse policy, deployment state, runtime constraints, and test-harness behavior.
+
+A valid request with trusted Vercel request context performs one managed abuse-control check before delivery. If trusted request context is unavailable, the action fails closed before delivery and may perform no managed check. Honeypot and invalid submissions are rejected before abuse control.
+
 ## Quality Gates
 
 After installing dependencies, install Playwright's Chromium binary once before running the browser tests or full gate:

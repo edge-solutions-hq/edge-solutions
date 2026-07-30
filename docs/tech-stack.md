@@ -16,6 +16,7 @@ This file owns current implementation tooling for the Edge Solutions web app. It
 - Internationalization: `next-intl` with prefixed `fr`, `en`, and `nl` routes; `fr` is default
 - Forms: `react-hook-form`, `zod`, `@hookform/resolvers`
 - Email delivery: Resend through server-side contact delivery
+- Contact abuse control: `@vercel/firewall` programmatic rate limiting before Resend
 - Analytics: Vercel Analytics, Vercel Speed Insights, optional Google tag runtime ID
 - Browser tests: Playwright with one Chromium project and axe-core smoke checks
 
@@ -65,6 +66,16 @@ Copy `web/env.example` to a local env file such as `web/.env.local`.
 - `RESEND_TO_EMAIL`: destination inbox for contact messages.
 - `NEXT_PUBLIC_GTM_ID`: optional Google tag / GA4 measurement ID, such as `G-XXXXXXXXXX`; configuration makes it available only after visitor opt-in.
 
+Contact abuse control requires no application environment key, credential, or connected storage. It uses Vercel's system request context and the already-published `contact-submit` WAF rule included with the Hobby plan.
+
+Active deployment state:
+
+- Vercel project `edge-solutions` is on Hobby, whose included use covers the selected programmatic rate limit.
+- Exactly one WAF rule is active and no draft changes remain: `Contact submission rate limit`, programmatic ID `contact-submit`.
+- Its action is a 600-second fixed window, limit 5, Vercel-managed IP key, with rate-limit / HTTP 429 when exceeded.
+- Function execution is configured only in `iad1`; zero-config failover is disabled.
+- No application credential or connected store is required. This rule is already published; do not modify Vercel configuration for the application deployment.
+
 ## Implementation Notes
 
 - `next.config.ts` enables MDX page extensions, `remark-gfm`, Next Intl, security headers, Turbopack root configuration, and one-day caching for SEO/static endpoints such as `robots.txt`, `sitemap.xml`, and `llms.txt`.
@@ -72,9 +83,14 @@ Copy `web/env.example` to a local env file such as `web/.env.local`.
 - `web/src/lib/runtime-config-core.mjs` owns Google tag ID validation for app runtime and scripts.
 - `web/src/lib/analytics/consent.ts` owns the persisted opt-in policy. Google and optional Vercel measurement runtimes load only after acceptance, and the conversion transport checks the same policy synchronously.
 - `web/src/lib/runtime-config.ts` adds contact delivery defaults.
+- `web/src/lib/contact/abuse.ts` owns the active `contact-submit` policy: five valid attempts per trusted client IP in one 600-second fixed window. The WAF rule is already active; do not modify Vercel configuration when deploying application changes.
+- A limited attempt returns the localized neutral retry-later form error, stops before Resend, emits no success conversion, and exposes no IP, count, rule, provider, or reset diagnostics.
+- The logical counter and storage lifetime is one 600-second fixed window. The repository stores no client IP or counter, and makes no claim about Vercel's undocumented physical deletion timing.
+- Abuse control fails closed for a missing WAF rule or result, a blocked or unexpected response, a thrown or network failure, or unavailable trusted request context (including unreadable headers). Each case returns the generic safe form error as internal `abuse_control_error` and suppresses delivery before Resend.
+- The managed counter is regional, so contact function execution must remain restricted to the single `iad1` region with zero-config failover disabled. Changing that deployment topology requires re-evaluating the one-policy guarantee.
 - `web/scripts/seo-source-facts.mjs` keeps SEO script facts aligned with app routing and service slugs.
 - `web/tests/http-contracts.contract.mjs` builds through `test:http`, starts the production server on an isolated localhost port, and verifies routing, status, header, and metadata endpoint contracts.
-- `web/e2e/` runs against an already-built production app. Its server-only harness selects a no-I/O contact delivery adapter only for requests carrying the per-run Playwright token; test mode otherwise fails closed. These private test values are not application configuration.
+- `web/e2e/` runs against an already-built production app. Its server-only harness selects no-I/O abuse and delivery adapters only for requests carrying the per-run Playwright token, bypassing both WAF and Resend; test mode otherwise fails closed without provider I/O. These private test values are not application configuration.
 - The aggregate `check` command performs one production build, then reuses it for HTTP contracts, Chromium browser tests, and SEO checks.
 - `web/package.json` installs TypeScript 7 directly and aliases the same package under Next.js 16.2's recognized `@typescript/native-preview` name. The build runs the TypeScript 7 CLI before `next build`; Oxlint handles native TypeScript linting, and ESLint uses Next's Babel parser for framework-specific rules.
 - `pnpm-workspace.yaml` allows required native dependency build scripts for Next/SWC, image handling, and file watching.

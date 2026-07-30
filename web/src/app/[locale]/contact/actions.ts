@@ -1,6 +1,7 @@
 'use server';
 
 import {Resend} from 'resend';
+import {checkRateLimit} from '@vercel/firewall';
 import {headers} from 'next/headers.js';
 import {
   submitContactAttempt,
@@ -8,8 +9,13 @@ import {
   type ContactDeliveryAdapter,
 } from '@/lib/contact/delivery';
 import {
+  CONTACT_RATE_LIMIT_ID,
+  normalizeContactRateLimitResult,
+  type ContactAbuseAdapter,
+} from '@/lib/contact/abuse';
+import {
   BROWSER_HARNESS_HEADER,
-  isBrowserHarnessRequest,
+  resolveBrowserHarnessMode,
 } from '@/lib/contact/browser-harness';
 
 export type {ContactActionState} from '@/lib/contact/delivery';
@@ -22,32 +28,49 @@ const deliverWithResend: ContactDeliveryAdapter = async (payload, config) => {
 
 const deliverWithoutIo: ContactDeliveryAdapter = async () => ({ok: true});
 const rejectUnverifiedBrowserHarness: ContactDeliveryAdapter = async () => ({ok: false});
+const allowWithoutIo: ContactAbuseAdapter = async () => 'allowed';
+const rejectAbuseWithoutIo: ContactAbuseAdapter = async () => 'unavailable';
 
-async function defaultDeliveryAdapter(): Promise<ContactDeliveryAdapter> {
-  if (process.env.PLAYWRIGHT_TEST !== '1') return deliverWithResend;
+type ContactAdapters = {
+  abuse: ContactAbuseAdapter;
+  deliver: ContactDeliveryAdapter;
+};
 
-  let requestToken: string | null = null;
+async function defaultContactAdapters(): Promise<ContactAdapters> {
+  let requestHeaders: Awaited<ReturnType<typeof headers>>;
   try {
-    requestToken = (await headers()).get(BROWSER_HARNESS_HEADER);
+    requestHeaders = await headers();
   } catch {
-    return rejectUnverifiedBrowserHarness;
+    return {
+      abuse: rejectAbuseWithoutIo,
+      deliver: rejectUnverifiedBrowserHarness,
+    };
   }
 
-  return isBrowserHarnessRequest({
+  const mode = resolveBrowserHarnessMode({
     enabled: process.env.PLAYWRIGHT_TEST,
     expectedToken: process.env.PLAYWRIGHT_TEST_TOKEN,
-    requestToken,
-  })
-    ? deliverWithoutIo
-    : rejectUnverifiedBrowserHarness;
+    requestToken: requestHeaders.get(BROWSER_HARNESS_HEADER),
+  });
+
+  if (mode === 'production') {
+    return {
+      abuse: async () => normalizeContactRateLimitResult(
+        await checkRateLimit(CONTACT_RATE_LIMIT_ID, {headers: requestHeaders})
+      ),
+      deliver: deliverWithResend,
+    };
+  }
+
+  return mode === 'verified'
+    ? {abuse: allowWithoutIo, deliver: deliverWithoutIo}
+    : {abuse: rejectAbuseWithoutIo, deliver: rejectUnverifiedBrowserHarness};
 }
 
 export async function sendContactEmail(
   _prevState: ContactActionState,
   formData: FormData,
-  deliver?: ContactDeliveryAdapter
+  adapters?: ContactAdapters
 ): Promise<ContactActionState> {
-  return submitContactAttempt(formData, {
-    deliver: deliver ?? await defaultDeliveryAdapter(),
-  });
+  return submitContactAttempt(formData, adapters ?? await defaultContactAdapters());
 }

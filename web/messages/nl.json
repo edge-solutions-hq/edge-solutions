@@ -169,6 +169,7 @@
       "submit": "Versturen",
       "success": "Bericht verzonden. Ik kom snel bij je terug.",
       "validationError": "Sommige velden zijn ongeldig.",
+      "rateLimitError": "Te veel pogingen. Probeer het later opnieuw.",
       "configError": "Het formulier is nog niet geconfigureerd voor emailverzending.",
       "genericError": "Kon je bericht niet versturen. Probeer het opnieuw.",
       "fieldErrors": {

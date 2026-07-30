@@ -5,7 +5,17 @@ import {register} from 'node:module';
 register(new URL('./ts-extension-resolver.mjs', import.meta.url));
 
 const deliveries = [];
+let abuseCalls = 0;
+let abuseBehavior = 'allowed';
 let deliveryBehavior = 'success';
+
+function fakeAbuseAdapter() {
+  abuseCalls += 1;
+  if (abuseBehavior === 'throw') {
+    throw new Error('WAF diagnostic: unavailable');
+  }
+  return Promise.resolve(abuseBehavior);
+}
 
 async function fakeDeliveryAdapter(payload, config) {
   deliveries.push({payload, config});
@@ -22,7 +32,13 @@ async function fakeDeliveryAdapter(payload, config) {
 }
 
 const {sendContactEmail} = await import('../src/app/[locale]/contact/actions.ts');
-const {isBrowserHarnessRequest} = await import(
+const {
+  CONTACT_RATE_LIMIT_ID,
+  CONTACT_RATE_LIMIT,
+  CONTACT_RATE_LIMIT_WINDOW_SECONDS,
+  normalizeContactRateLimitResult,
+} = await import('../src/lib/contact/abuse.ts');
+const {isBrowserHarnessRequest, resolveBrowserHarnessMode} = await import(
   '../src/lib/contact/browser-harness.ts'
 );
 
@@ -48,6 +64,8 @@ after(() => {
 });
 
 beforeEach(() => {
+  abuseCalls = 0;
+  abuseBehavior = 'allowed';
   deliveries.length = 0;
   deliveryBehavior = 'success';
   if (originalContactEnv.NODE_ENV === undefined) delete process.env.NODE_ENV;
@@ -78,9 +96,111 @@ function contactForm(overrides = {}) {
   return formData;
 }
 
-async function submit(formData) {
-  return sendContactEmail({status: 'idle'}, formData, fakeDeliveryAdapter);
+async function submit(formData, overrides = {}) {
+  return sendContactEmail(
+    {status: 'idle'},
+    formData,
+    {
+      abuse: overrides.abuse ?? fakeAbuseAdapter,
+      deliver: overrides.deliver ?? fakeDeliveryAdapter,
+    }
+  );
 }
+
+function createFixedWindowAbuseAdapter(now) {
+  let activeWindow;
+  let count = 0;
+
+  return () => {
+    const window = Math.floor(
+      now() / (CONTACT_RATE_LIMIT_WINDOW_SECONDS * 1000)
+    );
+    if (window !== activeWindow) {
+      activeWindow = window;
+      count = 0;
+    }
+
+    // Mutate before returning the promise so concurrent calls allocate atomically in the fake.
+    count += 1;
+    return Promise.resolve(count > CONTACT_RATE_LIMIT ? 'limited' : 'allowed');
+  };
+}
+
+describe('contact abuse policy', () => {
+  it('matches the active programmatic WAF policy', () => {
+    assert.equal(CONTACT_RATE_LIMIT_ID, 'contact-submit');
+    assert.equal(CONTACT_RATE_LIMIT, 5);
+    assert.equal(CONTACT_RATE_LIMIT_WINDOW_SECONDS, 600);
+  });
+
+  it('normalizes allowed, limited, missing, and blocked WAF results', () => {
+    assert.equal(
+      normalizeContactRateLimitResult({rateLimited: false}),
+      'allowed'
+    );
+    assert.equal(
+      normalizeContactRateLimitResult({rateLimited: true}),
+      'limited'
+    );
+    assert.equal(
+      normalizeContactRateLimitResult({rateLimited: false, error: 'not-found'}),
+      'unavailable'
+    );
+    assert.equal(
+      normalizeContactRateLimitResult({rateLimited: true, error: 'blocked'}),
+      'unavailable'
+    );
+  });
+
+  it('allows attempts one through five and limits the sixth', async () => {
+    const abuse = createFixedWindowAbuseAdapter(() => 0);
+    const states = [];
+
+    for (let attempt = 0; attempt < CONTACT_RATE_LIMIT + 1; attempt += 1) {
+      states.push(await submit(contactForm(), {abuse}));
+    }
+
+    assert.deepEqual(
+      states.map((state) => state.outcome.kind),
+      ['success', 'success', 'success', 'success', 'success', 'limited']
+    );
+    assert.equal(deliveries.length, CONTACT_RATE_LIMIT);
+  });
+
+  it('accepts a new attempt at the exact fixed-window boundary', async () => {
+    let now = 0;
+    const abuse = createFixedWindowAbuseAdapter(() => now);
+
+    for (let attempt = 0; attempt < CONTACT_RATE_LIMIT; attempt += 1) {
+      assert.equal((await submit(contactForm(), {abuse})).outcome.kind, 'success');
+    }
+    assert.equal((await submit(contactForm(), {abuse})).outcome.kind, 'limited');
+
+    now = CONTACT_RATE_LIMIT_WINDOW_SECONDS * 1000;
+
+    assert.equal((await submit(contactForm(), {abuse})).outcome.kind, 'success');
+    assert.equal(deliveries.length, CONTACT_RATE_LIMIT + 1);
+  });
+
+  it('allocates exactly five concurrent attempts before suppressing delivery', async () => {
+    const abuse = createFixedWindowAbuseAdapter(() => 0);
+    const states = await Promise.all(
+      Array.from({length: CONTACT_RATE_LIMIT + 7}, () =>
+        submit(contactForm(), {abuse})
+      )
+    );
+
+    assert.equal(
+      states.filter((state) => state.outcome.kind === 'success').length,
+      CONTACT_RATE_LIMIT
+    );
+    assert.equal(
+      states.filter((state) => state.outcome.kind === 'limited').length,
+      7
+    );
+    assert.equal(deliveries.length, CONTACT_RATE_LIMIT);
+  });
+});
 
 describe('contact Server Action delivery', () => {
   it('requires the exact per-run request marker for the browser harness', () => {
@@ -101,9 +221,32 @@ describe('contact Server Action delivery', () => {
       }),
       true
     );
+    assert.equal(
+      resolveBrowserHarnessMode({...harness, requestToken: null}),
+      'unverified'
+    );
+    assert.equal(
+      resolveBrowserHarnessMode({...harness, requestToken: 'wrong-token'}),
+      'unverified'
+    );
+    assert.equal(
+      resolveBrowserHarnessMode({
+        ...harness,
+        requestToken: 'random-per-run-token',
+      }),
+      'verified'
+    );
+    assert.equal(
+      resolveBrowserHarnessMode({
+        enabled: undefined,
+        expectedToken: undefined,
+        requestToken: null,
+      }),
+      'production'
+    );
   });
 
-  it('fails closed in self-hosted production without the browser request marker', async () => {
+  it('fails closed without I/O when browser harness headers are unavailable', async () => {
     process.env.NODE_ENV = 'production';
     process.env.PLAYWRIGHT_TEST = '1';
     process.env.PLAYWRIGHT_TEST_TOKEN = 'random-per-run-token';
@@ -114,11 +257,12 @@ describe('contact Server Action delivery', () => {
     assert.deepEqual(state, {
       status: 'error',
       messageKey: 'contact.form.genericError',
-      outcome: {kind: 'delivery_error', service: 'ai'},
+      outcome: {kind: 'abuse_control_error', service: 'ai'},
     });
+    assert.doesNotMatch(JSON.stringify(state), /WAF|Vercel|IP|rule|counter/i);
   });
 
-  it('normalizes valid data, delivers through the action binding, and returns success', async () => {
+  it('allows the first valid attempt, delivers once, and returns success', async () => {
     const state = await submit(contactForm());
 
     assert.deepEqual(state, {
@@ -127,6 +271,7 @@ describe('contact Server Action delivery', () => {
       messageKey: 'contact.form.success',
       outcome: {kind: 'success', service: 'ai'},
     });
+    assert.equal(abuseCalls, 1);
     assert.deepEqual(deliveries, [
       {
         payload: {
@@ -147,8 +292,57 @@ describe('contact Server Action delivery', () => {
     ]);
   });
 
-  it('does not deliver invalid data and preserves its validation outcome', async () => {
-    const state = await submit(contactForm({name: 'A', email: 'invalid', message: 'short'}));
+  it('suppresses delivery for a limited attempt without exposing diagnostics', async () => {
+    abuseBehavior = 'limited';
+
+    const state = await submit(contactForm());
+
+    assert.deepEqual(state, {
+      status: 'error',
+      messageKey: 'contact.form.rateLimitError',
+      outcome: {kind: 'limited', service: 'ai'},
+    });
+    assert.doesNotMatch(
+      JSON.stringify(state),
+      /contact-submit|Vercel|IP|count|remaining|reset|600|\b5\b/i
+    );
+    assert.equal(abuseCalls, 1);
+    assert.equal(deliveries.length, 0);
+  });
+
+  it('fails closed when abuse control is unavailable', async () => {
+    abuseBehavior = 'unavailable';
+
+    const state = await submit(contactForm());
+
+    assert.deepEqual(state, {
+      status: 'error',
+      messageKey: 'contact.form.genericError',
+      outcome: {kind: 'abuse_control_error', service: 'ai'},
+    });
+    assert.equal(abuseCalls, 1);
+    assert.equal(deliveries.length, 0);
+  });
+
+  it('normalizes thrown abuse errors and suppresses delivery', async () => {
+    abuseBehavior = 'throw';
+
+    const state = await submit(contactForm());
+
+    assert.deepEqual(state, {
+      status: 'error',
+      messageKey: 'contact.form.genericError',
+      outcome: {kind: 'abuse_control_error', service: 'ai'},
+    });
+    assert.doesNotMatch(JSON.stringify(state), /WAF|diagnostic|unavailable/i);
+    assert.equal(abuseCalls, 1);
+    assert.equal(deliveries.length, 0);
+  });
+
+  it('bypasses abuse control and delivery for invalid data', async () => {
+    const state = await submit(
+      contactForm({name: 'A', email: 'invalid', message: 'short'})
+    );
 
     assert.deepEqual(state, {
       status: 'error',
@@ -171,20 +365,22 @@ describe('contact Server Action delivery', () => {
         },
       },
     });
+    assert.equal(abuseCalls, 0);
     assert.equal(deliveries.length, 0);
   });
 
-  it('does not deliver honeypot data and preserves its silent outcome', async () => {
+  it('bypasses abuse control and delivery for honeypot data', async () => {
     const state = await submit(contactForm({company: 'robot-company'}));
 
     assert.deepEqual(state, {
       status: 'idle',
       outcome: {kind: 'spam', service: 'ai'},
     });
+    assert.equal(abuseCalls, 0);
     assert.equal(deliveries.length, 0);
   });
 
-  it('normalizes missing delivery configuration without leaking config diagnostics', async () => {
+  it('consumes an allowed decision before resolving delivery configuration', async () => {
     delete process.env.RESEND_API_KEY;
 
     const state = await submit(contactForm());
@@ -195,6 +391,7 @@ describe('contact Server Action delivery', () => {
       outcome: {kind: 'delivery_error', service: 'ai'},
     });
     assert.doesNotMatch(JSON.stringify(state), /RESEND|missing|api.?key/i);
+    assert.equal(abuseCalls, 1);
     assert.equal(deliveries.length, 0);
   });
 
@@ -209,6 +406,7 @@ describe('contact Server Action delivery', () => {
       outcome: {kind: 'delivery_error', service: 'ai'},
     });
     assert.doesNotMatch(JSON.stringify(state), /provider|invalid sender|resend/i);
+    assert.equal(abuseCalls, 1);
     assert.equal(deliveries.length, 1);
   });
 
@@ -223,6 +421,7 @@ describe('contact Server Action delivery', () => {
       outcome: {kind: 'delivery_error', service: 'ai'},
     });
     assert.doesNotMatch(JSON.stringify(state), /network|connection reset|resend/i);
+    assert.equal(abuseCalls, 1);
     assert.equal(deliveries.length, 1);
   });
 });
