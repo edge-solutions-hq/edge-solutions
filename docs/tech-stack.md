@@ -84,6 +84,9 @@ Active deployment state:
 - `web/src/lib/analytics/consent.ts` owns the persisted opt-in policy. Google and optional Vercel measurement runtimes load only after acceptance, and the conversion transport checks the same policy synchronously.
 - `web/src/lib/runtime-config.ts` adds contact delivery defaults.
 - `web/src/lib/contact/abuse.ts` owns the active `contact-submit` policy: five valid attempts per trusted client IP in one 600-second fixed window. The WAF rule is already active; do not modify Vercel configuration when deploying application changes.
+- A limited attempt returns the localized neutral retry-later form error, stops before Resend, emits no success conversion, and exposes no IP, count, rule, provider, or reset diagnostics.
+- The logical counter and storage lifetime is one 600-second fixed window. The repository stores no client IP or counter, and makes no claim about Vercel's undocumented physical deletion timing.
+- Abuse control fails closed for a missing WAF rule or result, a blocked or unexpected response, a thrown or network failure, or unavailable trusted request context (including unreadable headers). Each case returns the generic safe form error as internal `abuse_control_error` and suppresses delivery before Resend.
 - The managed counter is regional, so contact function execution must remain restricted to the single `iad1` region with zero-config failover disabled. Changing that deployment topology requires re-evaluating the one-policy guarantee.
 - `web/scripts/seo-source-facts.mjs` keeps SEO script facts aligned with app routing and service slugs.
 - `web/tests/http-contracts.contract.mjs` builds through `test:http`, starts the production server on an isolated localhost port, and verifies routing, status, header, and metadata endpoint contracts.
