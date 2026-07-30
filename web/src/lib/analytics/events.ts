@@ -276,6 +276,11 @@ export function buildContactFormOutcomePayload({
     outcome.kind === 'validation_error'
       ? Object.values(outcome.fieldErrors).filter(Boolean).length
       : undefined;
+  const errorType = outcome.kind === 'validation_error'
+    ? 'validation'
+    : outcome.kind === 'limited'
+      ? 'limited'
+      : 'delivery';
 
   return {
     eventName: analyticsEvents.contactFormError,
@@ -283,7 +288,7 @@ export function buildContactFormOutcomePayload({
       page_path: pagePath,
       service: service as ContactOfferValue | string | undefined,
       submit_attempt: submitAttempt,
-      error_type: outcome.kind === 'validation_error' ? 'validation' : 'delivery',
+      error_type: errorType,
       error_field_count: fieldErrorCount,
     },
   };

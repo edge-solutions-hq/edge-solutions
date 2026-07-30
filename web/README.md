@@ -35,6 +35,18 @@ pnpm run check:analytics-env:prod
 
 For event names and parameters, follow `../docs/analytics/conversion-event-taxonomy.md`.
 
+## Contact Abuse Protection
+
+The deployed contact action uses the active Vercel programmatic WAF Rate Limit ID `contact-submit`. The rule uses Vercel's trusted default client-IP key (`x-real-ip`); application code does not accept or construct a rate-limit key. It allows five valid contact attempts per IP in each fixed 600-second window.
+
+Honeypot classification and field validation run first and do not consume quota. Each valid attempt then receives exactly one atomic managed WAF decision before Resend configuration or email delivery is accessed. Allowed attempts remain consumed if later delivery setup or Resend fails; there is no quota refund.
+
+Limited attempts receive a neutral localized retry-later response. A missing rule, absent trusted IP, blocked or unexpected WAF response, or thrown request fails closed with the generic safe form error. Neither path calls Resend or exposes the IP, count, allowance, reset time, rule/provider details, region, or stack diagnostics.
+
+The application's logical counter lifetime is the 600-second window. The repository stores no client IP or counter, adds no application credential or datastore, and makes no claim about Vercel's physical record-deletion timing. The active managed counter is regional, so production function execution must remain pinned only to `iad1` with zero-config failover disabled. The WAF rule is already published on the Hobby project; deployment of this code requires no Vercel configuration change.
+
+The private Playwright browser harness preserves test isolation: a verified per-run marker selects always-allow abuse and successful delivery adapters with no WAF or Resend I/O. Missing, incorrect, or unreadable harness markers fail closed with no provider I/O.
+
 ## Quality Gates
 
 After installing dependencies, install Playwright's Chromium binary once before running the browser tests or full gate:

@@ -119,13 +119,14 @@ When a known AI referrer is detected, `page_referrer` is reduced to the referrer
 - `page_path` (string): current path
 - `service` (string, optional): submitted service value (`ai` | `realtime` | `unsure`)
 - `submit_attempt` (number): submit attempt index linked to the matching `contact_form_submit`
-- `error_type` (string): `validation` | `delivery`
+- `error_type` (string): `validation` | `limited` | `delivery`
 - `error_field_count` (number, optional): count of invalid fields when `error_type=validation`
 
 **Emission rule:**
 
 - `contact_form_success` / `contact_form_error` fire once per captured submit attempt, including consecutive attempts with the same final status.
 - Browser-blocked native invalid attempts are counted once per user attempt and emit `contact_form_submit` followed by `contact_form_error` with `error_type=validation`, without sending field values.
+- Contact rate-limit decisions emit `error_type=limited`. Abuse-control outages remain internally distinct from email-delivery failures but use the stable `delivery` analytics bucket; neither outcome emits success or provider diagnostics.
 - `submit_attempt` can be used to join `contact_form_submit` with the final outcome event for that attempt.
 
 ---

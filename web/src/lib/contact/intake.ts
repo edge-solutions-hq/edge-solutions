@@ -22,6 +22,7 @@ export type {ContactOfferValue};
 export type ContactActionMessageKey =
   | 'contact.form.success'
   | 'contact.form.validationError'
+  | 'contact.form.rateLimitError'
   | 'contact.form.configError'
   | 'contact.form.genericError';
 
@@ -43,6 +44,8 @@ export type ContactFieldErrors = Partial<Record<keyof ContactFields, ContactFiel
 export type ContactAttemptOutcome =
   | {kind: 'success'; service: ContactOfferValue}
   | {kind: 'validation_error'; service?: string; fieldErrors: ContactFieldErrors}
+  | {kind: 'limited'; service: ContactOfferValue}
+  | {kind: 'abuse_control_error'; service: ContactOfferValue}
   | {kind: 'delivery_error'; service: ContactOfferValue}
   | {kind: 'spam'; service?: string};
 

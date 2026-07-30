@@ -169,6 +169,7 @@
       "submit": "Envoyer",
       "success": "Message envoyé. Je reviens vers vous rapidement.",
       "validationError": "Certains champs sont invalides.",
+      "rateLimitError": "Trop de tentatives. Réessayez plus tard.",
       "configError": "Le formulaire n'est pas encore configuré pour l'envoi email.",
       "genericError": "Impossible d'envoyer votre message. Réessayez dans un instant.",
       "fieldErrors": {

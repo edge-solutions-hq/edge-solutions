@@ -1,5 +1,6 @@
 import {site} from '@/lib/site';
 import {getContactDeliveryConfig} from '@/lib/runtime-config';
+import type {ContactAbuseAdapter} from '@/lib/contact/abuse';
 import {
   parseContactFields,
   readContactFormData,
@@ -69,12 +70,13 @@ export function buildContactEmailPayload({
 
 type SubmitContactAttemptOptions = {
   env?: Record<string, string | undefined>;
+  abuse: ContactAbuseAdapter;
   deliver: ContactDeliveryAdapter;
 };
 
 export async function submitContactAttempt(
   formData: FormData,
-  {env = process.env, deliver}: SubmitContactAttemptOptions
+  {env = process.env, abuse, deliver}: SubmitContactAttemptOptions
 ): Promise<ContactActionState> {
   const parsed = parseContactFields(readContactFormData(formData));
   if (!parsed.ok) {
@@ -101,6 +103,33 @@ export async function submitContactAttempt(
   }
 
   const {service} = parsed.fields;
+  let abuseDecision: Awaited<ReturnType<ContactAbuseAdapter>>;
+  try {
+    abuseDecision = await abuse();
+  } catch {
+    return {
+      status: 'error',
+      messageKey: 'contact.form.genericError',
+      outcome: {kind: 'abuse_control_error', service},
+    };
+  }
+
+  if (abuseDecision === 'limited') {
+    return {
+      status: 'error',
+      messageKey: 'contact.form.rateLimitError',
+      outcome: {kind: 'limited', service},
+    };
+  }
+
+  if (abuseDecision === 'unavailable') {
+    return {
+      status: 'error',
+      messageKey: 'contact.form.genericError',
+      outcome: {kind: 'abuse_control_error', service},
+    };
+  }
+
   const config = getContactDeliveryConfig(env);
   if (!config.ready) {
     return deliveryErrorState(service, 'contact.form.configError');

@@ -24,6 +24,7 @@ Keep route files and UI surfaces thin.
 | Service evidence registry | `web/src/lib/content/service-evidence-registry.ts` | Evidence module expected by each offer track, including visual asset and evidence counts. |
 | Asset authority | `web/src/lib/content/asset-authority.ts` | Approved source asset provenance, usage scopes, and public path authority. |
 | Contact intake | `web/src/lib/contact/options.ts` and `web/src/lib/contact/intake.ts` | Lightweight offer options and service-target helpers for client code; validation, spam classification, delivery outcome vocabulary, localized errors, and contact form model in intake. |
+| Contact abuse control | `web/src/lib/contact/abuse.ts` | Programmatic WAF policy constants, normalized allow/limit/unavailable decisions, and the abuse-adapter seam used before delivery. |
 | Contact modal | `web/src/components/contact/ContactModalContext.tsx` and `web/src/app/[locale]/contact/ContactModalProvider.tsx` | Modal-first contact CTA behavior, service preselection, focus handling, and page fallback preservation. |
 | Contact attempt tracking | `web/src/lib/contact/contact-attempt-tracker.ts` | Submit-attempt counting and one-outcome-per-attempt completion rules. |
 | Contact delivery | `web/src/lib/contact/delivery.ts` | Contact workflow after intake, email payload shape, success/error state, and delivery adapter seam. |

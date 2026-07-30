@@ -117,7 +117,7 @@ describe('analytics event payload policy', () => {
 
     assert.deepEqual(
       buildContactFormOutcomePayload({
-        outcome: {kind: 'delivery_error', service: 'ai'},
+        outcome: {kind: 'limited', service: 'realtime'},
         submitAttempt: 5,
         pagePath: '/fr/contact',
       }),
@@ -125,8 +125,44 @@ describe('analytics event payload policy', () => {
         eventName: 'contact_form_error',
         params: {
           page_path: '/fr/contact',
-          service: 'ai',
+          service: 'realtime',
           submit_attempt: 5,
+          error_type: 'limited',
+          error_field_count: undefined,
+        },
+      }
+    );
+
+    assert.deepEqual(
+      buildContactFormOutcomePayload({
+        outcome: {kind: 'abuse_control_error', service: 'unsure'},
+        submitAttempt: 6,
+        pagePath: '/fr/contact',
+      }),
+      {
+        eventName: 'contact_form_error',
+        params: {
+          page_path: '/fr/contact',
+          service: 'unsure',
+          submit_attempt: 6,
+          error_type: 'delivery',
+          error_field_count: undefined,
+        },
+      }
+    );
+
+    assert.deepEqual(
+      buildContactFormOutcomePayload({
+        outcome: {kind: 'delivery_error', service: 'ai'},
+        submitAttempt: 7,
+        pagePath: '/fr/contact',
+      }),
+      {
+        eventName: 'contact_form_error',
+        params: {
+          page_path: '/fr/contact',
+          service: 'ai',
+          submit_attempt: 7,
           error_type: 'delivery',
           error_field_count: undefined,
         },
@@ -136,7 +172,7 @@ describe('analytics event payload policy', () => {
     assert.equal(
       buildContactFormOutcomePayload({
         outcome: {kind: 'spam', service: 'ai'},
-        submitAttempt: 6,
+        submitAttempt: 8,
         pagePath: '/fr/contact',
       }),
       undefined

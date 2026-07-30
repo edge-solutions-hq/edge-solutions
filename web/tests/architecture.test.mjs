@@ -394,7 +394,12 @@ describe('contact intake and analytics taxonomy seams', () => {
   });
 
   it('keeps contact delivery and runtime config behind named seams', () => {
-    assert.match(read('src/app/[locale]/contact/actions.ts'), /submitContactAttempt/);
+    const actionSource = read('src/app/[locale]/contact/actions.ts');
+
+    assert.match(actionSource, /submitContactAttempt/);
+    assert.match(actionSource, /checkRateLimit\(CONTACT_RATE_LIMIT_ID, \{headers: requestHeaders\}\)/);
+    assert.doesNotMatch(actionSource, /rateLimitKey/);
+    assert.match(read('src/lib/contact/abuse.ts'), /ContactAbuseAdapter/);
     assert.match(read('src/lib/contact/delivery.ts'), /ContactDeliveryAdapter/);
     assert.match(read('src/lib/contact/delivery.ts'), /buildContactEmailPayload/);
     assert.match(read('src/lib/contact/delivery.ts'), /getContactDeliveryConfig/);
