@@ -46,7 +46,7 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 
 - every pull request, including Dependabot pull requests;
 - merge-queue `checks_requested` events; and
-- every commit pushed to `main`, so post-merge drift remains visible.
+- the tip commit of every push to `main`, so post-merge drift remains visible.
 
 Pull-request concurrency is scoped by event and pull-request number, allowing a newer update to cancel an obsolete run for the same pull request. Merge-group and push concurrency is scoped by event and commit SHA, so unrelated queue candidates or `main` commits cannot cancel each other's validation. The workflow grants only `contents: read`, does not persist checkout credentials, and pins actions to immutable commit revisions.
 
