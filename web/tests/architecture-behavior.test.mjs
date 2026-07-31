@@ -121,6 +121,14 @@ describe('tracked link target behavior', () => {
 describe('service scroll-depth behavior', () => {
   it('calculates current scroll percent', () => {
     assert.equal(
+      serviceScrollDepth.calculateScrollDepthPercent({scrollTop: -50, scrollHeight: 1000, viewportHeight: 500}),
+      0
+    );
+    assert.equal(
+      serviceScrollDepth.calculateScrollDepthPercent({scrollTop: 0, scrollHeight: 1000, viewportHeight: 500}),
+      0
+    );
+    assert.equal(
       serviceScrollDepth.calculateScrollDepthPercent({scrollTop: 250, scrollHeight: 1000, viewportHeight: 500}),
       50
     );
