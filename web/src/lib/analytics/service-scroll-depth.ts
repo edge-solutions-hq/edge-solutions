@@ -13,7 +13,7 @@ export function calculateScrollDepthPercent({
     return 100;
   }
 
-  return Math.min(100, Math.round((scrollTop / scrollableHeight) * 100));
+  return Math.max(0, Math.min(100, Math.round((scrollTop / scrollableHeight) * 100)));
 }
 
 export function getUnfiredScrollDepthThresholds<T extends number>({
