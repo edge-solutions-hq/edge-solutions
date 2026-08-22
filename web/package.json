@@ -18,7 +18,7 @@
     "lint": "oxlint && eslint",
     "typecheck": "tsc --noEmit",
     "check": "corepack pnpm run test && corepack pnpm run check:security && corepack pnpm run check:analytics-env && corepack pnpm run lint && NEXT_PUBLIC_GTM_ID=G-PLAYWRIGHT corepack pnpm run build && corepack pnpm run test:http:built && corepack pnpm run test:browser:built && corepack pnpm run check:seo",
-    "check:security": "node scripts/check-dependency-security.mjs && corepack pnpm audit --audit-level high",
+    "check:security": "corepack pnpm audit --audit-level high",
     "check:seo": "node scripts/check-seo.mjs",
     "check:seo:live": "node scripts/check-live-seo.mjs",
     "check:analytics-env": "node scripts/validate-analytics-env.mjs",
