@@ -41,7 +41,7 @@
     "react-hook-form": "^7.69.0",
     "remark-gfm": "^4.0.1",
     "resend": "^6.18.1",
-    "tailwind-merge": "^3.4.0",
+    "tailwind-merge": "^3.6.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
@@ -60,7 +60,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.0.1",
     "globals": "^17.9.0",
-    "oxlint": "^1.74.0",
+    "oxlint": "^1.79.0",
     "tailwindcss": "^4",
     "typescript": "^7.0.2"
   }
