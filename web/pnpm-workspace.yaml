@@ -11,9 +11,3 @@ allowBuilds:
   '@swc/core': true
   sharp: true
   unrs-resolver: true
-
-# braces has no patched release (latest is 3.0.3); it is only reached at lint time
-# through @next/eslint-plugin-next > fast-glob > micromatch. Remove once >=3.0.4 ships.
-auditConfig:
-  ignoreGhsas:
-    - GHSA-vfj7-8cjw-p6xm
