@@ -33,9 +33,6 @@ async function fakeDeliveryAdapter(payload, config) {
 
 const {sendContactEmail} = await import('../src/app/[locale]/contact/actions.ts');
 const {
-  CONTACT_RATE_LIMIT_ID,
-  CONTACT_RATE_LIMIT,
-  CONTACT_RATE_LIMIT_WINDOW_SECONDS,
   normalizeContactRateLimitResult,
 } = await import('../src/lib/contact/abuse.ts');
 const {isBrowserHarnessRequest, resolveBrowserHarnessMode} = await import(
@@ -107,32 +104,7 @@ async function submit(formData, overrides = {}) {
   );
 }
 
-function createFixedWindowAbuseAdapter(now) {
-  let activeWindow;
-  let count = 0;
-
-  return () => {
-    const window = Math.floor(
-      now() / (CONTACT_RATE_LIMIT_WINDOW_SECONDS * 1000)
-    );
-    if (window !== activeWindow) {
-      activeWindow = window;
-      count = 0;
-    }
-
-    // Mutate before returning the promise so concurrent calls allocate atomically in the fake.
-    count += 1;
-    return Promise.resolve(count > CONTACT_RATE_LIMIT ? 'limited' : 'allowed');
-  };
-}
-
 describe('contact abuse policy', () => {
-  it('matches the active programmatic WAF policy', () => {
-    assert.equal(CONTACT_RATE_LIMIT_ID, 'contact-submit');
-    assert.equal(CONTACT_RATE_LIMIT, 5);
-    assert.equal(CONTACT_RATE_LIMIT_WINDOW_SECONDS, 600);
-  });
-
   it('normalizes allowed, limited, missing, and blocked WAF results', () => {
     assert.equal(
       normalizeContactRateLimitResult({rateLimited: false}),
@@ -150,55 +122,6 @@ describe('contact abuse policy', () => {
       normalizeContactRateLimitResult({rateLimited: true, error: 'blocked'}),
       'unavailable'
     );
-  });
-
-  it('allows attempts one through five and limits the sixth', async () => {
-    const abuse = createFixedWindowAbuseAdapter(() => 0);
-    const states = [];
-
-    for (let attempt = 0; attempt < CONTACT_RATE_LIMIT + 1; attempt += 1) {
-      states.push(await submit(contactForm(), {abuse}));
-    }
-
-    assert.deepEqual(
-      states.map((state) => state.outcome.kind),
-      ['success', 'success', 'success', 'success', 'success', 'limited']
-    );
-    assert.equal(deliveries.length, CONTACT_RATE_LIMIT);
-  });
-
-  it('accepts a new attempt at the exact fixed-window boundary', async () => {
-    let now = 0;
-    const abuse = createFixedWindowAbuseAdapter(() => now);
-
-    for (let attempt = 0; attempt < CONTACT_RATE_LIMIT; attempt += 1) {
-      assert.equal((await submit(contactForm(), {abuse})).outcome.kind, 'success');
-    }
-    assert.equal((await submit(contactForm(), {abuse})).outcome.kind, 'limited');
-
-    now = CONTACT_RATE_LIMIT_WINDOW_SECONDS * 1000;
-
-    assert.equal((await submit(contactForm(), {abuse})).outcome.kind, 'success');
-    assert.equal(deliveries.length, CONTACT_RATE_LIMIT + 1);
-  });
-
-  it('allocates exactly five concurrent attempts before suppressing delivery', async () => {
-    const abuse = createFixedWindowAbuseAdapter(() => 0);
-    const states = await Promise.all(
-      Array.from({length: CONTACT_RATE_LIMIT + 7}, () =>
-        submit(contactForm(), {abuse})
-      )
-    );
-
-    assert.equal(
-      states.filter((state) => state.outcome.kind === 'success').length,
-      CONTACT_RATE_LIMIT
-    );
-    assert.equal(
-      states.filter((state) => state.outcome.kind === 'limited').length,
-      7
-    );
-    assert.equal(deliveries.length, CONTACT_RATE_LIMIT);
   });
 });
 

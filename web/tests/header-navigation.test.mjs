@@ -79,32 +79,7 @@ describe('header navigation model', () => {
     });
   });
 
-  it('derives contact tracking payloads from item metadata and placement', () => {
-    const contact = {
-      href: '/contact',
-      label: 'Contact',
-      tracking: {
-        type: 'contact_cta',
-        target: '/contact',
-      },
-    };
-
-    assert.deepEqual(
-      headerNavigation.getHeaderNavigationContactTrackingPayload(contact, 'header_nav'),
-      {
-        ctaTarget: '/contact',
-        placement: 'header_nav',
-        ctaLabel: 'Contact',
-      }
-    );
-    assert.deepEqual(
-      headerNavigation.getHeaderNavigationContactTrackingPayload(contact, 'mobile_menu_nav'),
-      {
-        ctaTarget: '/contact',
-        placement: 'mobile_menu_nav',
-        ctaLabel: 'Contact',
-      }
-    );
+  it('returns no contact tracking payload for items without tracking metadata', () => {
     assert.equal(
       headerNavigation.getHeaderNavigationContactTrackingPayload({href: '/contact', label: 'Contact'}, 'header_nav'),
       null

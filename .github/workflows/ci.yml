@@ -44,7 +44,7 @@ jobs:
         run: corepack pnpm install --frozen-lockfile
 
       - name: Install Chromium
-        run: corepack pnpm exec playwright install --with-deps chromium
+        run: corepack pnpm exec playwright install --with-deps --only-shell chromium
 
       - name: Run full gate
         run: corepack pnpm run check

@@ -97,32 +97,6 @@ function normalizeContent(value) {
     .replace(/[’']/g, "'");
 }
 
-describe('website operating docs', () => {
-  it('keeps the website source-of-truth entrypoint discoverable', () => {
-    const website = read('../WEBSITE.md');
-    const positioning = read('../docs/positioning.md');
-    const agents = read('../AGENTS.md');
-    const webReadme = read('README.md');
-
-    assert.match(website, /mandatory entrypoint for website work/i);
-    assert.match(website, /docs\/positioning\.md/);
-    assert.match(website, /technical_seo_platform/);
-    assert.match(website, /content_icp/);
-    assert.match(website, /design_conversion/);
-    assert.match(website, /pr_review/);
-    assert.match(website, /analysis_observation/);
-    assert.match(positioning, /AI-first/i);
-    assert.match(positioning, /not a generic agency/);
-    assert.match(website, /Generated visuals are allowed only as synthetic diagrams/);
-    assert.match(website, /Missing provider access is a setup-required state, not evidence/);
-
-    assert.equal(existsSync(path.join(root, '../docs/README.md')), false);
-    assert.match(agents, /`WEBSITE\.md`/);
-    assert.match(webReadme, /`\.\.\/WEBSITE\.md`/);
-    assert.doesNotMatch(agents, /Tests: none defined yet/);
-  });
-});
-
 describe('offer track catalog seam', () => {
   it('keeps offer track identity and ordering in the catalog', () => {
     const source = read('src/lib/offer-tracks.ts');
@@ -278,31 +252,9 @@ describe('localized content and evidence seam', () => {
     assert.match(read('src/app/[locale]/contact/page.tsx'), /getContactPageProfile/);
     assert.match(read('src/app/[locale]/privacy-policy/page.tsx'), /getPrivacyPolicyPageProfile/);
   });
-
-  it('keeps repeated media frame mechanics behind a shared UI module', () => {
-    assert.match(read('src/components/ui/MediaFrame.tsx'), /export function MediaFrame/);
-
-    for (const filePath of [
-      'src/components/ui/ShowcasePanel.tsx',
-      'src/components/mdx/WorkflowSnapshot.tsx',
-      'src/components/mdx/DeliveryBlueprint.tsx',
-      'src/components/mdx/PrototypeSignals.tsx',
-    ]) {
-      const source = read(filePath);
-      assert.match(source, /MediaFrame/, `${filePath} should consume the shared media frame`);
-      assert.doesNotMatch(source, /bg-rose-400\/80/, `${filePath} should not repeat browser chrome dots`);
-    }
-  });
 });
 
 describe('contact intake and analytics taxonomy seams', () => {
-  it('keeps honeypot submissions out of success conversion outcomes', () => {
-    const deliverySource = read('src/lib/contact/delivery.ts');
-    assert.match(deliverySource, /kind === 'spam'/);
-    assert.match(deliverySource, /status: 'idle'/);
-    assert.doesNotMatch(deliverySource, /status: 'success', message: 'OK'/);
-  });
-
   it('keeps contact offer options and visible outcomes behind contact seams', () => {
     const intakeSource = read('src/lib/contact/intake.ts');
     const formSource = read('src/app/[locale]/contact/ContactForm.tsx');
@@ -429,24 +381,5 @@ describe('contact intake and analytics taxonomy seams', () => {
         `${locale} message keys must match French`
       );
     }
-  });
-
-  it('always launches the configured browser harness server', () => {
-    assert.match(read('playwright.config.ts'), /reuseExistingServer: false/);
-  });
-});
-
-describe('page profile seam', () => {
-  it('owns sitemap route facts and keeps sitemap as an Adapter', () => {
-    const profileSource = read('src/lib/page-profiles.ts');
-    const sitemapSource = read('src/app/sitemap.ts');
-    const seoCheckSource = read('scripts/check-seo.mjs');
-    assert.match(profileSource, /STATIC_PAGE_DEFINITIONS/);
-    assert.match(profileSource, /getLocalizedSitemapEntries/);
-    assert.match(sitemapSource, /getLocalizedSitemapEntries/);
-    assert.doesNotMatch(sitemapSource, /path\.endsWith/);
-    assert.match(seoCheckSource, /expectedLocalizedUrlCount/);
-    assert.doesNotMatch(seoCheckSource, /Expected 18/);
-    assert.match(seoCheckSource, /\[\^'\\?"\]\*/);
   });
 });

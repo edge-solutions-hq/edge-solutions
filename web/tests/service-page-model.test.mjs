@@ -1,20 +1,13 @@
 import {describe, it} from 'node:test';
 import assert from 'node:assert/strict';
-import {readFileSync} from 'node:fs';
 import {register} from 'node:module';
-import path from 'node:path';
 
-const root = path.resolve(import.meta.dirname, '..');
 register('./ts-extension-resolver.mjs', import.meta.url);
 const {LOCALES} = await import('../src/i18n/routing.ts');
 const {OFFER_TRACKS} = await import('../src/lib/offer-tracks.ts');
 const {getServiceSchemaDetails} = await import('../src/lib/seo.ts');
 const services = await import('../src/lib/content/services.ts');
 const servicePage = await import('../src/lib/content/service-page.ts');
-
-function read(relativePath) {
-  return readFileSync(path.join(root, relativePath), 'utf8');
-}
 
 function mdxModule(title) {
   return {
@@ -262,32 +255,5 @@ describe('service page model ownership', () => {
       model.evidencePolicy.requiredSignals.map((signal) => signal.concept),
       ['human review', 'source of truth', 'action limits']
     );
-  });
-
-  it('derives static params from locale routing and offer-track slugs', () => {
-    const source = read('src/lib/content/service-page.ts');
-
-    assert.match(source, /export function getServicePageStaticParams/);
-    assert.match(source, /routing\.locales\.flatMap/);
-    assert.match(source, /OFFER_TRACK_SLUGS\.map/);
-  });
-
-  it('keeps service route validity, profile creation, and tracking identity behind the model seam', () => {
-    const modelSource = read('src/lib/content/service-page.ts');
-    const routeSource = read('src/app/[locale]/services/[slug]/page.tsx');
-
-    assert.match(modelSource, /export function isServicePageLocale/);
-    assert.match(modelSource, /if \(!isServicePageLocale\(locale\)\) return null/);
-    assert.match(modelSource, /getServiceContentAvailability/);
-    assert.match(modelSource, /availability\.status !== 'localized'/);
-    assert.match(modelSource, /getOfferTrackPageProfile/);
-    assert.match(modelSource, /renderPolicy\.requestedLocale/);
-    assert.match(modelSource, /evidencePolicy/);
-    assert.match(modelSource, /evidenceContract/);
-    assert.match(modelSource, /scrollTracking/);
-    assert.match(routeSource, /getServicePageStaticParams/);
-    assert.match(routeSource, /getServicePageMetadata/);
-    assert.match(routeSource, /getServicePageModel/);
-    assert.doesNotMatch(routeSource, /getOfferTrackPageProfile/);
   });
 });

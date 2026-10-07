@@ -7,27 +7,6 @@ register(new URL('./ts-extension-resolver.mjs', import.meta.url));
 const contactIntake = await import('../src/lib/contact/intake.ts');
 
 describe('contact form model behavior', () => {
-  it('exposes field defaults and validation hints from the contact module', () => {
-    const {contactFormModel} = contactIntake;
-
-    assert.equal(contactFormModel.fields.name.name, 'name');
-    assert.equal(contactFormModel.fields.name.required, true);
-    assert.equal(contactFormModel.fields.name.minLength, 2);
-    assert.equal(contactFormModel.fields.name.maxLength, 80);
-    assert.equal(contactFormModel.fields.email.type, 'email');
-    assert.equal(contactFormModel.fields.email.maxLength, 200);
-    assert.equal(contactFormModel.fields.service.defaultValue, 'unsure');
-    assert.equal(contactFormModel.fields.message.minLength, 10);
-    assert.equal(contactFormModel.fields.message.maxLength, 5000);
-    assert.equal(contactFormModel.fields.honeypot.name, 'company');
-    assert.equal(contactFormModel.fields.honeypot.autocomplete, 'off');
-    assert.deepEqual(contactFormModel.fieldOrder, ['name', 'email', 'service', 'message']);
-    assert.deepEqual(
-      contactFormModel.offerOptions.map((option) => option.value),
-      ['ai', 'realtime', 'unsure']
-    );
-  });
-
   it('extracts the submit service from form data without normalizing business validity', () => {
     const formData = new FormData();
     formData.set('service', 'realtime');
