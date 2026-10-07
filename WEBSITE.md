@@ -23,7 +23,7 @@ Make the positioning in `docs/positioning.md` concrete on the website and turn q
 4. `docs/architecture.md` for active module ownership and code boundaries.
 5. `docs/analytics/conversion-event-taxonomy.md` for analytics behavior.
 6. `docs/tech-stack.md` for current stack, commands, setup notes, and runtime assumptions.
-7. Active issues, PRs, and PRDs for scoped delivery decisions.
+7. Active issues, PRs, and specs for scoped delivery decisions.
 
 Notion prompt blocks may steer scheduled automation. Stable website strategy belongs in this repo. If Notion feedback conflicts with this file or `docs/positioning.md`, escalate instead of silently rewriting strategy.
 
@@ -48,7 +48,7 @@ Website automation and reports use one lane per run:
 
 Each automation run should produce at most one PR-sized change, one PR review, one investigation, or one escalation.
 
-Strategic changes spanning multiple slices should become a PRD, issue set, or autopilot handoff.
+Strategic changes spanning multiple slices should become a spec, issue set, or autopilot handoff.
 
 ## SEO Rules
 

@@ -57,7 +57,7 @@ Node.js 24 is required by `.nvmrc`, `web/package.json`, and CI. Prefer the full 
 
 ### Issue Tracker
 
-Issues and PRDs are tracked in GitHub Issues for `Gil-1/edge-solutions`. See `docs/agents/issue-tracker.md`.
+Issues and specs are tracked in GitHub Issues for `Gil-1/edge-solutions`. See `docs/agents/issue-tracker.md`.
 
 ### Triage Labels
 
@@ -65,4 +65,4 @@ Use the default triage label vocabulary: `needs-triage`, `needs-info`, `ready-fo
 
 ### Domain Docs
 
-Use the single-context layout. Read repo docs as the domain source, and consume `CONTEXT.md` or `docs/adr/` if they are added later. See `docs/agents/domain.md`.
+Use the single-context layout. Read repo docs as the domain source, and consume `GLOSSARY.md` or `docs/adr/` if they are added later. See `docs/agents/domain.md`.
