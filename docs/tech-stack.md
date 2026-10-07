@@ -34,7 +34,7 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 - Lint: `pnpm run lint`
 - Type-check: `pnpm run typecheck`
 - Build: `pnpm run build`
-- Dependency security audit: `pnpm run check:security`
+- Dependency security audit: `pnpm run check:security` (manual; not part of the full gate, Dependabot alerts are the signal)
 - SEO check: `pnpm run check:seo`
 - Live SEO smoke: `pnpm run check:seo:live`
 - Analytics env check: `pnpm run check:analytics-env`
