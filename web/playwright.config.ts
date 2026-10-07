@@ -10,10 +10,10 @@ process.env.PLAYWRIGHT_TEST_TOKEN = browserHarnessToken;
 export default defineConfig({
   testDir: './e2e',
   outputDir: 'test-results',
-  fullyParallel: false,
+  fullyParallel: true,
   forbidOnly: Boolean(process.env.CI),
   retries: process.env.CI ? 1 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined,
   reporter: process.env.CI
     ? [['github'], ['html', {open: 'never', outputFolder: 'playwright-report'}]]
     : [['list'], ['html', {open: 'never', outputFolder: 'playwright-report'}]],
