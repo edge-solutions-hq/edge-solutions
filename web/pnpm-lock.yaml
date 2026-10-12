@@ -35,8 +35,8 @@ importers:
         specifier: ^2.0.1
         version: 2.0.1(next@16.3.6(@babel/core@7.29.7)(@playwright/test@1.62.1)(@types/node@26.6.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
       '@vercel/firewall':
-        specifier: ^1.2.5
-        version: 1.2.5
+        specifier: ^1.2.6
+        version: 1.2.6
       '@vercel/speed-insights':
         specifier: ^2.0.0
         version: 2.0.0(next@16.3.6(@babel/core@7.29.7)(@playwright/test@1.62.1)(@types/node@26.6.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)
@@ -1259,8 +1259,8 @@ packages:
       vue-router:
         optional: true
 
-  '@vercel/firewall@1.2.5':
-    resolution: {integrity: sha512-rylXD6sfUgJMtYGuILXZZPy1af2aLQbRIAQf5nr2vI84PdGNaPEu19VvMG05KOXZ2qwfwf99OsM8brO9VzN8Gg==}
+  '@vercel/firewall@1.2.6':
+    resolution: {integrity: sha512-89ybsa2rnVNdw6RI3jGOVvqUJaBj6Umm4IagC1o3PKtr/MXxBKOLek+yyUgF0csA0O5W+dzcpdIhKxVXhgVVtA==}
     engines: {node: '>= 20'}
 
   '@vercel/speed-insights@2.0.0':
@@ -3710,7 +3710,7 @@ snapshots:
       next: 16.3.6(@babel/core@7.29.7)(@playwright/test@1.62.1)(@types/node@26.6.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)
       react: 19.2.3
 
-  '@vercel/firewall@1.2.5': {}
+  '@vercel/firewall@1.2.6': {}
 
   '@vercel/speed-insights@2.0.0(next@16.3.6(@babel/core@7.29.7)(@playwright/test@1.62.1)(@types/node@26.6.4)(react-dom@19.2.3(react@19.2.3))(react@19.2.3))(react@19.2.3)':
     optionalDependencies:
