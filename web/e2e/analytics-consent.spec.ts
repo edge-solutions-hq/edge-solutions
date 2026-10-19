@@ -14,7 +14,7 @@ test('undecided visitors produce no optional load or conversion emission', async
   await expect(page.getByRole('region', {name: 'Mesures optionnelles'})).toBeVisible();
   await expectNoOptionalRuntime(page, network);
 
-  await page.getByRole('main').getByRole('link', {name: 'IA & automatisation', exact: true}).click();
+  await page.getByRole('main').getByRole('link', {name: /^IA & automatisation/}).click();
   await expect(page).toHaveURL(/\/fr\/services\/ai-automation$/);
   await expectNoOptionalRuntime(page, network);
 });
@@ -75,7 +75,7 @@ test('acceptance persists, enables configured runtimes, and withdrawal disables 
     si: typeof window.si === 'function',
   }))).toEqual({dataLayer: true, gtag: true, va: true, si: true});
 
-  await page.getByRole('main').getByRole('link', {name: 'AI systems & automation', exact: true}).click();
+  await page.getByRole('main').getByRole('link', {name: /^AI systems & automation/}).click();
   await expect.poll(() => page.evaluate(() =>
     (window.dataLayer ?? []).some((entry) => entry.event === 'service_card_click')
   )).toBe(true);
@@ -275,10 +275,7 @@ test('withdrawing in another page blocks the previously accepted page', async ({
   }));
   acceptedPageNetwork.optionalRequests.length = 0;
   await page.getByRole('button', {name: 'Close'}).click();
-  await page.getByRole('main').getByRole('link', {
-    name: 'AI systems & automation',
-    exact: true,
-  }).click();
+  await page.getByRole('main').getByRole('link', {name: /^AI systems & automation/}).click();
   await expect(page).toHaveURL(/\/en\/services\/ai-automation$/);
 
   await expect.poll(() => page.evaluate(() => ({
@@ -316,10 +313,7 @@ test('clearing storage in another page withdraws consent', async ({page, context
   const emissionsBefore = await page.evaluate(() => (
     window.dataLayer ?? []
   ).filter((entry) => entry.event === 'service_card_click').length);
-  await page.getByRole('main').getByRole('link', {
-    name: 'AI systems & automation',
-    exact: true,
-  }).click();
+  await page.getByRole('main').getByRole('link', {name: /^AI systems & automation/}).click();
   await expect(page).toHaveURL(/\/en\/services\/ai-automation$/);
   await expect.poll(() => page.evaluate(() => (
     window.dataLayer ?? []
@@ -339,7 +333,7 @@ test('rejection persists while essential navigation and contact remain available
 
   await page.reload();
   await expect(page.getByRole('region', {name: 'Optionele meting'})).toHaveCount(0);
-  await page.getByRole('main').getByRole('link', {name: 'AI-systemen & automatisatie', exact: true}).click();
+  await page.getByRole('main').getByRole('link', {name: /^AI-systemen & automatisatie/}).click();
   await expect(page).toHaveURL(/\/nl\/services\/ai-automation$/);
   await page.locator('header').getByRole('link', {name: 'Contacteer mij', exact: true}).click();
   await expect(page.getByRole('dialog')).toBeVisible();

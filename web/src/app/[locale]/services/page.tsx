@@ -93,7 +93,7 @@ export default async function ServicesIndexPage({params}: Props) {
           <TrackedLink
             key={service.slug}
             href={service.href}
-            aria-label={service.label}
+            trackingLabel={service.label}
             offerTrackSlug={service.slug}
             trackingPlacement="services_index_grid"
             className={servicesOfferCardClass(service)}

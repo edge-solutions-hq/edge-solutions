@@ -11,7 +11,7 @@ test('homepage service journey preselects contact and submits through the server
   const network = await guardBrowserNetwork(page);
 
   await page.goto('/fr');
-  await page.getByRole('main').getByRole('link', {name: 'IA & automatisation', exact: true}).click();
+  await page.getByRole('main').getByRole('link', {name: /^IA & automatisation/}).click();
   await expect(page).toHaveURL(/\/fr\/services\/ai-automation$/);
 
   await page.getByRole('main').getByRole('link', {name: 'Me contacter', exact: true}).click();

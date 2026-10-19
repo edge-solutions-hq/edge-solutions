@@ -70,7 +70,7 @@ When a known AI referrer is detected, `page_referrer` is reduced to the referrer
 - `placement` (string): `home_services_grid` | `services_index_grid`
 - `page_path` (string): current path where click happened
 - `link_target` (string): target route (preserves query string/hash when present)
-- `link_label` (string, optional): readable card/link label (from `aria-label` or visible text)
+- `link_label` (string, optional): readable card/link label (from the `trackingLabel` prop, `aria-label`, or visible text)
 
 ---
 
