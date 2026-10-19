@@ -160,7 +160,7 @@ export default async function HomePage({params}: Props) {
               <FadeIn key={service.slug} className={homeOfferGridItemClass()}>
                 <TrackedLink
                   href={service.href}
-                  aria-label={service.label}
+                  trackingLabel={service.label}
                   offerTrackSlug={service.slug}
                   trackingPlacement="home_services_grid"
                   className={homeOfferCardFrame()}

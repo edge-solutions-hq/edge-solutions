@@ -10,11 +10,13 @@ import {hrefToTrackedTarget} from '@/lib/navigation/tracked-link-target';
 type TrackedLinkProps = React.ComponentProps<typeof Link> & {
   offerTrackSlug: OfferTrackSlug;
   trackingPlacement: OfferTrackClickPlacement;
+  trackingLabel?: string;
 };
 
 export function TrackedLink({
   offerTrackSlug,
   trackingPlacement,
+  trackingLabel,
   onClick,
   href,
   ...props
@@ -32,6 +34,7 @@ export function TrackedLink({
         }
 
         const linkLabel =
+          trackingLabel?.trim() ||
           event.currentTarget.getAttribute('aria-label')?.trim() ||
           event.currentTarget.textContent?.trim();
 
