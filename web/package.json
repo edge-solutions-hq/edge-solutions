@@ -25,7 +25,7 @@
     "check:analytics-env:prod": "node scripts/validate-analytics-env.mjs --strict"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.9.1",
+    "@hookform/resolvers": "^6.0.0",
     "@mdx-js/loader": "^3.1.1",
     "@mdx-js/react": "^3.1.1",
     "@next/mdx": "^16.4.2",
