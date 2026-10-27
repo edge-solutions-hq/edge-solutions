@@ -18,7 +18,8 @@ concurrency:
 jobs:
   check:
     name: Web check
-    runs-on: ubuntu-24.04
+    # A repository variable can point CI at a self-hosted runner without editing the job.
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-24.04' }}
     timeout-minutes: 30
 
     defaults:

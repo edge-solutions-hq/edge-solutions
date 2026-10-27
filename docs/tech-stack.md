@@ -49,6 +49,8 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 - merge-queue `checks_requested` events; and
 - the tip commit of every push to `main`, so post-merge drift remains visible.
 
+The job runs on the runner named by the `CI_RUNNER` repository variable (Settings → Secrets and variables → Actions → Variables) when it is set, else on GitHub's `ubuntu-24.04`. Point it at the self-hosted runner to spend no Actions minutes; delete the variable to go back to GitHub-hosted runners. A job aimed at a self-hosted runner that is offline waits in the queue (up to 24 h) instead of falling back.
+
 Pull-request concurrency is scoped by event and pull-request number, allowing a newer update to cancel an obsolete run for the same pull request. Merge-group and push concurrency is scoped by event and commit SHA, so unrelated queue candidates or `main` commits cannot cancel each other's validation. The workflow grants only `contents: read`, does not persist checkout credentials, and pins actions to immutable commit revisions.
 
 ### Repository Enforcement
