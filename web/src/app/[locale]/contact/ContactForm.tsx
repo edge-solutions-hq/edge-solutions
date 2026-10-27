@@ -30,7 +30,7 @@ const inputBase =
 
 function FieldError({children, id}: {children?: string; id: string}) {
   if (!children) return null;
-  return <div id={id} className="mt-1 text-xs text-red-600 dark:text-red-400">{children}</div>;
+  return <div id={id} className="mt-1 text-xs text-red-800">{children}</div>;
 }
 
 function isValidatableControl(
@@ -255,13 +255,13 @@ export function ContactForm({
       </Button>
 
       {feedback.kind === 'success' ? (
-        <div role="status" aria-live="polite" className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-900 dark:text-emerald-100">
+        <div role="status" aria-live="polite" className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-900">
           {t(feedback.messageKey)}
         </div>
       ) : null}
 
       {feedback.kind === 'error' && (feedback.messageKey || feedback.fallbackMessage) ? (
-        <div role="alert" className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-900 dark:text-red-100">
+        <div role="alert" className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-900">
           {feedback.messageKey ? t(feedback.messageKey) : feedback.fallbackMessage}
         </div>
       ) : null}
