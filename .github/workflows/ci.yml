@@ -18,7 +18,7 @@ concurrency:
 jobs:
   check:
     name: Web check
-    runs-on: ubuntu-24.04
+    runs-on: ${{ vars.CI_RUNNER || 'ubuntu-24.04' }}
     timeout-minutes: 30
 
     defaults:
