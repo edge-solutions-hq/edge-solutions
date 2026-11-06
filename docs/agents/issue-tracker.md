@@ -12,7 +12,7 @@ Issues and specs for this repo live as GitHub issues. Use the `gh` CLI for all o
 - **Apply / remove labels**: `gh issue edit <number> --add-label "..."` / `--remove-label "..."`
 - **Close**: `gh issue close <number> --comment "..."`
 
-The repo is `Gil-1/edge-solutions`; `gh` infers it from `git remote -v` when run inside a clone.
+The repo is `edge-solutions-hq/edge-solutions`; `gh` infers it from `git remote -v` when run inside a clone.
 
 ## Pull requests as a triage surface
 

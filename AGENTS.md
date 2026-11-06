@@ -57,7 +57,7 @@ Node.js 24 is required by `.nvmrc`, `web/package.json`, and CI. Prefer the full 
 
 ### Issue Tracker
 
-Issues and specs are tracked in GitHub Issues for `Gil-1/edge-solutions`. See `docs/agents/issue-tracker.md`.
+Issues and specs are tracked in GitHub Issues for `edge-solutions-hq/edge-solutions`. See `docs/agents/issue-tracker.md`.
 
 ### Triage Labels
 
