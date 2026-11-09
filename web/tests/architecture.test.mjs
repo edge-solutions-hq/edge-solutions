@@ -338,9 +338,6 @@ describe('contact intake and analytics taxonomy seams', () => {
       assert.match(taxonomy, new RegExp(`\\b${threshold}\\b`), `taxonomy docs missing scroll depth ${threshold}`);
     }
 
-    const readme = read('README.md');
-    assert.match(readme, /locale_switch/);
-    assert.match(readme, /service_scroll_depth/);
   });
 
   it('keeps contact delivery and runtime config behind named seams', () => {

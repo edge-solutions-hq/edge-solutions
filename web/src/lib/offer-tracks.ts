@@ -43,7 +43,7 @@ export const OFFER_TRACKS: readonly OfferTrack[] = [
     hubCheckKey: 'services.hubRealtimeCheck',
     decisionKey: 'services.decisionRealtime',
     schemaServiceType: 'Real-time 3D / XR',
-    lastModified: new Date('2026-06-01T00:00:00.000Z'),
+    lastModified: new Date('2026-06-02T00:00:00.000Z'),
     sitemapPriority: 0.7,
     priorityRole: 'supporting',
   },

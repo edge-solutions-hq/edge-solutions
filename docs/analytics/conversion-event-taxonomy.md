@@ -1,7 +1,5 @@
 # Conversion event taxonomy (Edge Solutions)
 
-Last updated: 2026-06-01
-
 ## Scope
 
 This document defines the canonical event names and parameters emitted by the website for conversion analysis.

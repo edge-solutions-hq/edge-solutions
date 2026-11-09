@@ -2,11 +2,19 @@ name: CI
 
 on:
   pull_request:
+    paths:
+      - "web/**"
+      - "docs/**"
+      - ".github/**"
   merge_group:
     types: [checks_requested]
   push:
     branches:
       - main
+    paths:
+      - "web/**"
+      - "docs/**"
+      - ".github/**"
 
 permissions:
   contents: read
@@ -50,7 +58,7 @@ jobs:
         run: corepack pnpm run check
 
       - name: Upload browser diagnostics
-        if: ${{ !cancelled() }}
+        if: failure()
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: playwright-report
