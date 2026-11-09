@@ -72,11 +72,6 @@ export async function Footer() {
               <AnalyticsSettingsButton className={footerLinkClass} />
             </li>
           </ul>
-          {!site.social.github ? (
-            <div className="text-xs text-secondary-foreground/65">
-              GitHub : à renseigner
-            </div>
-          ) : null}
         </div>
 
         <div className="space-y-2">

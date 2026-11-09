@@ -49,7 +49,7 @@ When a known AI referrer is detected, `page_referrer` is reduced to the referrer
 
 - `cta_target` (string): target path (typically `/contact`)
 - `page_path` (string): current path where click happened
-- `placement` (string, optional): source location (`header_cta`, `header_nav`, `mobile_menu_cta`, `mobile_menu_nav`, `home_hero_primary`, `home_process_primary`, `home_bottom_primary`, `service_detail_cta`)
+- `placement` (string, optional): source location (`header_cta`, `header_nav`, `mobile_menu_cta`, `mobile_menu_nav`, `home_hero_primary`, `home_bottom_primary`, `service_detail_cta`)
 - `cta_label` (string, optional): clicked CTA label
 
 ---

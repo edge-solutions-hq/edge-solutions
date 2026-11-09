@@ -5,7 +5,7 @@ import {
   type AssetAuthorityRecord,
 } from './asset-authority';
 
-export type EvidenceModuleName = 'WorkflowSnapshot' | 'DeliveryBlueprint' | 'PrototypeSignals';
+export type EvidenceModuleName = 'WorkflowSnapshot' | 'PrototypeSignals';
 
 export type EvidenceStructureKey =
   | 'checklist'

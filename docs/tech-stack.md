@@ -12,9 +12,9 @@ This file owns current implementation tooling for the Edge Solutions web app. It
 - React: 19
 - Language: TypeScript 7 native CLI
 - Styling: Tailwind CSS v4 through `@tailwindcss/postcss`
-- Content: local MDX with `@next/mdx`, `@mdx-js/react`, and `remark-gfm`
+- Content: local MDX with `@next/mdx` and `remark-gfm`
 - Internationalization: `next-intl` with prefixed `fr`, `en`, and `nl` routes; `fr` is default
-- Forms: `react-hook-form`, `zod`, `@hookform/resolvers`
+- Forms: React `useActionState` with a server action and `zod`
 - Email delivery: Resend through server-side contact delivery
 - Contact abuse control: `@vercel/firewall` programmatic rate limiting before Resend
 - Analytics: Vercel Analytics, Vercel Speed Insights, optional Google tag runtime ID
