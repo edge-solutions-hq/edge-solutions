@@ -104,7 +104,7 @@ export const STATIC_PAGE_DEFINITIONS: readonly StaticPageDefinition[] = [
   {
     id: 'privacyPolicy',
     pathSuffix: '/privacy-policy',
-    lastModified: new Date('2026-07-29T00:00:00.000Z'),
+    lastModified: new Date('2026-11-09T00:00:00.000Z'),
     sitemapPriority: 0.3,
     title: {
       fr: 'Politique de confidentialité - Edge Solutions',

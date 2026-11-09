@@ -153,7 +153,8 @@
         "title": "Welke gegevens we verzamelen",
         "body": [
           "Als je de website alleen bezoekt, verzamelen we vooral technische en statistische informatie over het bezoek.",
-          "Als je ons contacteert via formulier, email of telefoon, kunnen we de informatie verwerken die je vrijwillig geeft: naam, emailadres, telefoonnummer, type project en inhoud van het bericht."
+          "Als je ons contacteert via formulier of email, kunnen we de informatie verwerken die je vrijwillig geeft: naam, emailadres, type project en inhoud van het bericht.",
+          "Om misbruik te voorkomen, is het aantal verzendingen via het contactformulier per IP-adres beperkt via de firewall van onze host, Vercel."
         ]
       },
       "cookiesAndGoogleTags": {
@@ -162,7 +163,7 @@
           "Google-tags en Google Analytics, wanneer een ID geconfigureerd is, en Vercel Web Analytics en Speed Insights zijn optionele meetinstrumenten. Ze worden pas geladen na je uitdrukkelijke toestemming.",
           "Als je weigert, blijven ze uitgeschakeld. Je browser bewaart je keuze en via de link Analytics-instellingen in de footer kun je die wijzigen of je toestemming intrekken.",
           "Google kan technische gegevens verwerken zoals cookies, IP-adres, browser- en apparaatinformatie, bezochte pagina’s, referrer en geschatte locatie.",
-          "De huidige configuratie verzendt navigatie- en conversie-events, zoals klikken naar contact, bekeken servicepagina’s, gekozen taal, scrolldiepte en het algemene resultaat van een formulier. Ze verzendt niet bewust de naam, het emailadres, het telefoonnummer of de inhoud van het bericht naar Google.",
+          "De huidige configuratie verzendt navigatie- en conversie-events, zoals klikken naar contact, bekeken servicepagina’s, gekozen taal, scrolldiepte en het algemene resultaat van een formulier. Ze verzendt niet bewust de naam, het emailadres of de inhoud van het bericht naar Google.",
           "Vercel blijft nodig om de website te hosten en aan te bieden, ongeacht je keuze. De optionele tools Web Analytics en Speed Insights leveren alleen na toestemming geaggregeerde statistieken over verkeer en prestaties."
         ]
       },
@@ -202,7 +203,7 @@
       "lastUpdated": {
         "title": "Laatst bijgewerkt",
         "body": [
-          "29 juli 2026."
+          "9 november 2026."
         ]
       }
     }

@@ -45,17 +45,14 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 
 `.github/workflows/ci.yml` runs the complete `corepack pnpm run check` gate when `web/**`, `docs/**` or `.github/**` changes, for:
 
-- every such pull request, including Dependabot pull requests;
-- merge-queue `checks_requested` events; and
+- every such pull request, including Dependabot pull requests; and
 - the tip commit of every such push to `main`, so post-merge drift remains visible.
 
-Pull-request concurrency is scoped by event and pull-request number, allowing a newer update to cancel an obsolete run for the same pull request. Merge-group and push concurrency is scoped by event and commit SHA, so unrelated queue candidates or `main` commits cannot cancel each other's validation. The workflow grants only `contents: read`, does not persist checkout credentials, and pins actions to immutable commit revisions.
+Pull-request concurrency is scoped by event and pull-request number, allowing a newer update to cancel an obsolete run for the same pull request. Push concurrency is scoped by commit SHA, so `main` commits cannot cancel each other's validation. The workflow grants only `contents: read`, does not persist checkout credentials, and pins actions to immutable commit revisions.
 
 ### Repository Enforcement
 
-Workflow triggers provide validation but do not enforce merging policy. As of 2026-07-30, `main` has no classic branch protection, and repository ruleset `mainruleset` (ID `12598945`) is disabled and contains only deletion and non-fast-forward rules. No status check or merge queue is currently required. The repository's default Actions permission is read-only, and workflows cannot approve pull requests.
-
-An administrator must configure an active ruleset or branch-protection rule targeting `main` and require the `Web check` status before merge if CI should block unvalidated merges. If merge-queue validation is required, the administrator must also enable and require the merge queue; the repository workflow can handle `merge_group` events but cannot enable the account-side queue or cause those events before the queue is used. The `push` trigger reports failures after a commit reaches `main`; it is not a substitute for a required pre-merge status check.
+`main` has no required checks: the repository's GitHub plan does not offer rulesets or branch protection for a private repository, so CI reports results but does not block merges.
 
 ## Environment Keys
 

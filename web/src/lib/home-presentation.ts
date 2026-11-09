@@ -1,5 +1,6 @@
 import type {ContactCtaPlacement} from '@/lib/analytics/taxonomy';
 import {getAssetAuthorityRecord, type AssetAuthorityRecord} from './content/asset-authority';
+import {site} from './site';
 
 type Translate = (key: string) => string;
 
@@ -45,7 +46,7 @@ export function getHomePresentationModel(translate: Translate): HomePresentation
       imageSrc: '/images/work/rusty-art-showcase.jpg',
       imageAlt: translate('home.showcase.publicProject.title'),
       assetAuthority: getAssetAuthorityRecord('rusty-art-showcase')!,
-      href: 'https://rusty-art.edge-solutions.be/',
+      href: site.rustyArtUrl,
       ctaLabel: translate('home.showcase.publicProject.cta'),
     },
     processCards: [

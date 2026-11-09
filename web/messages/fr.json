@@ -153,7 +153,8 @@
         "title": "Quelles données nous collectons",
         "body": [
           "Si vous utilisez seulement le site, nous collectons principalement des informations techniques et statistiques liées à la visite.",
-          "Si vous nous contactez par formulaire, email ou téléphone, nous pouvons traiter les informations que vous donnez volontairement : nom, adresse email, numéro de téléphone, type de projet et contenu du message."
+          "Si vous nous contactez par formulaire ou par email, nous pouvons traiter les informations que vous donnez volontairement : nom, adresse email, type de projet et contenu du message.",
+          "Pour limiter les abus, les envois du formulaire de contact sont limités par adresse IP via le pare-feu de notre hébergeur, Vercel."
         ]
       },
       "cookiesAndGoogleTags": {
@@ -162,7 +163,7 @@
           "Les Google tags et Google Analytics, lorsqu’un identifiant est configuré, ainsi que Vercel Web Analytics et Speed Insights sont des mesures optionnelles. Ils ne se chargent qu’après votre accord explicite.",
           "Un refus les maintient désactivés. Le navigateur conserve votre choix et le lien Réglages analytics du pied de page permet de le modifier ou de retirer votre consentement.",
           "Google peut traiter des données techniques comme les cookies, l’adresse IP, le navigateur, l’appareil, les pages visitées, le référent et la localisation approximative.",
-          "La configuration actuelle envoie des événements de navigation et de conversion, comme les clics vers le contact, les pages de service consultées, la langue choisie, la profondeur de scroll et le résultat général d’un formulaire. Elle n’envoie pas volontairement à Google le nom, l’email, le téléphone ou le contenu du message.",
+          "La configuration actuelle envoie des événements de navigation et de conversion, comme les clics vers le contact, les pages de service consultées, la langue choisie, la profondeur de scroll et le résultat général d’un formulaire. Elle n’envoie pas volontairement à Google le nom, l’email ou le contenu du message.",
           "Vercel reste nécessaire pour héberger et servir le site, indépendamment de votre choix. Ses outils optionnels Web Analytics et Speed Insights servent uniquement aux statistiques agrégées de trafic et de performance après accord."
         ]
       },
@@ -202,7 +203,7 @@
       "lastUpdated": {
         "title": "Dernière mise à jour",
         "body": [
-          "29 juillet 2026."
+          "9 novembre 2026."
         ]
       }
     }

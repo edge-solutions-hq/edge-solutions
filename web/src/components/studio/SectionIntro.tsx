@@ -1,7 +1,6 @@
 import type {ReactNode} from 'react';
 import {cn} from '@/lib/cn';
 import {Container} from './Container';
-import {FadeIn} from './FadeIn';
 import {unwrapMdxParagraphs} from '@/lib/unwrap-mdx-paragraphs';
 
 export function SectionIntro({
@@ -25,7 +24,7 @@ export function SectionIntro({
 
   return (
     <Container className={cn('not-prose', className)}>
-      <FadeIn className="max-w-2xl">
+      <div className="max-w-2xl">
         {eyebrow ? (
           <p
             className={cn(
@@ -58,7 +57,7 @@ export function SectionIntro({
             {content}
           </div>
         ) : null}
-      </FadeIn>
+      </div>
     </Container>
   );
 }

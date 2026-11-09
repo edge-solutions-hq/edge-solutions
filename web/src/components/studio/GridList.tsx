@@ -1,7 +1,6 @@
 import type {ReactNode} from 'react';
 import {cn} from '@/lib/cn';
 import {Border} from './Border';
-import {FadeIn, FadeInStagger} from './FadeIn';
 
 export function GridList({
   children,
@@ -11,7 +10,7 @@ export function GridList({
   className?: string;
 }) {
   return (
-    <FadeInStagger>
+    <div>
       <ul
         role="list"
         className={cn(
@@ -21,7 +20,7 @@ export function GridList({
       >
         {children}
       </ul>
-    </FadeInStagger>
+    </div>
   );
 }
 
@@ -44,7 +43,7 @@ export function GridListItem({
         className
       )}
     >
-      <FadeIn>
+      <div>
         <Border position="left" className="pl-6" invert={invert}>
           <strong
             className={cn(
@@ -56,7 +55,7 @@ export function GridListItem({
           </strong>{' '}
           {children}
         </Border>
-      </FadeIn>
+      </div>
     </li>
   );
 }

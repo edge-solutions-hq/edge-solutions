@@ -153,7 +153,8 @@
         "title": "What data we collect",
         "body": [
           "If you only browse the website, we mainly collect technical and statistical information related to the visit.",
-          "If you contact us by form, email or phone, we may process the information you voluntarily provide: name, email address, phone number, project type and message content."
+          "If you contact us by form or email, we may process the information you voluntarily provide: name, email address, project type and message content.",
+          "To prevent abuse, contact form submissions are rate-limited by IP address through our host's firewall, Vercel."
         ]
       },
       "cookiesAndGoogleTags": {
@@ -162,7 +163,7 @@
           "Google tags and Google Analytics, when an ID is configured, as well as Vercel Web Analytics and Speed Insights are optional measurement tools. They load only after your explicit consent.",
           "Rejecting keeps them disabled. Your browser stores your choice, and the Analytics settings link in the footer lets you change it or withdraw consent.",
           "Google may process technical data such as cookies, IP address, browser and device information, pages visited, referrer and approximate location.",
-          "The current setup sends navigation and conversion events, such as contact clicks, service pages viewed, selected language, scroll depth and the general result of a form submission. It does not intentionally send Google the visitor’s name, email address, phone number or message content.",
+          "The current setup sends navigation and conversion events, such as contact clicks, service pages viewed, selected language, scroll depth and the general result of a form submission. It does not intentionally send Google the visitor’s name, email address or message content.",
           "Vercel remains necessary to host and serve the website regardless of your choice. Its optional Web Analytics and Speed Insights tools provide aggregated traffic and performance statistics only after consent."
         ]
       },
@@ -202,7 +203,7 @@
       "lastUpdated": {
         "title": "Last updated",
         "body": [
-          "July 29, 2026."
+          "November 9, 2026."
         ]
       }
     }
