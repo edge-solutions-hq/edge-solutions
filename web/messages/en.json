@@ -1,12 +1,10 @@
 {
   "meta": {
-    "siteName": "Edge Solutions",
     "siteTagline": "AI automation and 3D / XR applications by a senior real-time developer"
   },
   "nav": {
     "home": "Home",
     "ai": "AI systems",
-    "process": "How we work",
     "realtime": "Real-time 3D / XR",
     "contact": "Contact",
     "mobileMenu": {
@@ -20,7 +18,6 @@
     "primaryCta": "Contact me",
     "secondaryCta": "View services",
     "profile": {
-      "eyebrow": "About",
       "title": "Analyze the project, then build intelligently.",
       "body": "I work on technical projects that combine AI, automation, web and 3D / XR: scope the need, choose a maintainable architecture, make teamwork easier and leave behind a usable base.",
       "signals": {
@@ -58,45 +55,17 @@
         "title": "Rusty Art, AI orchestration with OpenClaw",
         "description": "Rusty Art is a public project. I use it to test AI processes, task orchestration and product iteration with OpenClaw.",
         "cta": "View Rusty Art"
-      },
-      "items": {
-        "openclaw": {
-          "title": "My daily AI environment",
-          "description": "I use OpenClaw and specialist assistants to organize ideas, keep a working memory, prepare reports and validate important actions."
-        }
-      }
-    },
-    "trust": {
-      "eyebrow": "When ideas move faster than structure",
-      "title": "The situations where I can help",
-      "intro": "An AI project, automation or 3D / XR application can move quickly without a clear enough frame. My role is to make the base understandable, reliable and usable.",
-      "items": {
-        "direct": {
-          "value": "Lots of experiments",
-          "label": "Ideas, applications or automations move quickly, but without a base that is really clear enough to last"
-        },
-        "delivery": {
-          "value": "Faster, but less clear",
-          "label": "Tools speed up the work, but decisions, ownership or code become harder to follow"
-        },
-        "quality": {
-          "value": "A need to make it real",
-          "label": "A first version exists, but it now needs to become cleaner, more maintainable and more credible in production"
-        }
       }
     },
     "process": {
       "eyebrow": "What I take on",
       "title": "A structured mission",
       "intro": "Whether the topic is AI automation or a 3D / XR application, I start by analyzing the work, defining a clear scope with you, then moving forward with progressive, verifiable builds.",
-      "primaryCta": "Discuss your AI or 3D / XR project",
       "discovery": {
         "kicker": "Starting point",
         "title": "Understand the context and choose the angle of attack",
         "body": "Goals, users, repeated tasks, technical constraints, available data or assets, timeline: we establish what matters before producing.",
         "points": {
-          "goals": "Identify what repeats and the first concrete result to obtain.",
-          "queries": "Make roles, limits and decisions easier for the team to understand.",
           "plan": "By the end of this step: a clear priority and a first-version scope."
         }
       },
@@ -105,8 +74,6 @@
         "title": "Develop a first usable version",
         "body": "Automation, integration, interface, 3D / XR scene or targeted recovery: the format depends on the need, not on a fixed recipe.",
         "stackItems": {
-          "backend": "Clarify technical choices",
-          "realtime": "Make the base easier to maintain",
           "delivery": "Deliver regularly so the work can be tested, adjusted and decided on before the end."
         }
       },
@@ -115,16 +82,7 @@
         "title": "Stabilize and prepare what comes after",
         "body": "Cleanup, documentation, deployment, handover or next iterations: the project should remain usable after my intervention.",
         "items": {
-          "verify": {
-            "step": "Clarify the use case",
-            "body": "Define what the project should actually improve for the user or the team."
-          },
-          "publish": {
-            "step": "Build without blurring things",
-            "body": "Keep architecture, decisions and ownership readable during development."
-          },
           "measure": {
-            "step": "Leave a usable base behind",
             "body": "Make sure the project can be resumed, maintained or extended later without starting over."
           }
         }

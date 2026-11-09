@@ -105,7 +105,6 @@ export default async function HomePage({params}: Props) {
         <section className="relative overflow-hidden">
           <Container className="not-prose">
             <FadeIn
-              initiallyVisible
               className="relative overflow-hidden rounded-lg border border-border/70 bg-surface/90 p-4 shadow-[6px_6px_0_rgba(170,142,75,0.26)] sm:p-6 lg:rounded-none lg:border-x-0 lg:border-b lg:border-t lg:bg-transparent lg:px-0 lg:py-8 lg:shadow-none"
             >
               <div
@@ -293,7 +292,6 @@ export default async function HomePage({params}: Props) {
           </SectionIntro>
 
           <FadeIn
-            initiallyVisible
             className={surfaceClass('panel', `${homeSectionContentGap} grid gap-8 p-6 md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]`)}
           >
             <ol className="divide-y divide-border">
@@ -349,7 +347,6 @@ export default async function HomePage({params}: Props) {
             innerClassName="max-w-6xl px-6 lg:max-w-6xl"
           >
             <FadeIn
-              initiallyVisible
               className={surfaceClass('panel', 'grid gap-6 p-6 sm:p-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center')}
             >
               <div className="max-w-3xl">

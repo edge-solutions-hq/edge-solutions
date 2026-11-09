@@ -9,9 +9,6 @@ import {
 import {cn} from '@/lib/cn';
 
 /**
- * Lightweight content wrappers.
- *
- * This replaces framer-motion to reduce first-load JS.
  * Content stays visible by default so no-JS rendering, screenshots, and LCP text
  * do not depend on hydration.
  */
@@ -19,13 +16,9 @@ import {cn} from '@/lib/cn';
 type FadeInProps = HTMLAttributes<HTMLDivElement> & {
   /** Optional delay (ms) used by FadeInStagger. */
   delayMs?: number;
-  /** Kept for compatibility with older callers; content is always visible. */
-  initiallyVisible?: boolean;
 };
 
-export function FadeIn({className, style, delayMs, initiallyVisible, ...props}: FadeInProps) {
-  void initiallyVisible;
-
+export function FadeIn({className, style, delayMs, ...props}: FadeInProps) {
   return (
     <div
       className={cn(

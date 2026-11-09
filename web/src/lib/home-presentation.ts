@@ -32,7 +32,6 @@ export type HomePresentationModel = {
   processCards: HomeProcessCard[];
   ctas: {
     heroPrimary: HomeCtaIntent;
-    processPrimary: HomeCtaIntent;
     bottomPrimary: HomeCtaIntent;
   };
 };
@@ -73,10 +72,6 @@ export function getHomePresentationModel(translate: Translate): HomePresentation
       heroPrimary: {
         href: '/contact',
         trackingPlacement: 'home_hero_primary',
-      },
-      processPrimary: {
-        href: '/contact',
-        trackingPlacement: 'home_process_primary',
       },
       bottomPrimary: {
         href: '/contact',

@@ -1,12 +1,10 @@
 {
   "meta": {
-    "siteName": "Edge Solutions",
     "siteTagline": "AI-automatisatie en 3D / XR-applicaties door een senior realtime developer"
   },
   "nav": {
     "home": "Home",
     "ai": "AI-systemen",
-    "process": "Hoe we werken",
     "realtime": "Realtime 3D / XR",
     "contact": "Contact",
     "mobileMenu": {
@@ -20,7 +18,6 @@
     "primaryCta": "Contacteer mij",
     "secondaryCta": "Bekijk services",
     "profile": {
-      "eyebrow": "Over mij",
       "title": "Het project analyseren en daarna slim bouwen.",
       "body": "Ik werk aan technische projecten die AI, automatisatie, web en 3D / XR combineren: de behoefte kaderen, een onderhoudbare architectuur kiezen, het teamwerk vereenvoudigen en een bruikbare basis achterlaten.",
       "signals": {
@@ -58,45 +55,17 @@
         "title": "Rusty Art, AI-orchestratie met OpenClaw",
         "description": "Rusty Art is een publiek project. Ik gebruik het om AI-processen, taakorchestratie en productiteratie met OpenClaw te testen.",
         "cta": "Bekijk Rusty Art"
-      },
-      "items": {
-        "openclaw": {
-          "title": "Mijn dagelijkse AI-omgeving",
-          "description": "Ik gebruik OpenClaw en gespecialiseerde assistenten om ideeën te ordenen, werkgeheugen bij te houden, rapporten voor te bereiden en belangrijke acties te valideren."
-        }
-      }
-    },
-    "trust": {
-      "eyebrow": "Wanneer ideeën sneller gaan dan de structuur",
-      "title": "De situaties waarin ik kan helpen",
-      "intro": "Een AI-project, automatisatie of 3D / XR-applicatie kan snel vooruitgaan zonder een duidelijk genoeg kader. Mijn rol is om de basis begrijpelijk, betrouwbaar en bruikbaar te maken.",
-      "items": {
-        "direct": {
-          "value": "Veel experimenten",
-          "label": "Ideeën, applicaties of automatiseringen gaan snel vooruit, maar zonder een basis die echt duidelijk genoeg is om te blijven bestaan"
-        },
-        "delivery": {
-          "value": "Sneller, maar minder duidelijk",
-          "label": "Tools versnellen het werk, maar beslissingen, eigenaarschap of code worden moeilijker te volgen"
-        },
-        "quality": {
-          "value": "Nood aan iets echts",
-          "label": "Er bestaat al een eerste versie, maar die moet nu properder, onderhoudbaarder en geloofwaardiger worden voor productie"
-        }
       }
     },
     "process": {
       "eyebrow": "Wat ik opneem",
       "title": "Een gestructureerde missie",
       "intro": "Of het nu om AI-automatisatie of een 3D / XR-applicatie gaat: ik start met het werk te analyseren, samen met jou een duidelijke scope te bepalen en daarna verder te gaan met progressieve, verifieerbare builds.",
-      "primaryCta": "Bespreek je AI- of 3D / XR-project",
       "discovery": {
         "kicker": "Startpunt",
         "title": "De context begrijpen en de juiste invalshoek kiezen",
         "body": "Doelen, gebruikers, repetitieve taken, technische beperkingen, beschikbare data of assets, timing: we leggen vast wat telt voor er gebouwd wordt.",
         "points": {
-          "goals": "Bepalen wat zich herhaalt en welk concreet resultaat eerst nodig is.",
-          "queries": "Rollen, grenzen en beslissingen begrijpelijker maken voor het team.",
           "plan": "Aan het einde van deze stap: een duidelijke prioriteit en scope voor een eerste versie."
         }
       },
@@ -105,8 +74,6 @@
         "title": "Een eerste bruikbare versie ontwikkelen",
         "body": "Automatisatie, integratie, interface, 3D / XR-scene of gerichte overname: de vorm hangt af van de nood, niet van een vaste formule.",
         "stackItems": {
-          "backend": "Technische keuzes verduidelijken",
-          "realtime": "De basis onderhoudbaarder maken",
           "delivery": "Regelmatig opleveren zodat er getest, bijgestuurd en beslist kan worden voor het einde."
         }
       },
@@ -115,16 +82,7 @@
         "title": "Stabiliseren en voorbereiden wat daarna komt",
         "body": "Opschonen, documentatie, deployment, overdracht of volgende iteraties: het project moet bruikbaar blijven na mijn interventie.",
         "items": {
-          "verify": {
-            "step": "Het gebruik verduidelijken",
-            "body": "Bepalen wat het project echt moet verbeteren voor de gebruiker of het team."
-          },
-          "publish": {
-            "step": "Bouwen zonder te vertroebelen",
-            "body": "Architectuur, beslissingen en eigenaarschap leesbaar houden tijdens de ontwikkeling."
-          },
           "measure": {
-            "step": "Een bruikbare basis achterlaten",
             "body": "Zorgen dat het project later kan worden hervat, onderhouden of uitgebreid zonder opnieuw te beginnen."
           }
         }

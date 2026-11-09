@@ -428,8 +428,8 @@ assert(
   'sitemap.ts must derive service routes from OFFER_TRACKS'
 );
 assert(
-  servicesSource.includes('OFFER_TRACK_SLUGS'),
-  'content registry must derive service slugs from OFFER_TRACK_SLUGS'
+  servicesSource.includes('isOfferTrackSlug'),
+  'content registry must validate service slugs with isOfferTrackSlug'
 );
 assert(robotsSource.includes('/sitemap.xml'), 'robots.ts must point crawlers to sitemap.xml');
 assert(llmsTxtSource.includes('buildLlmsTxt'), 'llms.txt route must use the AI discovery builder');

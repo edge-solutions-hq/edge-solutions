@@ -132,7 +132,7 @@ describe('offer track catalog seam', () => {
     assert.match(read('src/app/llms.txt/route.ts'), /buildLlmsTxt/);
     assert.match(read('src/lib/ai-discovery.ts'), /OFFER_TRACKS/);
     assert.match(read('src/lib/ai-discovery.ts'), /STATIC_PAGE_DEFINITIONS/);
-    assert.match(read('src/lib/content/services.ts'), /OFFER_TRACK_SLUGS/);
+    assert.match(read('src/lib/content/services.ts'), /isOfferTrackSlug/);
     assert.match(read('../docs/architecture.md'), /UI surfaces/);
     assert.match(read('../docs/architecture.md'), /Surface\.tsx/);
     assert.match(read('../docs/architecture.md'), /External CTA links/);
@@ -300,7 +300,6 @@ describe('contact intake and analytics taxonomy seams', () => {
 
   it('routes event taxonomy through named domain actions', () => {
     const eventsSource = read('src/lib/analytics/events.ts');
-    const taxonomySource = read('src/lib/analytics/taxonomy.ts');
     for (const name of [
       'trackContactCtaClick',
       'trackOfferTrackClick',
@@ -316,7 +315,6 @@ describe('contact intake and analytics taxonomy seams', () => {
     assert.doesNotMatch(read('src/components/ui/TrackedLink.tsx'), /trackConversionEvent/);
     assert.doesNotMatch(read('src/app/[locale]/contact/ContactForm.tsx'), /trackConversionEvent/);
     assert.match(eventsSource, /analyticsEvents\./);
-    assert.match(taxonomySource, /home_process_primary/);
   });
 
   it('keeps analytics docs aligned with runtime events and AI offer value', () => {

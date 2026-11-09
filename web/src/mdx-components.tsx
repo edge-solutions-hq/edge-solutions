@@ -1,7 +1,5 @@
 import type {MDXComponents} from 'mdx/types';
 import {CTA} from '@/components/mdx/CTA';
-import {Callout} from '@/components/mdx/Callout';
-import {DeliveryBlueprint} from '@/components/mdx/DeliveryBlueprint';
 import {GridList, GridListItem} from '@/components/studio/GridList';
 import {List, ListItem} from '@/components/studio/List';
 import {PageIntro} from '@/components/studio/PageIntro';
@@ -9,8 +7,6 @@ import {PrototypeSignals} from '@/components/mdx/PrototypeSignals';
 import {ProjectGallery} from '@/components/mdx/ProjectGallery';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ServiceFaq} from '@/components/mdx/ServiceFaq';
-import {StatList, StatListItem} from '@/components/studio/StatList';
-import {TagList, TagListItem} from '@/components/studio/TagList';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
 import {WorkflowSnapshot} from '@/components/mdx/WorkflowSnapshot';
 
@@ -20,8 +16,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
     // Custom components available in MDX without imports
     CTA,
-    Callout,
-    DeliveryBlueprint,
     PageIntro,
     PrototypeSignals,
     ProjectGallery,
@@ -31,12 +25,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     GridListItem,
     List,
     ListItem,
-    StatList,
-    StatListItem,
-    Stats: StatList,
-    StatsItem: StatListItem,
-    TagList,
-    TagListItem,
     ShowcasePanel,
     WorkflowSnapshot,
 

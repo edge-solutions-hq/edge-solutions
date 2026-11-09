@@ -14,7 +14,6 @@ export const contactCtaPlacements = [
   'mobile_menu_cta',
   'mobile_menu_nav',
   'home_hero_primary',
-  'home_process_primary',
   'home_bottom_primary',
   'service_detail_cta',
 ] as const;

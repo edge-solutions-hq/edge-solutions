@@ -1,12 +1,10 @@
 {
   "meta": {
-    "siteName": "Edge Solutions",
     "siteTagline": "Automatisations IA et applications 3D / XR par un développeur temps réel senior"
   },
   "nav": {
     "home": "Accueil",
     "ai": "IA & automatisation",
-    "process": "Méthode",
     "realtime": "3D / XR temps réel",
     "contact": "Contact",
     "mobileMenu": {
@@ -20,7 +18,6 @@
     "primaryCta": "Me contacter",
     "secondaryCta": "Voir les services",
     "profile": {
-      "eyebrow": "À propos",
       "title": "Analyser le projet, puis construire intelligemment.",
       "body": "J’interviens sur des projets techniques qui mêlent IA, automatisation, web et 3D / XR : cadrer le besoin, choisir une architecture maintenable, faciliter le travail de l’équipe et livrer une base exploitable.",
       "signals": {
@@ -58,45 +55,17 @@
         "title": "Rusty Art, orchestration IA avec OpenClaw",
         "description": "Rusty Art est un projet accessible publiquement. Je l’utilise pour tester des processus IA, de l’orchestration de tâches et des itérations produit avec OpenClaw.",
         "cta": "Voir Rusty Art"
-      },
-      "items": {
-        "openclaw": {
-          "title": "Mon environnement IA au quotidien",
-          "description": "J’utilise OpenClaw et des assistants spécialisés pour organiser les idées, garder une mémoire de travail, préparer des rapports et valider les actions importantes."
-        }
-      }
-    },
-    "trust": {
-      "eyebrow": "Quand les idées avancent plus vite que la structure",
-      "title": "Les situations où je peux aider",
-      "intro": "Un projet IA, une automatisation ou une application 3D / XR peut vite avancer sans cadre assez clair. Mon rôle est de rendre la base compréhensible, fiable et utilisable.",
-      "items": {
-        "direct": {
-          "value": "Beaucoup d’essais",
-          "label": "Des idées, applications ou automatisations qui avancent vite, mais sans base vraiment claire pour durer"
-        },
-        "delivery": {
-          "value": "Plus vite, mais moins clair",
-          "label": "Les outils accélèrent le travail, mais les décisions, les responsabilités ou le code deviennent difficiles à suivre"
-        },
-        "quality": {
-          "value": "Un besoin de passage au réel",
-          "label": "Une première base existe, mais elle doit devenir plus propre, plus maintenable et plus crédible côté production"
-        }
       }
     },
     "process": {
       "eyebrow": "Ce que je prends en charge",
       "title": "Une mission structurée",
       "intro": "Que le sujet soit une automatisation IA ou une application 3D / XR, je commence par analyser le travail, définir un périmètre clair avec vous, puis avancer avec des builds progressifs et vérifiables.",
-      "primaryCta": "Parler de votre projet IA ou 3D / XR",
       "discovery": {
         "kicker": "Point de départ",
         "title": "Comprendre le contexte et choisir l’angle d’attaque",
         "body": "Objectifs, utilisateurs, tâches répétitives, contraintes techniques, données ou assets disponibles, délais : on pose ce qui compte avant de produire.",
         "points": {
-          "goals": "Identifier ce qui se répète et le premier résultat concret à obtenir.",
-          "queries": "Rendre les rôles, limites et décisions compréhensibles pour l’équipe.",
           "plan": "À la fin de cette étape : une priorité claire et un périmètre de première version."
         }
       },
@@ -105,8 +74,6 @@
         "title": "Développer une première version utilisable",
         "body": "Automatisation, intégration, interface, scène 3D / XR ou reprise ciblée : le format dépend du besoin, pas d’une recette imposée.",
         "stackItems": {
-          "backend": "Clarifier les choix techniques",
-          "realtime": "Rendre la base plus maintenable",
           "delivery": "Livrer régulièrement pour tester, ajuster et décider sans attendre la fin."
         }
       },
@@ -115,16 +82,7 @@
         "title": "Stabiliser et préparer l’évolution",
         "body": "Nettoyage, documentation, déploiement, transfert ou prochaines itérations : le projet doit rester exploitable après mon intervention.",
         "items": {
-          "verify": {
-            "step": "Clarifier l’usage",
-            "body": "Définir ce que le projet doit réellement améliorer pour l’utilisateur ou l’équipe."
-          },
-          "publish": {
-            "step": "Construire sans brouiller",
-            "body": "Garder une architecture, des choix et une responsabilité lisibles pendant le développement."
-          },
           "measure": {
-            "step": "Laisser une base exploitable",
             "body": "Permettre au projet d’être repris, maintenu ou étendu sans repartir de zéro."
           }
         }

@@ -1,7 +1,6 @@
 import {resolveLocale, type Locale} from '../../i18n/routing';
 import {
   isOfferTrackSlug,
-  OFFER_TRACK_SLUGS,
   type OfferTrackSlug,
 } from '../offer-tracks';
 import {
@@ -10,9 +9,6 @@ import {
   type OfferTrackEvidenceContract,
   type OfferTrackEvidenceProfile,
 } from './service-evidence-registry';
-
-export type ServiceSlug = OfferTrackSlug;
-export const SERVICE_SLUGS = OFFER_TRACK_SLUGS;
 
 type MdxModule = {
   default: React.ComponentType;
@@ -24,10 +20,10 @@ type MdxModule = {
 
 type Loader = () => Promise<MdxModule>;
 
-export type ServiceContentLoaderMap = Record<Locale, Partial<Record<ServiceSlug, Loader>>>;
+export type ServiceContentLoaderMap = Record<Locale, Partial<Record<OfferTrackSlug, Loader>>>;
 
 type ServiceContentAvailabilityBase = {
-  slug: ServiceSlug;
+  slug: OfferTrackSlug;
   requestedLocale: Locale;
 };
 
@@ -197,10 +193,4 @@ export async function getServiceContentAvailability(
     module: loadedFallback.module,
     metadata: loadedFallback.module.metadata ?? {},
   };
-}
-
-export async function getServiceContent(locale: string, slug: string): Promise<ServiceContentResult | null> {
-  const availability = await getServiceContentAvailability(locale, slug);
-  if (availability.status !== 'localized' && availability.status !== 'fallback') return null;
-  return availability;
 }
