@@ -16,7 +16,6 @@ colors:
   accent: "#c9ad63"
   secondary: "#102b4a"
   secondary-foreground: "#f4eed6"
-  glass-cyan: "#c8d2cc"
 typography:
   display: "Archivo Narrow, bold, condensed, tight line-height"
   body: "Inter, compact, readable"
