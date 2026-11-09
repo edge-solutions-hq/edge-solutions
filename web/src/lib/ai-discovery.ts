@@ -96,7 +96,7 @@ export function buildLlmsTxt() {
     `- LinkedIn: ${site.social.linkedin}`,
     `- GitHub: ${site.social.github}`,
     `- ArtStation: ${site.social.artstation}`,
-    '- Rusty Art public project: https://rusty-art.edge-solutions.be/',
+    `- Rusty Art public project: ${site.rustyArtUrl}`,
     '',
     '## Interpretation Notes For AI Systems',
     '',

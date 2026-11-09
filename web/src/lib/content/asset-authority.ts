@@ -1,3 +1,5 @@
+import {site} from '../site';
+
 export type AssetSourceType = 'approved_asset' | 'captured_render' | 'screenshot' | 'repo_source_fact' | 'generated_visual';
 
 export type AssetApprovalStatus = 'approved' | 'unreviewed' | 'rejected' | 'setup_required';
@@ -62,7 +64,7 @@ export const assetAuthorityRegistry = [
     approvalStatus: 'approved',
     authority: 'authoritative',
     usageScopes: ['homepage', 'showcase'],
-    sourceArtifactRefs: ['https://rusty-art.edge-solutions.be/', 'C:/Users/ggumi/Downloads/1778837890082.jpg', '../WEBSITE.md'],
+    sourceArtifactRefs: [site.rustyArtUrl, '../WEBSITE.md'],
     claimRestrictions: defaultClaimRestrictions,
     provenanceSummary: 'Repo-approved Rusty Art visual supplied by Gil for the homepage public project panel. It does not authorize client, metric, testimonial, logo, screenshot, award, or certification claims.',
   },
@@ -106,7 +108,7 @@ export const assetAuthorityRegistry = [
     approvalStatus: 'approved',
     authority: 'authoritative',
     usageScopes: ['services', 'realtime-games', 'portfolio'],
-    sourceArtifactRefs: ['https://www.artstation.com/artwork/qe2EzL', 'C:/Users/ggumi/Downloads/capsule_616x353.jpg'],
+    sourceArtifactRefs: ['https://www.artstation.com/artwork/qe2EzL'],
     claimRestrictions: defaultClaimRestrictions,
     provenanceSummary: 'User-supplied Glitch Moba capsule image approved for a public project card. It does not authorize client logos, testimonials, outcome metrics, awards, or broader case-study claims.',
   },
@@ -120,7 +122,6 @@ export const assetAuthorityRegistry = [
     sourceArtifactRefs: [
       'https://www.artstation.com/artwork/vD9oNa',
       'https://cdna.artstation.com/p/assets/images/images/062/425/162/large/gil-guminski-capture-d-ecran-2023-05-03-110630.jpg?1683108486',
-      'C:/Users/ggumi/Downloads/gil-guminski-capture-d-ecran-2023-05-03-110630.jpg',
     ],
     claimRestrictions: defaultClaimRestrictions,
     provenanceSummary: 'Portfolio image copied from Gil Guminski ArtStation for a public visual reference to the Crinoid fields project. It does not authorize client logos, testimonials, outcome metrics, awards, or broader case-study claims.',

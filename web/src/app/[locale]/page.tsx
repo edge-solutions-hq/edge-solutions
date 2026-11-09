@@ -5,7 +5,6 @@ import {ButtonLink} from '@/components/ui/Button';
 import {ExternalLinkButton} from '@/components/ui/ExternalLinkButton';
 import {surfaceClass} from '@/components/ui/Surface';
 import {TrackedLink} from '@/components/ui/TrackedLink';
-import {FadeIn, FadeInStagger} from '@/components/studio/FadeIn';
 import {Container} from '@/components/studio/Container';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
@@ -104,7 +103,7 @@ export default async function HomePage({params}: Props) {
       <div className="relative z-10">
         <section className="relative overflow-hidden">
           <Container className="not-prose">
-            <FadeIn
+            <div
               className="relative overflow-hidden rounded-lg border border-border/70 bg-surface/90 p-4 shadow-[6px_6px_0_rgba(170,142,75,0.26)] sm:p-6 lg:rounded-none lg:border-x-0 lg:border-b lg:border-t lg:bg-transparent lg:px-0 lg:py-8 lg:shadow-none"
             >
               <div
@@ -147,16 +146,16 @@ export default async function HomePage({params}: Props) {
                   </div>
                 </div>
               </div>
-            </FadeIn>
+            </div>
           </Container>
         </section>
 
         <section className={homeSectionGap}>
           <SectionIntro title={t('services.title')} />
 
-          <FadeInStagger className={`${homeSectionContentGap} grid grid-cols-1 gap-6 md:grid-cols-2`}>
+          <div className={`${homeSectionContentGap} grid grid-cols-1 gap-6 md:grid-cols-2`}>
             {serviceCards.map((service) => (
-              <FadeIn key={service.slug} className={homeOfferGridItemClass()}>
+              <div key={service.slug} className={homeOfferGridItemClass()}>
                 <TrackedLink
                   href={service.href}
                   trackingLabel={service.label}
@@ -208,13 +207,13 @@ export default async function HomePage({params}: Props) {
                     </span>
                   </div>
                 </TrackedLink>
-              </FadeIn>
+              </div>
             ))}
-          </FadeInStagger>
+          </div>
         </section>
 
         <section className={homeSectionGap}>
-          <FadeIn className={surfaceClass('panel', 'grid gap-8 p-6 md:p-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start')}>
+          <div className={surfaceClass('panel', 'grid gap-8 p-6 md:p-8 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)] lg:items-start')}>
             <div>
               <h2 className="max-w-2xl text-balance font-display text-3xl font-bold leading-[0.98] tracking-normal text-technical-blue sm:text-4xl">
                 {t('home.profile.title')}
@@ -239,7 +238,7 @@ export default async function HomePage({params}: Props) {
                 </div>
               ))}
             </dl>
-          </FadeIn>
+          </div>
         </section>
 
         <section className={homeTokenSectionGap}>
@@ -291,7 +290,7 @@ export default async function HomePage({params}: Props) {
             <p>{t('home.process.intro')}</p>
           </SectionIntro>
 
-          <FadeIn
+          <div
             className={surfaceClass('panel', `${homeSectionContentGap} grid gap-8 p-6 md:p-8 lg:grid-cols-[minmax(0,1.35fr)_minmax(20rem,0.65fr)]`)}
           >
             <ol className="divide-y divide-border">
@@ -335,7 +334,7 @@ export default async function HomePage({params}: Props) {
                 {t('home.finalCta.processBody')}
               </p>
             </div>
-          </FadeIn>
+          </div>
         </section>
 
         <section
@@ -346,7 +345,7 @@ export default async function HomePage({params}: Props) {
             className="not-prose"
             innerClassName="max-w-6xl px-6 lg:max-w-6xl"
           >
-            <FadeIn
+            <div
               className={surfaceClass('panel', 'grid gap-6 p-6 sm:p-7 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center')}
             >
               <div className="max-w-3xl">
@@ -372,7 +371,7 @@ export default async function HomePage({params}: Props) {
               >
                 {t('home.finalCta.cta')}
               </ButtonLink>
-            </FadeIn>
+            </div>
           </Container>
         </section>
       </div>

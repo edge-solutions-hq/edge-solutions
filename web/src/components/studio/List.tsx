@@ -1,7 +1,6 @@
 import type {ReactNode} from 'react';
 import {cn} from '@/lib/cn';
 import {Border} from './Border';
-import {FadeIn, FadeInStagger} from './FadeIn';
 
 export function List({
   children,
@@ -11,28 +10,28 @@ export function List({
   className?: string;
 }) {
   return (
-    <FadeInStagger>
+    <div>
       <ul
         role="list"
         className={cn('not-prose text-sm leading-relaxed text-muted-foreground', className)}
       >
         {children}
       </ul>
-    </FadeInStagger>
+    </div>
   );
 }
 
 export function ListItem({children, title}: {children: ReactNode; title?: string}) {
   return (
     <li className="group mt-8 first:mt-0">
-      <FadeIn>
+      <div>
         <Border className="pt-8 group-first:pt-0 group-first:before:hidden group-first:after:hidden">
           {title ? (
             <strong className="font-semibold text-foreground">{`${title}. `}</strong>
           ) : null}
           {children}
         </Border>
-      </FadeIn>
+      </div>
     </li>
   );
 }

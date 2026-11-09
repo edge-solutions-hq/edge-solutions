@@ -4,10 +4,11 @@ export const site = {
   url: 'https://edge-solutions.be',
   contactEmail: 'gil@edge-solutions.be',
   vatNumber: 'BE1012.938.930',
+  rustyArtUrl: 'https://rusty-art.edge-solutions.be/',
   social: {
     linkedin: 'https://www.linkedin.com/in/gil-guminski',
     github: 'https://github.com/Gil-1',
-    artstation: 'https://gilguminski.artstation.com/'
+    artstation: 'https://www.artstation.com/gilguminski'
   }
 } as const;
 

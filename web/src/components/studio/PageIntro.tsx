@@ -1,7 +1,6 @@
 import type {ReactNode} from 'react';
 import {cn} from '@/lib/cn';
 import {Container} from './Container';
-import {FadeIn} from './FadeIn';
 import {unwrapMdxParagraphs} from '@/lib/unwrap-mdx-paragraphs';
 
 export function PageIntro({
@@ -24,7 +23,7 @@ export function PageIntro({
       className={cn('not-prose', className)}
       innerClassName={cn('max-w-4xl', centered && 'text-center')}
     >
-      <FadeIn>
+      <div>
         <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
           {eyebrow}
         </p>
@@ -34,7 +33,7 @@ export function PageIntro({
         <div className="mt-4 space-y-4 text-lg leading-relaxed text-muted-foreground">
           {content}
         </div>
-      </FadeIn>
+      </div>
     </Container>
   );
 }
