@@ -1,8 +1,8 @@
 import type {Metadata} from 'next';
 import {getTranslations, setRequestLocale} from 'next-intl/server';
 import {JsonLd} from '@/components/seo/JsonLd';
-import {getPrivacyPolicyPageProfile} from '@/lib/page-profiles';
-import {site} from '@/lib/site';
+import {getPrivacyPolicyPageProfile} from '@/lib/site/page-profiles';
+import {site} from '@/lib/site/site';
 
 type Props = {
   params: Promise<{locale: string}>;

@@ -11,7 +11,7 @@ import {ContactModalProvider} from './contact/ContactModalProvider';
 import {AnalyticsConsentProvider} from '@/components/analytics/AnalyticsConsentProvider';
 import {JsonLd} from '@/components/seo/JsonLd';
 import {getAnalyticsRuntimeConfig} from '@/lib/runtime-config';
-import {getRootLayoutProfile} from '@/lib/site-profile';
+import {getRootLayoutProfile} from '@/lib/site/site-profile';
 
 const inter = Inter({variable: '--font-inter', subsets: ['latin']});
 

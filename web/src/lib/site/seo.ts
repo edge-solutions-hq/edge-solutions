@@ -1,6 +1,6 @@
 import type {Metadata} from 'next';
-import {routing} from '../i18n/routing';
-import {getOfferTrack, OFFER_TRACKS, type OfferTrackSlug} from './offer-tracks';
+import {routing} from '../../i18n/routing';
+import {getOfferTrack, OFFER_TRACKS, type OfferTrackSlug} from '../offer/offer-tracks';
 import {site} from './site';
 
 export const HREFLANG_BY_LOCALE: Record<string, string> = {

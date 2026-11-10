@@ -13,7 +13,7 @@ const {
   resolveAssetAuthorityRecord,
 } = await import('../src/lib/content/asset-authority.ts');
 const {serviceEvidenceRegistry} = await import('../src/lib/content/service-evidence-registry.ts');
-const {getHomePresentationModel} = await import('../src/lib/home-presentation.ts');
+const {getHomePresentationModel} = await import('../src/lib/offer/home-presentation.ts');
 
 function translate(key) {
   return key;

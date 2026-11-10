@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {register} from 'node:module';
 
 register('./ts-extension-resolver.mjs', import.meta.url);
-const {getHomePresentationModel} = await import('../src/lib/home-presentation.ts');
+const {getHomePresentationModel} = await import('../src/lib/offer/home-presentation.ts');
 
 function translate(key) {
   return key;

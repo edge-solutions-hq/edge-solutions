@@ -1,7 +1,7 @@
 import type {Metadata} from 'next';
 import {isLocale, routing, type Locale} from '../../i18n/routing';
-import {OFFER_TRACK_SLUGS, type OfferTrackSlug} from '../offer-tracks';
-import {getOfferTrackPageProfile} from '../page-profiles';
+import {OFFER_TRACK_SLUGS, type OfferTrackSlug} from '../offer/offer-tracks';
+import {getOfferTrackPageProfile} from '../site/page-profiles';
 import {getServiceFaqItems} from './service-faq';
 import {
   getServiceContentAvailability,

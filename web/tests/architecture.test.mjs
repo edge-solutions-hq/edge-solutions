@@ -53,7 +53,7 @@ function extractConstNumberValues(source, constName) {
 }
 
 function extractOfferTracks() {
-  return extractObjectBlocks(read('src/lib/offer-tracks.ts'), 'OFFER_TRACKS').map((block) => ({
+  return extractObjectBlocks(read('src/lib/offer/offer-tracks.ts'), 'OFFER_TRACKS').map((block) => ({
     slug: extractStringProperty(block, 'slug'),
     titleKey: extractStringProperty(block, 'titleKey').replace('services.', ''),
     descKey: extractStringProperty(block, 'descriptionKey').replace('services.', ''),
@@ -99,7 +99,7 @@ function normalizeContent(value) {
 
 describe('offer track catalog seam', () => {
   it('keeps offer track identity and ordering in the catalog', () => {
-    const source = read('src/lib/offer-tracks.ts');
+    const source = read('src/lib/offer/offer-tracks.ts');
     const first = source.indexOf("slug: 'ai-automation'");
     const second = source.indexOf("slug: 'realtime-games'");
 
@@ -119,7 +119,7 @@ describe('offer track catalog seam', () => {
   });
 
   it('wires public route modules through the catalog', () => {
-    assert.match(read('src/lib/offer-presentation.ts'), /OFFER_TRACKS\.map/);
+    assert.match(read('src/lib/offer/offer-presentation.ts'), /OFFER_TRACKS\.map/);
     assert.match(read('src/app/[locale]/page.tsx'), /getHomeOfferCards/);
     assert.match(read('src/app/[locale]/services/page.tsx'), /getServicesHubOfferCards/);
     assert.match(read('src/app/[locale]/services/page.tsx'), /getServicesDecisionItems/);
@@ -128,10 +128,10 @@ describe('offer track catalog seam', () => {
     assert.doesNotMatch(read('src/app/[locale]/services/page.tsx'), /OFFER_TRACKS\.map/);
     assert.doesNotMatch(read('src/components/layout/Header.tsx'), /OFFER_TRACKS\.map/);
     assert.match(read('src/app/sitemap.ts'), /getLocalizedSitemapEntries/);
-    assert.match(read('src/lib/page-profiles.ts'), /OFFER_TRACKS/);
+    assert.match(read('src/lib/site/page-profiles.ts'), /OFFER_TRACKS/);
     assert.match(read('src/app/llms.txt/route.ts'), /buildLlmsTxt/);
-    assert.match(read('src/lib/ai-discovery.ts'), /OFFER_TRACKS/);
-    assert.match(read('src/lib/ai-discovery.ts'), /STATIC_PAGE_DEFINITIONS/);
+    assert.match(read('src/lib/site/ai-discovery.ts'), /OFFER_TRACKS/);
+    assert.match(read('src/lib/site/ai-discovery.ts'), /STATIC_PAGE_DEFINITIONS/);
     assert.match(read('src/lib/content/services.ts'), /isOfferTrackSlug/);
     assert.match(read('../docs/architecture.md'), /UI surfaces/);
     assert.match(read('../docs/architecture.md'), /Surface\.tsx/);
@@ -140,7 +140,7 @@ describe('offer track catalog seam', () => {
   });
 
   it('projects role-aware offer presentation while homepage cards stay visually balanced', () => {
-    const presentationSource = read('src/lib/offer-presentation.ts');
+    const presentationSource = read('src/lib/offer/offer-presentation.ts');
     const homeSource = read('src/app/[locale]/page.tsx');
     const servicesSource = read('src/app/[locale]/services/page.tsx');
 

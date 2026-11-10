@@ -1,6 +1,6 @@
 'use client';
 
-import type {OfferTrackSlug} from '@/lib/offer-tracks';
+import type {OfferTrackSlug} from '@/lib/offer/offer-tracks';
 import type {ContactAttemptOutcome, ContactOfferValue} from '@/lib/contact/intake';
 import {
   currentBrowserPagePath,

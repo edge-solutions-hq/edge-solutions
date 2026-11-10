@@ -8,9 +8,9 @@ const root = path.resolve(import.meta.dirname, '..');
 register('./ts-extension-resolver.mjs', import.meta.url);
 
 const {LOCALES} = await import('../src/i18n/routing.ts');
-const {OFFER_TRACK_SLUGS} = await import('../src/lib/offer-tracks.ts');
+const {OFFER_TRACK_SLUGS} = await import('../src/lib/offer/offer-tracks.ts');
 const {getServiceFaqItems} = await import('../src/lib/content/service-faq.ts');
-const {faqPageSchema} = await import('../src/lib/seo.ts');
+const {faqPageSchema} = await import('../src/lib/site/seo.ts');
 
 function read(relativePath) {
   return readFileSync(path.join(root, relativePath), 'utf8');

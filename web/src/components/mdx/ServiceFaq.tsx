@@ -1,5 +1,5 @@
 import type {Locale} from '@/i18n/routing';
-import type {OfferTrackSlug} from '@/lib/offer-tracks';
+import type {OfferTrackSlug} from '@/lib/offer/offer-tracks';
 import {getServiceFaqItems} from '@/lib/content/service-faq';
 import {List, ListItem} from '@/components/studio/List';
 

@@ -3,8 +3,8 @@ import {setRequestLocale} from 'next-intl/server';
 import {getTranslations} from 'next-intl/server';
 import {TrackedLink} from '@/components/ui/TrackedLink';
 import {surfaceClass} from '@/components/ui/Surface';
-import {getServicesDecisionItems, getServicesHubOfferCards} from '@/lib/offer-presentation';
-import {getServicesPageProfile} from '@/lib/page-profiles';
+import {getServicesDecisionItems, getServicesHubOfferCards} from '@/lib/offer/offer-presentation';
+import {getServicesPageProfile} from '@/lib/site/page-profiles';
 import {JsonLd} from '@/components/seo/JsonLd';
 
 type ServicesHubOfferCard = ReturnType<typeof getServicesHubOfferCards>[number];

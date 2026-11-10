@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import {OFFER_TRACKS, type OfferTrackSlug} from './offer-tracks';
+import {OFFER_TRACKS, type OfferTrackSlug} from '../offer/offer-tracks';
 import {
   breadcrumbSchema,
   buildAbsoluteLocaleAlternates,

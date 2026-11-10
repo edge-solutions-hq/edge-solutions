@@ -8,9 +8,9 @@ import {TrackedLink} from '@/components/ui/TrackedLink';
 import {Container} from '@/components/studio/Container';
 import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
-import {getHomePresentationModel} from '@/lib/home-presentation';
-import {getHomeOfferCards} from '@/lib/offer-presentation';
-import {getHomePageProfile} from '@/lib/page-profiles';
+import {getHomePresentationModel} from '@/lib/offer/home-presentation';
+import {getHomeOfferCards} from '@/lib/offer/offer-presentation';
+import {getHomePageProfile} from '@/lib/site/page-profiles';
 import {JsonLd} from '@/components/seo/JsonLd';
 
 type HomeOfferCard = ReturnType<typeof getHomeOfferCards>[number];

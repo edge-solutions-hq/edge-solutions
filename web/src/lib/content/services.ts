@@ -2,7 +2,7 @@ import {resolveLocale, type Locale} from '../../i18n/routing';
 import {
   isOfferTrackSlug,
   type OfferTrackSlug,
-} from '../offer-tracks';
+} from '../offer/offer-tracks';
 import {
   getOfferTrackEvidenceContract,
   getOfferTrackEvidenceProfile,

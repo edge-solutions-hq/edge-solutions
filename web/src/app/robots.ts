@@ -1,5 +1,5 @@
 import type {MetadataRoute} from 'next';
-import {site} from '@/lib/site';
+import {site} from '@/lib/site/site';
 
 export default function robots(): MetadataRoute.Robots {
   const base = site.url.replace(/\/$/, '');

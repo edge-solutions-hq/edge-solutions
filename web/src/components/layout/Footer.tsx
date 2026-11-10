@@ -1,6 +1,6 @@
 import {getTranslations} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
-import {site} from '@/lib/site';
+import {site} from '@/lib/site/site';
 import {AnalyticsSettingsButton} from '@/components/analytics/AnalyticsConsentProvider';
 
 type SocialLink = {label: string; href: string};

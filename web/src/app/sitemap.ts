@@ -1,6 +1,6 @@
 import type {MetadataRoute} from 'next';
 import {routing} from '@/i18n/routing';
-import {getLocalizedSitemapEntries} from '@/lib/page-profiles';
+import {getLocalizedSitemapEntries} from '@/lib/site/page-profiles';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return getLocalizedSitemapEntries(routing.locales);

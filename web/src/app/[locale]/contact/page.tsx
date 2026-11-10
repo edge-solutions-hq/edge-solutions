@@ -4,7 +4,7 @@ import {getTranslations} from 'next-intl/server';
 import {ContactForm} from './ContactForm';
 import {Card} from '@/components/ui/Card';
 import {Surface} from '@/components/ui/Surface';
-import {getContactPageProfile} from '@/lib/page-profiles';
+import {getContactPageProfile} from '@/lib/site/page-profiles';
 import {JsonLd} from '@/components/seo/JsonLd';
 
 type Props = {

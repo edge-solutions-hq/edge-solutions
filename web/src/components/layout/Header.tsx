@@ -2,11 +2,11 @@ import {getTranslations} from 'next-intl/server';
 import {Suspense} from 'react';
 import {Link} from '@/i18n/navigation';
 import {LocaleSwitch, LocaleSwitchFallback} from './LocaleSwitch';
-import {site} from '@/lib/site';
+import {site} from '@/lib/site/site';
 import {ButtonLink} from '@/components/ui/Button';
 import {HeaderNav} from './HeaderNav';
 import {MobileMenu} from './MobileMenu';
-import {getHeaderOfferNavItems} from '@/lib/offer-presentation';
+import {getHeaderOfferNavItems} from '@/lib/offer/offer-presentation';
 import {getHeaderNavigationItems} from '@/lib/navigation/header-navigation';
 
 export async function Header({locale}: {locale: string}) {
