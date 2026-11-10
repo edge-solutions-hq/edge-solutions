@@ -1,6 +1,6 @@
 import type {ContactCtaPlacement} from '@/lib/analytics/taxonomy';
-import {getAssetAuthorityRecord, type AssetAuthorityRecord} from './content/asset-authority';
-import {site} from './site';
+import {getAssetAuthorityRecord, type AssetAuthorityRecord} from '../content/asset-authority';
+import {site} from '../site/site';
 
 type Translate = (key: string) => string;
 

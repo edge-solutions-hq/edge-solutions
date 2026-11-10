@@ -1,8 +1,8 @@
-import enMessages from '../../messages/en.json';
-import frMessages from '../../messages/fr.json';
-import nlMessages from '../../messages/nl.json';
-import {LOCALES, type Locale} from '../i18n/routing';
-import {getOfferTrackPath, OFFER_TRACKS} from './offer-tracks';
+import enMessages from '../../../messages/en.json';
+import frMessages from '../../../messages/fr.json';
+import nlMessages from '../../../messages/nl.json';
+import {LOCALES, type Locale} from '../../i18n/routing';
+import {getOfferTrackPath, OFFER_TRACKS} from '../offer/offer-tracks';
 import {STATIC_PAGE_DEFINITIONS} from './page-profiles';
 import {absoluteUrl, localizedPath} from './seo';
 import {site} from './site';

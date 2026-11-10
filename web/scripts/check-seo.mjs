@@ -396,12 +396,12 @@ function assertSitemapUrlHasLocaleAlternates(sitemapXml, pagePath) {
 
 const routingSource = readSource('src/i18n/routing.ts');
 const servicesSource = readSource('src/lib/content/services.ts');
-const pageProfilesSource = readSource('src/lib/page-profiles.ts');
+const pageProfilesSource = readSource('src/lib/site/page-profiles.ts');
 const sitemapSource = readSource('src/app/sitemap.ts');
 const robotsSource = readSource('src/app/robots.ts');
 const llmsTxtSource = readSource('src/app/llms.txt/route.ts');
-const seoSource = readSource('src/lib/seo.ts');
-const aiDiscoverySource = readSource('src/lib/ai-discovery.ts');
+const seoSource = readSource('src/lib/site/seo.ts');
+const aiDiscoverySource = readSource('src/lib/site/ai-discovery.ts');
 const homeSource = readSource('src/app/[locale]/page.tsx');
 const servicesIndexSource = readSource('src/app/[locale]/services/page.tsx');
 const serviceDetailSource = readSource('src/app/[locale]/services/[slug]/page.tsx');
@@ -424,7 +424,7 @@ assert(
 assert(sitemapSource.includes("from '@/i18n/routing'"), 'sitemap.ts must derive locales from routing.locales');
 assert(
   sitemapUsesCentralizedPageProfiles ||
-    (sitemapSource.includes("from '@/lib/offer-tracks'") && sitemapSource.includes('OFFER_TRACKS')),
+    (sitemapSource.includes("from '@/lib/offer/offer-tracks'") && sitemapSource.includes('OFFER_TRACKS')),
   'sitemap.ts must derive service routes from OFFER_TRACKS'
 );
 assert(
@@ -436,10 +436,10 @@ assert(llmsTxtSource.includes('buildLlmsTxt'), 'llms.txt route must use the AI d
 assert(llmsTxtSource.includes('X-Robots-Tag'), 'llms.txt route must explicitly set an X-Robots-Tag');
 assert(aiDiscoverySource.includes('OFFER_TRACKS'), 'AI discovery must derive services from OFFER_TRACKS');
 assert(aiDiscoverySource.includes('STATIC_PAGE_DEFINITIONS'), 'AI discovery must derive static pages from page profiles');
-assertSourceContainsAll(seoSource, Object.values(hreflangByLocale), 'src/lib/seo.ts hreflang map');
+assertSourceContainsAll(seoSource, Object.values(hreflangByLocale), 'src/lib/site/seo.ts hreflang map');
 assert(
   seoSource.includes("languages['x-default']"),
-  'src/lib/seo.ts must expose an x-default hreflang alternate'
+  'src/lib/site/seo.ts must expose an x-default hreflang alternate'
 );
 assertSourceContainsAll(
   homeSource,

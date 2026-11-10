@@ -7,7 +7,7 @@ import {
   getUnfiredScrollDepthThresholds,
 } from '@/lib/analytics/service-scroll-depth';
 import {scrollDepthThresholds} from '@/lib/analytics/taxonomy';
-import type {OfferTrackSlug} from '@/lib/offer-tracks';
+import type {OfferTrackSlug} from '@/lib/offer/offer-tracks';
 
 type ServiceScrollDepthTrackerProps = {
   offerTrackSlug: OfferTrackSlug;

@@ -1,4 +1,4 @@
-import {site} from '../site';
+import {site} from '../site/site';
 
 export type AssetSourceType = 'approved_asset' | 'captured_render' | 'screenshot' | 'repo_source_fact' | 'generated_visual';
 

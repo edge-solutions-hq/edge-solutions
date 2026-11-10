@@ -10,14 +10,14 @@ Keep route files and UI surfaces thin.
 
 | Area | Owner | Boundary |
 | --- | --- | --- |
-| Offer tracks | `web/src/lib/offer-tracks.ts` | AI-first track order, slugs, paths, message-key stems, and sitemap freshness. |
-| Offer presentation | `web/src/lib/offer-presentation.ts` | Header nav items, homepage offer cards, services-hub cards, and decision-strip items derived from offer tracks. |
-| Home presentation | `web/src/lib/home-presentation.ts` | Homepage public project model, process cards, and contact CTA placements. |
-| Page profiles | `web/src/lib/page-profiles.ts` | Localized public page metadata, JSON-LD graph selection, static page sitemap facts, and localized sitemap entries. |
-| Global site profile | `web/src/lib/site-profile.ts` | Layout-level localized metadata and global structured data. |
-| Site constants | `web/src/lib/site.ts` | Canonical company URL, contact, VAT, and social references consumed by SEO and profile modules. |
-| SEO helpers and schema | `web/src/lib/seo.ts` | Localized URL/hreflang helpers, metadata builder, and reusable Organization/WebSite/WebPage/Service/FAQ/ItemList schema builders. |
-| AI discovery | `web/src/lib/ai-discovery.ts` | `llms.txt` content derived from site profile, localized routes, offer tracks, and claim guardrails. |
+| Offer tracks | `web/src/lib/offer/offer-tracks.ts` | AI-first track order, slugs, paths, message-key stems, and sitemap freshness. |
+| Offer presentation | `web/src/lib/offer/offer-presentation.ts` | Header nav items, homepage offer cards, services-hub cards, and decision-strip items derived from offer tracks. |
+| Home presentation | `web/src/lib/offer/home-presentation.ts` | Homepage public project model, process cards, and contact CTA placements. |
+| Page profiles | `web/src/lib/site/page-profiles.ts` | Localized public page metadata, JSON-LD graph selection, static page sitemap facts, and localized sitemap entries. |
+| Global site profile | `web/src/lib/site/site-profile.ts` | Layout-level localized metadata and global structured data. |
+| Site constants | `web/src/lib/site/site.ts` | Canonical company URL, contact, VAT, and social references consumed by SEO and profile modules. |
+| SEO helpers and schema | `web/src/lib/site/seo.ts` | Localized URL/hreflang helpers, metadata builder, and reusable Organization/WebSite/WebPage/Service/FAQ/ItemList schema builders. |
+| AI discovery | `web/src/lib/site/ai-discovery.ts` | `llms.txt` content derived from site profile, localized routes, offer tracks, and claim guardrails. |
 | Service content | `web/src/lib/content/services.ts` | Localized MDX loading through the offer-track catalog, with explicit fallback state. |
 | Service route model | `web/src/lib/content/service-page.ts` | Service route params, valid locale handling, localized content lookup, metadata defaults, and scroll-tracking identity. |
 | Service FAQ | `web/src/lib/content/service-faq.ts` | Localized FAQ copy by locale and offer track for service pages and FAQ JSON-LD. |

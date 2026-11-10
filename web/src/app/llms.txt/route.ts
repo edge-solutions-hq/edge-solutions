@@ -1,4 +1,4 @@
-import {buildLlmsTxt} from '@/lib/ai-discovery';
+import {buildLlmsTxt} from '@/lib/site/ai-discovery';
 
 export const dynamic = 'force-static';
 export const revalidate = 86400;

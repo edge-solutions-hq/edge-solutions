@@ -1,4 +1,4 @@
-import {site} from '@/lib/site';
+import {site} from '@/lib/site/site';
 import {getContactDeliveryConfig} from '@/lib/runtime-config';
 import type {ContactAbuseAdapter} from '@/lib/contact/abuse';
 import {

@@ -1,4 +1,4 @@
-import {site} from '@/lib/site';
+import {site} from '@/lib/site/site';
 import {cleanEnvValue} from '@/lib/runtime-config-core.mjs';
 
 export {

@@ -1,5 +1,5 @@
 import type {Locale} from '../../i18n/routing';
-import type {OfferTrackSlug} from '../offer-tracks';
+import type {OfferTrackSlug} from '../offer/offer-tracks';
 
 export type ServiceFaqItem = {
   question: string;

@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import {resolveLocale, type Locale} from '../i18n/routing';
+import {resolveLocale, type Locale} from '../../i18n/routing';
 import {site} from './site';
 import {buildLocalizedPageMetadata, organizationSchema, personSchema} from './seo';
 

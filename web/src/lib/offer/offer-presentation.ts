@@ -1,4 +1,4 @@
-import {OFFER_TRACKS, type OfferTrackSlug} from '@/lib/offer-tracks';
+import {OFFER_TRACKS, type OfferTrackSlug} from '@/lib/offer/offer-tracks';
 
 type Translate = (key: string) => string;
 

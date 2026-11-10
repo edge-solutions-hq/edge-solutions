@@ -26,11 +26,11 @@ function copyFixtureFile(fixtureRoot, relativePath) {
 function withSourceFixture(mutate) {
   const fixtureRoot = mkdtempSync(path.join(os.tmpdir(), 'edge-seo-source-facts-'));
   const sourceFiles = [
-    'src/lib/site.ts',
+    'src/lib/site/site.ts',
     'src/i18n/routing.ts',
-    'src/lib/seo.ts',
-    'src/lib/page-profiles.ts',
-    'src/lib/offer-tracks.ts',
+    'src/lib/site/seo.ts',
+    'src/lib/site/page-profiles.ts',
+    'src/lib/offer/offer-tracks.ts',
   ];
   const facts = getLiveSeoSourceFacts({root});
 

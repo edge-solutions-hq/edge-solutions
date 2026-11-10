@@ -1,4 +1,4 @@
-import type {OfferTrackSlug} from '@/lib/offer-tracks';
+import type {OfferTrackSlug} from '@/lib/offer/offer-tracks';
 import type {Locale} from '@/i18n/routing';
 import {
   getAssetAuthorityRecord,

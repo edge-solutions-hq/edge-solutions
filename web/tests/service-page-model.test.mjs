@@ -4,8 +4,8 @@ import {register} from 'node:module';
 
 register('./ts-extension-resolver.mjs', import.meta.url);
 const {LOCALES} = await import('../src/i18n/routing.ts');
-const {OFFER_TRACKS} = await import('../src/lib/offer-tracks.ts');
-const {getServiceSchemaDetails} = await import('../src/lib/seo.ts');
+const {OFFER_TRACKS} = await import('../src/lib/offer/offer-tracks.ts');
+const {getServiceSchemaDetails} = await import('../src/lib/site/seo.ts');
 const services = await import('../src/lib/content/services.ts');
 const servicePage = await import('../src/lib/content/service-page.ts');
 

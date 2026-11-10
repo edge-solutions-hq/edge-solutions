@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {register} from 'node:module';
 
 register('./ts-extension-resolver.mjs', import.meta.url);
-const {buildLocalizedPageMetadata} = await import('../src/lib/seo.ts');
+const {buildLocalizedPageMetadata} = await import('../src/lib/site/seo.ts');
 
 describe('global site profile ownership', () => {
   it('keeps localized metadata wired to an approved social preview image', () => {

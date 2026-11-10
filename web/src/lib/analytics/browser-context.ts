@@ -1,5 +1,5 @@
 import {LOCALES} from '../../i18n/routing';
-import {isOfferTrackSlug, type OfferTrackSlug} from '../offer-tracks';
+import {isOfferTrackSlug, type OfferTrackSlug} from '../offer/offer-tracks';
 
 type BrowserAnalyticsDocument = {
   documentElement?: {

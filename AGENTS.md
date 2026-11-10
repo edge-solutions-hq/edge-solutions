@@ -38,7 +38,7 @@ Node.js 24 is required by `.nvmrc`, `web/package.json`, and CI. Prefer the full 
 - Locales: `fr`, `en`, `nl`; default locale is `fr`; URLs are always prefixed.
 - Public service content: `web/src/content/{locale}/services/{slug}.mdx`
 - UI messages: `web/messages/{locale}.json`
-- Offer tracks: `web/src/lib/offer-tracks.ts`; do not rebuild service order or slugs elsewhere.
+- Offer tracks: `web/src/lib/offer/offer-tracks.ts`; do not rebuild service order or slugs elsewhere.
 - Content registries live under `web/src/lib/content/`.
 - Analytics contracts live under `web/src/lib/analytics/` and `docs/analytics/`.
 - Shared surface styling lives in `web/src/components/ui/Surface.tsx`; reuse those variants before adding page-specific card or panel shadows.

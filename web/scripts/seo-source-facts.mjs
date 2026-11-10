@@ -398,20 +398,20 @@ function expectedJsonLdTypesForRouteFamily(family) {
 }
 
 export function getLiveSeoSourceFacts({root = defaultRoot} = {}) {
-  const siteSource = readSource(root, 'src/lib/site.ts');
+  const siteSource = readSource(root, 'src/lib/site/site.ts');
   const routingSource = readSource(root, 'src/i18n/routing.ts');
-  const seoSource = readSource(root, 'src/lib/seo.ts');
-  const pageProfilesSource = readSource(root, 'src/lib/page-profiles.ts');
-  const offerTracksSource = readSource(root, 'src/lib/offer-tracks.ts');
+  const seoSource = readSource(root, 'src/lib/site/seo.ts');
+  const pageProfilesSource = readSource(root, 'src/lib/site/page-profiles.ts');
+  const offerTracksSource = readSource(root, 'src/lib/offer/offer-tracks.ts');
 
-  const siteUrl = normalizeSiteUrl(extractStringProperty(siteSource, 'url', 'src/lib/site.ts'));
+  const siteUrl = normalizeSiteUrl(extractStringProperty(siteSource, 'url', 'src/lib/site/site.ts'));
   const locales = extractConstStringArray(routingSource, 'LOCALES', 'src/i18n/routing.ts');
   const defaultLocale = extractConstString(routingSource, 'DEFAULT_LOCALE', 'src/i18n/routing.ts');
-  const hreflangByLocale = extractStringRecord(seoSource, 'HREFLANG_BY_LOCALE', 'src/lib/seo.ts');
-  const staticPageSuffixes = extractStaticPageSuffixes(pageProfilesSource, 'src/lib/page-profiles.ts');
-  const serviceSlugs = extractOfferTrackSlugs(offerTracksSource, 'src/lib/offer-tracks.ts');
-  const staticPages = extractStaticPageDefinitions(pageProfilesSource, 'src/lib/page-profiles.ts');
-  const servicePages = extractOfferTracks(offerTracksSource, 'src/lib/offer-tracks.ts');
+  const hreflangByLocale = extractStringRecord(seoSource, 'HREFLANG_BY_LOCALE', 'src/lib/site/seo.ts');
+  const staticPageSuffixes = extractStaticPageSuffixes(pageProfilesSource, 'src/lib/site/page-profiles.ts');
+  const serviceSlugs = extractOfferTrackSlugs(offerTracksSource, 'src/lib/offer/offer-tracks.ts');
+  const staticPages = extractStaticPageDefinitions(pageProfilesSource, 'src/lib/site/page-profiles.ts');
+  const servicePages = extractOfferTracks(offerTracksSource, 'src/lib/offer/offer-tracks.ts');
   const routeFamilies = [...staticPages, ...servicePages];
   const servicePageSuffixes = serviceSlugs.map((slug) => `/services/${slug}`);
   const pageSuffixes = unique([...staticPageSuffixes, ...servicePageSuffixes]);
