@@ -4,7 +4,7 @@
 
 - Public website for Edge Solutions: `edge-solutions.be`.
 - Main app: `web/`, a Next.js App Router site with TypeScript, Tailwind CSS, MDX content, FR/EN/NL routes, analytics, and a Resend-backed contact form.
-- Personal source material lives in `ressources/` and may be used for truthful bios or experience wording.
+- Personal source material lives in `resources/` and may be used for truthful bios or experience wording.
 
 ## Setup Commands
 
