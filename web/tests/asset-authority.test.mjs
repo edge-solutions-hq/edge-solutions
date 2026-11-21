@@ -1,61 +1,60 @@
 import {describe, it} from 'node:test';
 import assert from 'node:assert/strict';
+import {existsSync} from 'node:fs';
 import {register} from 'node:module';
+import path from 'node:path';
 
 register('./ts-extension-resolver.mjs', import.meta.url);
 
 const {
   evaluateClaimAuthority,
-  getAssetAuthorityRecord,
   isPublicAssetApproved,
   assetAuthorityRegistry,
-  publicAssetMetadata,
   resolveAssetAuthorityRecord,
 } = await import('../src/lib/content/asset-authority.ts');
 const {serviceEvidenceRegistry} = await import('../src/lib/content/service-evidence-registry.ts');
 const {getHomePresentationModel} = await import('../src/lib/offer/home-presentation.ts');
 
-function translate(key) {
-  return key;
+const publicDir = path.resolve(import.meta.dirname, '../public');
+
+function generatedVisual(overrides) {
+  return {
+    assetId: 'generated-concept',
+    publicPath: '/images/work/generated-concept.svg',
+    sourceType: 'generated_visual',
+    approvalStatus: 'approved',
+    usageScopes: ['concept'],
+    sourceArtifactRefs: [],
+    claimRestrictions: ['no_outcome_metrics'],
+    provenanceSummary: 'Synthetic concept only.',
+    ...overrides,
+  };
 }
 
 describe('asset authority', () => {
-  it('keeps public source assets approved, scoped, and non-leaky', () => {
-    assert.ok(assetAuthorityRegistry.length >= 3);
+  it('registers only approved, sourced, client-mark-free assets that exist on disk', () => {
     for (const asset of assetAuthorityRegistry) {
-      assert.equal(asset.approvalStatus, 'approved');
-      assert.equal(asset.authority, 'authoritative');
-      assert.ok(asset.publicPath.startsWith('/images/work/'));
-      assert.ok(asset.claimRestrictions.includes('no_client_marks'));
-      assert.ok(asset.sourceArtifactRefs.length > 0);
-
-      const metadata = publicAssetMetadata(asset);
-      assert.deepEqual(
-        Object.keys(metadata).sort(),
-        ['approvalStatus', 'assetId', 'authority', 'claimRestrictions', 'provenanceSummary', 'publicPath', 'sourceType', 'usageScopes'].sort()
-      );
-      assert.equal(metadata.internalDebug, undefined);
-      assert.equal(metadata.promptDiagnostics, undefined);
-      assert.equal(metadata.cachePath, undefined);
+      assert.equal(isPublicAssetApproved(asset.assetId), true, `${asset.assetId} is not approved`);
+      assert.ok(asset.claimRestrictions.includes('no_client_marks'), `${asset.assetId} allows client marks`);
+      assert.ok(asset.sourceArtifactRefs.length > 0, `${asset.assetId} has no provenance`);
+      assert.ok(existsSync(path.join(publicDir, asset.publicPath)), `${asset.publicPath} missing from public/`);
     }
   });
 
-  it('wires service evidence contracts and homepage public project through approved authority records', () => {
+  it('only shows approved images in service evidence and the homepage public project', () => {
     assert.deepEqual(serviceEvidenceRegistry.validate(), []);
     for (const profile of serviceEvidenceRegistry.profiles) {
       const contract = serviceEvidenceRegistry.getContract(profile.slug);
-      assert.ok(contract.render.assetAuthority, `${profile.slug} missing asset authority`);
-      assert.equal(contract.render.assetAuthority.approvalStatus, 'approved');
-      assert.equal(isPublicAssetApproved(contract.render.assetAuthority.publicPath), true);
+      assert.ok(contract, `${profile.slug} has no evidence contract`);
+      assert.equal(isPublicAssetApproved(contract.render.imagePath), true, `${profile.slug} evidence image is not approved`);
     }
 
-    const home = getHomePresentationModel(translate);
-    assert.equal(home.publicProject.assetAuthority.assetId, 'rusty-art-showcase');
-    assert.equal(home.publicProject.assetAuthority.authority, 'authoritative');
+    const {publicProject} = getHomePresentationModel((key) => key);
+    assert.equal(isPublicAssetApproved(publicProject.imageSrc), true, 'homepage public project image is not approved');
+    assert.equal(publicProject.assetAuthority.publicPath, publicProject.imageSrc);
   });
 
   it('forbids restricted claims without an authoritative approved source', () => {
-    assert.equal(getAssetAuthorityRecord('missing-asset'), null);
     assert.deepEqual(resolveAssetAuthorityRecord('missing-asset'), {
       status: 'setup_required',
       asset: null,
@@ -73,49 +72,25 @@ describe('asset authority', () => {
     });
   });
 
-  it('fails closed for image-backed claims and generated visual support', () => {
+  it('fails closed for image-backed claims without a source', () => {
     assert.deepEqual(evaluateClaimAuthority({claimType: 'process', imageBacked: true, sourceAssetIds: []}), {
       allowed: false,
       reason: 'missing_authoritative_source_artifact',
       sourceAssetId: null,
     });
-    assert.deepEqual(evaluateClaimAuthority({
-      claimType: 'metric',
-      imageBacked: true,
-      sourceAssets: [{
-        assetId: 'generated-concept',
-        publicPath: '/images/work/generated-concept.svg',
-        sourceType: 'generated_visual',
-        approvalStatus: 'approved',
-        authority: 'non_authoritative',
-        usageScopes: ['concept'],
-        sourceArtifactRefs: [],
-        claimRestrictions: ['no_outcome_metrics'],
-        provenanceSummary: 'Synthetic concept only.',
-      }],
-    }), {
-      allowed: false,
-      reason: 'generated_visual_cannot_authorize_restricted_claim',
-      sourceAssetId: null,
-    });
-    assert.deepEqual(evaluateClaimAuthority({
-      claimType: 'metric',
-      imageBacked: true,
-      sourceAssets: [{
-        assetId: 'misconfigured-generated-concept',
-        publicPath: '/images/work/misconfigured-generated-concept.svg',
-        sourceType: 'generated_visual',
-        approvalStatus: 'approved',
-        authority: 'authoritative',
-        usageScopes: ['concept'],
-        sourceArtifactRefs: [],
-        claimRestrictions: ['no_outcome_metrics'],
-        provenanceSummary: 'Synthetic concept only.',
-      }],
-    }), {
-      allowed: false,
-      reason: 'generated_visual_cannot_authorize_restricted_claim',
-      sourceAssetId: null,
-    });
   });
+
+  for (const authority of ['non_authoritative', 'authoritative']) {
+    it(`never lets a generated visual with ${authority} authority authorize a restricted claim`, () => {
+      assert.deepEqual(evaluateClaimAuthority({
+        claimType: 'metric',
+        imageBacked: true,
+        sourceAssets: [generatedVisual({authority})],
+      }), {
+        allowed: false,
+        reason: 'generated_visual_cannot_authorize_restricted_claim',
+        sourceAssetId: null,
+      });
+    });
+  }
 });

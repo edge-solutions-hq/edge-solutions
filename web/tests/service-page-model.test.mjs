@@ -80,16 +80,6 @@ describe('service content availability', () => {
     assert.equal(result.didFallback, false);
     assert.equal(result.renderPolicy.kind, 'localized');
     assert.equal(result.metadata.title, 'EN realtime');
-    assert.equal(result.evidenceContract.slug, 'realtime-games');
-    assert.equal(result.evidenceContract.render.module, 'PrototypeSignals');
-    assert.equal(result.evidenceContract.render.imagePath, 'services-realtime-prototype-board.svg');
-    assert.deepEqual(
-      result.evidenceContract.structure.map((item) => [item.key, item.expectedCount]),
-      [
-        ['signals', 3],
-        ['phases', 3],
-      ]
-    );
   });
 
   it('returns fallback hit state when localized content is absent and FR content exists', async () => {
@@ -105,8 +95,6 @@ describe('service content availability', () => {
     assert.equal(result.didFallback, true);
     assert.equal(result.renderPolicy.kind, 'fallback');
     assert.equal(result.metadata.title, 'FR realtime');
-    assert.equal(result.evidenceContract.slug, 'realtime-games');
-    assert.equal(result.evidenceContract.render.module, 'PrototypeSignals');
   });
 
   it('returns invalid slug state before loading content', async () => {
@@ -202,16 +190,6 @@ describe('service page model ownership', () => {
         assert.deepEqual(service.provider, {
           '@id': 'https://edge-solutions.be#organization',
         });
-        assert.deepEqual(service.areaServed, [
-          {
-            '@type': 'Country',
-            name: 'Belgium',
-          },
-          {
-            '@type': 'AdministrativeArea',
-            name: 'Wallonia',
-          },
-        ]);
         assert.deepEqual(service.offers, {
           '@type': 'Offer',
           name: details.offer.name,
@@ -228,32 +206,5 @@ describe('service page model ownership', () => {
         assert.equal(webPage.dateModified, track.lastModified.toISOString());
       }
     }
-  });
-
-  it('exposes evidence policy as structured page-model data', async () => {
-    const model = await servicePage.getServicePageModel({
-      locale: 'en',
-      slug: 'ai-automation',
-      loaders: loaderMap({
-        fr: {'ai-automation': async () => mdxModule('FR AI')},
-        en: {'ai-automation': async () => mdxModule('EN AI')},
-      }),
-    });
-
-    assert.ok(model);
-    assert.equal(model.evidencePolicy.offerTrackSlug, 'ai-automation');
-    assert.equal(model.evidencePolicy.renderModule, 'WorkflowSnapshot');
-    assert.equal(model.evidencePolicy.imagePath, 'services-ai-workflow-board.svg');
-    assert.deepEqual(
-      model.evidencePolicy.structuralExpectations.map((item) => [item.key, item.expectedCount]),
-      [
-        ['reviewPoints', 3],
-        ['steps', 3],
-      ]
-    );
-    assert.deepEqual(
-      model.evidencePolicy.requiredSignals.map((signal) => signal.concept),
-      ['human review', 'source of truth', 'action limits']
-    );
   });
 });

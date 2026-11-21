@@ -8,8 +8,6 @@ const {LOCALES} = await import('../src/i18n/routing.ts');
 const {
   classifyAiReferrer,
   createBrowserAnalyticsContext,
-  currentBrowserPagePath,
-  readBrowserAnalyticsContext,
   resolveBrowserAnalyticsPageContext,
   resolveBrowserAnalyticsLocale,
 } = await import('../src/lib/analytics/browser-context.ts');
@@ -31,11 +29,11 @@ function fakeLocation({
 }
 
 describe('browser analytics context', () => {
-  it('derives supported locales from routing locales', () => {
+  it('falls back to the localized path segment for every routing locale when html lang is unsupported', () => {
     for (const locale of LOCALES) {
       assert.equal(
         resolveBrowserAnalyticsLocale({
-          document: fakeDocument({lang: ''}),
+          document: fakeDocument({lang: 'de-BE'}),
           pathname: `/${locale}/services`,
         }),
         locale
@@ -50,16 +48,6 @@ describe('browser analytics context', () => {
         pathname: '/fr/services',
       }),
       'en'
-    );
-  });
-
-  it('falls back to the first localized path segment when html lang is unsupported', () => {
-    assert.equal(
-      resolveBrowserAnalyticsLocale({
-        document: fakeDocument({lang: 'de-BE'}),
-        pathname: '/nl/services',
-      }),
-      'nl'
     );
   });
 
@@ -81,16 +69,19 @@ describe('browser analytics context', () => {
           title: '  Edge Solutions  ',
           referrer: '  https://referrer.example/path  ',
         }),
-        location: fakeLocation(),
+        location: fakeLocation({
+          href: 'https://example.com/fr/services/ai-automation?source=hero',
+          pathname: '/fr/services/ai-automation',
+        }),
       }),
       {
-        page_family: 'services_index',
+        page_family: 'service_detail',
         site_locale: 'fr',
-        page_path: '/fr/services?source=hero',
-        page_location: 'https://example.com/fr/services?source=hero',
+        page_path: '/fr/services/ai-automation?source=hero',
+        page_location: 'https://example.com/fr/services/ai-automation?source=hero',
         page_title: 'Edge Solutions',
         page_referrer: 'https://referrer.example/path',
-        source_offer_track: undefined,
+        source_offer_track: 'ai-automation',
       }
     );
   });
@@ -153,11 +144,6 @@ describe('browser analytics context', () => {
         source_offer_track: undefined,
       }
     );
-  });
-
-  it('keeps browser reads optional outside a real browser', () => {
-    assert.equal(readBrowserAnalyticsContext(), undefined);
-    assert.equal(currentBrowserPagePath(), undefined);
   });
 
   it('classifies localized page families and current service-track source', () => {

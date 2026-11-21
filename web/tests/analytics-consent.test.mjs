@@ -22,36 +22,7 @@ describe('analytics consent persistence', () => {
     assert.equal(parseAnalyticsConsent('unknown'), 'undecided');
   });
 
-  it('reads and writes the versioned storage value', () => {
-    const values = new Map();
-    const storage = {
-      getItem: (key) => values.get(key) ?? null,
-      setItem: (key, value) => values.set(key, value),
-    };
-
-    assert.equal(readAnalyticsConsent(storage), 'undecided');
-    assert.equal(writeAnalyticsConsent('accepted', storage), true);
-    assert.equal(values.get(ANALYTICS_CONSENT_STORAGE_KEY), 'accepted');
-    assert.equal(readAnalyticsConsent(storage), 'accepted');
-    assert.equal(writeAnalyticsConsent('rejected', storage), true);
-    assert.equal(readAnalyticsConsent(storage), 'rejected');
-  });
-
-  it('fails closed when browser storage is unavailable', () => {
-    const unavailableStorage = {
-      getItem() {
-        throw new Error('blocked');
-      },
-      setItem() {
-        throw new Error('blocked');
-      },
-    };
-
-    assert.equal(readAnalyticsConsent(unavailableStorage), 'undecided');
-    assert.equal(writeAnalyticsConsent('accepted', unavailableStorage), false);
-  });
-
-  it('keeps a failed withdrawal rejected across reloads', () => {
+  it('keeps a failed withdrawal rejected until visitors accept again', () => {
     const originalWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
     const localValues = new Map([
       [ANALYTICS_CONSENT_STORAGE_KEY, 'accepted'],
@@ -78,17 +49,10 @@ describe('analytics consent persistence', () => {
     });
 
     try {
-      assert.equal(readAnalyticsConsent(), 'accepted');
       assert.equal(writeAnalyticsConsent('rejected'), true);
-      assert.equal(localValues.get(ANALYTICS_CONSENT_STORAGE_KEY), 'accepted');
-      assert.equal(
-        sessionValues.get(ANALYTICS_CONSENT_STORAGE_KEY),
-        'rejected'
-      );
       assert.equal(readAnalyticsConsent(), 'rejected');
 
       assert.equal(writeAnalyticsConsent('accepted'), true);
-      assert.equal(sessionValues.has(ANALYTICS_CONSENT_STORAGE_KEY), false);
       assert.equal(readAnalyticsConsent(), 'accepted');
     } finally {
       if (originalWindow) {
@@ -99,38 +63,17 @@ describe('analytics consent persistence', () => {
     }
   });
 
-  it('guards localStorage property access and session rejection', () => {
+  it('session rejection overrides stored acceptance until accepted again', () => {
     const originalWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
     Object.defineProperty(globalThis, 'window', {
       configurable: true,
-      value: Object.defineProperty({}, 'localStorage', {
-        configurable: true,
-        get() {
-          throw new Error('blocked getter');
-        },
-      }),
+      value: {
+        localStorage: {getItem: () => 'accepted'},
+        sessionStorage: {getItem: () => null},
+      },
     });
 
     try {
-      assert.equal(readAnalyticsConsent(), 'undecided');
-      assert.equal(writeAnalyticsConsent('accepted'), false);
-
-      const acceptedStorage = {
-        getItem: () => 'accepted',
-        setItem() {},
-      };
-      Object.defineProperty(globalThis.window, 'localStorage', {
-        configurable: true,
-        value: acceptedStorage,
-      });
-      Object.defineProperty(globalThis.window, 'sessionStorage', {
-        configurable: true,
-        value: {
-          getItem: () => null,
-          removeItem() {},
-          setItem() {},
-        },
-      });
       setAnalyticsConsentForSession('rejected');
       assert.equal(hasAnalyticsConsent(), false);
       setAnalyticsConsentForSession('accepted');

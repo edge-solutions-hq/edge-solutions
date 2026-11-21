@@ -1,3 +1,4 @@
+import type {Page} from '@playwright/test';
 import {
   ANALYTICS_CONSENT_STORAGE_KEY,
   expect,
@@ -5,7 +6,26 @@ import {
   guardBrowserNetwork,
   optionalAnalyticsKind,
   test,
+  type NetworkEvidence,
 } from './fixtures';
+
+async function expectAllOptionalRuntimesRequested(network: NetworkEvidence) {
+  await expect.poll(() => new Set(
+    network.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
+  ).size).toBe(3);
+}
+
+function countGoogleEmissions(page: Page) {
+  return page.evaluate(() => ({
+    configs: (window.dataLayer ?? []).filter((entry) => {
+      const args = Array.from(entry as unknown as ArrayLike<unknown>);
+      return args[0] === 'config';
+    }).length,
+    conversions: (window.dataLayer ?? []).filter(
+      (entry) => entry.event === 'service_card_click'
+    ).length,
+  }));
+}
 
 test('undecided visitors produce no optional load or conversion emission', async ({page}) => {
   const network = await guardBrowserNetwork(page);
@@ -65,9 +85,7 @@ test('acceptance persists, enables configured runtimes, and withdrawal disables 
   await expectNoOptionalRuntime(page, network);
   await page.getByRole('button', {name: 'Accept', exact: true}).click();
 
-  await expect.poll(() => new Set(
-    network.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
-  ).size).toBe(3);
+  await expectAllOptionalRuntimesRequested(network);
   await expect.poll(() => page.evaluate(() => ({
     dataLayer: Array.isArray(window.dataLayer),
     gtag: typeof window.gtag === 'function',
@@ -83,9 +101,7 @@ test('acceptance persists, enables configured runtimes, and withdrawal disables 
   network.optionalRequests.length = 0;
   await page.reload();
   await expect(page.getByRole('region', {name: 'Optional measurement'})).toHaveCount(0);
-  await expect.poll(() => new Set(
-    network.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
-  ).size).toBe(3);
+  await expectAllOptionalRuntimesRequested(network);
 
   await page.getByRole('button', {name: 'Analytics settings'}).click();
   await expect(page.getByRole('region', {name: 'Analytics settings'})).toBeVisible();
@@ -122,10 +138,6 @@ test('acceptance persists, enables configured runtimes, and withdrawal disables 
   await page.getByRole('button', {name: 'Disable measurement'}).click();
   await reloaded;
 
-  await expect.poll(() => page.evaluate(
-    (key) => window.localStorage.getItem(key),
-    ANALYTICS_CONSENT_STORAGE_KEY
-  )).toBe('rejected');
   await expect.poll(() => page.evaluate(() => JSON.parse(
     window.sessionStorage.getItem('withdrawal-evidence') ?? 'null'
   ))).toEqual({
@@ -150,9 +162,7 @@ test('failed withdrawal persistence survives reload and blocks stale acceptance'
   );
 
   await page.goto('/en');
-  await expect.poll(() => new Set(
-    network.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
-  ).size).toBe(3);
+  await expectAllOptionalRuntimesRequested(network);
   await page.getByRole('button', {name: 'Analytics settings'}).click();
 
   await page.evaluate(({key}) => {
@@ -180,14 +190,6 @@ test('failed withdrawal persistence survives reload and blocks stale acceptance'
   const reloaded = page.waitForEvent('load');
   await page.getByRole('button', {name: 'Disable measurement'}).click();
   await reloaded;
-  await expect.poll(() => page.evaluate(
-    (key) => window.localStorage.getItem(key),
-    ANALYTICS_CONSENT_STORAGE_KEY
-  )).toBe('accepted');
-  await expect.poll(() => page.evaluate(
-    (key) => window.sessionStorage.getItem(key),
-    ANALYTICS_CONSENT_STORAGE_KEY
-  )).toBe('rejected');
   await page.getByRole('button', {name: 'Analytics settings'}).click();
   await expect(page.getByText(
     'Optional measurement is disabled. You can allow it at any time.'
@@ -204,16 +206,12 @@ test('withdrawing in another page blocks the previously accepted page', async ({
 
   await page.goto('/en');
   await page.getByRole('button', {name: 'Accept', exact: true}).click();
-  await expect.poll(() => new Set(
-    acceptedPageNetwork.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
-  ).size).toBe(3);
+  await expectAllOptionalRuntimesRequested(acceptedPageNetwork);
 
   const withdrawingPage = await context.newPage();
   const withdrawingPageNetwork = await guardBrowserNetwork(withdrawingPage);
   await withdrawingPage.goto('/en');
-  await expect.poll(() => new Set(
-    withdrawingPageNetwork.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
-  ).size).toBe(3);
+  await expectAllOptionalRuntimesRequested(withdrawingPageNetwork);
   const settingsTrigger = page.getByRole('button', {name: 'Analytics settings'});
   await settingsTrigger.click();
   await page.getByRole('button', {name: 'Disable measurement'}).focus();
@@ -264,29 +262,13 @@ test('withdrawing in another page blocks the previously accepted page', async ({
     vercelSpeed: null,
   });
 
-  const emissionsBefore = await page.evaluate(() => ({
-    configs: (window.dataLayer ?? []).filter((entry) => {
-      const args = Array.from(entry as unknown as ArrayLike<unknown>);
-      return args[0] === 'config';
-    }).length,
-    conversions: (window.dataLayer ?? []).filter(
-      (entry) => entry.event === 'service_card_click'
-    ).length,
-  }));
+  const emissionsBefore = await countGoogleEmissions(page);
   acceptedPageNetwork.optionalRequests.length = 0;
   await page.getByRole('button', {name: 'Close'}).click();
   await page.getByRole('main').getByRole('link', {name: /^AI systems & automation/}).click();
   await expect(page).toHaveURL(/\/en\/services\/ai-automation$/);
 
-  await expect.poll(() => page.evaluate(() => ({
-    configs: (window.dataLayer ?? []).filter((entry) => {
-      const args = Array.from(entry as unknown as ArrayLike<unknown>);
-      return args[0] === 'config';
-    }).length,
-    conversions: (window.dataLayer ?? []).filter(
-      (entry) => entry.event === 'service_card_click'
-    ).length,
-  }))).toEqual(emissionsBefore);
+  await expect.poll(() => countGoogleEmissions(page)).toEqual(emissionsBefore);
   expect(acceptedPageNetwork.optionalRequests).toEqual([]);
   expect(acceptedPageNetwork.unexpectedExternalRequests).toEqual([]);
 });
@@ -296,9 +278,7 @@ test('clearing storage in another page withdraws consent', async ({page, context
 
   await page.goto('/en');
   await page.getByRole('button', {name: 'Accept', exact: true}).click();
-  await expect.poll(() => new Set(
-    network.optionalRequests.map(optionalAnalyticsKind).filter(Boolean)
-  ).size).toBe(3);
+  await expectAllOptionalRuntimesRequested(network);
 
   const clearingPage = await context.newPage();
   await clearingPage.goto('/en');

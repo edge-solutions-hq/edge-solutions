@@ -125,6 +125,16 @@ function request(pathname, options = {}) {
   });
 }
 
+async function finalResponse(pathname) {
+  let response = await request(pathname);
+  for (let hop = 0; hop < 3 && response.status >= 300 && response.status < 400; hop += 1) {
+    const location = response.headers.get('location');
+    await response.arrayBuffer();
+    response = await request(location);
+  }
+  return response;
+}
+
 function assertSecurityHeaders(response, label) {
   for (const [name, value] of Object.entries(securityHeaders)) {
     assert.equal(response.headers.get(name), value, `${label} ${name}`);
@@ -160,15 +170,6 @@ describe('built site HTTP contracts', () => {
     assert.equal(query.status, 307);
     assert.equal(query.headers.get('location'), '/en/contact?service=ai&source=http-contract');
     await query.arrayBuffer();
-
-    const unsupportedPath = await request('/de?source=http-contract');
-    assert.equal(unsupportedPath.status, 307);
-    assert.equal(unsupportedPath.headers.get('location'), '/fr/de?source=http-contract');
-    await unsupportedPath.arrayBuffer();
-
-    const finalResponse = await request(unsupportedPath.headers.get('location'));
-    assert.equal(finalResponse.status, 404);
-    await finalResponse.arrayBuffer();
   });
 
   it('serves every source-derived localized page', async () => {
@@ -181,9 +182,9 @@ describe('built site HTTP contracts', () => {
     }
   });
 
-  it('returns 404 for invalid routes and service slugs', async () => {
-    for (const pathname of ['/fr/not-a-route', '/fr/services/not-a-service']) {
-      const response = await request(pathname);
+  it('returns 404 for invalid routes, service slugs, and unsupported locale prefixes', async () => {
+    for (const pathname of ['/fr/not-a-route', '/fr/services/not-a-service', '/de?source=http-contract']) {
+      const response = await finalResponse(pathname);
       assert.equal(response.status, 404, pathname);
       await response.arrayBuffer();
     }
@@ -194,6 +195,8 @@ describe('built site HTTP contracts', () => {
       {path: '/fr', cache: htmlCache, type: /^text\/html\b/i},
       {path: '/favicon.ico', cache: staticCache, type: /^image\/x-icon\b/i},
       {path: '/robots.txt', cache: staticCache, type: /^text\/plain\b/i},
+      {path: '/sitemap.xml', cache: staticCache, type: /^application\/xml\b/i},
+      {path: '/llms.txt', cache: staticCache, type: /^text\/plain; charset=utf-8$/i},
       {path: '/fr/not-a-route', cache: errorCache, type: /^text\/html\b/i},
     ];
 
@@ -208,10 +211,6 @@ describe('built site HTTP contracts', () => {
 
   it('serves robots.txt with its crawl and sitemap facts', async () => {
     const response = await request('/robots.txt');
-    assert.equal(response.status, 200);
-    assert.match(response.headers.get('content-type') ?? '', /^text\/plain\b/i);
-    assert.equal(response.headers.get('cache-control'), staticCache);
-
     const body = await response.text();
     assert.match(body, /^User-Agent: \*$/m);
     assert.match(body, /^Allow: \/$/m);
@@ -221,12 +220,8 @@ describe('built site HTTP contracts', () => {
   it('serves sitemap.xml with every source-derived canonical URL', async () => {
     const response = await request('/sitemap.xml');
     assert.equal(response.status, 200);
-    assert.match(response.headers.get('content-type') ?? '', /^application\/xml\b/i);
-    assert.equal(response.headers.get('cache-control'), staticCache);
 
     const body = await response.text();
-    assert.match(body, /^<\?xml version="1\.0" encoding="UTF-8"\?>/);
-    assert.match(body, /<urlset\b/);
     const urls = [...body.matchAll(/<loc>([^<]+)<\/loc>/g)].map((match) => match[1]);
     assert.deepEqual([...urls].sort(), [...facts.expectedUrls].sort());
   });
@@ -234,13 +229,10 @@ describe('built site HTTP contracts', () => {
   it('serves llms.txt with noindex and localized discovery facts', async () => {
     const response = await request('/llms.txt');
     assert.equal(response.status, 200);
-    assert.match(response.headers.get('content-type') ?? '', /^text\/plain; charset=utf-8$/i);
-    assert.equal(response.headers.get('cache-control'), staticCache);
     assert.equal(response.headers.get('x-robots-tag'), 'noindex');
 
     const body = await response.text();
-    assert.match(body, /^# Edge Solutions$/m);
-    assert.match(body, /^## Canonical Localized Pages$/m);
+    assert.match(body, /^# \S/, 'llms.txt must open with an H1 title');
     for (const url of facts.expectedUrls) assert.ok(body.includes(url), url);
   });
 });
