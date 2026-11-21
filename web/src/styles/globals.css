@@ -2,7 +2,6 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  /* Warm dark editor theme, documented in DESIGN.md */
   --background: #14110e;
   --foreground: #ede6d8;
   --heading: #f8f2e6;
@@ -13,7 +12,6 @@
   --muted-foreground: #c2b8a6;
   --subtle-foreground: #a0957f;
 
-  /* Brand: amber prompt */
   --primary: #f0a85a;
   --primary-foreground: #1b1206;
   --accent: #ffc686;
@@ -21,14 +19,12 @@
   --secondary: #0d0b09;
   --secondary-foreground: #ede6d8;
 
-  /* Syntax accents */
   --syn-green: #a8cc7c;
   --syn-cyan: #7fd0c0;
   --syn-purple: #cbaae2;
   --syn-red: #f39581;
   --syn-blue: #93bce4;
 
-  /* Interactive */
   --link: var(--foreground);
   --ring: var(--primary);
   color-scheme: dark;
@@ -88,7 +84,6 @@ body {
   color: var(--primary-foreground);
 }
 
-/* Prompt line: decorative command above a plain-language heading. */
 .prompt-line {
   display: flex;
   align-items: center;
@@ -106,7 +101,6 @@ body {
   font-weight: 700;
 }
 
-/* CSS-only typing. The full text is always in the DOM; only the clip animates. */
 .typed {
   display: inline-block;
   overflow: hidden;
@@ -157,7 +151,6 @@ body {
   }
 }
 
-/* MDX prose on the dark editor theme */
 .prose-terminal {
   --tw-prose-body: var(--muted-foreground);
   --tw-prose-headings: var(--heading);

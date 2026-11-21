@@ -81,6 +81,7 @@ Eyebrows are written as code comments: `// Méthode` in mono, `syn-green`, sente
 
 ## Patterns And Decoration
 
+- **Logo mark** (`LogoMark`, Hex Edge): a cube seen corner-on, drawn as a hexagon, with one edge from the near vertex at the centre to the upper-right corner. It strokes in `currentColor`, so it takes the surrounding text colour.
 - **Window chrome** (`WindowChrome`): 40px title bar, three dots, mono title. Decorative by default.
 - **Prompt line** (`PromptLine`): amber `$` plus a dim command. Optional CSS-only typing (`.typed`, width animated in `ch` with `steps()`) and a blinking block caret. The full text is always in the DOM; `prefers-reduced-motion` disables both animations. Use the typed variant once per page, at the top.
 - **Gutters**: line numbers or `01 / 02 / 03` step numbers in a darker left column.

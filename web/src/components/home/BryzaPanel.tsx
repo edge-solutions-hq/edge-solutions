@@ -16,10 +16,6 @@ type BryzaPanelProps = {
   className?: string;
 };
 
-/**
- * Bryza, Gil's own product. The screenshot is the approved `bryza-console`
- * asset: a local build with synthetic demo data, labelled as such below it.
- */
 export function BryzaPanel({
   eyebrow,
   title,

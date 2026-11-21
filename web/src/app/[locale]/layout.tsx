@@ -46,7 +46,6 @@ export default async function LocaleLayout({children, params}: Props) {
 
   if (!hasLocale(routing.locales, locale)) notFound();
 
-  // Enable static rendering with next-intl
   setRequestLocale(locale);
 
   const messages = await getMessages();
