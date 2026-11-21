@@ -71,6 +71,8 @@ export function ContactForm({
   const serviceSelectRef = useRef<HTMLSelectElement>(null);
   const {fields, offerOptions: contactOfferOptions} = contactFormModel;
   const feedback = resolveContactFeedback(state);
+  const fieldErrors: ContactFieldErrors = feedback.kind === 'error' ? feedback.fieldErrors : {};
+  const outcome = state.status === 'idle' ? undefined : state.outcome;
 
   useEffect(() => {
     const selectedService =
@@ -88,7 +90,7 @@ export function ContactForm({
     const completion = resolveContactAttemptCompletion({
       state: attemptTrackerRef.current,
       pending,
-      outcome: state.outcome,
+      outcome,
     });
 
     if (completion?.shouldTrack) {
@@ -97,7 +99,7 @@ export function ContactForm({
         submitAttempt: completion.submitAttempt,
       });
     }
-  }, [pending, state.outcome]);
+  }, [pending, outcome]);
 
   function handleSubmitCapture(event: FormEvent<HTMLFormElement>) {
     const submitAttempt = captureContactSubmitAttempt(attemptTrackerRef.current);
@@ -122,7 +124,7 @@ export function ContactForm({
     const submitAttempt = captureContactSubmitAttempt(attemptTrackerRef.current);
     const formData = new FormData(event.currentTarget);
     const normalizedService = extractContactSubmitService(formData);
-    const fieldErrors = nativeValidationFieldErrors(event.currentTarget);
+    const nativeFieldErrors = nativeValidationFieldErrors(event.currentTarget);
 
     trackContactFormSubmit({
       service: normalizedService,
@@ -133,7 +135,7 @@ export function ContactForm({
       outcome: {
         kind: 'validation_error',
         service: normalizedService,
-        fieldErrors,
+        fieldErrors: nativeFieldErrors,
       },
       submitAttempt,
     });
@@ -178,12 +180,12 @@ export function ContactForm({
             required={fields.name.required}
             minLength={fields.name.minLength}
             maxLength={fields.name.maxLength}
-            aria-invalid={Boolean(state.fieldErrors?.name)}
-            aria-describedby={state.fieldErrors?.name ? fieldErrorId('name') : undefined}
+            aria-invalid={Boolean(fieldErrors.name)}
+            aria-describedby={fieldErrors.name ? fieldErrorId('name') : undefined}
             className={inputBase + ' h-11'}
             placeholder={t(fields.name.placeholderKey)}
           />
-          <FieldError id={fieldErrorId('name')}>{fieldErrorMessage(state.fieldErrors?.name)}</FieldError>
+          <FieldError id={fieldErrorId('name')}>{fieldErrorMessage(fieldErrors.name)}</FieldError>
         </div>
 
         <div>
@@ -196,12 +198,12 @@ export function ContactForm({
             type={fields.email.type}
             required={fields.email.required}
             maxLength={fields.email.maxLength}
-            aria-invalid={Boolean(state.fieldErrors?.email)}
-            aria-describedby={state.fieldErrors?.email ? fieldErrorId('email') : undefined}
+            aria-invalid={Boolean(fieldErrors.email)}
+            aria-describedby={fieldErrors.email ? fieldErrorId('email') : undefined}
             className={inputBase + ' h-11'}
             placeholder={t(fields.email.placeholderKey)}
           />
-          <FieldError id={fieldErrorId('email')}>{fieldErrorMessage(state.fieldErrors?.email)}</FieldError>
+          <FieldError id={fieldErrorId('email')}>{fieldErrorMessage(fieldErrors.email)}</FieldError>
         </div>
       </div>
 
@@ -214,8 +216,8 @@ export function ContactForm({
           ref={serviceSelectRef}
           name={fields.service.name}
           defaultValue={fields.service.defaultValue}
-          aria-invalid={Boolean(state.fieldErrors?.service)}
-          aria-describedby={state.fieldErrors?.service ? fieldErrorId('service') : undefined}
+          aria-invalid={Boolean(fieldErrors.service)}
+          aria-describedby={fieldErrors.service ? fieldErrorId('service') : undefined}
           className={inputBase + ' h-11'}
         >
           {contactOfferOptions.map((option) => (
@@ -224,7 +226,7 @@ export function ContactForm({
             </option>
           ))}
         </select>
-        <FieldError id={fieldErrorId('service')}>{fieldErrorMessage(state.fieldErrors?.service)}</FieldError>
+        <FieldError id={fieldErrorId('service')}>{fieldErrorMessage(fieldErrors.service)}</FieldError>
       </div>
 
       <div>
@@ -238,12 +240,12 @@ export function ContactForm({
           minLength={fields.message.minLength}
           maxLength={fields.message.maxLength}
           rows={fields.message.rows}
-          aria-invalid={Boolean(state.fieldErrors?.message)}
-          aria-describedby={state.fieldErrors?.message ? fieldErrorId('message') : undefined}
+          aria-invalid={Boolean(fieldErrors.message)}
+          aria-describedby={fieldErrors.message ? fieldErrorId('message') : undefined}
           className={inputBase + ' min-h-[8rem] resize-y'}
           placeholder={t(fields.message.placeholderKey)}
         />
-        <FieldError id={fieldErrorId('message')}>{fieldErrorMessage(state.fieldErrors?.message)}</FieldError>
+        <FieldError id={fieldErrorId('message')}>{fieldErrorMessage(fieldErrors.message)}</FieldError>
       </div>
 
       <Button
@@ -260,9 +262,9 @@ export function ContactForm({
         </div>
       ) : null}
 
-      {feedback.kind === 'error' && (feedback.messageKey || feedback.fallbackMessage) ? (
+      {feedback.kind === 'error' ? (
         <div role="alert" className="rounded-md border border-syn-red/50 bg-syn-red/10 p-4 text-sm text-syn-red">
-          {feedback.messageKey ? t(feedback.messageKey) : feedback.fallbackMessage}
+          {t(feedback.messageKey)}
         </div>
       ) : null}
     </form>

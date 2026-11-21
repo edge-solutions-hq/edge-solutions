@@ -66,16 +66,26 @@ export type ContactFormFieldModel = {
   autocomplete?: string;
 };
 
-export type ContactFeedbackState = {
-  status: 'idle' | 'success' | 'error';
-  message?: string;
-  messageKey?: ContactActionMessageKey;
-};
+type OutcomeOf<Kind extends ContactAttemptOutcome['kind']> = Extract<ContactAttemptOutcome, {kind: Kind}>;
+
+export type ContactParseFailure = OutcomeOf<'spam' | 'validation_error'>;
+
+export type ContactErrorMessageKey = Exclude<ContactActionMessageKey, 'contact.form.success'>;
+
+export type ContactActionState =
+  | {status: 'idle'}
+  | {status: 'dropped'; outcome: OutcomeOf<'spam'>}
+  | {status: 'success'; outcome: OutcomeOf<'success'>}
+  | {
+      status: 'error';
+      messageKey: ContactErrorMessageKey;
+      outcome: OutcomeOf<'validation_error' | 'limited' | 'abuse_control_error' | 'delivery_error'>;
+    };
 
 export type ContactFeedbackModel =
   | {kind: 'none'}
-  | {kind: 'success'; messageKey: ContactActionMessageKey}
-  | {kind: 'error'; messageKey?: ContactActionMessageKey; fallbackMessage?: string};
+  | {kind: 'success'; messageKey: 'contact.form.success'}
+  | {kind: 'error'; messageKey: ContactErrorMessageKey; fieldErrors: ContactFieldErrors};
 
 export const contactFieldConstraints = {
   name: {minLength: 2, maxLength: 80},
@@ -170,28 +180,25 @@ export function extractContactSubmitService(formData: FormData) {
   return typeof service === 'string' && isContactOfferValue(service) ? service : undefined;
 }
 
-export function resolveContactFeedback(state: ContactFeedbackState): ContactFeedbackModel {
-  if (state.status === 'success') {
-    return {
-      kind: 'success',
-      messageKey: state.messageKey ?? 'contact.form.success',
-    };
+export function resolveContactFeedback(state: ContactActionState): ContactFeedbackModel {
+  switch (state.status) {
+    case 'success':
+      return {kind: 'success', messageKey: 'contact.form.success'};
+    case 'error':
+      return {
+        kind: 'error',
+        messageKey: state.messageKey,
+        fieldErrors: state.outcome.kind === 'validation_error' ? state.outcome.fieldErrors : {},
+      };
+    case 'idle':
+    case 'dropped':
+      return {kind: 'none'};
   }
-
-  if (state.status === 'error') {
-    return {
-      kind: 'error',
-      messageKey: state.messageKey,
-      fallbackMessage: state.message,
-    };
-  }
-
-  return {kind: 'none'};
 }
 
 export function parseContactFields(raw: ReturnType<typeof readContactFormData>):
   | {ok: true; fields: ContactFields}
-  | {ok: false; outcome: ContactAttemptOutcome} {
+  | {ok: false; outcome: ContactParseFailure} {
   if (raw.company) {
     return {ok: false, outcome: {kind: 'spam', service: raw.service || undefined}};
   }

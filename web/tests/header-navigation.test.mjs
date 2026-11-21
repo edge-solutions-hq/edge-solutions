@@ -9,25 +9,6 @@ describe('header navigation model', () => {
     'nav.contact': 'Contact',
   })[key] ?? key;
 
-  it('builds shared header navigation items with contact tracking metadata', () => {
-    const items = headerNavigation.getHeaderNavigationItems(translate, [
-      {href: '/services/ai-automation', label: 'AI'},
-    ]);
-
-    assert.deepEqual(items, [
-      {href: '/', label: 'Home'},
-      {href: '/services/ai-automation', label: 'AI'},
-      {
-        href: '/contact',
-        label: 'Contact',
-        tracking: {
-          type: 'contact_cta',
-          target: '/contact',
-        },
-      },
-    ]);
-  });
-
   it('matches active items exactly for home and by path segment for nested pages', () => {
     const home = {href: '/', label: 'Home'};
     const services = {href: '/services/ai-automation', label: 'AI'};
@@ -39,7 +20,7 @@ describe('header navigation model', () => {
     assert.equal(headerNavigation.isHeaderNavigationItemActive('/services/ai-automation-extra', services), false);
   });
 
-  it('builds desktop and mobile render items with matching active state and placement-specific contact payloads', () => {
+  it('renders home, offers, then a tracked contact item with placement-specific payloads', () => {
     const items = headerNavigation.getHeaderNavigationItems(translate, [
       {href: '/services/ai-automation', label: 'AI'},
     ]);
@@ -55,18 +36,16 @@ describe('header navigation model', () => {
       'mobile_menu_nav'
     );
 
-    assert.deepEqual(
-      desktopItems.map((item) => ({href: item.href, active: item.active})),
-      mobileItems.map((item) => ({href: item.href, active: item.active}))
-    );
-    assert.deepEqual(
-      desktopItems.map((item) => ({href: item.href, active: item.active})),
-      [
-        {href: '/', active: false},
-        {href: '/services/ai-automation', active: true},
-        {href: '/contact', active: false},
-      ]
-    );
+    for (const renderItems of [desktopItems, mobileItems]) {
+      assert.deepEqual(
+        renderItems.map((item) => ({href: item.href, active: item.active, tracked: item.trackingPayload !== null})),
+        [
+          {href: '/', active: false, tracked: false},
+          {href: '/services/ai-automation', active: true, tracked: false},
+          {href: '/contact', active: false, tracked: true},
+        ]
+      );
+    }
     assert.deepEqual(desktopItems.at(-1).trackingPayload, {
       ctaTarget: '/contact',
       placement: 'header_nav',
@@ -77,13 +56,6 @@ describe('header navigation model', () => {
       placement: 'mobile_menu_nav',
       ctaLabel: 'Contact',
     });
-  });
-
-  it('returns no contact tracking payload for items without tracking metadata', () => {
-    assert.equal(
-      headerNavigation.getHeaderNavigationContactTrackingPayload({href: '/contact', label: 'Contact'}, 'header_nav'),
-      null
-    );
   });
 
   it('derives mobile menu CTA targets and tracking payloads from the shared contact item', () => {

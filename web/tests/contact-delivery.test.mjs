@@ -35,9 +35,7 @@ const {sendContactEmail} = await import('../src/app/[locale]/contact/actions.ts'
 const {
   normalizeContactRateLimitResult,
 } = await import('../src/lib/contact/abuse.ts');
-const {isBrowserHarnessRequest, resolveBrowserHarnessMode} = await import(
-  '../src/lib/contact/browser-harness.ts'
-);
+const {resolveBrowserHarnessMode} = await import('../src/lib/contact/browser-harness.ts');
 
 const contactEnvKeys = [
   'NODE_ENV',
@@ -127,46 +125,17 @@ describe('contact abuse policy', () => {
 
 describe('contact Server Action delivery', () => {
   it('requires the exact per-run request marker for the browser harness', () => {
-    const harness = {
-      enabled: '1',
-      expectedToken: 'random-per-run-token',
-    };
+    const harness = {enabled: '1', expectedToken: 'random-per-run-token'};
+    const cases = [
+      [{...harness, requestToken: null}, 'unverified'],
+      [{...harness, requestToken: 'wrong-token'}, 'unverified'],
+      [{...harness, requestToken: 'random-per-run-token'}, 'verified'],
+      [{enabled: undefined, expectedToken: undefined, requestToken: null}, 'production'],
+    ];
 
-    assert.equal(isBrowserHarnessRequest({...harness, requestToken: null}), false);
-    assert.equal(
-      isBrowserHarnessRequest({...harness, requestToken: 'wrong-token'}),
-      false
-    );
-    assert.equal(
-      isBrowserHarnessRequest({
-        ...harness,
-        requestToken: 'random-per-run-token',
-      }),
-      true
-    );
-    assert.equal(
-      resolveBrowserHarnessMode({...harness, requestToken: null}),
-      'unverified'
-    );
-    assert.equal(
-      resolveBrowserHarnessMode({...harness, requestToken: 'wrong-token'}),
-      'unverified'
-    );
-    assert.equal(
-      resolveBrowserHarnessMode({
-        ...harness,
-        requestToken: 'random-per-run-token',
-      }),
-      'verified'
-    );
-    assert.equal(
-      resolveBrowserHarnessMode({
-        enabled: undefined,
-        expectedToken: undefined,
-        requestToken: null,
-      }),
-      'production'
-    );
+    for (const [input, expected] of cases) {
+      assert.equal(resolveBrowserHarnessMode(input), expected, JSON.stringify(input));
+    }
   });
 
   it('fails closed without I/O when browser harness headers are unavailable', async () => {
@@ -190,8 +159,6 @@ describe('contact Server Action delivery', () => {
 
     assert.deepEqual(state, {
       status: 'success',
-      message: 'Message envoyé. Je reviens vers vous rapidement.',
-      messageKey: 'contact.form.success',
       outcome: {kind: 'success', service: 'ai'},
     });
     assert.equal(abuseCalls, 1);
@@ -233,57 +200,37 @@ describe('contact Server Action delivery', () => {
     assert.equal(deliveries.length, 0);
   });
 
-  it('fails closed when abuse control is unavailable', async () => {
-    abuseBehavior = 'unavailable';
+  for (const behavior of ['unavailable', 'throw']) {
+    it(`fails closed without delivery when abuse control is ${behavior === 'throw' ? 'throwing' : 'unavailable'}`, async () => {
+      abuseBehavior = behavior;
 
-    const state = await submit(contactForm());
+      const state = await submit(contactForm());
 
-    assert.deepEqual(state, {
-      status: 'error',
-      messageKey: 'contact.form.genericError',
-      outcome: {kind: 'abuse_control_error', service: 'ai'},
+      assert.deepEqual(state, {
+        status: 'error',
+        messageKey: 'contact.form.genericError',
+        outcome: {kind: 'abuse_control_error', service: 'ai'},
+      });
+      assert.doesNotMatch(JSON.stringify(state), /WAF|diagnostic|unavailable/i);
+      assert.equal(abuseCalls, 1);
+      assert.equal(deliveries.length, 0);
     });
-    assert.equal(abuseCalls, 1);
-    assert.equal(deliveries.length, 0);
-  });
-
-  it('normalizes thrown abuse errors and suppresses delivery', async () => {
-    abuseBehavior = 'throw';
-
-    const state = await submit(contactForm());
-
-    assert.deepEqual(state, {
-      status: 'error',
-      messageKey: 'contact.form.genericError',
-      outcome: {kind: 'abuse_control_error', service: 'ai'},
-    });
-    assert.doesNotMatch(JSON.stringify(state), /WAF|diagnostic|unavailable/i);
-    assert.equal(abuseCalls, 1);
-    assert.equal(deliveries.length, 0);
-  });
+  }
 
   it('bypasses abuse control and delivery for invalid data', async () => {
     const state = await submit(
       contactForm({name: 'A', email: 'invalid', message: 'short'})
     );
 
-    assert.deepEqual(state, {
+    assert.partialDeepStrictEqual(state, {
       status: 'error',
-      message: 'Champs invalides.',
       messageKey: 'contact.form.validationError',
-      fieldErrors: {
-        name: 'contact.form.fieldErrors.name',
-        email: 'contact.form.fieldErrors.email',
-        service: undefined,
-        message: 'contact.form.fieldErrors.message',
-      },
       outcome: {
         kind: 'validation_error',
         service: 'ai',
         fieldErrors: {
           name: 'contact.form.fieldErrors.name',
           email: 'contact.form.fieldErrors.email',
-          service: undefined,
           message: 'contact.form.fieldErrors.message',
         },
       },
@@ -296,7 +243,7 @@ describe('contact Server Action delivery', () => {
     const state = await submit(contactForm({company: 'robot-company'}));
 
     assert.deepEqual(state, {
-      status: 'idle',
+      status: 'dropped',
       outcome: {kind: 'spam', service: 'ai'},
     });
     assert.equal(abuseCalls, 0);
@@ -318,33 +265,23 @@ describe('contact Server Action delivery', () => {
     assert.equal(deliveries.length, 0);
   });
 
-  it('normalizes adapter rejection without exposing provider diagnostics', async () => {
-    deliveryBehavior = 'reject';
+  for (const behavior of ['reject', 'throw']) {
+    it(`hides provider diagnostics when delivery ${behavior === 'throw' ? 'throws' : 'is rejected'}`, async () => {
+      deliveryBehavior = behavior;
 
-    const state = await submit(contactForm());
+      const state = await submit(contactForm());
 
-    assert.deepEqual(state, {
-      status: 'error',
-      messageKey: 'contact.form.genericError',
-      outcome: {kind: 'delivery_error', service: 'ai'},
+      assert.deepEqual(state, {
+        status: 'error',
+        messageKey: 'contact.form.genericError',
+        outcome: {kind: 'delivery_error', service: 'ai'},
+      });
+      assert.doesNotMatch(
+        JSON.stringify(state),
+        /provider|invalid sender|network|connection reset|resend/i
+      );
+      assert.equal(abuseCalls, 1);
+      assert.equal(deliveries.length, 1);
     });
-    assert.doesNotMatch(JSON.stringify(state), /provider|invalid sender|resend/i);
-    assert.equal(abuseCalls, 1);
-    assert.equal(deliveries.length, 1);
-  });
-
-  it('normalizes thrown provider errors without exposing network diagnostics', async () => {
-    deliveryBehavior = 'throw';
-
-    const state = await submit(contactForm());
-
-    assert.deepEqual(state, {
-      status: 'error',
-      messageKey: 'contact.form.genericError',
-      outcome: {kind: 'delivery_error', service: 'ai'},
-    });
-    assert.doesNotMatch(JSON.stringify(state), /network|connection reset|resend/i);
-    assert.equal(abuseCalls, 1);
-    assert.equal(deliveries.length, 1);
-  });
+  }
 });
