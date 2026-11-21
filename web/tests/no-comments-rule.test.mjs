@@ -25,8 +25,26 @@ tester.run('no-comments', edgeComments.rules['no-comments'], {
     {code: '// @ts-expect-error legacy\nconst a = b;', filename},
     {code: '/// <reference types="node" />\nconst a = 1;', filename},
     {code: '// kept\nconst a = 1;', filename, options: [{baseline}]},
+    {code: '/* global window, document: readonly */\nconst a = 1;', filename},
+    {code: '/* exported init */\nfunction init() {}', filename},
+    {code: '/* eslint no-console: "off" */\nconst a = 1;', filename},
+    {code: 'const a = /* @__PURE__ */ make();', filename},
   ],
   invalid: [
+    ...[
+      '// global state lives in the store',
+      '/* global state lives in the store */',
+      '// eslint is configured elsewhere',
+      '/* eslint, then oxlint */',
+      '// exported because the tests need it',
+      '/* exported for tests: init */',
+      '// @ts-strict would be nicer',
+      '// globals are bad',
+    ].map((comment) => ({
+      code: `${comment}\nconst a = 1;`,
+      filename,
+      errors: [{messageId: 'banned'}],
+    })),
     {code: '// says what\nconst a = 1;', filename, errors: [{messageId: 'banned'}]},
     {code: 'const a = <div>{/* label */}</div>;', filename, errors: [{messageId: 'banned'}]},
     {
