@@ -7,7 +7,7 @@ import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 
 const hookPath = fileURLToPath(new URL('../../.claude/hooks/secret-guard.mjs', import.meta.url));
-const {evaluate, checkCommand, isSensitivePath} = await import(hookPath);
+const {evaluate, checkCommand} = await import(hookPath);
 
 const fake = {
   resend: ['re', 'Ab12Cd34', 'Ef56Gh78Ij90Kl12Mn34Op56'].join('_'),
@@ -85,7 +85,7 @@ describe('agent secret guard', () => {
     assert.ok(evaluate({tool_name: 'Edit', tool_input: {file_path: '/repo/web/x.ts', new_string: fake.openrouter}}));
     assert.equal(evaluate({tool_name: 'Read', tool_input: {file_path: '/repo/web/env.example'}}), null);
     assert.equal(evaluate({tool_name: 'Read', tool_input: {file_path: '/repo/.env.example'}}), null);
-    assert.equal(isSensitivePath('/repo/server.pem'), true);
+    assert.ok(evaluate({tool_name: 'Read', tool_input: {file_path: '/repo/server.pem'}}));
   });
 
   it('blocks broad Grep searches over a directory that holds secret files', () => {
