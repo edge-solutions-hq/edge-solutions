@@ -9,8 +9,8 @@ This repo uses the single-context layout: one `GLOSSARY.md` and `docs/adr/` at t
 ```
 /
 ├── GLOSSARY.md       ← domain glossary, created lazily by /domain-modeling
-├── docs/adr/         ← architecture decision records, created lazily
-│   └── 0001-….md
+├── docs/adr/         ← architecture decision records
+│   └── NNNN-….md
 └── web/
 ```
 
@@ -21,7 +21,7 @@ This repo uses the single-context layout: one `GLOSSARY.md` and `docs/adr/` at t
 - **`GLOSSARY.md`** at the repo root.
 - **`docs/adr/`**: read ADRs that touch the area you're about to work in.
 
-If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. `GLOSSARY.md` doesn't exist yet: the `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates it lazily when terms actually get resolved. Number new ADRs after the highest one in `docs/adr/`.
+`docs/adr/` always exists; read it before changing the area an ADR covers. `GLOSSARY.md` may not exist: if so, **proceed silently**, don't flag its absence and don't suggest creating it upfront. It doesn't exist yet: the `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates it lazily when terms actually get resolved. Number new ADRs after the highest one in `docs/adr/`.
 
 ## Use the glossary's vocabulary
 
@@ -35,4 +35,4 @@ If the concept you need isn't in the glossary yet, that's a signal: either you'r
 
 If your output contradicts an existing ADR, surface it explicitly rather than silently overriding:
 
-> _Contradicts ADR-0007 (…), but worth reopening because…_
+> _Contradicts ADR-NNNN (…), but worth reopening because…_

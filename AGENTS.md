@@ -17,7 +17,7 @@ Never print or commit secret values. Gitleaks (CI and pre-commit) and the Claude
 ## Docs To Read
 
 - Start with `WEBSITE.md`; it is the mandatory website work entrypoint and source-of-truth order.
-- Owner docs referenced there: `docs/positioning.md`, `DESIGN.md`, `docs/architecture.md`, `docs/analytics/conversion-event-taxonomy.md`, and `docs/tech-stack.md`.
+- Owner docs referenced there: `docs/positioning.md`, `DESIGN.md`, `docs/architecture.md`, `docs/analytics/conversion-event-taxonomy.md`, `docs/tech-stack.md`, and the ADRs in `docs/adr/`.
 
 ## App Structure
 
@@ -51,4 +51,4 @@ Use the default triage label vocabulary: `needs-triage`, `needs-info`, `ready-fo
 
 ### Domain Docs
 
-Single-context layout: one root `GLOSSARY.md` and `docs/adr/`, both created lazily by `/domain-modeling`. See `docs/agents/domain.md`.
+Single-context layout: ADRs live in `docs/adr/`; a root `GLOSSARY.md` is created lazily by `/domain-modeling`. See `docs/agents/domain.md`.

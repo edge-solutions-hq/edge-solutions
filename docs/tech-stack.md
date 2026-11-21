@@ -40,7 +40,7 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 
 ## Continuous Integration
 
-`.github/workflows/ci.yml` runs the full `check` gate on pull requests and pushes to `main` that touch `web/**`, `docs/**` or `.github/**`, so post-merge drift stays visible. Push runs are keyed by commit SHA, so `main` commits never cancel each other's validation.
+`.github/workflows/ci.yml` runs the full `check` gate on pull requests and pushes to `main` that touch `web/**`, `docs/**`, `.github/**`, `.claude/**`, `.githooks/**` or the root `eslint.config.mjs`, so post-merge drift stays visible. Push runs are keyed by commit SHA, so `main` commits never cancel each other's validation.
 
 `main` has no required checks: CI reports results but does not block merges.
 
