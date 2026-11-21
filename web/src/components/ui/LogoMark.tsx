@@ -2,10 +2,6 @@ type LogoMarkProps = {
   className?: string;
 };
 
-/**
- * Hex Edge mark: a cube seen corner-on (hexagon) with a single edge from the
- * near vertex (centre) to the upper-right corner. Uses currentColor.
- */
 export function LogoMark({className}: LogoMarkProps) {
   return (
     <svg
