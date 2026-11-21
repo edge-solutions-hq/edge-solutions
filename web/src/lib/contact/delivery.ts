@@ -5,18 +5,12 @@ import {
   parseContactFields,
   readContactFormData,
   serviceLabel,
+  type ContactActionState,
+  type ContactErrorMessageKey,
   type ContactFields,
-  type ContactAttemptOutcome,
-  type ContactActionMessageKey,
 } from '@/lib/contact/intake';
 
-export type ContactActionState = {
-  status: 'idle' | 'success' | 'error';
-  message?: string;
-  messageKey?: ContactActionMessageKey;
-  fieldErrors?: Partial<Record<'name' | 'email' | 'service' | 'message', string>>;
-  outcome?: ContactAttemptOutcome;
-};
+export type {ContactActionState} from '@/lib/contact/intake';
 
 export type ContactEmailPayload = {
   from: string;
@@ -33,7 +27,7 @@ export type ContactDeliveryAdapter = (
 
 function deliveryErrorState(
   service: ContactFields['service'],
-  messageKey: Extract<ContactActionMessageKey, 'contact.form.configError' | 'contact.form.genericError'>
+  messageKey: Extract<ContactErrorMessageKey, 'contact.form.configError' | 'contact.form.genericError'>
 ): ContactActionState {
   return {
     status: 'error',
@@ -81,23 +75,12 @@ export async function submitContactAttempt(
   const parsed = parseContactFields(readContactFormData(formData));
   if (!parsed.ok) {
     if (parsed.outcome.kind === 'spam') {
-      return {status: 'idle', outcome: parsed.outcome};
-    }
-
-    if (parsed.outcome.kind !== 'validation_error') {
-      return {
-        status: 'error',
-        message: 'Erreur de traitement du formulaire.',
-        messageKey: 'contact.form.genericError',
-        outcome: parsed.outcome,
-      };
+      return {status: 'dropped', outcome: parsed.outcome};
     }
 
     return {
       status: 'error',
-      message: 'Champs invalides.',
       messageKey: 'contact.form.validationError',
-      fieldErrors: parsed.outcome.fieldErrors,
       outcome: parsed.outcome,
     };
   }
@@ -154,8 +137,6 @@ export async function submitContactAttempt(
 
   return {
     status: 'success',
-    message: 'Message envoyé. Je reviens vers vous rapidement.',
-    messageKey: 'contact.form.success',
     outcome: {kind: 'success', service},
   };
 }

@@ -190,8 +190,6 @@ describe('contact Server Action delivery', () => {
 
     assert.deepEqual(state, {
       status: 'success',
-      message: 'Message envoyé. Je reviens vers vous rapidement.',
-      messageKey: 'contact.form.success',
       outcome: {kind: 'success', service: 'ai'},
     });
     assert.equal(abuseCalls, 1);
@@ -269,14 +267,7 @@ describe('contact Server Action delivery', () => {
 
     assert.deepEqual(state, {
       status: 'error',
-      message: 'Champs invalides.',
       messageKey: 'contact.form.validationError',
-      fieldErrors: {
-        name: 'contact.form.fieldErrors.name',
-        email: 'contact.form.fieldErrors.email',
-        service: undefined,
-        message: 'contact.form.fieldErrors.message',
-      },
       outcome: {
         kind: 'validation_error',
         service: 'ai',
@@ -296,7 +287,7 @@ describe('contact Server Action delivery', () => {
     const state = await submit(contactForm({company: 'robot-company'}));
 
     assert.deepEqual(state, {
-      status: 'idle',
+      status: 'dropped',
       outcome: {kind: 'spam', service: 'ai'},
     });
     assert.equal(abuseCalls, 0);
