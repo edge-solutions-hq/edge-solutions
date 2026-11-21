@@ -5,17 +5,12 @@ type BorderProps<T extends ElementType> = {
   as?: T;
   className?: string;
   position?: 'top' | 'left';
-  /**
-   * Use a higher-contrast border on dark backgrounds (e.g. inside a dark section).
-   */
-  invert?: boolean;
 };
 
 export function Border<T extends ElementType = 'div'>({
   as,
   className,
   position = 'top',
-  invert = false,
   ...props
 }: Omit<ComponentPropsWithoutRef<T>, keyof BorderProps<T>> & BorderProps<T>) {
   const Component = as ?? 'div';
@@ -25,9 +20,7 @@ export function Border<T extends ElementType = 'div'>({
       className={cn(
         className,
         'relative before:absolute after:absolute',
-        invert
-          ? 'before:bg-foreground after:bg-foreground/20'
-          : 'before:bg-primary after:bg-border',
+        'before:bg-primary after:bg-border',
         position === 'top' &&
           'before:top-0 before:left-0 before:h-px before:w-6 after:top-0 after:right-0 after:left-8 after:h-px',
         position === 'left' &&

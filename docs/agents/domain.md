@@ -21,7 +21,7 @@ This repo uses the single-context layout: one `GLOSSARY.md` and `docs/adr/` at t
 - **`GLOSSARY.md`** at the repo root.
 - **`docs/adr/`**: read ADRs that touch the area you're about to work in.
 
-If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. `GLOSSARY.md` and `docs/adr/` don't exist yet: the `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
+If any of these files don't exist, **proceed silently**. Don't flag their absence; don't suggest creating them upfront. `GLOSSARY.md` doesn't exist yet: the `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates it lazily when terms actually get resolved. Number new ADRs after the highest one in `docs/adr/`.
 
 ## Use the glossary's vocabulary
 
