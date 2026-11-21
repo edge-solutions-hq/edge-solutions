@@ -1,7 +1,39 @@
 import path from "node:path";
 
-const MACHINE_DIRECTIVE =
-  /^\s*(?:eslint(?:-disable|-enable|-env)?\b|global(?:s)?\s|exported\s|oxlint-(?:disable|enable)|stylelint-(?:disable|enable)|@ts-|\/\s*<reference\b|istanbul\s|c8\s|v8\s|webpack[A-Z]|@vite-ignore|[#@]__PURE__|@jsx|@refresh|prettier-ignore|biome-ignore)/;
+const IDENTIFIER_LIST = String.raw`[\w$]+(?:\s*:\s*(?:readonly|writable|writeable|off|true|false))?(?:\s*,\s*[\w$]+(?:\s*:\s*(?:readonly|writable|writeable|off|true|false))?)*\s*,?`;
+
+const ANY_COMMENT_DIRECTIVE = new RegExp(
+  [
+    String.raw`^\s*(?:eslint|oxlint)-disable(?:-line|-next-line)?(?:\s|$)`,
+    String.raw`^\s*@ts-(?:ignore|expect-error|nocheck|check)\b`,
+    String.raw`^\s*(?:istanbul|c8|v8)\s+ignore\b`,
+    String.raw`^\s*(?:prettier|biome)-ignore\b`,
+  ].join("|")
+);
+
+const BLOCK_ONLY_DIRECTIVE = new RegExp(
+  [
+    String.raw`^\s*(?:eslint|oxlint|stylelint)-(?:disable|enable)(?:\s|$)`,
+    String.raw`^\s*stylelint-disable-(?:line|next-line)(?:\s|$)`,
+    String.raw`^\s*eslint\s+[@\w/-]+\s*:`,
+    String.raw`^\s*eslint-env\s+[\w$]+`,
+    String.raw`^\s*globals?\s+${IDENTIFIER_LIST}\s*$`,
+    String.raw`^\s*exported\s+${IDENTIFIER_LIST}\s*$`,
+    String.raw`^\s*webpack[A-Z]\w*\s*:`,
+    String.raw`^\s*@vite-ignore\s*$`,
+    String.raw`^\s*[#@]__(?:PURE|NO_SIDE_EFFECTS)__\s*$`,
+    String.raw`^\*?\s*@(?:jsx|jsxFrag|jsxImportSource|jsxRuntime)\s+\S+`,
+  ].join("|")
+);
+
+const TRIPLE_SLASH_DIRECTIVE = /^\/\s*<(?:reference|amd-module|amd-dependency)\b/;
+
+function isMachineDirective(comment) {
+  if (comment.type === "Shebang") return true;
+  if (ANY_COMMENT_DIRECTIVE.test(comment.value)) return true;
+  if (comment.type === "Line") return TRIPLE_SLASH_DIRECTIVE.test(comment.value);
+  return BLOCK_ONLY_DIRECTIVE.test(comment.value);
+}
 
 const ADR = "docs/adr/0005-ban-code-comments.md";
 
@@ -10,9 +42,7 @@ function humanComments(sourceCode) {
     typeof sourceCode.getAllComments === "function"
       ? sourceCode.getAllComments()
       : sourceCode.comments ?? [];
-  return comments.filter(
-    (comment) => comment.type !== "Shebang" && !MACHINE_DIRECTIVE.test(comment.value)
-  );
+  return comments.filter((comment) => !isMachineDirective(comment));
 }
 
 function fileKey(context) {

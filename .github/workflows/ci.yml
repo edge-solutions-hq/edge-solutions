@@ -6,6 +6,9 @@ on:
       - "web/**"
       - "docs/**"
       - ".github/**"
+      - ".claude/**"
+      - ".githooks/**"
+      - "eslint.config.mjs"
   push:
     branches:
       - main
@@ -13,6 +16,9 @@ on:
       - "web/**"
       - "docs/**"
       - ".github/**"
+      - ".claude/**"
+      - ".githooks/**"
+      - "eslint.config.mjs"
 
 permissions:
   contents: read
