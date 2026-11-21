@@ -25,7 +25,7 @@ Node.js 24 is required by `.nvmrc`, `web/package.json`, and CI. Prefer the full 
 - Copy `web/env.example` to a local env file such as `web/.env.local`.
 - Contact delivery uses `RESEND_API_KEY`, `RESEND_FROM_EMAIL`, and `RESEND_TO_EMAIL`.
 - Optional Google tag analytics use `NEXT_PUBLIC_GTM_ID` with a GA4 Measurement ID such as `G-XXXXXXXXXX`.
-- Never print or commit secret values.
+- Never print or commit secret values. Gitleaks (CI and pre-commit) and the Claude Code secret guard in `.claude/` enforce this; see "Secret Scanning" in `docs/tech-stack.md`.
 
 ## Docs To Read
 
