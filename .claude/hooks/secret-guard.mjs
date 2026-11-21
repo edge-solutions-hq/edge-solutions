@@ -27,6 +27,8 @@ export function isSensitivePath(path) {
   return /\.(?:pem|p12|pfx|key)$/i.test(name);
 }
 
+const sensitiveGlob = /(?:^|[\/{,])(?:\.env|id_(?:rsa|dsa|ecdsa|ed25519))|\.(?:pem|p12|pfx|key)\b/i;
+
 const envFileInCommand = /(?:^|[\s/'"=<>(])(\.env(?:\.[\w.-]+)?)(?=$|[\s'";|&)<>])/g;
 
 const printingCommands = [
@@ -57,6 +59,14 @@ export function checkCommand(command) {
   if (typeof command !== 'string' || command === '') return null;
   const secret = findSecretValue(command);
   if (secret) return `the command contains what looks like a ${secret}`;
+  for (const line of command.split(/\r?\n/)) {
+    const reason = checkCommandLine(line);
+    if (reason) return reason;
+  }
+  return null;
+}
+
+function checkCommandLine(command) {
   for (const [label, pattern] of printingCommands) {
     if (pattern.test(command)) return `\`${label}\` can print secrets into the transcript`;
   }
@@ -101,7 +111,7 @@ export function evaluate(event) {
   }
   if (tool === 'Grep') {
     if (isSensitivePath(input.path)) return `\`${basename(input.path)}\` holds secrets and is off limits to the agent`;
-    if (typeof input.glob === 'string' && /(?:^|\/)\.env/.test(input.glob)) return 'searching `.env` files is off limits to the agent';
+    if (typeof input.glob === 'string' && sensitiveGlob.test(input.glob)) return 'searching `.env` or private key files is off limits to the agent';
     return null;
   }
   return null;

@@ -43,6 +43,9 @@ describe('agent secret guard', () => {
       'echo $RESEND_API_KEY',
       'printf "%s" "${VERCEL_TOKEN}"',
       'cat ~/.ssh/id_ed25519',
+      'true\nprintenv RESEND_API_KEY',
+      'ls\nenv',
+      'cd web\r\ncat .env.local',
       `curl -H "Authorization: Bearer ${fake.vercel}" https://api.vercel.com`,
     ]) {
       assert.ok(checkCommand(command), command);
@@ -67,6 +70,10 @@ describe('agent secret guard', () => {
   it('blocks file tools on secret files and secret values in new content', () => {
     assert.ok(evaluate({tool_name: 'Read', tool_input: {file_path: '/repo/web/.env.local'}}));
     assert.ok(evaluate({tool_name: 'Grep', tool_input: {pattern: 'KEY', glob: '.env*'}}));
+    for (const glob of ['*.pem', '**/*.key', '{*.p12,*.pfx}', '**/id_rsa']) {
+      assert.ok(evaluate({tool_name: 'Grep', tool_input: {path: '/repo', pattern: '.', glob, output_mode: 'content'}}), glob);
+    }
+    assert.equal(evaluate({tool_name: 'Grep', tool_input: {path: '/repo', pattern: 'KEY', glob: '*.ts'}}), null);
     assert.ok(evaluate({tool_name: 'Write', tool_input: {file_path: '/repo/web/x.ts', content: `const k = '${fake.resend}';`}}));
     assert.ok(evaluate({tool_name: 'Edit', tool_input: {file_path: '/repo/web/x.ts', new_string: fake.openrouter}}));
     assert.equal(evaluate({tool_name: 'Read', tool_input: {file_path: '/repo/web/env.example'}}), null);
