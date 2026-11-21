@@ -45,6 +45,10 @@ describe('agent secret guard', () => {
       'cat ~/.ssh/id_ed25519',
       'true\nprintenv RESEND_API_KEY',
       'ls\nenv',
+      'cat web/.env*',
+      'cat web/.env.*',
+      'head .env?local',
+      'cat web/.env{,.local}',
       'cd web\r\ncat .env.local',
       `curl -H "Authorization: Bearer ${fake.vercel}" https://api.vercel.com`,
     ]) {

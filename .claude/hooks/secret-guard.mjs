@@ -22,14 +22,14 @@ export function isSensitivePath(path) {
   if (typeof path !== 'string' || path === '') return false;
   const name = basename(path.replace(/[\\/]+$/, ''));
   if (allowedEnvFiles.has(name)) return false;
-  if (name === '.env' || name.startsWith('.env.')) return true;
+  if (name === '.env' || name.startsWith('.env.') || /^\.env[*?[{]/.test(name)) return true;
   if (/^id_(?:rsa|dsa|ecdsa|ed25519)$/.test(name)) return true;
   return /\.(?:pem|p12|pfx|key)$/i.test(name);
 }
 
 const sensitiveGlob = /(?:^|[\/{,])(?:\.env|id_(?:rsa|dsa|ecdsa|ed25519))|\.(?:pem|p12|pfx|key)\b/i;
 
-const envFileInCommand = /(?:^|[\s/'"=<>(])(\.env(?:\.[\w.-]+)?)(?=$|[\s'";|&)<>])/g;
+const envFileInCommand = /(?:^|[\s/'"=<>(])(\.env(?:[.*?[{][\w.*?[\]{},-]*)?)(?=$|[\s'";|&)<>])/g;
 
 const printingCommands = [
   ['printenv', /(?:^|[;&|(`]|\$\()\s*(?:sudo\s+)?printenv\b/],
