@@ -11,9 +11,9 @@ const {googleTagId} = analyticsConfig.raw;
 const {googleTag: googleTagStatus} = analyticsConfig.status;
 
 function resolveGoogleTagOutcome() {
-  if (requireGoogleTag && !googleTagStatus.ok) return {kind: 'fail', reason: googleTagStatus.reason};
-  if (!googleTagId) return requireGoogleTag ? {kind: 'ok'} : {kind: 'absent_allowed'};
-  return googleTagStatus.ok ? {kind: 'ok'} : {kind: 'invalid_tolerated'};
+  if (googleTagStatus.ok) return {kind: 'ok'};
+  if (googleTagId || requireGoogleTag) return {kind: 'fail', reason: googleTagStatus.reason};
+  return {kind: 'absent_allowed'};
 }
 
 console.log('Analytics env validation');
@@ -30,7 +30,6 @@ switch (outcome.kind) {
   case 'absent_allowed':
     console.log('\nNo analytics IDs configured. This is valid for local development.');
     break;
-  case 'invalid_tolerated':
   case 'ok':
     break;
 }

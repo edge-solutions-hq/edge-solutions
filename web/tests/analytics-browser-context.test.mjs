@@ -95,6 +95,8 @@ describe('browser analytics context', () => {
     assert.equal(classifyAiReferrer('https://www.bing.com/chat?q=private'), 'copilot');
     assert.equal(classifyAiReferrer('not a url'), undefined);
     assert.equal(classifyAiReferrer('https://example.com/search?q=private'), undefined);
+    assert.equal(classifyAiReferrer('https://chat.openai.com/c/abc'), 'chatgpt');
+    assert.equal(classifyAiReferrer('https://poe.com/chat/123'), 'poe');
 
     assert.deepEqual(
       createBrowserAnalyticsContext({
@@ -120,6 +122,18 @@ describe('browser analytics context', () => {
         source_offer_track: undefined,
       }
     );
+  });
+
+  it('does not count search engines or lookalike hosts as AI referrals', () => {
+    for (const referrer of [
+      'https://www.google.com/search?q=edge+solutions',
+      'https://www.bing.com/search?q=edge+solutions',
+      'https://notclaude.ai/chat',
+      'https://claude.ai.example.com/',
+      'https://fakeperplexity.ai/search',
+    ]) {
+      assert.equal(classifyAiReferrer(referrer), undefined, referrer);
+    }
   });
 
   it('allows router-derived page path while keeping browser location and locale fallback', () => {
@@ -168,6 +182,10 @@ describe('browser analytics context', () => {
     );
     assert.deepEqual(
       resolveBrowserAnalyticsPageContext('/fr/services/unknown-offer'),
+      {pageFamily: 'other'}
+    );
+    assert.deepEqual(
+      resolveBrowserAnalyticsPageContext('/fr/services/ai-automation-legacy'),
       {pageFamily: 'other'}
     );
   });
