@@ -256,12 +256,22 @@ export default async function HomePage({params}: Props) {
           <p>{t('home.showcase.intro')}</p>
         </SectionIntro>
 
-        <ShowcasePanel
+        <BryzaPanel
           className={homeSectionContentGap}
+          eyebrow={t('home.showcase.bryza.eyebrow')}
+          title={t('home.showcase.bryza.title')}
+          description={t('home.showcase.bryza.description')}
+          supportText={t('home.showcase.bryza.supportText')}
+          pipelineLabel={t('home.showcase.bryza.pipelineLabel')}
+          ctaLabel={t('home.showcase.bryza.cta')}
+          href={site.bryzaUrl}
+        />
+
+        <ShowcasePanel
+          className="mt-6"
           title={home.publicProject.title}
           imageSrc={home.publicProject.imageSrc}
           imageAlt={home.publicProject.imageAlt}
-          imagePriority
         >
           <p className="text-base">{home.publicProject.description}</p>
           {home.publicProject.supportText ? (
@@ -284,17 +294,6 @@ export default async function HomePage({params}: Props) {
             {home.publicProject.ctaLabel}
           </ExternalLinkButton>
         </ShowcasePanel>
-
-        <BryzaPanel
-          className="mt-6"
-          eyebrow={t('home.showcase.bryza.eyebrow')}
-          title={t('home.showcase.bryza.title')}
-          description={t('home.showcase.bryza.description')}
-          supportText={t('home.showcase.bryza.supportText')}
-          pipelineLabel={t('home.showcase.bryza.pipelineLabel')}
-          ctaLabel={t('home.showcase.bryza.cta')}
-          href={site.bryzaUrl}
-        />
       </section>
 
       <section
