@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import {readFileSync} from 'node:fs';
-import {basename, resolve} from 'node:path';
+import {readFileSync, readdirSync, statSync} from 'node:fs';
+import {basename, join, resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
 
 export const secretValuePatterns = [
@@ -112,7 +112,50 @@ export function evaluate(event) {
   if (tool === 'Grep') {
     if (isSensitivePath(input.path)) return `\`${basename(input.path)}\` holds secrets and is off limits to the agent`;
     if (typeof input.glob === 'string' && sensitiveGlob.test(input.glob)) return 'searching `.env` or private key files is off limits to the agent';
+    if (isNarrowSearch(input)) return null;
+    const root = resolve(event.cwd ?? process.cwd(), input.path ?? '.');
+    const found = findSensitiveFile(root);
+    return found
+      ? `\`${found}\` holds secrets and sits under the searched directory; narrow the search with a \`type\` or a file-extension \`glob\` such as \`*.ts\``
+      : null;
+  }
+  return null;
+}
+
+const skippedDirs = new Set(['node_modules', '.git', '.next', '.vercel', 'coverage', 'playwright-report', 'test-results']);
+
+export function isNarrowSearch(input) {
+  if (typeof input.type === 'string' && input.type !== '') return true;
+  if (typeof input.glob !== 'string') return false;
+  const last = input.glob.split('/').pop() ?? '';
+  return /\.[A-Za-z0-9{]/.test(last) && !sensitiveGlob.test(input.glob);
+}
+
+export function findSensitiveFile(root, depth = 6) {
+  let stats;
+  try {
+    stats = statSync(root);
+  } catch {
     return null;
+  }
+  if (!stats.isDirectory()) return isSensitivePath(root) ? basename(root) : null;
+  const stack = [[root, 0]];
+  while (stack.length > 0) {
+    const [dir, level] = stack.pop();
+    let entries;
+    try {
+      entries = readdirSync(dir, {withFileTypes: true});
+    } catch {
+      continue;
+    }
+    for (const entry of entries) {
+      const full = join(dir, entry.name);
+      if (entry.isDirectory()) {
+        if (level < depth && !skippedDirs.has(entry.name)) stack.push([full, level + 1]);
+      } else if (isSensitivePath(entry.name)) {
+        return full.slice(root.length + 1) || entry.name;
+      }
+    }
   }
   return null;
 }

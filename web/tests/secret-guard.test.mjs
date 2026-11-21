@@ -2,6 +2,9 @@ import {describe, it} from 'node:test';
 import assert from 'node:assert/strict';
 import {spawnSync} from 'node:child_process';
 import {fileURLToPath} from 'node:url';
+import {mkdtempSync, mkdirSync, writeFileSync, rmSync} from 'node:fs';
+import {tmpdir} from 'node:os';
+import {join} from 'node:path';
 
 const hookPath = fileURLToPath(new URL('../../.claude/hooks/secret-guard.mjs', import.meta.url));
 const {evaluate, checkCommand, isSensitivePath} = await import(hookPath);
@@ -83,6 +86,28 @@ describe('agent secret guard', () => {
     assert.equal(evaluate({tool_name: 'Read', tool_input: {file_path: '/repo/web/env.example'}}), null);
     assert.equal(evaluate({tool_name: 'Read', tool_input: {file_path: '/repo/.env.example'}}), null);
     assert.equal(isSensitivePath('/repo/server.pem'), true);
+  });
+
+  it('blocks broad Grep searches over a directory that holds secret files', () => {
+    const root = mkdtempSync(join(tmpdir(), 'secret-guard-'));
+    try {
+      mkdirSync(join(root, 'web', 'src'), {recursive: true});
+      writeFileSync(join(root, 'web', 'src', 'page.ts'), 'export {};');
+      const grep = (extra) => evaluate({tool_name: 'Grep', cwd: root, tool_input: {pattern: '.', output_mode: 'content', ...extra}});
+      assert.equal(grep({}), null);
+      writeFileSync(join(root, 'web', 'server.pem'), 'marker');
+      assert.ok(grep({}));
+      assert.ok(grep({path: root}));
+      assert.ok(grep({glob: '**/*'}));
+      assert.equal(grep({glob: '*.ts'}), null);
+      assert.equal(grep({type: 'ts'}), null);
+      assert.equal(grep({path: join(root, 'web', 'src')}), null);
+      rmSync(join(root, 'web', 'server.pem'));
+      writeFileSync(join(root, 'web', '.env.local'), 'marker');
+      assert.ok(grep({path: join(root, 'web')}));
+    } finally {
+      rmSync(root, {recursive: true, force: true});
+    }
   });
 
   it('exits with code 2 and a reason when blocking, 0 otherwise', () => {
