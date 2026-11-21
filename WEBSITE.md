@@ -23,7 +23,8 @@ Make the positioning in `docs/positioning.md` concrete on the website and turn q
 4. `docs/architecture.md` for active module ownership and code boundaries.
 5. `docs/analytics/conversion-event-taxonomy.md` for analytics behavior.
 6. `docs/tech-stack.md` for current stack, commands, setup notes, and runtime assumptions.
-7. Active issues, PRs, and specs for scoped delivery decisions.
+7. `docs/adr/` for accepted decisions and their reasons.
+8. Active issues, PRs, and specs for scoped delivery decisions.
 
 Notion prompt blocks may steer scheduled automation. Stable website strategy belongs in this repo. If Notion feedback conflicts with this file or `docs/positioning.md`, escalate instead of silently rewriting strategy.
 

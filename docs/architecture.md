@@ -13,7 +13,7 @@ Keep route files and UI surfaces thin.
 | Offer tracks | `web/src/lib/offer/offer-tracks.ts` | AI-first track order, slugs, paths, message-key stems, and sitemap freshness. |
 | Offer presentation | `web/src/lib/offer/offer-presentation.ts` | Header nav items, homepage offer cards, services-hub cards, and decision-strip items derived from offer tracks. |
 | Home presentation | `web/src/lib/offer/home-presentation.ts` | Homepage public project model, process cards, and contact CTA placements. |
-| Locale routing | `web/src/i18n/routing.ts` | Locale list, default locale, and always-prefixed locale routing. |
+| Locale routing | `web/src/i18n/routing.ts` | Locale list, default locale, and always-prefixed locale routing (why: `docs/adr/0003-locale-prefixed-urls-and-regional-hreflang.md`). |
 | Page profiles | `web/src/lib/site/page-profiles.ts` and `web/src/lib/site/site-profile.ts` | Localized public page metadata, JSON-LD graph selection, static page sitemap facts, and localized sitemap entries; the layout-level profile lives in `site-profile.ts`. |
 | SEO helpers and schema | `web/src/lib/site/seo.ts` | Only place that builds localized URLs, hreflang, metadata, and JSON-LD schema; pages do not hand-roll them. |
 | AI discovery | `web/src/lib/site/ai-discovery.ts` | `llms.txt` content derived from site profile, localized routes, offer tracks, and claim guardrails. |
