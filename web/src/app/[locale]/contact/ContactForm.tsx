@@ -160,7 +160,6 @@ export function ContactForm({
       onSubmitCapture={handleSubmitCapture}
       className="space-y-5"
     >
-      {/* Honeypot */}
       <input
         type={fields.honeypot.type}
         name={fields.honeypot.name}

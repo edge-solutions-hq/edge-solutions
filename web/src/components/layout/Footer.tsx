@@ -2,6 +2,7 @@ import {getTranslations} from 'next-intl/server';
 import {Link} from '@/i18n/navigation';
 import {site} from '@/lib/site/site';
 import {AnalyticsSettingsButton} from '@/components/analytics/AnalyticsConsentProvider';
+import {LogoMark} from '@/components/ui/LogoMark';
 
 type SocialLink = {label: string; href: string};
 
@@ -23,10 +24,8 @@ export async function Footer() {
     <footer className="mt-20 border-t border-border bg-secondary text-secondary-foreground">
       <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-6 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)]">
         <div className="space-y-3">
-          <div className="font-mono text-2xl font-extrabold tracking-tight text-heading">
-            <span className="text-primary" aria-hidden="true">
-              &gt;_{' '}
-            </span>
+          <div className="flex items-center gap-2.5 font-mono text-2xl font-extrabold tracking-tight text-heading">
+            <LogoMark className="size-7 shrink-0 text-primary" />
             {site.companyName}
           </div>
           <div className="text-sm text-muted-foreground">{site.personalBrand}</div>

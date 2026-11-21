@@ -15,8 +15,6 @@ export function resolveLocale(value: string): Locale {
 export const routing = defineRouting({
   locales: LOCALES,
   defaultLocale: DEFAULT_LOCALE,
-  // URLs toujours préfixées /fr, /en, /nl (SEO + clarté)
   localePrefix: 'always',
-  // HTML metadata owns hreflang output with regional codes (fr-BE/en-BE/nl-BE).
   alternateLinks: false
 });
