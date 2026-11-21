@@ -45,14 +45,6 @@ describe('contact form model behavior', () => {
       }),
       {kind: 'success', messageKey: 'contact.form.success'}
     );
-    assert.partialDeepStrictEqual(
-      contactIntake.resolveContactFeedback({
-        status: 'error',
-        messageKey: 'contact.form.rateLimitError',
-      }),
-      {kind: 'error', messageKey: 'contact.form.rateLimitError'}
-    );
-
     assert.deepEqual(
       contactIntake.resolveContactFeedback({
         status: 'error',

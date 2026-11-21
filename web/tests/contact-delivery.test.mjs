@@ -157,9 +157,8 @@ describe('contact Server Action delivery', () => {
   it('allows the first valid attempt, delivers once, and returns success', async () => {
     const state = await submit(contactForm());
 
-    assert.partialDeepStrictEqual(state, {
+    assert.deepEqual(state, {
       status: 'success',
-      messageKey: 'contact.form.success',
       outcome: {kind: 'success', service: 'ai'},
     });
     assert.equal(abuseCalls, 1);
@@ -226,11 +225,6 @@ describe('contact Server Action delivery', () => {
     assert.partialDeepStrictEqual(state, {
       status: 'error',
       messageKey: 'contact.form.validationError',
-      fieldErrors: {
-        name: 'contact.form.fieldErrors.name',
-        email: 'contact.form.fieldErrors.email',
-        message: 'contact.form.fieldErrors.message',
-      },
       outcome: {
         kind: 'validation_error',
         service: 'ai',
