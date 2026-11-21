@@ -70,7 +70,7 @@ export const assetAuthorityRegistry = [
   },
   {
     assetId: 'bryza-console',
-    publicPath: '/images/work/bryza-console.jpg',
+    publicPath: '/images/work/bryza-console-dark.jpg',
     sourceType: 'screenshot',
     approvalStatus: 'approved',
     authority: 'authoritative',
