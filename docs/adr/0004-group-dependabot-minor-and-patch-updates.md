@@ -4,7 +4,7 @@ Status: accepted
 
 ## Context
 
-Every dependency PR runs the full CI gate, and GitHub Actions minutes are limited.
+Every dependency PR runs the full CI gate and needs its own review, so routine bumps are batched to keep PR and CI noise down.
 
 ## Decision
 
@@ -12,4 +12,4 @@ Every dependency PR runs the full CI gate, and GitHub Actions minutes are limite
 
 ## Consequences
 
-One CI run per ecosystem per week for routine bumps. If a grouped PR fails, find the bump that broke it inside the group.
+One PR and one CI run per ecosystem per week for routine bumps. If a grouped PR fails, find the bump that broke it inside the group.
