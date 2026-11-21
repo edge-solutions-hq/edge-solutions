@@ -35,12 +35,15 @@ describe('localized service FAQ source', () => {
   it('has localized MDX service pages render FAQ from the centralized FAQ source', () => {
     for (const locale of LOCALES) {
       for (const slug of OFFER_TRACK_SLUGS) {
-        const source = read(`src/content/${locale}/services/${slug}.mdx`);
+        const tags = [...read(`src/content/${locale}/services/${slug}.mdx`).matchAll(/<ServiceFaq\b([^>]*)\/>/g)];
+        const attributes = tags.map(([, attrs]) =>
+          Object.fromEntries([...attrs.matchAll(/(\w+)="([^"]*)"/g)].map(([, key, value]) => [key, value]))
+        );
 
-        assert.match(
-          source,
-          new RegExp(`<ServiceFaq locale="${locale}" slug="${slug}" />`),
-          `${locale}/${slug} must render centralized FAQ content`
+        assert.deepEqual(
+          attributes,
+          [{locale, slug}],
+          `${locale}/${slug} must render the centralized FAQ for its own locale and slug once`
         );
       }
     }
@@ -54,7 +57,6 @@ describe('localized service FAQ source', () => {
 
         assert.equal(schema['@type'], 'FAQPage');
         assert.equal(schema.inLanguage, locale);
-        assert.equal(schema.mainEntity.length, items.length);
         assert.deepEqual(
           schema.mainEntity.map((item) => ({
             question: item.name,

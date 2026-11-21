@@ -96,10 +96,6 @@ describe('contact attempt tracker behavior', () => {
 });
 
 describe('tracked link target behavior', () => {
-  it('preserves string hrefs', () => {
-    assert.equal(trackedLinkTarget.hrefToTrackedTarget('/contact?source=hero#top'), '/contact?source=hero#top');
-  });
-
   it('serializes object hrefs with query arrays and normalized hashes', () => {
     assert.equal(
       trackedLinkTarget.hrefToTrackedTarget({

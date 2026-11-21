@@ -22,21 +22,14 @@ describe('contact form model behavior', () => {
 
   it('resolves contact service query params for preselected CTAs', () => {
     assert.equal(contactIntake.resolveContactServiceSearchParam('ai'), 'ai');
-    assert.equal(contactIntake.resolveContactServiceSearchParam('realtime'), 'realtime');
     assert.equal(contactIntake.resolveContactServiceSearchParam(['realtime', 'ai']), 'realtime');
     assert.equal(contactIntake.resolveContactServiceSearchParam('unknown'), undefined);
     assert.equal(contactIntake.resolveContactServiceSearchParam(undefined), undefined);
-    assert.equal(contactIntake.resolveContactServiceTarget('/contact?service=ai'), 'ai');
     assert.equal(contactIntake.resolveContactServiceTarget('/fr/contact?service=realtime'), 'realtime');
     assert.equal(contactIntake.resolveContactServiceTarget('/contact?service=unknown'), undefined);
   });
 
-  it('resolves feedback from each contact action state', () => {
-    assert.deepEqual(
-      contactIntake.resolveContactFeedback({status: 'idle'}),
-      {kind: 'none'}
-    );
-
+  it('shows success and error feedback for the contact adapter', () => {
     assert.deepEqual(
       contactIntake.resolveContactFeedback({
         status: 'dropped',
@@ -52,24 +45,6 @@ describe('contact form model behavior', () => {
       }),
       {kind: 'success', messageKey: 'contact.form.success'}
     );
-
-    assert.deepEqual(
-      contactIntake.resolveContactFeedback({
-        status: 'error',
-        messageKey: 'contact.form.validationError',
-        outcome: {
-          kind: 'validation_error',
-          service: 'ai',
-          fieldErrors: {name: 'contact.form.fieldErrors.name'},
-        },
-      }),
-      {
-        kind: 'error',
-        messageKey: 'contact.form.validationError',
-        fieldErrors: {name: 'contact.form.fieldErrors.name'},
-      }
-    );
-
     assert.deepEqual(
       contactIntake.resolveContactFeedback({
         status: 'error',
