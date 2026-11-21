@@ -5,6 +5,7 @@ import {
   expectNoOptionalRuntime,
   guardBrowserNetwork,
   optionalAnalyticsKind,
+  seedRejectedConsent,
   test,
   type NetworkEvidence,
 } from './fixtures';
@@ -61,10 +62,7 @@ test('storage getter failure keeps acceptance fail closed', async ({page}) => {
 
 test('analytics settings choices restore focus to the footer trigger', async ({page}) => {
   await guardBrowserNetwork(page);
-  await page.addInitScript(
-    ({key}) => window.localStorage.setItem(key, 'rejected'),
-    {key: ANALYTICS_CONSENT_STORAGE_KEY}
-  );
+  await seedRejectedConsent(page);
 
   await page.goto('/en');
   const settingsTrigger = page.getByRole('button', {name: 'Analytics settings'});

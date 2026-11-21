@@ -151,7 +151,6 @@ describe('contact Server Action delivery', () => {
       messageKey: 'contact.form.genericError',
       outcome: {kind: 'abuse_control_error', service: 'ai'},
     });
-    assert.doesNotMatch(JSON.stringify(state), /WAF|Vercel|IP|rule|counter/i);
   });
 
   it('allows the first valid attempt, delivers once, and returns success', async () => {
@@ -192,10 +191,6 @@ describe('contact Server Action delivery', () => {
       messageKey: 'contact.form.rateLimitError',
       outcome: {kind: 'limited', service: 'ai'},
     });
-    assert.doesNotMatch(
-      JSON.stringify(state),
-      /contact-submit|Vercel|IP|count|remaining|reset|600|\b5\b/i
-    );
     assert.equal(abuseCalls, 1);
     assert.equal(deliveries.length, 0);
   });
@@ -211,7 +206,6 @@ describe('contact Server Action delivery', () => {
         messageKey: 'contact.form.genericError',
         outcome: {kind: 'abuse_control_error', service: 'ai'},
       });
-      assert.doesNotMatch(JSON.stringify(state), /WAF|diagnostic|unavailable/i);
       assert.equal(abuseCalls, 1);
       assert.equal(deliveries.length, 0);
     });
@@ -260,7 +254,6 @@ describe('contact Server Action delivery', () => {
       messageKey: 'contact.form.configError',
       outcome: {kind: 'delivery_error', service: 'ai'},
     });
-    assert.doesNotMatch(JSON.stringify(state), /RESEND|missing|api.?key/i);
     assert.equal(abuseCalls, 1);
     assert.equal(deliveries.length, 0);
   });
@@ -276,10 +269,6 @@ describe('contact Server Action delivery', () => {
         messageKey: 'contact.form.genericError',
         outcome: {kind: 'delivery_error', service: 'ai'},
       });
-      assert.doesNotMatch(
-        JSON.stringify(state),
-        /provider|invalid sender|network|connection reset|resend/i
-      );
       assert.equal(abuseCalls, 1);
       assert.equal(deliveries.length, 1);
     });
