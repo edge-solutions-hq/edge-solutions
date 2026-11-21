@@ -15,20 +15,22 @@ type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost';
 type ButtonSize = 'sm' | 'md' | 'lg';
 
 const base =
-  'inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[background-color,border-color,color,box-shadow] duration-300 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60 motion-reduce:transition-none';
+  'inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-md font-mono text-[0.8125rem] font-bold transition-[background-color,border-color,color] duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-60 motion-reduce:transition-none';
 
 const variants: Record<ButtonVariant, string> = {
   primary:
-    'border border-border/85 bg-primary text-primary-foreground shadow-[2px_2px_0_color-mix(in_srgb,var(--secondary)_58%,transparent)] hover:bg-accent hover:shadow-[1px_1px_0_color-mix(in_srgb,var(--secondary)_70%,transparent)]',
-  secondary: 'bg-secondary text-secondary-foreground hover:bg-secondary/90',
-  outline: 'border border-border bg-surface text-foreground hover:bg-surface-muted',
+    'border border-primary bg-primary text-primary-foreground hover:border-accent hover:bg-accent',
+  secondary:
+    'border border-border-strong bg-secondary text-secondary-foreground hover:border-primary',
+  outline:
+    'border border-border-strong bg-transparent text-foreground hover:border-primary hover:bg-surface-muted',
   ghost: 'text-foreground hover:bg-surface-muted'
 };
 
 const sizes: Record<ButtonSize, string> = {
   sm: 'h-9 px-3',
   md: 'h-10 px-4',
-  lg: 'h-11 px-5'
+  lg: 'h-12 px-6'
 };
 
 export function buttonClass({

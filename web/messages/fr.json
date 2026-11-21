@@ -10,6 +10,12 @@
     "mobileMenu": {
       "open": "Ouvrir le menu de navigation",
       "close": "Fermer le menu de navigation"
+    },
+    "palette": {
+      "title": "Navigation rapide",
+      "placeholder": "Aller à une page...",
+      "empty": "Aucune page ne correspond.",
+      "close": "Fermer la navigation rapide"
     }
   },
   "home": {
@@ -55,6 +61,14 @@
         "title": "Rusty Art, orchestration IA avec OpenClaw",
         "description": "Rusty Art est un projet accessible publiquement. Je l’utilise pour tester des processus IA, de l’orchestration de tâches et des itérations produit avec OpenClaw.",
         "cta": "Voir Rusty Art"
+      },
+      "bryza": {
+        "eyebrow": "Mon produit",
+        "title": "Bryza, les avis Steam des joueurs transformés en tâches pour l’équipe",
+        "description": "Bryza lit les avis Steam publics d’un jeu et les regroupe en points de travail clairs : bugs, retours de design et demandes de fonctionnalités, chacun appuyé par les citations des joueurs et un lien vers l’avis d’origine.",
+        "supportText": "Je le conçois et le développe, de l’analyse par modèles de langage jusqu’à la console web des équipes. En ligne depuis octobre 2026.",
+        "pipelineLabel": "Pipeline Bryza",
+        "cta": "Découvrir Bryza"
       }
     },
     "process": {
@@ -87,6 +101,11 @@
           }
         }
       }
+    },
+    "status": {
+      "role": "Freelance",
+      "location": "Région de Liège, Belgique",
+      "focus": "IA et 3D / XR"
     }
   },
   "services": {

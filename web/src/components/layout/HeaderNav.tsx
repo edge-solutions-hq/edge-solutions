@@ -18,17 +18,17 @@ export function HeaderNav({items}: {items: HeaderNavigationItem[]}) {
   const contactModal = useContactModal();
 
   return (
-    <nav className="hidden items-center gap-1 md:flex">
+    <nav className="hidden items-stretch lg:flex">
       {navItems.map((item) => (
         <Link
           key={item.href}
           href={item.href}
           aria-current={item.active ? 'page' : undefined}
           className={cn(
-            'rounded-md px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
+            'relative flex items-center whitespace-nowrap border-x border-transparent px-3 font-mono text-[0.8125rem] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring motion-reduce:transition-none lg:px-4',
             item.active
-              ? 'bg-surface-muted text-foreground'
-              : 'text-muted-foreground hover:bg-surface-muted hover:text-foreground'
+              ? 'border-border bg-background text-heading after:absolute after:inset-x-0 after:top-0 after:h-0.5 after:bg-primary'
+              : 'text-muted-foreground hover:bg-surface hover:text-heading'
           )}
           onClick={(event) => {
             if (item.trackingPayload) {

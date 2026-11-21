@@ -42,10 +42,10 @@ export default async function PrivacyPolicyPage({params}: Props) {
       <JsonLd data={profile.jsonLd} />
 
       <header className="border-b border-border pb-6">
-        <p className="text-xs font-semibold uppercase tracking-normal text-subtle-foreground">
+        <p className="font-mono text-xs text-syn-green">
           {site.companyName}
         </p>
-        <h1 className="mt-3 text-3xl font-semibold tracking-tight text-technical-blue">
+        <h1 className="mt-3 font-display text-3xl font-extrabold tracking-tight text-heading">
           {t('privacy.title')}
         </h1>
         <p className="mt-4 text-base leading-7 text-muted-foreground">
@@ -58,7 +58,7 @@ export default async function PrivacyPolicyPage({params}: Props) {
           <section key={section.key} aria-labelledby={`privacy-${section.key}`}>
             <h2
               id={`privacy-${section.key}`}
-              className="text-lg font-semibold tracking-tight text-technical-blue"
+              className="font-mono text-base font-bold text-heading"
             >
               {section.title}
             </h2>
@@ -70,7 +70,7 @@ export default async function PrivacyPolicyPage({params}: Props) {
                 <p>
                   <a
                     href={`mailto:${site.contactEmail}`}
-                    className="text-link underline underline-offset-4 decoration-primary/60 transition-colors hover:decoration-link motion-reduce:transition-none"
+                    className="text-link underline underline-offset-4 decoration-primary/70 transition-colors hover:decoration-link motion-reduce:transition-none"
                   >
                     {site.contactEmail}
                   </a>

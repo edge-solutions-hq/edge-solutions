@@ -6,6 +6,7 @@ import {site} from '@/lib/site/site';
 import {ButtonLink} from '@/components/ui/Button';
 import {HeaderNav} from './HeaderNav';
 import {MobileMenu} from './MobileMenu';
+import {CommandPalette} from './CommandPalette';
 import {getHeaderOfferNavItems} from '@/lib/offer/offer-presentation';
 import {getHeaderNavigationItems} from '@/lib/navigation/header-navigation';
 
@@ -15,17 +16,20 @@ export async function Header({locale}: {locale: string}) {
   const items = getHeaderNavigationItems(t, getHeaderOfferNavItems(t));
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/82">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
-        <div className="flex items-center gap-6">
+    <header className="sticky top-0 z-50 border-b border-border bg-secondary/95 backdrop-blur supports-[backdrop-filter]:bg-secondary/85">
+      <div className="mx-auto flex h-14 max-w-6xl items-stretch justify-between gap-4 px-5 sm:px-6">
+        <div className="flex items-stretch gap-5">
           <Link
             href="/"
-            className="group flex items-baseline gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+            className="group flex items-center gap-2 whitespace-nowrap font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
           >
-            <span className="text-base font-semibold tracking-tight text-foreground">
+            <span className="text-sm font-extrabold text-primary" aria-hidden="true">
+              &gt;_
+            </span>
+            <span className="text-sm font-bold text-heading">
               {site.personalBrand}
             </span>
-            <span className="text-sm text-subtle-foreground">
+            <span className="hidden text-xs text-subtle-foreground sm:inline lg:hidden">
               {site.companyName}
             </span>
           </Link>
@@ -33,13 +37,27 @@ export async function Header({locale}: {locale: string}) {
           <HeaderNav items={items} />
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
+          <CommandPalette
+            items={items}
+            extraItems={[
+              {href: '/services', label: t('services.title')},
+              {href: '/privacy-policy', label: t('footer.privacyPolicy')},
+            ]}
+            labels={{
+              title: t('nav.palette.title'),
+              placeholder: t('nav.palette.placeholder'),
+              empty: t('nav.palette.empty'),
+              close: t('nav.palette.close'),
+            }}
+          />
           <Suspense fallback={<LocaleSwitchFallback locale={locale} />}>
             <LocaleSwitch locale={locale} />
           </Suspense>
           <ButtonLink
             href="/contact"
             className="hidden md:inline-flex"
+            size="sm"
             trackingPlacement="header_cta"
           >
             {t('home.primaryCta')}

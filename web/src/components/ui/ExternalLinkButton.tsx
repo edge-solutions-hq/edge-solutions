@@ -16,7 +16,7 @@ export function ExternalLinkButton({
       target="_blank"
       rel="noreferrer"
       className={cn(
-        'inline-flex items-center justify-center gap-1 rounded-md border border-primary/80 bg-primary/18 px-3 py-2 text-sm font-semibold text-technical-blue no-underline shadow-[3px_3px_0_rgba(170,142,75,0.2)] transition-[background-color,box-shadow] duration-300 ease-out hover:bg-primary/25 hover:shadow-[2px_2px_0_rgba(170,142,75,0.34)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
+        'inline-flex items-center justify-center gap-1.5 rounded-md border border-primary/70 bg-primary/10 px-3.5 py-2 font-mono text-[0.8125rem] font-bold text-accent no-underline transition-[background-color,border-color] duration-200 ease-out hover:border-primary hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
         className
       )}
       {...props}

@@ -20,6 +20,7 @@ import {
   resolveContactServiceTarget,
   type ContactOfferValue,
 } from '@/lib/contact/options';
+import {WindowDots} from '@/components/ui/WindowChrome';
 import {ContactForm} from './ContactForm';
 
 type ContactModalState = {
@@ -131,7 +132,7 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
           <button
             type="button"
             aria-label={t('contact.modalClose')}
-            className="absolute inset-0 h-full w-full cursor-default bg-secondary/45 backdrop-blur-sm"
+            className="absolute inset-0 h-full w-full cursor-default bg-black/70 backdrop-blur-sm"
             onClick={closeContactModal}
           />
 
@@ -142,20 +143,23 @@ export function ContactModalProvider({children}: {children: ReactNode}) {
               aria-modal="true"
               aria-labelledby={titleId}
               className={cn(
-                'pointer-events-auto flex h-dvh w-full flex-col overflow-hidden border-border bg-surface text-foreground shadow-[0_0_0_1px_rgba(16,43,74,0.18)]',
-                'sm:h-auto sm:max-h-[calc(100dvh-3rem)] sm:w-[min(42rem,calc(100vw-3rem))] sm:rounded-lg sm:border sm:shadow-[8px_8px_0_rgba(170,142,75,0.24)]'
+                'pointer-events-auto flex h-dvh w-full flex-col overflow-hidden border-border-strong bg-surface text-foreground',
+                'sm:h-auto sm:max-h-[calc(100dvh-3rem)] sm:w-[min(42rem,calc(100vw-3rem))] sm:rounded-md sm:border sm:shadow-[0_40px_90px_-30px_rgba(0,0,0,0.95)]'
               )}
               onKeyDown={handleDialogKeyDown}
             >
-              <div className="flex items-center justify-between gap-4 border-b border-border px-5 py-4 sm:px-6">
-                <h2 id={titleId} className="text-xl font-semibold tracking-tight text-technical-blue">
-                  {t('contact.title')}
-                </h2>
+              <div className="flex items-center justify-between gap-4 border-b border-border bg-secondary/70 px-5 py-3 sm:px-6">
+                <div className="flex min-w-0 items-center gap-3">
+                  <WindowDots className="hidden sm:flex" />
+                  <h2 id={titleId} className="font-mono text-sm font-bold text-heading sm:text-base">
+                    {t('contact.title')}
+                  </h2>
+                </div>
                 <button
                   ref={closeButtonRef}
                   type="button"
                   aria-label={t('contact.modalClose')}
-                  className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border bg-background text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-surface motion-reduce:transition-none"
+                  className="inline-flex h-9 w-9 cursor-pointer items-center justify-center rounded-md border border-border-strong bg-background text-foreground transition-colors hover:border-primary hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-surface motion-reduce:transition-none"
                   onClick={closeContactModal}
                 >
                   <svg

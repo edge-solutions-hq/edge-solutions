@@ -6,7 +6,9 @@ import {AnalyticsSettingsButton} from '@/components/analytics/AnalyticsConsentPr
 type SocialLink = {label: string; href: string};
 
 const footerLinkClass =
-  'text-secondary-foreground underline underline-offset-4 decoration-primary/60 transition-colors hover:decoration-secondary-foreground motion-reduce:transition-none';
+  'inline-block cursor-pointer py-0.5 text-secondary-foreground underline underline-offset-4 decoration-primary/70 transition-colors hover:text-accent hover:decoration-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring motion-reduce:transition-none';
+
+const footerHeadingClass = 'font-mono text-xs text-syn-green';
 
 export async function Footer() {
   const t = await getTranslations();
@@ -18,39 +20,29 @@ export async function Footer() {
   ];
 
   return (
-    <footer className="mt-16 border-t border-primary bg-secondary text-secondary-foreground">
-      <div className="overflow-hidden border-b border-primary/65 py-3">
-        <div
-          className="whitespace-nowrap font-display text-5xl font-extrabold uppercase leading-none tracking-normal text-primary sm:text-6xl"
-          aria-hidden="true"
-        >
-          Edge Solutions · Edge Solutions · Edge Solutions · Edge Solutions ·
-        </div>
-      </div>
-
-      <div className="mx-auto grid max-w-6xl gap-8 px-6 py-12 md:grid-cols-3">
-        <div className="space-y-2">
-          <div className="text-sm font-semibold text-secondary-foreground">
-            {site.personalBrand} · {site.companyName}
+    <footer className="mt-20 border-t border-border bg-secondary text-secondary-foreground">
+      <div className="mx-auto grid max-w-6xl gap-10 px-5 py-12 sm:px-6 md:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)_minmax(0,1fr)]">
+        <div className="space-y-3">
+          <div className="font-mono text-2xl font-extrabold tracking-tight text-heading">
+            <span className="text-primary" aria-hidden="true">
+              &gt;_{' '}
+            </span>
+            {site.companyName}
           </div>
-          <div className="text-sm text-secondary-foreground/75">
-            <a
-              className={footerLinkClass}
-              href={`mailto:${site.contactEmail}`}
-            >
+          <div className="text-sm text-muted-foreground">{site.personalBrand}</div>
+          <div className="text-sm">
+            <a className={footerLinkClass} href={`mailto:${site.contactEmail}`}>
               {site.contactEmail}
             </a>
           </div>
-          <div className="text-sm text-secondary-foreground/75">
-            {site.vatNumber}
-          </div>
         </div>
 
-        <div className="space-y-2">
-          <div className="text-sm font-semibold text-secondary-foreground">
+        <div className="space-y-3">
+          <div className={footerHeadingClass}>
+            <span aria-hidden="true">{'// '}</span>
             {t('footer.links')}
           </div>
-          <ul className="space-y-1 text-sm text-secondary-foreground/75">
+          <ul className="space-y-2 text-sm">
             {links.map((l) => (
               <li key={l.label}>
                 <a
@@ -63,6 +55,15 @@ export async function Footer() {
                 </a>
               </li>
             ))}
+          </ul>
+        </div>
+
+        <div className="space-y-3">
+          <div className={footerHeadingClass}>
+            <span aria-hidden="true">{'// '}</span>
+            edge-solutions.be
+          </div>
+          <ul className="space-y-2 text-sm">
             <li>
               <Link href="/privacy-policy" className={footerLinkClass}>
                 {t('footer.privacyPolicy')}
@@ -73,14 +74,15 @@ export async function Footer() {
             </li>
           </ul>
         </div>
+      </div>
 
-        <div className="space-y-2">
-          <div className="text-sm font-semibold text-secondary-foreground">
-            edge-solutions.be
-          </div>
-          <div className="text-sm text-secondary-foreground/75">
-            {t('footer.copyright', {year: new Date().getFullYear()})}
-          </div>
+      <div className="border-t border-border bg-background/60">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center gap-x-4 gap-y-1 px-5 py-2.5 font-mono text-xs text-muted-foreground sm:px-6">
+          <span className="rounded-sm bg-primary px-2 py-0.5 font-bold text-primary-foreground">
+            {site.companyName}
+          </span>
+          <span>{t('footer.copyright', {year: new Date().getFullYear()})}</span>
+          <span className="sm:ml-auto">{site.vatNumber}</span>
         </div>
       </div>
     </footer>

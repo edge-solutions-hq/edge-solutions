@@ -40,7 +40,7 @@ export function ProjectGallery({
             rel="noreferrer"
             className={surfaceClass(
               'interactive-card',
-              'group flex flex-col overflow-hidden border-0 ring-1 ring-border no-underline'
+              'group flex flex-col overflow-hidden no-underline'
             )}
           >
             <div className="relative aspect-video overflow-hidden border-b border-border bg-surface-muted">
@@ -54,11 +54,11 @@ export function ProjectGallery({
             </div>
             <div className="flex-1 p-4">
               {item.category ? (
-                <div className="mb-2 text-xs font-semibold uppercase tracking-normal text-subtle-foreground">
+                <div className="mb-2 font-mono text-xs text-syn-cyan">
                   {item.category}
                 </div>
               ) : null}
-              <div className="text-base font-semibold tracking-tight text-technical-blue">
+              <div className="font-mono text-sm font-bold text-heading">
                 {item.title}
               </div>
               <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -72,7 +72,7 @@ export function ProjectGallery({
       {links && links.length > 0 ? (
         <div className="mt-8 border-t border-border/70 pt-6">
           {linksTitle ? (
-            <div className="text-sm font-semibold text-technical-blue">
+            <div className="font-mono text-sm font-bold text-heading">
               {linksTitle}
             </div>
           ) : null}

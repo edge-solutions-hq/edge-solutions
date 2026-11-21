@@ -24,13 +24,15 @@ export function PageIntro({
       innerClassName={cn('max-w-4xl', centered && 'text-center')}
     >
       <div>
-        <p className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+        <p className="font-mono text-xs text-syn-green">
+          <span aria-hidden="true">{'// '}</span>
           {eyebrow}
         </p>
-        <h1 className="mt-4 text-balance font-display text-4xl leading-[0.95] font-bold tracking-normal text-technical-blue sm:text-5xl sm:leading-[0.92]">
+        <h1 className="mt-4 text-balance font-display text-3xl leading-[1.12] font-extrabold tracking-tight text-heading sm:text-4xl lg:text-[2.75rem]">
           {title}
+          <span className="caret ml-2" aria-hidden="true" />
         </h1>
-        <div className="mt-4 space-y-4 text-lg leading-relaxed text-muted-foreground">
+        <div className="mt-6 space-y-4 border-l-2 border-primary/60 pl-5 text-base leading-relaxed text-muted-foreground sm:text-lg">
           {content}
         </div>
       </div>
