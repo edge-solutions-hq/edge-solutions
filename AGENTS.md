@@ -65,4 +65,4 @@ Use the default triage label vocabulary: `needs-triage`, `needs-info`, `ready-fo
 
 ### Domain Docs
 
-Single-context layout: one root `CONTEXT.md` glossary and `docs/adr/`, both created lazily by `/domain-modeling`. See `docs/agents/domain.md`.
+Single-context layout: one root `GLOSSARY.md` and `docs/adr/`, both created lazily by `/domain-modeling`. See `docs/agents/domain.md`.
