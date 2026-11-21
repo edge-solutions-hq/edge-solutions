@@ -101,6 +101,10 @@ describe('agent secret guard', () => {
       assert.ok(grep({glob: '**/*'}));
       assert.equal(grep({glob: '*.ts'}), null);
       assert.equal(grep({type: 'ts'}), null);
+      assert.equal(grep({glob: '*.{ts,tsx}'}), null);
+      assert.ok(grep({glob: '!*.ts'}));
+      assert.ok(grep({glob: '*.{ts,}'}));
+      assert.ok(grep({glob: '*.{ts,pem}'}));
       assert.equal(grep({path: join(root, 'web', 'src')}), null);
       rmSync(join(root, 'web', 'server.pem'));
       writeFileSync(join(root, 'web', '.env.local'), 'marker');

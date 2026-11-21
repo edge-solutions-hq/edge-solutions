@@ -126,9 +126,11 @@ const skippedDirs = new Set(['node_modules', '.git', '.next', '.vercel', 'covera
 
 export function isNarrowSearch(input) {
   if (typeof input.type === 'string' && input.type !== '') return true;
-  if (typeof input.glob !== 'string') return false;
+  if (typeof input.glob !== 'string' || input.glob.includes('!') || sensitiveGlob.test(input.glob)) return false;
   const last = input.glob.split('/').pop() ?? '';
-  return /\.[A-Za-z0-9{]/.test(last) && !sensitiveGlob.test(input.glob);
+  const group = last.match(/\{([^{}]*)\}/);
+  const alternatives = group ? group[1].split(',').map((option) => last.replace(group[0], option)) : [last];
+  return alternatives.every((name) => /\.[A-Za-z0-9]+$/.test(name) && !isSensitivePath(name.replaceAll('*', 'x')));
 }
 
 export function findSensitiveFile(root, depth = 6) {
