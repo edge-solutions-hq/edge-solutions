@@ -38,7 +38,6 @@ function servicesOfferAccentClass(service: ServicesHubOfferCard) {
 }
 
 function servicesOfferTitleClass(service: ServicesHubOfferCard) {
-  // Same size for both families; emphasis only picks the syntax accent.
   return [
     'font-display text-xl font-bold tracking-tight text-heading decoration-2 underline-offset-4 group-hover:underline',
     service.visualEmphasis === 'high' ? 'decoration-syn-green' : 'decoration-syn-cyan',

@@ -14,11 +14,6 @@ type BryzaPanelProps = {
   className?: string;
 };
 
-/**
- * Bryza, Gil's own product. Text-only presentation: no screenshot or logo is
- * approved in the asset registry, so the right pane is a synthetic pipeline
- * read-out describing the real processing steps, not product UI.
- */
 const pipelineSteps: {cmd: string; tone: string}[] = [
   {cmd: 'fetch    steam_reviews --public', tone: 'text-syn-cyan'},
   {cmd: 'translate --to en', tone: 'text-syn-cyan'},
