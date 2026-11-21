@@ -1,6 +1,6 @@
 import {ExternalLinkButton} from '@/components/ui/ExternalLinkButton';
+import {MediaFrame} from '@/components/ui/MediaFrame';
 import {surfaceClass} from '@/components/ui/Surface';
-import {WindowChrome} from '@/components/ui/WindowChrome';
 import {cn} from '@/lib/cn';
 
 type BryzaPanelProps = {
@@ -8,31 +8,26 @@ type BryzaPanelProps = {
   title: string;
   description: string;
   supportText: string;
-  pipelineLabel: string;
+  imageSrc: string;
+  imageAlt: string;
+  imageCaption: string;
   ctaLabel: string;
   href: string;
   className?: string;
 };
 
 /**
- * Bryza, Gil's own product. Text-only presentation: no screenshot or logo is
- * approved in the asset registry, so the right pane is a synthetic pipeline
- * read-out describing the real processing steps, not product UI.
+ * Bryza, Gil's own product. The screenshot is the approved `bryza-console`
+ * asset: a local build with synthetic demo data, labelled as such below it.
  */
-const pipelineSteps: {cmd: string; tone: string}[] = [
-  {cmd: 'fetch    steam_reviews --public', tone: 'text-syn-cyan'},
-  {cmd: 'translate --to en', tone: 'text-syn-cyan'},
-  {cmd: 'triage   bug | design | feature', tone: 'text-syn-purple'},
-  {cmd: 'group    → issues', tone: 'text-syn-green'},
-  {cmd: 'cite     player_quotes + source_link', tone: 'text-primary'},
-];
-
 export function BryzaPanel({
   eyebrow,
   title,
   description,
   supportText,
-  pipelineLabel,
+  imageSrc,
+  imageAlt,
+  imageCaption,
   ctaLabel,
   href,
   className,
@@ -64,25 +59,22 @@ export function BryzaPanel({
         </div>
       </div>
 
-      <div className="border-t border-border bg-secondary p-4 lg:border-l lg:border-t-0">
-        <div className={surfaceClass('media', 'overflow-hidden bg-background')}>
-          <WindowChrome title={`bryza.app · ${pipelineLabel}`} />
-          <ol
-            className="space-y-2.5 px-4 py-5 font-mono text-[0.8125rem] leading-6"
-            aria-hidden="true"
-          >
-            {pipelineSteps.map((step, index) => (
-              <li key={step.cmd} className="flex gap-3">
-                <span className="w-4 shrink-0 text-right text-subtle-foreground">{index + 1}</span>
-                <span className="min-w-0 break-words">
-                  <span className="text-primary">$ </span>
-                  <span className={step.tone}>{step.cmd}</span>
-                </span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
+      <figure className="m-0 border-t border-border bg-secondary p-4 lg:border-l lg:border-t-0">
+        <MediaFrame
+          imageSrc={imageSrc}
+          imageAlt={imageAlt}
+          width={1600}
+          height={1000}
+          outerClassName=""
+          chromeClassName="pb-3"
+          imageFrameClassName={surfaceClass('media', 'overflow-hidden')}
+          imagePriority
+        />
+        <figcaption className="mt-3 font-mono text-xs text-subtle-foreground">
+          <span aria-hidden="true">{'// '}</span>
+          {imageCaption}
+        </figcaption>
+      </figure>
     </section>
   );
 }

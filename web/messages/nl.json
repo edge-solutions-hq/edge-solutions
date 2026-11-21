@@ -67,8 +67,9 @@
         "title": "Bryza maakt van Steam-reviews van spelers werk voor het team",
         "description": "Bryza leest de openbare Steam-reviews van een game en groepeert ze in duidelijke werkpunten: bugs, designfeedback en featureverzoeken, elk onderbouwd met citaten van spelers en een link naar de oorspronkelijke review.",
         "supportText": "Ik ontwerp en bouw het, van de analyse met taalmodellen tot de webconsole voor de teams. Online sinds oktober 2026.",
-        "pipelineLabel": "Bryza-pipeline",
-        "cta": "Ontdek Bryza"
+        "cta": "Ontdek Bryza",
+        "imageAlt": "Bryza-console, overzicht van een game",
+        "imageCaption": "Demodata: de game ‘Lanternfall’ en de reviews zijn verzonnen."
       }
     },
     "process": {

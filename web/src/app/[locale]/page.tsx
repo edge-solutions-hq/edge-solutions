@@ -9,6 +9,7 @@ import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
 import {BryzaPanel} from '@/components/home/BryzaPanel';
 import {site} from '@/lib/site/site';
+import {getAssetAuthorityRecord} from '@/lib/content/asset-authority';
 import {getHomePresentationModel} from '@/lib/offer/home-presentation';
 import {getHomeOfferCards} from '@/lib/offer/offer-presentation';
 import {getHomePageProfile} from '@/lib/site/page-profiles';
@@ -262,7 +263,9 @@ export default async function HomePage({params}: Props) {
           title={t('home.showcase.bryza.title')}
           description={t('home.showcase.bryza.description')}
           supportText={t('home.showcase.bryza.supportText')}
-          pipelineLabel={t('home.showcase.bryza.pipelineLabel')}
+          imageSrc={getAssetAuthorityRecord('bryza-console')!.publicPath}
+          imageAlt={t('home.showcase.bryza.imageAlt')}
+          imageCaption={t('home.showcase.bryza.imageCaption')}
           ctaLabel={t('home.showcase.bryza.cta')}
           href={site.bryzaUrl}
         />

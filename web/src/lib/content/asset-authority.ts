@@ -69,6 +69,17 @@ export const assetAuthorityRegistry = [
     provenanceSummary: 'Repo-approved Rusty Art visual supplied by Gil for the homepage public project panel. It does not authorize client, metric, testimonial, logo, screenshot, award, or certification claims.',
   },
   {
+    assetId: 'bryza-console',
+    publicPath: '/images/work/bryza-console.jpg',
+    sourceType: 'screenshot',
+    approvalStatus: 'approved',
+    authority: 'authoritative',
+    usageScopes: ['homepage', 'showcase'],
+    sourceArtifactRefs: [site.bryzaUrl, '../WEBSITE.md'],
+    claimRestrictions: defaultClaimRestrictions,
+    provenanceSummary: 'Screenshot of Gil\'s own product Bryza (game Overview), captured on a local build with synthetic demo data: the game "Lanternfall", its reviews and its numbers are invented. Approved by Gil for the homepage Bryza panel; it does not authorize client, user, metric, testimonial or outcome claims.',
+  },
+  {
     assetId: 'services-ai-workflow-board',
     publicPath: '/images/work/services-ai-workflow-board.svg',
     sourceType: 'approved_asset',
