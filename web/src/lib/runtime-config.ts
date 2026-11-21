@@ -18,22 +18,16 @@ export const contactEnvKeys = {
 
 type RuntimeEnv = Record<string, string | undefined>;
 
-export type RuntimeIdStatus = {
-  ok: boolean;
-  value: string;
-  reason: string;
-};
+export type ContactDeliveryConfig =
+  | {ready: true; apiKey: string; from: string; to: string}
+  | {ready: false};
 
-export function getContactDeliveryConfig(env: RuntimeEnv = process.env) {
+export function getContactDeliveryConfig(env: RuntimeEnv = process.env): ContactDeliveryConfig {
   const apiKey = cleanEnvValue(env, contactEnvKeys.resendApiKey);
+  if (!apiKey) return {ready: false};
+
   const from = cleanEnvValue(env, contactEnvKeys.resendFromEmail) || 'Edge Solutions <onboarding@resend.dev>';
   const to = cleanEnvValue(env, contactEnvKeys.resendToEmail) || site.contactEmail;
 
-  return {
-    ready: Boolean(apiKey),
-    missingKeys: apiKey ? [] : [contactEnvKeys.resendApiKey],
-    apiKey,
-    from,
-    to,
-  };
+  return {ready: true, apiKey, from, to};
 }

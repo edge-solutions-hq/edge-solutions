@@ -29,6 +29,12 @@ export function captureContactSubmitAttempt(state: ContactAttemptTrackerState) {
   return state.submissionAttempt;
 }
 
+export function captureContactInvalidAttempt(state: ContactAttemptTrackerState) {
+  const submitAttempt = captureContactSubmitAttempt(state);
+  state.trackedAttempt = submitAttempt;
+  return submitAttempt;
+}
+
 export function resolveContactAttemptCompletion({
   state,
   pending,
