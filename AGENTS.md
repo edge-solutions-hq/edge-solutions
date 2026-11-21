@@ -12,7 +12,7 @@ Commands, Node.js version, and environment keys are owned by `docs/tech-stack.md
 
 Prefer the full gate, `cd web && pnpm run check`, before finishing code changes. For docs-only edits, run targeted consistency checks instead of the full app gate unless the docs affect behavior.
 
-Never print or commit secret values.
+Never print or commit secret values. Gitleaks (CI and pre-commit) and the Claude Code secret guard in `.claude/` enforce this; see "Secret Scanning" in `docs/tech-stack.md`.
 
 ## Docs To Read
 
@@ -37,6 +37,7 @@ Never print or commit secret values.
 - Keep AI-first acquisition priority intact in offer order and SEO, while treating AI automation and 3D / XR as two clear project families. Do not make realtime work look like a minor add-on or turn the site into a generic agency menu.
 - Follow `WEBSITE.md`; do not add fake clients, metrics, client screenshots, logos, testimonials, awards, or case studies. Use only approved source assets from the asset authority registry.
 - Before changing module boundaries, read `docs/architecture.md` and preserve the named ownership seams.
+- Do not write code comments; lint rejects them (`docs/adr/0005-ban-code-comments.md`). Name the code instead, and record non-obvious decisions as ADRs in `docs/adr/`.
 
 ## Agent Skills
 
@@ -50,4 +51,4 @@ Use the default triage label vocabulary: `needs-triage`, `needs-info`, `ready-fo
 
 ### Domain Docs
 
-Use the single-context layout. Read repo docs as the domain source, and consume `GLOSSARY.md` or `docs/adr/` if they are added later. See `docs/agents/domain.md`.
+Single-context layout: one root `GLOSSARY.md` and `docs/adr/`, both created lazily by `/domain-modeling`. See `docs/agents/domain.md`.

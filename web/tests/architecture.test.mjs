@@ -265,7 +265,7 @@ describe('contact intake and analytics taxonomy seams', () => {
     assert.doesNotMatch(formSource, /<option value="ai"/);
     assert.match(deliverySource, /messageKey/);
     assert.match(formSource, /resolveContactFeedback/);
-    assert.match(formSource, /feedback\.messageKey \? t\(feedback\.messageKey\)/);
+    assert.match(formSource, /t\(feedback\.messageKey\)/);
   });
 
   it('keeps contact attempt tracking outside the form Adapter', () => {

@@ -28,11 +28,6 @@ function normalize(value: string) {
     .replace(/[̀-ͯ]/g, '');
 }
 
-/**
- * Command-palette style quick navigation. It only re-lists the header
- * navigation items (plus a few static pages), so it never becomes a second
- * source of truth for routes or tracking.
- */
 export function CommandPalette({
   items,
   extraItems = [],
@@ -73,21 +68,22 @@ export function CommandPalette({
   React.useEffect(() => {
     function handleKeyDown(event: KeyboardEvent) {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
-        // Only on viewports where the trigger is visible (desktop).
-        if (!triggerRef.current || triggerRef.current.offsetParent === null) return;
-        // Never open behind another modal (e.g. the contact dialog).
-        const otherModal = Array.from(
+        const triggerIsVisible = triggerRef.current?.offsetParent != null;
+        if (!triggerIsVisible) return;
+        const anotherModalIsOpen = Array.from(
           document.querySelectorAll('[role="dialog"][aria-modal="true"]')
         ).some((dialog) => dialog !== dialogRef.current);
-        if (otherModal) return;
+        if (anotherModalIsOpen) return;
         event.preventDefault();
-        setOpen((value) => !value);
+        const paletteIsOpen = dialogRef.current != null;
+        if (paletteIsOpen) close();
+        else setOpen(true);
       }
     }
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [close]);
 
   React.useEffect(() => {
     if (open) inputRef.current?.focus();

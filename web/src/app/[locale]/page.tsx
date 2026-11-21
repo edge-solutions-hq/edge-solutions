@@ -9,6 +9,7 @@ import {SectionIntro} from '@/components/studio/SectionIntro';
 import {ShowcasePanel} from '@/components/ui/ShowcasePanel';
 import {BryzaPanel} from '@/components/home/BryzaPanel';
 import {site} from '@/lib/site/site';
+import {getAssetAuthorityRecord} from '@/lib/content/asset-authority';
 import {getHomePresentationModel} from '@/lib/offer/home-presentation';
 import {getHomeOfferCards} from '@/lib/offer/offer-presentation';
 import {getHomePageProfile} from '@/lib/site/page-profiles';
@@ -37,7 +38,6 @@ function homeOfferTitleClass() {
   return 'font-display text-xl font-bold tracking-tight text-heading';
 }
 
-// Syntax accent per project family. Both cards share the same size and structure.
 const homeOfferAccent: Record<HomeOfferCard['slug'], {text: string; bar: string}> = {
   'ai-automation': {text: 'text-syn-green', bar: 'bg-syn-green'},
   'realtime-games': {text: 'text-syn-cyan', bar: 'bg-syn-cyan'},
@@ -100,7 +100,6 @@ export default async function HomePage({params}: Props) {
     <div className="relative">
       <JsonLd data={profile.jsonLd} />
 
-      {/* Hero: one terminal window. The command is decoration, the copy is the message. */}
       <section className={surfaceClass('feature', 'not-prose overflow-hidden')}>
         <WindowChrome
           title="gil@edge-solutions: ~"
@@ -143,7 +142,6 @@ export default async function HomePage({params}: Props) {
           />
         </div>
 
-        {/* Status line */}
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 border-t border-border bg-secondary/70 px-4 py-2 font-mono text-xs text-muted-foreground">
           <span className="rounded-sm bg-primary px-2 py-0.5 font-bold text-primary-foreground">
             {t('home.status.role')}
@@ -256,12 +254,24 @@ export default async function HomePage({params}: Props) {
           <p>{t('home.showcase.intro')}</p>
         </SectionIntro>
 
-        <ShowcasePanel
+        <BryzaPanel
           className={homeSectionContentGap}
+          eyebrow={t('home.showcase.bryza.eyebrow')}
+          title={t('home.showcase.bryza.title')}
+          description={t('home.showcase.bryza.description')}
+          supportText={t('home.showcase.bryza.supportText')}
+          imageSrc={getAssetAuthorityRecord('bryza-console')!.publicPath}
+          imageAlt={t('home.showcase.bryza.imageAlt')}
+          imageCaption={t('home.showcase.bryza.imageCaption')}
+          ctaLabel={t('home.showcase.bryza.cta')}
+          href={site.bryzaUrl}
+        />
+
+        <ShowcasePanel
+          className="mt-6"
           title={home.publicProject.title}
           imageSrc={home.publicProject.imageSrc}
           imageAlt={home.publicProject.imageAlt}
-          imagePriority
         >
           <p className="text-base">{home.publicProject.description}</p>
           {home.publicProject.supportText ? (
@@ -284,17 +294,6 @@ export default async function HomePage({params}: Props) {
             {home.publicProject.ctaLabel}
           </ExternalLinkButton>
         </ShowcasePanel>
-
-        <BryzaPanel
-          className="mt-6"
-          eyebrow={t('home.showcase.bryza.eyebrow')}
-          title={t('home.showcase.bryza.title')}
-          description={t('home.showcase.bryza.description')}
-          supportText={t('home.showcase.bryza.supportText')}
-          pipelineLabel={t('home.showcase.bryza.pipelineLabel')}
-          ctaLabel={t('home.showcase.bryza.cta')}
-          href={site.bryzaUrl}
-        />
       </section>
 
       <section

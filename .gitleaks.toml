@@ -1,0 +1,36 @@
+title = "Edge Solutions secret scan"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "resend-api-key"
+description = "Resend API key"
+regex = '''\bre_[A-Za-z0-9]{8,}_[A-Za-z0-9]{16,}\b'''
+keywords = ["re_"]
+
+[[rules]]
+id = "openrouter-api-key"
+description = "OpenRouter API key"
+regex = '''\bsk-or-(?:v1-)?[A-Za-z0-9]{32,}\b'''
+keywords = ["sk-or-"]
+
+[[rules]]
+id = "vercel-token"
+description = "Vercel access token"
+regex = '''\bvc[aikpr]_[A-Za-z0-9]{24,}\b'''
+keywords = ["vca_", "vci_", "vck_", "vcp_", "vcr_"]
+
+[[rules]]
+id = "vercel-token-assignment"
+description = "Vercel token assigned to a variable"
+regex = '''(?i)\bVERCEL_(?:TOKEN|ACCESS_TOKEN|OIDC_TOKEN)\s*[:=]\s*["']?([A-Za-z0-9._-]{24,})'''
+secretGroup = 1
+keywords = ["vercel_"]
+
+[[rules]]
+id = "resend-key-assignment"
+description = "Resend key assigned to a variable"
+regex = '''\bRESEND_API_KEY\s*[:=]\s*["']?([A-Za-z0-9_]{20,})'''
+secretGroup = 1
+keywords = ["resend_api_key"]

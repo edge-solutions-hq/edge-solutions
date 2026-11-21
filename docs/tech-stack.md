@@ -44,6 +44,16 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 
 `main` has no required checks: CI reports results but does not block merges.
 
+### Secret Scanning
+
+Secret-leak protection has three layers, all reading `.gitleaks.toml` (gitleaks defaults plus rules for Resend, OpenRouter and Vercel keys):
+
+- `.github/workflows/secrets.yml` runs gitleaks over the full git history of every branch on every pull request and every push to `main`, with no path filter. It downloads a pinned gitleaks release and verifies its SHA-256 before running it, on the same `CI_RUNNER` as the main gate.
+- `.githooks/pre-commit` scans staged changes. `pnpm install` in `web/` points `core.hooksPath` at `.githooks`. The hook needs a local `gitleaks` binary (`brew install gitleaks`); without one it warns and lets the commit through, and CI still catches the leak.
+- `.claude/hooks/secret-guard.mjs`, wired in `.claude/settings.json`, stops Claude Code from sending prompts that contain a key, from reading or searching `.env*` files and private keys, from writing a key into a file, and from running commands that print secrets (`printenv`, bare `env` or `set`, `export -p`, `/proc/*/environ`, `gh auth token`, `echo $SOME_KEY`). `web/tests/secret-guard.test.mjs` covers it. The guard is best-effort: it matches tool inputs and command text, so a shell can still reach a secret file through tools it does not recognize (for example a recursive `rg` or a script). Gitleaks and `.gitignore` are the backstop that keeps secrets out of the repository.
+
+A leaked key must be rotated first. Because the CI scan covers the whole history, a finding keeps failing after the file is fixed: once the key is revoked, add the fingerprint gitleaks prints to `.gitleaksignore`.
+
 ## Environment Keys
 
 Copy `web/env.example` to a local env file such as `web/.env.local`.
