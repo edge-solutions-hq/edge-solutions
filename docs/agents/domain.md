@@ -12,7 +12,7 @@ This repo uses the single-context layout: one `GLOSSARY.md` and `docs/adr/` at t
 - `WEBSITE.md` for source-of-truth order and website operating constraints.
 - `GLOSSARY.md` at the repo root and the ADRs in `docs/adr/` that touch the area you're about to work in.
 
-`GLOSSARY.md` and `docs/adr/` don't exist yet. Proceed silently: don't flag their absence or suggest creating them upfront. The `/domain-modeling` skill creates them lazily when terms or decisions actually get resolved.
+`GLOSSARY.md` doesn't exist yet. Proceed silently: don't flag its absence or suggest creating it upfront. The `/domain-modeling` skill creates it lazily when terms actually get resolved. Number new ADRs after the highest one in `docs/adr/`.
 
 ## Use the project's vocabulary
 

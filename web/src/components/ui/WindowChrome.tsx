@@ -1,11 +1,6 @@
 import type {CSSProperties, ReactNode} from 'react';
 import {cn} from '@/lib/cn';
 
-/**
- * Editor/terminal title bar: three window dots, a mono title and an optional
- * right slot. Purely decorative by default (aria-hidden) so that the real
- * copy underneath stays the accessible signal.
- */
 export function WindowChrome({
   title,
   right,
@@ -42,7 +37,6 @@ export function WindowDots({className}: {className?: string}) {
   );
 }
 
-/** Decorative prompt line such as `$ ls ./services`, placed above a real heading. */
 export function PromptLine({
   command,
   typed = false,

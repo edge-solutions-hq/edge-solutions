@@ -14,7 +14,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     ...components,
 
-    // Custom components available in MDX without imports
     CTA,
     PageIntro,
     PrototypeSignals,
@@ -28,7 +27,6 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ShowcasePanel,
     WorkflowSnapshot,
 
-    // Optional: tighten default rendering
     h1: (props) => (
       <h1
         className="scroll-m-20 font-display text-4xl font-extrabold tracking-tight"
