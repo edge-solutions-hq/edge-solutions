@@ -52,6 +52,7 @@ Node.js 24 is required by `.nvmrc`, `web/package.json`, and CI. Prefer the full 
 - Follow `WEBSITE.md`; do not add fake clients, metrics, client screenshots, logos, testimonials, awards, or case studies. Use only approved source assets from the asset authority registry.
 - For external CTA links, reuse `web/src/components/ui/ExternalLinkButton.tsx` instead of adding unicode external-arrow glyphs or one-off button classes.
 - Before changing module boundaries, read `docs/architecture.md` and preserve the named ownership seams.
+- Do not write code comments; lint rejects them (`docs/adr/0005-ban-code-comments.md`). Name the code instead, and record non-obvious decisions as ADRs in `docs/adr/`.
 
 ## Agent Skills
 
