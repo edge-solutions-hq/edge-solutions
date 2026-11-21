@@ -4,9 +4,8 @@ This file owns current implementation tooling for the Edge Solutions web app. It
 
 ## Runtime Baseline
 
-- App path: `web/`
 - Package manager: pnpm (`web/pnpm-lock.yaml`, pinned by `packageManager` in `web/package.json`)
-- Build-script approvals: `web/pnpm-workspace.yaml`
+- Native dependency build-script approvals and dependency overrides: `web/pnpm-workspace.yaml`
 - Node.js: 24 (`.nvmrc`, `web/package.json`, and CI)
 - Framework: Next.js 16 App Router
 - React: 19
@@ -14,11 +13,9 @@ This file owns current implementation tooling for the Edge Solutions web app. It
 - Styling: Tailwind CSS v4 through `@tailwindcss/postcss`
 - Content: local MDX with `@next/mdx` and `remark-gfm`
 - Internationalization: `next-intl` with prefixed `fr`, `en`, and `nl` routes; `fr` is default
-- Forms: React `useActionState` with a server action and `zod`
 - Email delivery: Resend through server-side contact delivery
 - Contact abuse control: `@vercel/firewall` programmatic rate limiting before Resend
 - Analytics: Vercel Analytics, Vercel Speed Insights, optional Google tag runtime ID
-- Browser tests: Playwright with one Chromium project and axe-core smoke checks
 
 ## Commands
 
@@ -43,16 +40,9 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 
 ## Continuous Integration
 
-`.github/workflows/ci.yml` runs the complete `corepack pnpm run check` gate when `web/**`, `docs/**` or `.github/**` changes, for:
+`.github/workflows/ci.yml` runs the full `check` gate on pull requests and pushes to `main` that touch `web/**`, `docs/**` or `.github/**`, so post-merge drift stays visible. Push runs are keyed by commit SHA, so `main` commits never cancel each other's validation.
 
-- every such pull request, including Dependabot pull requests; and
-- the tip commit of every such push to `main`, so post-merge drift remains visible.
-
-Pull-request concurrency is scoped by event and pull-request number, allowing a newer update to cancel an obsolete run for the same pull request. Push concurrency is scoped by commit SHA, so `main` commits cannot cancel each other's validation. The workflow grants only `contents: read`, does not persist checkout credentials, and pins actions to immutable commit revisions.
-
-### Repository Enforcement
-
-`main` has no required checks: the repository's GitHub plan does not offer rulesets or branch protection for a private repository, so CI reports results but does not block merges.
+`main` has no required checks: CI reports results but does not block merges.
 
 ## Environment Keys
 
@@ -70,24 +60,15 @@ Active deployment state:
 - Vercel project `edge-solutions` is on Hobby, whose included use covers the selected programmatic rate limit.
 - Exactly one WAF rule is active and no draft changes remain: `Contact submission rate limit`, programmatic ID `contact-submit`.
 - Its action is a 600-second fixed window, limit 5, Vercel-managed IP key, with rate-limit / HTTP 429 when exceeded.
-- Function execution is configured only in `iad1`; zero-config failover is disabled.
-- No application credential or connected store is required. This rule is already published; do not modify Vercel configuration for the application deployment.
+- Function execution is configured only in `iad1` with zero-config failover disabled, because the managed counter is regional. Changing that topology requires re-evaluating the one-policy guarantee.
+- This rule is already published; do not modify Vercel configuration when deploying application changes.
 
 ## Implementation Notes
 
-- `next.config.ts` enables MDX page extensions, `remark-gfm`, Next Intl, security headers, Turbopack root configuration, and one-day caching for SEO/static endpoints such as `robots.txt`, `sitemap.xml`, and `llms.txt`.
-- `web/src/i18n/routing.ts` owns locale list, default locale, and always-prefixed locale routing.
-- `web/src/lib/runtime-config-core.mjs` owns Google tag ID validation for app runtime and scripts.
-- `web/src/lib/analytics/consent.ts` owns the persisted opt-in policy. Google and optional Vercel measurement runtimes load only after acceptance, and the conversion transport checks the same policy synchronously.
-- `web/src/lib/runtime-config.ts` adds contact delivery defaults.
-- `web/src/lib/contact/abuse.ts` owns the `contact-submit` rule ID and the contact abuse decision; the limit itself is the WAF rule above. The WAF rule is already active; do not modify Vercel configuration when deploying application changes.
-- A limited attempt returns the localized neutral retry-later form error, stops before Resend, emits no success conversion, and exposes no IP, count, rule, provider, or reset diagnostics.
+- The limit itself is the `contact-submit` WAF rule above, not application code. A limited attempt returns the localized neutral retry-later form error, stops before Resend, emits no success conversion, and exposes no IP, count, rule, provider, or reset diagnostics.
 - The logical counter and storage lifetime is the rule's fixed window. The repository stores no client IP or counter, and makes no claim about Vercel's undocumented physical deletion timing.
 - Abuse control fails closed for a missing WAF rule or result, a blocked or unexpected response, a thrown or network failure, or unavailable trusted request context (including unreadable headers). Each case returns the generic safe form error as internal `abuse_control_error` and suppresses delivery before Resend.
-- The managed counter is regional, so contact function execution must remain restricted to the single `iad1` region with zero-config failover disabled. Changing that deployment topology requires re-evaluating the one-policy guarantee.
-- `web/scripts/seo-source-facts.mjs` keeps SEO script facts aligned with app routing and service slugs.
 - `web/tests/http-contracts.contract.mjs` builds through `test:http`, starts the production server on an isolated localhost port, and verifies routing, status, header, and metadata endpoint contracts.
 - `web/e2e/` runs against an already-built production app. Its server-only harness selects no-I/O abuse and delivery adapters only for requests carrying the per-run Playwright token, bypassing both WAF and Resend; test mode otherwise fails closed without provider I/O. These private test values are not application configuration.
 - The aggregate `check` command performs one production build, then reuses it for HTTP contracts, Chromium browser tests, and SEO checks.
 - `web/package.json` installs TypeScript 7 directly and aliases the same package under Next.js 16's recognized `@typescript/native-preview` name. The build runs the TypeScript 7 CLI before `next build`; Oxlint handles native TypeScript linting, and ESLint uses Next's Babel parser for framework-specific rules.
-- `pnpm-workspace.yaml` allows required native dependency build scripts for Next/SWC, image handling, and file watching.
