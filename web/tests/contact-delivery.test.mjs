@@ -273,4 +273,15 @@ describe('contact Server Action delivery', () => {
       assert.equal(deliveries.length, 1);
     });
   }
+
+  for (const [service, label] of [['realtime', '3D / XR temps réel'], ['unsure', 'Non précisé']]) {
+    it(`labels a ${service} enquiry with its own service in the delivered email`, async () => {
+      await submit(contactForm({service}));
+
+      assert.equal(deliveries.length, 1);
+      const {subject, text} = deliveries[0].payload;
+      assert.equal(subject, `[Edge Solutions] Nouveau message (${label}) - Ada Lovelace`);
+      assert.equal(text.split('\n')[2], `Service: ${label}`);
+    });
+  }
 });

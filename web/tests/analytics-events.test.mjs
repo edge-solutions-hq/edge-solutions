@@ -8,10 +8,21 @@ const {
   buildContactCtaClickPayload,
   buildContactFormOutcomePayload,
   buildContactFormSubmitPayload,
+  buildLocaleSwitchPayload,
   buildOfferTrackClickPayload,
+  buildServiceScrollDepthPayload,
+  trackContactCtaClick,
   trackContactFormOutcome,
+  trackContactFormSubmit,
   trackConversionEvent,
+  trackLocaleSwitch,
+  trackServiceScrollDepth,
 } = await import('../src/lib/analytics/events.ts');
+const {
+  calculateScrollDepthPercent,
+  getUnfiredScrollDepthThresholds,
+} = await import('../src/lib/analytics/service-scroll-depth.ts');
+const {scrollDepthThresholds} = await import('../src/lib/analytics/taxonomy.ts');
 const {ANALYTICS_CONSENT_STORAGE_KEY} = await import('../src/lib/analytics/consent.ts');
 
 afterEach(() => {
@@ -93,6 +104,20 @@ describe('analytics event payload policy', () => {
           },
         },
       ],
+      [
+        buildLocaleSwitchPayload({fromLocale: 'fr', toLocale: 'en', pagePath: '/fr'}),
+        {
+          eventName: 'locale_switch',
+          params: {from_locale: 'fr', to_locale: 'en', page_path: '/fr'},
+        },
+      ],
+      [
+        buildServiceScrollDepthPayload({offerTrackSlug: 'ai-automation', scrollDepthPercent: 75}),
+        {
+          eventName: 'service_scroll_depth',
+          params: {service_slug: 'ai-automation', scroll_depth_percent: 75},
+        },
+      ],
     ];
 
     for (const [actual, expected] of cases) {
@@ -170,6 +195,8 @@ describe('analytics browser transport adapter', () => {
       service: 'ai',
       submit_attempt: 1,
       error_type: undefined,
+      error_field_count: 0,
+      is_retry: false,
     });
 
     const expectedPayload = {
@@ -181,6 +208,8 @@ describe('analytics browser transport adapter', () => {
       page_referrer: 'https://referrer.example/start',
       service: 'ai',
       submit_attempt: 1,
+      error_field_count: 0,
+      is_retry: false,
     };
 
     assert.deepEqual(dataLayer, [
@@ -202,5 +231,53 @@ describe('analytics browser transport adapter', () => {
 
     assert.deepEqual(dataLayer, []);
     assert.deepEqual(gtagCalls, []);
+  });
+
+  it('sends each tracked interaction with the current page path and caller values', () => {
+    const {gtagCalls} = installBrowser();
+
+    trackContactCtaClick({ctaTarget: '/fr/contact', placement: 'header_cta', ctaLabel: 'Contact'});
+    trackContactFormSubmit({service: 'ai', submitAttempt: 1});
+    trackLocaleSwitch({fromLocale: 'fr', toLocale: 'en'});
+    trackServiceScrollDepth({offerTrackSlug: 'ai-automation', scrollDepthPercent: 50});
+
+    const pagePath = '/fr/contact?source=hero';
+    const expected = [
+      ['contact_cta_click', {page_path: pagePath, cta_target: '/fr/contact', placement: 'header_cta'}],
+      ['contact_form_submit', {page_path: pagePath, service: 'ai', submit_attempt: 1}],
+      ['locale_switch', {page_path: pagePath, from_locale: 'fr', to_locale: 'en'}],
+      ['service_scroll_depth', {service_slug: 'ai-automation', scroll_depth_percent: 50}],
+    ];
+
+    assert.deepEqual(
+      gtagCalls.map(([, eventName, params], index) => [
+        eventName,
+        Object.fromEntries(Object.keys(expected[index]?.[1] ?? {}).map((key) => [key, params[key]])),
+      ]),
+      expected
+    );
+  });
+});
+
+describe('service scroll-depth thresholds', () => {
+  it('fires every documented threshold once, including depths that land exactly on one', () => {
+    const fired = new Set();
+    const emitted = [];
+
+    for (const scrollTop of [500, 950, 1000, 1000]) {
+      const newlyReached = getUnfiredScrollDepthThresholds({
+        scrollDepthPercent: calculateScrollDepthPercent({
+          scrollTop,
+          scrollHeight: 2000,
+          viewportHeight: 1000,
+        }),
+        thresholds: scrollDepthThresholds,
+        firedThresholds: fired,
+      });
+      newlyReached.forEach((threshold) => fired.add(threshold));
+      emitted.push(newlyReached);
+    }
+
+    assert.deepEqual(emitted, [[25, 50], [75, 90], [100], []]);
   });
 });

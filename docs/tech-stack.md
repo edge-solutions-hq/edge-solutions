@@ -34,8 +34,8 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 - Dependency security audit: `pnpm run check:security` (manual; not part of the full gate, Dependabot alerts are the signal)
 - SEO check: `pnpm run check:seo`
 - Live SEO smoke: `pnpm run check:seo:live`
-- Analytics env check: `pnpm run check:analytics-env`
-- Strict production analytics env check: `pnpm run check:analytics-env:prod`
+- Analytics env check: `pnpm run check:analytics-env` (fails on a set but invalid ID, allows an unset one)
+- Strict production analytics env check: `pnpm run check:analytics-env:prod` (also fails when the ID is unset)
 - Full gate: `pnpm run check`
 
 ## Continuous Integration

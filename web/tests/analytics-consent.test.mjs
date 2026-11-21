@@ -87,4 +87,33 @@ describe('analytics consent persistence', () => {
       setAnalyticsConsentForSession('accepted');
     }
   });
+
+  it('fails closed when browser storage is unavailable', () => {
+    const originalWindow = Object.getOwnPropertyDescriptor(globalThis, 'window');
+    delete globalThis.window;
+    assert.equal(readAnalyticsConsent(), 'undecided');
+    assert.equal(hasAnalyticsConsent(), false);
+
+    const blocked = () => {
+      throw new Error('storage blocked');
+    };
+    const blockedStorage = {getItem: blocked, setItem: blocked, removeItem: blocked};
+    Object.defineProperty(globalThis, 'window', {
+      configurable: true,
+      value: {localStorage: blockedStorage, sessionStorage: blockedStorage},
+    });
+
+    try {
+      assert.equal(readAnalyticsConsent(), 'undecided');
+      assert.equal(hasAnalyticsConsent(), false);
+      assert.equal(writeAnalyticsConsent('accepted'), false);
+      assert.equal(writeAnalyticsConsent('rejected'), false);
+    } finally {
+      if (originalWindow) {
+        Object.defineProperty(globalThis, 'window', originalWindow);
+      } else {
+        delete globalThis.window;
+      }
+    }
+  });
 });
