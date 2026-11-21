@@ -37,7 +37,7 @@
     "react": "19.3.1",
     "react-dom": "19.3.1",
     "remark-gfm": "^4.0.1",
-    "resend": "^6.38.0",
+    "resend": "^6.39.0",
     "tailwind-merge": "^3.7.0",
     "zod": "^4.6.7"
   },
@@ -45,7 +45,7 @@
     "@axe-core/playwright": "^4.14.0",
     "@eslint/css": "^2.0.1",
     "@next/eslint-plugin-next": "16.4.6",
-    "@playwright/test": "^1.65.0",
+    "@playwright/test": "^1.65.1",
     "@tailwindcss/postcss": "^4.3.5",
     "@types/mdx": "^2.0.14",
     "@types/node": "^26",
@@ -58,7 +58,7 @@
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.14.0",
-    "oxlint": "^1.93.0",
+    "oxlint": "^1.94.0",
     "tailwindcss": "^4.3.5",
     "typescript": "^7.0.2"
   }
