@@ -11,8 +11,8 @@ This file owns current implementation tooling for the Edge Solutions web app. It
 - React: 19
 - Language: TypeScript 7 native CLI
 - Styling: Tailwind CSS v4 through `@tailwindcss/postcss`
-- Content: local MDX with `@next/mdx` and `remark-gfm`
-- Internationalization: `next-intl` with prefixed `fr`, `en`, and `nl` routes; `fr` is default
+- Content: local MDX with `@next/mdx` and `remark-gfm` (plugins passed as strings: `docs/adr/0002-pass-mdx-plugins-to-next-as-strings.md`)
+- Internationalization: `next-intl` (URL and hreflang rules: `docs/adr/0003-locale-prefixed-urls-and-regional-hreflang.md`)
 - Email delivery: Resend through server-side contact delivery
 - Contact abuse control: `@vercel/firewall` programmatic rate limiting before Resend
 - Analytics: Vercel Analytics, Vercel Speed Insights, optional Google tag runtime ID
@@ -43,6 +43,8 @@ If the `pnpm` shim is unavailable, prefix commands with `corepack`, for example 
 `.github/workflows/ci.yml` runs the full `check` gate on pull requests and pushes to `main` that touch `web/**`, `docs/**` or `.github/**`, so post-merge drift stays visible. Push runs are keyed by commit SHA, so `main` commits never cancel each other's validation.
 
 `main` has no required checks: CI reports results but does not block merges.
+
+Dependabot batches minor and patch bumps into one weekly PR per ecosystem: `docs/adr/0004-group-dependabot-minor-and-patch-updates.md`.
 
 ### Secret Scanning
 
@@ -81,4 +83,4 @@ Active deployment state:
 - `web/tests/http-contracts.contract.mjs` builds through `test:http`, starts the production server on an isolated localhost port, and verifies routing, status, header, and metadata endpoint contracts.
 - `web/e2e/` runs against an already-built production app. Its server-only harness selects no-I/O abuse and delivery adapters only for requests carrying the per-run Playwright token, bypassing both WAF and Resend; test mode otherwise fails closed without provider I/O. These private test values are not application configuration.
 - The aggregate `check` command performs one production build, then reuses it for HTTP contracts, Chromium browser tests, and SEO checks.
-- `web/package.json` installs TypeScript 7 directly and aliases the same package under Next.js 16's recognized `@typescript/native-preview` name. The build runs the TypeScript 7 CLI before `next build`; Oxlint handles native TypeScript linting, and ESLint uses Next's Babel parser for framework-specific rules.
+- `web/package.json` installs TypeScript 7 directly and aliases the same package under Next.js 16's recognized `@typescript/native-preview` name. The build runs the TypeScript 7 CLI before `next build`. Why lint is split between Oxlint and ESLint is in `docs/adr/0001-lint-with-oxlint-and-nexts-babel-parser.md`.

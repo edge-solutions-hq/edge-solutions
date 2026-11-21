@@ -8,7 +8,7 @@ The site is on TypeScript 7, which has no JavaScript compiler API. `typescript-e
 
 ## Decision
 
-`pnpm run lint` runs Oxlint first for native TypeScript linting, then ESLint for the React, hooks, a11y and Next rules. ESLint parses JS and TS through Next's bundled Babel parser (`next/dist/compiled/babel/eslint-parser.js`) with the `next/babel` preset. Type checking stays with `tsc --noEmit`.
+`pnpm run lint` runs Oxlint first for native TypeScript linting, then ESLint for the React, hooks, a11y, Next, import and comment rules. ESLint parses JS and TS through Next's bundled Babel parser (`next/dist/compiled/babel/eslint-parser.js`) with the `next/babel` preset, and type checking stays with `tsc --noEmit`.
 
 ## Consequences
 
