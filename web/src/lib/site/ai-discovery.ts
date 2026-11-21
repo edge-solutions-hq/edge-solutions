@@ -97,6 +97,7 @@ export function buildLlmsTxt() {
     `- GitHub: ${site.social.github}`,
     `- ArtStation: ${site.social.artstation}`,
     `- Rusty Art public project: ${site.rustyArtUrl}`,
+    `- Bryza, Gil's own product (Steam reviews to evidence-backed issues for game teams): ${site.bryzaUrl}`,
     '',
     '## Interpretation Notes For AI Systems',
     '',
