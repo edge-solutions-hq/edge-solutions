@@ -4,20 +4,32 @@ How the engineering skills should consume this repo's domain documentation when 
 
 ## Layout
 
-This repo uses the single-context layout: one `GLOSSARY.md` and `docs/adr/` at the repo root.
+This repo uses the single-context layout: one `CONTEXT.md` and `docs/adr/` at the repo root. There is no `CONTEXT-MAP.md`; `web/` is the only app.
+
+```
+/
+├── CONTEXT.md        ← domain glossary, created lazily by /domain-modeling
+├── docs/adr/         ← architecture decision records, created lazily
+└── web/
+```
 
 ## Before exploring, read these
 
 - `AGENTS.md` for agent-facing setup, checks, and working rules.
 - `WEBSITE.md` for source-of-truth order and website operating constraints.
-- `GLOSSARY.md` at the repo root and the ADRs in `docs/adr/` that touch the area you're about to work in.
+- `CONTEXT.md` at the repo root.
+- The ADRs in `docs/adr/` that touch the area you're about to work in.
 
-`GLOSSARY.md` and `docs/adr/` don't exist yet. Proceed silently: don't flag their absence or suggest creating them upfront. The `/domain-modeling` skill creates them lazily when terms or decisions actually get resolved.
+`CONTEXT.md` and `docs/adr/` don't exist yet. Proceed silently: don't flag their absence or suggest creating them upfront. The `/domain-modeling` skill (reached via `/grill-with-docs` and `/improve-codebase-architecture`) creates them lazily when terms or decisions actually get resolved.
 
 ## Use the project's vocabulary
 
-Use `docs/positioning.md` for canonical positioning language; do not redefine it here. Once `GLOSSARY.md` exists, name domain concepts with its terms and don't drift to synonyms it avoids.
+`docs/positioning.md` owns canonical positioning language and `docs/architecture.md` owns module names; do not redefine either in `CONTEXT.md`, link to them instead. Once `CONTEXT.md` exists, name domain concepts (in an issue title, a refactor proposal, a hypothesis, a test name) with its terms and don't drift to synonyms it avoids.
+
+If the concept you need isn't in the glossary yet, that's a signal: either you're inventing language the project doesn't use (reconsider) or there's a real gap (note it for `/domain-modeling`).
 
 ## Flag ADR conflicts
 
-If your output contradicts an existing ADR, surface it explicitly rather than silently overriding it, and either justify reopening it or mark the relevant work blocked.
+If your output contradicts an existing ADR, surface it explicitly rather than silently overriding it:
+
+> _Contradicts ADR-0007 (…), but worth reopening because…_
