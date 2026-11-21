@@ -81,13 +81,15 @@ export function CommandPalette({
         ).some((dialog) => dialog !== dialogRef.current);
         if (otherModal) return;
         event.preventDefault();
-        setOpen((value) => !value);
+        const paletteIsOpen = dialogRef.current != null;
+        if (paletteIsOpen) close();
+        else setOpen(true);
       }
     }
 
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [close]);
 
   React.useEffect(() => {
     if (open) inputRef.current?.focus();
