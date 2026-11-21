@@ -27,7 +27,7 @@ export function Border<T extends ElementType = 'div'>({
         'relative before:absolute after:absolute',
         invert
           ? 'before:bg-foreground after:bg-foreground/20'
-          : 'before:bg-foreground after:bg-border',
+          : 'before:bg-primary after:bg-border',
         position === 'top' &&
           'before:top-0 before:left-0 before:h-px before:w-6 after:top-0 after:right-0 after:left-8 after:h-px',
         position === 'left' &&

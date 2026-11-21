@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import {Archivo_Narrow, Fira_Code, Inter} from 'next/font/google';
+import {IBM_Plex_Sans, JetBrains_Mono} from 'next/font/google';
 import {NextIntlClientProvider, hasLocale} from 'next-intl';
 import {getMessages, setRequestLocale} from 'next-intl/server';
 import {notFound} from 'next/navigation';
@@ -13,18 +13,16 @@ import {JsonLd} from '@/components/seo/JsonLd';
 import {getAnalyticsRuntimeConfig} from '@/lib/runtime-config';
 import {getRootLayoutProfile} from '@/lib/site/site-profile';
 
-const inter = Inter({variable: '--font-inter', subsets: ['latin']});
-
-const archivoNarrow = Archivo_Narrow({
-  variable: '--font-archivo-narrow',
+const plexSans = IBM_Plex_Sans({
+  variable: '--font-plex-sans',
   subsets: ['latin'],
   weight: ['400', '500', '600', '700']
 });
 
-const firaCode = Fira_Code({
-  variable: '--font-fira-code',
+const jetbrainsMono = JetBrains_Mono({
+  variable: '--font-jetbrains-mono',
   subsets: ['latin'],
-  preload: false,
+  weight: ['400', '500', '700', '800']
 });
 
 const analyticsConfig = getAnalyticsRuntimeConfig();
@@ -57,13 +55,13 @@ export default async function LocaleLayout({children, params}: Props) {
   return (
     <html lang={locale}>
       <body
-        className={`${inter.variable} ${archivoNarrow.variable} ${firaCode.variable} flex min-h-dvh flex-col antialiased`}
+        className={`${plexSans.variable} ${jetbrainsMono.variable} flex min-h-dvh flex-col antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
           <AnalyticsConsentProvider googleTagId={analyticsConfig.googleTagId}>
             <ContactModalProvider>
               <Header locale={locale} />
-              <main className="mx-auto w-full max-w-6xl flex-1 px-6 py-12 md:py-14">{children}</main>
+              <main className="mx-auto w-full max-w-6xl flex-1 px-5 py-10 sm:px-6 md:py-14">{children}</main>
               <Footer />
             </ContactModalProvider>
           </AnalyticsConsentProvider>

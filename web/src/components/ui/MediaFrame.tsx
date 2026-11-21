@@ -1,6 +1,6 @@
 import Image, {type StaticImageData} from 'next/image';
 
-import {cn} from '@/lib/cn';
+import {WindowDots} from '@/components/ui/WindowChrome';
 
 type MediaFrameProps = {
   imageSrc: string | StaticImageData;
@@ -16,13 +16,7 @@ type MediaFrameProps = {
 };
 
 function BrowserChrome({className}: {className?: string}) {
-  return (
-    <div className={cn('flex items-center gap-2', className)} aria-hidden="true">
-      <span className="h-2.5 w-2.5 rounded-full bg-rose-400/80" />
-      <span className="h-2.5 w-2.5 rounded-full bg-amber-400/80" />
-      <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-    </div>
-  );
+  return <WindowDots className={className} />;
 }
 
 export function MediaFrame({

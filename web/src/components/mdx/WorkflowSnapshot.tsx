@@ -46,41 +46,44 @@ export function WorkflowSnapshot({
     >
       <div className="grid gap-px bg-border xl:grid-cols-[minmax(0,0.9fr)_minmax(24rem,1.1fr)]">
         <div className="bg-secondary px-6 py-7 text-secondary-foreground md:px-8 md:py-8">
+          <div className="xl:sticky xl:top-24">
           {eyebrow ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+            <p className="font-mono text-xs text-syn-green">
+              <span aria-hidden="true">{'// '}</span>
               {eyebrow}
             </p>
           ) : null}
 
-          <h2 className="mt-3 max-w-xl text-balance text-2xl font-semibold tracking-tight text-secondary-foreground sm:text-3xl">
+          <h2 className="mt-3 max-w-xl text-balance font-display text-xl font-bold tracking-tight text-heading sm:text-2xl">
             {title}
           </h2>
 
-          <div className="mt-5 space-y-4 text-sm leading-relaxed text-secondary-foreground/82 [&_strong]:font-semibold [&_strong]:text-secondary-foreground">
+          <div className="mt-5 space-y-4 text-sm leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-secondary-foreground">
             {content}
           </div>
 
-          <div className="mt-8 rounded-lg border border-primary/70 bg-secondary-foreground/8 p-5">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+          <div className="mt-8 rounded-md border border-primary/60 bg-primary/5 p-5">
+            <p className="font-mono text-xs text-syn-green">
               {reviewTitle}
             </p>
-            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-secondary-foreground/82">
+            <ul className="mt-4 space-y-3 text-sm leading-relaxed text-muted-foreground">
               {reviewPoints.map((point) => (
                 <li key={point} className="flex gap-3">
-                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full border border-secondary-foreground/70 bg-primary" aria-hidden="true" />
+                  <span className="mt-1.5 h-2 w-2 shrink-0 rounded-[2px] bg-primary" aria-hidden="true" />
                   <span>{point}</span>
                 </li>
               ))}
             </ul>
           </div>
+          </div>
         </div>
 
-        <div className="bg-[linear-gradient(90deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,var(--surface-muted),var(--surface))] bg-[length:28px_28px,28px_28px,auto] px-6 py-7 text-foreground md:px-8 md:py-8">
+        <div className="bg-surface px-6 py-7 text-foreground md:px-8 md:py-8">
           <MediaFrame
             imageSrc={imageSrc}
             imageAlt={imageAlt}
             outerClassName={surfaceClass('media', 'overflow-hidden')}
-            chromeClassName="border-b border-border/70 px-4 py-3"
+            chromeClassName="border-b border-border px-4 py-3"
           />
 
           <div className="relative mt-8">
@@ -88,12 +91,12 @@ export function WorkflowSnapshot({
             <ol className="space-y-4 pl-5">
               {steps.map((step) => (
                 <li key={`${step.label}-${step.title}`} className="relative pl-6">
-                  <span className="absolute left-0 top-2.5 h-3.5 w-3.5 rounded-full border-2 border-surface bg-primary shadow-[0_0_0_4px_color-mix(in_srgb,var(--primary)_20%,transparent)]" aria-hidden="true" />
-                  <div className={surfaceClass('card', 'border-border/70 p-5 shadow-[3px_3px_0_rgba(16,43,74,0.12)]')}>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                  <span className="absolute left-0 top-2.5 h-3.5 w-3.5 rounded-full border-2 border-surface bg-primary" aria-hidden="true" />
+                  <div className={surfaceClass('inset', 'p-5')}>
+                    <p className="font-mono text-xs text-syn-cyan">
                       {step.label}
                     </p>
-                    <h3 className="mt-2 text-base font-semibold tracking-tight text-technical-blue">
+                    <h3 className="mt-2 font-mono text-sm font-bold text-heading">
                       {step.title}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">

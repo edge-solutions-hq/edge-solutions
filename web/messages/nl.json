@@ -10,6 +10,12 @@
     "mobileMenu": {
       "open": "Navigatiemenu openen",
       "close": "Navigatiemenu sluiten"
+    },
+    "palette": {
+      "title": "Snelle navigatie",
+      "placeholder": "Ga naar een pagina...",
+      "empty": "Geen overeenkomende pagina.",
+      "close": "Snelle navigatie sluiten"
     }
   },
   "home": {
@@ -87,6 +93,11 @@
           }
         }
       }
+    },
+    "status": {
+      "role": "Freelance",
+      "location": "Regio Luik, België",
+      "focus": "AI en 3D / XR"
     }
   },
   "services": {

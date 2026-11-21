@@ -10,6 +10,12 @@
     "mobileMenu": {
       "open": "Ouvrir le menu de navigation",
       "close": "Fermer le menu de navigation"
+    },
+    "palette": {
+      "title": "Navigation rapide",
+      "placeholder": "Aller à une page...",
+      "empty": "Aucune page ne correspond.",
+      "close": "Fermer la navigation rapide"
     }
   },
   "home": {
@@ -87,6 +93,11 @@
           }
         }
       }
+    },
+    "status": {
+      "role": "Freelance",
+      "location": "Région de Liège, Belgique",
+      "focus": "IA et 3D / XR"
     }
   },
   "services": {

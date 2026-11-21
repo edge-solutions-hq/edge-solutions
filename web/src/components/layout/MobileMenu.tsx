@@ -5,6 +5,7 @@ import {Link, usePathname} from '@/i18n/navigation';
 import {cn} from '@/lib/cn';
 import {buttonClass} from '@/components/ui/Button';
 import {surfaceClass} from '@/components/ui/Surface';
+import {WindowChrome} from '@/components/ui/WindowChrome';
 import {trackContactCtaClick} from '@/lib/analytics/events';
 import {
   shouldOpenContactModalForClick,
@@ -50,12 +51,12 @@ export function MobileMenu({
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       {open ? (
         <button
           type="button"
           aria-label={labels.close}
-          className="fixed inset-0 z-40 bg-black/20"
+          className="fixed inset-0 z-40 bg-black/60"
           onClick={() => setOpen(false)}
         />
       ) : null}
@@ -68,32 +69,33 @@ export function MobileMenu({
           aria-controls={menuId}
           aria-label={open ? labels.close : labels.open}
           className={cn(
-            buttonClass({variant: 'outline', size: 'md', className: 'px-3'})
+            buttonClass({variant: 'outline', size: 'sm', className: 'px-2.5'})
           )}
           onClick={() => setOpen((v) => !v)}
         >
           <span className="sr-only">{open ? labels.close : labels.open}</span>
           <span aria-hidden="true" className="grid gap-1">
-            <span className="h-0.5 w-5 rounded bg-foreground/80" />
-            <span className="h-0.5 w-5 rounded bg-foreground/80" />
-            <span className="h-0.5 w-5 rounded bg-foreground/80" />
+            <span className="h-0.5 w-5 rounded bg-foreground" />
+            <span className="h-0.5 w-5 rounded bg-foreground" />
+            <span className="h-0.5 w-5 rounded bg-foreground" />
           </span>
         </button>
 
         {open ? (
           <div
             id={menuId}
-            className={surfaceClass('card', 'absolute right-0 mt-2 w-[min(22rem,calc(100vw-3rem))] p-2')}
+            className={surfaceClass('feature', 'absolute right-0 mt-3 w-[min(22rem,calc(100vw-2.5rem))] overflow-hidden')}
           >
-            <div className="grid gap-1">
+            <WindowChrome title="menu" />
+            <div className="grid gap-1 p-2">
               {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
                   aria-current={item.active ? 'page' : undefined}
                   className={cn(
-                    'rounded-md px-3 py-2 text-sm font-medium text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
-                    item.active ? 'bg-surface-muted' : undefined
+                    'flex items-center gap-3 rounded px-3 py-3 font-mono text-sm text-foreground transition-colors hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring motion-reduce:transition-none',
+                    item.active ? 'bg-surface-muted text-heading' : undefined
                   )}
                   onClick={(event) => {
                     if (item.trackingPayload) {
@@ -115,13 +117,19 @@ export function MobileMenu({
                     setOpen(false);
                   }}
                 >
+                  <span
+                    className={item.active ? 'text-primary' : 'text-subtle-foreground'}
+                    aria-hidden="true"
+                  >
+                    &gt;
+                  </span>
                   {item.label}
                 </Link>
               ))}
             </div>
 
             {contactAction ? (
-              <div className="mt-2 border-t border-border pt-2">
+              <div className="border-t border-border p-3">
                 <Link
                   href={contactAction.href}
                   className={buttonClass({size: 'lg', className: 'w-full'})}

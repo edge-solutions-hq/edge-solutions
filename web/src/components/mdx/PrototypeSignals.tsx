@@ -48,59 +48,58 @@ export function PrototypeSignals({
     >
       <div className="grid gap-px bg-border xl:grid-cols-[minmax(0,1.05fr)_minmax(22rem,0.95fr)]">
         <div className="bg-secondary px-6 py-7 text-secondary-foreground md:px-8 md:py-8">
+          <div className="xl:sticky xl:top-24">
           {eyebrow ? (
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
+            <p className="font-mono text-xs text-syn-green">
+              <span aria-hidden="true">{'// '}</span>
               {eyebrow}
             </p>
           ) : null}
 
-          <h2 className="mt-3 max-w-xl text-balance text-2xl font-semibold tracking-tight text-secondary-foreground sm:text-3xl">
+          <h2 className="mt-3 max-w-xl text-balance font-display text-xl font-bold tracking-tight text-heading sm:text-2xl">
             {title}
           </h2>
 
-          <div className="mt-5 max-w-xl space-y-4 text-sm leading-relaxed text-secondary-foreground/82 [&_strong]:font-semibold [&_strong]:text-secondary-foreground">
+          <div className="mt-5 max-w-xl space-y-4 text-sm leading-relaxed text-muted-foreground [&_strong]:font-semibold [&_strong]:text-secondary-foreground">
             {content}
           </div>
 
           <div className="mt-8 grid gap-3 sm:grid-cols-3 xl:grid-cols-1">
-            {signals.map((signal, index) => (
+            {signals.map((signal) => (
               <div
                 key={`${signal.label}-${signal.value}`}
-                className={cn(
-                  'rounded-lg border border-primary/55 bg-secondary-foreground/8 px-4 py-4',
-                  index === 1 && 'bg-secondary-foreground/12',
-                  index > 2 && 'border-secondary-foreground/25 bg-secondary-foreground/6',
-                )}
+                className="rounded-md border border-border bg-surface px-4 py-4"
               >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-accent">
+                <p className="font-mono text-xs text-syn-cyan">
                   {signal.label}
                 </p>
-                <p className="mt-2 text-lg font-semibold tracking-tight text-secondary-foreground">
+                <p className="mt-2 font-mono text-base font-bold text-heading">
                   {signal.value}
                 </p>
               </div>
             ))}
           </div>
+          </div>
         </div>
 
-        <div className="bg-[linear-gradient(90deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,color-mix(in_srgb,var(--foreground)_8%,transparent)_1px,transparent_1px),linear-gradient(180deg,var(--surface-muted),var(--surface))] bg-[length:28px_28px,28px_28px,auto] px-6 py-7 text-foreground md:px-8 md:py-8">
+        <div className="bg-surface px-6 py-7 text-foreground md:px-8 md:py-8">
           <MediaFrame
             imageSrc={imageSrc}
             imageAlt={imageAlt}
             outerClassName={surfaceClass('media', 'overflow-hidden')}
-            chromeClassName="border-b border-border/70 px-4 py-3"
+            chromeClassName="border-b border-border px-4 py-3"
           />
 
           <div className="mt-6 space-y-4">
             {phases.map((phase) => (
               <div
                 key={`${phase.label}-${phase.title}`}
-                className={surfaceClass('card', 'border-border/70 p-5 shadow-[3px_3px_0_rgba(16,43,74,0.12)]')}
+                className={surfaceClass('inset', 'p-5')}
               >
-                <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground">
+                <p className="font-mono text-xs text-syn-cyan">
                   {phase.label}
                 </p>
-                <h3 className="mt-2 text-base font-semibold tracking-tight text-technical-blue">
+                <h3 className="mt-2 font-mono text-sm font-bold text-heading">
                   {phase.title}
                 </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">

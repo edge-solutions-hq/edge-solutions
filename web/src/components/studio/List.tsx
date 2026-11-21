@@ -27,7 +27,7 @@ export function ListItem({children, title}: {children: ReactNode; title?: string
       <div>
         <Border className="pt-8 group-first:pt-0 group-first:before:hidden group-first:after:hidden">
           {title ? (
-            <strong className="font-semibold text-foreground">{`${title}. `}</strong>
+            <strong className="mb-1.5 block font-mono text-[0.8125rem] font-bold text-heading">{`${title}. `}</strong>
           ) : null}
           {children}
         </Border>

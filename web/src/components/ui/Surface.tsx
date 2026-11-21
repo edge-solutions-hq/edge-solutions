@@ -10,16 +10,14 @@ export type SurfaceVariant =
   | 'media';
 
 export const surfaceClassNames: Record<SurfaceVariant, string> = {
-  card: 'rounded-lg border border-border bg-surface shadow-[5px_5px_0_rgba(170,142,75,0.24)]',
+  card: 'rounded-md border border-border bg-surface',
   'interactive-card':
-    'rounded-lg border border-border bg-surface shadow-[5px_5px_0_rgba(170,142,75,0.24)] transition-[background-color,box-shadow] duration-300 ease-out hover:bg-surface-muted hover:shadow-[4px_4px_0_rgba(170,142,75,0.38)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
-  panel:
-    'rounded-lg border border-border bg-surface/90 shadow-[6px_6px_0_rgba(170,142,75,0.22)]',
+    'rounded-md border border-border bg-surface transition-[background-color,border-color] duration-200 ease-out hover:border-primary/70 hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
+  panel: 'rounded-md border border-border bg-surface',
   feature:
-    'rounded-lg border border-border bg-surface shadow-[6px_6px_0_rgba(170,142,75,0.28)]',
-  inset: 'rounded-lg border border-border bg-background/65',
-  media:
-    'rounded-lg border border-border/70 bg-surface shadow-[6px_6px_0_rgba(170,142,75,0.26)]',
+    'rounded-md border border-border bg-surface shadow-[0_30px_70px_-40px_rgba(0,0,0,0.9)]',
+  inset: 'rounded-md border border-border bg-background/70',
+  media: 'rounded-md border border-border bg-secondary',
 };
 
 export function surfaceClass(variant: SurfaceVariant = 'card', className?: string) {

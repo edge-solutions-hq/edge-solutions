@@ -150,12 +150,12 @@ export function AnalyticsConsentProvider({
           aria-labelledby={titleId}
           className={surfaceClass(
             'panel',
-            'fixed inset-x-4 bottom-4 z-[90] mx-auto max-w-2xl p-5 text-foreground'
+            'fixed inset-x-4 bottom-4 z-[90] mx-auto max-w-2xl border-border-strong p-5 text-foreground shadow-[0_30px_70px_-20px_rgba(0,0,0,0.95)]'
           )}
         >
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h2 id={titleId} className="text-lg font-semibold text-technical-blue">
+              <h2 id={titleId} className="font-mono text-sm font-bold text-heading">
                 {consent === 'undecided' ? t('promptTitle') : t('settingsTitle')}
               </h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
@@ -170,7 +170,7 @@ export function AnalyticsConsentProvider({
               <button
                 type="button"
                 aria-label={t('close')}
-                className="rounded-md border border-border px-2 py-1 text-sm hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+                className="cursor-pointer rounded-md border border-border-strong px-2.5 py-1 font-mono text-xs hover:border-primary hover:bg-surface-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 onClick={closeSettings}
               >
                 {t('close')}

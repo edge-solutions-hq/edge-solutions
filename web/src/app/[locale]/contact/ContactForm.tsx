@@ -26,11 +26,11 @@ import {Button} from '@/components/ui/Button';
 const initialState: ContactActionState = {status: 'idle'};
 
 const inputBase =
-  'mt-2 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm text-foreground shadow-sm transition-colors placeholder:text-subtle-foreground focus-visible:border-primary/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none';
+  'mt-2 w-full rounded-md border border-border-strong bg-background px-3 py-2 text-sm text-foreground transition-colors placeholder:text-subtle-foreground hover:border-muted-foreground focus-visible:border-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/60 motion-reduce:transition-none';
 
 function FieldError({children, id}: {children?: string; id: string}) {
   if (!children) return null;
-  return <div id={id} className="mt-1 text-xs text-red-800">{children}</div>;
+  return <div id={id} className="mt-1.5 font-mono text-xs text-syn-red">{children}</div>;
 }
 
 function isValidatableControl(
@@ -169,7 +169,7 @@ export function ContactForm({
 
       <div className="grid gap-5 md:grid-cols-2">
         <div>
-          <label htmlFor={fieldControlId('name')} className="block text-sm font-medium">
+          <label htmlFor={fieldControlId('name')} className="block font-mono text-xs font-bold text-syn-cyan">
             {t(fields.name.labelKey)}
           </label>
           <input
@@ -181,14 +181,14 @@ export function ContactForm({
             maxLength={fields.name.maxLength}
             aria-invalid={Boolean(state.fieldErrors?.name)}
             aria-describedby={state.fieldErrors?.name ? fieldErrorId('name') : undefined}
-            className={inputBase + ' h-10'}
+            className={inputBase + ' h-11'}
             placeholder={t(fields.name.placeholderKey)}
           />
           <FieldError id={fieldErrorId('name')}>{fieldErrorMessage(state.fieldErrors?.name)}</FieldError>
         </div>
 
         <div>
-          <label htmlFor={fieldControlId('email')} className="block text-sm font-medium">
+          <label htmlFor={fieldControlId('email')} className="block font-mono text-xs font-bold text-syn-cyan">
             {t(fields.email.labelKey)}
           </label>
           <input
@@ -199,7 +199,7 @@ export function ContactForm({
             maxLength={fields.email.maxLength}
             aria-invalid={Boolean(state.fieldErrors?.email)}
             aria-describedby={state.fieldErrors?.email ? fieldErrorId('email') : undefined}
-            className={inputBase + ' h-10'}
+            className={inputBase + ' h-11'}
             placeholder={t(fields.email.placeholderKey)}
           />
           <FieldError id={fieldErrorId('email')}>{fieldErrorMessage(state.fieldErrors?.email)}</FieldError>
@@ -207,7 +207,7 @@ export function ContactForm({
       </div>
 
       <div>
-        <label htmlFor={fieldControlId('service')} className="block text-sm font-medium">
+        <label htmlFor={fieldControlId('service')} className="block font-mono text-xs font-bold text-syn-cyan">
           {t(fields.service.labelKey)}
         </label>
         <select
@@ -217,7 +217,7 @@ export function ContactForm({
           defaultValue={fields.service.defaultValue}
           aria-invalid={Boolean(state.fieldErrors?.service)}
           aria-describedby={state.fieldErrors?.service ? fieldErrorId('service') : undefined}
-          className={inputBase + ' h-10'}
+          className={inputBase + ' h-11'}
         >
           {contactOfferOptions.map((option) => (
             <option key={option.value} value={option.value}>
@@ -229,7 +229,7 @@ export function ContactForm({
       </div>
 
       <div>
-        <label htmlFor={fieldControlId('message')} className="block text-sm font-medium">
+        <label htmlFor={fieldControlId('message')} className="block font-mono text-xs font-bold text-syn-cyan">
           {t(fields.message.labelKey)}
         </label>
         <textarea
@@ -249,19 +249,20 @@ export function ContactForm({
 
       <Button
         type="submit"
+        size="lg"
         disabled={pending}
       >
         {pending ? contactFormModel.pendingLabel : t(contactFormModel.submitMessageKey)}
       </Button>
 
       {feedback.kind === 'success' ? (
-        <div role="status" aria-live="polite" className="rounded-lg border border-emerald-500/20 bg-emerald-500/10 p-4 text-sm text-emerald-900">
+        <div role="status" aria-live="polite" className="rounded-md border border-syn-green/50 bg-syn-green/10 p-4 text-sm text-syn-green">
           {t(feedback.messageKey)}
         </div>
       ) : null}
 
       {feedback.kind === 'error' && (feedback.messageKey || feedback.fallbackMessage) ? (
-        <div role="alert" className="rounded-lg border border-red-500/20 bg-red-500/10 p-4 text-sm text-red-900">
+        <div role="alert" className="rounded-md border border-syn-red/50 bg-syn-red/10 p-4 text-sm text-syn-red">
           {feedback.messageKey ? t(feedback.messageKey) : feedback.fallbackMessage}
         </div>
       ) : null}

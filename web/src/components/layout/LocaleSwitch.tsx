@@ -29,7 +29,7 @@ function LocaleLinks({locale, href}: {locale: string; href: string}) {
   };
 
   return (
-    <div className="flex items-center gap-1 text-sm">
+    <div className="flex items-center rounded-md border border-border p-0.5 font-mono text-xs">
       {routing.locales.map((l) => {
         const active = l === locale;
         return (
@@ -40,10 +40,10 @@ function LocaleLinks({locale, href}: {locale: string; href: string}) {
             onClick={() => handleLocaleClick(l, active)}
             aria-current={active ? 'page' : undefined}
             className={cn(
-              'rounded-md px-2 py-1 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background motion-reduce:transition-none',
+              'rounded px-2 py-1.5 font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-secondary motion-reduce:transition-none',
               active
                 ? 'bg-primary text-primary-foreground'
-                : 'text-muted-foreground hover:bg-surface-muted hover:text-foreground'
+                : 'text-muted-foreground hover:bg-surface-muted hover:text-heading'
             )}
           >
             {l.toUpperCase()}
