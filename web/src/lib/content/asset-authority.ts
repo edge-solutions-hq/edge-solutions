@@ -77,7 +77,7 @@ export const assetAuthorityRegistry = [
     usageScopes: ['homepage', 'showcase'],
     sourceArtifactRefs: [site.bryzaUrl, '../WEBSITE.md'],
     claimRestrictions: defaultClaimRestrictions,
-    provenanceSummary: 'Screenshot of Gil\'s own product Bryza (game Overview), captured on a local build with synthetic demo data: the game "Lanternfall", its reviews and its numbers are invented. Approved by Gil for the homepage Bryza panel; it does not authorize client, user, metric, testimonial or outcome claims.',
+    provenanceSummary: 'Screenshot of Gil\'s own product Bryza (game Overview, dark theme), captured on a local build with synthetic demo data: the game "Lanternfall", its reviews and its numbers are invented. Approved by Gil for the homepage Bryza panel; it does not authorize client, user, metric, testimonial or outcome claims.',
   },
   {
     assetId: 'services-ai-workflow-board',
