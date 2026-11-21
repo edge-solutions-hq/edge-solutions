@@ -1,6 +1,7 @@
 'use client';
 
 import * as React from 'react';
+import {createPortal} from 'react-dom';
 import {Link, usePathname} from '@/i18n/navigation';
 import {cn} from '@/lib/cn';
 import {trackContactCtaClick} from '@/lib/analytics/events';
@@ -47,6 +48,7 @@ export function CommandPalette({
   const triggerRef = React.useRef<HTMLButtonElement>(null);
   const inputRef = React.useRef<HTMLInputElement>(null);
   const listRef = React.useRef<HTMLUListElement>(null);
+  const dialogRef = React.useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const contactModal = useContactModal();
 
@@ -73,6 +75,11 @@ export function CommandPalette({
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
         // Only on viewports where the trigger is visible (desktop).
         if (!triggerRef.current || triggerRef.current.offsetParent === null) return;
+        // Never open behind another modal (e.g. the contact dialog).
+        const otherModal = Array.from(
+          document.querySelectorAll('[role="dialog"][aria-modal="true"]')
+        ).some((dialog) => dialog !== dialogRef.current);
+        if (otherModal) return;
         event.preventDefault();
         setOpen((value) => !value);
       }
@@ -152,7 +159,8 @@ export function CommandPalette({
         </kbd>
       </button>
 
-      {open ? (
+      {open
+        ? createPortal(
         <div className="fixed inset-0 z-[95]">
           <button
             type="button"
@@ -164,6 +172,7 @@ export function CommandPalette({
 
           <div className="pointer-events-none relative z-10 flex justify-center px-4 pt-[12vh]">
             <div
+              ref={dialogRef}
               role="dialog"
               aria-modal="true"
               aria-labelledby={titleId}
@@ -253,8 +262,10 @@ export function CommandPalette({
               )}
             </div>
           </div>
-        </div>
-      ) : null}
+        </div>,
+            document.body
+          )
+        : null}
     </>
   );
 }
