@@ -66,4 +66,4 @@ Use the default triage label vocabulary: `needs-triage`, `needs-info`, `ready-fo
 
 ### Domain Docs
 
-Use the single-context layout. Read repo docs as the domain source, and consume `GLOSSARY.md` or `docs/adr/` if they are added later. See `docs/agents/domain.md`.
+Single-context layout: one root `GLOSSARY.md` and `docs/adr/`, both created lazily by `/domain-modeling`. See `docs/agents/domain.md`.
