@@ -31,7 +31,18 @@ describe('contact form model behavior', () => {
 
   it('shows success and error feedback for the contact adapter', () => {
     assert.deepEqual(
-      contactIntake.resolveContactFeedback({status: 'success'}),
+      contactIntake.resolveContactFeedback({
+        status: 'dropped',
+        outcome: {kind: 'spam', service: 'ai'},
+      }),
+      {kind: 'none'}
+    );
+
+    assert.deepEqual(
+      contactIntake.resolveContactFeedback({
+        status: 'success',
+        outcome: {kind: 'success', service: 'ai'},
+      }),
       {kind: 'success', messageKey: 'contact.form.success'}
     );
     assert.partialDeepStrictEqual(
@@ -40,6 +51,15 @@ describe('contact form model behavior', () => {
         messageKey: 'contact.form.rateLimitError',
       }),
       {kind: 'error', messageKey: 'contact.form.rateLimitError'}
+    );
+
+    assert.deepEqual(
+      contactIntake.resolveContactFeedback({
+        status: 'error',
+        messageKey: 'contact.form.rateLimitError',
+        outcome: {kind: 'limited', service: 'ai'},
+      }),
+      {kind: 'error', messageKey: 'contact.form.rateLimitError', fieldErrors: {}}
     );
   });
 });

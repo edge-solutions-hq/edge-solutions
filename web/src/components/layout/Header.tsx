@@ -5,6 +5,7 @@ import {LocaleSwitch, LocaleSwitchFallback} from './LocaleSwitch';
 import {site} from '@/lib/site/site';
 import {ButtonLink} from '@/components/ui/Button';
 import {HeaderNav} from './HeaderNav';
+import {LogoMark} from '@/components/ui/LogoMark';
 import {MobileMenu} from './MobileMenu';
 import {CommandPalette} from './CommandPalette';
 import {getHeaderOfferNavItems} from '@/lib/offer/offer-presentation';
@@ -23,9 +24,7 @@ export async function Header({locale}: {locale: string}) {
             href="/"
             className="group flex items-center gap-2 whitespace-nowrap font-mono focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-secondary"
           >
-            <span className="text-sm font-extrabold text-primary" aria-hidden="true">
-              &gt;_
-            </span>
+            <LogoMark className="size-5 text-primary" />
             <span className="text-sm font-bold text-heading">
               {site.personalBrand}
             </span>

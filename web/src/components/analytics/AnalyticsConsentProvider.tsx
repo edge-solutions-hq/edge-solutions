@@ -34,7 +34,16 @@ type ConsentContextValue = {
 
 const AnalyticsConsentContext = createContext<ConsentContextValue | null>(null);
 
-const readServerConsent = () => 'loading' as const;
+type ConsentSnapshot = AnalyticsConsent | 'loading';
+type ConsentPanel = 'hidden' | 'prompt' | 'settings';
+
+const readServerConsent = (): ConsentSnapshot => 'loading';
+
+function resolveConsentPanel(consent: ConsentSnapshot, settingsOpen: boolean): ConsentPanel {
+  if (consent === 'loading') return 'hidden';
+  if (consent === 'undecided') return 'prompt';
+  return settingsOpen ? 'settings' : 'hidden';
+}
 
 function allowWhenConsented<T>(event: T): T | null {
   return hasAnalyticsConsent() ? event : null;
@@ -89,7 +98,7 @@ export function AnalyticsConsentProvider({
     window.addEventListener('storage', handleStorage);
     return () => window.removeEventListener('storage', handleStorage);
   }, [closeSettings, googleTagId]);
-  const persistedConsent = useSyncExternalStore(
+  const persistedConsent = useSyncExternalStore<ConsentSnapshot>(
     subscribeToConsent,
     readAnalyticsConsent,
     readServerConsent
@@ -129,7 +138,7 @@ export function AnalyticsConsentProvider({
     if (hadConsent && persisted) window.location.reload();
   }
 
-  const showPanel = consent === 'undecided' || settingsOpen;
+  const panel = resolveConsentPanel(consent, settingsOpen);
   const analyticsEnabled = consent === 'accepted';
 
   return (
@@ -144,7 +153,7 @@ export function AnalyticsConsentProvider({
     >
       {children}
 
-      {showPanel ? (
+      {panel !== 'hidden' ? (
         <section
           role="region"
           aria-labelledby={titleId}
@@ -156,7 +165,7 @@ export function AnalyticsConsentProvider({
           <div className="flex items-start justify-between gap-4">
             <div>
               <h2 id={titleId} className="font-mono text-sm font-bold text-heading">
-                {consent === 'undecided' ? t('promptTitle') : t('settingsTitle')}
+                {panel === 'prompt' ? t('promptTitle') : t('settingsTitle')}
               </h2>
               <p className="mt-2 text-sm leading-6 text-muted-foreground">
                 {consent === 'accepted'
@@ -166,7 +175,7 @@ export function AnalyticsConsentProvider({
                     : t('promptDescription')}
               </p>
             </div>
-            {consent !== 'undecided' ? (
+            {panel === 'settings' ? (
               <button
                 type="button"
                 aria-label={t('close')}

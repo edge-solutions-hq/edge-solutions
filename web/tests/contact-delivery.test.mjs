@@ -249,7 +249,7 @@ describe('contact Server Action delivery', () => {
     const state = await submit(contactForm({company: 'robot-company'}));
 
     assert.deepEqual(state, {
-      status: 'idle',
+      status: 'dropped',
       outcome: {kind: 'spam', service: 'ai'},
     });
     assert.equal(abuseCalls, 0);

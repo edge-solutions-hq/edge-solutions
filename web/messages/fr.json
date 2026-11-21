@@ -67,8 +67,9 @@
         "title": "Bryza, les avis Steam des joueurs transformés en tâches pour l’équipe",
         "description": "Bryza lit les avis Steam publics d’un jeu et les regroupe en points de travail clairs : bugs, retours de design et demandes de fonctionnalités, chacun appuyé par les citations des joueurs et un lien vers l’avis d’origine.",
         "supportText": "Je le conçois et le développe, de l’analyse par modèles de langage jusqu’à la console web des équipes. En ligne depuis octobre 2026.",
-        "pipelineLabel": "Pipeline Bryza",
-        "cta": "Découvrir Bryza"
+        "cta": "Découvrir Bryza",
+        "imageAlt": "Console Bryza, tableau de bord d’un jeu",
+        "imageCaption": "Données de démonstration : le jeu « Lanternfall » et ses avis sont fictifs."
       }
     },
     "process": {

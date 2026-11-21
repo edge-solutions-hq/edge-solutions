@@ -7,8 +7,6 @@ const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
 
 const withMDX = createMDX({
   options: {
-    // Turbopack requires remark/rehype plugins to be passed as serializable values.
-    // Use strings instead of importing plugin functions.
     remarkPlugins: ['remark-gfm']
   }
 });
@@ -37,13 +35,11 @@ const nextConfig: NextConfig = {
     const cacheOneDay = 'public, max-age=86400, stale-while-revalidate=604800';
 
     return [
-      // Baseline security headers for all routes.
       {
         source: '/:path*',
         headers: [...securityHeaders]
       },
 
-      // Light caching for SEO/static endpoints.
       {
         source: '/robots.txt',
         headers: [...securityHeaders, {key: 'Cache-Control', value: cacheOneDay}]

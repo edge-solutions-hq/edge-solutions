@@ -67,8 +67,9 @@
         "title": "Bryza turns players’ Steam reviews into work for the team",
         "description": "Bryza reads a game’s public Steam reviews and groups them into clear work items: bugs, design feedback and feature requests, each backed by players’ own quotes and a link to the original review.",
         "supportText": "I design and build it, from the language-model analysis to the web console teams work in. Live since October 2026.",
-        "pipelineLabel": "Bryza pipeline",
-        "cta": "Discover Bryza"
+        "cta": "Discover Bryza",
+        "imageAlt": "Bryza console, a game overview",
+        "imageCaption": "Demo data: the game “Lanternfall” and its reviews are made up."
       }
     },
     "process": {

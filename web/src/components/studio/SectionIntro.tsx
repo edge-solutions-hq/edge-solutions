@@ -21,7 +21,6 @@ export function SectionIntro({
   invert?: boolean;
   className?: string;
   titleId?: string;
-  /** Decorative prompt command shown above the heading, e.g. `ls ./services`. */
   command?: string;
 }) {
   const content = unwrapMdxParagraphs(children);
