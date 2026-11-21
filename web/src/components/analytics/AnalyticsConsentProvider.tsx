@@ -72,14 +72,14 @@ export function AnalyticsConsentProvider({
 }) {
   const t = useTranslations('analyticsConsent');
   const titleId = useId();
-  const settingsTriggerRef = useRef<HTMLButtonElement | null>(null);
-  const settingsOpenRef = useRef(false);
+  const openSettingsTriggerRef = useRef<HTMLButtonElement | null>(null);
   const [sessionConsent, setSessionConsent] = useState<AnalyticsConsent | null>(null);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const closeSettings = useCallback(() => {
-    settingsOpenRef.current = false;
+    const trigger = openSettingsTriggerRef.current;
+    openSettingsTriggerRef.current = null;
     setSettingsOpen(false);
-    settingsTriggerRef.current?.focus();
+    trigger?.focus();
   }, []);
   const subscribeToConsent = useCallback((onStoreChange: () => void) => {
     function handleStorage(event: StorageEvent) {
@@ -91,7 +91,7 @@ export function AnalyticsConsentProvider({
       );
       updateGoogleConsent(googleTagId, externalConsent);
       setSessionConsent(externalConsent);
-      if (settingsOpenRef.current) closeSettings();
+      if (openSettingsTriggerRef.current) closeSettings();
       onStoreChange();
     }
 
@@ -145,8 +145,7 @@ export function AnalyticsConsentProvider({
     <AnalyticsConsentContext.Provider
       value={{
         openSettings(trigger) {
-          settingsTriggerRef.current = trigger;
-          settingsOpenRef.current = true;
+          openSettingsTriggerRef.current = trigger;
           setSettingsOpen(true);
         },
       }}

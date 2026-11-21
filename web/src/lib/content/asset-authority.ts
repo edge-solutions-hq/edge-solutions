@@ -202,6 +202,18 @@ export function publicAssetMetadata(asset: AssetAuthorityRecord): PublicAssetMet
   };
 }
 
+export type ClaimAuthorityDecision =
+  | {
+      allowed: false;
+      reason:
+        | 'generated_visual_cannot_authorize_restricted_claim'
+        | 'missing_authoritative_source_artifact'
+        | 'generated_visual_is_non_authoritative_support_only';
+      sourceAssetId: null;
+    }
+  | {allowed: true; reason: 'authorized_by_verified_source_artifact'; sourceAssetId: string}
+  | {allowed: true; reason: 'non_restricted_claim'; sourceAssetId: null};
+
 export function evaluateClaimAuthority({
   claimType,
   sourceAssetIds,
@@ -212,7 +224,7 @@ export function evaluateClaimAuthority({
   sourceAssetIds?: readonly string[];
   sourceAssets?: readonly AssetAuthorityRecord[];
   imageBacked?: boolean;
-}) {
+}): ClaimAuthorityDecision {
   const normalizedClaim = claimType.trim().toLowerCase();
   const registryAssets = (sourceAssetIds ?? [])
     .map((assetId) => getAssetAuthorityRecord(assetId))
@@ -237,11 +249,15 @@ export function evaluateClaimAuthority({
     };
   }
 
-  return {
-    allowed: true,
-    reason: authoritativeAsset ? 'authorized_by_verified_source_artifact' : 'non_restricted_claim',
-    sourceAssetId: authoritativeAsset?.assetId ?? null,
-  };
+  if (authoritativeAsset) {
+    return {
+      allowed: true,
+      reason: 'authorized_by_verified_source_artifact',
+      sourceAssetId: authoritativeAsset.assetId,
+    };
+  }
+
+  return {allowed: true, reason: 'non_restricted_claim', sourceAssetId: null};
 }
 
 export function isPublicAssetApproved(assetIdOrPublicPath: string): boolean {
