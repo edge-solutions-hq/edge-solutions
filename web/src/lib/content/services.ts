@@ -27,15 +27,21 @@ type ServiceContentAvailabilityBase = {
   requestedLocale: Locale;
 };
 
-export type ServiceContentAvailabilityHit = ServiceContentAvailabilityBase & {
-  status: 'localized' | 'fallback';
-  contentLocale: Locale;
-  didFallback: boolean;
-  renderPolicy: {
-    kind: 'localized' | 'fallback';
-    requestedLocale: Locale;
-    contentLocale: Locale;
-  };
+type ServiceContentLocaleResolution =
+  | {
+      status: 'localized';
+      contentLocale: Locale;
+      didFallback: false;
+      renderPolicy: {kind: 'localized'; requestedLocale: Locale; contentLocale: Locale};
+    }
+  | {
+      status: 'fallback';
+      contentLocale: 'fr';
+      didFallback: true;
+      renderPolicy: {kind: 'fallback'; requestedLocale: Locale; contentLocale: 'fr'};
+    };
+
+export type ServiceContentAvailabilityHit = ServiceContentAvailabilityBase & ServiceContentLocaleResolution & {
   evidence: OfferTrackEvidenceProfile;
   evidenceContract: OfferTrackEvidenceContract;
   module: MdxModule;

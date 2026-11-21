@@ -7,6 +7,7 @@ import {
   trackContactFormSubmit,
 } from '@/lib/analytics/events';
 import {
+  captureContactInvalidAttempt,
   captureContactSubmitAttempt,
   createContactAttemptTrackerState,
   resolveContactAttemptCompletion,
@@ -121,7 +122,7 @@ export function ContactForm({
       invalidTrackingQueuedRef.current = false;
     }, 0);
 
-    const submitAttempt = captureContactSubmitAttempt(attemptTrackerRef.current);
+    const submitAttempt = captureContactInvalidAttempt(attemptTrackerRef.current);
     const formData = new FormData(event.currentTarget);
     const normalizedService = extractContactSubmitService(formData);
     const nativeFieldErrors = nativeValidationFieldErrors(event.currentTarget);

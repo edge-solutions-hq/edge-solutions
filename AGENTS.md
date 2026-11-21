@@ -17,7 +17,7 @@ Never print or commit secret values. Gitleaks (CI and pre-commit) and the Claude
 ## Docs To Read
 
 - Start with `WEBSITE.md`; it is the mandatory website work entrypoint and source-of-truth order.
-- Owner docs referenced there: `docs/positioning.md`, `DESIGN.md`, `docs/architecture.md`, `docs/analytics/conversion-event-taxonomy.md`, `docs/tech-stack.md`, and the ADRs in `docs/adr/`.
+- Owner docs referenced there: `docs/positioning.md`, `DESIGN.md`, `docs/architecture.md`, `docs/analytics/conversion-event-taxonomy.md`, and `docs/tech-stack.md`.
 
 ## App Structure
 
@@ -37,7 +37,7 @@ Never print or commit secret values. Gitleaks (CI and pre-commit) and the Claude
 - Keep AI-first acquisition priority intact in offer order and SEO, while treating AI automation and 3D / XR as two clear project families. Do not make realtime work look like a minor add-on or turn the site into a generic agency menu.
 - Follow `WEBSITE.md`; do not add fake clients, metrics, client screenshots, logos, testimonials, awards, or case studies. Use only approved source assets from the asset authority registry.
 - Before changing module boundaries, read `docs/architecture.md` and preserve the named ownership seams.
-- Do not write code comments; lint rejects them (`docs/adr/0005-ban-code-comments.md`). Name the code instead, and record non-obvious decisions as ADRs in `docs/adr/`.
+- Do not write code comments; lint rejects them (`docs/adr/0005-ban-code-comments.md`). Name the code instead, and record non-obvious decisions in an ADR or the owning doc, as the ADR describes.
 
 ## Agent Skills
 
@@ -51,4 +51,4 @@ Use the default triage label vocabulary: `needs-triage`, `needs-info`, `ready-fo
 
 ### Domain Docs
 
-Single-context layout: ADRs live in `docs/adr/`; a root `GLOSSARY.md` is created lazily by `/domain-modeling`. See `docs/agents/domain.md`.
+Single-context layout: one root `GLOSSARY.md` (created lazily by `/domain-modeling`) and `docs/adr/`. See `docs/agents/domain.md`.

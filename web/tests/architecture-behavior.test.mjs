@@ -93,6 +93,26 @@ describe('contact attempt tracker behavior', () => {
       {shouldTrack: false, submitAttempt: 1, outcome: {kind: 'spam', service: 'realtime'}}
     );
   });
+
+  it('never re-tracks a previous server outcome under a client-invalid attempt', () => {
+    const state = contactAttemptTracker.createContactAttemptTrackerState();
+    contactAttemptTracker.captureContactSubmitAttempt(state);
+    contactAttemptTracker.resolveContactAttemptCompletion({
+      state,
+      pending: false,
+      outcome: {kind: 'limited', service: 'ai'},
+    });
+
+    assert.equal(contactAttemptTracker.captureContactInvalidAttempt(state), 2);
+    assert.equal(
+      contactAttemptTracker.resolveContactAttemptCompletion({
+        state,
+        pending: false,
+        outcome: {kind: 'limited', service: 'ai'},
+      }),
+      null
+    );
+  });
 });
 
 describe('tracked link target behavior', () => {

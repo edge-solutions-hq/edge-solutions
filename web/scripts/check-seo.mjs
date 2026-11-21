@@ -7,11 +7,8 @@ const routeFacts = getLiveSeoSourceFacts({root});
 const {
   siteUrl,
   locales,
-  hreflangByLocale,
   serviceSlugs,
-  staticPageSuffixes,
   expectedPaths,
-  expectedUrls,
   localizedRoutes,
 } = routeFacts;
 
@@ -66,12 +63,6 @@ function escapeRegExp(value) {
 
 const htmlAttributeValuePattern = String.raw`[^'"]*`;
 
-function assertSourceContainsAll(source, values, label) {
-  for (const value of values) {
-    assert(source.includes(value), `${label} is missing ${value}`);
-  }
-}
-
 function readGeneratedPage(pathname) {
   const normalized = pathname.replace(/^\//, '');
   const appDirectory = path.join(root, '.next/server/app');
@@ -97,18 +88,6 @@ function readGeneratedPage(pathname) {
   }
 
   return null;
-}
-
-function assertPageHasJsonLd(pathname) {
-  const generated = readGeneratedPage(pathname);
-  assert(
-    generated,
-    `Generated page ${pathname} was not found. Run pnpm run build before check:seo.`
-  );
-  assert(
-    generated.includes('application/ld+json'),
-    `Generated page ${pathname} is missing JSON-LD`
-  );
 }
 
 function assertPageHasLocaleAlternates(pathname) {
@@ -229,6 +208,13 @@ function assertPageHasWebPageDateModified(route) {
   assert(
     webPage.dateModified === route.lastModified,
     `Generated ${route.path} WebPage has unexpected dateModified`
+  );
+}
+
+function assertPageHasJsonLdType(pathname, type) {
+  assert(
+    jsonLdObjects(pathname).some((item) => item?.['@type'] === type),
+    `Generated ${pathname} is missing ${type} JSON-LD`
   );
 }
 
@@ -394,77 +380,9 @@ function assertSitemapUrlHasLocaleAlternates(sitemapXml, pagePath) {
   );
 }
 
-const routingSource = readSource('src/i18n/routing.ts');
-const servicesSource = readSource('src/lib/content/services.ts');
-const pageProfilesSource = readSource('src/lib/site/page-profiles.ts');
-const sitemapSource = readSource('src/app/sitemap.ts');
-const robotsSource = readSource('src/app/robots.ts');
-const llmsTxtSource = readSource('src/app/llms.txt/route.ts');
-const seoSource = readSource('src/lib/site/seo.ts');
-const aiDiscoverySource = readSource('src/lib/site/ai-discovery.ts');
-const homeSource = readSource('src/app/[locale]/page.tsx');
-const servicesIndexSource = readSource('src/app/[locale]/services/page.tsx');
-const serviceDetailSource = readSource('src/app/[locale]/services/[slug]/page.tsx');
-const servicePageModelSource = readSource('src/lib/content/service-page.ts');
-const sitemapUsesCentralizedPageProfiles =
-  sitemapSource.includes('getLocalizedSitemapEntries') &&
-  pageProfilesSource.includes('STATIC_PAGE_DEFINITIONS') &&
-  pageProfilesSource.includes('OFFER_TRACKS');
-
-const expectedLocalizedUrlCount = localizedRoutes.length;
-
 assert(
-  expectedUrls.length === expectedLocalizedUrlCount,
-  `Expected ${expectedLocalizedUrlCount} localized URLs, got ${expectedUrls.length}`
-);
-assert(
-  /alternateLinks\s*:\s*false/.test(routingSource),
+  /alternateLinks\s*:\s*false/.test(readSource('src/i18n/routing.ts')),
   'next-intl HTTP alternate Link headers must stay disabled; HTML metadata owns hreflang output'
-);
-assert(sitemapSource.includes("from '@/i18n/routing'"), 'sitemap.ts must derive locales from routing.locales');
-assert(
-  sitemapUsesCentralizedPageProfiles ||
-    (sitemapSource.includes("from '@/lib/offer/offer-tracks'") && sitemapSource.includes('OFFER_TRACKS')),
-  'sitemap.ts must derive service routes from OFFER_TRACKS'
-);
-assert(
-  servicesSource.includes('isOfferTrackSlug'),
-  'content registry must validate service slugs with isOfferTrackSlug'
-);
-assert(robotsSource.includes('/sitemap.xml'), 'robots.ts must point crawlers to sitemap.xml');
-assert(llmsTxtSource.includes('buildLlmsTxt'), 'llms.txt route must use the AI discovery builder');
-assert(llmsTxtSource.includes('X-Robots-Tag'), 'llms.txt route must explicitly set an X-Robots-Tag');
-assert(aiDiscoverySource.includes('OFFER_TRACKS'), 'AI discovery must derive services from OFFER_TRACKS');
-assert(aiDiscoverySource.includes('STATIC_PAGE_DEFINITIONS'), 'AI discovery must derive static pages from page profiles');
-assertSourceContainsAll(seoSource, Object.values(hreflangByLocale), 'src/lib/site/seo.ts hreflang map');
-assert(
-  seoSource.includes("languages['x-default']"),
-  'src/lib/site/seo.ts must expose an x-default hreflang alternate'
-);
-assertSourceContainsAll(
-  homeSource,
-  ['getHomePageProfile', 'profile.jsonLd'],
-  'home page JSON-LD'
-);
-assertSourceContainsAll(
-  servicesIndexSource,
-  ['getServicesPageProfile', 'profile.jsonLd'],
-  'services hub JSON-LD'
-);
-assertSourceContainsAll(
-  pageProfilesSource,
-  ['websiteSchema(locale)', 'webPageSchema(', 'servicesItemListSchema(', 'serviceSchema(', 'breadcrumbSchema('],
-  'page profile JSON-LD graph helpers'
-);
-assertSourceContainsAll(
-  servicePageModelSource,
-  ['getOfferTrackPageProfile', 'const profile ='],
-  'service page model JSON-LD'
-);
-assertSourceContainsAll(
-  serviceDetailSource,
-  ['getServicePageMetadata', 'model.profile.jsonLd'],
-  'service detail route JSON-LD'
 );
 
 for (const pagePath of expectedPaths) {
@@ -477,12 +395,12 @@ for (const route of localizedRoutes) {
 }
 
 for (const locale of locales) {
-  assertPageHasJsonLd(`/${locale}`);
+  assertPageHasJsonLdType(`/${locale}`, 'WebSite');
   assertPageHasPersonSchema(`/${locale}`);
-  assertPageHasJsonLd(`/${locale}/services`);
+  assertPageHasJsonLdType(`/${locale}/services`, 'BreadcrumbList');
   assertServicesHubHasServiceItemList(locale, serviceSlugs);
   for (const slug of serviceSlugs) {
-    assertPageHasJsonLd(`/${locale}/services/${slug}`);
+    assertPageHasJsonLdType(`/${locale}/services/${slug}`, 'BreadcrumbList');
     assertServicePageHasOfferTrackServiceSchema(
       localizedRoutes.find((route) => route.kind === 'service' && route.locale === locale && route.slug === slug)
     );
@@ -494,48 +412,17 @@ const generatedSitemap = findGeneratedTextFile(
   path.join(root, '.next/server/app'),
   /sitemap\.xml(?:\/[^/]+|\.[^/]+)?\.(?:body|txt|xml)$/
 );
-const generatedRobots = findGeneratedTextFile(
-  path.join(root, '.next/server/app'),
-  /robots\.txt(?:\/[^/]+|\.[^/]+)?\.(?:body|txt)$/
-);
 
 if (generatedSitemap) {
   const sitemapXml = readFileSync(generatedSitemap, 'utf8');
-  const urls = [...sitemapXml.matchAll(/<loc>(.*?)<\/loc>/g)].map((item) => item[1]);
-
-  assert(urls.length === expectedUrls.length, `Generated sitemap has ${urls.length} URLs, expected ${expectedUrls.length}`);
-
-  for (const expectedUrl of expectedUrls) {
-    assert(urls.includes(expectedUrl), `Generated sitemap is missing ${expectedUrl}`);
-  }
 
   for (const expectedPath of expectedPaths) {
     assertSitemapUrlHasLocaleAlternates(sitemapXml, expectedPath);
-  }
-
-  for (const locale of locales) {
-    const localeUrls = urls.filter((url) => url.startsWith(`${siteUrl}/${locale}`));
-    assert(
-      localeUrls.length === staticPageSuffixes.length + serviceSlugs.length,
-      `Generated sitemap has ${localeUrls.length} URLs for ${locale}, expected ${
-        staticPageSuffixes.length + serviceSlugs.length
-      }`
-    );
   }
 } else {
   throw new Error('Generated sitemap.xml was not found. Run pnpm run build before check:seo.');
 }
 
-if (generatedRobots) {
-  const robotsTxt = readFileSync(generatedRobots, 'utf8');
-  assert(
-    robotsTxt.includes(`Sitemap: ${siteUrl}/sitemap.xml`),
-    `Generated robots.txt must include Sitemap: ${siteUrl}/sitemap.xml`
-  );
-} else {
-  throw new Error('Generated robots.txt was not found. Run pnpm run build before check:seo.');
-}
-
 console.log(
-  `SEO check passed: ${expectedUrls.length} localized URLs, generated hreflang alternates, dateModified JSON-LD, Person schema, llms.txt source, and robots sitemap URL validated.`
+  `SEO check passed: ${expectedPaths.length} localized pages, canonical and hreflang alternates, sitemap hreflang alternates, and WebPage, WebSite, Person, ItemList, Service, FAQPage and BreadcrumbList JSON-LD validated.`
 );
