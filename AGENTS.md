@@ -38,6 +38,7 @@ Never print or commit secret values. Gitleaks (CI and pre-commit) and the Claude
 - Follow `WEBSITE.md`; do not add fake clients, metrics, client screenshots, logos, testimonials, awards, or case studies. Use only approved source assets from the asset authority registry.
 - Before changing module boundaries, read `docs/architecture.md` and preserve the named ownership seams.
 - Do not write code comments; lint rejects them (`docs/adr/0005-ban-code-comments.md`). Name the code instead, and record non-obvious decisions in an ADR or the owning doc, as the ADR describes.
+- Docs never state a count that drifts, such as "five pages": name the folder or the rule instead.
 
 ## Agent Skills
 
